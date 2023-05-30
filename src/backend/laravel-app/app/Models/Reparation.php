@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Reparation extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'id',
-        'demarcheMediation',
-        'faute_id',
+        'demarche_mediatiion',
     ];
+
     public function faute()
     {
-        return $this->belongsTo(Faute::class);
+        return $this->hasOne(Faute::class);
     }
 }

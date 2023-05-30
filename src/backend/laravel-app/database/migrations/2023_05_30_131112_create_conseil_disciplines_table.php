@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fautes', function (Blueprint $table) {
+        Schema::create('conseil_disciplines', function (Blueprint $table) {
             $table->id();
-            $table->string('libelleFaute');
-            $table->string('gravite');
+            $table->timestamps();
+            $table->date('date_cd');
+            $table->date('heure_debut_cd');
+            $table->date('heure_fin_cd');
             $table->unsignedBigInteger('eleve_id');
             $table->foreign('eleve_id')->references('id')->on('eleves');
-            $table->unsignedBigInteger('regle_id');
-            $table->foreign('regle_id')->references('id')->on('regles');
-            $table->timestamps();
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fautes');
+        Schema::dropIfExists('conseil_disciplines');
     }
 };
