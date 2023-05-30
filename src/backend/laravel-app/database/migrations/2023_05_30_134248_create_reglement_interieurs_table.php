@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conseil__d_s', function (Blueprint $table) {
+        Schema::create('reglement_interieurs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->date('date_cd');
-            $table->date('heure_debut_cd');
-            $table->date('heure_fin_cd');
+            $table->string('libelle');
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conseil__d_s');
+        Schema::dropIfExists('reglement_interieurs');
     }
 };
