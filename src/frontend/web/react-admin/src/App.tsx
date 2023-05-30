@@ -9,6 +9,7 @@ import DashBoard from './pages/Dashboard/DashBoard';
 import FormElements from './pages/Form/FormElements';
 import FormLayout from './pages/Form/FormLayout';
 import Profile from './pages/Profile';
+import Students from './pages/Students';
 import Settings from './pages/Settings';
 import Tables from './pages/Tables';
 import Alerts from './pages/UiElements/Alerts';
@@ -38,6 +39,7 @@ function App() {
         <Route path="/" element={<DashBoard />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/students" element={<Students />} />
         <Route path="/forms/form-elements" element={<FormElements />} />
         <Route path="/forms/form-layout" element={<FormLayout />} />
         <Route path="/tables" element={<Tables />} />
