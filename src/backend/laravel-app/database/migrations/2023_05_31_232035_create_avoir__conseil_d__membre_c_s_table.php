@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('avoir__conseil_d__membre_c_s', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('conseil_disciplines_id')->constrained();
-            $table->foreignId('membre_conseil_id')->constrained();
+            $table->foreignId('conseil_disciplines_id')->references('id')->on('conseil_disciplines');
+            $table->foreignId('membre_conseil_id')->references('id')->on('membre_conseils');
         });
     }
 

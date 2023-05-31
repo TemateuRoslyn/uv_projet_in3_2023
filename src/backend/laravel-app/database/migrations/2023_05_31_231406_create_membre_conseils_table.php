@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('membre_conseils', function (Blueprint $table) {
             $table->id();
-            $table->integer("id_chef");
-            $table->integer("id_surveillant_G");
-            $table->integer("id_representant_E");
+            $table->foreign('id_chef')->references('id')->on('personnels');
+            $table->foreign('id_surveillant_G')->references('id')->on('personnels');
+            $table->foreign('id_representant_E')->references('id')->on('parents');
             $table->timestamps();
         });
     }
