@@ -1,46 +1,89 @@
-name: Vercel Deployment
+name: Vercel Production Deployment
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
   push:
     branches:
       - main
-
 jobs:
-  deploy:
+  Deploy-Production:
     defaults:
         run:
           working-directory: ./src/frontend/web/react-admin
 
     strategy:
       matrix:
-        node: ['16.15.0']
+        node: ['16']
         os: ['ubuntu-latest']
-    runs-on: ${{ matrix.os }}
 
+    runs-on: ${{ matrix.os }}
+    
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Install Yarn
-        run: npm install -g yarn
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Build
-        run: npm run build
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Uninstall Yarn
-        if: always()
-        run: npm uninstall -g yarn
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v20
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+
+
+# name: Vercel Deployment
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   deploy:
+#     defaults:
+#         run:
+#           working-directory: ./src/frontend/web/react-admin
+
+#     strategy:
+#       matrix:
+#         node: ['16.15.0']
+#         os: ['ubuntu-latest']
+#     runs-on: ${{ matrix.os }}
+
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v2
+
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: ${{ matrix.node }}
+
+#       - name: Install Yarn
+#         run: npm install -g yarn
+
+#       - name: Install Dependencies
+#         run: npm install
+
+#       - name: Build
+#         run: npm run build
+
+#       - name: Uninstall Yarn
+#         if: always()
+#         run: npm uninstall -g yarn
+
+#       - name: Deploy to Vercel
+#         uses: amondnet/vercel-action@v20
+#         with:
+#           vercel-token: ${{ secrets.VERCEL_TOKEN }}
+#           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+#           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
