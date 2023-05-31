@@ -12,7 +12,7 @@ jobs:
   react-admin-app:
     defaults:
         run:
-          working-directory: src/frontend/web/react-admin
+          working-directory: ./src/frontend/web/react-admin
 
     strategy:
       matrix:
@@ -34,4 +34,4 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@4.1.0
       with:
         branch: gh-pages
-        folder: build
+        folder: ./src/frontend/web/react-admin/build
