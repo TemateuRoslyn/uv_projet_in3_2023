@@ -3,10 +3,6 @@ name: react-admin-ci
 on:
   push:
     branches: [ main ]
-  # pull_request:
-  #   branches: [ main ]
-  schedule:
-    - cron: '0 0 */5 * *'
 
 jobs:
   react-admin-app:
@@ -37,4 +33,4 @@ jobs:
         publish_branch: gh-pages
         publish_dir: ./src/frontend/web/react-admin/dist
 
-  
+    
