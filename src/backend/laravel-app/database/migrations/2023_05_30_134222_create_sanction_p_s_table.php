@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sanction__p_s', function (Blueprint $table) {
+        Schema::create('sanction_p_s', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('libelle');
             $table->string('niveau_gravite');
             $table->string('motifs');
             $table->date('duree_validite');
-            $table->string('niveau_gravite');
             $table->unsignedBigInteger('eleve_id');
             $table->foreign('eleve_id')->references('id')->on('eleves');
             $table->unsignedBigInteger('convocation_id');

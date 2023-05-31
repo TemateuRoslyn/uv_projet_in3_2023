@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('photo');
             $table->string('email');
             $table->string('sexe');
-            $table->int('tel');
+            $table->string('tel');
             $table->string('role');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('cour_id');
             $table->foreign('cour_id')->references('id')->on('cours');
             $table->timestamps();
         });
