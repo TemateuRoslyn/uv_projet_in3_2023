@@ -1,7 +1,7 @@
 name: React Admin Vercel Production Deployment
 env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_WEBSITE_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_WEBSITE_ID }}
 on:
   push:
     branches: [ main ]
@@ -9,7 +9,7 @@ jobs:
   Admin-Deploy-Production:
     defaults:
         run:
-          working-directory: ./src/frontend/web/react-admin
+          working-directory: ./src/frontend/web/react-site
 
     strategy:
       matrix:

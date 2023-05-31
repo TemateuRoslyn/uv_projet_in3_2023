@@ -1,0 +1,28 @@
+name: 🚀 Deploy on push main
+
+on: 
+  push:
+    branches:    
+      - mains 
+    
+jobs:
+  web-deploy:
+    defaults:
+        run:
+          working-directory: ./src/backend/laravel-app
+
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2
+
+      - name: 📂 Deploy to server via ssh
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: "sh ./.scripts/deploy.sh"
