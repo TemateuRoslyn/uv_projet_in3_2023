@@ -25,6 +25,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      - name: setupe vite
+        run: npm install -g vite
+
       - name: Install Dependencies
         run: vite install
 
