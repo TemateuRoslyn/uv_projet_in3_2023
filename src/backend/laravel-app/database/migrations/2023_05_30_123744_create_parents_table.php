@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('photo');
             $table->string('email');
             $table->string('sexe');
-            $table->int('telephone');
+            $table->string('telephone');
             $table->string('role');
             $table->string('profession');
         });
