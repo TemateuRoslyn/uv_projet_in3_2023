@@ -18,6 +18,8 @@ return new class extends Migration
             $table->date('date_convocation');
             $table->date('date_rdv');
             $table->string('statut');
+            $table->unsignedBigInteger('personnel_id');
+            $table->foreign('personnel_id')->references('id')->on('personnels');
         });
     }
 

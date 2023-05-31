@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('libelle');
-            $table->unsignedBigInteger('sanction_p_id');
-            $table->foreign('sanction_p_id')->references('id')->on('sanction_p_s');
+            $table->unsignedBigInteger('reglement_interieur_id');
+            $table->foreign('reglement_interieur_id')->references('id')->on('reglement_interieurs');
         });
     }
 

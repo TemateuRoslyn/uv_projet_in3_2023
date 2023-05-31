@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reparations', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->string('demarcheMediation');
-            $table->unsignedBigInteger('faute_id');
-            $table->foreign('faute_id')->references('id')->on('fautes');
+            $table->string("libele");
+            $table->integer("view");
+            $table->string("nom");
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reparations');
+        Schema::dropIfExists('notifications');
     }
 };
