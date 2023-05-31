@@ -25,8 +25,8 @@ class Eleve extends Model
         'solvable',
         'redoublant',
     ];
-   public function parents(){
+    public function parents(){
         return $this->belongsToMany(Parents::class);
-   }
-   
+    }
+
 }
