@@ -21,19 +21,17 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Setup Nodejs and npm
+      - name: Setup Node.js and yarn
         uses: actions/setup-node@v2
         with:
           node-version: "16"
+          cache: yarn
 
-      - name: Setup yarn
-        run: npm install -g yarn
-
-      - name: Install Dependencies
-        run: npm install
+      - name: Install dependencies with Yarn
+        run: yarn install
 
       - name: Build
-        run: npm run build
+        run: yarn build
 
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
@@ -41,4 +39,3 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-
