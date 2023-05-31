@@ -11,7 +11,7 @@ jobs:
         run:
           working-directory: ./src/frontend/web/react-admin
           
-     strategy:
+    strategy:
       matrix:
         node: [ '16.15.0' ]
         os: [ 'ubuntu-latest' ]
