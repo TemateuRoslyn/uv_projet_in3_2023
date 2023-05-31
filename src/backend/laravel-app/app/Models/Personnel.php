@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Conseil_D;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,4 +24,8 @@ class Personnel extends Model
         'role',
         'fonction'
     ];
+
+    public function conseilDiscipline(){
+        return $this->belongsToMany(Conseil_D::class);
+   }
 }
