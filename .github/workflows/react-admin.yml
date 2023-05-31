@@ -7,6 +7,10 @@ on:
 
 jobs:
   deploy:
+    defaults:
+        run:
+          working-directory: ./src/frontend/web/react-admin
+          
     runs-on: ubuntu-latest
 
     steps:
@@ -31,3 +35,4 @@ jobs:
           vercel_org_id: ${{ secrets.VERCEL_ORG_ID }}
           vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel_scope: production
+
