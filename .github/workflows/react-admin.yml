@@ -4,9 +4,9 @@ env:
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
   push:
-    branches:
-      - main
-
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 jobs:
   Admin-Deploy-Production:
     defaults:
@@ -23,39 +23,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Check Changed Files
-        id: check_changes
-        uses: juliangruber/changeset-action@v1
-        with:
-          files: |
-            /src/frontend/web/react-admin/**
-            .github/workflows/react-admin.yml
-
-      - name: Ignore Paths
-        id: ignore_paths
-        uses: actions/paths-ignore@v0.2.2
-        with:
-          paths: |
-            .github/workflows/react-admin.yml
-
       - name: Set up Node.js
-        if: steps.check_changes.outputs.changed == 'true' || steps.ignore_paths.outputs.ignored == 'false'
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
 
       - name: Install Vercel CLI
-        if: steps.check_changes.outputs.changed == 'true' || steps.ignore_paths.outputs.ignored == 'false'
         run: npm install --global vercel@latest
 
       - name: Pull Vercel Environment Information
-        if: steps.check_changes.outputs.changed == 'true' || steps.ignore_paths.outputs.ignored == 'false'
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build Project Artifacts
-        if: steps.check_changes.outputs.changed == 'true' || steps.ignore_paths.outputs.ignored == 'false'
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Project Artifacts to Vercel
-        if: steps.check_changes.outputs.changed == 'true' || steps.ignore_paths.outputs.ignored == 'false'
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
