@@ -6,9 +6,9 @@ import DefaultLayout from '../layout/DefaultLayout'
 const Cours = () => {
   return (
     <DefaultLayout>
-      <ChatCard/>
+      <ChatCard />
       <br></br>
-      <TableOne/>
+      <TableOne />
     </DefaultLayout>
   )
 }
