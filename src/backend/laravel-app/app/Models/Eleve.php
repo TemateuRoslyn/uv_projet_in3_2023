@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\parents;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,8 +24,13 @@ class Eleve extends Model
         'solvable',
         'redoublant',
     ];
-    public function parents(){
+    public function parents()
+    {
         return $this->belongsToMany(Parents::class);
     }
 
+    public function classe()
+    {
+        return $this->belongsTo(Classe::class);
+    }
 }
