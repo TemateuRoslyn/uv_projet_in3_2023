@@ -3,10 +3,6 @@ name: react-admin-ci
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  schedule:
-    - cron: '0 0 */5 * *'
 
 jobs:
   react-admin-app:
@@ -31,7 +27,10 @@ jobs:
       run: npm run build
 
     - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@4.1.0
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        branch: gh-pages
-        folder: ./src/frontend/web/react-admin/dist
+        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        publish_branch: gh-pages
+        publish_dir: ./src/frontend/web/react-admin/dist
+
+    
