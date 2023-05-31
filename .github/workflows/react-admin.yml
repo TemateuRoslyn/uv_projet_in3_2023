@@ -1,36 +1,27 @@
 name: react-admin-ci
-
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
   push:
-    branches: [ main ]
-
+    branches:
+      - main
 jobs:
-  react-admin-app:
-    defaults:
-        run:
-          working-directory: ./src/frontend/web/react-admin
+  Deploy-Dashbord-Production:
+    runs-on: ubuntu-latest
 
     strategy:
-      matrix:
-        node: [ '16.15.0' ]
-        os: [ 'ubuntu-latest' ]
-    runs-on: ${{ matrix.os }}
+            matrix:
+                node-version: [16.15.0]
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-    - name: Install Dependencies
-      run: npm install
-
-    - name: Build
-      run: npm run build
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        publish_branch: gh-pages
-        publish_dir: ./src/frontend/web/react-admin/dist
-
-    
