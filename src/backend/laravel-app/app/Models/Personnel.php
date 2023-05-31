@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Personnel extends Model
 {
     use HasFactory;
-    protected $filable = [
+    // protected $guarded = [];
+    protected $fillable = [
         'nom',
         'prenom',
         'date_nais',
