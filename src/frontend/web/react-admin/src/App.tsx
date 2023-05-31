@@ -10,7 +10,10 @@ import FormElements from './pages/Form/FormElements';
 import FormLayout from './pages/Form/FormLayout';
 import Profile from './pages/Profile';
 import Students from './pages/Students';
+<<<<<<< HEAD
 import Parents from './pages/Parents';
+=======
+>>>>>>> 87efe0c (Ajout de l'item Students)
 import Settings from './pages/Settings';
 import Tables from './pages/Tables';
 import Alerts from './pages/UiElements/Alerts';
