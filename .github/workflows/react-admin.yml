@@ -29,7 +29,7 @@ jobs:
         run: npm install -g vite
 
       - name: Install Dependencies
-        run: vite install
+        run: npm install
 
       - name: Build
         run: vite build
