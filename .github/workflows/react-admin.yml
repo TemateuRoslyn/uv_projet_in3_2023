@@ -27,13 +27,13 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
-    - name: Build
+        - name: Build
       run: npm run build
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@4.1.0
       with:
-        access_token: ${{ secrets.GH_DOCS }}
+        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         branch: gh-pages
         folder: ./src/frontend/web/react-admin/dist
 
