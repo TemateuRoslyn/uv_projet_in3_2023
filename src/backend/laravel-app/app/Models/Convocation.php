@@ -9,4 +9,9 @@ class Convocation extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function personnel()
+    {
+        return $this->hasOne(Personnel::class);
+    }
 }
