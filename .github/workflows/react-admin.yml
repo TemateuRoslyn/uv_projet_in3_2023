@@ -34,7 +34,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        branch: gh-pages
-        folder: ./src/frontend/web/react-admin/dist
+        publish_branch: gh-pages
+        publish_dir: ./src/frontend/web/react-admin/dist
 
       
