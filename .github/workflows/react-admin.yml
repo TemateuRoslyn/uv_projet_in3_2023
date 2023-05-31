@@ -1,13 +1,24 @@
-name: CI/CD
+name: react-admin-ci
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 */5 * *'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  react-admin-app:
+    defaults:
+        run:
+          working-directory: src/frontend/web/react-admin
+
+    strategy:
+      matrix:
+        node: [ '16.15.0' ]
+        os: [ 'ubuntu-latest' ]
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Checkout Repository
