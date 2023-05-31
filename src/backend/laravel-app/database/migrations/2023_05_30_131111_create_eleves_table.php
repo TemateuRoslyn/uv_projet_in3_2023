@@ -27,9 +27,8 @@ return new class extends Migration
             $table->string('role');
             $table->string('solvable');
             $table->string('redoublant');
-            $table->unsignedBigInteger('conseil_d_id');
-            $table->foreign('conseil_d_id')->references('id')->on('conseil__d_s');
-            
+            $table->unsignedBigInteger('classe_id');
+            $table->foreign('classe_id')->references('id')->on('classes');
         });
     }
 
