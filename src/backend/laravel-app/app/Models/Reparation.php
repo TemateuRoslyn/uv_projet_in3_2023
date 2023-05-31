@@ -10,7 +10,7 @@ class Reparation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'demarche_mediatiion',
+        'demarche_mediation',
     ];
 
     public function faute()
