@@ -8,5 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Regle extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+
+    protected $fillable = [
+        'libelle',
+    ];
+
+    public function reglementInterieur()
+    {
+        return $this->hasOne(ReglementInterieur::class);
+    }
 }

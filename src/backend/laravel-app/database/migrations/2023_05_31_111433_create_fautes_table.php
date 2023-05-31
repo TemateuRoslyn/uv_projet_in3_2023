@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sanction_p_s', function (Blueprint $table) {
+        Schema::create('fautes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('libelle');
-            $table->string('niveau_gravite');
-            $table->string('motifs');
-            $table->date('duree_validite');
+            $table->string('gravite');
             $table->unsignedBigInteger('eleve_id');
             $table->foreign('eleve_id')->references('id')->on('eleves');
-            $table->unsignedBigInteger('convocation_id');
-            $table->foreign('convocation_id')->references('id')->on('convocations');
+            $table->unsignedBigInteger('regle_id');
+            $table->foreign('regle_id')->references('id')->on('regles');
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sanction__p_s');
+        Schema::dropIfExists('fautes');
     }
 };
