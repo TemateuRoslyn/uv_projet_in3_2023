@@ -33,5 +33,8 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@4.1.0
       with:
+        access_token: ${{ secrets.GH_DOCS }}
         branch: gh-pages
         folder: ./src/frontend/web/react-admin/dist
+
+        
