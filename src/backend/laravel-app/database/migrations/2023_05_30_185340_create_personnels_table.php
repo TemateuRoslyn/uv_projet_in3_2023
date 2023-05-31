@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('login');
             $table->string('mot_de_passe');
             $table->string('sexe');
-            $table->int('tel');
+            $table->integer('tel');
             $table->string('role');
             $table->string('fonction');
             $table->timestamps();
