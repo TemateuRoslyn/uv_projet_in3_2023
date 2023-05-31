@@ -25,14 +25,18 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: setupe vite
-        run: npm install -g vite
+      - name: Install Yarn
+        run: npm install -g yarn
 
       - name: Install Dependencies
         run: npm install
 
       - name: Build
-        run: vite build
+        run: npm run build
+
+      - name: Uninstall Yarn
+        if: always()
+        run: npm uninstall -g yarn
 
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
