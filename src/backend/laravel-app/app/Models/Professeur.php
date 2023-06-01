@@ -13,4 +13,9 @@ class Professeur extends Model
     {
         return $this->belongsToMany(Cour::class);
     }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }
