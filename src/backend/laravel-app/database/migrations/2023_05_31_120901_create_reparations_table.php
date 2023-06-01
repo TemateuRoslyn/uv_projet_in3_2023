@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('reparations', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('demarche_mediatiion');
+            $table->string('demarche_mediation');
             $table->unsignedBigInteger('faute_id');
             $table->foreign('faute_id')->references('id')->on('fautes');
         });
