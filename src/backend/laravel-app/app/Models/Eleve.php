@@ -33,4 +33,10 @@ class Eleve extends Model
     {
         return $this->belongsTo(Classe::class);
     }
+
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }
