@@ -21,8 +21,8 @@ class UserSeeder extends Seeder
         
         $user = User::create([
             'name' => 'maestros',
-            'email' => 'maestros@',
-            'password' => bcrypt('maestros@'),
+            'email' => 'maestros@gmail.com',
+            'password' => bcrypt('maestros'),
             'first_name' => 'John',
             'last_name' => 'Doe',
             'date_de_naissance' => '1990-01-01',
@@ -35,6 +35,8 @@ class UserSeeder extends Seeder
         // Créer un utilisateur de base avec le rôle d'administrateur
         $adminRole = Role::where('name', 'admin')->first();
 
+        
         $user->roles()->attach($adminRole);
+        
     }
 }
