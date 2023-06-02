@@ -9,24 +9,23 @@ Route::prefix('auth')->group(function () {
     // ...
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);
+    
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('user', [AuthController::class, 'user']);
     // ...
 });
 
-Route::get('/text', function () {
+Route::middleware('auth:api')->get('/text', function (Request $request) {
     return response('Texte brut de MAESTROS', 200)
         ->header('Content-Type', 'text/plain');
 });
+
+
 
 // Route::get('/admin/dashboard', function () {
 //     // Cette route est accessible uniquement pour les utilisateurs avec le rôle "admin"
 // })->middleware('admin');
 
-Route::prefix('auth')->group(function () {
-    // ...
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::get('user', [AuthController::class, 'user']);
-    // ...
-});
 
 Route::prefix('notification')->group(function () {
     Route::get('/', [NotificationController::class, 'showAll']);
