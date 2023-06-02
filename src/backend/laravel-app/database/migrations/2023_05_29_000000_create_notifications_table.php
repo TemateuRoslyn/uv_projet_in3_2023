@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('eleve_parents', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
+            $table->string("libele");
+            $table->integer("view");
+            $table->string("name");
             $table->timestamps();
-            $table->foreignId('eleve_id')->constrained();
-            $table->foreignId('parents_id')->constrained();
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('eleve_parents');
+        Schema::dropIfExists('notifications');
     }
 };

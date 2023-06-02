@@ -11,6 +11,11 @@ class Notification extends Model
     protected $fillable = [
         'libelle',
         'view',
-        'nom'
+        'name'
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(Professeur::class, 'user_notifications');
+    }
 }
