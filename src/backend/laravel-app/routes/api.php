@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,10 @@ Route::prefix('auth')->group(function () {
     // ...
 });
 
+Route::prefix('notification')->group(function () {
+    Route::get('/', [NotificationController::class, 'showAll']);
+    Route::post('/', [NotificationController::class, 'store']);
+    Route::get('/{id}', [NotificationController::class, 'showIndex']);
+    Route::put('/{id}', [NotificationController::class, 'update']);
+    Route::delete('/{id}', [NotificationController::class, 'delete']);
+});
