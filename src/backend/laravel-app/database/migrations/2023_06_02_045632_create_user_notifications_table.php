@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('recevoir_eleve_notifications', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-
-            $table->unsignedBigInteger('eleve_id');
-            $table->foreign('eleve_id')->references('id')->on('eleves');
+        Schema::create('user_notifications', function (Blueprint $table) {
 
             $table->unsignedBigInteger('notification_id');
-            $table->foreign('notification_id')->references('id')->on('notifications');
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('notification_id')->references('id')->on('notifications')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('recevoir_eleve_notifications');
+        Schema::dropIfExists('user_notifications');
     }
 };

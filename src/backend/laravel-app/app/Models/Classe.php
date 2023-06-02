@@ -11,7 +11,7 @@ class Classe extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nom',
+        'name',
     ];
 
     public function eleves()

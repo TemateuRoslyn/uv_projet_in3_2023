@@ -2,20 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Professeur extends Model
+class Professeur extends User
 {
-    use HasFactory;
+    protected $fillable = [
+        'matiere',
+    ];
 
     public function cours()
     {
         return $this->belongsToMany(Cour::class);
-    }
-
-    public function notifications()
-    {
-        return $this->hasMany(Notification::class);
     }
 }

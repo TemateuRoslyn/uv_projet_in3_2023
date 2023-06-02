@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\EnvoiNotificationPersonnel>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\EnvoiNotificationUserl>
  */
-class EnvoiNotificationPersonnelFactory extends Factory
+class EnvoiNotificationUserlFactory extends Factory
 {
     /**
      * Define the model's default state.
