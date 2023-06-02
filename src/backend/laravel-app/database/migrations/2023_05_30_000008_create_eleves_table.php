@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contenir_cour_classe', function (Blueprint $table) {
+        Schema::create('eleves', function (Blueprint $table) {
             $table->id();
+            $table->boolean('solvable');
+            $table->boolean('redoublant');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
-
-
-            $table->unsignedBigInteger('cour_id');
-            $table->foreign('cour_id')->references('id')->on('cours');
-
-            $table->unsignedBigInteger('classe_id');
-            $table->foreign('classe_id')->references('id')->on('classes');
         });
     }
 
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contenir_cour_classe');
+        Schema::dropIfExists('eleves');
     }
 };

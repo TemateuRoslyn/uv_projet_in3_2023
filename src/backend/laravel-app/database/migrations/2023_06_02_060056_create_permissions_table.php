@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('avoir__conseil_d__membre_c_s', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();
+            $table->text('description')->nullable();
             $table->timestamps();
-            $table->foreignId('conseil_disciplines_id')->references('id')->on('conseil_disciplines');
-            $table->foreignId('membre_conseil_id')->references('id')->on('membre_conseils');
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('avoir__conseil_d__membre_c_s');
+        Schema::dropIfExists('permissions');
     }
 };

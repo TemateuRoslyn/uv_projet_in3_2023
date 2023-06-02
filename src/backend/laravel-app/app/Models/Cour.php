@@ -10,8 +10,4 @@ class Cour extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function professeur()
-    {
-        return $this->belongsTo(Professeur::class);
-    }
 }

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('id_surveillant_G');
             $table->unsignedBigInteger('id_representant_E');
 
-            $table->foreign('id_chef')->references('id')->on('personnels');
-            $table->foreign('id_surveillant_G')->references('id')->on('personnels');
+            $table->foreign('id_chef')->references('id')->on('userls');
+            $table->foreign('id_surveillant_G')->references('id')->on('userls');
             $table->foreign('id_representant_E')->references('id')->on('parents');
 
             $table->timestamps();
