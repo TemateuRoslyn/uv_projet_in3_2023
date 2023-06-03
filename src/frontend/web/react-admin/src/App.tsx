@@ -19,6 +19,10 @@ import Tables from './pages/Tables';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 
+import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
+import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
+// import 'ag-grid-enterprise';
+
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
 
