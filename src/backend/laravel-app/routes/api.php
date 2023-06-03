@@ -1,32 +1,38 @@
 <?php
 
-use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\NotificationController;
+// third party libs...
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+// controllers
+use App\Http\Controllers\API\EleveController;
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\NotificationController;
+
+// maestros
 Route::prefix('auth')->group(function () {
-    // ...
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);
-    
     Route::post('logout', [AuthController::class, 'logout']);
     Route::get('user', [AuthController::class, 'user']);
-    // ...
 });
 
-Route::middleware('auth:api')->get('/text', function (Request $request) {
-    return response('Texte brut de MAESTROS', 200)
-        ->header('Content-Type', 'text/plain');
+// lucie
+Route::prefix('students')->group(function () {
+    Route::post('create', [EleveController::class, 'store']);
+    Route::post('update', [EleveController::class, 'update']);
+    Route::delete('delete/{eleve}', [EleveController::class, 'delete']);
+    Route::get('findOne/{eleveId}', [EleveController::class, 'read']);
+    Route::get('findAll', [EleveController::class, 'index']);
 });
 
+// Route::prefix('students')->middleware('auth:api')->group(function () {
+//     Route::post('/eleves', [EleveController::class, 'store']);
+//     Route::put('/eleves/{eleve}', [EleveController::class, 'update']);
+//     Route::delete('/eleves/{eleve}', [EleveController::class, 'delete']);
+// });
 
-
-// Route::get('/admin/dashboard', function () {
-//     // Cette route est accessible uniquement pour les utilisateurs avec le rôle "admin"
-// })->middleware('admin');
-
-
+// midas
 Route::prefix('notification')->group(function () {
     Route::get('/', [NotificationController::class, 'showAll']);
     Route::post('/', [NotificationController::class, 'store']);
