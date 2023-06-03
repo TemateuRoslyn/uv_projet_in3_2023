@@ -9,8 +9,11 @@ class Faute extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'libelle',
+        'id',
+        'libelleFaute',
         'gravite',
+        'eleve_id',
+        'regle_id'
     ];
     public function regle()
     {
