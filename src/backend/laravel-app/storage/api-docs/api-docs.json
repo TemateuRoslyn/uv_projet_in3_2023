@@ -68,10 +68,6 @@
                                     },
                                     "sexe": {
                                         "type": "string",
-                                        "enum": [
-                                            "Male",
-                                            "Female"
-                                        ],
                                         "example": "Male"
                                     },
                                     "telephone": {
@@ -488,7 +484,8 @@
                                     "sexe",
                                     "telephone",
                                     "solvable",
-                                    "redoublant"
+                                    "redoublant",
+                                    "user_id"
                                 ],
                                 "properties": {
                                     "email": {
@@ -529,10 +526,6 @@
                                     },
                                     "sexe": {
                                         "type": "string",
-                                        "enum": [
-                                            "Male",
-                                            "Female"
-                                        ],
                                         "example": "Male"
                                     },
                                     "telephone": {
@@ -651,17 +644,6 @@
                 "summary": "Update a eleve's information",
                 "description": "Update a eleve's information",
                 "operationId": "updateEleve",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of eleve to update",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -706,10 +688,6 @@
                                     },
                                     "sexe": {
                                         "type": "string",
-                                        "enum": [
-                                            "Male",
-                                            "Female"
-                                        ],
                                         "example": "Male"
                                     },
                                     "telephone": {
@@ -901,157 +879,27 @@
             },
             "Eleve": {
                 "required": [
-                    "email",
-                    "password",
-                    "first_name",
-                    "last_name",
-                    "sexe",
                     "solvable",
-                    "redoublant"
-                ],
-                "type": "object",
-                "xml": {
-                    "name": "Eleve"
-                },
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/User"
-                    },
-                    {
-                        "properties": {
-                            "id": {
-                                "type": "integer",
-                                "readOnly": "true",
-                                "example": "1"
-                            },
-                            "role": {
-                                "description": "User role",
-                                "type": "string",
-                                "readOnly": "true"
-                            },
-                            "email": {
-                                "description": "User unique email address",
-                                "type": "string",
-                                "format": "email",
-                                "readOnly": "true",
-                                "example": "user@gmail.com"
-                            },
-                            "email_verified_at": {
-                                "description": "Datetime marker of verification status",
-                                "type": "string",
-                                "format": "date-time",
-                                "readOnly": "true",
-                                "example": "2019-02-25 12:59:20"
-                            },
-                            "password": {
-                                "description": "User password",
-                                "type": "string",
-                                "format": "password",
-                                "readOnly": "true",
-                                "example": "secret"
-                            },
-                            "name": {
-                                "type": "string",
-                                "maxLength": 32,
-                                "example": "John"
-                            },
-                            "first_name": {
-                                "type": "string",
-                                "maxLength": 32,
-                                "example": "Doe"
-                            },
-                            "last_name": {
-                                "type": "string",
-                                "maxLength": 32,
-                                "example": "Smith"
-                            },
-                            "date_de_naissance": {
-                                "type": "string",
-                                "format": "date",
-                                "example": "1990-01-01"
-                            },
-                            "lieu_de_naissance": {
-                                "type": "string",
-                                "maxLength": 32,
-                                "example": "Paris"
-                            },
-                            "photo": {
-                                "type": "string",
-                                "format": "url",
-                                "example": "https://example.com/photo.jpg"
-                            },
-                            "sexe": {
-                                "type": "string",
-                                "enum": [
-                                    "male",
-                                    "female"
-                                ],
-                                "example": "male"
-                            },
-                            "telephone": {
-                                "type": "string",
-                                "example": "+33123456789"
-                            },
-                            "solvable": {
-                                "type": "boolean",
-                                "example": true
-                            },
-                            "redoublant": {
-                                "type": "boolean",
-                                "example": false
-                            },
-                            "created_at": {
-                                "$ref": "#/components/schemas/BaseModel/properties/created_at"
-                            },
-                            "updated_at": {
-                                "$ref": "#/components/schemas/BaseModel/properties/updated_at"
-                            },
-                            "deleted_at": {
-                                "$ref": "#/components/schemas/BaseModel/properties/deleted_at"
-                            }
-                        }
-                    }
-                ]
-            },
-            "User": {
-                "required": [
-                    "email",
-                    "password",
+                    "redoublant",
+                    "name",
                     "first_name",
                     "last_name",
-                    "sexe"
+                    "date_de_naissance",
+                    "lieu_de_naissance",
+                    "photo",
+                    "sexe",
+                    "telephone"
                 ],
                 "properties": {
                     "id": {
                         "type": "integer",
-                        "readOnly": "true",
+                        "readOnly": true,
                         "example": "1"
                     },
                     "role": {
                         "description": "User role",
                         "type": "string",
-                        "readOnly": "true"
-                    },
-                    "email": {
-                        "description": "User unique email address",
-                        "type": "string",
-                        "format": "email",
-                        "readOnly": "true",
-                        "example": "user@gmail.com"
-                    },
-                    "email_verified_at": {
-                        "description": "Datetime marker of verification status",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": "true",
-                        "example": "2019-02-25 12:59:20"
-                    },
-                    "password": {
-                        "description": "User password",
-                        "type": "string",
-                        "format": "password",
-                        "readOnly": "true",
-                        "example": "secret"
+                        "readOnly": true
                     },
                     "name": {
                         "type": "string",
@@ -1085,10 +933,6 @@
                     },
                     "sexe": {
                         "type": "string",
-                        "enum": [
-                            "male",
-                            "female"
-                        ],
                         "example": "male"
                     },
                     "telephone": {
@@ -1102,6 +946,58 @@
                     "redoublant": {
                         "type": "boolean",
                         "example": false
+                    },
+                    "created_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/created_at"
+                    },
+                    "updated_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/updated_at"
+                    },
+                    "deleted_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/deleted_at"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Eleve"
+                }
+            },
+            "User": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": true,
+                        "example": "1"
+                    },
+                    "role": {
+                        "description": "User role",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "email": {
+                        "description": "User unique email address",
+                        "type": "string",
+                        "format": "email",
+                        "readOnly": true,
+                        "example": "user@gmail.com"
+                    },
+                    "email_verified_at": {
+                        "description": "Datetime marker of verification status",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "example": "2019-02-25 12:59:20"
+                    },
+                    "password": {
+                        "description": "User password",
+                        "type": "string",
+                        "format": "password",
+                        "readOnly": true,
+                        "example": "secret"
                     },
                     "created_at": {
                         "$ref": "#/components/schemas/BaseModel/properties/created_at"

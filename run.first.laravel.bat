@@ -1,7 +1,6 @@
 :: !/bin/bash
 
-cd src/backend/laravel-app
-
+cd src\backend\laravel-app
 
 set port=8000
 
@@ -17,7 +16,9 @@ if %running% == yes (
   php artisan serve
 ) else (
   composer install
-  php artisan migrate:fresh --seed
+  pphp artisan migrate:fresh --seed
   php artisan passport:install
   php artisan serve
 )
+
+

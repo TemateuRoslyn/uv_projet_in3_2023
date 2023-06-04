@@ -15,6 +15,14 @@ return new class extends Migration
             $table->id();
             $table->boolean('solvable');
             $table->boolean('redoublant');
+            $table->string('name');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->date('date_de_naissance');
+            $table->string('lieu_de_naissance');
+            $table->string('photo')->nullable();
+            $table->string('sexe');
+            $table->string('telephone')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

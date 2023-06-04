@@ -1,0 +1,7 @@
+https://localhost:8000/v2/api-docs
+
+OpenApi
+java -jar openapi-generator-cli-4.2.2.jar generate -i api-docs.json -g typescript-angular -o generated
+
+Swagger
+java -jar swagger-codegen-cli.jar generate -i api-docs.json -l typescript-angular -o generated
