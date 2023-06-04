@@ -15,7 +15,7 @@ use App\Models\Role;
 class EleveController extends Controller
 {
 
-    private $avatar_path = "assets/avatars/api/eleves" ;
+    private $avatar_path = "assets/avatars/eleves" ;
 
 
     /**
@@ -43,11 +43,8 @@ class EleveController extends Controller
      */
     public function index()
     {
-        $eleves = Eleve::get()->map(function ($eleve) {
-                                $user = User::find($eleve->user_id);
-                                $eleve->assignUserFields($user);
-                                return $eleve;
-                            });
+        $eleves = Eleve::has('user')->with('user')->get();
+
     
         return response()->json([
             'message' => 'Liste des élèves', 
@@ -99,26 +96,25 @@ class EleveController extends Controller
      */
     public function view($eleveId)
     {
-        $eleve = Eleve::find($eleveId);
-        
+        $eleve = Eleve::with('user')->find($eleveId);
+
         if ($eleve) {
-            $user = User::find($eleve->user_id);
-             // on cahrge les champ de l'entite user associee
-            $eleve->assignUserFields($user);
+            $eleveData = $eleve->toArray();
+            $eleveData['email'] = $eleve->user->email;
 
             return response()->json([
                 'message' => 'élève trouvé(e)',
                 'success' => true,
-                'data' => $eleve
+                'data' => $eleveData
             ], 200);
         } else {
-            // L'élève n'a pas été trouvé
             return response()->json([
                 'message' => 'Élève non trouvé',
                 'success' => false,
             ], 404);
         }
     }
+
     
 
 
@@ -133,7 +129,7 @@ class EleveController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"email", "password", "name", "first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "sexe", "telephone", "solvable", "redoublant"},
+     *             required={"email", "password", "name", "first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "sexe", "telephone", "solvable", "redoublant", "user_id"},
      *             @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
      *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
      *             @OA\Property(property="name", type="string", example="Doe"),
@@ -142,7 +138,7 @@ class EleveController extends Controller
      *             @OA\Property(property="date_de_naissance", type="string", format="date", example="1990-01-01"),
      *             @OA\Property(property="lieu_de_naissance", type="string", example="Paris"),
      *             @OA\Property(property="photo", type="string", nullable=true, example="https://example.com/photo.jpg"),
-     *             @OA\Property(property="sexe", type="string", enum={"Male", "Female"}, example="Male"),
+     *             @OA\Property(property="sexe", type="string", example="Male"),
      *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
      *             @OA\Property(property="solvable", type="boolean", example="true"),
      *             @OA\Property(property="redoublant", type="boolean", example="false")
@@ -224,6 +220,13 @@ class EleveController extends Controller
         $user = User::create([
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
+        ]);
+
+        
+        $eleve = Eleve::create([
+            'user_id' => $user->id,
+            'solvable' => boolval($request->input('solvable')),
+            'redoublant' => boolval($request->input('redoublant')),
             'name' => $request->input('name'),
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
@@ -233,15 +236,14 @@ class EleveController extends Controller
             'sexe' => $request->input('sexe'),
             'telephone' => $request->input('telephone'),
         ]);
-        
-        $eleve = Eleve::create([
-            'user_id' => $user->id,
-            'solvable' => boolval($request->input('solvable')),
-            'redoublant' => boolval($request->input('redoublant'))
-        ]);
 
-        // on cahrge les champ de l'entite user associee
-        $eleve->assignUserFields($user);
+        $eleve->user = $user;
+        
+            return response()->json([
+                'message' => 'Eleve created successfully', 
+                'success' => true,
+                'data' => $eleve
+            ]);
         
         // Créer un eleve de base avec le rôle eleve
         $eleveRole = Role::where('name', 'eleve')->first();
@@ -256,6 +258,7 @@ class EleveController extends Controller
         ]);
     }
 
+    
     /**
      * @OA\Post(
      *     path="/api/eleves/update",
@@ -264,15 +267,6 @@ class EleveController extends Controller
      *     operationId="updateEleve",
      *     tags={"eleves"},
      *     security={ {"bearer": {} }},
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="ID of eleve to update",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="integer"
-     *         )
-     *     ),
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -284,7 +278,7 @@ class EleveController extends Controller
      *             @OA\Property(property="date_de_naissance", type="string", format="date", example="1990-01-01"),
      *             @OA\Property(property="lieu_de_naissance", type="string", example="Paris"),
      *             @OA\Property(property="photo", type="string", nullable=true, example="https://example.com/photo.jpg"),
-     *             @OA\Property(property="sexe", type="string", enum={"Male", "Female"}, example="Male"),
+     *             @OA\Property(property="sexe", type="string", example="Male"),
      *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
      *             @OA\Property(property="solvable", type="boolean", example="true"),
      *             @OA\Property(property="redoublant", type="boolean", example="false")
@@ -337,7 +331,6 @@ class EleveController extends Controller
             $validator = Validator::make($request->all(), [
                 'id' => 'required',
                 'email' => 'required|email|unique:users,email,' . $user->id,
-                'password' => 'required|min:8',
                 'name' => 'required',
                 'first_name' => 'required',
                 'last_name' => 'required',
@@ -366,33 +359,32 @@ class EleveController extends Controller
 
         // Mise à jour des champs de l'objet User
         $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password'));
-        $user->name = $request->input('name');
-        $user->first_name = $request->input('first_name');
-        $user->last_name = $request->input('last_name');
-        $user->date_de_naissance = $request->input('date_de_naissance');
-        $user->lieu_de_naissance = $request->input('lieu_de_naissance');
-        $user->sexe = $request->input('sexe');
-        $user->telephone = $request->input('telephone');
+        // $user->password = $user->password;
         
         // Suppression de l'ancienne photo si une nouvelle a été sélectionnée
         if ($request->hasFile('photo')) {
-            $oldPhoto = $user->photo;
+            $oldPhoto = $eleveFound->photo;
             if ($oldPhoto) {
                 Storage::delete($oldPhoto);
             }
-            $user->photo = $request->file('photo')->store($this->avatar_path);
+            $eleveFound->photo = $request->file('photo')->store($this->avatar_path);
         }
 
         $user->save();
 
         // Mise à jour des champs de l'objet Eleve
+        $eleveFound->name = $request->input('name');
+        $eleveFound->first_name = $request->input('first_name');
+        $eleveFound->last_name = $request->input('last_name');
+        $eleveFound->date_de_naissance = $request->input('date_de_naissance');
+        $eleveFound->lieu_de_naissance = $request->input('lieu_de_naissance');
+        $eleveFound->sexe = $request->input('sexe');
+        $eleveFound->telephone = $request->input('telephone');
         $eleveFound->solvable = boolval($request->input('solvable'));
         $eleveFound->redoublant = boolval($request->input('redoublant'));
         $eleveFound->save();
 
-        // on cahrge les champ de l'entite user associee
-        $eleveFound->assignUserFields($user);
+        $eleveFound = Eleve::with('user')->find($eleveFound->id);
 
         return response()->json([
             'message' => 'Eleve updated successfully', 
