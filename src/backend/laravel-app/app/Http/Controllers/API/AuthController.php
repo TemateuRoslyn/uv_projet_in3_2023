@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,38 +25,40 @@ class AuthController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"email", "password", "name", "first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "sexe"},
-     *             @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+     *             required={"email", "password", "username"},
+     *             @OA\Property(property="username", type="string", example="maestros21"),
      *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     *             @OA\Property(property="name", type="string", example="Doe"),
-     *             @OA\Property(property="first_name", type="string", example="John"),
-     *             @OA\Property(property="last_name", type="string", example="Smith"),
-     *             @OA\Property(property="date_de_naissance", type="string", format="date", example="1990-01-01"),
-     *             @OA\Property(property="lieu_de_naissance", type="string", example="Paris"),
-     *             @OA\Property(property="photo", type="string", nullable=true, example="https://example.com/photo.jpg"),
-     *             @OA\Property(property="sexe", type="string", example="Male"),
-     *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789")
+     *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
      *         )
      *     ),
      *     @OA\Response(
      *         response=201,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="user", type="object", ref="#/components/schemas/User"),
-     *             @OA\Property(property="token", type="string", example="eyJ0eXAiOiJKV1QiLCJ....")
-     *         )
-     *     ),
+     *             @OA\Property(property="success", type="boolean", example="Logged in successfully"),
+     *             @OA\Property(property="message", type="string", example="Logged in successfully"),
+     *             @OA\Property(
+     *                   property="content",
+     *                   type="object",
+     *                   @OA\Property(property="user", type="object", ref="#/components/schemas/User"),
+     *                   @OA\Property(property="token", type="string", example="eyJ0eXAiOiJKV1QiLCJ....")
+     *              ),
+     *           )
+     *          ),
      *     @OA\Response(
      *         response=400,
      *         description="Error - Invalid request data",
      *         @OA\JsonContent(
      *             @OA\Property(property="error", type="object", example={
-     *                 "email": {
-     *                     "The email field is required."
+     *                 "username": {
+     *                     "Le username est un champ requis."
      *                 },
      *                 "password": {
-     *                     "The password field is required."
-     *                 }
+     *                     "Le mot de passe est un champ requis."
+     *                 },
+     *                 "email": {
+     *                     "L'email est un champ requis."
+     *                 }     
      *             })
      *         )
      *     ),
@@ -70,14 +74,14 @@ class AuthController extends Controller
      *         description="Error - Validation failed",
      *         @OA\JsonContent(
      *             @OA\Property(property="error", type="object", example={
-     *                 "email": {
-     *                     "The email must be a valid email address."
+     *                 "username": {
+     *                     "Le username est un champ requis."
      *                 },
      *                 "password": {
-     *                     "The password must be at least 6 characters."
+     *                     "TLe mot de passe doit avoir au moins 6 characteres"
      *                 },
-     *                 "name": {
-     *                     "The name field is required."
+     *                 "email": {
+     *                     "L'email doit etre valide"
      *                 }
      *             })
      *         )
@@ -89,14 +93,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|email|unique:users|max:255',
             'password' => 'required|string|min:6',
-            'name' => 'required|string|max:255',
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'date_de_naissance' => 'required|date',
-            'lieu_de_naissance' => 'required|string|max:255',
-            'photo' => 'nullable|string',
-            'sexe' => 'required|in:Male,Female',
-            'telephone' => 'nullable|string|max:255',
+            'username' => 'required|string|unique:users',
         ]);
 
         if ($validator->fails()) {
@@ -105,25 +102,20 @@ class AuthController extends Controller
 
         $user = User::create([
             'email' => $request->email,
+            'username' => $request->username,
             'password' => bcrypt($request->password),
-            'name' => $request->name,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'date_de_naissance' => $request->date_de_naissance,
-            'lieu_de_naissance' => $request->lieu_de_naissance,
-            'photo' => $request->photo,
-            'sexe' => $request->sexe,
-            'telephone' => $request->telephone,
         ]);
-
+        
         // Créer un utilisateur de base avec le rôle user
         $userRole = Role::where('name', 'user')->first();
-
+        
         $user->roles()->attach($userRole);
-
-        $token = $user->createToken('API Token')->accessToken;
-
-        return response()->json(['user' => $user, 'token' => $token], 200);
+        
+        return response()->json([
+            'content' => $user, 
+            'message' => "User successfully created",
+            'success' => true
+        ], 200);
     }
 
     /**
@@ -137,8 +129,8 @@ class AuthController extends Controller
      *        required=true,
      *        description="Pass user credentials",
      *        @OA\JsonContent(
-     *           required={"email","password"},
-     *           @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+     *           required={"password", "username"},
+     *           @OA\Property(property="username", type="string", example="maestros21"),
      *           @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
      *           @OA\Property(property="persistent", type="boolean", example="true"),
      *        ),
@@ -154,28 +146,49 @@ class AuthController extends Controller
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="user", type="object", ref="#/components/schemas/User"),
-     *             @OA\Property(property="token", type="string", example="eyJ0eXAiOiJKV1QiLCJ....")
+     *             @OA\Property(property="success", type="boolean", example="Logged in successfully"),
+     *             @OA\Property(property="message", type="string", example="Logged in successfully"),
+     *             @OA\Property(
+     *                   property="content",
+     *                   type="object",
+     *                   @OA\Property(property="user", type="object", ref="#/components/schemas/User"),
+     *                   @OA\Property(property="token", type="string", example="eyJ0eXAiOiJKV1QiLCJ....")
+     *               ),
      *         )
      *     )
      * )
      */
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            $token = $user->createToken('API Token')->accessToken;
+        // validation
+        $request->validate([
+            "username" => "required",
+            "password" => "required"
+        ]);
 
-            return response()->json(['user' => $user, 'token' => $token], 200);
-        } else {
-            return response()->json(['error' => 'Invalid credentials'], 401);
+        // verify user + token
+        if (!$token = auth()->attempt(["username" => $request->username, "password" => $request->password])) {
+            return response()->json([
+                "success" => false,
+                "message" => "Invalid credentials"
+            ]);
         }
+
+        // send response
+        return response()->json([
+            "success" => true,
+            "message" => "Logged in successfully",
+            "content" => [
+                'token' => $token,
+                'user' => auth()->user(),
+                ]
+        ], 200);
+
     }
 
     /**
-     * @OA\Post(
+     * @OA\POST(
      *     path="/api/auth/user",
      *     summary="Get user details",
      *     description="Get details of the authenticated user",
@@ -195,41 +208,62 @@ class AuthController extends Controller
      *         @OA\JsonContent(
      *             @OA\Property(property="user", type="object", ref="#/components/schemas/User")
      *         )
+     *     ),
+     *     @OA\SecurityScheme(
+     *         type="http",
+     *         securityScheme="bearerAuth",
+     *         scheme="bearer",
+     *         bearerFormat="JWT"
      *     )
      * )
      */
-    public function user(Request $request)
+    public function user()
     {
-        $user = $request->user();
-
-        return response()->json(['user' => $user], 200);
+        $user = auth()->user();
+        return response()->json(['data' => $user], 200);
     }
 
     /**
      * @OA\Post(
-     * path="/api/auth/logout",
-     * summary="Logout",
-     * description="Logout user and invalidate token",
-     * operationId="authLogout",
-     * tags={"auth"},
-     * security={ {"bearer": {} }},
-     * @OA\Response(
-     *    response=200,
-     *    description="Success"
+     *     path="/api/auth/logout",
+     *     summary="Logout",
+     *     description="Invalidate token and log out user",
+     *     operationId="authLogout",
+     *     tags={"auth"},
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
      *     ),
-     * @OA\Response(
-     *    response=401,
-     *    description="Returns when user is not authenticated",
-     *    @OA\JsonContent(
-     *       @OA\Property(property="message", type="string", example="Not authorized"),
-     *    )
-     * )
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully logged out",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Successfully logged out")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     )
      * )
      */
-    public function logout(Request $request)
+    public function logout()
     {
-        $request->user()->token()->revoke();
-
-        return response()->json(['message' => 'Logged out successfully'], 200);
+        try {
+            JWTAuth::parseToken()->authenticate(); // Vérifie que le token JWT existe et est valide
+            JWTAuth::invalidate(JWTAuth::getToken()); // Invalide le token JWT
+            return response()->json(['message' => 'Successfully logged out'],200);
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'Invalid token'], 401);
+        }
     }
 }

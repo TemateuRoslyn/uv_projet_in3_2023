@@ -1,12 +1,11 @@
 import 'package:dio/dio.dart';
 
 class ApiConfiguration {
-  static String appDomainUrl =
-      'https://a963-129-0-103-69.ngrok-free.app/vendor/';
+  static String appDomainUrl = 'https://4310-129-0-103-12.ngrok-free.app/';
 
   static Dio dioClient = Dio(
     BaseOptions(
-      baseUrl: '${appDomainUrl}api/v1/',
+      baseUrl: '${appDomainUrl}api/',
       headers: {'Content-Type': 'application/json'},
     ),
   );
@@ -18,7 +17,7 @@ class ApiConfiguration {
       );
 
   // this function is use to retrieve dio error message as a string
-  static String getErrorMessage(DioError error) {
+  static String getErrorMessage(DioException error) {
     late String errorMessage;
 
     if (error.response!.statusCode != 200 ||

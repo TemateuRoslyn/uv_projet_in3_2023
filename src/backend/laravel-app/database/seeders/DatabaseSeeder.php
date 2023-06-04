@@ -4,8 +4,13 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Database\Seeders\RoleSeeder;
-use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserSeeder;
+use Database\Seeders\ReglementInterieurSeeder;
+use Database\Seeders\RegleSeeder;
+use Database\Seeders\CoursSeeder;
+use Database\Seeders\ClasseSeeder;
+use Database\Seeders\EleveSeeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,8 +18,13 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RoleSeeder::class,
-            PermissionSeeder::class,
             UserSeeder::class,
+            ReglementInterieurSeeder::class,
+            RegleSeeder::class,
+            CoursSeeder::class,
+            ProfesseurSeeder::class,
+            ClasseSeeder::class,
+            EleveSeeder::class,
         ]);
     }
 }
