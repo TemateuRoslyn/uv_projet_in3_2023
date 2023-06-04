@@ -39,41 +39,6 @@
                                         "type": "string",
                                         "format": "password",
                                         "example": "PassWord12345"
-                                    },
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Doe"
-                                    },
-                                    "first_name": {
-                                        "type": "string",
-                                        "example": "John"
-                                    },
-                                    "last_name": {
-                                        "type": "string",
-                                        "example": "Smith"
-                                    },
-                                    "date_de_naissance": {
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "1990-01-01"
-                                    },
-                                    "lieu_de_naissance": {
-                                        "type": "string",
-                                        "example": "Paris"
-                                    },
-                                    "photo": {
-                                        "type": "string",
-                                        "example": "https://example.com/photo.jpg",
-                                        "nullable": true
-                                    },
-                                    "sexe": {
-                                        "type": "string",
-                                        "example": "Male"
-                                    },
-                                    "telephone": {
-                                        "type": "string",
-                                        "example": "+33123456789",
-                                        "nullable": true
                                     }
                                 },
                                 "type": "object"
@@ -301,21 +266,46 @@
                     "auth"
                 ],
                 "summary": "Logout",
-                "description": "Logout user and invalidate token",
+                "description": "Invalidate token and log out user",
                 "operationId": "authLogout",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "Success"
-                    },
-                    "401": {
-                        "description": "Returns when user is not authenticated",
+                        "description": "Successfully logged out",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Not authorized"
+                                            "example": "Successfully logged out"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
                                         }
                                     },
                                     "type": "object"
@@ -323,12 +313,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
+                }
             }
         },
         "/api/eleves/findAll": {
@@ -339,6 +324,18 @@
                 "summary": "Get all eleves",
                 "description": "Retrieve a list of all eleves",
                 "operationId": "elevesIndex",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer {your_token}"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -374,7 +371,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/eleves/findOne/{id}": {
@@ -386,6 +388,16 @@
                 "description": "Get information about a specific eleve",
                 "operationId": "viewEleve",
                 "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    },
                     {
                         "name": "id",
                         "in": "path",
@@ -452,12 +464,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
+                }
             }
         },
         "/api/eleves/create": {
@@ -468,6 +475,18 @@
                 "summary": "Create a new eleve",
                 "description": "Create a new eleve resource",
                 "operationId": "createEleve",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -628,12 +647,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
+                }
             }
         },
         "/api/eleves/update": {
@@ -644,6 +658,18 @@
                 "summary": "Update a eleve's information",
                 "description": "Update a eleve's information",
                 "operationId": "updateEleve",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -780,12 +806,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
+                }
             }
         },
         "/api/eleves/delete/{id}": {
@@ -797,6 +818,16 @@
                 "description": "Delete an eleve resource",
                 "operationId": "deleteEleve",
                 "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    },
                     {
                         "name": "id",
                         "in": "path",
@@ -843,12 +874,7 @@
                     "204": {
                         "description": "Success"
                     }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
+                }
             }
         }
     },

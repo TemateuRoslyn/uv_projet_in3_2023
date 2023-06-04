@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,15 +27,7 @@ class AuthController extends Controller
      *         @OA\JsonContent(
      *             required={"email", "password", "name", "first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "sexe"},
      *             @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
-     *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     *             @OA\Property(property="name", type="string", example="Doe"),
-     *             @OA\Property(property="first_name", type="string", example="John"),
-     *             @OA\Property(property="last_name", type="string", example="Smith"),
-     *             @OA\Property(property="date_de_naissance", type="string", format="date", example="1990-01-01"),
-     *             @OA\Property(property="lieu_de_naissance", type="string", example="Paris"),
-     *             @OA\Property(property="photo", type="string", nullable=true, example="https://example.com/photo.jpg"),
-     *             @OA\Property(property="sexe", type="string", example="Male"),
-     *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789")
+     *             @OA\Property(property="password", type="string", format="password", example="PassWord12345")
      *         )
      *     ),
      *     @OA\Response(
@@ -89,14 +83,6 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|email|unique:users|max:255',
             'password' => 'required|string|min:6',
-            'name' => 'required|string|max:255',
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'date_de_naissance' => 'required|date',
-            'lieu_de_naissance' => 'required|string|max:255',
-            'photo' => 'nullable|string',
-            'sexe' => 'required|in:Male,Female',
-            'telephone' => 'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -106,24 +92,18 @@ class AuthController extends Controller
         $user = User::create([
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'name' => $request->name,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'date_de_naissance' => $request->date_de_naissance,
-            'lieu_de_naissance' => $request->lieu_de_naissance,
-            'photo' => $request->photo,
-            'sexe' => $request->sexe,
-            'telephone' => $request->telephone,
         ]);
-
+        
         // Créer un utilisateur de base avec le rôle user
         $userRole = Role::where('name', 'user')->first();
-
+        
         $user->roles()->attach($userRole);
-
-        $token = $user->createToken('API Token')->accessToken;
-
-        return response()->json(['user' => $user, 'token' => $token], 200);
+        
+        return response()->json([
+            'data' => $user, 
+            'message' => "User successfully created",
+            'success' => true
+        ], 200);
     }
 
     /**
@@ -162,20 +142,32 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            $token = $user->createToken('API Token')->accessToken;
+        // validation
+        $request->validate([
+            "email" => "required|email",
+            "password" => "required"
+        ]);
 
-            return response()->json(['user' => $user, 'token' => $token], 200);
-        } else {
-            return response()->json(['error' => 'Invalid credentials'], 401);
+        // verify user + token
+        if (!$token = auth()->attempt(["email" => $request->email, "password" => $request->password])) {
+            return response()->json([
+                "success" => false,
+                "message" => "Invalid credentials"
+            ]);
         }
+
+        // send response
+        return response()->json([
+            "success" => true,
+            "message" => "Logged in successfully",
+            "data" => ['token' => $token]
+        ]);
+
     }
 
     /**
-     * @OA\Post(
+     * @OA\POST(
      *     path="/api/auth/user",
      *     summary="Get user details",
      *     description="Get details of the authenticated user",
@@ -195,41 +187,73 @@ class AuthController extends Controller
      *         @OA\JsonContent(
      *             @OA\Property(property="user", type="object", ref="#/components/schemas/User")
      *         )
+     *     ),
+     *     @OA\SecurityScheme(
+     *         type="http",
+     *         securityScheme="bearerAuth",
+     *         scheme="bearer",
+     *         bearerFormat="JWT"
      *     )
      * )
      */
-    public function user(Request $request)
+    public function user()
     {
-        $user = $request->user();
+        $user = auth()->user();
 
-        return response()->json(['user' => $user], 200);
+        $profile = [
+            'email' => $user->email,
+        ];
+
+        return response()->json(['data' => $profile], 200);
+        // $user_data = auth()->user();
+        // return response()->json([
+        //     "success" => true,
+        //     "message" => "User profile data",
+        //     "data" => $user_data
+        // ]);
     }
 
     /**
      * @OA\Post(
-     * path="/api/auth/logout",
-     * summary="Logout",
-     * description="Logout user and invalidate token",
-     * operationId="authLogout",
-     * tags={"auth"},
-     * security={ {"bearer": {} }},
-     * @OA\Response(
-     *    response=200,
-     *    description="Success"
+     *     path="/api/auth/logout",
+     *     summary="Logout",
+     *     description="Invalidate token and log out user",
+     *     operationId="authLogout",
+     *     tags={"auth"},
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
      *     ),
-     * @OA\Response(
-     *    response=401,
-     *    description="Returns when user is not authenticated",
-     *    @OA\JsonContent(
-     *       @OA\Property(property="message", type="string", example="Not authorized"),
-     *    )
-     * )
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully logged out",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Successfully logged out")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     )
      * )
      */
-    public function logout(Request $request)
+    public function logout()
     {
-        $request->user()->token()->revoke();
-
-        return response()->json(['message' => 'Logged out successfully'], 200);
+        try {
+            JWTAuth::parseToken()->authenticate(); // Vérifie que le token JWT existe et est valide
+            JWTAuth::invalidate(JWTAuth::getToken()); // Invalide le token JWT
+            return response()->json(['message' => 'Successfully logged out'],200);
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'Invalid token'], 401);
+        }
     }
 }

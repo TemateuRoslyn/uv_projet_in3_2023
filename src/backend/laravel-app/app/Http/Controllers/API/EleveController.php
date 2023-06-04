@@ -24,6 +24,17 @@ class EleveController extends Controller
      *     summary="Get all eleves",
      *     description="Retrieve a list of all eleves",
      *     operationId="elevesIndex",
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *     security={{"bearerAuth":{}}},
      *     tags={"eleves"},
      *     @OA\Response(
      *         response=200,
@@ -59,8 +70,17 @@ class EleveController extends Controller
      *     description="Get information about a specific eleve",
      *     operationId="viewEleve",
      *     tags={"eleves"},
-     *     security={ {"bearer": {} }},
      *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
+     *      @OA\Parameter(
      *         name="id",
      *         in="path",
      *         description="ID of eleve to get information for",
@@ -125,8 +145,17 @@ class EleveController extends Controller
      *     description="Create a new eleve resource",
      *     operationId="createEleve",
      *     tags={"eleves"},
-     *     security={ {"bearer": {} }},
-     *     @OA\RequestBody(
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
+     *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
      *             required={"email", "password", "name", "first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "sexe", "telephone", "solvable", "redoublant", "user_id"},
@@ -266,8 +295,17 @@ class EleveController extends Controller
      *     description="Update a eleve's information",
      *     operationId="updateEleve",
      *     tags={"eleves"},
-     *     security={ {"bearer": {} }},
-     *     @OA\RequestBody(
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
+     *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
      *             @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
@@ -400,8 +438,17 @@ class EleveController extends Controller
      *     description="Delete an eleve resource",
      *     operationId="deleteEleve",
      *     tags={"eleves"},
-     *     security={ {"bearer": {} }},
      *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
+     *      @OA\Parameter(
      *         name="id",
      *         in="path",
      *         description="ID of eleve to delete",
