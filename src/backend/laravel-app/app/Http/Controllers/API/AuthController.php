@@ -32,7 +32,7 @@ class AuthController extends Controller
      *             @OA\Property(property="date_de_naissance", type="string", format="date", example="1990-01-01"),
      *             @OA\Property(property="lieu_de_naissance", type="string", example="Paris"),
      *             @OA\Property(property="photo", type="string", nullable=true, example="https://example.com/photo.jpg"),
-     *             @OA\Property(property="sexe", type="string", enum={"Male", "Female"}, example="Male"),
+     *             @OA\Property(property="sexe", type="string", example="Male"),
      *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789")
      *         )
      *     ),
