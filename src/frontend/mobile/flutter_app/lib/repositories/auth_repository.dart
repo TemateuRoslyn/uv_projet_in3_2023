@@ -21,7 +21,7 @@ class AuthRepository {
   late String _userToken;
 
   String get getUserId => _userId;
-  String get getUserToken => _userToken!;
+  String get getUserToken => _userToken;
 
   Stream<AuthStatus> getStatus() async* {
     final userToken = await flutterSecureStorage.read(key: kUserToken);
