@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Permission;
 
 class UserSeeder extends Seeder
 {
@@ -18,17 +20,26 @@ class UserSeeder extends Seeder
     {
 
 
-        
         $user = User::create([
             'email' => 'maestros@gmail.com',
+            'username' => 'maestros',
             'password' => bcrypt('maestros'),
         ]);
-        
-        // Créer un utilisateur de base avec le rôle d'administrateur
-        $adminRole = Role::where('name', 'admin')->first();
 
-        
-        $user->roles()->attach($adminRole);
-        
+        // recupere le role admin
+        $adminRole = Role::where('name', ADMIN_ROLE['name'])->first();
+
+        // assigner le role
+        if ($adminRole) {
+            $user->roles()->attach($adminRole);
+        }
+
+        // assigner les permission
+        foreach (ADMINITRATEUR_PERMISSIONS as $permission) {
+            $adminPerm = Permission::where('name', $permission['name'])->first();
+            if ($adminPerm) {
+                $user->permissions()->attach($adminPerm);
+            }
+        }
     }
 }
