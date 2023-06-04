@@ -18,8 +18,8 @@ return new class extends Migration
             $table->date('date_convocation');
             $table->date('date_rdv');
             $table->string('statut');
-            $table->unsignedBigInteger('userl_id');
-            $table->foreign('userl_id')->references('id')->on('userls');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

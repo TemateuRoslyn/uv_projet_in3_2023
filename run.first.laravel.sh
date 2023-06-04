@@ -7,10 +7,12 @@ port=8000
 if sudo netstat -tulpn | grep "$port" > /dev/null
 then
     sudo kill -9 `sudo lsof -t -i:8000`
+    composer install
     php artisan migrate:fresh --seed
     php artisan passport:install
     php artisan serve
 else
+    composer install
     php artisan migrate:fresh --seed
     php artisan passport:install
     php artisan serve

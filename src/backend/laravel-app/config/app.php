@@ -168,6 +168,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        // Darkaonline/l5-swagger Service Provider
+        // \L5Swagger\L5SwaggerServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -183,6 +186,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        // Darkaonline/l5-swagger Alias
+        // 'L5Swagger' => \L5Swagger\Facades\L5Swagger::class,
     ])->toArray(),
 
 ];

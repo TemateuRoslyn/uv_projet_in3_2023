@@ -18,11 +18,11 @@ Route::prefix('auth')->group(function () {
 });
 
 // lucie
-Route::prefix('students')->group(function () {
+Route::prefix('eleves')->group(function () {
     Route::post('create', [EleveController::class, 'store']);
     Route::post('update', [EleveController::class, 'update']);
     Route::delete('delete/{eleve}', [EleveController::class, 'delete']);
-    Route::get('findOne/{eleveId}', [EleveController::class, 'read']);
+    Route::get('findOne/{eleveId}', [EleveController::class, 'view']);
     Route::get('findAll', [EleveController::class, 'index']);
 });
 

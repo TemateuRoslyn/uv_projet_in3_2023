@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Userl extends User
+class Personnel extends User
 {
     protected $fillable = [
         'fonction',
