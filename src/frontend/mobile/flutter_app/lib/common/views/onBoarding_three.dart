@@ -1,4 +1,3 @@
-
 import 'package:fltter_app/features/authentication/views/login_page.dart';
 import 'package:flutter/material.dart';
 
@@ -46,6 +45,7 @@ class OnBoardingThree extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => LoginPage()),
                   (route) => false),
               height: getHeight(50, context),
+              width: getWidth(50, context),
               iconSize: getHeight(15, context),
               color: appColors.tinary!,
               iconColor: Colors.white,
