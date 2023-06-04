@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use Tymon\JWTAuth\Contracts\JWTSubject;
+
 use App\Models\Notification;
 use App\Models\Role;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
+
+
+
 
 /**
  * @OA\Schema(
@@ -32,9 +36,9 @@ use Laravel\Passport\HasApiTokens;
  *
  * @package App\Models
  */
-class User  extends Authenticatable
+class User  extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'email',
@@ -59,5 +63,15 @@ class User  extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'role_user');
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+    
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

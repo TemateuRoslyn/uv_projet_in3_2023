@@ -12,12 +12,12 @@ for /f "skip=1" %%p in ('netstat -aon ^| findstr "%port%"') do (
 if %running% == yes (
   composer install
   php artisan migrate:fresh --seed
-  php artisan passport:install
+  php artisan jwt:secret
   php artisan serve
 ) else (
   composer install
   pphp artisan migrate:fresh --seed
-  php artisan passport:install
+  php artisan jwt:secret
   php artisan serve
 )
 
