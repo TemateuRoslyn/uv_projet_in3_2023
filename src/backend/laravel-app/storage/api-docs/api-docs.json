@@ -1,0 +1,1123 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Mon API",
+        "description": "Documentation de l'API de votre application.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Register",
+                "description": "Register a new user",
+                "operationId": "authRegister",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "name",
+                                    "first_name",
+                                    "last_name",
+                                    "date_de_naissance",
+                                    "lieu_de_naissance",
+                                    "sexe"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Doe"
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Smith"
+                                    },
+                                    "date_de_naissance": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1990-01-01"
+                                    },
+                                    "lieu_de_naissance": {
+                                        "type": "string",
+                                        "example": "Paris"
+                                    },
+                                    "photo": {
+                                        "type": "string",
+                                        "example": "https://example.com/photo.jpg",
+                                        "nullable": true
+                                    },
+                                    "sexe": {
+                                        "type": "string",
+                                        "enum": [
+                                            "Male",
+                                            "Female"
+                                        ],
+                                        "example": "Male"
+                                    },
+                                    "telephone": {
+                                        "type": "string",
+                                        "example": "+33123456789",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJ...."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error - Invalid request data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "object",
+                                            "example": {
+                                                "email": [
+                                                    "The email field is required."
+                                                ],
+                                                "password": [
+                                                    "The password field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error - Validation failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "object",
+                                            "example": {
+                                                "email": [
+                                                    "The email must be a valid email address."
+                                                ],
+                                                "password": [
+                                                    "The password must be at least 6 characters."
+                                                ],
+                                                "name": [
+                                                    "The name field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Sign in",
+                "description": "Login by email, password",
+                "operationId": "authLogin",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    },
+                                    "persistent": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Invalid credentials"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJ...."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/user": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Get user details",
+                "description": "Get details of the authenticated user",
+                "operationId": "authUser",
+                "responses": {
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Logout",
+                "description": "Logout user and invalidate token",
+                "operationId": "authLogout",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/eleves/findAll": {
+            "get": {
+                "tags": [
+                    "eleves"
+                ],
+                "summary": "Get all eleves",
+                "description": "Retrieve a list of all eleves",
+                "operationId": "elevesIndex",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "eleves": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Eleve"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/eleves/findOne/{id}": {
+            "get": {
+                "tags": [
+                    "eleves"
+                ],
+                "summary": "Get eleve information",
+                "description": "Get information about a specific eleve",
+                "operationId": "viewEleve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of eleve to get information for",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error - Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Eleve not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Élève trouvé(e)"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Eleve"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/eleves/create": {
+            "post": {
+                "tags": [
+                    "eleves"
+                ],
+                "summary": "Create a new eleve",
+                "description": "Create a new eleve resource",
+                "operationId": "createEleve",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "name",
+                                    "first_name",
+                                    "last_name",
+                                    "date_de_naissance",
+                                    "lieu_de_naissance",
+                                    "sexe",
+                                    "telephone",
+                                    "solvable",
+                                    "redoublant"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Doe"
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Smith"
+                                    },
+                                    "date_de_naissance": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1990-01-01"
+                                    },
+                                    "lieu_de_naissance": {
+                                        "type": "string",
+                                        "example": "Paris"
+                                    },
+                                    "photo": {
+                                        "type": "string",
+                                        "example": "https://example.com/photo.jpg",
+                                        "nullable": true
+                                    },
+                                    "sexe": {
+                                        "type": "string",
+                                        "enum": [
+                                            "Male",
+                                            "Female"
+                                        ],
+                                        "example": "Male"
+                                    },
+                                    "telephone": {
+                                        "type": "string",
+                                        "example": "+33123456789",
+                                        "nullable": true
+                                    },
+                                    "solvable": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "redoublant": {
+                                        "type": "boolean",
+                                        "example": "false"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Error - Invalid request data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "object",
+                                            "example": {
+                                                "email": [
+                                                    "The email field is required."
+                                                ],
+                                                "password": [
+                                                    "The password field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error - Validation failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "object",
+                                            "example": {
+                                                "email": [
+                                                    "The email must be a valid email address."
+                                                ],
+                                                "password": [
+                                                    "The password must be at least 8 characters."
+                                                ],
+                                                "name": [
+                                                    "The name field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "eleve": {
+                                            "$ref": "#/components/schemas/Eleve"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/eleves/update": {
+            "post": {
+                "tags": [
+                    "eleves"
+                ],
+                "summary": "Update a eleve's information",
+                "description": "Update a eleve's information",
+                "operationId": "updateEleve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of eleve to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Doe"
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Smith"
+                                    },
+                                    "date_de_naissance": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1990-01-01"
+                                    },
+                                    "lieu_de_naissance": {
+                                        "type": "string",
+                                        "example": "Paris"
+                                    },
+                                    "photo": {
+                                        "type": "string",
+                                        "example": "https://example.com/photo.jpg",
+                                        "nullable": true
+                                    },
+                                    "sexe": {
+                                        "type": "string",
+                                        "enum": [
+                                            "Male",
+                                            "Female"
+                                        ],
+                                        "example": "Male"
+                                    },
+                                    "telephone": {
+                                        "type": "string",
+                                        "example": "+33123456789",
+                                        "nullable": true
+                                    },
+                                    "solvable": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "redoublant": {
+                                        "type": "boolean",
+                                        "example": "false"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Error - Invalid request data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "object",
+                                            "example": {
+                                                "email": [
+                                                    "The email field is required."
+                                                ],
+                                                "password": [
+                                                    "The password field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error - Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Eleve not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "eleve": {
+                                            "$ref": "#/components/schemas/Eleve"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/eleves/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "eleves"
+                ],
+                "summary": "Delete an eleve",
+                "description": "Delete an eleve resource",
+                "operationId": "deleteEleve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of eleve to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error - Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Eleve not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BaseModel": {
+                "properties": {
+                    "created_at": {
+                        "description": "Initial creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true"
+                    },
+                    "deleted_at": {
+                        "description": "Soft delete timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true"
+                    }
+                },
+                "type": "object"
+            },
+            "Eleve": {
+                "required": [
+                    "email",
+                    "password",
+                    "first_name",
+                    "last_name",
+                    "sexe",
+                    "solvable",
+                    "redoublant"
+                ],
+                "type": "object",
+                "xml": {
+                    "name": "Eleve"
+                },
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "readOnly": "true",
+                                "example": "1"
+                            },
+                            "role": {
+                                "description": "User role",
+                                "type": "string",
+                                "readOnly": "true"
+                            },
+                            "email": {
+                                "description": "User unique email address",
+                                "type": "string",
+                                "format": "email",
+                                "readOnly": "true",
+                                "example": "user@gmail.com"
+                            },
+                            "email_verified_at": {
+                                "description": "Datetime marker of verification status",
+                                "type": "string",
+                                "format": "date-time",
+                                "readOnly": "true",
+                                "example": "2019-02-25 12:59:20"
+                            },
+                            "password": {
+                                "description": "User password",
+                                "type": "string",
+                                "format": "password",
+                                "readOnly": "true",
+                                "example": "secret"
+                            },
+                            "name": {
+                                "type": "string",
+                                "maxLength": 32,
+                                "example": "John"
+                            },
+                            "first_name": {
+                                "type": "string",
+                                "maxLength": 32,
+                                "example": "Doe"
+                            },
+                            "last_name": {
+                                "type": "string",
+                                "maxLength": 32,
+                                "example": "Smith"
+                            },
+                            "date_de_naissance": {
+                                "type": "string",
+                                "format": "date",
+                                "example": "1990-01-01"
+                            },
+                            "lieu_de_naissance": {
+                                "type": "string",
+                                "maxLength": 32,
+                                "example": "Paris"
+                            },
+                            "photo": {
+                                "type": "string",
+                                "format": "url",
+                                "example": "https://example.com/photo.jpg"
+                            },
+                            "sexe": {
+                                "type": "string",
+                                "enum": [
+                                    "male",
+                                    "female"
+                                ],
+                                "example": "male"
+                            },
+                            "telephone": {
+                                "type": "string",
+                                "example": "+33123456789"
+                            },
+                            "solvable": {
+                                "type": "boolean",
+                                "example": true
+                            },
+                            "redoublant": {
+                                "type": "boolean",
+                                "example": false
+                            },
+                            "created_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/created_at"
+                            },
+                            "updated_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/updated_at"
+                            },
+                            "deleted_at": {
+                                "$ref": "#/components/schemas/BaseModel/properties/deleted_at"
+                            }
+                        }
+                    }
+                ]
+            },
+            "User": {
+                "required": [
+                    "email",
+                    "password",
+                    "first_name",
+                    "last_name",
+                    "sexe"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "role": {
+                        "description": "User role",
+                        "type": "string",
+                        "readOnly": "true"
+                    },
+                    "email": {
+                        "description": "User unique email address",
+                        "type": "string",
+                        "format": "email",
+                        "readOnly": "true",
+                        "example": "user@gmail.com"
+                    },
+                    "email_verified_at": {
+                        "description": "Datetime marker of verification status",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true",
+                        "example": "2019-02-25 12:59:20"
+                    },
+                    "password": {
+                        "description": "User password",
+                        "type": "string",
+                        "format": "password",
+                        "readOnly": "true",
+                        "example": "secret"
+                    },
+                    "name": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "John"
+                    },
+                    "first_name": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "Doe"
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "Smith"
+                    },
+                    "date_de_naissance": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "1990-01-01"
+                    },
+                    "lieu_de_naissance": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "Paris"
+                    },
+                    "photo": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "https://example.com/photo.jpg"
+                    },
+                    "sexe": {
+                        "type": "string",
+                        "enum": [
+                            "male",
+                            "female"
+                        ],
+                        "example": "male"
+                    },
+                    "telephone": {
+                        "type": "string",
+                        "example": "+33123456789"
+                    },
+                    "solvable": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "redoublant": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "created_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/created_at"
+                    },
+                    "updated_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/updated_at"
+                    },
+                    "deleted_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/deleted_at"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "User"
+                }
+            }
+        }
+    }
+}

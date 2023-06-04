@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "2d2ec488d0bc5986a1aa1dc6f46c39a1",
+=======
+    "content-hash": "24b1692bac7618bc9c5d491d5994885a",
+>>>>>>> c093823... Closes #77 - Documentation swagger pour les route eleve au auth
     "packages": [
         {
             "name": "brick/math",
@@ -60,6 +64,85 @@
                 }
             ],
             "time": "2023-01-15T23:15:59+00:00"
+        },
+        {
+            "name": "darkaonline/l5-swagger",
+            "version": "8.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DarkaOnLine/L5-Swagger.git",
+                "reference": "8e61ce632fb90eb9d78cf34918d133c46baa93b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DarkaOnLine/L5-Swagger/zipball/8e61ce632fb90eb9d78cf34918d133c46baa93b4",
+                "reference": "8e61ce632fb90eb9d78cf34918d133c46baa93b4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "^10.0 || ^9.0 || >=8.40.0 || ^7.0",
+                "php": "^7.2 || ^8.0",
+                "swagger-api/swagger-ui": "^3.0 || ^4.0",
+                "symfony/yaml": "^5.0 || ^6.0",
+                "zircote/swagger-php": "^3.2.0 || ^4.0.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "1.*",
+                "orchestra/testbench": "^8.0 || 7.* || ^6.15 || 5.*",
+                "php-coveralls/php-coveralls": "^2.0",
+                "phpunit/phpunit": "^10.0 || ^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "L5Swagger\\L5SwaggerServiceProvider"
+                    ],
+                    "aliases": {
+                        "L5Swagger": "L5Swagger\\L5SwaggerFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "L5Swagger\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Darius Matulionis",
+                    "email": "darius@matulionis.lt"
+                }
+            ],
+            "description": "OpenApi or Swagger integration to Laravel",
+            "keywords": [
+                "api",
+                "documentation",
+                "laravel",
+                "openapi",
+                "specification",
+                "swagger",
+                "ui"
+            ],
+            "support": {
+                "issues": "https://github.com/DarkaOnLine/L5-Swagger/issues",
+                "source": "https://github.com/DarkaOnLine/L5-Swagger/tree/8.5.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/DarkaOnLine",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-15T07:29:49+00:00"
         },
         {
             "name": "defuse/php-encryption",
@@ -201,6 +284,82 @@
                 "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.2"
             },
             "time": "2022-10-27T11:44:00+00:00"
+        },
+        {
+            "name": "doctrine/annotations",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/annotations.git",
+                "reference": "e157ef3f3124bbf6fe7ce0ffd109e8a8ef284e7f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/e157ef3f3124bbf6fe7ce0ffd109e8a8ef284e7f",
+                "reference": "e157ef3f3124bbf6fe7ce0ffd109e8a8ef284e7f",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/lexer": "^2 || ^3",
+                "ext-tokenizer": "*",
+                "php": "^7.2 || ^8.0",
+                "psr/cache": "^1 || ^2 || ^3"
+            },
+            "require-dev": {
+                "doctrine/cache": "^2.0",
+                "doctrine/coding-standard": "^10",
+                "phpstan/phpstan": "^1.8.0",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
+                "symfony/cache": "^5.4 || ^6",
+                "vimeo/psalm": "^4.10"
+            },
+            "suggest": {
+                "php": "PHP 8.0 or higher comes with attributes, a native replacement for annotations"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Common\\Annotations\\": "lib/Doctrine/Common/Annotations"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "Docblock Annotations Parser",
+            "homepage": "https://www.doctrine-project.org/projects/annotations.html",
+            "keywords": [
+                "annotations",
+                "docblock",
+                "parser"
+            ],
+            "support": {
+                "issues": "https://github.com/doctrine/annotations/issues",
+                "source": "https://github.com/doctrine/annotations/tree/2.0.1"
+            },
+            "time": "2023-02-02T22:02:53+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -1305,21 +1464,21 @@
         },
         {
             "name": "laravel/passport",
-            "version": "v11.8.4",
+            "version": "v11.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/passport.git",
-                "reference": "b6b68fad1d02e39c6c659705159487f643393cdd"
+                "reference": "48a03ffbfce7217b7ceba2c8e685ae8caa68db10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/passport/zipball/b6b68fad1d02e39c6c659705159487f643393cdd",
-                "reference": "b6b68fad1d02e39c6c659705159487f643393cdd",
+                "url": "https://api.github.com/repos/laravel/passport/zipball/48a03ffbfce7217b7ceba2c8e685ae8caa68db10",
+                "reference": "48a03ffbfce7217b7ceba2c8e685ae8caa68db10",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "firebase/php-jwt": "^6.3.1",
+                "firebase/php-jwt": "^6.4",
                 "illuminate/auth": "^9.0|^10.0",
                 "illuminate/console": "^9.0|^10.0",
                 "illuminate/container": "^9.0|^10.0",
@@ -1329,12 +1488,12 @@
                 "illuminate/encryption": "^9.0|^10.0",
                 "illuminate/http": "^9.0|^10.0",
                 "illuminate/support": "^9.0|^10.0",
-                "lcobucci/jwt": "^3.4|^4.0",
-                "league/oauth2-server": "^8.2",
-                "nyholm/psr7": "^1.3",
+                "lcobucci/jwt": "^4.3|^5.0",
+                "league/oauth2-server": "^8.5.1",
+                "nyholm/psr7": "^1.5",
                 "php": "^8.0",
                 "phpseclib/phpseclib": "^2.0|^3.0",
-                "symfony/psr-http-message-bridge": "^2.0"
+                "symfony/psr-http-message-bridge": "^2.1"
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
@@ -1379,7 +1538,7 @@
                 "issues": "https://github.com/laravel/passport/issues",
                 "source": "https://github.com/laravel/passport"
             },
-            "time": "2023-03-18T18:55:20+00:00"
+            "time": "2023-04-28T10:08:34+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -1577,34 +1736,34 @@
         },
         {
             "name": "lcobucci/clock",
-            "version": "2.3.0",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lcobucci/clock.git",
-                "reference": "c7aadcd6fd97ed9e199114269c0be3f335e38876"
+                "reference": "30a854ceb22bd87d83a7a4563b3f6312453945fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/clock/zipball/c7aadcd6fd97ed9e199114269c0be3f335e38876",
-                "reference": "c7aadcd6fd97ed9e199114269c0be3f335e38876",
+                "url": "https://api.github.com/repos/lcobucci/clock/zipball/30a854ceb22bd87d83a7a4563b3f6312453945fc",
+                "reference": "30a854ceb22bd87d83a7a4563b3f6312453945fc",
                 "shasum": ""
             },
             "require": {
-                "php": "~8.1.0 || ~8.2.0",
-                "stella-maris/clock": "^0.1.7"
+                "php": "~8.2.0",
+                "psr/clock": "^1.0"
             },
             "provide": {
                 "psr/clock-implementation": "1.0"
             },
             "require-dev": {
                 "infection/infection": "^0.26",
-                "lcobucci/coding-standard": "^9.0",
+                "lcobucci/coding-standard": "^10.0.0",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.9.4",
-                "phpstan/phpstan-deprecation-rules": "^1.1.1",
-                "phpstan/phpstan-phpunit": "^1.3.2",
-                "phpstan/phpstan-strict-rules": "^1.4.4",
-                "phpunit/phpunit": "^9.5.27"
+                "phpstan/phpstan": "^1.10.7",
+                "phpstan/phpstan-deprecation-rules": "^1.1.3",
+                "phpstan/phpstan-phpunit": "^1.3.10",
+                "phpstan/phpstan-strict-rules": "^1.5.0",
+                "phpunit/phpunit": "^10.0.17"
             },
             "type": "library",
             "autoload": {
@@ -1625,7 +1784,7 @@
             "description": "Yet another clock abstraction",
             "support": {
                 "issues": "https://github.com/lcobucci/clock/issues",
-                "source": "https://github.com/lcobucci/clock/tree/2.3.0"
+                "source": "https://github.com/lcobucci/clock/tree/3.1.0"
             },
             "funding": [
                 {
@@ -1637,47 +1796,46 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-12-19T14:38:11+00:00"
+            "time": "2023-03-20T19:12:25+00:00"
         },
         {
             "name": "lcobucci/jwt",
-            "version": "4.0.4",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lcobucci/jwt.git",
-                "reference": "55564265fddf810504110bd68ca311932324b0e9"
+                "reference": "47bdb0e0b5d00c2f89ebe33e7e384c77e84e7c34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/55564265fddf810504110bd68ca311932324b0e9",
-                "reference": "55564265fddf810504110bd68ca311932324b0e9",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/47bdb0e0b5d00c2f89ebe33e7e384c77e84e7c34",
+                "reference": "47bdb0e0b5d00c2f89ebe33e7e384c77e84e7c34",
                 "shasum": ""
             },
             "require": {
-                "ext-mbstring": "*",
+                "ext-hash": "*",
+                "ext-json": "*",
                 "ext-openssl": "*",
-                "lcobucci/clock": "^2.0",
-                "php": "^7.4 || ^8.0"
+                "ext-sodium": "*",
+                "php": "~8.1.0 || ~8.2.0",
+                "psr/clock": "^1.0"
             },
             "require-dev": {
-                "infection/infection": "^0.20",
-                "lcobucci/coding-standard": "^6.0",
-                "mikey179/vfsstream": "^1.6",
-                "phpbench/phpbench": "^0.17",
-                "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^0.12",
-                "phpstan/phpstan-deprecation-rules": "^0.12",
-                "phpstan/phpstan-phpunit": "^0.12",
-                "phpstan/phpstan-strict-rules": "^0.12",
-                "phpunit/php-invoker": "^3.1",
-                "phpunit/phpunit": "^9.4"
+                "infection/infection": "^0.26.19",
+                "lcobucci/clock": "^3.0",
+                "lcobucci/coding-standard": "^9.0",
+                "phpbench/phpbench": "^1.2.8",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10.3",
+                "phpstan/phpstan-deprecation-rules": "^1.1.2",
+                "phpstan/phpstan-phpunit": "^1.3.8",
+                "phpstan/phpstan-strict-rules": "^1.5.0",
+                "phpunit/phpunit": "^10.0.12"
+            },
+            "suggest": {
+                "lcobucci/clock": ">= 3.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.0-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Lcobucci\\JWT\\": "src"
@@ -1701,7 +1859,7 @@
             ],
             "support": {
                 "issues": "https://github.com/lcobucci/jwt/issues",
-                "source": "https://github.com/lcobucci/jwt/tree/4.0.4"
+                "source": "https://github.com/lcobucci/jwt/tree/5.0.0"
             },
             "funding": [
                 {
@@ -1713,7 +1871,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-09-28T19:18:28+00:00"
+            "time": "2023-02-25T21:35:16+00:00"
         },
         {
             "name": "league/commonmark",
@@ -2163,26 +2321,27 @@
         },
         {
             "name": "league/oauth2-server",
-            "version": "8.4.1",
+            "version": "8.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/oauth2-server.git",
-                "reference": "eed31d86d8cc8e6e9c9f58fbb2113494f8b41e24"
+                "reference": "43cd4d406906c6be5c8de2cee9bd3ad3753544ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth2-server/zipball/eed31d86d8cc8e6e9c9f58fbb2113494f8b41e24",
-                "reference": "eed31d86d8cc8e6e9c9f58fbb2113494f8b41e24",
+                "url": "https://api.github.com/repos/thephpleague/oauth2-server/zipball/43cd4d406906c6be5c8de2cee9bd3ad3753544ef",
+                "reference": "43cd4d406906c6be5c8de2cee9bd3ad3753544ef",
                 "shasum": ""
             },
             "require": {
-                "defuse/php-encryption": "^2.2.1",
+                "defuse/php-encryption": "^2.3",
                 "ext-json": "*",
                 "ext-openssl": "*",
-                "lcobucci/jwt": "^3.4.6 || ^4.0.4",
+                "lcobucci/clock": "^2.2 || ^3.0",
+                "lcobucci/jwt": "^4.3 || ^5.0",
                 "league/event": "^2.2",
-                "league/uri": "^6.4",
-                "php": "^7.2 || ^8.0",
+                "league/uri": "^6.7",
+                "php": "^8.0",
                 "psr/http-message": "^1.0.1"
             },
             "replace": {
@@ -2190,10 +2349,10 @@
                 "lncd/oauth2": "*"
             },
             "require-dev": {
-                "laminas/laminas-diactoros": "^2.4.1",
+                "laminas/laminas-diactoros": "^2.24.0",
                 "phpstan/phpstan": "^0.12.57",
                 "phpstan/phpstan-phpunit": "^0.12.16",
-                "phpunit/phpunit": "^8.5.13",
+                "phpunit/phpunit": "^9.6.6",
                 "roave/security-advisories": "dev-master"
             },
             "type": "library",
@@ -2239,7 +2398,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/oauth2-server/issues",
-                "source": "https://github.com/thephpleague/oauth2-server/tree/8.4.1"
+                "source": "https://github.com/thephpleague/oauth2-server/tree/8.5.1"
             },
             "funding": [
                 {
@@ -2247,7 +2406,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-22T11:47:53+00:00"
+            "time": "2023-04-04T10:20:16+00:00"
         },
         {
             "name": "league/uri",
@@ -3295,6 +3454,55 @@
             "time": "2023-03-05T17:13:09+00:00"
         },
         {
+            "name": "psr/cache",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/cache.git",
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Cache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for caching libraries",
+            "keywords": [
+                "cache",
+                "psr",
+                "psr-6"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/cache/tree/3.0.0"
+            },
+            "time": "2021-02-03T23:26:27+00:00"
+        },
+        {
             "name": "psr/clock",
             "version": "1.0.0",
             "source": {
@@ -4008,51 +4216,65 @@
             "time": "2023-04-15T23:01:58+00:00"
         },
         {
-            "name": "stella-maris/clock",
-            "version": "0.1.7",
+            "name": "swagger-api/swagger-ui",
+            "version": "v4.19.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/stella-maris-solutions/clock.git",
-                "reference": "fa23ce16019289a18bb3446fdecd45befcdd94f8"
+                "url": "https://github.com/swagger-api/swagger-ui.git",
+                "reference": "f01969138dbce7d2a03ae5a02565088df552794f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stella-maris-solutions/clock/zipball/fa23ce16019289a18bb3446fdecd45befcdd94f8",
-                "reference": "fa23ce16019289a18bb3446fdecd45befcdd94f8",
+                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/f01969138dbce7d2a03ae5a02565088df552794f",
+                "reference": "f01969138dbce7d2a03ae5a02565088df552794f",
                 "shasum": ""
             },
-            "require": {
-                "php": "^7.0|^8.0",
-                "psr/clock": "^1.0"
-            },
             "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "StellaMaris\\Clock\\": "src"
-                }
-            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "Apache-2.0"
             ],
             "authors": [
                 {
-                    "name": "Andreas Heigl",
-                    "role": "Maintainer"
+                    "name": "Anna Bodnia",
+                    "email": "anna.bodnia@gmail.com"
+                },
+                {
+                    "name": "Buu Nguyen",
+                    "email": "buunguyen@gmail.com"
+                },
+                {
+                    "name": "Josh Ponelat",
+                    "email": "jponelat@gmail.com"
+                },
+                {
+                    "name": "Kyle Shockey",
+                    "email": "kyleshockey1@gmail.com"
+                },
+                {
+                    "name": "Robert Barnwell",
+                    "email": "robert@robertismy.name"
+                },
+                {
+                    "name": "Sahar Jafari",
+                    "email": "shr.jafari@gmail.com"
                 }
             ],
-            "description": "A pre-release of the proposed PSR-20 Clock-Interface",
-            "homepage": "https://gitlab.com/stella-maris/clock",
+            "description": " Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API.",
+            "homepage": "http://swagger.io",
             "keywords": [
-                "clock",
-                "datetime",
-                "point in time",
-                "psr20"
+                "api",
+                "documentation",
+                "openapi",
+                "specification",
+                "swagger",
+                "ui"
             ],
             "support": {
-                "source": "https://github.com/stella-maris-solutions/clock/tree/0.1.7"
+                "issues": "https://github.com/swagger-api/swagger-ui/issues",
+                "source": "https://github.com/swagger-api/swagger-ui/tree/v4.19.0"
             },
-            "time": "2022-11-25T16:15:06+00:00"
+            "time": "2023-05-24T13:22:49+00:00"
         },
         {
             "name": "symfony/console",
@@ -6386,6 +6608,77 @@
             "time": "2023-05-25T13:09:35+00:00"
         },
         {
+            "name": "symfony/yaml",
+            "version": "v6.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "a9a8337aa641ef2aa39c3e028f9107ec391e5927"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/a9a8337aa641ef2aa39c3e028f9107ec391e5927",
+                "reference": "a9a8337aa641ef2aa39c3e028f9107ec391e5927",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "symfony/polyfill-ctype": "^1.8"
+            },
+            "conflict": {
+                "symfony/console": "<5.4"
+            },
+            "require-dev": {
+                "symfony/console": "^5.4|^6.0"
+            },
+            "bin": [
+                "Resources/bin/yaml-lint"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Loads and dumps YAML files",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/yaml/tree/v6.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-04-28T13:28:14+00:00"
+        },
+        {
             "name": "tijsverkoyen/css-to-inline-styles",
             "version": "2.2.6",
             "source": {
@@ -6653,6 +6946,84 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "zircote/swagger-php",
+            "version": "4.7.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zircote/swagger-php.git",
+                "reference": "6d2f0fcc46bf9043877de8656a9ea95331155522"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zircote/swagger-php/zipball/6d2f0fcc46bf9043877de8656a9ea95331155522",
+                "reference": "6d2f0fcc46bf9043877de8656a9ea95331155522",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/annotations": "^1.7 || ^2.0",
+                "ext-json": "*",
+                "php": ">=7.2",
+                "psr/log": "^1.1 || ^2.0 || ^3.0",
+                "symfony/deprecation-contracts": "^2 || ^3",
+                "symfony/finder": ">=2.2",
+                "symfony/yaml": ">=3.3"
+            },
+            "require-dev": {
+                "composer/package-versions-deprecated": "^1.11",
+                "friendsofphp/php-cs-fixer": "^2.17 || ^3.0",
+                "phpstan/phpstan": "^1.6",
+                "phpunit/phpunit": ">=8",
+                "vimeo/psalm": "^4.23"
+            },
+            "bin": [
+                "bin/openapi"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OpenApi\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Allen",
+                    "email": "zircote@gmail.com"
+                },
+                {
+                    "name": "Bob Fanger",
+                    "email": "bfanger@gmail.com",
+                    "homepage": "https://bfanger.nl"
+                },
+                {
+                    "name": "Martin Rademacher",
+                    "email": "mano@radebatz.net",
+                    "homepage": "https://radebatz.net"
+                }
+            ],
+            "description": "swagger-php - Generate interactive documentation for your RESTful API using phpdoc annotations",
+            "homepage": "https://github.com/zircote/swagger-php/",
+            "keywords": [
+                "api",
+                "json",
+                "rest",
+                "service discovery"
+            ],
+            "support": {
+                "issues": "https://github.com/zircote/swagger-php/issues",
+                "source": "https://github.com/zircote/swagger-php/tree/4.7.10"
+            },
+            "time": "2023-04-28T00:56:39+00:00"
         }
     ],
     "packages-dev": [
@@ -8951,77 +9322,6 @@
                 }
             ],
             "time": "2023-05-25T11:30:27+00:00"
-        },
-        {
-            "name": "symfony/yaml",
-            "version": "v6.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "a9a8337aa641ef2aa39c3e028f9107ec391e5927"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/a9a8337aa641ef2aa39c3e028f9107ec391e5927",
-                "reference": "a9a8337aa641ef2aa39c3e028f9107ec391e5927",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.1",
-                "symfony/polyfill-ctype": "^1.8"
-            },
-            "conflict": {
-                "symfony/console": "<5.4"
-            },
-            "require-dev": {
-                "symfony/console": "^5.4|^6.0"
-            },
-            "bin": [
-                "Resources/bin/yaml-lint"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Yaml\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Loads and dumps YAML files",
-            "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/yaml/tree/v6.3.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2023-04-28T13:28:14+00:00"
         },
         {
             "name": "theseer/tokenizer",

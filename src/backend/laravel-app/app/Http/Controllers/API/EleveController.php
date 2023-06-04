@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use Carbon\Carbon;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 use App\Http\Controllers\Controller;
 
@@ -16,8 +15,32 @@ use App\Models\Role;
 class EleveController extends Controller
 {
 
-    private $avatar_path = "assets/avatars/eleves" ;
+    private $avatar_path = "assets/avatars/api/eleves" ;
 
+
+    /**
+     * @OA\Get(
+     *     path="/api/eleves/findAll",
+     *     summary="Get all eleves",
+     *     description="Retrieve a list of all eleves",
+     *     operationId="elevesIndex",
+     *     tags={"eleves"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="eleves", type="array", @OA\Items(ref="#/components/schemas/Eleve"))
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     )
+     * )
+     */
     public function index()
     {
         $eleves = Eleve::get()->map(function ($eleve) {
@@ -32,7 +55,49 @@ class EleveController extends Controller
             'data' => $eleves]);
     }
 
-    public function read($eleveId)
+    /**
+     * @OA\Get(
+     *     path="/api/eleves/findOne/{id}",
+     *     summary="Get eleve information",
+     *     description="Get information about a specific eleve",
+     *     operationId="viewEleve",
+     *     tags={"eleves"},
+     *     security={ {"bearer": {} }},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of eleve to get information for",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Error - Not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Eleve not found")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Élève trouvé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="data", type="object", ref="#/components/schemas/Eleve")
+     *         )
+     *     )
+     * )
+     */
+    public function view($eleveId)
     {
         $eleve = Eleve::find($eleveId);
         
@@ -56,10 +121,84 @@ class EleveController extends Controller
     }
     
 
+
+    /**
+     * @OA\Post(
+     *     path="/api/eleves/create",
+     *     summary="Create a new eleve",
+     *     description="Create a new eleve resource",
+     *     operationId="createEleve",
+     *     tags={"eleves"},
+     *     security={ {"bearer": {} }},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"email", "password", "name", "first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "sexe", "telephone", "solvable", "redoublant"},
+     *             @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
+     *             @OA\Property(property="name", type="string", example="Doe"),
+     *             @OA\Property(property="first_name", type="string", example="John"),
+     *             @OA\Property(property="last_name", type="string", example="Smith"),
+     *             @OA\Property(property="date_de_naissance", type="string", format="date", example="1990-01-01"),
+     *             @OA\Property(property="lieu_de_naissance", type="string", example="Paris"),
+     *             @OA\Property(property="photo", type="string", nullable=true, example="https://example.com/photo.jpg"),
+     *             @OA\Property(property="sexe", type="string", enum={"Male", "Female"}, example="Male"),
+     *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
+     *             @OA\Property(property="solvable", type="boolean", example="true"),
+     *             @OA\Property(property="redoublant", type="boolean", example="false")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Error - Invalid request data",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="object", example={
+     *                 "email": {
+     *                     "The email field is required."
+     *                 },
+     *                 "password": {
+     *                     "The password field is required."
+     *                 }
+     *             })
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Error - Validation failed",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="object", example={
+     *                 "email": {
+     *                     "The email must be a valid email address."
+     *                 },
+     *                 "password": {
+     *                     "The password must be at least 8 characters."
+     *                 },
+     *                 "name": {
+     *                     "The name field is required."
+     *                 }
+     *             })
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="eleve", type="object", ref="#/components/schemas/Eleve"),
+     *         )
+     *     )
+     * )
+     */
     public function store(Request $request)
     {
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
             'name' => 'required',
@@ -73,7 +212,15 @@ class EleveController extends Controller
             'solvable' => 'required',
             'redoublant' => 'required',
         ]);
-        
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Could not create this student', 
+                'success' => false,
+                'error' => $validator->errors()
+            ], 400);
+        }
+
         $user = User::create([
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
@@ -97,7 +244,7 @@ class EleveController extends Controller
         $eleve->assignUserFields($user);
         
         // Créer un eleve de base avec le rôle eleve
-        $eleveRole = Role::where('name', 'student')->first();
+        $eleveRole = Role::where('name', 'eleve')->first();
 
         $user->roles()->attach($eleveRole);
 
@@ -109,27 +256,113 @@ class EleveController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/eleves/update",
+     *     summary="Update a eleve's information",
+     *     description="Update a eleve's information",
+     *     operationId="updateEleve",
+     *     tags={"eleves"},
+     *     security={ {"bearer": {} }},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of eleve to update",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
+     *             @OA\Property(property="name", type="string", example="Doe"),
+     *             @OA\Property(property="first_name", type="string", example="John"),
+     *             @OA\Property(property="last_name", type="string", example="Smith"),
+     *             @OA\Property(property="date_de_naissance", type="string", format="date", example="1990-01-01"),
+     *             @OA\Property(property="lieu_de_naissance", type="string", example="Paris"),
+     *             @OA\Property(property="photo", type="string", nullable=true, example="https://example.com/photo.jpg"),
+     *             @OA\Property(property="sexe", type="string", enum={"Male", "Female"}, example="Male"),
+     *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
+     *             @OA\Property(property="solvable", type="boolean", example="true"),
+     *             @OA\Property(property="redoublant", type="boolean", example="false")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Error - Invalid request data",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="object", example={
+     *                 "email": {
+     *                     "The email field is required."
+     *                 },
+     *                 "password": {
+     *                     "The password field is required."
+     *                 }
+     *             })
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Error - Not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Eleve not found")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="eleve", type="object", ref="#/components/schemas/Eleve"),
+     *         )
+     *     )
+     * )
+     */
     public function update(Request $request)
     {
         // on récupère l'élève associé
         $eleveFound = Eleve::find($request->id);
-        $user = User::find($eleveFound->user_id);
+        if($eleveFound){
+            $user = User::find($eleveFound->user_id);
+    
+            $validator = Validator::make($request->all(), [
+                'id' => 'required',
+                'email' => 'required|email|unique:users,email,' . $user->id,
+                'password' => 'required|min:8',
+                'name' => 'required',
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'date_de_naissance' => 'required|date',
+                'lieu_de_naissance' => 'required',
+                'photo' => 'nullable|image',
+                'sexe' => 'required',
+                'telephone' => 'required',
+                'solvable' => 'required',
+                'redoublant' => 'required',
+            ]);
+        }else {
+            return response()->json([
+                'message' => 'Student not exists', 
+                'success' => false,
+            ], 400);
+        }
 
-        $request->validate([
-            'id' => 'required',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'required|min:8',
-            'name' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'date_de_naissance' => 'required|date',
-            'lieu_de_naissance' => 'required',
-            'photo' => 'nullable|image',
-            'sexe' => 'required',
-            'telephone' => 'required',
-            'solvable' => 'required',
-            'redoublant' => 'required',
-        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Could not update this student', 
+                'success' => false,
+                'error' => $validator->errors()
+            ], 400);
+        }
 
         // Mise à jour des champs de l'objet User
         $user->email = $request->input('email');
@@ -168,8 +401,44 @@ class EleveController extends Controller
         ]);
     }
 
-
-
+    /**
+     * @OA\Delete (
+     *     path="/api/eleves/delete/{id}",
+     *     summary="Delete an eleve",
+     *     description="Delete an eleve resource",
+     *     operationId="deleteEleve",
+     *     tags={"eleves"},
+     *     security={ {"bearer": {} }},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of eleve to delete",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Error - Not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Eleve not found")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Success",
+     *     )
+     * )
+     */
     public function delete($eleveId)
     {
         $eleveFound = Eleve::find($eleveId);
@@ -180,7 +449,9 @@ class EleveController extends Controller
             $userFound = User::find($eleveFound->user_id);
 
             // supperssion de l'image du user
-            Storage::delete($userFound->photo);
+            if($userFound->photo){
+                Storage::delete($userFound->photo);
+            }
 
             //suppression de l'eleve
             $eleveFound->delete();
