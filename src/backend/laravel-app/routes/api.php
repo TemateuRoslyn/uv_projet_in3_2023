@@ -13,12 +13,12 @@ use App\Http\Controllers\API\NotificationController;
 Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::get('user', [AuthController::class, 'user']);
+    Route::middleware('jwt.verify')->post('logout', [AuthController::class, 'logout']);
+    Route::middleware('jwt.verify')->post('user', [AuthController::class, 'user']);
 });
 
 // lucie
-Route::prefix('eleves')->group(function () {
+Route::middleware('jwt.verify')->prefix('eleves')->group(function () {
     Route::post('create', [EleveController::class, 'store']);
     Route::post('update', [EleveController::class, 'update']);
     Route::delete('delete/{eleve}', [EleveController::class, 'delete']);
