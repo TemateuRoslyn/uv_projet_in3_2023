@@ -13,10 +13,15 @@ return [
     |
     */
 
+    // 'defaults' => [
+    //     'guard' => 'web',
+    //     'passwords' => 'users',
+    // ],
+
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'api', // update here
         'passwords' => 'users',
-    ],
+      ],
 
     /*
     |--------------------------------------------------------------------------
@@ -40,11 +45,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'api' => [
-        'driver' => 'passport',
-        'provider' => 'users',
-        'hash' => false,
-        ],
+        'api' => [ // update here
+            'driver' => 'jwt',
+            'provider' => 'users',
+            'hash' => false,
+          ],
     ],
 
     /*
