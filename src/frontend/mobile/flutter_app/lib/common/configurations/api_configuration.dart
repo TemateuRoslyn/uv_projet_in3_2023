@@ -18,7 +18,7 @@ class ApiConfiguration {
       );
 
   // this function is use to retrieve dio error message as a string
-  static String getErrorMessage(DioError error) {
+  static String getErrorMessage(DioException error) {
     late String errorMessage;
 
     if (error.response!.statusCode != 200 ||

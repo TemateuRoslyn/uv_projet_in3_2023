@@ -1,4 +1,8 @@
+import 'package:fltter_app/common/styles/colors.dart';
+import 'package:fltter_app/common/utils/helper.dart';
 import 'package:flutter/material.dart';
+
+import '../utils/constants.dart';
 
 class SplashPage extends StatelessWidget {
   static const navRoute = 'splash-page';
@@ -6,10 +10,15 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Splash page...'),
-      ),
-    );
+    return Scaffold(
+        backgroundColor: appColors.primary,
+        body: Center(
+          child: Image.asset(
+            AppImages.logo,
+            color: Colors.white,
+            height: getHeight(250, context),
+            width: getWidth(250, context),
+          ),
+        ));
   }
 }

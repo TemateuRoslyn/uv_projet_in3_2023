@@ -1,16 +1,18 @@
 import 'dart:developer';
 
 import 'package:fltter_app/app/app_bloc_observer.dart';
+import 'package:fltter_app/common/logics/navigation/cubit/navigation_cubit.dart';
+import 'package:fltter_app/common/views/onBoarding_one.dart';
+import 'package:fltter_app/common/views/page_skeleton.dart';
 import 'package:fltter_app/common/views/splash_page.dart';
 import 'package:fltter_app/features/authentication/views/login_page.dart';
-import 'package:fltter_app/features/authentication/views/register_page.dart';
-import 'package:fltter_app/features/home/views/home_page.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'common/configurations/routes.dart';
 import 'features/authentication/logic/authentication/bloc/authentication_bloc.dart';
+import 'features/authentication/logic/login/login_cubit.dart';
 
 void main() {
   Bloc.observer = AppBlocObserver();
@@ -46,6 +48,13 @@ class _MyAppState extends State<MyApp> {
             create: (context) =>
                 AuthenticationBloc(authRepository: widget.authRepository),
           ),
+          BlocProvider<LoginCubit>(
+            create: (context) =>
+                LoginCubit(authRepository: widget.authRepository),
+          ),
+          BlocProvider<NavigationCubit>(
+            create: (context) => NavigationCubit(),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -72,7 +81,7 @@ class _MyAppState extends State<MyApp> {
 
                   navigatorKey.currentState!.pushAndRemoveUntil(
                       MaterialPageRoute(
-                          builder: (context) => const RegisterPage()),
+                          builder: (context) => const OnBoardingOne()),
                       (route) => false);
 
                   widget.authRepository.changeFirstUsageValue();
@@ -81,8 +90,7 @@ class _MyAppState extends State<MyApp> {
                     log('user is UNAUTHENTICATED');
 
                     navigatorKey.currentState!.pushAndRemoveUntil(
-                        MaterialPageRoute(
-                            builder: (context) => const LoginPage()),
+                        MaterialPageRoute(builder: (context) => LoginPage()),
                         (route) => false);
                   }
 
@@ -91,7 +99,7 @@ class _MyAppState extends State<MyApp> {
 
                     navigatorKey.currentState!.pushAndRemoveUntil(
                         MaterialPageRoute(
-                            builder: (context) => const HomePage()),
+                            builder: (context) => const PageSkeleton()),
                         (route) => false);
                   }
                 }

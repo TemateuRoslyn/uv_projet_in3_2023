@@ -21,7 +21,7 @@ class AuthRepository {
   late String _userToken;
 
   String get getUserId => _userId;
-  String get getUserToken => _userToken!;
+  String get getUserToken => _userToken;
 
   Stream<AuthStatus> getStatus() async* {
     final userToken = await flutterSecureStorage.read(key: kUserToken);
@@ -53,6 +53,12 @@ class AuthRepository {
   void changeFirstUsageValue() async {
     await flutterSecureStorage.write(
         key: kIsFirstUsage, value: 'is-not-first-usage');
+  }
+
+  Future<void> login() async {
+    try {} catch (e) {
+      rethrow;
+    }
   }
 
   void logOut() async {
