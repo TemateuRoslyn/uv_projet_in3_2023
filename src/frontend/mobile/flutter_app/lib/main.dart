@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:fltter_app/app/app_bloc_observer.dart';
+import 'package:fltter_app/common/views/onBoarding_one.dart';
 import 'package:fltter_app/common/views/splash_page.dart';
 import 'package:fltter_app/features/authentication/views/login_page.dart';
 import 'package:fltter_app/features/authentication/views/register_page.dart';
@@ -72,7 +73,7 @@ class _MyAppState extends State<MyApp> {
 
                   navigatorKey.currentState!.pushAndRemoveUntil(
                       MaterialPageRoute(
-                          builder: (context) => const RegisterPage()),
+                          builder: (context) => const OnBoardingOne()),
                       (route) => false);
 
                   widget.authRepository.changeFirstUsageValue();
