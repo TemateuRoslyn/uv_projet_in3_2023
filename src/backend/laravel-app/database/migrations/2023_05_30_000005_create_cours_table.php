@@ -17,6 +17,8 @@ return new class extends Migration
             $table->date('date_cour');
             $table->date('heure_debut');
             $table->date('heure_fin');
+            //  $table->unsignedBigInteger('professeur_id');
+            //  $table->foreign('professeur_id')->references('id')->on('professeurs')->onDelete('cascade');
             $table->timestamps();
         });
     }

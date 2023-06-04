@@ -1,29 +1,36 @@
-import 'dart:developer';
-
+import 'package:connectivity/connectivity.dart';
 import 'package:fltter_app/app/app_bloc_observer.dart';
+import 'package:fltter_app/common/logics/internet/internet_cubit.dart';
+import 'package:fltter_app/common/views/onBoarding_one.dart';
+import 'package:fltter_app/common/views/page_skeleton.dart';
 import 'package:fltter_app/common/views/splash_page.dart';
 import 'package:fltter_app/features/authentication/views/login_page.dart';
-import 'package:fltter_app/features/authentication/views/register_page.dart';
-import 'package:fltter_app/features/home/views/home_page.dart';
+import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'common/configurations/routes.dart';
+import 'common/logics/navigation/navigation_cubit.dart';
 import 'features/authentication/logic/authentication/bloc/authentication_bloc.dart';
+import 'features/authentication/logic/login/login_cubit.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = AppBlocObserver();
 
   runApp(MyApp(
     authRepository: AuthRepository(),
+    internetCubit: InternetCubit(connectivity: Connectivity()),
   ));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({required this.authRepository, super.key});
+  const MyApp(
+      {required this.authRepository, required this.internetCubit, super.key});
 
   final AuthRepository authRepository;
+  final InternetCubit internetCubit;
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -46,6 +53,19 @@ class _MyAppState extends State<MyApp> {
             create: (context) =>
                 AuthenticationBloc(authRepository: widget.authRepository),
           ),
+          BlocProvider<InternetCubit>(
+              create: (context) => widget.internetCubit),
+          BlocProvider<LoginCubit>(
+            create: (context) =>
+                LoginCubit(authRepository: widget.authRepository),
+          ),
+          BlocProvider<NavigationCubit>(
+            create: (context) => NavigationCubit(),
+          ),
+          BlocProvider<ProfileCubit>(
+              create: (context) => ProfileCubit(
+                  authRepository: widget.authRepository,
+                  internetCubit: widget.internetCubit)),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -68,30 +88,23 @@ class _MyAppState extends State<MyApp> {
                   previous.status != current.status,
               listener: (context, state) async {
                 if (await widget.authRepository.checkUserFirstUsage()) {
-                  log('is first usage');
-
                   navigatorKey.currentState!.pushAndRemoveUntil(
                       MaterialPageRoute(
-                          builder: (context) => const RegisterPage()),
+                          builder: (context) => const OnBoardingOne()),
                       (route) => false);
 
                   widget.authRepository.changeFirstUsageValue();
                 } else {
                   if (state is IsUnAuthenticated) {
-                    log('user is UNAUTHENTICATED');
-
                     navigatorKey.currentState!.pushAndRemoveUntil(
-                        MaterialPageRoute(
-                            builder: (context) => const LoginPage()),
+                        MaterialPageRoute(builder: (context) => LoginPage()),
                         (route) => false);
                   }
 
                   if (state is IsAuthenticated) {
-                    log('user is AUTHENTICATED');
-
                     navigatorKey.currentState!.pushAndRemoveUntil(
                         MaterialPageRoute(
-                            builder: (context) => const HomePage()),
+                            builder: (context) => const PageSkeleton()),
                         (route) => false);
                   }
                 }

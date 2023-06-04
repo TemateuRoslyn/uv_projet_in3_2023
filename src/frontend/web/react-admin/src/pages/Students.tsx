@@ -139,7 +139,7 @@ const Students = () => {
               />
             </div>
 
-          <div className="ag-theme-alpine" style={{height: 500}}>
+          <div className="ag-theme-alpine" style={{height: 400}}>
           <AgGridReact 
           ref={gridRef}
               rowData={rowData} 

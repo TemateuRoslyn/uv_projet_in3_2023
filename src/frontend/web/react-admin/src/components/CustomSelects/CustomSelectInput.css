@@ -1,0 +1,14 @@
+.custom-select-li {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.custom-select-li:hover {
+  background-color: rgb(77, 77, 218);
+  color: #fff;
+}
+
+.custom-select-ul{
+  z-index: 90;
+}

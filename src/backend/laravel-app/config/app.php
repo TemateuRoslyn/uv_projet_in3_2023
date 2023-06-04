@@ -169,9 +169,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        // Darkaonline/l5-swagger Service Provider
-        // \L5Swagger\L5SwaggerServiceProvider::class,
-    ])->toArray(),
+        // <- add
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        ])->toArray(),
 
     /*
     |--------------------------------------------------------------------------
@@ -186,8 +186,10 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
-        // Darkaonline/l5-swagger Alias
-        // 'L5Swagger' => \L5Swagger\Facades\L5Swagger::class,
+        
+        //<-add  JWTAuth/ Alias
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     ])->toArray(),
 
 ];
