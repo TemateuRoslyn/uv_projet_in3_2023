@@ -14,13 +14,19 @@
 /**
  * 
  * @export
- * @interface InlineResponse2002
+ * @interface UpdateRoleIdBody
  */
-export interface InlineResponse2002 {
+export interface UpdateRoleIdBody {
     /**
      * 
-     * @type {Array&lt;Eleve&gt;}
-     * @memberof InlineResponse2002
+     * @type {string}
+     * @memberof UpdateRoleIdBody
      */
-    eleves?: any;
+    name?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateRoleIdBody
+     */
+    description?: any;
 }

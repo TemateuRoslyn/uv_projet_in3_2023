@@ -14,13 +14,25 @@
 /**
  * 
  * @export
- * @interface InlineResponse2002
+ * @interface UsersCreateBody
  */
-export interface InlineResponse2002 {
+export interface UsersCreateBody {
     /**
      * 
-     * @type {Array&lt;Eleve&gt;}
-     * @memberof InlineResponse2002
+     * @type {string}
+     * @memberof UsersCreateBody
      */
-    eleves?: any;
+    email?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof UsersCreateBody
+     */
+    username?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof UsersCreateBody
+     */
+    password?: any;
 }

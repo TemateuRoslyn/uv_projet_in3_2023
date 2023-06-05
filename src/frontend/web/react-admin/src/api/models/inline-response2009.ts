@@ -14,13 +14,25 @@
 /**
  * 
  * @export
- * @interface InlineResponse2002
+ * @interface InlineResponse2009
  */
-export interface InlineResponse2002 {
+export interface InlineResponse2009 {
     /**
      * 
-     * @type {Array&lt;Eleve&gt;}
-     * @memberof InlineResponse2002
+     * @type {boolean}
+     * @memberof InlineResponse2009
      */
-    eleves?: any;
+    success?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2009
+     */
+    message?: any;
+    /**
+     * 
+     * @type {Role}
+     * @memberof InlineResponse2009
+     */
+    data?: any;
 }

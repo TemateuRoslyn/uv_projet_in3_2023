@@ -14,25 +14,25 @@
 /**
  * 
  * @export
- * @interface AuthLoginBody
+ * @interface InlineResponse4004
  */
-export interface AuthLoginBody {
+export interface InlineResponse4004 {
     /**
      * 
      * @type {string}
-     * @memberof AuthLoginBody
+     * @memberof InlineResponse4004
      */
-    username: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof AuthLoginBody
-     */
-    password: any;
+    message?: any;
     /**
      * 
      * @type {boolean}
-     * @memberof AuthLoginBody
+     * @memberof InlineResponse4004
      */
-    persistent?: any;
+    success?: any;
+    /**
+     * 
+     * @type {InlineResponse4002Error}
+     * @memberof InlineResponse4004
+     */
+    error?: any;
 }

@@ -14,61 +14,43 @@
 /**
  * 
  * @export
- * @interface User
+ * @interface Role
  */
-export interface User {
+export interface Role {
     /**
      * 
      * @type {number}
-     * @memberof User
+     * @memberof Role
      */
     id?: any;
     /**
-     * User role
+     * Role name
      * @type {string}
-     * @memberof User
+     * @memberof Role
      */
-    role?: any;
+    name: any;
     /**
-     * User unique email address
+     * Role description
      * @type {string}
-     * @memberof User
+     * @memberof Role
      */
-    email: any;
-    /**
-     * username
-     * @type {string}
-     * @memberof User
-     */
-    username: any;
-    /**
-     * Datetime marker of verification status
-     * @type {Date}
-     * @memberof User
-     */
-    emailVerifiedAt?: any;
-    /**
-     * User password
-     * @type {string}
-     * @memberof User
-     */
-    password: any;
+    description: any;
     /**
      * 
      * @type {BaseModelpropertiescreatedAt}
-     * @memberof User
+     * @memberof Role
      */
     createdAt?: any;
     /**
      * 
      * @type {BaseModelpropertiesupdatedAt}
-     * @memberof User
+     * @memberof Role
      */
     updatedAt?: any;
     /**
      * 
      * @type {BaseModelpropertiesdeletedAt}
-     * @memberof User
+     * @memberof Role
      */
     deletedAt?: any;
 }

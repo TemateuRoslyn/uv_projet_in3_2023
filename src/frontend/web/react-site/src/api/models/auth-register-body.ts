@@ -22,7 +22,7 @@ export interface AuthRegisterBody {
      * @type {string}
      * @memberof AuthRegisterBody
      */
-    email: any;
+    username: any;
     /**
      * 
      * @type {string}
@@ -34,47 +34,5 @@ export interface AuthRegisterBody {
      * @type {string}
      * @memberof AuthRegisterBody
      */
-    name: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof AuthRegisterBody
-     */
-    firstName: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof AuthRegisterBody
-     */
-    lastName: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof AuthRegisterBody
-     */
-    dateDeNaissance: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof AuthRegisterBody
-     */
-    lieuDeNaissance: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof AuthRegisterBody
-     */
-    photo?: any | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AuthRegisterBody
-     */
-    sexe: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof AuthRegisterBody
-     */
-    telephone?: any | null;
+    email: any;
 }

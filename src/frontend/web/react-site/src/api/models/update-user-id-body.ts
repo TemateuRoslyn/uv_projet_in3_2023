@@ -14,13 +14,19 @@
 /**
  * 
  * @export
- * @interface InlineResponse2002
+ * @interface UpdateUserIdBody
  */
-export interface InlineResponse2002 {
+export interface UpdateUserIdBody {
     /**
      * 
-     * @type {Array&lt;Eleve&gt;}
-     * @memberof InlineResponse2002
+     * @type {string}
+     * @memberof UpdateUserIdBody
      */
-    eleves?: any;
+    email?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateUserIdBody
+     */
+    username?: any;
 }

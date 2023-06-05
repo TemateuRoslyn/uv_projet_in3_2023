@@ -14,25 +14,25 @@
 /**
  * 
  * @export
- * @interface AuthLoginBody
+ * @interface InlineResponse4005Error
  */
-export interface AuthLoginBody {
+export interface InlineResponse4005Error {
     /**
      * 
-     * @type {string}
-     * @memberof AuthLoginBody
+     * @type {Array&lt;string&gt;}
+     * @memberof InlineResponse4005Error
      */
-    username: any;
+    email?: any;
     /**
      * 
-     * @type {string}
-     * @memberof AuthLoginBody
+     * @type {Array&lt;string&gt;}
+     * @memberof InlineResponse4005Error
      */
-    password: any;
+    username?: any;
     /**
      * 
-     * @type {boolean}
-     * @memberof AuthLoginBody
+     * @type {Array&lt;string&gt;}
+     * @memberof InlineResponse4005Error
      */
-    persistent?: any;
+    password?: any;
 }

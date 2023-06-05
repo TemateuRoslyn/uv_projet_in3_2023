@@ -14,13 +14,19 @@
 /**
  * 
  * @export
- * @interface InlineResponse2002
+ * @interface PermissionsCreateBody
  */
-export interface InlineResponse2002 {
+export interface PermissionsCreateBody {
     /**
      * 
-     * @type {Array&lt;Eleve&gt;}
-     * @memberof InlineResponse2002
+     * @type {string}
+     * @memberof PermissionsCreateBody
      */
-    eleves?: any;
+    name?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof PermissionsCreateBody
+     */
+    description?: any;
 }

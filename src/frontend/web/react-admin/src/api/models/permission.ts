@@ -14,61 +14,43 @@
 /**
  * 
  * @export
- * @interface User
+ * @interface Permission
  */
-export interface User {
+export interface Permission {
     /**
      * 
      * @type {number}
-     * @memberof User
+     * @memberof Permission
      */
     id?: any;
     /**
-     * User role
+     * Permission name
      * @type {string}
-     * @memberof User
+     * @memberof Permission
      */
-    role?: any;
+    name: any;
     /**
-     * User unique email address
+     * Permission description
      * @type {string}
-     * @memberof User
+     * @memberof Permission
      */
-    email: any;
-    /**
-     * username
-     * @type {string}
-     * @memberof User
-     */
-    username: any;
-    /**
-     * Datetime marker of verification status
-     * @type {Date}
-     * @memberof User
-     */
-    emailVerifiedAt?: any;
-    /**
-     * User password
-     * @type {string}
-     * @memberof User
-     */
-    password: any;
+    description: any;
     /**
      * 
      * @type {BaseModelpropertiescreatedAt}
-     * @memberof User
+     * @memberof Permission
      */
     createdAt?: any;
     /**
      * 
      * @type {BaseModelpropertiesupdatedAt}
-     * @memberof User
+     * @memberof Permission
      */
     updatedAt?: any;
     /**
      * 
      * @type {BaseModelpropertiesdeletedAt}
-     * @memberof User
+     * @memberof Permission
      */
     deletedAt?: any;
 }
