@@ -158,10 +158,10 @@ class EleveController extends Controller
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"email", "password", "name", "first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "sexe", "telephone", "solvable", "redoublant", "user_id"},
+     *             required={"email", "password", "username", "first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "sexe", "telephone", "solvable", "redoublant", "user_id"},
      *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
      *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     *             @OA\Property(property="name", type="string", example="Doe"),
+     *             @OA\Property(property="username", type="string", example="Doe"),
      *             @OA\Property(property="first_name", type="string", example="John"),
      *             @OA\Property(property="last_name", type="string", example="Smith"),
      *             @OA\Property(property="date_de_naissance", type="string", format="date", example="1990-01-01"),
@@ -205,8 +205,8 @@ class EleveController extends Controller
      *                 "password": {
      *                     "The password must be at least 8 characters."
      *                 },
-     *                 "name": {
-     *                     "The name field is required."
+     *                 "username": {
+     *                     "The username field is required."
      *                 }
      *             })
      *         )
@@ -226,7 +226,7 @@ class EleveController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
-            'name' => 'required',
+            'username' => 'required|unique:users',
             'first_name' => 'required',
             'last_name' => 'required',
             'date_de_naissance' => 'required|date',
@@ -248,6 +248,7 @@ class EleveController extends Controller
 
         $user = User::create([
             'email' => $request->input('email'),
+            'username' => $request->input('username'),
             'password' => bcrypt($request->input('password')),
         ]);
 
@@ -256,7 +257,6 @@ class EleveController extends Controller
             'user_id' => $user->id,
             'solvable' => boolval($request->input('solvable')),
             'redoublant' => boolval($request->input('redoublant')),
-            'name' => $request->input('name'),
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'date_de_naissance' => $request->input('date_de_naissance'),
@@ -310,7 +310,7 @@ class EleveController extends Controller
      *         @OA\JsonContent(
      *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
      *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     *             @OA\Property(property="name", type="string", example="Doe"),
+     *             @OA\Property(property="username", type="string", example="Doe"),
      *             @OA\Property(property="first_name", type="string", example="John"),
      *             @OA\Property(property="last_name", type="string", example="Smith"),
      *             @OA\Property(property="date_de_naissance", type="string", format="date", example="1990-01-01"),
@@ -369,7 +369,7 @@ class EleveController extends Controller
             $validator = Validator::make($request->all(), [
                 'id' => 'required',
                 'email' => 'required|email|unique:users,email,' . $user->id,
-                'name' => 'required',
+                'username' => 'required|unique:users',
                 'first_name' => 'required',
                 'last_name' => 'required',
                 'date_de_naissance' => 'required|date',
@@ -397,7 +397,7 @@ class EleveController extends Controller
 
         // Mise à jour des champs de l'objet User
         $user->email = $request->input('email');
-        // $user->password = $user->password;
+        $user->username = $request->input('username');
         
         // Suppression de l'ancienne photo si une nouvelle a été sélectionnée
         if ($request->hasFile('photo')) {
@@ -411,7 +411,6 @@ class EleveController extends Controller
         $user->save();
 
         // Mise à jour des champs de l'objet Eleve
-        $eleveFound->name = $request->input('name');
         $eleveFound->first_name = $request->input('first_name');
         $eleveFound->last_name = $request->input('last_name');
         $eleveFound->date_de_naissance = $request->input('date_de_naissance');
