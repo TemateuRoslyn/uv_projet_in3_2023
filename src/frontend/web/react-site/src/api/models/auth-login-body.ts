@@ -22,7 +22,7 @@ export interface AuthLoginBody {
      * @type {string}
      * @memberof AuthLoginBody
      */
-    email: any;
+    username: any;
     /**
      * 
      * @type {string}

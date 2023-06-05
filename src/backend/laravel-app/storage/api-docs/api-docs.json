@@ -885,7 +885,19 @@
                 ],
                 "summary": "Get a list of permissions",
                 "description": "Display a listing of the permissions.",
-                "operationId": "1fd0d7049b6dbc5007d5808790bcd0eb",
+                "operationId": "permissionsIndex",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer {your_token}"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -912,6 +924,22 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -923,7 +951,19 @@
                 ],
                 "summary": "Create a new permission",
                 "description": "Create a new permission.",
-                "operationId": "a9180466d0dac390ba5373ce353765dd",
+                "operationId": "permissionCreate",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer {your_token}"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1015,8 +1055,18 @@
                 ],
                 "summary": "Get a specific permission",
                 "description": "Display the specified permission.",
-                "operationId": "4200e08943671268e44ff2d301939b0a",
+                "operationId": "permissionShow",
                 "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer {your_token}"
+                        }
+                    },
                     {
                         "name": "id",
                         "in": "path",
@@ -1081,7 +1131,7 @@
                 ],
                 "summary": "Update a specific permission",
                 "description": "Update the specified permission.",
-                "operationId": "76eb4715e98f2dfd5053d9cb75c0f650",
+                "operationId": "permissionUpdate",
                 "parameters": [
                     {
                         "name": "id",
@@ -1090,6 +1140,16 @@
                         "required": true,
                         "schema": {
                             "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer {your_token}"
                         }
                     }
                 ],
@@ -1191,7 +1251,7 @@
                 ],
                 "summary": "Delete a specific permission",
                 "description": "Remove the specified permission from storage.",
-                "operationId": "5e09ce01a298e985a186071a1b6e8092",
+                "operationId": "permissionDelete",
                 "parameters": [
                     {
                         "name": "id",
@@ -1200,6 +1260,16 @@
                         "required": true,
                         "schema": {
                             "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer {your_token}"
                         }
                     }
                 ],
@@ -1250,31 +1320,51 @@
         "/api/roles/findAll": {
             "get": {
                 "tags": [
-                    "Roles"
+                    "roles"
                 ],
-                "summary": "Get a list of roles",
-                "description": "Display a listing of the roles.",
-                "operationId": "d716988ba806662633d10653a08af0b7",
+                "summary": "Get all roles",
+                "description": "Retrieve a list of all roles",
+                "operationId": "rolesIndex",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer {your_token}"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "Successful operation",
+                        "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": true
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Roles retrieved successfully"
-                                        },
-                                        "data": {
+                                        "roles": {
                                             "type": "array",
                                             "items": {
                                                 "$ref": "#/components/schemas/Role"
                                             }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
                                         }
                                     },
                                     "type": "object"
@@ -1288,24 +1378,40 @@
         "/api/roles/create": {
             "post": {
                 "tags": [
-                    "Roles"
+                    "roles"
                 ],
                 "summary": "Create a new role",
-                "description": "Create a new role.",
-                "operationId": "fb3bf4a42ec8542a0fc077cda492fc77",
+                "description": "Create a new role resource",
+                "operationId": "createRole",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
+                                "required": [
+                                    "name",
+                                    "description"
+                                ],
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "example": "create_users"
+                                        "example": "admins"
                                     },
                                     "description": {
                                         "type": "string",
-                                        "example": "Create users role"
+                                        "example": "Admin"
                                     }
                                 },
                                 "type": "object"
@@ -1314,22 +1420,22 @@
                     }
                 },
                 "responses": {
-                    "201": {
-                        "description": "Role created successfully",
+                    "400": {
+                        "description": "Error - Invalid request data",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": true
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Role created successfully"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/schemas/Role"
+                                        "error": {
+                                            "type": "object",
+                                            "example": {
+                                                "name": [
+                                                    "The name field is required."
+                                                ],
+                                                "description": [
+                                                    "The description field is required."
+                                                ]
+                                            }
                                         }
                                     },
                                     "type": "object"
@@ -1337,36 +1443,53 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "Validation error",
+                    "401": {
+                        "description": "Error - Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Could not create this role"
-                                        },
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": false
-                                        },
                                         "error": {
-                                            "properties": {
-                                                "name": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "description": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            },
-                                            "type": "object"
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error - Validation failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "object",
+                                            "example": {
+                                                "name": [
+                                                    "The name must be a valid name address."
+                                                ],
+                                                "description": [
+                                                    "The description must be at least 8 characters."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "role": {
+                                            "$ref": "#/components/schemas/Role"
                                         }
                                     },
                                     "type": "object"
@@ -1377,19 +1500,29 @@
                 }
             }
         },
-        "/api/roles/findOne/{roleId}": {
+        "/api/roles/findOne/{id}": {
             "get": {
                 "tags": [
-                    "Roles"
+                    "roles"
                 ],
-                "summary": "Get a specific role",
-                "description": "Display the specified role.",
-                "operationId": "3f49462753e1db7aece5d16dfdb0faf2",
+                "summary": "Get role information",
+                "description": "Get information about a specific role",
+                "operationId": "viewRole",
                 "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    },
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Role ID",
+                        "description": "ID of role to get information for",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -1397,22 +1530,15 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Successful operation",
+                    "401": {
+                        "description": "Error - Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": true
-                                        },
-                                        "message": {
+                                        "error": {
                                             "type": "string",
-                                            "example": "Role retrieved successfully"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/schemas/Role"
+                                            "example": "Unauthorized"
                                         }
                                     },
                                     "type": "object"
@@ -1421,18 +1547,37 @@
                         }
                     },
                     "404": {
-                        "description": "Role not found",
+                        "description": "Error - Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Role not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Role not found"
+                                            "example": "Role trouve"
                                         },
                                         "success": {
                                             "type": "boolean",
-                                            "example": false
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Role"
                                         }
                                     },
                                     "type": "object"
@@ -1443,62 +1588,51 @@
                 }
             }
         },
-        "/api/roles/update/{roleId}": {
+        "/api/roles/update/{id}": {
             "put": {
                 "tags": [
-                    "Roles"
+                    "roles"
                 ],
                 "summary": "Update a specific role",
-                "description": "Update the specified role.",
-                "operationId": "26a808b47fbe02bce8e933cc6b456c3a",
+                "operationId": "updateRole",
                 "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    },
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Role ID",
+                        "description": "ID of eleve to delete",
                         "required": true,
                         "schema": {
                             "type": "integer"
                         }
                     }
                 ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "edit_users"
-                                    },
-                                    "description": {
-                                        "type": "string",
-                                        "example": "Edit users role"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
                 "responses": {
-                    "200": {
-                        "description": "Role updated successfully",
+                    "400": {
+                        "description": "Error - Invalid request data",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": true
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Role updated successfully"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/schemas/Role"
+                                        "error": {
+                                            "type": "object",
+                                            "example": {
+                                                "name": [
+                                                    "The name field is required."
+                                                ],
+                                                "description": [
+                                                    "The password field is required."
+                                                ]
+                                            }
                                         }
                                     },
                                     "type": "object"
@@ -1506,23 +1640,15 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "Validation error",
+                    "401": {
+                        "description": "Error - Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "message": {
+                                        "error": {
                                             "type": "string",
-                                            "example": "The given data was invalid"
-                                        },
-                                        "errors": {
-                                            "type": "object",
-                                            "example": "{'name': ['The name field is required.']}"
-                                        },
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": false
+                                            "example": "Unauthorized"
                                         }
                                     },
                                     "type": "object"
@@ -1531,18 +1657,29 @@
                         }
                     },
                     "404": {
-                        "description": "Role not found",
+                        "description": "Error - Not found",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "message": {
+                                        "error": {
                                             "type": "string",
                                             "example": "Role not found"
-                                        },
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "role": {
+                                            "$ref": "#/components/schemas/Role"
                                         }
                                     },
                                     "type": "object"
@@ -1553,19 +1690,29 @@
                 }
             }
         },
-        "/api/roles/delete/{roleId}": {
+        "/api/roles/delete/{id}": {
             "delete": {
                 "tags": [
-                    "Roles"
+                    "roles"
                 ],
-                "summary": "Delete a specific role",
-                "description": "Remove the specified role from storage.",
-                "operationId": "501e40226108869e8b95324a5913fffb",
+                "summary": "Delete an role",
+                "description": "Delete an role resource",
+                "operationId": "deleteRole",
                 "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    },
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Role ID",
+                        "description": "ID of role to delete",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -1573,19 +1720,15 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Role deleted successfully",
+                    "401": {
+                        "description": "Error - Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": true
-                                        },
-                                        "message": {
+                                        "error": {
                                             "type": "string",
-                                            "example": "Role deleted successfully"
+                                            "example": "Unauthorized"
                                         }
                                     },
                                     "type": "object"
@@ -1594,24 +1737,23 @@
                         }
                     },
                     "404": {
-                        "description": "Role not found",
+                        "description": "Error - Not found",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "message": {
+                                        "error": {
                                             "type": "string",
                                             "example": "Role not found"
-                                        },
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": false
                                         }
                                     },
                                     "type": "object"
                                 }
                             }
                         }
+                    },
+                    "204": {
+                        "description": "Success"
                     }
                 }
             }
@@ -1622,7 +1764,19 @@
                     "Users"
                 ],
                 "summary": "Get a list of users",
-                "operationId": "41066a17c2e27262b355fe148be88ad3",
+                "operationId": "usersIndex",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer {your_token}"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -1649,6 +1803,22 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1659,7 +1829,19 @@
                     "Users"
                 ],
                 "summary": "Create a new user",
-                "operationId": "7d741ec1c7a842b6a35ac2eacf613e20",
+                "operationId": "userCreate",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer {your_token}"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1763,7 +1945,7 @@
                 ],
                 "summary": "Get a specific user",
                 "description": "Get information about a specific user by user ID",
-                "operationId": "getUser",
+                "operationId": "userShow",
                 "parameters": [
                     {
                         "name": "userId",
@@ -1822,24 +2004,35 @@
                 }
             }
         },
-        "/api/users/update/{userId}": {
-            "put": {
+        "/api/users/update/{id}": {
+            "post": {
                 "tags": [
                     "Users"
                 ],
-                "summary": "Update a specific user",
-                "description": "Update information of a specific user by user ID",
-                "operationId": "updateUser",
+                "summary": "Update a  user",
+                "operationId": "userUpdate",
                 "parameters": [
                     {
-                        "name": "userId",
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer {your_token}"
+                        }
+                    },
+                    {
+                        "name": "id",
                         "in": "path",
-                        "description": "User object",
-                        "required": true
+                        "description": "ID of role to get information for",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
                     }
                 ],
                 "requestBody": {
-                    "description": "Updated user information",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -1848,7 +2041,7 @@
                                     "email": {
                                         "type": "string",
                                         "format": "email",
-                                        "example": "user@gmail.com"
+                                        "example": "user@example.com"
                                     },
                                     "username": {
                                         "type": "string",
@@ -1861,8 +2054,8 @@
                     }
                 },
                 "responses": {
-                    "200": {
-                        "description": "User updated successfully",
+                    "201": {
+                        "description": "User created successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1873,7 +2066,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "User updated successfully"
+                                            "example": "User created successfully"
                                         },
                                         "data": {
                                             "$ref": "#/components/schemas/User"
@@ -1885,29 +2078,35 @@
                         }
                     },
                     "400": {
-                        "description": "Could not update this user",
+                        "description": "Validation error",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Could not update this user"
+                                            "example": "Could not create this user"
                                         },
                                         "success": {
                                             "type": "boolean",
                                             "example": false
                                         },
                                         "error": {
-                                            "type": "object",
-                                            "example": {
-                                                "email": [
-                                                    "The email has already been taken."
-                                                ],
-                                                "username": [
-                                                    "The username has already been taken."
-                                                ]
-                                            }
+                                            "properties": {
+                                                "email": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "username": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -1934,6 +2133,16 @@
                         "required": true,
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer {your_token}"
                         }
                     }
                 ],

@@ -18,10 +18,10 @@ import { Configuration } from '../configuration';
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { ElevesCreateBody } from '../models';
 import { ElevesUpdateBody } from '../models';
-import { InlineResponse2001 } from '../models';
 import { InlineResponse2002 } from '../models';
+import { InlineResponse2003 } from '../models';
 import { InlineResponse2011 } from '../models';
-import { InlineResponse400 } from '../models';
+import { InlineResponse4001 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse404 } from '../models';
 import { InlineResponse4221 } from '../models';
@@ -35,13 +35,18 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
          * Create a new eleve resource
          * @summary Create a new eleve
          * @param {ElevesCreateBody} body 
+         * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createEleve: async (body: ElevesCreateBody, options: any = {}): Promise<RequestArgs> => {
+        createEleve: async (body: ElevesCreateBody, authorization: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling createEleve.');
+            }
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling createEleve.');
             }
             const localVarPath = `/api/eleves/create`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -53,6 +58,10 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -77,11 +86,16 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Delete an eleve resource
          * @summary Delete an eleve
+         * @param {string} authorization JWT token
          * @param {number} id ID of eleve to delete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteEleve: async (id: number, options: any = {}): Promise<RequestArgs> => {
+        deleteEleve: async (authorization: string, id: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling deleteEleve.');
+            }
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling deleteEleve.');
@@ -97,6 +111,10 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -117,10 +135,15 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Retrieve a list of all eleves
          * @summary Get all eleves
+         * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        elevesIndex: async (options: any = {}): Promise<RequestArgs> => {
+        elevesIndex: async (authorization: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling elevesIndex.');
+            }
             const localVarPath = `/api/eleves/findAll`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -131,6 +154,10 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -152,13 +179,18 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
          * Update a eleve's information
          * @summary Update a eleve's information
          * @param {ElevesUpdateBody} body 
+         * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateEleve: async (body: ElevesUpdateBody, options: any = {}): Promise<RequestArgs> => {
+        updateEleve: async (body: ElevesUpdateBody, authorization: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling updateEleve.');
+            }
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling updateEleve.');
             }
             const localVarPath = `/api/eleves/update`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -170,6 +202,10 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -194,11 +230,16 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Get information about a specific eleve
          * @summary Get eleve information
+         * @param {string} authorization JWT token
          * @param {number} id ID of eleve to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewEleve: async (id: number, options: any = {}): Promise<RequestArgs> => {
+        viewEleve: async (authorization: string, id: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling viewEleve.');
+            }
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling viewEleve.');
@@ -214,6 +255,10 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -244,11 +289,12 @@ export const ElevesApiFp = function(configuration?: Configuration) {
          * Create a new eleve resource
          * @summary Create a new eleve
          * @param {ElevesCreateBody} body 
+         * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createEleve(body: ElevesCreateBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2011>> {
-            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).createEleve(body, options);
+        async createEleve(body: ElevesCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2011>> {
+            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).createEleve(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -257,12 +303,13 @@ export const ElevesApiFp = function(configuration?: Configuration) {
         /**
          * Delete an eleve resource
          * @summary Delete an eleve
+         * @param {string} authorization JWT token
          * @param {number} id ID of eleve to delete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteEleve(id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).deleteEleve(id, options);
+        async deleteEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).deleteEleve(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -271,11 +318,12 @@ export const ElevesApiFp = function(configuration?: Configuration) {
         /**
          * Retrieve a list of all eleves
          * @summary Get all eleves
+         * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async elevesIndex(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
-            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).elevesIndex(options);
+        async elevesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
+            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).elevesIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -285,11 +333,12 @@ export const ElevesApiFp = function(configuration?: Configuration) {
          * Update a eleve's information
          * @summary Update a eleve's information
          * @param {ElevesUpdateBody} body 
+         * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateEleve(body: ElevesUpdateBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2011>> {
-            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).updateEleve(body, options);
+        async updateEleve(body: ElevesUpdateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2011>> {
+            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).updateEleve(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -298,12 +347,13 @@ export const ElevesApiFp = function(configuration?: Configuration) {
         /**
          * Get information about a specific eleve
          * @summary Get eleve information
+         * @param {string} authorization JWT token
          * @param {number} id ID of eleve to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewEleve(id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
-            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).viewEleve(id, options);
+        async viewEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2003>> {
+            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).viewEleve(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -322,50 +372,55 @@ export const ElevesApiFactory = function (configuration?: Configuration, basePat
          * Create a new eleve resource
          * @summary Create a new eleve
          * @param {ElevesCreateBody} body 
+         * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createEleve(body: ElevesCreateBody, options?: any): AxiosPromise<InlineResponse2011> {
-            return ElevesApiFp(configuration).createEleve(body, options).then((request) => request(axios, basePath));
+        createEleve(body: ElevesCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse2011> {
+            return ElevesApiFp(configuration).createEleve(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete an eleve resource
          * @summary Delete an eleve
+         * @param {string} authorization JWT token
          * @param {number} id ID of eleve to delete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteEleve(id: number, options?: any): AxiosPromise<void> {
-            return ElevesApiFp(configuration).deleteEleve(id, options).then((request) => request(axios, basePath));
+        deleteEleve(authorization: string, id: number, options?: any): AxiosPromise<void> {
+            return ElevesApiFp(configuration).deleteEleve(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieve a list of all eleves
          * @summary Get all eleves
+         * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        elevesIndex(options?: any): AxiosPromise<InlineResponse2001> {
-            return ElevesApiFp(configuration).elevesIndex(options).then((request) => request(axios, basePath));
+        elevesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse2002> {
+            return ElevesApiFp(configuration).elevesIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Update a eleve's information
          * @summary Update a eleve's information
          * @param {ElevesUpdateBody} body 
+         * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateEleve(body: ElevesUpdateBody, options?: any): AxiosPromise<InlineResponse2011> {
-            return ElevesApiFp(configuration).updateEleve(body, options).then((request) => request(axios, basePath));
+        updateEleve(body: ElevesUpdateBody, authorization: string, options?: any): AxiosPromise<InlineResponse2011> {
+            return ElevesApiFp(configuration).updateEleve(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Get information about a specific eleve
          * @summary Get eleve information
+         * @param {string} authorization JWT token
          * @param {number} id ID of eleve to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewEleve(id: number, options?: any): AxiosPromise<InlineResponse2002> {
-            return ElevesApiFp(configuration).viewEleve(id, options).then((request) => request(axios, basePath));
+        viewEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse2003> {
+            return ElevesApiFp(configuration).viewEleve(authorization, id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -381,54 +436,59 @@ export class ElevesApi extends BaseAPI {
      * Create a new eleve resource
      * @summary Create a new eleve
      * @param {ElevesCreateBody} body 
+     * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ElevesApi
      */
-    public createEleve(body: ElevesCreateBody, options?: any) {
-        return ElevesApiFp(this.configuration).createEleve(body, options).then((request) => request(this.axios, this.basePath));
+    public createEleve(body: ElevesCreateBody, authorization: string, options?: any) {
+        return ElevesApiFp(this.configuration).createEleve(body, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Delete an eleve resource
      * @summary Delete an eleve
+     * @param {string} authorization JWT token
      * @param {number} id ID of eleve to delete
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ElevesApi
      */
-    public deleteEleve(id: number, options?: any) {
-        return ElevesApiFp(this.configuration).deleteEleve(id, options).then((request) => request(this.axios, this.basePath));
+    public deleteEleve(authorization: string, id: number, options?: any) {
+        return ElevesApiFp(this.configuration).deleteEleve(authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Retrieve a list of all eleves
      * @summary Get all eleves
+     * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ElevesApi
      */
-    public elevesIndex(options?: any) {
-        return ElevesApiFp(this.configuration).elevesIndex(options).then((request) => request(this.axios, this.basePath));
+    public elevesIndex(authorization: string, options?: any) {
+        return ElevesApiFp(this.configuration).elevesIndex(authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update a eleve's information
      * @summary Update a eleve's information
      * @param {ElevesUpdateBody} body 
+     * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ElevesApi
      */
-    public updateEleve(body: ElevesUpdateBody, options?: any) {
-        return ElevesApiFp(this.configuration).updateEleve(body, options).then((request) => request(this.axios, this.basePath));
+    public updateEleve(body: ElevesUpdateBody, authorization: string, options?: any) {
+        return ElevesApiFp(this.configuration).updateEleve(body, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get information about a specific eleve
      * @summary Get eleve information
+     * @param {string} authorization JWT token
      * @param {number} id ID of eleve to get information for
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ElevesApi
      */
-    public viewEleve(id: number, options?: any) {
-        return ElevesApiFp(this.configuration).viewEleve(id, options).then((request) => request(this.axios, this.basePath));
+    public viewEleve(authorization: string, id: number, options?: any) {
+        return ElevesApiFp(this.configuration).viewEleve(authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -17,6 +17,17 @@ class PermissionController extends Controller
      *     path="/api/permissions/findAll",
      *     summary="Get a list of permissions",
      *     tags={"Permissions"},
+     *     operationId="permissionsIndex",
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
@@ -30,8 +41,15 @@ class PermissionController extends Controller
      *                 @OA\Items(ref="#/components/schemas/Permission")
      *             )
      *         )
-     *     )
-     * )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *      )     
+     *  )
      */
     public function index()
     {
@@ -52,7 +70,18 @@ class PermissionController extends Controller
      *     path="/api/permissions/create",
      *     summary="Create a new permission",
      *     tags={"Permissions"},
-     *     @OA\RequestBody(
+     *     operationId="permissionCreate",
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),    
+     *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
      *             @OA\Property(property="name", type="string", example="create_users"),
@@ -121,6 +150,17 @@ class PermissionController extends Controller
      *     path="/api/permissions/findOne/{permissionId}",
      *     summary="Get a specific permission",
      *     tags={"Permissions"},
+     *     operationId="permissionShow",
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),      
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -177,6 +217,7 @@ class PermissionController extends Controller
      *     path="/api/permissions/update/{permissionId}",
      *     summary="Update a specific permission",
      *     tags={"Permissions"},
+     *     operationId="permissionUpdate",     
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -186,6 +227,16 @@ class PermissionController extends Controller
      *             type="integer"
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -267,6 +318,7 @@ class PermissionController extends Controller
      *     path="/api/permissions/delete/{permissionId}",
      *     summary="Delete a specific permission",
      *     tags={"Permissions"},
+     *     operationId="permissionDelete",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -276,6 +328,16 @@ class PermissionController extends Controller
      *             type="integer"
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
      *     @OA\Response(
      *         response=200,
      *         description="Permission deleted successfully",
