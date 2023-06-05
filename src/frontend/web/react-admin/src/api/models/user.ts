@@ -36,6 +36,12 @@ export interface User {
      */
     email: any;
     /**
+     * username
+     * @type {string}
+     * @memberof User
+     */
+    username: any;
+    /**
      * Datetime marker of verification status
      * @type {Date}
      * @memberof User

@@ -6,29 +6,40 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\Role;
 
 class RoleController extends Controller
 {
     /**
-     * Display a listing of the roles.
-     *
      * @OA\Get(
      *     path="/api/roles/findAll",
-     *     summary="Get a list of roles",
-     *     tags={"Roles"},
+     *     summary="Get all roles",
+     *     description="Retrieve a list of all roles",
+     *     operationId="rolesIndex",
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *     tags={"roles"},
      *     @OA\Response(
      *         response=200,
-     *         description="Successful operation",
+     *         description="Success",
      *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Roles retrieved successfully"),
-     *             @OA\Property(
-     *                 property="data",
-     *                 type="array",
-     *                 @OA\Items(ref="#/components/schemas/Role")
-     *             )
+     *             @OA\Property(property="roles", type="array", @OA\Items(ref="#/components/schemas/Role"))
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
      *         )
      *     )
      * )
@@ -44,42 +55,70 @@ class RoleController extends Controller
     }
 
     /**
-     * Create a new role.
-     *
      * @OA\Post(
      *     path="/api/roles/create",
      *     summary="Create a new role",
-     *     tags={"Roles"},
-     *     @OA\RequestBody(
+     *     description="Create a new role resource",
+     *     operationId="createRole",
+     *     tags={"roles"},
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
+     *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="name", type="string", example="create_users"),
-     *             @OA\Property(property="description", type="string", example="Create users role")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=201,
-     *         description="Role created successfully",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Role created successfully"),
-     *             @OA\Property(property="data", ref="#/components/schemas/Role")
+     *             required={"name", "description"},
+     *             @OA\Property(property="name", type="string", example="admins"),
+     *             @OA\Property(property="description", type="string", example="Admin")
      *         )
      *     ),
      *     @OA\Response(
      *         response=400,
-     *         description="Validation error",
+     *         description="Error - Invalid request data",
      *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="message", type="string", example="Could not create this role"),
-     *             @OA\Property(property="success", type="boolean", example=false),
-     *             @OA\Property(
-     *                 property="error",
-     *                 type="object",
-     *                 @OA\Property(property="name", type="array", @OA\Items(type="string")),
-     *                 @OA\Property(property="description", type="array", @OA\Items(type="string"))
-     *             )
+     *             @OA\Property(property="error", type="object", example={
+     *                 "name": {
+     *                     "The name field is required."
+     *                 },
+     *                 "description": {
+     *                     "The description field is required."
+     *                 }
+     *             })
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Error - Validation failed",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="object", example={
+     *                 "name": {
+     *                     "The name must be a valid name address."
+     *                 },
+     *                 "description": {
+     *                     "The description must be at least 8 characters."
+     *                 }
+     *             })
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="role", type="object", ref="#/components/schemas/Role"),
      *         )
      *     )
      * )
@@ -112,38 +151,52 @@ class RoleController extends Controller
     }
 
     /**
-     * Display the specified role.
-     *
      * @OA\Get(
-     *     path="/api/roles/findOne/{roleId}",
-     *     summary="Get a specific role",
-     *     tags={"Roles"},
+     *     path="/api/roles/findOne/{id}",
+     *     summary="Get role information",
+     *     description="Get information about a specific role",
+     *     operationId="viewRole",
+     *     tags={"roles"},
      *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
+     *      @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="Role ID",
+     *         description="ID of role to get information for",
      *         required=true,
      *         @OA\Schema(
      *             type="integer"
      *         )
      *     ),
      *     @OA\Response(
-     *         response=200,
-     *         description="Successful operation",
+     *         response=401,
+     *         description="Error - Unauthorized",
      *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Role retrieved successfully"),
-     *             @OA\Property(property="data", ref="#/components/schemas/Role")
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
      *         )
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Role not found",
+     *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="message", type="string", example="Role not found"),
-     *             @OA\Property(property="success", type="boolean", example=false)
+     *             @OA\Property(property="error", type="string", example="Role not found")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Role trouve"),
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="data", type="object", ref="#/components/schemas/Role")
      *         )
      *     )
      * )
@@ -165,56 +218,64 @@ class RoleController extends Controller
         ], 200);
     }
 
-/**
-     * Update the specified role.
-     *
+    /**
      * @OA\Put(
-     *     path="/api/roles/update/{roleId}",
+     *     path="/api/roles/update/{id}",
      *     summary="Update a specific role",
-     *     tags={"Roles"},
+     *     tags={"roles"},
+     *     operationId="updateRole",
      *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
+     *      @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="Role ID",
+     *         description="ID of eleve to delete",
      *         required=true,
      *         @OA\Schema(
      *             type="integer"
      *         )
      *     ),
-     *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *             @OA\Property(property="name", type="string", example="edit_users"),
-     *             @OA\Property(property="description", type="string", example="Edit users role")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Role updated successfully",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Role updated successfully"),
-     *             @OA\Property(property="data", ref="#/components/schemas/Role")
-     *         )
-     *     ),
      *     @OA\Response(
      *         response=400,
-     *         description="Validation error",
+     *         description="Error - Invalid request data",
      *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="message", type="string", example="The given data was invalid"),
-     *             @OA\Property(property="errors", type="object", example="{'name': ['The name field is required.']}"),
-     *             @OA\Property(property="success", type="boolean", example=false)
+     *             @OA\Property(property="error", type="object", example={
+     *                 "name": {
+     *                     "The name field is required."
+     *                 },
+     *                 "description": {
+     *                     "The password field is required."
+     *                 }
+     *             })
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
      *         )
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Role not found",
+     *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="message", type="string", example="Role not found"),
-     *             @OA\Property(property="success", type="boolean", example=false)
+     *             @OA\Property(property="error", type="string", example="Role not found")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="role", type="object", ref="#/components/schemas/Role"),
      *         )
      *     )
      * )
@@ -255,39 +316,50 @@ class RoleController extends Controller
         ], 200);
     }
 
-/**
-     * Remove the specified role from storage.
-     *
-     * @OA\Delete(
-     *     path="/api/roles/delete/{roleId}",
-     *     summary="Delete a specific role",
-     *     tags={"Roles"},
+    /**
+     * @OA\Delete (
+     *     path="/api/roles/delete/{id}",
+     *     summary="Delete an role",
+     *     description="Delete an role resource",
+     *     operationId="deleteRole",
+     *     tags={"roles"},
      *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
+     *      @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="Role ID",
+     *         description="ID of role to delete",
      *         required=true,
      *         @OA\Schema(
      *             type="integer"
      *         )
      *     ),
+     *
      *     @OA\Response(
-     *         response=200,
-     *         description="Role deleted successfully",
+     *         response=401,
+     *         description="Error - Unauthorized",
      *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Role deleted successfully")
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
      *         )
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Role not found",
+     *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="message", type="string", example="Role not found"),
-     *             @OA\Property(property="success", type="boolean", example=false)
+     *             @OA\Property(property="error", type="string", example="Role not found")
      *         )
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Success",
      *     )
      * )
      */
