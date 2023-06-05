@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @OA\Schema(
- *     required={"solvable", "redoublant", "name", "first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "photo", "sexe", "telephone"},
+ *     required={"solvable", "redoublant","first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "photo", "sexe", "telephone"},
  *     @OA\Xml(name="Eleve"),
  *     @OA\Property(property="id", type="integer", readOnly=true, example="1"),
  *     @OA\Property(property="role", type="string", readOnly=true, description="User role"),
- *     @OA\Property(property="name", type="string", maxLength=32, example="John"),
  *     @OA\Property(property="first_name", type="string", maxLength=32, example="Doe"),
  *     @OA\Property(property="last_name", type="string", maxLength=32, example="Smith"),
  *     @OA\Property(property="date_de_naissance", type="string", format="date", example="1990-01-01"),
@@ -39,7 +38,6 @@ class Eleve extends Model
     protected $fillable = [
         'solvable',
         'redoublant',
-        'name',
         'first_name',
         'last_name',
         'date_de_naissance',
