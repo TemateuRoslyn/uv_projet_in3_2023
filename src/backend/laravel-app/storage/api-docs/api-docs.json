@@ -877,6 +877,1109 @@
                     }
                 }
             }
+        },
+        "/api/permissions/findAll": {
+            "get": {
+                "tags": [
+                    "Permissions"
+                ],
+                "summary": "Get a list of permissions",
+                "description": "Display a listing of the permissions.",
+                "operationId": "1fd0d7049b6dbc5007d5808790bcd0eb",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Permissions retrieved successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Permission"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/permissions/create": {
+            "post": {
+                "tags": [
+                    "Permissions"
+                ],
+                "summary": "Create a new permission",
+                "description": "Create a new permission.",
+                "operationId": "a9180466d0dac390ba5373ce353765dd",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "create_users"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Create users permission"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Permission created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Permission created successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Permission"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Could not create this permission"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "error": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "description": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/permissions/findOne/{permissionId}": {
+            "get": {
+                "tags": [
+                    "Permissions"
+                ],
+                "summary": "Get a specific permission",
+                "description": "Display the specified permission.",
+                "operationId": "4200e08943671268e44ff2d301939b0a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Permission ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Permission retrieved successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Permission"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Permission not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Permission not found"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/permissions/update/{permissionId}": {
+            "put": {
+                "tags": [
+                    "Permissions"
+                ],
+                "summary": "Update a specific permission",
+                "description": "Update the specified permission.",
+                "operationId": "76eb4715e98f2dfd5053d9cb75c0f650",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Permission ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "edit_users"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Edit users permission"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Permission updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Permission updated successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Permission"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid"
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": "{'name': ['The name field is required.']}"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Permission not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Permission not found"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/permissions/delete/{permissionId}": {
+            "delete": {
+                "tags": [
+                    "Permissions"
+                ],
+                "summary": "Delete a specific permission",
+                "description": "Remove the specified permission from storage.",
+                "operationId": "5e09ce01a298e985a186071a1b6e8092",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Permission ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Permission deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Permission deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Permission not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Permission not found"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/roles/findAll": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Get a list of roles",
+                "description": "Display a listing of the roles.",
+                "operationId": "d716988ba806662633d10653a08af0b7",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Roles retrieved successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Role"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/roles/create": {
+            "post": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Create a new role",
+                "description": "Create a new role.",
+                "operationId": "fb3bf4a42ec8542a0fc077cda492fc77",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "create_users"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Create users role"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Role created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Role created successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Role"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Could not create this role"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "error": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "description": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/roles/findOne/{roleId}": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Get a specific role",
+                "description": "Display the specified role.",
+                "operationId": "3f49462753e1db7aece5d16dfdb0faf2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Role ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Role retrieved successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Role"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Role not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Role not found"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/roles/update/{roleId}": {
+            "put": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Update a specific role",
+                "description": "Update the specified role.",
+                "operationId": "26a808b47fbe02bce8e933cc6b456c3a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Role ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "edit_users"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Edit users role"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Role updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Role updated successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Role"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid"
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": "{'name': ['The name field is required.']}"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Role not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Role not found"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/roles/delete/{roleId}": {
+            "delete": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Delete a specific role",
+                "description": "Remove the specified role from storage.",
+                "operationId": "501e40226108869e8b95324a5913fffb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Role ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Role deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Role deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Role not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Role not found"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/findAll": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get a list of users",
+                "operationId": "41066a17c2e27262b355fe148be88ad3",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Users retrieved successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/User"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/create": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create a new user",
+                "operationId": "7d741ec1c7a842b6a35ac2eacf613e20",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    },
+                                    "username": {
+                                        "type": "string",
+                                        "example": "maestros21"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "secret"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User created successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Could not create this user"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "error": {
+                                            "properties": {
+                                                "email": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "username": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "password": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/findOne/{userId}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get a specific user",
+                "description": "Get information about a specific user by user ID",
+                "operationId": "getUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Utilisateur trouvé(e)"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Utilisateur non trouvé(e)"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/update/{userId}": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update a specific user",
+                "description": "Update information of a specific user by user ID",
+                "operationId": "updateUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "User object",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Updated user information",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@gmail.com"
+                                    },
+                                    "username": {
+                                        "type": "string",
+                                        "example": "maestros21"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User updated successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Could not update this user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Could not update this user"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": {
+                                                "email": [
+                                                    "The email has already been taken."
+                                                ],
+                                                "username": [
+                                                    "The username has already been taken."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/delete/{userId}": {
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete a specific user",
+                "description": "Delete a specific user by user ID",
+                "operationId": "deleteUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User deleted successfully"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User to delete was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User to delete was not found"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -987,6 +2090,82 @@
                 "type": "object",
                 "xml": {
                     "name": "Eleve"
+                }
+            },
+            "Permission": {
+                "required": [
+                    "name",
+                    "description"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": true,
+                        "example": "1"
+                    },
+                    "name": {
+                        "description": "Permission name",
+                        "type": "string",
+                        "readOnly": true,
+                        "example": "create_users"
+                    },
+                    "description": {
+                        "description": "Permission description",
+                        "type": "string",
+                        "readOnly": true,
+                        "example": "Create users permission"
+                    },
+                    "created_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/created_at"
+                    },
+                    "updated_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/updated_at"
+                    },
+                    "deleted_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/deleted_at"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Permission"
+                }
+            },
+            "Role": {
+                "required": [
+                    "name",
+                    "description"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": true,
+                        "example": "1"
+                    },
+                    "name": {
+                        "description": "Role name",
+                        "type": "string",
+                        "readOnly": true,
+                        "example": "admin"
+                    },
+                    "description": {
+                        "description": "Role description",
+                        "type": "string",
+                        "readOnly": true,
+                        "example": "Administrator role"
+                    },
+                    "created_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/created_at"
+                    },
+                    "updated_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/updated_at"
+                    },
+                    "deleted_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/deleted_at"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Role"
                 }
             },
             "User": {
