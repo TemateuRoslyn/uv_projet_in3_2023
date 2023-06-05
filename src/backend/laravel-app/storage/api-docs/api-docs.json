@@ -22,23 +22,22 @@
                                 "required": [
                                     "email",
                                     "password",
-                                    "name",
-                                    "first_name",
-                                    "last_name",
-                                    "date_de_naissance",
-                                    "lieu_de_naissance",
-                                    "sexe"
+                                    "username"
                                 ],
                                 "properties": {
-                                    "email": {
+                                    "username": {
                                         "type": "string",
-                                        "format": "email",
-                                        "example": "user1@mail.com"
+                                        "example": "maestros21"
                                     },
                                     "password": {
                                         "type": "string",
                                         "format": "password",
                                         "example": "PassWord12345"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "maestros.roslyn@gmail.com"
                                     }
                                 },
                                 "type": "object"
@@ -75,11 +74,14 @@
                                         "error": {
                                             "type": "object",
                                             "example": {
-                                                "email": [
-                                                    "The email field is required."
+                                                "username": [
+                                                    "Le username est un champ requis."
                                                 ],
                                                 "password": [
-                                                    "The password field is required."
+                                                    "Le mot de passe est un champ requis."
+                                                ],
+                                                "email": [
+                                                    "L'email est un champ requis."
                                                 ]
                                             }
                                         }
@@ -114,14 +116,14 @@
                                         "error": {
                                             "type": "object",
                                             "example": {
-                                                "email": [
-                                                    "The email must be a valid email address."
+                                                "username": [
+                                                    "Le username est un champ requis."
                                                 ],
                                                 "password": [
-                                                    "The password must be at least 6 characters."
+                                                    "TLe mot de passe doit avoir au moins 6 characteres"
                                                 ],
-                                                "name": [
-                                                    "The name field is required."
+                                                "email": [
+                                                    "L'email doit etre valide"
                                                 ]
                                             }
                                         }
@@ -149,14 +151,13 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "email",
-                                    "password"
+                                    "password",
+                                    "username"
                                 ],
                                 "properties": {
-                                    "email": {
+                                    "username": {
                                         "type": "string",
-                                        "format": "email",
-                                        "example": "user1@mail.com"
+                                        "example": "maestros21"
                                     },
                                     "password": {
                                         "type": "string",
@@ -510,7 +511,7 @@
                                     "email": {
                                         "type": "string",
                                         "format": "email",
-                                        "example": "user1@mail.com"
+                                        "example": "maestros.roslyn@gmail.com"
                                     },
                                     "password": {
                                         "type": "string",
@@ -679,7 +680,7 @@
                                     "email": {
                                         "type": "string",
                                         "format": "email",
-                                        "example": "user1@mail.com"
+                                        "example": "maestros.roslyn@gmail.com"
                                     },
                                     "password": {
                                         "type": "string",
@@ -991,7 +992,8 @@
             "User": {
                 "required": [
                     "email",
-                    "password"
+                    "password",
+                    "username"
                 ],
                 "properties": {
                     "id": {
@@ -1010,6 +1012,12 @@
                         "format": "email",
                         "readOnly": true,
                         "example": "user@gmail.com"
+                    },
+                    "username": {
+                        "description": "username",
+                        "type": "string",
+                        "readOnly": true,
+                        "example": "maestros21"
                     },
                     "email_verified_at": {
                         "description": "Datetime marker of verification status",
