@@ -34,7 +34,7 @@ export interface ElevesUpdateBody {
      * @type {string}
      * @memberof ElevesUpdateBody
      */
-    name?: any;
+    username?: any;
     /**
      * 
      * @type {string}

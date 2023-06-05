@@ -22,17 +22,11 @@ export interface InlineResponse4004Error {
      * @type {Array&lt;string&gt;}
      * @memberof InlineResponse4004Error
      */
-    email?: any;
+    name?: any;
     /**
      * 
      * @type {Array&lt;string&gt;}
      * @memberof InlineResponse4004Error
      */
-    username?: any;
-    /**
-     * 
-     * @type {Array&lt;string&gt;}
-     * @memberof InlineResponse4004Error
-     */
-    password?: any;
+    description?: any;
 }

@@ -19,8 +19,20 @@
 export interface InlineResponse2008 {
     /**
      * 
-     * @type {Array&lt;Role&gt;}
+     * @type {boolean}
      * @memberof InlineResponse2008
      */
-    roles?: any;
+    success?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2008
+     */
+    message?: any;
+    /**
+     * 
+     * @type {Permission}
+     * @memberof InlineResponse2008
+     */
+    data?: any;
 }

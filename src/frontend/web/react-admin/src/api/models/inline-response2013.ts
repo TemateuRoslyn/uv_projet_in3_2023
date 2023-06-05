@@ -19,8 +19,20 @@
 export interface InlineResponse2013 {
     /**
      * 
-     * @type {Role}
+     * @type {boolean}
      * @memberof InlineResponse2013
      */
-    role?: any;
+    success?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2013
+     */
+    message?: any;
+    /**
+     * 
+     * @type {Permission}
+     * @memberof InlineResponse2013
+     */
+    data?: any;
 }
