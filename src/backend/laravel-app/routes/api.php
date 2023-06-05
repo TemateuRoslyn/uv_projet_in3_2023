@@ -12,9 +12,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\PermissionController;
 use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\ParentsController;
-
-
-
+use App\Http\Controllers\API\PersonnelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +44,7 @@ Route::prefix('auth')->group(function () {
  * secured routes
  */
 Route::middleware('jwt.verify')->group(function () {
-   
+
     // users
     Route::prefix('users')->group(function () {
         Route::get('/findAll', [UserController::class, 'index']);
@@ -73,7 +71,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::put('/update/{roleId}', [RoleController::class, 'update']);
         Route::delete('/delete/{roleId}', [RoleController::class, 'destroy']);
     });
-    
+
     // eleves
     Route::prefix('eleves')->group(function () {
         Route::post('create', [EleveController::class, 'store']);
@@ -100,7 +98,15 @@ Route::middleware('jwt.verify')->group(function () {
         Route::post('update', [ParentsController::class, 'update']);
         Route::delete('delete/{parentId}', [ParentsController::class, 'delete']);
     });
-    
+
+    // personnel
+    Route::prefix('personnel')->group(function () {
+        Route::get('findAll', [PersonnelController::class, 'showAll']);
+        Route::post('create', [PersonnelController::class, 'store']);
+        Route::get('findOne/{personnelId}', [PersonnelController::class, 'showIndex']);
+        Route::post('update', [PersonnelController::class, 'update']);
+        Route::delete('delete/{personnelId}', [PersonnelController::class, 'delete']);
+    });
 });
 
 
