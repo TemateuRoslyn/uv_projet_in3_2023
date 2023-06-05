@@ -17,6 +17,17 @@ class UserController extends Controller
      *     path="/api/users/findAll",
      *     summary="Get a list of users",
      *     tags={"Users"},
+     *     operationId="usersIndex",
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
@@ -29,6 +40,13 @@ class UserController extends Controller
      *                 type="array",
      *                 @OA\Items(ref="#/components/schemas/User")
      *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
      *         )
      *     )
      * )
@@ -49,6 +67,17 @@ class UserController extends Controller
      *     path="/api/users/create",
      *     summary="Create a new user",
      *     tags={"Users"},
+     *     operationId="userCreate",
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -123,6 +152,7 @@ class UserController extends Controller
      *     path="/api/users/findOne/{userId}",
      *     operationId="getUser",
      *     tags={"Users"},
+     *     operationId="userShow",
      *     summary="Get a specific user",
      *     description="Get information about a specific user by user ID",
      *     @OA\Parameter(
@@ -191,82 +221,59 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified user in storage.
-     *
-     * @OA\Put(
-     *     path="/api/users/update/{userId}",
-     *     operationId="updateUser",
+     * @OA\Post(
+     *     path="/api/users/update/{id}",
+     *     summary="Update a  user",
      *     tags={"Users"},
-     *     summary="Update a specific user",
-     *     description="Update information of a specific user by user ID",
+     *     operationId="userUpdate",
      *     @OA\Parameter(
-     *         name="userId",
-     *         in="path",
+     *         name="Authorization",
+     *         in="header",
      *         required=true,
-     *         description="User object",
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
      *     ),
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of role to get information for",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),         
      *     @OA\RequestBody(
      *         required=true,
-     *         description="Updated user information",
      *         @OA\JsonContent(
-     *             @OA\Property(
-     *                 property="email",
-     *                 type="string",
-     *                 format="email",
-     *                 example="user@gmail.com"
-     *             ),
-     *             @OA\Property(
-     *                 property="username",
-     *                 type="string",
-     *                 example="maestros21"
-     *             )
+     *             @OA\Property(property="email", type="string", format="email", example="user@example.com"),
+     *             @OA\Property(property="username", type="string", example="maestros21"),
      *         )
      *     ),
      *     @OA\Response(
-     *         response=200,
-     *         description="User updated successfully",
+     *         response=201,
+     *         description="User created successfully",
      *         @OA\JsonContent(
-     *             @OA\Property(
-     *                 property="success",
-     *                 type="boolean",
-     *                 example=true
-     *             ),
-     *             @OA\Property(
-     *                 property="message",
-     *                 type="string",
-     *                 example="User updated successfully"
-     *             ),
-     *             @OA\Property(
-     *                 property="data",
-     *                 ref="#/components/schemas/User"
-     *             )
+     *             type="object",
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="User created successfully"),
+     *             @OA\Property(property="data", ref="#/components/schemas/User")
      *         )
      *     ),
      *     @OA\Response(
      *         response=400,
-     *         description="Could not update this user",
+     *         description="Validation error",
      *         @OA\JsonContent(
-     *             @OA\Property(
-     *                 property="message",
-     *                 type="string",
-     *                 example="Could not update this user"
-     *             ),
-     *             @OA\Property(
-     *                 property="success",
-     *                 type="boolean",
-     *                 example=false
-     *             ),
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Could not create this user"),
+     *             @OA\Property(property="success", type="boolean", example=false),
      *             @OA\Property(
      *                 property="error",
      *                 type="object",
-     *                 example={
-     *                     "email": {
-     *                         "The email has already been taken."
-     *                     },
-     *                     "username": {
-     *                         "The username has already been taken."
-     *                     }
-     *                 }
+     *                 @OA\Property(property="email", type="array", @OA\Items(type="string")),
+     *                 @OA\Property(property="username", type="array", @OA\Items(type="string")),
      *             )
      *         )
      *     )
@@ -316,6 +323,16 @@ class UserController extends Controller
      *             type="string"
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
      *     @OA\Response(
      *         response=200,
      *         description="User deleted successfully",

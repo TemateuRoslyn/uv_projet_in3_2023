@@ -19,11 +19,11 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { AuthLoginBody } from '../models';
 import { AuthRegisterBody } from '../models';
 import { InlineResponse200 } from '../models';
+import { InlineResponse2001 } from '../models';
 import { InlineResponse201 } from '../models';
 import { InlineResponse400 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse4011 } from '../models';
-import { InlineResponse4012 } from '../models';
 import { InlineResponse422 } from '../models';
 /**
  * AuthApi - axios parameter creator
@@ -75,12 +75,17 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
             };
         },
         /**
-         * Logout user and invalidate token
+         * Invalidate token and log out user
          * @summary Logout
+         * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authLogout: async (options: any = {}): Promise<RequestArgs> => {
+        authLogout: async (authorization: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling authLogout.');
+            }
             const localVarPath = `/api/auth/logout`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -91,6 +96,10 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -209,13 +218,14 @@ export const AuthApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Logout user and invalidate token
+         * Invalidate token and log out user
          * @summary Logout
+         * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authLogout(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).authLogout(options);
+        async authLogout(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
+            const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).authLogout(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -268,13 +278,14 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
             return AuthApiFp(configuration).authLogin(body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Logout user and invalidate token
+         * Invalidate token and log out user
          * @summary Logout
+         * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authLogout(options?: any): AxiosPromise<void> {
-            return AuthApiFp(configuration).authLogout(options).then((request) => request(axios, basePath));
+        authLogout(authorization: string, options?: any): AxiosPromise<InlineResponse2001> {
+            return AuthApiFp(configuration).authLogout(authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Register a new user
@@ -317,14 +328,15 @@ export class AuthApi extends BaseAPI {
         return AuthApiFp(this.configuration).authLogin(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Logout user and invalidate token
+     * Invalidate token and log out user
      * @summary Logout
+     * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApi
      */
-    public authLogout(options?: any) {
-        return AuthApiFp(this.configuration).authLogout(options).then((request) => request(this.axios, this.basePath));
+    public authLogout(authorization: string, options?: any) {
+        return AuthApiFp(this.configuration).authLogout(authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Register a new user
