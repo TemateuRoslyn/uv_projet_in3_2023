@@ -496,7 +496,7 @@
                                 "required": [
                                     "email",
                                     "password",
-                                    "name",
+                                    "username",
                                     "first_name",
                                     "last_name",
                                     "date_de_naissance",
@@ -518,7 +518,7 @@
                                         "format": "password",
                                         "example": "PassWord12345"
                                     },
-                                    "name": {
+                                    "username": {
                                         "type": "string",
                                         "example": "Doe"
                                     },
@@ -622,8 +622,8 @@
                                                 "password": [
                                                     "The password must be at least 8 characters."
                                                 ],
-                                                "name": [
-                                                    "The name field is required."
+                                                "username": [
+                                                    "The username field is required."
                                                 ]
                                             }
                                         }
@@ -687,7 +687,7 @@
                                         "format": "password",
                                         "example": "PassWord12345"
                                     },
-                                    "name": {
+                                    "username": {
                                         "type": "string",
                                         "example": "Doe"
                                     },
@@ -2220,7 +2220,6 @@
                 "required": [
                     "solvable",
                     "redoublant",
-                    "name",
                     "first_name",
                     "last_name",
                     "date_de_naissance",
@@ -2239,11 +2238,6 @@
                         "description": "User role",
                         "type": "string",
                         "readOnly": true
-                    },
-                    "name": {
-                        "type": "string",
-                        "maxLength": 32,
-                        "example": "John"
                     },
                     "first_name": {
                         "type": "string",
