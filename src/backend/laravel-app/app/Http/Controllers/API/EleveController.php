@@ -159,7 +159,7 @@ class EleveController extends Controller
      *         required=true,
      *         @OA\JsonContent(
      *             required={"email", "password", "name", "first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "sexe", "telephone", "solvable", "redoublant", "user_id"},
-     *             @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+     *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
      *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
      *             @OA\Property(property="name", type="string", example="Doe"),
      *             @OA\Property(property="first_name", type="string", example="John"),
@@ -308,7 +308,7 @@ class EleveController extends Controller
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+     *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
      *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
      *             @OA\Property(property="name", type="string", example="Doe"),
      *             @OA\Property(property="first_name", type="string", example="John"),

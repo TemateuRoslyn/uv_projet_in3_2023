@@ -25,9 +25,10 @@ class AuthController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"email", "password", "name", "first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "sexe"},
-     *             @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
-     *             @OA\Property(property="password", type="string", format="password", example="PassWord12345")
+     *             required={"email", "password", "username"},
+     *             @OA\Property(property="username", type="string", example="maestros21"),
+     *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
+     *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
      *         )
      *     ),
      *     @OA\Response(
@@ -43,12 +44,15 @@ class AuthController extends Controller
      *         description="Error - Invalid request data",
      *         @OA\JsonContent(
      *             @OA\Property(property="error", type="object", example={
-     *                 "email": {
-     *                     "The email field is required."
+     *                 "username": {
+     *                     "Le username est un champ requis."
      *                 },
      *                 "password": {
-     *                     "The password field is required."
-     *                 }
+     *                     "Le mot de passe est un champ requis."
+     *                 },
+     *                 "email": {
+     *                     "L'email est un champ requis."
+     *                 }     
      *             })
      *         )
      *     ),
@@ -64,14 +68,14 @@ class AuthController extends Controller
      *         description="Error - Validation failed",
      *         @OA\JsonContent(
      *             @OA\Property(property="error", type="object", example={
-     *                 "email": {
-     *                     "The email must be a valid email address."
+     *                 "username": {
+     *                     "Le username est un champ requis."
      *                 },
      *                 "password": {
-     *                     "The password must be at least 6 characters."
+     *                     "TLe mot de passe doit avoir au moins 6 characteres"
      *                 },
-     *                 "name": {
-     *                     "The name field is required."
+     *                 "email": {
+     *                     "L'email doit etre valide"
      *                 }
      *             })
      *         )
@@ -83,6 +87,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|email|unique:users|max:255',
             'password' => 'required|string|min:6',
+            'username' => 'required|string|unique:users',
         ]);
 
         if ($validator->fails()) {
@@ -91,6 +96,7 @@ class AuthController extends Controller
 
         $user = User::create([
             'email' => $request->email,
+            'username' => $request->username,
             'password' => bcrypt($request->password),
         ]);
         
@@ -117,8 +123,8 @@ class AuthController extends Controller
      *        required=true,
      *        description="Pass user credentials",
      *        @OA\JsonContent(
-     *           required={"email","password"},
-     *           @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+     *           required={"password", "username"},
+     *           @OA\Property(property="username", type="string", example="maestros21"),
      *           @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
      *           @OA\Property(property="persistent", type="boolean", example="true"),
      *        ),
@@ -145,12 +151,12 @@ class AuthController extends Controller
 
         // validation
         $request->validate([
-            "email" => "required|email",
+            "username" => "required",
             "password" => "required"
         ]);
 
         // verify user + token
-        if (!$token = auth()->attempt(["email" => $request->email, "password" => $request->password])) {
+        if (!$token = auth()->attempt(["username" => $request->username, "password" => $request->password])) {
             return response()->json([
                 "success" => false,
                 "message" => "Invalid credentials"
@@ -161,7 +167,10 @@ class AuthController extends Controller
         return response()->json([
             "success" => true,
             "message" => "Logged in successfully",
-            "data" => ['token' => $token]
+            "data" => [
+                'token' => $token,
+                'user' => auth()->user(),
+                ]
         ]);
 
     }
@@ -199,18 +208,7 @@ class AuthController extends Controller
     public function user()
     {
         $user = auth()->user();
-
-        $profile = [
-            'email' => $user->email,
-        ];
-
-        return response()->json(['data' => $profile], 200);
-        // $user_data = auth()->user();
-        // return response()->json([
-        //     "success" => true,
-        //     "message" => "User profile data",
-        //     "data" => $user_data
-        // ]);
+        return response()->json(['data' => $user], 200);
     }
 
     /**
