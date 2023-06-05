@@ -56,6 +56,8 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   freezed: ^2.3.3
+  # Pour masquer la barre d'etat de son emulateur .
+  # flutter_native_splash: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
