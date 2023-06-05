@@ -14,13 +14,25 @@
 /**
  * 
  * @export
- * @interface InlineResponse4222
+ * @interface InlineResponse4008
  */
-export interface InlineResponse4222 {
+export interface InlineResponse4008 {
     /**
      * 
-     * @type {any}
-     * @memberof InlineResponse4222
+     * @type {string}
+     * @memberof InlineResponse4008
+     */
+    message?: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse4008
+     */
+    success?: any;
+    /**
+     * 
+     * @type {InlineResponse4008Error}
+     * @memberof InlineResponse4008
      */
     error?: any;
 }

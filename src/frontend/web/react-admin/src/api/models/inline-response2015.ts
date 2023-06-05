@@ -14,19 +14,25 @@
 /**
  * 
  * @export
- * @interface UpdateUserIdBody
+ * @interface InlineResponse2015
  */
-export interface UpdateUserIdBody {
+export interface InlineResponse2015 {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse2015
+     */
+    success?: any;
     /**
      * 
      * @type {string}
-     * @memberof UpdateUserIdBody
+     * @memberof InlineResponse2015
      */
-    email?: any;
+    message?: any;
     /**
      * 
-     * @type {string}
-     * @memberof UpdateUserIdBody
+     * @type {User}
+     * @memberof InlineResponse2015
      */
-    username?: any;
+    data?: any;
 }

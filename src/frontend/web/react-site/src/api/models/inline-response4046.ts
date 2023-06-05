@@ -14,19 +14,19 @@
 /**
  * 
  * @export
- * @interface UpdateRoleIdBody
+ * @interface InlineResponse4046
  */
-export interface UpdateRoleIdBody {
+export interface InlineResponse4046 {
     /**
      * 
      * @type {string}
-     * @memberof UpdateRoleIdBody
+     * @memberof InlineResponse4046
      */
-    name?: any;
+    message?: any;
     /**
      * 
-     * @type {string}
-     * @memberof UpdateRoleIdBody
+     * @type {boolean}
+     * @memberof InlineResponse4046
      */
-    description?: any;
+    success?: any;
 }

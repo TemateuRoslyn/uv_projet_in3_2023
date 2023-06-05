@@ -34,12 +34,6 @@ export interface Eleve {
      * @type {string}
      * @memberof Eleve
      */
-    name: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof Eleve
-     */
     firstName: any;
     /**
      * 

@@ -14,79 +14,73 @@
 /**
  * 
  * @export
- * @interface ElevesUpdateBody
+ * @interface ParentsUpdateBody
  */
-export interface ElevesUpdateBody {
+export interface ParentsUpdateBody {
+    /**
+     * 
+     * @type {number}
+     * @memberof ParentsUpdateBody
+     */
+    id?: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsUpdateBody
      */
     email?: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsUpdateBody
      */
-    password?: any;
+    name?: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
-     */
-    username?: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsUpdateBody
      */
     firstName?: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsUpdateBody
      */
     lastName?: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsUpdateBody
      */
     dateDeNaissance?: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsUpdateBody
      */
     lieuDeNaissance?: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsUpdateBody
      */
     photo?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsUpdateBody
      */
     sexe?: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsUpdateBody
      */
     telephone?: any | null;
     /**
      * 
-     * @type {boolean}
-     * @memberof ElevesUpdateBody
+     * @type {string}
+     * @memberof ParentsUpdateBody
      */
-    solvable?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ElevesUpdateBody
-     */
-    redoublant?: any;
+    profession?: any;
 }

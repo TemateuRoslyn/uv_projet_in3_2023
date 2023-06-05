@@ -14,91 +14,91 @@
 /**
  * 
  * @export
- * @interface Eleve
+ * @interface Parents
  */
-export interface Eleve {
+export interface Parents {
     /**
      * 
      * @type {number}
-     * @memberof Eleve
+     * @memberof Parents
      */
     id?: any;
     /**
-     * User role
+     * 
      * @type {string}
-     * @memberof Eleve
+     * @memberof Parents
      */
-    role?: any;
+    profession: any;
     /**
      * 
      * @type {string}
-     * @memberof Eleve
+     * @memberof Parents
      */
     firstName: any;
     /**
      * 
      * @type {string}
-     * @memberof Eleve
+     * @memberof Parents
      */
     lastName: any;
     /**
      * 
      * @type {string}
-     * @memberof Eleve
+     * @memberof Parents
      */
     dateDeNaissance: any;
     /**
      * 
      * @type {string}
-     * @memberof Eleve
+     * @memberof Parents
      */
     lieuDeNaissance: any;
     /**
      * 
      * @type {string}
-     * @memberof Eleve
+     * @memberof Parents
      */
     photo: any;
     /**
      * 
      * @type {string}
-     * @memberof Eleve
+     * @memberof Parents
      */
     sexe: any;
     /**
      * 
      * @type {string}
-     * @memberof Eleve
+     * @memberof Parents
      */
     telephone: any;
     /**
      * 
-     * @type {boolean}
-     * @memberof Eleve
+     * @type {number}
+     * @memberof Parents
      */
-    solvable: any;
+    userId: any;
     /**
      * 
-     * @type {boolean}
-     * @memberof Eleve
+     * @type {User}
+     * @memberof Parents
      */
-    redoublant: any;
+    user: any;
     /**
      * 
      * @type {BaseModelpropertiescreatedAt}
-     * @memberof Eleve
+     * @memberof Parents
      */
     createdAt?: any;
     /**
      * 
      * @type {BaseModelpropertiesupdatedAt}
-     * @memberof Eleve
+     * @memberof Parents
      */
     updatedAt?: any;
     /**
      * 
      * @type {BaseModelpropertiesdeletedAt}
-     * @memberof Eleve
+     * @memberof Parents
      */
     deletedAt?: any;
 }

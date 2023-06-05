@@ -24,7 +24,6 @@ import { InlineResponse2011 } from '../models';
 import { InlineResponse4001 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse404 } from '../models';
-import { InlineResponse4221 } from '../models';
 /**
  * ElevesApi - axios parameter creator
  * @export

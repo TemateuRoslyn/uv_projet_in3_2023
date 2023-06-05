@@ -11,6 +11,7 @@ use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\PermissionController;
 use App\Http\Controllers\API\RoleController;
+use App\Http\Controllers\API\ParentsController;
 
 
 
@@ -91,6 +92,14 @@ Route::middleware('jwt.verify')->group(function () {
         Route::delete('/{id}', [NotificationController::class, 'delete']);
     });
 
+    // parents
+    Route::prefix('parents')->group(function () {
+        Route::get('findAll', [ParentsController::class, 'showAll']);
+        Route::post('create', [ParentsController::class, 'store']);
+        Route::get('findOne/{parentId}', [ParentsController::class, 'showIndex']);
+        Route::post('update', [ParentsController::class, 'update']);
+        Route::delete('delete/{parentId}', [ParentsController::class, 'delete']);
+    });
 });
 
 

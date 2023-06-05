@@ -14,79 +14,73 @@
 /**
  * 
  * @export
- * @interface ElevesUpdateBody
+ * @interface ParentsCreateBody
  */
-export interface ElevesUpdateBody {
+export interface ParentsCreateBody {
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsCreateBody
      */
-    email?: any;
+    email: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsCreateBody
      */
-    password?: any;
+    password: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsCreateBody
      */
     username?: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsCreateBody
      */
-    firstName?: any;
+    firstName: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsCreateBody
      */
-    lastName?: any;
+    lastName: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsCreateBody
      */
-    dateDeNaissance?: any;
+    dateDeNaissance: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsCreateBody
      */
-    lieuDeNaissance?: any;
+    lieuDeNaissance: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsCreateBody
      */
     photo?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsCreateBody
      */
-    sexe?: any;
+    sexe: any;
     /**
      * 
      * @type {string}
-     * @memberof ElevesUpdateBody
+     * @memberof ParentsCreateBody
      */
-    telephone?: any | null;
+    telephone: any;
     /**
      * 
-     * @type {boolean}
-     * @memberof ElevesUpdateBody
+     * @type {string}
+     * @memberof ParentsCreateBody
      */
-    solvable?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ElevesUpdateBody
-     */
-    redoublant?: any;
+    profession: any;
 }

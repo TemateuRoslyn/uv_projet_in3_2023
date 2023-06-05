@@ -2,45 +2,31 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
-use App\Http\Controllers\Controller;
-
-use App\Models\Eleve;
+use App\Models\Parents;
 use App\Models\User;
 use App\Models\Role;
 
-class EleveController extends Controller
+class ParentsController extends Controller
 {
-
-    private $avatar_path = "assets/avatars/eleves";
-
+    private $avatar_path = "assets/avatars/parents";
 
     /**
      * @OA\Get(
-     *     path="/api/eleves/findAll",
-     *     summary="Get all eleves",
-     *     description="Retrieve a list of all eleves",
-     *     operationId="elevesIndex",
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string",
-     *             example="Bearer {your_token}"
-     *         ),
-     *         description="JWT token"
-     *     ),
-     *     security={{"bearerAuth":{}}},
-     *     tags={"eleves"},
+     *     path="/api/parents/findAll",
+     *     summary="Get all parents",
+     *     description="Retrieve a list of all parents",
+     *     operationId="parentsIndex",
+     *     tags={"parents"},
      *     @OA\Response(
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="eleves", type="array", @OA\Items(ref="#/components/schemas/Eleve"))
+     *             @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/Parents"))
      *         )
      *     ),
      *     @OA\Response(
@@ -52,115 +38,86 @@ class EleveController extends Controller
      *     )
      * )
      */
-    public function index()
+    public function showAll()
     {
-        $eleves = Eleve::has('user')->with('user')->get();
+        $parents = Parents::has('user')->with('user')->get();
 
 
         return response()->json([
-            'message' => 'Liste des élèves',
+            'message' => 'Liste des parents',
             'success' => true,
-            'data' => $eleves
+            'data' => $parents
         ]);
     }
 
     /**
      * @OA\Get(
-     *     path="/api/eleves/findOne/{id}",
-     *     summary="Get eleve information",
-     *     description="Get information about a specific eleve",
-     *     operationId="viewEleve",
-     *     tags={"eleves"},
+     *     path="/api/parents/findOne/{parentId}",
+     *     summary="Get parent information",
+     *     description="Get information about a specific parent",
+     *     operationId="viewParent",
+     *     tags={"parents"},
      *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string",
-     *             default="Bearer {your_token}"
-     *         ),
-     *         description="JWT token"
-     *     ),     
-     *      @OA\Parameter(
-     *         name="id",
+     *         name="parentId",
      *         in="path",
-     *         description="ID of eleve to get information for",
+     *         description="ID of the parent to get information for",
      *         required=true,
      *         @OA\Schema(
      *             type="integer"
      *         )
      *     ),
      *     @OA\Response(
-     *         response=401,
-     *         description="Error - Unauthorized",
+     *         response=200,
+     *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *             @OA\Property(property="message", type="string", example="Parent trouvé"),
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="data", type="object", ref="#/components/schemas/Parents")
      *         )
      *     ),
      *     @OA\Response(
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Eleve not found")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Success",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Élève trouvé(e)"),
-     *             @OA\Property(property="success", type="boolean", example="true"),
-     *             @OA\Property(property="data", type="object", ref="#/components/schemas/Eleve")
+     *             @OA\Property(property="error", type="string", example="Parent non trouvé"),
      *         )
      *     )
      * )
      */
-    public function view($eleveId)
+    public function showIndex($parentId)
     {
-        $eleve = Eleve::with('user')->find($eleveId);
+        $parent = Parents::with('user')->find($parentId);
 
-        if ($eleve) {
-            $eleveData = $eleve->toArray();
-            $eleveData['email'] = $eleve->user->email;
+        if ($parent) {
+            $parentData = $parent->toArray();
+            $parentData['email'] = $parent->user->email;
 
             return response()->json([
-                'message' => 'élève trouvé(e)',
+                'message' => 'Parent trouvé',
                 'success' => true,
-                'data' => $eleveData
+                'data' => $parentData
             ], 200);
         } else {
             return response()->json([
-                'message' => 'Élève non trouvé',
+                'message' => 'Parent non trouvé',
                 'success' => false,
             ], 404);
         }
     }
 
-
-
-
     /**
      * @OA\Post(
-     *     path="/api/eleves/create",
-     *     summary="Create a new eleve",
-     *     description="Create a new eleve resource",
-     *     operationId="createEleve",
-     *     tags={"eleves"},
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string",
-     *             default="Bearer {your_token}"
-     *         ),
-     *         description="JWT token"
-     *     ),     
-     *      @OA\RequestBody(
+     *     path="/api/parents/create",
+     *     summary="Create a new parent",
+     *     description="Create a new parent resource",
+     *     operationId="createParent",
+     *     tags={"parents"},
+     *     security={{"bearer": {}}},
+     *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"email", "password", "username", "first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "sexe", "telephone", "solvable", "redoublant"},
-     *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
+     *             required={"email", "password", "name", "first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "sexe", "telephone", "profession"},
+     *             @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
      *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
      *             @OA\Property(property="username", type="string", example="Doe"),
      *             @OA\Property(property="first_name", type="string", example="John"),
@@ -169,15 +126,16 @@ class EleveController extends Controller
      *             @OA\Property(property="lieu_de_naissance", type="string", example="Paris"),
      *             @OA\Property(property="photo", type="string", nullable=true, example="https://example.com/photo.jpg"),
      *             @OA\Property(property="sexe", type="string", example="Male"),
-     *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
-     *             @OA\Property(property="solvable", type="boolean", example="true"),
-     *             @OA\Property(property="redoublant", type="boolean", example="false")
+     *             @OA\Property(property="telephone", type="string", example="+33123456789"),
+     *             @OA\Property(property="profession", type="string", example="Teacher")
      *         )
      *     ),
      *     @OA\Response(
      *         response=400,
      *         description="Error - Invalid request data",
      *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Could not create this parent"),
+     *             @OA\Property(property="success", type="boolean", example=false),
      *             @OA\Property(property="error", type="object", example={
      *                 "email": { "The email field is required."},
      *                 "password": {"The password field is required."},
@@ -188,8 +146,7 @@ class EleveController extends Controller
      *                 "lieu_de_naissance": {"The lieu de naissance field is required."},
      *                 "sexe": {"The sexe field is required."},
      *                 "telephone": {"The telephone field is required."},
-     *                 "solvable": {"The solvable field is required."},
-     *                 "redoublant": {"The redoublant field is required."}
+     *                 "profession": {"The profession field is required."}
      *             })
      *         )
      *     ),
@@ -201,33 +158,17 @@ class EleveController extends Controller
      *         )
      *     ),
      *     @OA\Response(
-     *         response=422,
-     *         description="Error - Validation failed",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="object", example={
-     *                 "email": { "The email field is required."},
-     *                 "password": {"The password field is required."},
-     *                 "username": {"The username field is required."},
-     *                 "first_name": {"The first name field is required."},
-     *                 "last_name": {"The last name field is required."},
-     *                 "date_de_naissance": {"The date de naissance field is required."},
-     *                 "lieu_de_naissance": {"The lieu de naissance field is required."},
-     *                 "sexe": {"The sexe field is required."},
-     *                 "telephone": {"The telephone field is required."},
-     *                 "solvable": {"The solvable field is required."},
-     *                 "redoublant": {"The redoublant field is required."}
-     *             })
-     *         )
-     *     ),
-     *     @OA\Response(
      *         response=201,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="eleve", type="object", ref="#/components/schemas/Eleve"),
+     *             @OA\Property(property="message", type="string", example="Parent created successfully"),
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="data", type="object", ref="#/components/schemas/Parents")
      *         )
      *     )
      * )
      */
+
     public function store(Request $request)
     {
 
@@ -242,13 +183,12 @@ class EleveController extends Controller
             'photo' => 'nullable|image',
             'sexe' => 'required',
             'telephone' => 'required',
-            'solvable' => 'required',
-            'redoublant' => 'required',
+            'profession' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Could not create this student',
+                'message' => 'Could not create this parent',
                 'success' => false,
                 'error' => $validator->errors()
             ], 400);
@@ -261,10 +201,9 @@ class EleveController extends Controller
         ]);
 
 
-        $eleve = Eleve::create([
+        $parent = Parents::create([
             'user_id' => $user->id,
-            'solvable' => boolval($request->input('solvable')),
-            'redoublant' => boolval($request->input('redoublant')),
+            'profession' => $request->input('profession'),
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'date_de_naissance' => $request->input('date_de_naissance'),
@@ -274,51 +213,41 @@ class EleveController extends Controller
             'telephone' => $request->input('telephone'),
         ]);
 
-        $eleve->user = $user;
+        $parent->user = $user;
 
         return response()->json([
-            'message' => 'Eleve created successfully',
+            'message' => 'Parent created successfully',
             'success' => true,
-            'data' => $eleve
+            'data' => $parent
         ]);
 
-        // Créer un eleve de base avec le rôle eleve
-        $eleveRole = Role::where('name', 'eleve')->first();
+        // Créer un parent de base avec le rôle parent
+        $parentRole = Role::where('name', 'parent')->first();
 
-        $user->roles()->attach($eleveRole);
+        $user->roles()->attach($parentRole);
 
 
         return response()->json([
-            'message' => 'Eleve created successfully',
+            'message' => 'Parent created successfully',
             'success' => true,
-            'data' => $eleve
+            'data' => $parent
         ]);
     }
 
-
     /**
      * @OA\Post(
-     *     path="/api/eleves/update",
-     *     summary="Update a eleve's information",
-     *     description="Update a eleve's information",
-     *     operationId="updateEleve",
-     *     tags={"eleves"},
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string",
-     *             default="Bearer {your_token}"
-     *         ),
-     *         description="JWT token"
-     *     ),     
-     *      @OA\RequestBody(
+     *     path="/api/parents/update",
+     *     summary="Update a parent's information",
+     *     description="Update a parent's information",
+     *     operationId="updateParent",
+     *     tags={"parents"},
+     *     security={ {"bearer": {} }},
+     *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
-     *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     *             @OA\Property(property="username", type="string", example="Doe"),
+     *             @OA\Property(property="id", type="integer", example=1),
+     *             @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+     *             @OA\Property(property="name", type="string", example="Doe"),
      *             @OA\Property(property="first_name", type="string", example="John"),
      *             @OA\Property(property="last_name", type="string", example="Smith"),
      *             @OA\Property(property="date_de_naissance", type="string", format="date", example="1990-01-01"),
@@ -326,8 +255,7 @@ class EleveController extends Controller
      *             @OA\Property(property="photo", type="string", nullable=true, example="https://example.com/photo.jpg"),
      *             @OA\Property(property="sexe", type="string", example="Male"),
      *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
-     *             @OA\Property(property="solvable", type="boolean", example="true"),
-     *             @OA\Property(property="redoublant", type="boolean", example="false")
+     *             @OA\Property(property="profession", type="string", example="Engineer")
      *         )
      *     ),
      *     @OA\Response(
@@ -344,8 +272,7 @@ class EleveController extends Controller
      *                 "lieu_de_naissance": {"The lieu de naissance field is required."},
      *                 "sexe": {"The sexe field is required."},
      *                 "telephone": {"The telephone field is required."},
-     *                 "solvable": {"The solvable field is required."},
-     *                 "redoublant": {"The redoublant field is required."}
+     *                 "profession": {"The profession field is required."},
      *             })
      *         )
      *     ),
@@ -360,24 +287,25 @@ class EleveController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Eleve not found")
+     *             @OA\Property(property="error", type="string", example="Parent not found")
      *         )
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="eleve", type="object", ref="#/components/schemas/Eleve"),
+     *             @OA\Property(property="parent", type="object", ref="#/components/schemas/Parents"),
      *         )
      *     )
      * )
      */
+
     public function update(Request $request)
     {
-        // on récupère l'élève associé
-        $eleveFound = Eleve::find($request->id);
-        if ($eleveFound) {
-            $user = User::find($eleveFound->user_id);
+        // on récupère le parent associé
+        $parentFound = Parents::find($request->id);
+        if ($parentFound) {
+            $user = User::find($parentFound->user_id);
 
             $validator = Validator::make($request->all(), [
                 'id' => 'required',
@@ -390,19 +318,18 @@ class EleveController extends Controller
                 'photo' => 'nullable|image',
                 'sexe' => 'required',
                 'telephone' => 'required',
-                'solvable' => 'required',
-                'redoublant' => 'required',
+                'profession' => 'required',
             ]);
         } else {
             return response()->json([
-                'message' => 'Student not exists',
+                'message' => 'Parent not exists',
                 'success' => false,
             ], 400);
         }
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Could not update this student',
+                'message' => 'Could not update this parent',
                 'success' => false,
                 'error' => $validator->errors()
             ], 400);
@@ -411,59 +338,49 @@ class EleveController extends Controller
         // Mise à jour des champs de l'objet User
         $user->email = $request->input('email');
         $user->username = $request->input('username');
-        
+
         // Suppression de l'ancienne photo si une nouvelle a été sélectionnée
         if ($request->hasFile('photo')) {
-            $oldPhoto = $eleveFound->photo;
+            $oldPhoto = $parentFound->photo;
             if ($oldPhoto) {
                 Storage::delete($oldPhoto);
             }
-            $eleveFound->photo = $request->file('photo')->store($this->avatar_path);
+            $parentFound->photo = $request->file('photo')->store($this->avatar_path);
         }
 
         $user->save();
 
-        // Mise à jour des champs de l'objet Eleve
-        $eleveFound->first_name = $request->input('first_name');
-        $eleveFound->last_name = $request->input('last_name');
-        $eleveFound->date_de_naissance = $request->input('date_de_naissance');
-        $eleveFound->lieu_de_naissance = $request->input('lieu_de_naissance');
-        $eleveFound->sexe = $request->input('sexe');
-        $eleveFound->telephone = $request->input('telephone');
-        $eleveFound->solvable = boolval($request->input('solvable'));
-        $eleveFound->redoublant = boolval($request->input('redoublant'));
-        $eleveFound->save();
+        // Mise à jour des champs de l'objet Parent
+        $parentFound->first_name = $request->input('first_name');
+        $parentFound->last_name = $request->input('last_name');
+        $parentFound->date_de_naissance = $request->input('date_de_naissance');
+        $parentFound->lieu_de_naissance = $request->input('lieu_de_naissance');
+        $parentFound->sexe = $request->input('sexe');
+        $parentFound->telephone = $request->input('telephone');
+        $parentFound->profession = $request->input('profession');
+        $parentFound->save();
 
-        $eleveFound = Eleve::with('user')->find($eleveFound->id);
+        $parentFound = Parents::with('user')->find($parentFound->id);
 
         return response()->json([
-            'message' => 'Eleve updated successfully',
+            'message' => 'Parent updated successfully',
             'success' => true,
-            'data' => $eleveFound
+            'data' => $parentFound
         ]);
     }
 
     /**
      * @OA\Delete (
-     *     path="/api/eleves/delete/{id}",
-     *     summary="Delete an eleve",
-     *     description="Delete an eleve resource",
-     *     operationId="deleteEleve",
-     *     tags={"eleves"},
+     *     path="/api/parents/delete/{id}",
+     *     summary="Delete a parent",
+     *     description="Delete a parent resource",
+     *     operationId="deleteParent",
+     *     tags={"parents"},
+     *     security={ {"bearer": {} }},
      *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string",
-     *             default="Bearer {your_token}"
-     *         ),
-     *         description="JWT token"
-     *     ),     
-     *      @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID of eleve to delete",
+     *         description="ID of parent to delete",
      *         required=true,
      *         @OA\Schema(
      *             type="integer"
@@ -481,7 +398,7 @@ class EleveController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Eleve not found")
+     *             @OA\Property(property="error", type="string", example="Parent not found")
      *         )
      *     ),
      *     @OA\Response(
@@ -490,30 +407,27 @@ class EleveController extends Controller
      *     )
      * )
      */
-    public function delete($eleveId)
+    public function delete($parentId)
     {
-        $eleveFound = Eleve::find($eleveId);
+        $parentFound = Parents::find($parentId);
 
-        if ($eleveFound) {
+        if ($parentFound) {
 
-            //le user associe
-            // $userFound = User::find($eleveFound->user_id);
-
-            // supperssion de l'image du user
-            if ($eleveFound->photo) {
-                Storage::delete($eleveFound->photo);
+            // supperssion de l'image du parent
+            if ($parentFound->photo) {
+                Storage::delete($parentFound->photo);
             }
 
-            //suppression de l'eleve
-            $eleveFound->delete();
+            //suppression du parent
+            $parentFound->delete();
 
             return response()->json([
-                'message' => 'Eleve deleted successfully',
+                'message' => 'Parent deleted successfully',
                 'success' => true,
             ]);
         } else {
             return response()->json([
-                'message' => 'Eleve to delete was not found',
+                'message' => 'parent to delete was not found',
                 'success' => false,
             ]);
         }
