@@ -34,49 +34,6 @@ import { ParentsUpdateBody } from '../models';
 export const ParentsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Create a new parent resource
-         * @summary Create a new parent
-         * @param {ParentsCreateBody} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createParent: async (body: ParentsCreateBody, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            if (body === null || body === undefined) {
-                throw new RequiredError('body','Required parameter body was null or undefined when calling createParent.');
-            }
-            const localVarPath = `/api/parents/create`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Delete a parent resource
          * @summary Delete a parent
          * @param {number} id ID of parent to delete
@@ -122,7 +79,7 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parentsIndex: async (options: any = {}): Promise<RequestArgs> => {
+        showAllParent: async (options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/parents/findAll`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -144,6 +101,89 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get information about a specific parent
+         * @summary Get parent information
+         * @param {number} parentId ID of the parent to get information for
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        showOneParent: async (parentId: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'parentId' is not null or undefined
+            if (parentId === null || parentId === undefined) {
+                throw new RequiredError('parentId','Required parameter parentId was null or undefined when calling showOneParent.');
+            }
+            const localVarPath = `/api/parents/findOne/{parentId}`
+                .replace(`{${"parentId"}}`, encodeURIComponent(String(parentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Create a new parent resource
+         * @summary Create a new parent
+         * @param {ParentsCreateBody} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        storeParent: async (body: ParentsCreateBody, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new RequiredError('body','Required parameter body was null or undefined when calling storeParent.');
+            }
+            const localVarPath = `/api/parents/create`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -193,46 +233,6 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * Get information about a specific parent
-         * @summary Get parent information
-         * @param {number} parentId ID of the parent to get information for
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        viewParent: async (parentId: number, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'parentId' is not null or undefined
-            if (parentId === null || parentId === undefined) {
-                throw new RequiredError('parentId','Required parameter parentId was null or undefined when calling viewParent.');
-            }
-            const localVarPath = `/api/parents/findOne/{parentId}`
-                .replace(`{${"parentId"}}`, encodeURIComponent(String(parentId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -242,20 +242,6 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
  */
 export const ParentsApiFp = function(configuration?: Configuration) {
     return {
-        /**
-         * Create a new parent resource
-         * @summary Create a new parent
-         * @param {ParentsCreateBody} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createParent(body: ParentsCreateBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2012>> {
-            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).createParent(body, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
         /**
          * Delete a parent resource
          * @summary Delete a parent
@@ -276,8 +262,36 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async parentsIndex(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004>> {
-            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).parentsIndex(options);
+        async showAllParent(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004>> {
+            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).showAllParent(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Get information about a specific parent
+         * @summary Get parent information
+         * @param {number} parentId ID of the parent to get information for
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async showOneParent(parentId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2005>> {
+            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).showOneParent(parentId, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Create a new parent resource
+         * @summary Create a new parent
+         * @param {ParentsCreateBody} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async storeParent(body: ParentsCreateBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2012>> {
+            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).storeParent(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -297,20 +311,6 @@ export const ParentsApiFp = function(configuration?: Configuration) {
                 return axios.request(axiosRequestArgs);
             };
         },
-        /**
-         * Get information about a specific parent
-         * @summary Get parent information
-         * @param {number} parentId ID of the parent to get information for
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async viewParent(parentId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2005>> {
-            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).viewParent(parentId, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
     }
 };
 
@@ -320,16 +320,6 @@ export const ParentsApiFp = function(configuration?: Configuration) {
  */
 export const ParentsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
-        /**
-         * Create a new parent resource
-         * @summary Create a new parent
-         * @param {ParentsCreateBody} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createParent(body: ParentsCreateBody, options?: any): AxiosPromise<InlineResponse2012> {
-            return ParentsApiFp(configuration).createParent(body, options).then((request) => request(axios, basePath));
-        },
         /**
          * Delete a parent resource
          * @summary Delete a parent
@@ -346,8 +336,28 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parentsIndex(options?: any): AxiosPromise<InlineResponse2004> {
-            return ParentsApiFp(configuration).parentsIndex(options).then((request) => request(axios, basePath));
+        showAllParent(options?: any): AxiosPromise<InlineResponse2004> {
+            return ParentsApiFp(configuration).showAllParent(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get information about a specific parent
+         * @summary Get parent information
+         * @param {number} parentId ID of the parent to get information for
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        showOneParent(parentId: number, options?: any): AxiosPromise<InlineResponse2005> {
+            return ParentsApiFp(configuration).showOneParent(parentId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Create a new parent resource
+         * @summary Create a new parent
+         * @param {ParentsCreateBody} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        storeParent(body: ParentsCreateBody, options?: any): AxiosPromise<InlineResponse2012> {
+            return ParentsApiFp(configuration).storeParent(body, options).then((request) => request(axios, basePath));
         },
         /**
          * Update a parent's information
@@ -359,16 +369,6 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
         updateParent(body: ParentsUpdateBody, options?: any): AxiosPromise<InlineResponse2006> {
             return ParentsApiFp(configuration).updateParent(body, options).then((request) => request(axios, basePath));
         },
-        /**
-         * Get information about a specific parent
-         * @summary Get parent information
-         * @param {number} parentId ID of the parent to get information for
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        viewParent(parentId: number, options?: any): AxiosPromise<InlineResponse2005> {
-            return ParentsApiFp(configuration).viewParent(parentId, options).then((request) => request(axios, basePath));
-        },
     };
 };
 
@@ -379,17 +379,6 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
  * @extends {BaseAPI}
  */
 export class ParentsApi extends BaseAPI {
-    /**
-     * Create a new parent resource
-     * @summary Create a new parent
-     * @param {ParentsCreateBody} body 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ParentsApi
-     */
-    public createParent(body: ParentsCreateBody, options?: any) {
-        return ParentsApiFp(this.configuration).createParent(body, options).then((request) => request(this.axios, this.basePath));
-    }
     /**
      * Delete a parent resource
      * @summary Delete a parent
@@ -408,8 +397,30 @@ export class ParentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ParentsApi
      */
-    public parentsIndex(options?: any) {
-        return ParentsApiFp(this.configuration).parentsIndex(options).then((request) => request(this.axios, this.basePath));
+    public showAllParent(options?: any) {
+        return ParentsApiFp(this.configuration).showAllParent(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get information about a specific parent
+     * @summary Get parent information
+     * @param {number} parentId ID of the parent to get information for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ParentsApi
+     */
+    public showOneParent(parentId: number, options?: any) {
+        return ParentsApiFp(this.configuration).showOneParent(parentId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Create a new parent resource
+     * @summary Create a new parent
+     * @param {ParentsCreateBody} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ParentsApi
+     */
+    public storeParent(body: ParentsCreateBody, options?: any) {
+        return ParentsApiFp(this.configuration).storeParent(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update a parent's information
@@ -421,16 +432,5 @@ export class ParentsApi extends BaseAPI {
      */
     public updateParent(body: ParentsUpdateBody, options?: any) {
         return ParentsApiFp(this.configuration).updateParent(body, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     * Get information about a specific parent
-     * @summary Get parent information
-     * @param {number} parentId ID of the parent to get information for
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ParentsApi
-     */
-    public viewParent(parentId: number, options?: any) {
-        return ParentsApiFp(this.configuration).viewParent(parentId, options).then((request) => request(this.axios, this.basePath));
     }
 }

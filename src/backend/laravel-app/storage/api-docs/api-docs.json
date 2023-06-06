@@ -885,7 +885,7 @@
                 ],
                 "summary": "Get all parents",
                 "description": "Retrieve a list of all parents",
-                "operationId": "parentsIndex",
+                "operationId": "showAllParent",
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -931,7 +931,7 @@
                 ],
                 "summary": "Get parent information",
                 "description": "Get information about a specific parent",
-                "operationId": "viewParent",
+                "operationId": "showOneParent",
                 "parameters": [
                     {
                         "name": "parentId",
@@ -993,7 +993,7 @@
                 ],
                 "summary": "Create a new parent",
                 "description": "Create a new parent resource",
-                "operationId": "createParent",
+                "operationId": "storeParent",
                 "requestBody": {
                     "required": true,
                     "content": {

@@ -37,8 +37,6 @@ Route::prefix('auth')->group(function () {
     Route::middleware('jwt.verify')->post('user', [AuthController::class, 'user']);
 });
 
-Route::middleware('role:maestros-toto')->get('login', [AuthController::class, 'login']);
-
 
 
 /**
@@ -78,11 +76,18 @@ Route::middleware('jwt.verify')->group(function () {
 
     // eleves
     Route::prefix('eleves')->group(function () {
-        Route::post('create', [EleveController::class, 'store']);
-        Route::post('update', [EleveController::class, 'update']);
-        Route::delete('delete/{eleve}', [EleveController::class, 'delete']);
+
         Route::get('findOne/{eleveId}', [EleveController::class, 'view']);
         Route::get('findAll', [EleveController::class, 'index']);
+        
+        // Route::middleware('permission:modifier_eleve')->post('update', [EleveController::class, 'update']);
+        // Route::middleware('permission:supprimer_eleve')->delete('delete/{eleve}', [EleveController::class, 'delete']);
+        // Route::middleware('permission:creer_eleve')->post('create', [EleveController::class, 'store']);
+
+        Route::post('update', [EleveController::class, 'update']);
+        Route::delete('delete/{eleve}', [EleveController::class, 'delete']);
+        Route::post('create', [EleveController::class, 'store']);
+
     });
 
     // notifications
