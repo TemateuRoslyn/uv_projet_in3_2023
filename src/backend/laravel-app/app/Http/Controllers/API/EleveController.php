@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Eleve;
 use App\Models\User;
+use App\Models\Permission;
 use App\Models\Role;
 
 class EleveController extends Controller
@@ -60,7 +61,7 @@ class EleveController extends Controller
         return response()->json([
             'message' => 'Liste des élèves', 
             'success' => true,
-            'data' => ADMIN_ROLE]);
+            'data' => eleves]);
     }
 
     /**
@@ -268,10 +269,18 @@ class EleveController extends Controller
 
         $eleve->user = $user;
         
-        // Créer un eleve de base avec le rôle eleve
-        $eleveRole = Role::where('name', 'eleve')->first();
-
+        // assigner le role eleve
+        $eleveRole = Role::where('name', ELEVE_ROLE['name'])->first();
         $user->roles()->attach($eleveRole);
+
+        // assigner les permission
+        foreach (ELEVE_PERMISSIONS as $permission) {
+            $elevePerm = Permission::where('name', $permission['name'])->first();
+            if($elevePerm){
+                 $user->permissions()->attach($elevePerm); 
+            }
+         }
+
 
         return response()->json([
             'message' => 'Eleve created successfully', 
