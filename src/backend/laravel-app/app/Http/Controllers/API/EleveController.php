@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\SendEmailNotification;
+
 use App\Models\Eleve;
 use App\Models\User;
 use App\Models\Role;
@@ -56,9 +59,9 @@ class EleveController extends Controller
     {
         $eleves = Eleve::has('user')->with('user')->get();
 
-    
+
         return response()->json([
-            'message' => 'Liste des élèves', 
+            'message' => 'Liste des élèves',
             'success' => true,
             'data' => $eleves]);
     }
@@ -79,7 +82,7 @@ class EleveController extends Controller
      *             default="Bearer {your_token}"
      *         ),
      *         description="JWT token"
-     *     ),     
+     *     ),
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -135,7 +138,7 @@ class EleveController extends Controller
         }
     }
 
-    
+
 
 
     /**
@@ -154,7 +157,7 @@ class EleveController extends Controller
      *             default="Bearer {your_token}"
      *         ),
      *         description="JWT token"
-     *     ),     
+     *     ),
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -240,7 +243,7 @@ class EleveController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Could not create this student', 
+                'message' => 'Could not create this student',
                 'success' => false,
                 'error' => $validator->errors()
             ], 400);
@@ -252,7 +255,7 @@ class EleveController extends Controller
             'password' => bcrypt($request->input('password')),
         ]);
 
-        
+
         $eleve = Eleve::create([
             'user_id' => $user->id,
             'solvable' => boolval($request->input('solvable')),
@@ -267,20 +270,31 @@ class EleveController extends Controller
         ]);
 
         $eleve->user = $user;
-        
+
         // Créer un eleve de base avec le rôle eleve
         $eleveRole = Role::where('name', 'eleve')->first();
 
         $user->roles()->attach($eleveRole);
 
+        //envoie du mail a l'utilisateur
+        $details = array();
+
+        $details['greeting'] = "Hi " . $eleve->first_name;
+        $details['body'] = "Veuillez Modifier votre mot de passe pour assurer la confidentialite de vos donnees et de vos actions au sein de la plateforme . Pour cela, veuillez cliquer sur le ce lien pour proceder la la mise a jour de votre mot de passe .";
+        $details['actiontext'] = "Modifier mon mot de passe";
+        $details['actionurl'] = "http://www.gestiondiscipline.com/resetpassword";
+        $details['endtext'] = "Merci de rester fidele a cet etablissement";
+
+        Notification::send($user, new SendEmailNotification($details));
+
         return response()->json([
-            'message' => 'Eleve created successfully', 
+            'message' => 'Eleve created successfully',
             'success' => true,
             'data' => $eleve,
         ]);
     }
 
-    
+
     /**
      * @OA\Post(
      *     path="/api/eleves/update",
@@ -297,7 +311,7 @@ class EleveController extends Controller
      *             default="Bearer {your_token}"
      *         ),
      *         description="JWT token"
-     *     ),     
+     *     ),
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -358,7 +372,7 @@ class EleveController extends Controller
         $eleveFound = Eleve::find($request->id);
         if($eleveFound){
             $user = User::find($eleveFound->user_id);
-    
+
             $validator = Validator::make($request->all(), [
                 'id' => 'required',
                 'email' => 'required|email|unique:users,email,' . $user->id,
@@ -375,14 +389,14 @@ class EleveController extends Controller
             ]);
         }else {
             return response()->json([
-                'message' => 'Student not exists', 
+                'message' => 'Student not exists',
                 'success' => false,
             ], 400);
         }
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Could not update this student', 
+                'message' => 'Could not update this student',
                 'success' => false,
                 'error' => $validator->errors()
             ], 400);
@@ -391,7 +405,7 @@ class EleveController extends Controller
         // Mise à jour des champs de l'objet User
         $user->email = $request->input('email');
         $user->username = $request->input('username');
-        
+
         // Suppression de l'ancienne photo si une nouvelle a été sélectionnée
         if ($request->hasFile('photo')) {
             $oldPhoto = $eleveFound->photo;
@@ -417,7 +431,7 @@ class EleveController extends Controller
         $eleveFound = Eleve::with('user')->find($eleveFound->id);
 
         return response()->json([
-            'message' => 'Eleve updated successfully', 
+            'message' => 'Eleve updated successfully',
             'success' => true,
             'data' => $eleveFound
         ]);
@@ -439,7 +453,7 @@ class EleveController extends Controller
      *             default="Bearer {your_token}"
      *         ),
      *         description="JWT token"
-     *     ),     
+     *     ),
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -473,9 +487,9 @@ class EleveController extends Controller
     public function delete($eleveId)
     {
         $eleveFound = Eleve::find($eleveId);
-        
+
         if($eleveFound){
-            
+
             //le user associe
             $userFound = User::find($eleveFound->user_id);
 
@@ -489,7 +503,7 @@ class EleveController extends Controller
 
             return response()->json([
                 'message' => 'Eleve deleted successfully',
-                'success' => true, 
+                'success' => true,
             ]);
         }else {
             return response()->json([
