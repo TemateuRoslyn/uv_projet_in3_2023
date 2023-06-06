@@ -60,7 +60,7 @@ class EleveController extends Controller
         return response()->json([
             'message' => 'Liste des élèves', 
             'success' => true,
-            'data' => $eleves]);
+            'data' => ADMIN_ROLE]);
     }
 
     /**
@@ -387,6 +387,8 @@ class EleveController extends Controller
                 'error' => $validator->errors()
             ], 400);
         }
+
+        
 
         // Mise à jour des champs de l'objet User
         $user->email = $request->input('email');
