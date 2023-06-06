@@ -11,12 +11,14 @@ for /f "skip=1" %%p in ('netstat -aon ^| findstr "%port%"') do (
 )
 if %running% == yes (
   composer install
+  composer dumpautoload
   php artisan l5-swagger:generate
   php artisan migrate:fresh --seed
   php artisan jwt:secret
   php artisan serve
 ) else (
   composer install
+  composer dumpautoload
   php artisan l5-swagger:generate
   pphp artisan migrate:fresh --seed
   php artisan jwt:secret
