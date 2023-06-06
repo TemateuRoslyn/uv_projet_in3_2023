@@ -63,19 +63,14 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        
+        // <- add for jwt
         'jwt.auth' => \App\Http\Middleware\Authenticate::class,
         'jwt.verify' => \App\Http\Middleware\VerifyJWTToken::class,
-    ];
-
-    //Middlewares associes aux user du projet
-    protected $routeMiddleware = [
-        'admin' => \App\Http\Middleware\AdminMiddleware::class,
-        'manager' => \App\Http\Middleware\ManagerMiddleware::class,
-        'user' => \App\Http\Middleware\UserMiddleware::class,
-        'eleve' => \App\Http\Middleware\EleveMiddleware::class,
-        'parent' => \App\Http\Middleware\ParentMiddleware::class,
-        'professeur' => \App\Http\Middleware\ProfesseurMiddleware::class,
-        'personnel' => \App\Http\Middleware\PersonnelMiddleware::class,
+        
+        // <- add for custom midlleware
+        'role' => \App\Http\Middleware\CheckRoles::class,
+        'permission' => \App\Http\Middleware\CheckPermissions::class,
 
     ];
 }

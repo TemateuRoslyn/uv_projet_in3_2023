@@ -268,22 +268,15 @@ class EleveController extends Controller
 
         $eleve->user = $user;
         
-            return response()->json([
-                'message' => 'Eleve created successfully', 
-                'success' => true,
-                'data' => $eleve
-            ]);
-        
         // Créer un eleve de base avec le rôle eleve
         $eleveRole = Role::where('name', 'eleve')->first();
 
         $user->roles()->attach($eleveRole);
 
-
         return response()->json([
             'message' => 'Eleve created successfully', 
             'success' => true,
-            'data' => $eleve
+            'data' => $eleve,
         ]);
     }
 

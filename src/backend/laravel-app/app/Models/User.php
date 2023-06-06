@@ -6,6 +6,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 use App\Models\Notification;
 use App\Models\Role;
+use App\Models\Permission;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -67,6 +68,11 @@ class User  extends Authenticatable implements JWTSubject
         return $this->belongsToMany(Role::class, 'role_user');
     }
 
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class, 'user_permissions');
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -75,5 +81,32 @@ class User  extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    // check des roles
+
+
+    public function hasRole($role)
+    {
+        return $this->roles->contains('name', $role);
+    }
+
+    public function hasAnyRoles(array $roles)
+    {
+        return $exists = collect($this->roles)->pluck('name')->contains(function ($name) use ($roles) {
+            return in_array($name, $roles);
+        });
+    }
+
+    // check des permission
+
+    public function hasPermission($permission)
+    {
+        return $this->permissions->contains('name', $permission);
+    }
+
+    public function hasAnyPermissions($permissions)
+    {
+        return $this->permissions()->whereIn('name', $permissions)->exists();
     }
 }

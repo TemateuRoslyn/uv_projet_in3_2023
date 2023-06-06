@@ -37,6 +37,7 @@ Route::prefix('auth')->group(function () {
     Route::middleware('jwt.verify')->post('user', [AuthController::class, 'user']);
 });
 
+Route::middleware('role:maestros-toto')->get('login', [AuthController::class, 'login']);
 
 
 
@@ -45,31 +46,34 @@ Route::prefix('auth')->group(function () {
  */
 Route::middleware('jwt.verify')->group(function () {
 
-    // users
-    Route::prefix('users')->group(function () {
-        Route::get('/findAll', [UserController::class, 'index']);
-        Route::get('/findOne/{userId}', [UserController::class, 'show']);
-        Route::post('/create', [UserController::class, 'store']);
-        Route::put('/update/{userId}', [UserController::class, 'update']);
-        Route::delete('/delete/{userId}', [UserController::class, 'destroy']);
-    });
+    Route::middleware('role:admin')->group(function () {
 
-    // permissions
-    Route::prefix('permissions')->group(function () {
-        Route::get('/findAll', [PermissionController::class, 'index']);
-        Route::get('/findOne/{permissionId}', [PermissionController::class, 'show']);
-        Route::post('/create', [PermissionController::class, 'store']);
-        Route::put('/update/{permissionId}', [PermissionController::class, 'update']);
-        Route::delete('/delete/{permissionId}', [PermissionController::class, 'destroy']);
-    });
-
-    // roles
-    Route::prefix('roles')->group(function () {
-        Route::get('/findAll', [RoleController::class, 'index']);
-        Route::get('/findOne/{roleId}', [RoleController::class, 'show']);
-        Route::post('/create', [RoleController::class, 'store']);
-        Route::put('/update/{roleId}', [RoleController::class, 'update']);
-        Route::delete('/delete/{roleId}', [RoleController::class, 'destroy']);
+        // users
+        Route::prefix('users')->group(function () {
+            Route::get('/findAll', [UserController::class, 'index']);
+            Route::get('/findOne/{userId}', [UserController::class, 'show']);
+            Route::post('/create', [UserController::class, 'store']);
+            Route::put('/update/{userId}', [UserController::class, 'update']);
+            Route::delete('/delete/{userId}', [UserController::class, 'destroy']);
+        });
+    
+        // permissions
+        Route::prefix('permissions')->group(function () {
+            Route::get('/findAll', [PermissionController::class, 'index']);
+            Route::get('/findOne/{permissionId}', [PermissionController::class, 'show']);
+            Route::post('/create', [PermissionController::class, 'store']);
+            Route::put('/update/{permissionId}', [PermissionController::class, 'update']);
+            Route::delete('/delete/{permissionId}', [PermissionController::class, 'destroy']);
+        });
+    
+        // roles
+        Route::prefix('roles')->group(function () {
+            Route::get('/findAll', [RoleController::class, 'index']);
+            Route::get('/findOne/{roleId}', [RoleController::class, 'show']);
+            Route::post('/create', [RoleController::class, 'store']);
+            Route::put('/update/{roleId}', [RoleController::class, 'update']);
+            Route::delete('/delete/{roleId}', [RoleController::class, 'destroy']);
+        });
     });
 
     // eleves
