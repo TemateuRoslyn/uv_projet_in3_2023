@@ -76,18 +76,13 @@ Route::middleware('jwt.verify')->group(function () {
 
     // eleves
     Route::prefix('eleves')->group(function () {
-
         Route::get('findOne/{eleveId}', [EleveController::class, 'view']);
         Route::get('findAll', [EleveController::class, 'index']);
         
-        // Route::middleware('permission:modifier_eleve')->post('update', [EleveController::class, 'update']);
-        // Route::middleware('permission:supprimer_eleve')->delete('delete/{eleve}', [EleveController::class, 'delete']);
-        // Route::middleware('permission:creer_eleve')->post('create', [EleveController::class, 'store']);
-
-        Route::post('update', [EleveController::class, 'update']);
-        Route::delete('delete/{eleve}', [EleveController::class, 'delete']);
-        Route::post('create', [EleveController::class, 'store']);
-
+        Route::middleware('permission:modifier_eleve')->post('update', [EleveController::class, 'update']);
+        Route::middleware('permission:supprimer_eleve')->delete('delete/{eleve}', [EleveController::class, 'delete']);
+        Route::middleware('permission:creer_eleve')->post('create', [EleveController::class, 'store']);
+       
     });
 
     // notifications
@@ -102,19 +97,21 @@ Route::middleware('jwt.verify')->group(function () {
     // parents
     Route::prefix('parents')->group(function () {
         Route::get('findAll', [ParentsController::class, 'showAll']);
-        Route::post('create', [ParentsController::class, 'store']);
         Route::get('findOne/{parentId}', [ParentsController::class, 'showIndex']);
-        Route::post('update', [ParentsController::class, 'update']);
-        Route::delete('delete/{parentId}', [ParentsController::class, 'delete']);
+        
+        Route::middleware('permission:creer_parent')->post('create', [ParentsController::class, 'store']);
+        Route::middleware('permission:modifier_parent')->post('update', [ParentsController::class, 'update']);
+        Route::middleware('permission:supprimer_parent')->delete('delete/{parentId}', [ParentsController::class, 'delete']);
     });
 
     // personnel
     Route::prefix('personnel')->group(function () {
         Route::get('findAll', [PersonnelController::class, 'showAll']);
-        Route::post('create', [PersonnelController::class, 'store']);
         Route::get('findOne/{personnelId}', [PersonnelController::class, 'showIndex']);
-        Route::post('update', [PersonnelController::class, 'update']);
-        Route::delete('delete/{personnelId}', [PersonnelController::class, 'delete']);
+        
+        Route::middleware('permission:creer_personnel')->post('create', [PersonnelController::class, 'store']);
+        Route::middleware('permission:modifier_personnel')->post('update', [PersonnelController::class, 'update']);
+        Route::middleware('permission:supprimer_personnel')->delete('delete/{personnelId}', [PersonnelController::class, 'delete']);
     });
 });
 

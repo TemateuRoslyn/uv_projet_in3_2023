@@ -213,13 +213,17 @@ class ParentsController extends Controller
             'telephone' => $request->input('telephone'),
         ]);
 
-        $parent->user = $user;
-
-
-        // Créer un parent de base avec le rôle parent
-        $parentRole = Role::where('name', 'parent')->first();
-
+        // assigner le role parent
+        $parentRole = Role::where('name', PARENT_ROLE['name'])->first();
         $user->roles()->attach($parentRole);
+
+        // assigner les permission
+        foreach (PARENT_PERMISSIONS as $permission) {
+            $parentPerm = Permission::where('name', $permission['name'])->first();
+            if($parentPerm){
+                 $user->permissions()->attach($parentPerm); 
+            }
+         }
 
 
         return response()->json([
