@@ -13,14 +13,14 @@ class CheckPermissions
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $permision)
+    public function handle(Request $request, Closure $next, ...$permisions)
     {
    
         // Votre logique de vérification du rôle ou de la permission ici
         
-        if ($request->user() && !$request->user()->hasPermission($permision)) {
+        if ($request->user() && !$request->user()->hasAnyPermissions($permisions)) {
             return response()->json([
-                'message' => 'Pour exploiter cette ressource vous denez disposer de la permission "'.ucfirst($permision).'".',
+                'message' => 'Permission insuffisante !',
             ], 403);
         } else if($request->user() == null){
             return response()->json([

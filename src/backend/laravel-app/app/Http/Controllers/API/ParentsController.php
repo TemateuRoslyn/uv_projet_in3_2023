@@ -20,7 +20,7 @@ class ParentsController extends Controller
      *     path="/api/parents/findAll",
      *     summary="Get all parents",
      *     description="Retrieve a list of all parents",
-     *     operationId="parentsIndex",
+     *     operationId="showAllParent",
      *     tags={"parents"},
      *     @OA\Response(
      *         response=200,
@@ -55,7 +55,7 @@ class ParentsController extends Controller
      *     path="/api/parents/findOne/{parentId}",
      *     summary="Get parent information",
      *     description="Get information about a specific parent",
-     *     operationId="viewParent",
+     *     operationId="showOneParent",
      *     tags={"parents"},
      *     @OA\Parameter(
      *         name="parentId",
@@ -110,7 +110,7 @@ class ParentsController extends Controller
      *     path="/api/parents/create",
      *     summary="Create a new parent",
      *     description="Create a new parent resource",
-     *     operationId="createParent",
+     *     operationId="storeParent",
      *     tags={"parents"},
      *     security={{"bearer": {}}},
      *     @OA\RequestBody(
@@ -213,18 +213,17 @@ class ParentsController extends Controller
             'telephone' => $request->input('telephone'),
         ]);
 
-        $parent->user = $user;
-
-        return response()->json([
-            'message' => 'Parent created successfully',
-            'success' => true,
-            'data' => $parent
-        ]);
-
-        // Créer un parent de base avec le rôle parent
-        $parentRole = Role::where('name', 'parent')->first();
-
+        // assigner le role parent
+        $parentRole = Role::where('name', PARENT_ROLE['name'])->first();
         $user->roles()->attach($parentRole);
+
+        // assigner les permission
+        foreach (PARENT_PERMISSIONS as $permission) {
+            $parentPerm = Permission::where('name', $permission['name'])->first();
+            if($parentPerm){
+                 $user->permissions()->attach($parentPerm); 
+            }
+         }
 
 
         return response()->json([

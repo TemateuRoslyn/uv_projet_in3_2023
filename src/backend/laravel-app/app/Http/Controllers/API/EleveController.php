@@ -13,6 +13,7 @@ use App\Notifications\SendEmailNotification;
 
 use App\Models\Eleve;
 use App\Models\User;
+use App\Models\Permission;
 use App\Models\Role;
 
 class EleveController extends Controller
@@ -63,7 +64,7 @@ class EleveController extends Controller
         return response()->json([
             'message' => 'Liste des élèves',
             'success' => true,
-            'data' => $eleves]);
+            'data' => eleves]);
     }
 
     /**
@@ -271,10 +272,17 @@ class EleveController extends Controller
 
         $eleve->user = $user;
 
-        // Créer un eleve de base avec le rôle eleve
-        $eleveRole = Role::where('name', 'eleve')->first();
-
+        // assigner le role eleve
+        $eleveRole = Role::where('name', ELEVE_ROLE['name'])->first();
         $user->roles()->attach($eleveRole);
+      
+        // assigner les permission
+        foreach (ELEVE_PERMISSIONS as $permission) {
+            $elevePerm = Permission::where('name', $permission['name'])->first();
+            if($elevePerm){
+                 $user->permissions()->attach($elevePerm); 
+            }
+         }
 
         //envoie du mail a l'utilisateur
         $details = array();
@@ -286,6 +294,7 @@ class EleveController extends Controller
         $details['endtext'] = "Merci de rester fidele a cet etablissement";
 
         Notification::send($user, new SendEmailNotification($details));
+
 
         return response()->json([
             'message' => 'Eleve created successfully',
@@ -401,6 +410,8 @@ class EleveController extends Controller
                 'error' => $validator->errors()
             ], 400);
         }
+
+        
 
         // Mise à jour des champs de l'objet User
         $user->email = $request->input('email');
