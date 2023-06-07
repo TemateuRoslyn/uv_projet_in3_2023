@@ -197,12 +197,25 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "user": {
-                                            "$ref": "#/components/schemas/User"
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "Logged in successfully"
                                         },
-                                        "token": {
+                                        "message": {
                                             "type": "string",
-                                            "example": "eyJ0eXAiOiJKV1QiLCJ...."
+                                            "example": "Logged in successfully"
+                                        },
+                                        "content": {
+                                            "properties": {
+                                                "user": {
+                                                    "$ref": "#/components/schemas/User"
+                                                },
+                                                "token": {
+                                                    "type": "string",
+                                                    "example": "eyJ0eXAiOiJKV1QiLCJ...."
+                                                }
+                                            },
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"

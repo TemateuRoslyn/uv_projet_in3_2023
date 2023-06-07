@@ -12,6 +12,7 @@ export * from './inline-response20012';
 export * from './inline-response20013';
 export * from './inline-response20014';
 export * from './inline-response20015';
+export * from './inline-response20016';
 export * from './inline-response2002';
 export * from './inline-response2003';
 export * from './inline-response2004';
