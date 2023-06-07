@@ -27,6 +27,8 @@ import AdminRoleForm from './pages/Admin/AdminRoleForm';
 import AdminPermission from './pages/Admin/AdminPermission';
 import AdminPermissionForm from './pages/Admin/AdminPermissionForm';
 import UserGrid from './pages/Admin/AdminUser';
+import AddFaults from './pages/Admin/Faults/AddFaults';
+import FaultsGrid from './pages/Admin/Faults/FaultsGrid';
 
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
@@ -80,6 +82,8 @@ function App() {
       <Route path="/admin/newrole" element={<AdminRoleForm />} />
       <Route path="/admin/permissions" element={<AdminPermission />} />
       <Route path="/admin/newpermission" element={<AdminPermissionForm />} />
+      <Route path="/faults/addFaults" element={<AddFaults/>} />
+      <Route path="/faults/faults" element={<FaultsGrid />} />
     </Routes>
   );
 }
