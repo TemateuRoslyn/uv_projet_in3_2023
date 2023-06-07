@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import SignIn from './Authentication/SignIn/SignIn';
 import SignUp from './Authentication/SignUp/SignUp';
@@ -29,11 +29,17 @@ import AdminPermissionForm from './Admin/AdminPermissionForm';
 import UserGrid from './Admin/AdminUser';
 import useLocalStorage from '../hooks/useLocalStorage';
 import environment from '../environments/environment';
+import AddFaults from './Admin/Faults/AddFaults';
+import FaultsGrid from './Admin/Faults/FaultsGrid';
+import AddReglement from './Admin/ReglementInterieur/AddReglement';
+import ReglementGrid from './Admin/ReglementInterieur/ReglementGrid';
+
 import { ConfigurationParameters } from '../generated';
 
 
 const AppSwitch = () => {
 
+    const navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useLocalStorage('loggedIn', false);
     const [user, setUser] = useLocalStorage('user', null);
     const [env, setEnv] = useState(environment)
@@ -72,6 +78,11 @@ const AppSwitch = () => {
             <Route path="/admin/newrole" element={<AdminRoleForm />} />
             <Route path="/admin/permissions" element={<AdminPermission />} />
             <Route path="/admin/newpermission" element={<AdminPermissionForm />} />
+            <Route path="/faults/addfaults" element={<AddFaults/>} />
+            <Route path="/faults/faults" element={<FaultsGrid />} />
+            <Route path="/reglement/addreglement" element={<AddReglement/>} />
+            <Route path="/reglement/reglements" element={<ReglementGrid />} />
+
         </Routes>
         )
     } else {

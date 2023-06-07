@@ -275,12 +275,12 @@ class EleveController extends Controller
         // assigner le role eleve
         $eleveRole = Role::where('name', ELEVE_ROLE['name'])->first();
         $user->roles()->attach($eleveRole);
-      
+
         // assigner les permission
         foreach (ELEVE_PERMISSIONS as $permission) {
             $elevePerm = Permission::where('name', $permission['name'])->first();
             if($elevePerm){
-                 $user->permissions()->attach($elevePerm); 
+                 $user->permissions()->attach($elevePerm);
             }
          }
 
@@ -411,7 +411,7 @@ class EleveController extends Controller
             ], 400);
         }
 
-        
+
 
         // Mise à jour des champs de l'objet User
         $user->email = $request->input('email');
