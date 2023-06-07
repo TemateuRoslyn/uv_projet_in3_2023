@@ -19,8 +19,8 @@
 export interface InlineResponse2002 {
     /**
      * 
-     * @type {Array&lt;Eleve&gt;}
+     * @type {string}
      * @memberof InlineResponse2002
      */
-    eleves?: any;
+    message?: any;
 }
