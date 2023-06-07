@@ -127,10 +127,12 @@
                 "issues": "https://github.com/DarkaOnLine/L5-Swagger/issues",
                 "source": "https://github.com/DarkaOnLine/L5-Swagger/tree/8.5.1"
             },
-            "funding": [{
-                "url": "https://github.com/DarkaOnLine",
-                "type": "github"
-            }],
+            "funding": [
+                {
+                    "url": "https://github.com/DarkaOnLine",
+                    "type": "github"
+                }
+            ],
             "time": "2023-06-05T04:21:50+00:00"
         },
         {
