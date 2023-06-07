@@ -19,20 +19,8 @@
 export interface InlineResponse2015 {
     /**
      * 
-     * @type {boolean}
+     * @type {Role}
      * @memberof InlineResponse2015
      */
-    success?: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2015
-     */
-    message?: any;
-    /**
-     * 
-     * @type {User}
-     * @memberof InlineResponse2015
-     */
-    data?: any;
+    role?: any;
 }

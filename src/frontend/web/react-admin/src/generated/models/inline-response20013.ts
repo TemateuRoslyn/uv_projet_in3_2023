@@ -31,7 +31,7 @@ export interface InlineResponse20013 {
     success?: any;
     /**
      * 
-     * @type {Role}
+     * @type {Regle}
      * @memberof InlineResponse20013
      */
     data?: any;

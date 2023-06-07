@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\API;
 
+
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Notification;
 
 use App\Http\Controllers\Controller;
-
-use Illuminate\Support\Facades\Notification;
-use App\Notifications\SendEmailNotification;
+use App\Jobs\SendEmailJob;
 
 use App\Models\Eleve;
 use App\Models\User;
@@ -273,12 +274,6 @@ class EleveController extends Controller
 
         $eleve->user = $user;
 
-        return response()->json([
-            'message' => 'Eleve created successfully',
-            'success' => true,
-            'data' => $eleve
-        ]);
-
         // Créer un eleve de base avec le rôle eleve
         $eleveRole = Role::where('name', 'eleve')->first();
 
@@ -301,8 +296,8 @@ class EleveController extends Controller
         $details['actionurl'] = "http://www.gestiondiscipline.com/resetpassword";
         $details['endtext'] = "Merci de rester fidele a cet etablissement";
 
-        Notification::send($user, new SendEmailNotification($details));
-
+        // envoi du mail
+        Queue::push(new SendEmailJob($user, $details));
 
         return response()->json([
             'message' => 'Eleve created successfully',

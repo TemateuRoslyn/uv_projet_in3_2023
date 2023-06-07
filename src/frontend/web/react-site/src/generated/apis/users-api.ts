@@ -16,15 +16,15 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20014 } from '../models';
-import { InlineResponse20015 } from '../models';
-import { InlineResponse20016 } from '../models';
-import { InlineResponse2015 } from '../models';
-import { InlineResponse4008 } from '../models';
-import { InlineResponse4009 } from '../models';
+import { InlineResponse20021 } from '../models';
+import { InlineResponse20022 } from '../models';
+import { InlineResponse20023 } from '../models';
+import { InlineResponse2016 } from '../models';
+import { InlineResponse40011 } from '../models';
+import { InlineResponse40012 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse4045 } from '../models';
-import { InlineResponse4046 } from '../models';
+import { InlineResponse4048 } from '../models';
+import { InlineResponse4049 } from '../models';
 import { UpdateIdBody } from '../models';
 import { UsersCreateBody } from '../models';
 /**
@@ -292,7 +292,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20016>> {
+        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20023>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).deleteUser(userId, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -307,7 +307,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async userCreate(body: UsersCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2015>> {
+        async userCreate(body: UsersCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2016>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).userCreate(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -321,7 +321,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20015>> {
+        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20022>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).userShow(userId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -337,7 +337,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async userUpdate(body: UpdateIdBody, authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2015>> {
+        async userUpdate(body: UpdateIdBody, authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2016>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).userUpdate(body, authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -351,7 +351,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20014>> {
+        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20021>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).usersIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -375,7 +375,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20016> {
+        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20023> {
             return UsersApiFp(configuration).deleteUser(userId, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -386,7 +386,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userCreate(body: UsersCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse2015> {
+        userCreate(body: UsersCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse2016> {
             return UsersApiFp(configuration).userCreate(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -396,7 +396,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20015> {
+        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20022> {
             return UsersApiFp(configuration).userShow(userId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -408,7 +408,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userUpdate(body: UpdateIdBody, authorization: string, id: number, options?: any): AxiosPromise<InlineResponse2015> {
+        userUpdate(body: UpdateIdBody, authorization: string, id: number, options?: any): AxiosPromise<InlineResponse2016> {
             return UsersApiFp(configuration).userUpdate(body, authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -418,7 +418,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20014> {
+        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20021> {
             return UsersApiFp(configuration).usersIndex(authorization, options).then((request) => request(axios, basePath));
         },
     };
