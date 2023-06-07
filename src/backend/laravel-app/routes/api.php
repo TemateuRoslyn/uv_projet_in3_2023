@@ -13,6 +13,8 @@ use App\Http\Controllers\API\PermissionController;
 use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\ParentsController;
 use App\Http\Controllers\API\PersonnelController;
+use App\Http\Controllers\API\RegleController;
+use App\Http\Controllers\API\ReglementInterieurController;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,6 +106,24 @@ Route::middleware('jwt.verify')->group(function () {
         Route::middleware('permission:supprimer_parent')->delete('delete/{parentId}', [ParentsController::class, 'delete']);
     });
 
+    // Reglement Interieur
+    Route::prefix('reglement')->group(function () {
+        Route::get('findAll', [ReglementInterieurController::class, 'showAll']);
+        Route::post('create', [ReglementInterieurController::class, 'store']);
+        Route::get('findOne/{reglementId}', [ReglementInterieurController::class, 'showIndex']);
+        Route::post('update', [ReglementInterieurController::class, 'update']);
+        Route::delete('delete/{reglementId}', [ReglementInterieurController::class, 'delete']);
+    });
+
+    // Regle
+    Route::prefix('regle')->group(function () {
+        Route::get('findAll', [RegleController::class, 'showAll']);
+        Route::post('create', [RegleController::class, 'store']);
+        Route::get('findOne/{regleId}', [RegleController::class, 'showIndex']);
+        Route::post('update', [RegleController::class, 'update']);
+        Route::delete('delete/{regleId}', [RegleController::class, 'delete']);
+    });
+
     // personnel
     Route::prefix('personnel')->group(function () {
         Route::get('findAll', [PersonnelController::class, 'showAll']);
@@ -114,5 +134,3 @@ Route::middleware('jwt.verify')->group(function () {
         Route::middleware('permission:supprimer_personnel')->delete('delete/{personnelId}', [PersonnelController::class, 'delete']);
     });
 });
-
-

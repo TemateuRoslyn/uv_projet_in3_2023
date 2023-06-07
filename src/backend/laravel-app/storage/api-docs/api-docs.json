@@ -1855,6 +1855,922 @@
                 }
             }
         },
+        "/api/personnel/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "personnel"
+                ],
+                "summary": "Delete a personnel",
+                "description": "Delete a personnel resource",
+                "operationId": "deletePersonnel",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of personnel to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error - Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Personnel not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/regles/findAll": {
+            "get": {
+                "tags": [
+                    "Regles"
+                ],
+                "summary": "Find all regles",
+                "description": "Retrieve a list of all regles with associated reglementInterieur",
+                "operationId": "findAllRegles",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer {your_token}"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Regle"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/regle/create": {
+            "post": {
+                "tags": [
+                    "Regles"
+                ],
+                "summary": "Create a new Regle",
+                "description": "Create a new Regle resource",
+                "operationId": "createRegle",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "libelle"
+                                ],
+                                "properties": {
+                                    "libelle": {
+                                        "type": "string",
+                                        "example": "Ne pas bavarder en salle de cours"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Error - Invalid request data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid"
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "libelle": [
+                                                    "The libelle field is required."
+                                                ]
+                                            }
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Regle created successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Regle"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/regle/findOne/{id}": {
+            "get": {
+                "tags": [
+                    "Regles"
+                ],
+                "summary": "Get regle information",
+                "description": "Get information about a specific regle",
+                "operationId": "findOneRegle",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of regle to get information for",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error - Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Regle not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Regle trouvé(e)"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Regle"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/regle/update": {
+            "post": {
+                "tags": [
+                    "Regles"
+                ],
+                "summary": "Update a regle's information",
+                "description": "Update a regle's information",
+                "operationId": "updateRegle",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "libelle",
+                                    "reglement_interieur_id"
+                                ],
+                                "properties": {
+                                    "libelle": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Ne pas sortir sans avoir eu la permission"
+                                    },
+                                    "reglement_interieur_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Error - Invalid request data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "object",
+                                            "example": {
+                                                "libelle": [
+                                                    "The libelle field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error - Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Regle not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "regle": {
+                                            "$ref": "#/components/schemas/Regle"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/regle/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Regles"
+                ],
+                "summary": "Delete a regle",
+                "description": "Delete a regle resource",
+                "operationId": "deleteRegle",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of regle to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error - Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Regle not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/reglement/findAll": {
+            "get": {
+                "tags": [
+                    "ReglementInterieur"
+                ],
+                "summary": "Get all reglementInterieur",
+                "description": "Retrieve a list of all reglementInterieur",
+                "operationId": "findAllreglementInterieurs",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer {your_token}"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "reglements": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ReglementInterieur"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/reglement/create": {
+            "post": {
+                "tags": [
+                    "ReglementInterieur"
+                ],
+                "summary": "Create a new reglementInterieur",
+                "description": "Create a new reglementInterieur resource",
+                "operationId": "createreglementInterieur",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "libelle"
+                                ],
+                                "properties": {
+                                    "libelle": {
+                                        "type": "string",
+                                        "example": "Etre ponctuel"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Error - Invalid request data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Could not create this "
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": {
+                                                "libelle": [
+                                                    "The libelle field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "ReglementInterieur created successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/ReglementInterieur"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/reglement/findOne/{id}": {
+            "get": {
+                "tags": [
+                    "ReglementInterieur"
+                ],
+                "summary": "Get reglement information",
+                "description": "Get information about a specific reglementInterieur",
+                "operationId": "showOneReglementInterieur",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of reglementInterieur to get information for",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error - Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "reglementInterieur not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/ReglementInterieur"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/reglement/update": {
+            "post": {
+                "tags": [
+                    "ReglementInterieur"
+                ],
+                "summary": "Update a reglementInterieur's information",
+                "description": "Update a reglementInterieur's information",
+                "operationId": "updatereglementInterieur",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "libelle"
+                                ],
+                                "properties": {
+                                    "libelle": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Etre assidue"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Error - Invalid request data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "object",
+                                            "example": {
+                                                "libelle": [
+                                                    "The libelle field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error - Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "ReglementInterieur not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "reglement": {
+                                            "$ref": "#/components/schemas/ReglementInterieur"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/reglement/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "ReglementInterieur"
+                ],
+                "summary": "Delete a reglementInterieur",
+                "description": "Delete a reglementInterieur resource",
+                "operationId": "deleteReglementInterieur",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of reglementInterieur to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error - Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "ReglementInterieur not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
         "/api/roles/findAll": {
             "get": {
                 "tags": [
@@ -2945,6 +3861,66 @@
                 "type": "object",
                 "xml": {
                     "name": "Permission"
+                }
+            },
+            "Regle": {
+                "required": [
+                    "libelle"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": true,
+                        "example": "1"
+                    },
+                    "role": {
+                        "description": "Une regle",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "created_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/created_at"
+                    },
+                    "updated_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/updated_at"
+                    },
+                    "deleted_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/deleted_at"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Regle"
+                }
+            },
+            "ReglementInterieur": {
+                "required": [
+                    "libelle"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": true,
+                        "example": "1"
+                    },
+                    "role": {
+                        "description": "Un nouveau reglement interieur",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "created_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/created_at"
+                    },
+                    "updated_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/updated_at"
+                    },
+                    "deleted_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/deleted_at"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "ReglementInterieur"
                 }
             },
             "Role": {
