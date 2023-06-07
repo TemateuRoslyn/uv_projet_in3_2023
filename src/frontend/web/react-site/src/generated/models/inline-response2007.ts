@@ -19,20 +19,8 @@
 export interface InlineResponse2007 {
     /**
      * 
-     * @type {boolean}
+     * @type {Parents}
      * @memberof InlineResponse2007
      */
-    success?: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2007
-     */
-    message?: any;
-    /**
-     * 
-     * @type {Array&lt;Permission&gt;}
-     * @memberof InlineResponse2007
-     */
-    data?: any;
+    parent?: any;
 }

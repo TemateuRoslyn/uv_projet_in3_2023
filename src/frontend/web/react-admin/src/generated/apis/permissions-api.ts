@@ -17,7 +17,7 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { InlineResponse20010 } from '../models';
-import { InlineResponse2007 } from '../models';
+import { InlineResponse20011 } from '../models';
 import { InlineResponse2008 } from '../models';
 import { InlineResponse2009 } from '../models';
 import { InlineResponse2013 } from '../models';
@@ -316,7 +316,7 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async permissionDelete(id: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20010>> {
+        async permissionDelete(id: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20011>> {
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionDelete(id, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -331,7 +331,7 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async permissionShow(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2008>> {
+        async permissionShow(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2009>> {
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionShow(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -347,7 +347,7 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async permissionUpdate(body: UpdatePermissionIdBody, authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2009>> {
+        async permissionUpdate(body: UpdatePermissionIdBody, authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20010>> {
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionUpdate(body, authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -361,7 +361,7 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async permissionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2007>> {
+        async permissionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2008>> {
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionsIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -396,7 +396,7 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionDelete(id: number, authorization: string, options?: any): AxiosPromise<InlineResponse20010> {
+        permissionDelete(id: number, authorization: string, options?: any): AxiosPromise<InlineResponse20011> {
             return PermissionsApiFp(configuration).permissionDelete(id, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -407,7 +407,7 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionShow(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse2008> {
+        permissionShow(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse2009> {
             return PermissionsApiFp(configuration).permissionShow(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -419,7 +419,7 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionUpdate(body: UpdatePermissionIdBody, authorization: string, id: number, options?: any): AxiosPromise<InlineResponse2009> {
+        permissionUpdate(body: UpdatePermissionIdBody, authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20010> {
             return PermissionsApiFp(configuration).permissionUpdate(body, authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -429,7 +429,7 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse2007> {
+        permissionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse2008> {
             return PermissionsApiFp(configuration).permissionsIndex(authorization, options).then((request) => request(axios, basePath));
         },
     };

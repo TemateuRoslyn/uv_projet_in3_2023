@@ -140,8 +140,14 @@ class AuthController extends Controller
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="user", type="object", ref="#/components/schemas/User"),
-     *             @OA\Property(property="token", type="string", example="eyJ0eXAiOiJKV1QiLCJ....")
+     *             @OA\Property(property="success", type="boolean", example="Logged in successfully"),
+     *             @OA\Property(property="message", type="string", example="Logged in successfully"),
+     *             @OA\Property(
+     *                   property="content",
+     *                   type="object",
+     *                   @OA\Property(property="user", type="object", ref="#/components/schemas/User"),
+     *                   @OA\Property(property="token", type="string", example="eyJ0eXAiOiJKV1QiLCJ....")
+     *               ),
      *         )
      *     )
      * )
