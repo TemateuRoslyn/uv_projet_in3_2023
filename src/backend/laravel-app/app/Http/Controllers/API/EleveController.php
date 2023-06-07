@@ -19,7 +19,7 @@ use App\Models\Role;
 class EleveController extends Controller
 {
 
-    private $avatar_path = "assets/avatars/eleves" ;
+    private $avatar_path = "assets/avatars/eleves";
 
 
     /**
@@ -64,7 +64,8 @@ class EleveController extends Controller
         return response()->json([
             'message' => 'Liste des élèves',
             'success' => true,
-            'data' => eleves]);
+            'data' => $eleves
+        ]);
     }
 
     /**
@@ -272,17 +273,24 @@ class EleveController extends Controller
 
         $eleve->user = $user;
 
-        // assigner le role eleve
-        $eleveRole = Role::where('name', ELEVE_ROLE['name'])->first();
+        return response()->json([
+            'message' => 'Eleve created successfully',
+            'success' => true,
+            'data' => $eleve
+        ]);
+
+        // Créer un eleve de base avec le rôle eleve
+        $eleveRole = Role::where('name', 'eleve')->first();
+
         $user->roles()->attach($eleveRole);
 
         // assigner les permission
         foreach (ELEVE_PERMISSIONS as $permission) {
             $elevePerm = Permission::where('name', $permission['name'])->first();
-            if($elevePerm){
-                 $user->permissions()->attach($elevePerm);
+            if ($elevePerm) {
+                $user->permissions()->attach($elevePerm);
             }
-         }
+        }
 
         //envoie du mail a l'utilisateur
         $details = array();
@@ -379,7 +387,7 @@ class EleveController extends Controller
     {
         // on récupère l'élève associé
         $eleveFound = Eleve::find($request->id);
-        if($eleveFound){
+        if ($eleveFound) {
             $user = User::find($eleveFound->user_id);
 
             $validator = Validator::make($request->all(), [
@@ -396,7 +404,7 @@ class EleveController extends Controller
                 'solvable' => 'required',
                 'redoublant' => 'required',
             ]);
-        }else {
+        } else {
             return response()->json([
                 'message' => 'Student not exists',
                 'success' => false,
@@ -499,13 +507,13 @@ class EleveController extends Controller
     {
         $eleveFound = Eleve::find($eleveId);
 
-        if($eleveFound){
+        if ($eleveFound) {
 
             //le user associe
             $userFound = User::find($eleveFound->user_id);
 
             // supperssion de l'image du user
-            if($userFound->photo){
+            if ($userFound->photo) {
                 Storage::delete($userFound->photo);
             }
 
@@ -516,7 +524,7 @@ class EleveController extends Controller
                 'message' => 'Eleve deleted successfully',
                 'success' => true,
             ]);
-        }else {
+        } else {
             return response()->json([
                 'message' => 'Eleve to delete was not found',
                 'success' => false,
