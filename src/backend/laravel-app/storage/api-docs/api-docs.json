@@ -330,6 +330,474 @@
                 }
             }
         },
+        "/api/cours/findAll": {
+            "get": {
+                "tags": [
+                    "cours"
+                ],
+                "summary": "Get all cours",
+                "description": "Retrieve a list of all cours",
+                "operationId": "findAllcours",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer {your_token}"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "cours": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Cour"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/cours/findOne/{id}": {
+            "get": {
+                "tags": [
+                    "cours"
+                ],
+                "summary": "Get cour information",
+                "description": "Get information about a specific cour",
+                "operationId": "findOneCours",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of cour to get information for",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error - Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Cour not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cour trouvé"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Cour"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cours/create": {
+            "post": {
+                "tags": [
+                    "cours"
+                ],
+                "summary": "Create a new course",
+                "description": "Create a new course resource",
+                "operationId": "createCours",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "libelle",
+                                    "date_cour",
+                                    "heure_debut",
+                                    "heure_fin",
+                                    "professeur_id"
+                                ],
+                                "properties": {
+                                    "libelle": {
+                                        "type": "string",
+                                        "example": "Mathematics"
+                                    },
+                                    "date_cour": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-06-05"
+                                    },
+                                    "heure_debut": {
+                                        "type": "string",
+                                        "example": "09:00"
+                                    },
+                                    "heure_fin": {
+                                        "type": "string",
+                                        "example": "10:30"
+                                    },
+                                    "professeur_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Error - Invalid request data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Could not create this Course"
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": {
+                                                "libelle": [
+                                                    "The libelle field is required."
+                                                ],
+                                                "date_cour": [
+                                                    "The date_cour field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Course created successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Cour"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cours/update": {
+            "post": {
+                "tags": [
+                    "cours"
+                ],
+                "summary": "Update a cour's information",
+                "description": "Update a cour's information",
+                "operationId": "updateCours",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "libelle",
+                                    "date_cour",
+                                    "heure_debut",
+                                    "heure_fin",
+                                    "professeur_id"
+                                ],
+                                "properties": {
+                                    "libelle": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Histoire"
+                                    },
+                                    "date_cour": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1990-01-01"
+                                    },
+                                    "heure_debut": {
+                                        "type": "string",
+                                        "example": "12-03-34"
+                                    },
+                                    "heure_fin": {
+                                        "type": "string",
+                                        "example": "12-03-34"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Error - Invalid request data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "object",
+                                            "example": {
+                                                "heure_debut": [
+                                                    "The heure_debut field is required."
+                                                ],
+                                                "heure_fin": [
+                                                    "The heure_fin field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error - Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Cour not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "cour": {
+                                            "$ref": "#/components/schemas/Cour"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cours/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "cours"
+                ],
+                "summary": "Delete a cour",
+                "description": "Delete a cour resource",
+                "operationId": "deleteCours",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer {your_token}"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of cour to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Error - Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error - Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Cour not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
         "/api/eleves/findAll": {
             "get": {
                 "tags": [
@@ -2753,6 +3221,55 @@
                     }
                 },
                 "type": "object"
+            },
+            "Cour": {
+                "required": [
+                    "id",
+                    "libelle",
+                    "date_cour",
+                    "heure_debut",
+                    "heure_fin"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": true,
+                        "example": "1"
+                    },
+                    "libelle": {
+                        "description": "Physique",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "date_cour": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "1990-01-01"
+                    },
+                    "heure_debut": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "1990-01-01"
+                    },
+                    "heure_fin": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "1990-01-01"
+                    },
+                    "created_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/created_at"
+                    },
+                    "updated_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/updated_at"
+                    },
+                    "deleted_at": {
+                        "$ref": "#/components/schemas/BaseModel/properties/deleted_at"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Cour"
+                }
             },
             "Eleve": {
                 "required": [
