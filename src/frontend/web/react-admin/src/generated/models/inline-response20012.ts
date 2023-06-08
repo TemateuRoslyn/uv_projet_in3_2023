@@ -19,8 +19,14 @@
 export interface InlineResponse20012 {
     /**
      * 
-     * @type {Array&lt;Role&gt;}
+     * @type {boolean}
      * @memberof InlineResponse20012
      */
-    roles?: any;
+    success?: any;
+    /**
+     * 
+     * @type {Array&lt;Regle&gt;}
+     * @memberof InlineResponse20012
+     */
+    data?: any;
 }

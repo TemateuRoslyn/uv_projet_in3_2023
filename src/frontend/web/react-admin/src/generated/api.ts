@@ -14,6 +14,8 @@
 export * from './apis/eleves-api';
 export * from './apis/parents-api';
 export * from './apis/permissions-api';
+export * from './apis/reglement-interieur-api';
+export * from './apis/regles-api';
 export * from './apis/roles-api';
 export * from './apis/users-api';
 

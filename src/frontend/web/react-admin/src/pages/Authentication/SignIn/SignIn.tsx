@@ -7,33 +7,61 @@ import EmailSVG from './components/EmailSVG';
 import PasswordSVG from './components/PasswordSVG';
 import SubmitBtnSVG from './components/SubmitBtnSVG';
 
-import { useState } from 'react';
-import { AuthApi, ConfigurationParameters } from '../../../generated';
+import { useEffect, useState } from 'react';
+import { AuthApi } from '../../../generated';
 import { AuthLoginBody } from '../../../generated/models';
 import Indicator from '../components/Indicator';
 
+import { 
+  connect, 
+  useSelector,
+  useDispatch,
+ } from 'react-redux'
 
-interface SignInProps {
-  setEnvironment: (newEnv: ConfigurationParameters, loggedIn: boolean, user: any) => void;
-  environment: ConfigurationParameters,
-}
+import { ReduxProps } from '../../../redux/configureStore';
+
+import { IS_LOGGED_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
+import { USER_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
+import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
+import { setIsLOggedAction } from '../../../redux/Actions/LoggedInAction';
+
+
+interface SignInProps {}
 
 
 const SignIn: React.FC<SignInProps> = (props) => {
   
 
+  // redux states
+  const state = useSelector((state: ReduxProps) => state);
+  const dispatch = useDispatch()
+
+  // component states
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isLogedIn, setIsLogedIn] = useState(false);
   const [showotif, setShowNotif] = useState(false);
+  const [access_token, setAcessToken] = useState('');
+  const [store_user, setAaccessUser] = useState('');
+  
+
+  useEffect(() => {
+    if (isLogedIn === true) {
+      localStorage.setItem(TOKEN_LOCAL_STORAGE_KEY, access_token);
+      localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(store_user));
+      localStorage.setItem(IS_LOGGED_LOCAL_STORAGE_KEY, ''+isLogedIn);
+      dispatch(setIsLOggedAction(true)); // on force le parent à se mettre à jour
+    }
+  }, [isLogedIn, dispatch]);
+
 
   const handleUsernameChange = (event: any) => setUsername(event.target.value);
   const handlePasswordChange = (event: any) => setPassword(event.target.value);
 
   const handleSubmit = (event: any) => {
 
-    const authApi = new AuthApi(props.environment);
+    const authApi = new AuthApi(state.environment);
 
     const datas: AuthLoginBody = {
       username: username,
@@ -45,16 +73,17 @@ const SignIn: React.FC<SignInProps> = (props) => {
 
     authApi.authLogin(datas)
     .then((response) => {
-      setIsLoading(false)
+
+      setIsLoading(false)      
       if(response && response.data){
-        const env = {...props.environment,
-          accessToken: response?.data?.content?.token ? response.data.content.token : '',
-          username: username,
-          password: password
-        }
+
         if(response.data.success === true){
+          const token_r = response?.data?.content?.token
+          const user_r = response?.data?.content?.user          
+          setAcessToken(token_r)
+          setAaccessUser(user_r)
           setIsLogedIn(true)
-          props.setEnvironment(env, isLogedIn, response.data.content.user)
+
         }else if(response.data.success === false){
           setIsLogedIn(false)
           setShowNotif(true)
@@ -63,11 +92,10 @@ const SignIn: React.FC<SignInProps> = (props) => {
       
     })
     .catch((error) => {
-      alert(error.message);
-    })
+      alert('Error')
+          })
     .finally(() => {
       setIsLoading(false)
-      // Code à exécuter dans la clause 'finally'
     });
     
 
@@ -164,4 +192,13 @@ const SignIn: React.FC<SignInProps> = (props) => {
   );
 };
 
-export default SignIn;
+
+function mapStateToProps(state: ReduxProps): ReduxProps {
+  return { 
+      user: state.user,
+      environment: state.environment,
+      loggedIn: state.loggedIn,
+  };
+} 
+export default connect(mapStateToProps)(SignIn)
+

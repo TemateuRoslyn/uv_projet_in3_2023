@@ -19,14 +19,20 @@
 export interface InlineResponse20016 {
     /**
      * 
+     * @type {boolean}
+     * @memberof InlineResponse20016
+     */
+    success?: any;
+    /**
+     * 
      * @type {string}
      * @memberof InlineResponse20016
      */
     message?: any;
     /**
      * 
-     * @type {boolean}
+     * @type {ReglementInterieur}
      * @memberof InlineResponse20016
      */
-    success?: any;
+    data?: any;
 }

@@ -35,10 +35,16 @@ class AuthController extends Controller
      *         response=201,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="user", type="object", ref="#/components/schemas/User"),
-     *             @OA\Property(property="token", type="string", example="eyJ0eXAiOiJKV1QiLCJ....")
-     *         )
-     *     ),
+     *             @OA\Property(property="success", type="boolean", example="Logged in successfully"),
+     *             @OA\Property(property="message", type="string", example="Logged in successfully"),
+     *             @OA\Property(
+     *                   property="content",
+     *                   type="object",
+     *                   @OA\Property(property="user", type="object", ref="#/components/schemas/User"),
+     *                   @OA\Property(property="token", type="string", example="eyJ0eXAiOiJKV1QiLCJ....")
+     *              ),
+     *           )
+     *          ),
      *     @OA\Response(
      *         response=400,
      *         description="Error - Invalid request data",
@@ -106,7 +112,7 @@ class AuthController extends Controller
         $user->roles()->attach($userRole);
         
         return response()->json([
-            'data' => $user, 
+            'content' => $user, 
             'message' => "User successfully created",
             'success' => true
         ], 200);
@@ -173,11 +179,11 @@ class AuthController extends Controller
         return response()->json([
             "success" => true,
             "message" => "Logged in successfully",
-            "data" => [
+            "content" => [
                 'token' => $token,
                 'user' => auth()->user(),
                 ]
-        ]);
+        ], 200);
 
     }
 

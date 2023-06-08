@@ -6,10 +6,7 @@ import DefaultLayout from '../../../layout/DefaultLayout';
 import { Configuration, ConfigurationParameters } from '../../../generated';
 import environment from '../../../environments/environment';
 
-interface SignUpProps {
-  setEnvironment: (newEnv: ConfigurationParameters) => void;
-  environment: ConfigurationParameters,
-}
+interface SignUpProps {}
   
 
 const SignUp: React.FC<SignUpProps> = (props) => {
