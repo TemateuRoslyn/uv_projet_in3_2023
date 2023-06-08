@@ -7,6 +7,7 @@ import Team from "./components/team/Team"
 import Pricing from "./components/pricing/Pricing"
 import Blog from "./components/blog/Blog"
 import Contact from "./components/contact/Contact"
+import Login from "./components/login/login"
 import Footer from "./components/common/footer/Footer"
 import Home from "./components/home/Home"
 
@@ -25,6 +26,7 @@ const  App = () =>{
           <Route exact path='/journal' component={Blog} />
           <Route exact path='/contact' component={Contact} />
         </Switch>
+        <Route path='/login' component={Login} />
         <Footer />
       </Router>
     </>
