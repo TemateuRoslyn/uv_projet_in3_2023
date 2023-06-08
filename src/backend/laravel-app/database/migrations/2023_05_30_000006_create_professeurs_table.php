@@ -21,12 +21,14 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->string('sexe');
             $table->string('telephone')->nullable();
+            $table->string('statut');
             $table->unsignedBigInteger('user_id');
-
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            // $table->foreign('cour_id')->references('id')->on('cours')->onDelete('cascade');
 
-            $table->timestamps();
+            $table->unsignedBigInteger('cour_id');
+            $table->foreign('cour_id')->references('id')->on('cours')->onDelete('cascade');
+
+            $table->timestamps();;
         });
     }
 
