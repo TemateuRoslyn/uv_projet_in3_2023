@@ -35,10 +35,10 @@ class Cour extends Model
         'date_cour',
         'heure_debut',
         'heure_fin',
-        'professeur_id',
+        //  'professeur_id',
     ];
-    public function professeur()
+    /* public function professeur()
     {
         return $this->belongsTo(Professeur::class);
-    }
+    }*/
 }

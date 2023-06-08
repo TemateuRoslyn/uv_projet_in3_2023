@@ -7,6 +7,8 @@ use Database\Seeders\RoleSeeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\ReglementInterieurSeeder;
 use Database\Seeders\RegleSeeder;
+use Database\Seeders\CoursSeeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,6 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ReglementInterieurSeeder::class,
             RegleSeeder::class,
+            CoursSeeder::class,
         ]);
     }
 }
