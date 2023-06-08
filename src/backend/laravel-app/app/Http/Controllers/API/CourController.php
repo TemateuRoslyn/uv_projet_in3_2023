@@ -147,12 +147,12 @@ class CourController extends Controller
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"libelle", "date_cour", "heure_debut", "heure_fin", "professeur_id"},
+     *             required={"libelle", "date_cour", "heure_debut", "heure_fin"},
      *             @OA\Property(property="libelle", type="string", example="Mathematics"),
      *             @OA\Property(property="date_cour", type="string", format="date", example="2023-06-05"),
      *             @OA\Property(property="heure_debut", type="string", example="09:00"),
      *             @OA\Property(property="heure_fin", type="string", example="10:30"),
-     *             @OA\Property(property="professeur_id", type="integer", example=1)
+     *
      *         )
      *     ),
      *     @OA\Response(
@@ -189,7 +189,7 @@ class CourController extends Controller
             'date_cour' => 'required|date',
             'heure_debut' => 'required',
             'heure_fin' => 'required',
-            'professeur_id' => 'required|integer',
+            //'professeur_id' => 'required|integer',
         ]);
 
         if ($validator->fails()) {
@@ -204,7 +204,7 @@ class CourController extends Controller
             'date_cour' => $request->date_cour,
             'heure_debut' => $request->heure_debut,
             'heure_fin' => $request->heure_fin,
-            'professeur_id' => $request->professeur_id,
+            //  'professeur_id' => $request->professeur_id,
         ]);
 
         return response()->json([
@@ -236,7 +236,7 @@ class CourController extends Controller
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *              required={"libelle", "date_cour", "heure_debut", "heure_fin", "professeur_id"},
+     *              required={"libelle", "date_cour", "heure_debut", "heure_fin"},
      *             @OA\Property(property="libelle", type="string", format="text", example="Histoire"),
      *             @OA\Property(property="date_cour", type="string", format="date", example="1990-01-01"),
      *             @OA\Property(property="heure_debut", type="string", example="12-03-34"),
@@ -292,7 +292,7 @@ class CourController extends Controller
                 'date_cour' => 'required|date',
                 'heure_debut' => 'required',
                 'heure_fin' => 'required',
-                'professeur_id' => 'required|integer',
+                // 'professeur_id' => 'required|integer',
             ]);
         } else {
             return response()->json([
@@ -315,7 +315,7 @@ class CourController extends Controller
         $courFound->date_cour = $request->input('date_cour');
         $courFound->heure_debut = $request->input('heure_debut');
         $courFound->heure_fin = $request->input('heure_fin');
-        $courFound->professeur_id = $request->input('professeur_id');
+        //   $courFound->professeur_id = $request->input('professeur_id');
 
         $courFound->save();
 

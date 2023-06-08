@@ -15,10 +15,10 @@ class CoursSeeder extends Seeder
     {
         Cour::create([
             'libelle' => 'Histoire',
-            'date_cours' => '2023-01-04',
-            'heure_debut' => '15:00',
-            'heure_fin' => '18:00',
-            'professeur_id' => '1'
+            'date_cour' => '2023-01-04',
+            'heure_debut' => '2023-01-05',
+            'heure_fin' => '2023-01-06',
+            //  'professeur_id' => '1'
         ]);
     }
 }
