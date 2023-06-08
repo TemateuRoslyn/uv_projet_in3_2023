@@ -14,13 +14,19 @@ return new class extends Migration
         Schema::create('professeurs', function (Blueprint $table) {
 
             $table->id();
-            $table->unsignedBigInteger('cour_id');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->date('date_de_naissance');
+            $table->string('lieu_de_naissance');
+            $table->string('photo')->nullable();
+            $table->string('sexe');
+            $table->string('telephone')->nullable();
+            $table->unsignedBigInteger('user_id');
 
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreign('cour_id')->references('id')->on('cours')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('cour_id')->references('id')->on('cours')->onDelete('cascade');
 
             $table->timestamps();
-            
         });
     }
 

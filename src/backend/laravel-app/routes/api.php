@@ -12,6 +12,9 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\PermissionController;
 use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\ParentsController;
+use App\Http\Controllers\API\CourController;
+
+
 use App\Http\Controllers\API\PersonnelController;
 use App\Http\Controllers\API\RegleController;
 use App\Http\Controllers\API\ReglementInterieurController;
@@ -56,7 +59,7 @@ Route::middleware('jwt.verify')->group(function () {
             Route::put('/update/{userId}', [UserController::class, 'update']);
             Route::delete('/delete/{userId}', [UserController::class, 'destroy']);
         });
-    
+
         // permissions
         Route::prefix('permissions')->group(function () {
             Route::get('/findAll', [PermissionController::class, 'index']);
@@ -65,7 +68,7 @@ Route::middleware('jwt.verify')->group(function () {
             Route::put('/update/{permissionId}', [PermissionController::class, 'update']);
             Route::delete('/delete/{permissionId}', [PermissionController::class, 'destroy']);
         });
-    
+
         // roles
         Route::prefix('roles')->group(function () {
             Route::get('/findAll', [RoleController::class, 'index']);
@@ -80,11 +83,10 @@ Route::middleware('jwt.verify')->group(function () {
     Route::prefix('eleves')->group(function () {
         Route::get('findOne/{eleveId}', [EleveController::class, 'view']);
         Route::get('findAll', [EleveController::class, 'index']);
-        
+
         Route::middleware('permission:modifier_eleve')->post('update', [EleveController::class, 'update']);
         Route::middleware('permission:supprimer_eleve')->delete('delete/{eleve}', [EleveController::class, 'delete']);
         Route::middleware('permission:creer_eleve')->post('create', [EleveController::class, 'store']);
-       
     });
 
     // notifications
@@ -100,7 +102,7 @@ Route::middleware('jwt.verify')->group(function () {
     Route::prefix('parents')->group(function () {
         Route::get('findAll', [ParentsController::class, 'showAll']);
         Route::get('findOne/{parentId}', [ParentsController::class, 'showIndex']);
-        
+
         Route::middleware('permission:creer_parent')->post('create', [ParentsController::class, 'store']);
         Route::middleware('permission:modifier_parent')->post('update', [ParentsController::class, 'update']);
         Route::middleware('permission:supprimer_parent')->delete('delete/{parentId}', [ParentsController::class, 'delete']);
@@ -124,11 +126,20 @@ Route::middleware('jwt.verify')->group(function () {
         Route::delete('delete/{regleId}', [RegleController::class, 'delete']);
     });
 
+    // cours
+    Route::prefix('cours')->group(function () {
+        Route::post('create', [CourController::class, 'store']);
+        Route::post('update', [CourController::class, 'update']);
+        Route::delete('delete/{coursId}', [CourController::class, 'delete']);
+        Route::get('findOne/{coursId}', [CourController::class, 'show']);
+        Route::get('findAll', [CourController::class, 'index']);
+    });
+
     // personnel
     Route::prefix('personnel')->group(function () {
         Route::get('findAll', [PersonnelController::class, 'showAll']);
         Route::get('findOne/{personnelId}', [PersonnelController::class, 'showIndex']);
-        
+
         Route::middleware('permission:creer_personnel')->post('create', [PersonnelController::class, 'store']);
         Route::middleware('permission:modifier_personnel')->post('update', [PersonnelController::class, 'update']);
         Route::middleware('permission:supprimer_personnel')->delete('delete/{personnelId}', [PersonnelController::class, 'delete']);
