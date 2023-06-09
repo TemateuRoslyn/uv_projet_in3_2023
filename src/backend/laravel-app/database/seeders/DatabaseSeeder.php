@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ReglementInterieurSeeder::class,
             RegleSeeder::class,
             CoursSeeder::class,
+            ProfesseurSeeder::class,
         ]);
     }
 }

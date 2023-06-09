@@ -13,6 +13,8 @@ use App\Http\Controllers\API\PermissionController;
 use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\ParentsController;
 use App\Http\Controllers\API\CourController;
+use App\Http\Controllers\API\ProfesseurController;
+
 
 
 use App\Http\Controllers\API\PersonnelController;
@@ -143,5 +145,14 @@ Route::middleware('jwt.verify')->group(function () {
         Route::middleware('permission:creer_personnel')->post('create', [PersonnelController::class, 'store']);
         Route::middleware('permission:modifier_personnel')->post('update', [PersonnelController::class, 'update']);
         Route::middleware('permission:supprimer_personnel')->delete('delete/{personnelId}', [PersonnelController::class, 'delete']);
+    });
+
+    //professeurs
+    Route::prefix('professeurs')->group(function () {
+        Route::post('create', [ProfesseurController::class, 'store']);
+        Route::post('update', [ProfesseurController::class, 'update']);
+        Route::delete('delete/{professeurId}', [ProfesseurController::class, 'delete']);
+        Route::get('findOne/{professeurId}', [ProfesseurController::class, 'view']);
+        Route::get('findAll', [ProfesseurController::class, 'index']);
     });
 });
