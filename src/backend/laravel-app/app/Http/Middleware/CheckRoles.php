@@ -21,10 +21,12 @@ class CheckRoles
         // Votre logique de vérification du rôle ou de la permission ici
         if ($request->user() && !$request->user()->hasAnyRoles($roles)) {
             return response()->json([
+                'success' => false,
                 'message' => 'Votre role est insuffisant pour exploiter cette ressource !',
             ], 403);
         } else if($request->user() == null){
             return response()->json([
+                'success' => false,
                 'message' => 'Veuillez vous authentifier',
             ], 403);
         }

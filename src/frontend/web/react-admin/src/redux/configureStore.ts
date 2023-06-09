@@ -5,12 +5,14 @@ import { createStore, combineReducers } from "redux";
 import IsLOggedReducer from "./Reducers/IsLOggedReducer";
 import UserReducer from "./Reducers/UserReducer";
 import { ConfigurationParameters } from "../generated";
+import TokenReducer from "./Reducers/TokenReducer";
 
 
 export interface ReduxProps {
     user?: any;
     environment?: ConfigurationParameters,
     loggedIn?: boolean;
+    access_token?: string;
 }
 
 /**
@@ -20,6 +22,7 @@ const rootReducer = combineReducers({
     user: UserReducer,
     environment: EnvironmentReducer,
     loggedIn: IsLOggedReducer, 
+    access_token: TokenReducer
 }) 
 
 /**

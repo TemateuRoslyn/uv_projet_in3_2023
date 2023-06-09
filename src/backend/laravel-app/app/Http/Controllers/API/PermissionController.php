@@ -36,7 +36,7 @@ class PermissionController extends Controller
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="message", type="string", example="Permissions retrieved successfully"),
      *             @OA\Property(
-     *                 property="data",
+     *                 property="content",
      *                 type="array",
      *                 @OA\Items(ref="#/components/schemas/Permission")
      *             )
@@ -58,7 +58,7 @@ class PermissionController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Permissions retrieved successfully',
-            'data' => $permissions
+            'content' => $permissions
         ], 200);
     }
 
@@ -95,7 +95,7 @@ class PermissionController extends Controller
      *             type="object",
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="message", type="string", example="Permission created successfully"),
-     *             @OA\Property(property="data", ref="#/components/schemas/Permission")
+     *             @OA\Property(property="content", type="object",  ref="#/components/schemas/Permission")
      *         )
      *     ),
      *     @OA\Response(
@@ -131,13 +131,14 @@ class PermissionController extends Controller
         }
         $permission = Permission::create([
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
+            'status' => STATE_ACTIVATED
         ]);
     
         return response()->json([
             'success' => true,
             'message' => 'Permission created successfully',
-            'data' => $permission
+            'content' => $permission
         ], 201);
     }
     
@@ -177,7 +178,7 @@ class PermissionController extends Controller
      *             type="object",
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="message", type="string", example="Permission retrieved successfully"),
-     *             @OA\Property(property="data", ref="#/components/schemas/Permission")
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Permission")
      *         )
      *     ),
      *     @OA\Response(
@@ -205,7 +206,7 @@ class PermissionController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Permission retrieved successfully',
-            'data' => $permission
+            'content' => $permission
         ], 200);
     }
 
@@ -241,7 +242,7 @@ class PermissionController extends Controller
      *         required=true,
      *         @OA\JsonContent(
      *             @OA\Property(property="name", type="string", example="edit_users"),
-     *             @OA\Property(property="description", type="string", example="Edit users permission")
+     *             @OA\Property(property="description", type="string", example="Edit users permission"),
      *         )
      *     ),
      *     @OA\Response(
@@ -251,7 +252,7 @@ class PermissionController extends Controller
      *             type="object",
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
-     *             @OA\Property(property="data", ref="#/components/schemas/Permission")
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Permission")
      *         )
      *     ),
      *     @OA\Response(
@@ -302,6 +303,104 @@ class PermissionController extends Controller
         $permission->update([
             'name' => $request->name,
             'description' => $request->description
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Permission updated successfully',
+            'data' => $permission
+        ], 200);
+    }
+
+    /**
+     * Update the specified permission.
+     *
+     * @OA\Put(
+     *     path="/api/permissions/update/status/{permissionId}",
+     *     summary="Update a specific permission",
+     *     tags={"Permissions"},
+     *     operationId="permissionUpdateStatus",     
+     *     @OA\Parameter(
+     *         name="permissionId",
+     *         in="path",
+     *         description="Permission ID",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="status", type="integer", example="0: active"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Permission updated successfully",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Permission")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Validation error",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="The given data was invalid"),
+     *             @OA\Property(property="errors", type="object", example="{'name': ['The name field is required.']}"),
+     *             @OA\Property(property="success", type="boolean", example=false)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Permission not found",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Permission not found"),
+     *             @OA\Property(property="success", type="boolean", example=false)
+     *         )
+     *     )
+     * )
+     */
+    public function updateStatus(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'The given data was invalid',
+                'errors' => $validator->errors(),
+                'success' => false
+            ], 400);
+        }
+
+        $permission = Permission::find($id);
+
+        if (!$permission) {
+            return response()->json([
+                'message' => 'Permission not found',
+                'success' => false
+            ], 404);
+        }
+
+        $permission->update([
+            'status' => $request->status,
         ]);
 
         return response()->json([

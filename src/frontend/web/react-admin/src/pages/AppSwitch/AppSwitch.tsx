@@ -23,7 +23,6 @@ import Buttons from '../UiElements/Buttons';
 import AdminUserForm from '../Admin/AdminUserForm';
 import AdminRole from '../Admin/AdminRole';
 import AdminRoleForm from '../Admin/AdminRoleForm';
-import AdminPermission from '../Admin/AdminPermission';
 import AdminPermissionForm from '../Admin/AdminPermissionForm';
 import UserGrid from '../Admin/AdminUser';
 import AddFaults from '../Admin/Faults/AddFaults';
@@ -36,6 +35,7 @@ import ConvocationsGrid from '../Admin/Convocations/ConvocationsGrid';
 
 import { connect,useSelector } from 'react-redux'
 import { ReduxProps } from '../../redux/configureStore';
+import Permissions from '../Admin/Permission/Permissions.page';
 
 interface AppSwitchProps {
     isLoggedIn: boolean
@@ -53,6 +53,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
         return(
         <Routes>
             <Route path="/" element={<DashBoard />} />
+            <Route path="/ui/buttons" element={<Buttons />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/students" element={<Students />} />
@@ -71,7 +72,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
             <Route path="/admin/newuser" element={<AdminUserForm />} />
             <Route path="/admin/roles" element={<AdminRole />} />
             <Route path="/admin/newrole" element={<AdminRoleForm />} />
-            <Route path="/admin/permissions" element={<AdminPermission />} />
+            <Route path="/admin/permissions" element={<Permissions />} />
             <Route path="/admin/newpermission" element={<AdminPermissionForm />} />
             <Route path="/faults/addfaults" element={<AddFaults/>} />
             <Route path="/faults/faults" element={<FaultsGrid />} />

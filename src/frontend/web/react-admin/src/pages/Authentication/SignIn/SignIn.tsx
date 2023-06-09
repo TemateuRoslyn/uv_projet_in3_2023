@@ -24,6 +24,7 @@ import { IS_LOGGED_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
 import { USER_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
 import { setIsLOggedAction } from '../../../redux/Actions/LoggedInAction';
+import { setTokenAction } from '../../../redux/Actions/TokenAction';
 
 
 interface SignInProps {}
@@ -51,6 +52,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
       localStorage.setItem(TOKEN_LOCAL_STORAGE_KEY, access_token);
       localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(store_user));
       localStorage.setItem(IS_LOGGED_LOCAL_STORAGE_KEY, ''+isLogedIn);
+      dispatch(setTokenAction(access_token)); // on propage le token dans redux
       dispatch(setIsLOggedAction(true)); // on force le parent à se mettre à jour
     }
   }, [isLogedIn, dispatch]);
@@ -198,6 +200,7 @@ function mapStateToProps(state: ReduxProps): ReduxProps {
       user: state.user,
       environment: state.environment,
       loggedIn: state.loggedIn,
+      access_token: state.access_token,
   };
 } 
 export default connect(mapStateToProps)(SignIn)

@@ -15,9 +15,7 @@ function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const preloader = document.getElementById('preloader');
 
-  const isLoggedIn: boolean = Boolean(localStorage.getItem(IS_LOGGED_LOCAL_STORAGE_KEY));
-  console.log('from App, isLoggedIn = ' + isLoggedIn);
-  
+  const isLoggedIn: boolean = Boolean(localStorage.getItem(IS_LOGGED_LOCAL_STORAGE_KEY));  
 
   if (preloader) {
     setTimeout(() => {
@@ -39,6 +37,10 @@ function App() {
 }
 
 function mapStateToProps(state: ReduxProps): ReduxProps {
-  return {};
+  return {
+    user: state.user,
+    environment: state.environment,
+    loggedIn: state.loggedIn,
+  };
 } 
 export default connect(mapStateToProps)(App)

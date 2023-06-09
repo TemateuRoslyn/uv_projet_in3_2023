@@ -34,5 +34,5 @@ export interface InlineResponse2013 {
      * @type {Permission}
      * @memberof InlineResponse2013
      */
-    data?: any;
+    content?: any;
 }
