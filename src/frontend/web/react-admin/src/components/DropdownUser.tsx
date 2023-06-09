@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { connect, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate } from 'react-router-dom';
 
 import UserOne from '../images/user/user-01.png';
 import { IS_LOGGED_LOCAL_STORAGE_KEY, TOKEN_LOCAL_STORAGE_KEY, USER_LOCAL_STORAGE_KEY } from '../constants/LOCAL_STORAGE';
@@ -10,6 +10,7 @@ import { ReduxProps } from '../redux/configureStore';
 const DropdownUser = () => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -49,6 +50,7 @@ const DropdownUser = () => {
       localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
       localStorage.removeItem(IS_LOGGED_LOCAL_STORAGE_KEY);
       dispatch(setIsLOggedAction(false));
+      navigate('/');
   }
 
   return (
