@@ -12,7 +12,7 @@ import Students from '../Students';
 import Parents from '../Parents';
 import Cours from '../Cours';
 import Enseignant from '../Enseignant';
-import Convocations from '../Convocations';
+
 import Settings from '../Settings';
 import Tables from '../Tables';
 import Alerts from '../UiElements/Alerts';
@@ -30,6 +30,9 @@ import AddFaults from '../Admin/Faults/AddFaults';
 import FaultsGrid from '../Admin/Faults/FaultsGrid';
 import AddReglement from '../Admin/ReglementInterieur/AddReglement';
 import ReglementGrid from '../Admin/ReglementInterieur/ReglementGrid';
+import AddConvocations from '../Admin/Convocations/AddConvocations';
+import ConvocationsGrid from '../Admin/Convocations/ConvocationsGrid';
+
 
 import { connect,useSelector } from 'react-redux'
 import { ReduxProps } from '../../redux/configureStore';
@@ -56,7 +59,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
             <Route path="/parents" element={<Parents />} />
             <Route path="/cours" element={<Cours />} />
             <Route path="/enseignant" element={<Enseignant />} />
-            <Route path="/convocations" element={<Convocations />} />
+            
             <Route path="/forms/form-elements" element={<FormElements />} />
             <Route path="/forms/form-layout" element={<FormLayout />} />
             <Route path="/tables" element={<Tables />} />
@@ -74,6 +77,8 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
             <Route path="/faults/faults" element={<FaultsGrid />} />
             <Route path="/reglement/addreglement" element={<AddReglement/>} />
             <Route path="/reglement/reglements" element={<ReglementGrid />} />
+            <Route path="/convocation/addconvocation" element={<AddConvocations/>} />
+            <Route path="/convocation/convocations" element={<ConvocationsGrid />} />
 
         </Routes>
         )
