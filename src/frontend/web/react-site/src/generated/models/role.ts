@@ -30,6 +30,12 @@ export interface Role {
      */
     name: any;
     /**
+     * Permission status
+     * @type {number}
+     * @memberof Role
+     */
+    status?: any;
+    /**
      * Role description
      * @type {string}
      * @memberof Role

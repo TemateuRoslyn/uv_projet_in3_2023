@@ -19,14 +19,20 @@
 export interface InlineResponse20029 {
     /**
      * 
+     * @type {boolean}
+     * @memberof InlineResponse20029
+     */
+    success?: any;
+    /**
+     * 
      * @type {string}
      * @memberof InlineResponse20029
      */
     message?: any;
     /**
      * 
-     * @type {boolean}
+     * @type {Array&lt;User&gt;}
      * @memberof InlineResponse20029
      */
-    success?: any;
+    data?: any;
 }

@@ -3,11 +3,11 @@ import { AgGridReact } from 'ag-grid-react';
 import * as XLSX from 'xlsx';
 import { connect, useSelector } from 'react-redux';
 
-import { PERMISSION_COLUMNS_DEFS } from '../../../../configs/ag-grid-column-def/permission';
-import { Permission } from '../../../../generated/models';
+import { ROLE_COLUMNS_DEFS } from '../../../../configs/ag-grid-column-def/role';
+import { Role } from '../../../../generated/models';
 import { ReduxProps } from '../../../../redux/configureStore';
 import { Link } from 'react-router-dom';
-import CreateOrUpdatePermissionModal from './CreateOrUpdatePermissionModal';
+import CreateOrUpdateRoleModal from './CreateOrUpdateRoleModal';
 import { MODAL_MODE } from '../../../../constants/ENUM';
 
 import { 
@@ -19,16 +19,16 @@ import {
     TrashIcon 
 } from '../../../../components/Icone';
 
-import './DisplayPermissions.css'
+import './DisplayRoles.css'
 import { AgGridIndicator } from '../../../../components/AgGridIndicator';
-import { PermissionsApi } from '../../../../generated';
+import { RolesApi } from '../../../../generated';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../../constants/LOCAL_STORAGE';
 import { DeleteItemModal } from '../../../../components/DeleteItemModal';
 
 
 
-interface DisplayPermissionsProps {
-    permissions: Permission [],
+interface DisplayRolesProps {
+    roles: Role [],
     isLoading: boolean,
 
     setShowSuccessNotif: (value: boolean) => void,
@@ -44,11 +44,11 @@ interface DisplayPermissionsProps {
     setDangerNotifDescription: (value: string | null) => void,
 }
 
-const DisplayPermissions: React.FC<DisplayPermissionsProps> = (props) => {
+const DisplayRoles: React.FC<DisplayRolesProps> = (props) => {
 
     const state = useSelector((state: ReduxProps) => state);
-    const [permissions, setPermissions] = useState<Permission[]>(props.permissions);
-    const [permission, setPermission] = useState<Permission>(props.permissions[0]);
+    const [roles, setRoles] = useState<Role[]>(props.roles);
+    const [role, setRole] = useState<Role>(props.roles[0]);
 
     const [showCreateOrUpdateModal, setShowCreateOrUpdateModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -61,15 +61,15 @@ const DisplayPermissions: React.FC<DisplayPermissionsProps> = (props) => {
 
     const onGridReady = useCallback(() => {
         const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-        const permissionsApi = new PermissionsApi({...state.environment, accessToken: token});
+        const rolesApi = new RolesApi({...state.environment, accessToken: token});
 
         setShowIndicator(true)
         
-        permissionsApi.permissionsIndex('Bearer ' + token)
+        rolesApi.rolesIndex('Bearer ' + token)
         .then((response) => {  
         if(response && response.data){                    
             if(response.data.success === true){ 
-                setPermissions(response.data.content) 
+                setRoles(response.data.content) 
             }
         }
         })
@@ -103,7 +103,7 @@ const DisplayPermissions: React.FC<DisplayPermissionsProps> = (props) => {
     const handleNewItem = () => {
         setShowCreateOrUpdateModal(true);
         setModalMode(MODAL_MODE.create)
-        setModalTitle("Créer un nouvelle permission")
+        setModalTitle("Créer un nouveau role")
     }
 
     const handleExportExcel = () => {
@@ -112,8 +112,8 @@ const DisplayPermissions: React.FC<DisplayPermissionsProps> = (props) => {
             if (rowData && rowData.length > 0) {
                 const worksheet = XLSX.utils.json_to_sheet(rowData);
                 const workbook = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(workbook, worksheet, 'Permissions');
-                XLSX.writeFile(workbook, 'permissions_data.xlsx');
+                XLSX.utils.book_append_sheet(workbook, worksheet, 'Roles');
+                XLSX.writeFile(workbook, 'roles_data.xlsx');
             } else {
                 alert('Veuillez selectionner une ligne !')
             }
@@ -124,10 +124,10 @@ const DisplayPermissions: React.FC<DisplayPermissionsProps> = (props) => {
         if (gridRef.current && gridRef.current.api) {      
             const rowData =gridRef.current.api.getSelectedRows();
             if (rowData && rowData.length === 1) {
-                setPermission(rowData[0])
+                setRole(rowData[0])
                 setShowCreateOrUpdateModal(true);
                 setModalMode(MODAL_MODE.update)
-                setModalTitle("Modifier une permission")
+                setModalTitle("Modifier un role")
             } else if (rowData && rowData.length > 1) {
                 alert('Vous devez selectionner une seule ligne a supprimer !')
             }else {
@@ -140,10 +140,10 @@ const DisplayPermissions: React.FC<DisplayPermissionsProps> = (props) => {
         if (gridRef.current && gridRef.current.api) {      
             const rowData =gridRef.current.api.getSelectedRows();
             if (rowData && rowData.length === 1) {
-                setPermission(rowData[0])
+                setRole(rowData[0])
                 setShowCreateOrUpdateModal(true);
                 setModalMode(MODAL_MODE.view)
-                setModalTitle("Detail d'une permission")
+                setModalTitle("Detail d'un role")
             } else if (rowData && rowData.length > 1) {
                 alert('Vous devez selectionner une seule ligne pour voir les details !')
             }else {
@@ -156,7 +156,7 @@ const DisplayPermissions: React.FC<DisplayPermissionsProps> = (props) => {
         if (gridRef.current && gridRef.current.api) {      
             const rowData =gridRef.current.api.getSelectedRows();
             if (rowData && rowData.length === 1) {
-                setPermission(rowData[0])
+                setRole(rowData[0])
                 setShowDeleteModal(true)
             } else if (rowData && rowData.length > 1) {
                 alert('Vous devez selectionner une seule ligne a supprimer !')
@@ -169,11 +169,11 @@ const DisplayPermissions: React.FC<DisplayPermissionsProps> = (props) => {
     const proccessDeleteItem = () => {
 
         const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-        const permissionsApi = new PermissionsApi({...state.environment, accessToken: token});
+        const rolesApi = new RolesApi({...state.environment, accessToken: token});
 
         setShowIndicator(true)
 
-        permissionsApi.permissionDelete(permission.id, 'Bearer ' + token)
+        rolesApi.deleteRole('Bearer ' + token, role.id)
         .then((response) => {  
         if(response && response.data){                    
             if(response.data.success === true){ 
@@ -182,7 +182,7 @@ const DisplayPermissions: React.FC<DisplayPermissionsProps> = (props) => {
 
                 // notification
                 props.setDangerNotifMessage(response.data.message)
-                props.setDangerNotifDescription('Cette permission a ete supprimee avec success')
+                props.setDangerNotifDescription('Cette role a ete supprimee avec success')
                 props.setShowDangerNotif(true)
             }
         }
@@ -241,12 +241,12 @@ const DisplayPermissions: React.FC<DisplayPermissionsProps> = (props) => {
 
         </div>
 
-        {showCreateOrUpdateModal && <CreateOrUpdatePermissionModal 
+        {showCreateOrUpdateModal && <CreateOrUpdateRoleModal 
                                         mode={modalMode} 
                                         title={modalTitle} 
                                         onClose={() => setShowCreateOrUpdateModal(false)} 
                                         refresh={onGridReady}
-                                        item={modalMode !== MODAL_MODE.create ? permission : null } 
+                                        item={modalMode !== MODAL_MODE.create ? role : null } 
                                         setShowSuccessNotif={props.setShowSuccessNotif}
                                         setSuccessNotifMessage={props.setSuccessNotifMessage}
                                         setSuccessNotifDescription={props.setSuccessNotifDescription}
@@ -256,7 +256,7 @@ const DisplayPermissions: React.FC<DisplayPermissionsProps> = (props) => {
                                     />}
 
         {showDeleteModal && <DeleteItemModal 
-                                itemName={permission.name} 
+                                itemName={role.name} 
                                 onClose={() => setShowDeleteModal(false)} 
                                 refresh={onGridReady}
                                 onCofirm={() => proccessDeleteItem()}
@@ -268,9 +268,9 @@ const DisplayPermissions: React.FC<DisplayPermissionsProps> = (props) => {
                 <div className="ag-theme-alpine" style={{height: 500}}>
                     <AgGridReact 
                         ref={gridRef}
-                        rowData={permissions} 
+                        rowData={roles} 
                         animateRows={true} 
-                        columnDefs={PERMISSION_COLUMNS_DEFS} 
+                        columnDefs={ROLE_COLUMNS_DEFS} 
                         defaultColDef={defaultColDef} 
                         rowSelection={'multiple'}
                         suppressRowClickSelection={true}
@@ -295,4 +295,4 @@ function mapStateToProps(state: ReduxProps): ReduxProps {
         access_token: state.access_token,
     };
   } 
-  export default connect(mapStateToProps)(DisplayPermissions)
+  export default connect(mapStateToProps)(DisplayRoles)

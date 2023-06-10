@@ -125,7 +125,9 @@ class RoleController extends Controller
      *         response=201,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="role", type="object", ref="#/components/schemas/Role"),
+     *             @OA\Property(property="message", type="string", example="Role trouve"),
+     *             @OA\Property(property="success", type="boolean", example="true"),      
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Role"),
      *         )
      *     )
      * )
@@ -133,7 +135,7 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:roles',
+            'name' => 'required|string|max:255|unique:roles',
             'description' => 'nullable|string|max:255',
         ]);
 
@@ -147,13 +149,14 @@ class RoleController extends Controller
 
         $role = Role::create([
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
+            'status' => STATE_ACTIVATED
         ]);
 
         return response()->json([
             'success' => true,
             'message' => 'Role created successfully',
-            'data' => $role
+            'content' => $role
         ], 201);
     }
 
@@ -184,17 +187,11 @@ class RoleController extends Controller
      *         )
      *     ),
      *     @OA\Response(
-     *         response=401,
-     *         description="Error - Unauthorized",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Unauthorized")
-     *         )
-     *     ),
-     *     @OA\Response(
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Role not found")
+     *             @OA\Property(property="message", type="string", example="Role not found"),
+     *             @OA\Property(property="success", type="boolean", example="false"),
      *         )
      *     ),
      *     @OA\Response(
@@ -203,7 +200,7 @@ class RoleController extends Controller
      *         @OA\JsonContent(
      *             @OA\Property(property="message", type="string", example="Role trouve"),
      *             @OA\Property(property="success", type="boolean", example="true"),
-     *             @OA\Property(property="data", type="object", ref="#/components/schemas/Role")
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Role")
      *         )
      *     )
      * )
@@ -221,7 +218,7 @@ class RoleController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $role
+            'content' => $role
         ], 200);
     }
 
@@ -250,6 +247,14 @@ class RoleController extends Controller
      *             type="integer"
      *         )
      *     ),
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name", "description"},
+     *             @OA\Property(property="name", type="string", example="admins"),
+     *             @OA\Property(property="description", type="string", example="Admin")
+     *         )
+     *     ),      
      *     @OA\Response(
      *         response=400,
      *         description="Error - Invalid request data",
@@ -275,22 +280,25 @@ class RoleController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Role not found")
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Role not found")
      *         )
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="role", type="object", ref="#/components/schemas/Role"),
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Role deleted successfully"),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Role"),
      *         )
      *     )
      * )
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255|required|unique:roles',
+            'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
         ]);
 
@@ -319,7 +327,105 @@ class RoleController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Role updated successfully',
-            'data' => $role
+            'content' => $role
+        ], 200);
+    }
+
+        /**
+     * Update the specified role.
+     *
+     * @OA\Put(
+     *     path="/api/roles/update/status/{roleId}",
+     *     summary="Update a specific role",
+     *     tags={"Roles"},
+     *     operationId="roleUpdateStatus",     
+     *     @OA\Parameter(
+     *         name="roleId",
+     *         in="path",
+     *         description="Role ID",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),     
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="status", type="integer", example="0: active"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Role updated successfully",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Role updated successfully"),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Role")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Validation error",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="The given data was invalid"),
+     *             @OA\Property(property="errors", type="object", example="{'name': ['The name field is required.']}"),
+     *             @OA\Property(property="success", type="boolean", example=false)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Role not found",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Role not found"),
+     *             @OA\Property(property="success", type="boolean", example=false)
+     *         )
+     *     )
+     * )
+     */
+    public function updateStatus(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'The given data was invalid',
+                'errors' => $validator->errors(),
+                'success' => false
+            ], 400);
+        }
+
+        $role = Role::find($id);
+
+        if (!$role) {
+            return response()->json([
+                'message' => 'Role not found',
+                'success' => false
+            ], 404);
+        }
+
+        $role->update([
+            'status' => $request->status,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Role status updated successfully',
+            'content' => $role
         ], 200);
     }
 
@@ -358,6 +464,15 @@ class RoleController extends Controller
      *         )
      *     ),
      *     @OA\Response(
+     *         response=200,
+     *         description="Role deleted successfully",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Role deleted successfully"),
+     *         )
+     *     ),     
+     *      @OA\Response(
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(

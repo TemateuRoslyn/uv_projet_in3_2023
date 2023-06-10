@@ -1,42 +1,37 @@
 import { ColDef } from "ag-grid-community";
-import { StatusRoleBtnComponent } from "../../views/admin/roles/status-role-btn/status-role-btn.component";
+import StatusRoleBtn from "../../pages/Admin/Role/components/StatusRoleBtn";
 
 export const ROLE_COLUMNS_DEFS: ColDef[] = [
-    {
-        headerName: '',
-        valueGetter: (params) => {
-            return params.node.rowIndex + 1;
-        },
-        width: 60,
-        type: 'nonEditableColumn',
-        filter: false
-    },
-    {
-        headerName: '',
-        headerCheckboxSelection: true,
-        headerCheckboxSelectionFilteredOnly: true,
+    { 
+        headerName: '#', 
+        field: 'id',
+        filter: 'agNumberColumnFilter',
+        headerCheckboxSelection: true, 
         checkboxSelection: true,
-        floatingFilter: false,
-        width: 60,
-        type: 'nonEditableColumn'
-    },
-    {
-        headerName: 'Nom',
-        field: 'roleName',
-        width: 350,
-        type: 'nonEditableColumn'
-    },
-    {
-        headerName: 'Description',
-        field: 'roleDesc',
-        width: 450,
-        type: 'nonEditableColumn',
-    },
-    {
-        headerName: 'Statut',
-        field: 'statut',
-        width: 300,
-        cellRendererFramework: StatusRoleBtnComponent,
-        type: 'nonEditableColumn'
-    }
+        showDisabledCheckboxes: true,
+        width: 100
+      },
+      { 
+        headerName: 'Nom', 
+        field: 'name',
+        filter: 'agTextColumnFilter',
+        checkboxSelection: false,
+        showDisabledCheckboxes: true,
+        width: 300
+      },
+      { 
+        headerName: 'Description', 
+        field: 'description',
+        filter: 'agTextColumnFilter',
+        checkboxSelection: false,
+        showDisabledCheckboxes: true,
+        width: 700
+      },
+      {
+        headerName: 'Status',
+        field: 'status',
+        editable: false,
+        cellRendererFramework: StatusRoleBtn,
+        width: 300
+      }
 ];

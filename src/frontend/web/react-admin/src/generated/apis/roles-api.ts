@@ -18,13 +18,20 @@ import { Configuration } from '../configuration';
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { InlineResponse20025 } from '../models';
 import { InlineResponse20026 } from '../models';
+import { InlineResponse20027 } from '../models';
+import { InlineResponse20028 } from '../models';
 import { InlineResponse2016 } from '../models';
 import { InlineResponse40011 } from '../models';
 import { InlineResponse40012 } from '../models';
+import { InlineResponse4007 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse40410 } from '../models';
+import { InlineResponse40411 } from '../models';
+import { InlineResponse40412 } from '../models';
 import { InlineResponse4222 } from '../models';
 import { RolesCreateBody } from '../models';
+import { StatusRoleIdBody } from '../models';
+import { UpdateRoleIdBody } from '../models';
 /**
  * RolesApi - axios parameter creator
  * @export
@@ -133,6 +140,64 @@ export const RolesApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Update the specified role.
+         * @summary Update a specific role
+         * @param {StatusRoleIdBody} body 
+         * @param {string} authorization JWT token
+         * @param {number} roleId Role ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        roleUpdateStatus: async (body: StatusRoleIdBody, authorization: string, roleId: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new RequiredError('body','Required parameter body was null or undefined when calling roleUpdateStatus.');
+            }
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling roleUpdateStatus.');
+            }
+            // verify required parameter 'roleId' is not null or undefined
+            if (roleId === null || roleId === undefined) {
+                throw new RequiredError('roleId','Required parameter roleId was null or undefined when calling roleUpdateStatus.');
+            }
+            const localVarPath = `/api/roles/update/status/{roleId}`
+                .replace(`{${"roleId"}}`, encodeURIComponent(String(roleId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Retrieve a list of all roles
          * @summary Get all roles
          * @param {string} authorization JWT token
@@ -178,12 +243,17 @@ export const RolesApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @summary Update a specific role
+         * @param {UpdateRoleIdBody} body 
          * @param {string} authorization JWT token
          * @param {number} roleId ID of eleve to delete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateRole: async (authorization: string, roleId: number, options: any = {}): Promise<RequestArgs> => {
+        updateRole: async (body: UpdateRoleIdBody, authorization: string, roleId: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new RequiredError('body','Required parameter body was null or undefined when calling updateRole.');
+            }
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling updateRole.');
@@ -208,6 +278,8 @@ export const RolesApiAxiosParamCreator = function (configuration?: Configuration
                 localVarHeaderParameter['Authorization'] = String(authorization);
             }
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -218,6 +290,8 @@ export const RolesApiAxiosParamCreator = function (configuration?: Configuration
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -305,8 +379,24 @@ export const RolesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteRole(authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteRole(authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20028>> {
             const localVarAxiosArgs = await RolesApiAxiosParamCreator(configuration).deleteRole(authorization, roleId, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Update the specified role.
+         * @summary Update a specific role
+         * @param {StatusRoleIdBody} body 
+         * @param {string} authorization JWT token
+         * @param {number} roleId Role ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20027>> {
+            const localVarAxiosArgs = await RolesApiAxiosParamCreator(configuration).roleUpdateStatus(body, authorization, roleId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -329,13 +419,14 @@ export const RolesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update a specific role
+         * @param {UpdateRoleIdBody} body 
          * @param {string} authorization JWT token
          * @param {number} roleId ID of eleve to delete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateRole(authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2016>> {
-            const localVarAxiosArgs = await RolesApiAxiosParamCreator(configuration).updateRole(authorization, roleId, options);
+        async updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20026>> {
+            const localVarAxiosArgs = await RolesApiAxiosParamCreator(configuration).updateRole(body, authorization, roleId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -349,7 +440,7 @@ export const RolesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewRole(authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20026>> {
+        async viewRole(authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2016>> {
             const localVarAxiosArgs = await RolesApiAxiosParamCreator(configuration).viewRole(authorization, roleId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -384,8 +475,20 @@ export const RolesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteRole(authorization: string, roleId: number, options?: any): AxiosPromise<void> {
+        deleteRole(authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20028> {
             return RolesApiFp(configuration).deleteRole(authorization, roleId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Update the specified role.
+         * @summary Update a specific role
+         * @param {StatusRoleIdBody} body 
+         * @param {string} authorization JWT token
+         * @param {number} roleId Role ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20027> {
+            return RolesApiFp(configuration).roleUpdateStatus(body, authorization, roleId, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieve a list of all roles
@@ -400,13 +503,14 @@ export const RolesApiFactory = function (configuration?: Configuration, basePath
         /**
          * 
          * @summary Update a specific role
+         * @param {UpdateRoleIdBody} body 
          * @param {string} authorization JWT token
          * @param {number} roleId ID of eleve to delete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateRole(authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse2016> {
-            return RolesApiFp(configuration).updateRole(authorization, roleId, options).then((request) => request(axios, basePath));
+        updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20026> {
+            return RolesApiFp(configuration).updateRole(body, authorization, roleId, options).then((request) => request(axios, basePath));
         },
         /**
          * Get information about a specific role
@@ -416,7 +520,7 @@ export const RolesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewRole(authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20026> {
+        viewRole(authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse2016> {
             return RolesApiFp(configuration).viewRole(authorization, roleId, options).then((request) => request(axios, basePath));
         },
     };
@@ -454,6 +558,19 @@ export class RolesApi extends BaseAPI {
         return RolesApiFp(this.configuration).deleteRole(authorization, roleId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
+     * Update the specified role.
+     * @summary Update a specific role
+     * @param {StatusRoleIdBody} body 
+     * @param {string} authorization JWT token
+     * @param {number} roleId Role ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RolesApi
+     */
+    public roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any) {
+        return RolesApiFp(this.configuration).roleUpdateStatus(body, authorization, roleId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
      * Retrieve a list of all roles
      * @summary Get all roles
      * @param {string} authorization JWT token
@@ -467,14 +584,15 @@ export class RolesApi extends BaseAPI {
     /**
      * 
      * @summary Update a specific role
+     * @param {UpdateRoleIdBody} body 
      * @param {string} authorization JWT token
      * @param {number} roleId ID of eleve to delete
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RolesApi
      */
-    public updateRole(authorization: string, roleId: number, options?: any) {
-        return RolesApiFp(this.configuration).updateRole(authorization, roleId, options).then((request) => request(this.axios, this.basePath));
+    public updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any) {
+        return RolesApiFp(this.configuration).updateRole(body, authorization, roleId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get information about a specific role

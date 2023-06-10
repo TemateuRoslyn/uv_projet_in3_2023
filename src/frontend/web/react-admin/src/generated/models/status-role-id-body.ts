@@ -14,19 +14,13 @@
 /**
  * 
  * @export
- * @interface InlineResponse40410
+ * @interface StatusRoleIdBody
  */
-export interface InlineResponse40410 {
+export interface StatusRoleIdBody {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse40410
+     * @type {number}
+     * @memberof StatusRoleIdBody
      */
-    message?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse40410
-     */
-    success?: any;
+    status?: any;
 }

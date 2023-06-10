@@ -60,7 +60,7 @@ const DropdownUser = () => {
       localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
       localStorage.removeItem(IS_LOGGED_LOCAL_STORAGE_KEY);
       dispatch(setIsLOggedAction(false));
-      navigate('/');
+      navigate('/auth/signin');
     });
   }
 

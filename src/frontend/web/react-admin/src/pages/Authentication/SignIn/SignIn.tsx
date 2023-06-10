@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import LogoDark from '../../../images/logo/logo-dark.svg';
 import Logo from '../../../images/logo/logo.svg';
 
-import PhoneSVG from './components/EmailSVG';
+import PhoneSVG from './components/PhoneSVG';
 import EmailSVG from './components/EmailSVG';
 import PasswordSVG from './components/PasswordSVG';
 import SubmitBtnSVG from './components/SubmitBtnSVG';
@@ -104,10 +104,9 @@ const SignIn: React.FC<SignInProps> = (props) => {
   };
 
   return (
-    // <DefaultLayout>
     <div>
-      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-        <div className="flex flex-wrap items-center">
+      <div className="rounded-sm border h-full border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+        <div className="flex flex-wrap items-center h-full">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="py-17.5 px-26 text-center">
               <Link className="mb-5.5 inline-block" to="/">

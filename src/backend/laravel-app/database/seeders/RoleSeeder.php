@@ -92,12 +92,12 @@ class RoleSeeder extends Seeder
 
         // CREATE ROLES
 
-        $USER_ROLE       = Role::updateOrCreate(USER_ROLE);
-        $ELEVE_ROLE      = Role::updateOrCreate(ELEVE_ROLE);
-        $PARENT_ROLE     = Role::updateOrCreate(PARENT_ROLE);
-        $PROFESSEUR_ROLE = Role::updateOrCreate(PROFESSEUR_ROLE);
-        $PERSONNEL_ROLE  = Role::updateOrCreate(PERSONNEL_ROLE);
-        $ADMIN_ROLE      = Role::updateOrCreate(ADMIN_ROLE);
+        $USER_ROLE       = Role::updateOrCreate([...USER_ROLE, 'status' => STATE_ACTIVATED]);
+        $ELEVE_ROLE      = Role::updateOrCreate([...ELEVE_ROLE, 'status' => STATE_ACTIVATED]);
+        $PARENT_ROLE     = Role::updateOrCreate([...PARENT_ROLE, 'status' => STATE_ACTIVATED]);
+        $PROFESSEUR_ROLE = Role::updateOrCreate([...PROFESSEUR_ROLE, 'status' => STATE_ACTIVATED]);
+        $PERSONNEL_ROLE  = Role::updateOrCreate([...PERSONNEL_ROLE, 'status' => STATE_ACTIVATED]);
+        $ADMIN_ROLE      = Role::updateOrCreate([...ADMIN_ROLE, 'status' => STATE_ACTIVATED]);
 
         // ASSIGN ROLE TO PERMISSIONS
 
