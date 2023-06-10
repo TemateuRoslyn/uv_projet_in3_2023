@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  *     @OA\Xml(name="Role"),
  *     @OA\Property(property="id", type="integer", readOnly=true, example="1"),
  *     @OA\Property(property="name", type="string", readOnly=true, description="Role name", example="admin"),
+ *     @OA\Property(property="status", type="integer", readOnly=true, description="Permission status", example="1"),
  *     @OA\Property(property="description", type="string", readOnly=true, description="Role description", example="Administrator role"),
  *     @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),
  *     @OA\Property(property="updated_at", ref="#/components/schemas/BaseModel/properties/updated_at"),
@@ -31,7 +32,8 @@ class Role extends Model
 
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'status',
     ];
 
     public function permissions()

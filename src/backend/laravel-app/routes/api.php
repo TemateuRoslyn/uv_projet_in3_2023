@@ -78,6 +78,7 @@ Route::middleware('jwt.verify')->group(function () {
             Route::get('/findOne/{roleId}', [RoleController::class, 'show']);
             Route::post('/create', [RoleController::class, 'store']);
             Route::put('/update/{roleId}', [RoleController::class, 'update']);
+            Route::put('/update/status/{roleId}', [RoleController::class, 'updateStatus']);
             Route::delete('/delete/{roleId}', [RoleController::class, 'destroy']);
         });
     });

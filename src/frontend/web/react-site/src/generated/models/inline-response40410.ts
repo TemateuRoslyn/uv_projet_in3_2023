@@ -22,5 +22,11 @@ export interface InlineResponse40410 {
      * @type {string}
      * @memberof InlineResponse40410
      */
-    error?: any;
+    message?: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse40410
+     */
+    success?: any;
 }

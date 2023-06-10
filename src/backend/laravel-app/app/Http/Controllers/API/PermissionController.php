@@ -279,7 +279,7 @@ class PermissionController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255|required|unique:permissions',
+            'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
         ]);
 
@@ -308,7 +308,7 @@ class PermissionController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Permission updated successfully',
-            'data' => $permission
+            'content' => $permission
         ], 200);
     }
 
@@ -406,7 +406,7 @@ class PermissionController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Permission updated successfully',
-            'data' => $permission
+            'content' => $permission
         ], 200);
     }
 

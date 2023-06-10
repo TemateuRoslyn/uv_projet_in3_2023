@@ -36,6 +36,7 @@ import ConvocationsGrid from '../Admin/Convocations/ConvocationsGrid';
 import { connect,useSelector } from 'react-redux'
 import { ReduxProps } from '../../redux/configureStore';
 import Permissions from '../Admin/Permission/Permissions.page';
+import Roles from '../Admin/Role/Roles.page';
 
 interface AppSwitchProps {
     isLoggedIn: boolean
@@ -52,6 +53,12 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
     if((props.isLoggedIn && props.isLoggedIn ===true) || (state.loggedIn && state.loggedIn === true)){
         return(
         <Routes>
+            <Route path="*" element={<DashBoard/>} />
+
+            <Route path="/admin/permissions" element={<Permissions />} />
+            <Route path="/admin/roles" element={<Roles />} />
+            <Route path="/admin/users" element={<UserGrid />} />
+            
             <Route path="/" element={<DashBoard />} />
             <Route path="/ui/buttons" element={<Buttons />} />
             <Route path="/calendar" element={<Calendar />} />
@@ -61,6 +68,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
             <Route path="/cours" element={<Cours />} />
             <Route path="/enseignant" element={<Enseignant />} />
             
+
             <Route path="/forms/form-elements" element={<FormElements />} />
             <Route path="/forms/form-layout" element={<FormLayout />} />
             <Route path="/tables" element={<Tables />} />
@@ -68,11 +76,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
             <Route path="/chart" element={<Chart />} />
             <Route path="/ui/alerts" element={<Alerts />} />
             <Route path="/ui/buttons" element={<Buttons />} />
-            <Route path="/admin/users" element={<UserGrid />} />
-            <Route path="/admin/newuser" element={<AdminUserForm />} />
-            <Route path="/admin/roles" element={<AdminRole />} />
             <Route path="/admin/newrole" element={<AdminRoleForm />} />
-            <Route path="/admin/permissions" element={<Permissions />} />
             <Route path="/admin/newpermission" element={<AdminPermissionForm />} />
             <Route path="/faults/addfaults" element={<AddFaults/>} />
             <Route path="/faults/faults" element={<FaultsGrid />} />
@@ -86,9 +90,9 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
     } else {
         return(
             <Routes>
-                <Route path="/" element={<SignIn/>} />
                 <Route path="/auth/signin" element={<SignIn/>} />
                 <Route path="/auth/signup" element={<SignUp/>} />
+                <Route path="*" element={<SignIn/>} />
             </Routes>
         )
     }

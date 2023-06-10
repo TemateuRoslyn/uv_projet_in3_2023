@@ -31,8 +31,8 @@ export interface InlineResponse20027 {
     message?: any;
     /**
      * 
-     * @type {Array&lt;User&gt;}
+     * @type {Role}
      * @memberof InlineResponse20027
      */
-    data?: any;
+    content?: any;
 }
