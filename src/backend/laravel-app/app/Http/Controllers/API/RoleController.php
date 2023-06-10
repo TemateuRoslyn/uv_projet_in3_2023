@@ -159,7 +159,7 @@ class RoleController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/roles/findOne/{id}",
+     *     path="/api/roles/findOne/{roleId}",
      *     summary="Get role information",
      *     description="Get information about a specific role",
      *     operationId="viewRole",
@@ -175,7 +175,7 @@ class RoleController extends Controller
      *         description="JWT token"
      *     ),     
      *      @OA\Parameter(
-     *         name="id",
+     *         name="roleId",
      *         in="path",
      *         description="ID of role to get information for",
      *         required=true,
@@ -227,7 +227,7 @@ class RoleController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/roles/update/{id}",
+     *     path="/api/roles/update/{roleId}",
      *     summary="Update a specific role",
      *     tags={"roles"},
      *     operationId="updateRole",
@@ -242,7 +242,7 @@ class RoleController extends Controller
      *         description="JWT token"
      *     ),     
      *      @OA\Parameter(
-     *         name="id",
+     *         name="roleId",
      *         in="path",
      *         description="ID of eleve to delete",
      *         required=true,
@@ -325,7 +325,7 @@ class RoleController extends Controller
 
     /**
      * @OA\Delete (
-     *     path="/api/roles/delete/{id}",
+     *     path="/api/roles/delete/{roleId}",
      *     summary="Delete an role",
      *     description="Delete an role resource",
      *     operationId="deleteRole",
@@ -341,7 +341,7 @@ class RoleController extends Controller
      *         description="JWT token"
      *     ),     
      *      @OA\Parameter(
-     *         name="id",
+     *         name="roleId",
      *         in="path",
      *         description="ID of role to delete",
      *         required=true,

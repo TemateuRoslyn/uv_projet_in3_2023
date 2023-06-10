@@ -220,7 +220,7 @@ class PermissionController extends Controller
      *     tags={"Permissions"},
      *     operationId="permissionUpdate",     
      *     @OA\Parameter(
-     *         name="id",
+     *         name="permissionId",
      *         in="path",
      *         description="Permission ID",
      *         required=true,
@@ -419,7 +419,7 @@ class PermissionController extends Controller
      *     tags={"Permissions"},
      *     operationId="permissionDelete",
      *     @OA\Parameter(
-     *         name="id",
+     *         name="permissionId",
      *         in="path",
      *         description="Permission ID",
      *         required=true,
