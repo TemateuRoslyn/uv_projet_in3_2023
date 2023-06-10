@@ -89,22 +89,22 @@ export const PermissionsApiAxiosParamCreator = function (configuration?: Configu
         /**
          * Remove the specified permission from storage.
          * @summary Delete a specific permission
-         * @param {number} id Permission ID
+         * @param {number} permissionId Permission ID
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionDelete: async (id: number, authorization: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling permissionDelete.');
+        permissionDelete: async (permissionId: number, authorization: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'permissionId' is not null or undefined
+            if (permissionId === null || permissionId === undefined) {
+                throw new RequiredError('permissionId','Required parameter permissionId was null or undefined when calling permissionDelete.');
             }
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling permissionDelete.');
             }
             const localVarPath = `/api/permissions/delete/{permissionId}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace(`{${"permissionId"}}`, encodeURIComponent(String(permissionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -189,11 +189,11 @@ export const PermissionsApiAxiosParamCreator = function (configuration?: Configu
          * @summary Update a specific permission
          * @param {UpdatePermissionIdBody} body 
          * @param {string} authorization JWT token
-         * @param {number} id Permission ID
+         * @param {number} permissionId Permission ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionUpdate: async (body: UpdatePermissionIdBody, authorization: string, id: number, options: any = {}): Promise<RequestArgs> => {
+        permissionUpdate: async (body: UpdatePermissionIdBody, authorization: string, permissionId: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling permissionUpdate.');
@@ -202,12 +202,12 @@ export const PermissionsApiAxiosParamCreator = function (configuration?: Configu
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling permissionUpdate.');
             }
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling permissionUpdate.');
+            // verify required parameter 'permissionId' is not null or undefined
+            if (permissionId === null || permissionId === undefined) {
+                throw new RequiredError('permissionId','Required parameter permissionId was null or undefined when calling permissionUpdate.');
             }
             const localVarPath = `/api/permissions/update/{permissionId}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace(`{${"permissionId"}}`, encodeURIComponent(String(permissionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -370,13 +370,13 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
         /**
          * Remove the specified permission from storage.
          * @summary Delete a specific permission
-         * @param {number} id Permission ID
+         * @param {number} permissionId Permission ID
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async permissionDelete(id: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20014>> {
-            const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionDelete(id, authorization, options);
+        async permissionDelete(permissionId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20014>> {
+            const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionDelete(permissionId, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -402,12 +402,12 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @summary Update a specific permission
          * @param {UpdatePermissionIdBody} body 
          * @param {string} authorization JWT token
-         * @param {number} id Permission ID
+         * @param {number} permissionId Permission ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async permissionUpdate(body: UpdatePermissionIdBody, authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20013>> {
-            const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionUpdate(body, authorization, id, options);
+        async permissionUpdate(body: UpdatePermissionIdBody, authorization: string, permissionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20013>> {
+            const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionUpdate(body, authorization, permissionId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -466,13 +466,13 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
         /**
          * Remove the specified permission from storage.
          * @summary Delete a specific permission
-         * @param {number} id Permission ID
+         * @param {number} permissionId Permission ID
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionDelete(id: number, authorization: string, options?: any): AxiosPromise<InlineResponse20014> {
-            return PermissionsApiFp(configuration).permissionDelete(id, authorization, options).then((request) => request(axios, basePath));
+        permissionDelete(permissionId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20014> {
+            return PermissionsApiFp(configuration).permissionDelete(permissionId, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Display the specified permission.
@@ -490,12 +490,12 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @summary Update a specific permission
          * @param {UpdatePermissionIdBody} body 
          * @param {string} authorization JWT token
-         * @param {number} id Permission ID
+         * @param {number} permissionId Permission ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionUpdate(body: UpdatePermissionIdBody, authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20013> {
-            return PermissionsApiFp(configuration).permissionUpdate(body, authorization, id, options).then((request) => request(axios, basePath));
+        permissionUpdate(body: UpdatePermissionIdBody, authorization: string, permissionId: number, options?: any): AxiosPromise<InlineResponse20013> {
+            return PermissionsApiFp(configuration).permissionUpdate(body, authorization, permissionId, options).then((request) => request(axios, basePath));
         },
         /**
          * Update the specified permission.
@@ -544,14 +544,14 @@ export class PermissionsApi extends BaseAPI {
     /**
      * Remove the specified permission from storage.
      * @summary Delete a specific permission
-     * @param {number} id Permission ID
+     * @param {number} permissionId Permission ID
      * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PermissionsApi
      */
-    public permissionDelete(id: number, authorization: string, options?: any) {
-        return PermissionsApiFp(this.configuration).permissionDelete(id, authorization, options).then((request) => request(this.axios, this.basePath));
+    public permissionDelete(permissionId: number, authorization: string, options?: any) {
+        return PermissionsApiFp(this.configuration).permissionDelete(permissionId, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Display the specified permission.
@@ -570,13 +570,13 @@ export class PermissionsApi extends BaseAPI {
      * @summary Update a specific permission
      * @param {UpdatePermissionIdBody} body 
      * @param {string} authorization JWT token
-     * @param {number} id Permission ID
+     * @param {number} permissionId Permission ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PermissionsApi
      */
-    public permissionUpdate(body: UpdatePermissionIdBody, authorization: string, id: number, options?: any) {
-        return PermissionsApiFp(this.configuration).permissionUpdate(body, authorization, id, options).then((request) => request(this.axios, this.basePath));
+    public permissionUpdate(body: UpdatePermissionIdBody, authorization: string, permissionId: number, options?: any) {
+        return PermissionsApiFp(this.configuration).permissionUpdate(body, authorization, permissionId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update the specified permission.

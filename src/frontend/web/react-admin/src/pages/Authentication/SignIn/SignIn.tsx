@@ -65,7 +65,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
 
     const authApi = new AuthApi(state.environment);
 
-    const datas: AuthLoginBody = {
+    const apiParams: AuthLoginBody = {
       username: username,
       password: password,
       persistent: false,
@@ -73,7 +73,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
 
     setIsLoading(true)
 
-    authApi.authLogin(datas)
+    authApi.authLogin(apiParams)
     .then((response) => {
 
       setIsLoading(false)      
@@ -162,7 +162,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
                 </div>
 
                 <div className="mb-5">
-                  {isLoading && (<Indicator/>)}
+                  {isLoading && (<Indicator widtf={8} height={8} border='primary'/>)}
                   <input
                     onClick={handleSubmit}
                     type="submit"
