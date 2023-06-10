@@ -19,8 +19,8 @@
 export interface InlineResponse2002 {
     /**
      * 
-     * @type {string}
+     * @type {Array&lt;Cour&gt;}
      * @memberof InlineResponse2002
      */
-    message?: any;
+    cours?: any;
 }

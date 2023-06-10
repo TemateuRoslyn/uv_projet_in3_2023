@@ -57,9 +57,7 @@ class ProfesseurSeeder extends Seeder
         if ($professeurRole) {
             $user->roles()->attach($professeurRole);
         }
-
-
-
+        
         //assigner les permissions des profs
         foreach (PROFESSEUR_PERMISSIONS as $permission) {
             $professeurPermis = Permission::where('name', $permission['name'])->first();

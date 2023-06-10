@@ -32,8 +32,14 @@ class RoleController extends Controller
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="roles", type="array", @OA\Items(ref="#/components/schemas/Role"))
-     *         )
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Role Admin"),
+     *             @OA\Property(
+     *                 property="content",
+     *                 type="array",
+     *                 @OA\Items(ref="#/components/schemas/Role")
+     *             )     
+     *          )
      *     ),
      *     @OA\Response(
      *         response=401,
@@ -50,7 +56,8 @@ class RoleController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $roles
+            'message' => "List of roles",
+            'content' => $roles
         ], 200);
     }
 

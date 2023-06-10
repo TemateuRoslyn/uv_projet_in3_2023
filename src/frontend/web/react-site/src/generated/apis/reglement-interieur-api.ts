@@ -16,15 +16,15 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20015 } from '../models';
-import { InlineResponse20016 } from '../models';
-import { InlineResponse20017 } from '../models';
-import { InlineResponse20018 } from '../models';
-import { InlineResponse4007 } from '../models';
-import { InlineResponse4008 } from '../models';
+import { InlineResponse20021 } from '../models';
+import { InlineResponse20022 } from '../models';
+import { InlineResponse20023 } from '../models';
+import { InlineResponse20024 } from '../models';
+import { InlineResponse40010 } from '../models';
+import { InlineResponse4009 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse4045 } from '../models';
-import { InlineResponse4046 } from '../models';
+import { InlineResponse4048 } from '../models';
+import { InlineResponse4049 } from '../models';
 import { ReglementCreateBody } from '../models';
 import { ReglementUpdateBody } from '../models';
 /**
@@ -295,7 +295,7 @@ export const ReglementInterieurApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createreglementInterieur(body: ReglementCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20016>> {
+        async createreglementInterieur(body: ReglementCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20022>> {
             const localVarAxiosArgs = await ReglementInterieurApiAxiosParamCreator(configuration).createreglementInterieur(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -324,7 +324,7 @@ export const ReglementInterieurApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllreglementInterieurs(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20015>> {
+        async findAllreglementInterieurs(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20021>> {
             const localVarAxiosArgs = await ReglementInterieurApiAxiosParamCreator(configuration).findAllreglementInterieurs(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -339,7 +339,7 @@ export const ReglementInterieurApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async showOneReglementInterieur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20017>> {
+        async showOneReglementInterieur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20023>> {
             const localVarAxiosArgs = await ReglementInterieurApiAxiosParamCreator(configuration).showOneReglementInterieur(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -354,7 +354,7 @@ export const ReglementInterieurApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updatereglementInterieur(body: ReglementUpdateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20018>> {
+        async updatereglementInterieur(body: ReglementUpdateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20024>> {
             const localVarAxiosArgs = await ReglementInterieurApiAxiosParamCreator(configuration).updatereglementInterieur(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -378,7 +378,7 @@ export const ReglementInterieurApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createreglementInterieur(body: ReglementCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20016> {
+        createreglementInterieur(body: ReglementCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20022> {
             return ReglementInterieurApiFp(configuration).createreglementInterieur(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -399,7 +399,7 @@ export const ReglementInterieurApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllreglementInterieurs(authorization: string, options?: any): AxiosPromise<InlineResponse20015> {
+        findAllreglementInterieurs(authorization: string, options?: any): AxiosPromise<InlineResponse20021> {
             return ReglementInterieurApiFp(configuration).findAllreglementInterieurs(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -410,7 +410,7 @@ export const ReglementInterieurApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        showOneReglementInterieur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20017> {
+        showOneReglementInterieur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20023> {
             return ReglementInterieurApiFp(configuration).showOneReglementInterieur(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -421,7 +421,7 @@ export const ReglementInterieurApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatereglementInterieur(body: ReglementUpdateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20018> {
+        updatereglementInterieur(body: ReglementUpdateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20024> {
             return ReglementInterieurApiFp(configuration).updatereglementInterieur(body, authorization, options).then((request) => request(axios, basePath));
         },
     };

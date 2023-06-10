@@ -19,8 +19,8 @@
 export interface InlineResponse2005 {
     /**
      * 
-     * @type {Array&lt;Parents&gt;}
+     * @type {Cour}
      * @memberof InlineResponse2005
      */
-    data?: any;
+    cour?: any;
 }

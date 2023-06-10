@@ -30,6 +30,12 @@ export interface Permission {
      */
     name: any;
     /**
+     * Permission status
+     * @type {number}
+     * @memberof Permission
+     */
+    status?: any;
+    /**
      * Permission description
      * @type {string}
      * @memberof Permission

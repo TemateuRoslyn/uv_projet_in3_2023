@@ -1,16 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
-import { connect, useDispatch } from 'react-redux'
 import { Link ,useNavigate } from 'react-router-dom';
+import { connect, useDispatch, useSelector } from 'react-redux'
 
 import UserOne from '../images/user/user-01.png';
-import { IS_LOGGED_LOCAL_STORAGE_KEY, TOKEN_LOCAL_STORAGE_KEY, USER_LOCAL_STORAGE_KEY } from '../constants/LOCAL_STORAGE';
+import { 
+  IS_LOGGED_LOCAL_STORAGE_KEY, 
+  TOKEN_LOCAL_STORAGE_KEY, 
+  USER_LOCAL_STORAGE_KEY,
+} from '../constants/LOCAL_STORAGE';
 import { setIsLOggedAction } from '../redux/Actions/LoggedInAction';
 import { ReduxProps } from '../redux/configureStore';
+import { AuthApi } from '../generated';
 
 const DropdownUser = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const state = useSelector((state: ReduxProps) => state);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -43,14 +49,19 @@ const DropdownUser = () => {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
-
-
   const logout = () => {
+    const authApi = new AuthApi(state.environment);
+    const token : string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
+    authApi.authLogout('Bearer '+ token)
+    .then((response) => {})
+    .catch((error) => {})
+    .finally(() => {
       localStorage.removeItem(TOKEN_LOCAL_STORAGE_KEY);
       localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
       localStorage.removeItem(IS_LOGGED_LOCAL_STORAGE_KEY);
       dispatch(setIsLOggedAction(false));
       navigate('/');
+    });
   }
 
   return (

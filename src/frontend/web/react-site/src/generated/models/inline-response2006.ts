@@ -19,20 +19,8 @@
 export interface InlineResponse2006 {
     /**
      * 
-     * @type {string}
+     * @type {Array&lt;Eleve&gt;}
      * @memberof InlineResponse2006
      */
-    message?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse2006
-     */
-    success?: any;
-    /**
-     * 
-     * @type {Parents}
-     * @memberof InlineResponse2006
-     */
-    data?: any;
+    eleves?: any;
 }

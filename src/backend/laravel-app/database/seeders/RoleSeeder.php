@@ -33,7 +33,8 @@ class RoleSeeder extends Seeder
                 ...$USER_PERMISSIONS,
                 Permission::updateOrCreate([
                     'name' => $permission['name'],
-                    'description' => $permission['description']
+                    'description' => $permission['description'],
+                    'status' => STATE_ACTIVATED
                 ])
             ];
         }
@@ -42,7 +43,8 @@ class RoleSeeder extends Seeder
                 ...$ELEVE_PERMISSIONS,
                 Permission::updateOrCreate([
                     'name' => $permission['name'],
-                    'description' => $permission['description']
+                    'description' => $permission['description'],
+                    'status' => STATE_ACTIVATED
                 ])
             ];
         }
@@ -52,6 +54,7 @@ class RoleSeeder extends Seeder
                 Permission::updateOrCreate([
                     'name' => $permission['name'],
                     'description' => $permission['description'],
+                    'status' => STATE_ACTIVATED
                 ])
             ];
         }
@@ -61,6 +64,7 @@ class RoleSeeder extends Seeder
                 Permission::updateOrCreate([
                     'name' => $permission['name'],
                     'description' => $permission['description'],
+                    'status' => STATE_ACTIVATED
                 ])
             ];
         }
@@ -70,6 +74,7 @@ class RoleSeeder extends Seeder
                 Permission::updateOrCreate([
                     'name' => $permission['name'],
                     'description' => $permission['description'],
+                    'status' => STATE_ACTIVATED
                 ])
             ];
         }
@@ -79,6 +84,7 @@ class RoleSeeder extends Seeder
                 Permission::updateOrCreate([
                     'name' => $permission['name'],
                     'description' => $permission['description'],
+                    'status' => STATE_ACTIVATED
                 ])
             ];
         }

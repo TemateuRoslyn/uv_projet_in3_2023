@@ -16,16 +16,17 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20010 } from '../models';
 import { InlineResponse20011 } from '../models';
-import { InlineResponse2008 } from '../models';
-import { InlineResponse2009 } from '../models';
+import { InlineResponse20012 } from '../models';
+import { InlineResponse20013 } from '../models';
+import { InlineResponse20014 } from '../models';
 import { InlineResponse2013 } from '../models';
-import { InlineResponse4004 } from '../models';
-import { InlineResponse4005 } from '../models';
+import { InlineResponse4006 } from '../models';
+import { InlineResponse4007 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse4043 } from '../models';
+import { InlineResponse4044 } from '../models';
 import { PermissionsCreateBody } from '../models';
+import { StatusPermissionIdBody } from '../models';
 import { UpdatePermissionIdBody } from '../models';
 /**
  * PermissionsApi - axios parameter creator
@@ -242,6 +243,64 @@ export const PermissionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
+         * Update the specified permission.
+         * @summary Update a specific permission
+         * @param {StatusPermissionIdBody} body 
+         * @param {string} authorization JWT token
+         * @param {number} permissionId Permission ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        permissionUpdateStatus: async (body: StatusPermissionIdBody, authorization: string, permissionId: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new RequiredError('body','Required parameter body was null or undefined when calling permissionUpdateStatus.');
+            }
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling permissionUpdateStatus.');
+            }
+            // verify required parameter 'permissionId' is not null or undefined
+            if (permissionId === null || permissionId === undefined) {
+                throw new RequiredError('permissionId','Required parameter permissionId was null or undefined when calling permissionUpdateStatus.');
+            }
+            const localVarPath = `/api/permissions/update/status/{permissionId}`
+                .replace(`{${"permissionId"}}`, encodeURIComponent(String(permissionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Display a listing of the permissions.
          * @summary Get a list of permissions
          * @param {string} authorization JWT token
@@ -316,7 +375,7 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async permissionDelete(id: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20011>> {
+        async permissionDelete(id: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20014>> {
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionDelete(id, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -331,7 +390,7 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async permissionShow(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2009>> {
+        async permissionShow(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20012>> {
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionShow(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -347,8 +406,24 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async permissionUpdate(body: UpdatePermissionIdBody, authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20010>> {
+        async permissionUpdate(body: UpdatePermissionIdBody, authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20013>> {
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionUpdate(body, authorization, id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Update the specified permission.
+         * @summary Update a specific permission
+         * @param {StatusPermissionIdBody} body 
+         * @param {string} authorization JWT token
+         * @param {number} permissionId Permission ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async permissionUpdateStatus(body: StatusPermissionIdBody, authorization: string, permissionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20013>> {
+            const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionUpdateStatus(body, authorization, permissionId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -361,7 +436,7 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async permissionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2008>> {
+        async permissionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20011>> {
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionsIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -396,7 +471,7 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionDelete(id: number, authorization: string, options?: any): AxiosPromise<InlineResponse20011> {
+        permissionDelete(id: number, authorization: string, options?: any): AxiosPromise<InlineResponse20014> {
             return PermissionsApiFp(configuration).permissionDelete(id, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -407,7 +482,7 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionShow(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse2009> {
+        permissionShow(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20012> {
             return PermissionsApiFp(configuration).permissionShow(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -419,8 +494,20 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionUpdate(body: UpdatePermissionIdBody, authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20010> {
+        permissionUpdate(body: UpdatePermissionIdBody, authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20013> {
             return PermissionsApiFp(configuration).permissionUpdate(body, authorization, id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Update the specified permission.
+         * @summary Update a specific permission
+         * @param {StatusPermissionIdBody} body 
+         * @param {string} authorization JWT token
+         * @param {number} permissionId Permission ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        permissionUpdateStatus(body: StatusPermissionIdBody, authorization: string, permissionId: number, options?: any): AxiosPromise<InlineResponse20013> {
+            return PermissionsApiFp(configuration).permissionUpdateStatus(body, authorization, permissionId, options).then((request) => request(axios, basePath));
         },
         /**
          * Display a listing of the permissions.
@@ -429,7 +516,7 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse2008> {
+        permissionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20011> {
             return PermissionsApiFp(configuration).permissionsIndex(authorization, options).then((request) => request(axios, basePath));
         },
     };
@@ -490,6 +577,19 @@ export class PermissionsApi extends BaseAPI {
      */
     public permissionUpdate(body: UpdatePermissionIdBody, authorization: string, id: number, options?: any) {
         return PermissionsApiFp(this.configuration).permissionUpdate(body, authorization, id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Update the specified permission.
+     * @summary Update a specific permission
+     * @param {StatusPermissionIdBody} body 
+     * @param {string} authorization JWT token
+     * @param {number} permissionId Permission ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PermissionsApi
+     */
+    public permissionUpdateStatus(body: StatusPermissionIdBody, authorization: string, permissionId: number, options?: any) {
+        return PermissionsApiFp(this.configuration).permissionUpdateStatus(body, authorization, permissionId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Display a listing of the permissions.

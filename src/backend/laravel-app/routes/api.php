@@ -51,7 +51,7 @@ Route::prefix('auth')->group(function () {
  */
 Route::middleware('jwt.verify')->group(function () {
 
-    Route::middleware('role:admin')->group(function () {
+    Route::middleware('role:'.ADMIN_ROLE['name'])->group(function () {
 
         // users
         Route::prefix('users')->group(function () {
@@ -68,6 +68,7 @@ Route::middleware('jwt.verify')->group(function () {
             Route::get('/findOne/{permissionId}', [PermissionController::class, 'show']);
             Route::post('/create', [PermissionController::class, 'store']);
             Route::put('/update/{permissionId}', [PermissionController::class, 'update']);
+            Route::put('/update/status/{permisionId}', [PermissionController::class, 'updateStatus']);
             Route::delete('/delete/{permissionId}', [PermissionController::class, 'destroy']);
         });
 
