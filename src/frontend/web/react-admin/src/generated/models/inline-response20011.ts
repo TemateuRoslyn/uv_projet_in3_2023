@@ -19,20 +19,8 @@
 export interface InlineResponse20011 {
     /**
      * 
-     * @type {boolean}
+     * @type {Array&lt;Eleve&gt;}
      * @memberof InlineResponse20011
      */
-    success?: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20011
-     */
-    message?: any;
-    /**
-     * 
-     * @type {Array&lt;Permission&gt;}
-     * @memberof InlineResponse20011
-     */
-    content?: any;
+    eleves?: any;
 }

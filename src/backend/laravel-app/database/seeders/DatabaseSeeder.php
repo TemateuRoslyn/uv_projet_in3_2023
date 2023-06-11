@@ -8,6 +8,7 @@ use Database\Seeders\UserSeeder;
 use Database\Seeders\ReglementInterieurSeeder;
 use Database\Seeders\RegleSeeder;
 use Database\Seeders\CoursSeeder;
+use Database\Seeders\ClasseSeeder;
 use Database\Seeders\EleveSeeder;
 
 
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
             RegleSeeder::class,
             CoursSeeder::class,
             ProfesseurSeeder::class,
+            ClasseSeeder::class,
             EleveSeeder::class,
         ]);
     }

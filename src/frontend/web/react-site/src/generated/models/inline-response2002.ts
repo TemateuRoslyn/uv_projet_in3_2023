@@ -19,8 +19,20 @@
 export interface InlineResponse2002 {
     /**
      * 
-     * @type {Array&lt;Cour&gt;}
+     * @type {boolean}
      * @memberof InlineResponse2002
      */
-    cours?: any;
+    success?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2002
+     */
+    message?: any;
+    /**
+     * 
+     * @type {Array&lt;Classe&gt;}
+     * @memberof InlineResponse2002
+     */
+    content?: any;
 }

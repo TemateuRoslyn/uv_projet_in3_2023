@@ -20,8 +20,6 @@ import Buttons from '../UiElements/Buttons';
 
 //ADMIN
 //import AdminUser from './Admin/AdminUser';
-import AdminUserForm from '../Admin/AdminUserForm';
-import AdminRole from '../Admin/AdminRole';
 import AdminRoleForm from '../Admin/AdminRoleForm';
 import AdminPermissionForm from '../Admin/AdminPermissionForm';
 import UserGrid from '../Admin/AdminUser';
@@ -38,6 +36,7 @@ import { ReduxProps } from '../../redux/configureStore';
 import Permissions from '../Admin/Permission/Permissions.page';
 import Roles from '../Admin/Role/Roles.page';
 import CoursPage from "../Admin/cours/Cours.page";
+import Classes from '../Classe/Classes.page';
 
 interface AppSwitchProps {
     isLoggedIn: boolean
@@ -60,11 +59,12 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
             <Route path="/admin/roles" element={<Roles />} />
             <Route path="/admin/users" element={<UserGrid />} />
             
+            <Route path="/students" element={<Students />} />
+            <Route path="/classes" element={<Classes />} />
             <Route path="/" element={<DashBoard />} />
             <Route path="/ui/buttons" element={<Buttons />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/students" element={<Students />} />
             <Route path="/parents" element={<Parents />} />
             <Route path="/cours" element={<CoursPage />} />
             <Route path="/enseignant" element={<Enseignant />} />

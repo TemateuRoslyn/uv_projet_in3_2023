@@ -19,20 +19,8 @@
 export interface InlineResponse2012 {
     /**
      * 
-     * @type {string}
+     * @type {Eleve}
      * @memberof InlineResponse2012
      */
-    message?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse2012
-     */
-    success?: any;
-    /**
-     * 
-     * @type {Parents}
-     * @memberof InlineResponse2012
-     */
-    data?: any;
+    eleve?: any;
 }

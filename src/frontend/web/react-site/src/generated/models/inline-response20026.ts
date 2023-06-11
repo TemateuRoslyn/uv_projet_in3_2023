@@ -19,20 +19,8 @@
 export interface InlineResponse20026 {
     /**
      * 
-     * @type {boolean}
+     * @type {Array&lt;ReglementInterieur&gt;}
      * @memberof InlineResponse20026
      */
-    success?: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20026
-     */
-    message?: any;
-    /**
-     * 
-     * @type {Role}
-     * @memberof InlineResponse20026
-     */
-    content?: any;
+    reglements?: any;
 }

@@ -25,7 +25,7 @@ export interface InlineResponse20023 {
     success?: any;
     /**
      * 
-     * @type {ReglementInterieur}
+     * @type {Array&lt;Regle&gt;}
      * @memberof InlineResponse20023
      */
     data?: any;

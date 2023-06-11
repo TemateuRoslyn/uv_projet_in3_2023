@@ -33,7 +33,9 @@ class CourController extends Controller
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="cours", type="array", @OA\Items(ref="#/components/schemas/Cour"))
+     *             @OA\Property(property="message", type="string", example="Course retrieved successfully"),
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Cour")),
      *         )
      *     ),
      *     @OA\Response(
@@ -53,7 +55,7 @@ class CourController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Course retrieved successfully',
-            'data' => $cours
+            'content' => $cours
         ], 200);
     }
 
@@ -103,7 +105,7 @@ class CourController extends Controller
      *         @OA\JsonContent(
      *             @OA\Property(property="message", type="string", example="Cour trouvé"),
      *             @OA\Property(property="success", type="boolean", example="true"),
-     *             @OA\Property(property="data", type="object", ref="#/components/schemas/Cour")
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Cour")
      *         )
      *     )
      * )
@@ -123,7 +125,7 @@ class CourController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Course retrieved successfully',
-            'data' => $cour
+            'content' => $cour
         ], 200);
     }
 
@@ -177,7 +179,7 @@ class CourController extends Controller
      *         @OA\JsonContent(
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="message", type="string", example="Course created successfully"),
-     *             @OA\Property(property="data", ref="#/components/schemas/Cour")
+     *             @OA\Property(property="content", ref="#/components/schemas/Cour")
      *         )
      *     )
      * )
@@ -185,11 +187,10 @@ class CourController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'libelle' => 'required|unique:cours',
+            'libelle' => 'required',
             'date_cour' => 'required|date',
-            'heure_debut' => 'required',
-            'heure_fin' => 'required',
-            //'professeur_id' => 'required|integer',
+            'heure_debut' => 'required|date',
+            'heure_fin' => 'required|date',
         ]);
 
         if ($validator->fails()) {
@@ -210,7 +211,7 @@ class CourController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Course created successfully',
-            'data' => $cour
+            'content' => $cour
         ], 200);
     }
 
@@ -275,7 +276,9 @@ class CourController extends Controller
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="cour", type="object", ref="#/components/schemas/Cour"),
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Cour"),
      *         )
      *     )
      * )
@@ -288,11 +291,10 @@ class CourController extends Controller
         if ($courFound) {
 
             $validator = Validator::make($request->all(), [
-                'libelle' => 'required|unique:cours',
+                'libelle' => 'required',
                 'date_cour' => 'required|date',
-                'heure_debut' => 'required',
-                'heure_fin' => 'required',
-                // 'professeur_id' => 'required|integer',
+                'heure_debut' => 'required|date',
+                'heure_fin' => 'required|date',
             ]);
         } else {
             return response()->json([
@@ -322,7 +324,7 @@ class CourController extends Controller
         return response()->json([
             'message' => 'Course updated successfully',
             'success' => true,
-            'data' => $courFound
+            'content' => $courFound
         ]);
     }
 
@@ -370,6 +372,10 @@ class CourController extends Controller
      *     @OA\Response(
      *         response=200,
      *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
+     *         )  
      *     )
      * )
      */

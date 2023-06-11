@@ -19,20 +19,8 @@
 export interface InlineResponse20022 {
     /**
      * 
-     * @type {boolean}
+     * @type {Professeur}
      * @memberof InlineResponse20022
      */
-    success?: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20022
-     */
-    message?: any;
-    /**
-     * 
-     * @type {ReglementInterieur}
-     * @memberof InlineResponse20022
-     */
-    data?: any;
+    eleve?: any;
 }

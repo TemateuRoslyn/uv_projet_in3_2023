@@ -19,20 +19,8 @@
 export interface InlineResponse4007 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse4007
-     */
-    message?: any;
-    /**
-     * 
      * @type {any}
      * @memberof InlineResponse4007
      */
-    errors?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse4007
-     */
-    success?: any;
+    error?: any;
 }
