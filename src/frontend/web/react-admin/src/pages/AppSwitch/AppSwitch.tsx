@@ -37,6 +37,7 @@ import { connect,useSelector } from 'react-redux'
 import { ReduxProps } from '../../redux/configureStore';
 import Permissions from '../Admin/Permission/Permissions.page';
 import Roles from '../Admin/Role/Roles.page';
+import CoursPage from "../Admin/cours/Cours.page";
 
 interface AppSwitchProps {
     isLoggedIn: boolean
@@ -65,7 +66,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/students" element={<Students />} />
             <Route path="/parents" element={<Parents />} />
-            <Route path="/cours" element={<Cours />} />
+            <Route path="/cours" element={<CoursPage />} />
             <Route path="/enseignant" element={<Enseignant />} />
             
 
