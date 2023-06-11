@@ -45,7 +45,7 @@ const CoursPage = () => {
       .then((response) => {  
         if (response && response.data) {        
           if (response.data.success === true) {
-            setCours(response.data);
+            setCours(response.data.content);
             console.log(response.data);
           }
         }

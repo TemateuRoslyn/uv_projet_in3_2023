@@ -260,7 +260,7 @@ const DisplayClasses: React.FC<DisplayClassesProps> = (props) => {
                                 itemName={classe.speciality ? classe.shortName + ' ' + classe.speciality + ' ' + classe.no : classe.shortName  + ' ' + classe.no} 
                                 onClose={() => setShowDeleteModal(false)} 
                                 refresh={onGridReady}
-                                onCofirm={() => proccessDeleteItem()}
+                                onConfirm={() => proccessDeleteItem()}
                             />}
 
         <div className="col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4 relative">
