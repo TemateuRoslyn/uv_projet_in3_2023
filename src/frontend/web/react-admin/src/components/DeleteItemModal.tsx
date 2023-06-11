@@ -1,7 +1,7 @@
 interface NotificationModalProps {
     itemName?: string,
     onClose: () => void,
-    onCofirm: () => void,
+    onConfirm: () => void,
     refresh?: () => void,
   }
   
@@ -56,7 +56,7 @@ interface NotificationModalProps {
               <button
                 type="button"
                 className="confirm-button"
-                onClick={props.onCofirm}
+                onClick={props.onConfirm}
               >
                 Oui, je suis certain(e)
               </button>
