@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 // controllers
 use App\Http\Controllers\API\EleveController;
+use App\Http\Controllers\API\ClassesController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\UserController;
@@ -14,9 +15,6 @@ use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\ParentsController;
 use App\Http\Controllers\API\CourController;
 use App\Http\Controllers\API\ProfesseurController;
-
-
-
 use App\Http\Controllers\API\PersonnelController;
 use App\Http\Controllers\API\RegleController;
 use App\Http\Controllers\API\ReglementInterieurController;
@@ -81,6 +79,16 @@ Route::middleware('jwt.verify')->group(function () {
             Route::put('/update/status/{roleId}', [RoleController::class, 'updateStatus']);
             Route::delete('/delete/{roleId}', [RoleController::class, 'destroy']);
         });
+    });
+
+    // classes
+    Route::prefix('classes')->group(function () {
+        Route::get('findOne/{classeId}', [ClassesController::class, 'show']);
+        Route::get('findAll', [ClassesController::class, 'index']);
+
+        Route::middleware('permission:modifier_classe')->put('update/{classeId}', [ClassesController::class, 'update']);
+        Route::middleware('permission:supprimer_classe')->delete('delete/{classeId}', [ClassesController::class, 'destroy']);
+        Route::middleware('permission:creer_classe')->post('create', [ClassesController::class, 'store']);
     });
 
     // eleves

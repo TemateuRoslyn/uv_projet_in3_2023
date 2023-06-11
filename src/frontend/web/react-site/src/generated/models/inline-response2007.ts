@@ -31,8 +31,8 @@ export interface InlineResponse2007 {
     success?: any;
     /**
      * 
-     * @type {Eleve}
+     * @type {Cour}
      * @memberof InlineResponse2007
      */
-    data?: any;
+    content?: any;
 }

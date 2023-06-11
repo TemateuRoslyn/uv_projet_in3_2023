@@ -16,15 +16,15 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20010 } from '../models';
-import { InlineResponse2008 } from '../models';
-import { InlineResponse2009 } from '../models';
-import { InlineResponse2012 } from '../models';
-import { InlineResponse4004 } from '../models';
-import { InlineResponse4005 } from '../models';
+import { InlineResponse20013 } from '../models';
+import { InlineResponse20014 } from '../models';
+import { InlineResponse20015 } from '../models';
+import { InlineResponse2013 } from '../models';
+import { InlineResponse4006 } from '../models';
+import { InlineResponse4007 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse4042 } from '../models';
 import { InlineResponse4043 } from '../models';
+import { InlineResponse4044 } from '../models';
 import { ParentsCreateBody } from '../models';
 import { ParentsUpdateBody } from '../models';
 /**
@@ -262,7 +262,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async showAllParent(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2008>> {
+        async showAllParent(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20013>> {
             const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).showAllParent(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -276,7 +276,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async showOneParent(parentId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2009>> {
+        async showOneParent(parentId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20014>> {
             const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).showOneParent(parentId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -290,7 +290,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async storeParent(body: ParentsCreateBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2012>> {
+        async storeParent(body: ParentsCreateBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2013>> {
             const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).storeParent(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -304,7 +304,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateParent(body: ParentsUpdateBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20010>> {
+        async updateParent(body: ParentsUpdateBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20015>> {
             const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).updateParent(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -336,7 +336,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        showAllParent(options?: any): AxiosPromise<InlineResponse2008> {
+        showAllParent(options?: any): AxiosPromise<InlineResponse20013> {
             return ParentsApiFp(configuration).showAllParent(options).then((request) => request(axios, basePath));
         },
         /**
@@ -346,7 +346,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        showOneParent(parentId: number, options?: any): AxiosPromise<InlineResponse2009> {
+        showOneParent(parentId: number, options?: any): AxiosPromise<InlineResponse20014> {
             return ParentsApiFp(configuration).showOneParent(parentId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -356,7 +356,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        storeParent(body: ParentsCreateBody, options?: any): AxiosPromise<InlineResponse2012> {
+        storeParent(body: ParentsCreateBody, options?: any): AxiosPromise<InlineResponse2013> {
             return ParentsApiFp(configuration).storeParent(body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -366,7 +366,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateParent(body: ParentsUpdateBody, options?: any): AxiosPromise<InlineResponse20010> {
+        updateParent(body: ParentsUpdateBody, options?: any): AxiosPromise<InlineResponse20015> {
             return ParentsApiFp(configuration).updateParent(body, options).then((request) => request(axios, basePath));
         },
     };

@@ -18,14 +18,15 @@ import { Configuration } from '../configuration';
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { CoursCreateBody } from '../models';
 import { CoursUpdateBody } from '../models';
-import { InlineResponse2002 } from '../models';
-import { InlineResponse2003 } from '../models';
-import { InlineResponse2004 } from '../models';
-import { InlineResponse2005 } from '../models';
-import { InlineResponse4001 } from '../models';
-import { InlineResponse4002 } from '../models';
+import { InlineResponse20010 } from '../models';
+import { InlineResponse2006 } from '../models';
+import { InlineResponse2007 } from '../models';
+import { InlineResponse2008 } from '../models';
+import { InlineResponse2009 } from '../models';
+import { InlineResponse4003 } from '../models';
+import { InlineResponse4004 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse404 } from '../models';
+import { InlineResponse4041 } from '../models';
 /**
  * CoursApi - axios parameter creator
  * @export
@@ -294,7 +295,7 @@ export const CoursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createCours(body: CoursCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004>> {
+        async createCours(body: CoursCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2008>> {
             const localVarAxiosArgs = await CoursApiAxiosParamCreator(configuration).createCours(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -309,7 +310,7 @@ export const CoursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteCours(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteCours(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20010>> {
             const localVarAxiosArgs = await CoursApiAxiosParamCreator(configuration).deleteCours(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -323,7 +324,7 @@ export const CoursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllcours(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
+        async findAllcours(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2006>> {
             const localVarAxiosArgs = await CoursApiAxiosParamCreator(configuration).findAllcours(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -338,7 +339,7 @@ export const CoursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findOneCours(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2003>> {
+        async findOneCours(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2007>> {
             const localVarAxiosArgs = await CoursApiAxiosParamCreator(configuration).findOneCours(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -353,7 +354,7 @@ export const CoursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateCours(body: CoursUpdateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2005>> {
+        async updateCours(body: CoursUpdateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2009>> {
             const localVarAxiosArgs = await CoursApiAxiosParamCreator(configuration).updateCours(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -377,7 +378,7 @@ export const CoursApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createCours(body: CoursCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse2004> {
+        createCours(body: CoursCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse2008> {
             return CoursApiFp(configuration).createCours(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -388,7 +389,7 @@ export const CoursApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteCours(authorization: string, id: number, options?: any): AxiosPromise<void> {
+        deleteCours(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20010> {
             return CoursApiFp(configuration).deleteCours(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -398,7 +399,7 @@ export const CoursApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllcours(authorization: string, options?: any): AxiosPromise<InlineResponse2002> {
+        findAllcours(authorization: string, options?: any): AxiosPromise<InlineResponse2006> {
             return CoursApiFp(configuration).findAllcours(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -409,7 +410,7 @@ export const CoursApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findOneCours(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse2003> {
+        findOneCours(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse2007> {
             return CoursApiFp(configuration).findOneCours(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -420,7 +421,7 @@ export const CoursApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCours(body: CoursUpdateBody, authorization: string, options?: any): AxiosPromise<InlineResponse2005> {
+        updateCours(body: CoursUpdateBody, authorization: string, options?: any): AxiosPromise<InlineResponse2009> {
             return CoursApiFp(configuration).updateCours(body, authorization, options).then((request) => request(axios, basePath));
         },
     };

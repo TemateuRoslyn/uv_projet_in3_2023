@@ -19,20 +19,20 @@
 export interface InlineResponse20030 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20030
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20030
      */
     success?: any;
     /**
      * 
-     * @type {User}
+     * @type {string}
      * @memberof InlineResponse20030
      */
-    data?: any;
+    message?: any;
+    /**
+     * 
+     * @type {Array&lt;Role&gt;}
+     * @memberof InlineResponse20030
+     */
+    content?: any;
 }

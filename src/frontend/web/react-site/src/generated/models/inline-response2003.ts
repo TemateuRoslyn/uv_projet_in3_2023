@@ -19,20 +19,20 @@
 export interface InlineResponse2003 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse2003
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse2003
      */
     success?: any;
     /**
      * 
-     * @type {Cour}
+     * @type {string}
      * @memberof InlineResponse2003
      */
-    data?: any;
+    message?: any;
+    /**
+     * 
+     * @type {Classe}
+     * @memberof InlineResponse2003
+     */
+    content?: any;
 }

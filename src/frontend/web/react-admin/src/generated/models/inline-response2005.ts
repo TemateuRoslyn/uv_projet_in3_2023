@@ -19,8 +19,14 @@
 export interface InlineResponse2005 {
     /**
      * 
-     * @type {Cour}
+     * @type {boolean}
      * @memberof InlineResponse2005
      */
-    cour?: any;
+    success?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2005
+     */
+    message?: any;
 }

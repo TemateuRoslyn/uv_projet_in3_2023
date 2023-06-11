@@ -31,8 +31,8 @@ export interface InlineResponse2004 {
     message?: any;
     /**
      * 
-     * @type {Cour}
+     * @type {Classe}
      * @memberof InlineResponse2004
      */
-    data?: any;
+    content?: any;
 }

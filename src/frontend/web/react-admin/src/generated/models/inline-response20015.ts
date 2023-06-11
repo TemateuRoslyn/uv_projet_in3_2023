@@ -19,8 +19,8 @@
 export interface InlineResponse20015 {
     /**
      * 
-     * @type {Array&lt;Professeur&gt;}
+     * @type {Parents}
      * @memberof InlineResponse20015
      */
-    professeurs?: any;
+    parent?: any;
 }

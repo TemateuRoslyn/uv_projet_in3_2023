@@ -32,7 +32,8 @@
         "files": [
             "helpers/permissions.php",
             "helpers/roles.php",
-            "helpers/constants.php"
+            "helpers/constants.php",
+            "helpers/classes.php"
         ]
     },
     "autoload-dev": {
