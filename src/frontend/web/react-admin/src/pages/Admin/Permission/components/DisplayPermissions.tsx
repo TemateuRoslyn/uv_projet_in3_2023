@@ -259,7 +259,7 @@ const DisplayPermissions: React.FC<DisplayPermissionsProps> = (props) => {
                                 itemName={permission.name} 
                                 onClose={() => setShowDeleteModal(false)} 
                                 refresh={onGridReady}
-                                onCofirm={() => proccessDeleteItem()}
+                                onConfirm={() => proccessDeleteItem()}
                             />}
 
         <div className="col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4 relative">

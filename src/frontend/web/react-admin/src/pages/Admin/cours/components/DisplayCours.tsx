@@ -66,7 +66,7 @@ const DisplayCours: React.FC<DisplayCoursProps> = (props) => {
             .then((response) => {  
                 if (response && response.data) {                    
                     if (response.data.success === true) { 
-                        setCours(response.data.data);
+                        setCours(response.data.content);
                     }
                 }
             })
