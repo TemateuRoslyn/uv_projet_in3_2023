@@ -28,18 +28,6 @@ export interface ElevesCreateBody {
      * @type {string}
      * @memberof ElevesCreateBody
      */
-    password: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElevesCreateBody
-     */
-    username: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof ElevesCreateBody
-     */
     firstName: any;
     /**
      * 
@@ -89,4 +77,10 @@ export interface ElevesCreateBody {
      * @memberof ElevesCreateBody
      */
     redoublant: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof ElevesCreateBody
+     */
+    classeId: any;
 }

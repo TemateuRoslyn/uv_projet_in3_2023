@@ -17,7 +17,7 @@ export const ClASSE_COLUMNS_DEFS: ColDef[] = [
     filter: 'agTextColumnFilter',
     checkboxSelection: false,
     showDisabledCheckboxes: true,
-    width: 400
+    width: 200
   },
   { 
     headerName: 'Petit Nom', 
@@ -58,7 +58,7 @@ export const ClASSE_COLUMNS_DEFS: ColDef[] = [
     filter: 'agNumberColumnFilter',
     checkboxSelection: false,
     showDisabledCheckboxes: true,
-    width: 150
+    width: 200
   },
 
 ];

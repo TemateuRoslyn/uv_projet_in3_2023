@@ -21,9 +21,11 @@ import { InlineResponse2002 } from '../models';
 import { InlineResponse2003 } from '../models';
 import { InlineResponse2004 } from '../models';
 import { InlineResponse2005 } from '../models';
+import { InlineResponse2006 } from '../models';
 import { InlineResponse2011 } from '../models';
 import { InlineResponse4001 } from '../models';
 import { InlineResponse4002 } from '../models';
+import { InlineResponse4003 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse404 } from '../models';
 import { UpdateClasseIdBody } from '../models';
@@ -284,6 +286,55 @@ export const ClassesApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Get the filtered list of classes.
+         * @summary Get filtered list of classes
+         * @param {string} keyword Keyword to filter classes
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        classesRecords: async (keyword: string, authorization: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'keyword' is not null or undefined
+            if (keyword === null || keyword === undefined) {
+                throw new RequiredError('keyword','Required parameter keyword was null or undefined when calling classesRecords.');
+            }
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling classesRecords.');
+            }
+            const localVarPath = `/api/classes/records/{keyword}`
+                .replace(`{${"keyword"}}`, encodeURIComponent(String(keyword)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -368,6 +419,21 @@ export const ClassesApiFp = function(configuration?: Configuration) {
                 return axios.request(axiosRequestArgs);
             };
         },
+        /**
+         * Get the filtered list of classes.
+         * @summary Get filtered list of classes
+         * @param {string} keyword Keyword to filter classes
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async classesRecords(keyword: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2006>> {
+            const localVarAxiosArgs = await ClassesApiAxiosParamCreator(configuration).classesRecords(keyword, authorization, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
     }
 };
 
@@ -431,6 +497,17 @@ export const ClassesApiFactory = function (configuration?: Configuration, basePa
          */
         classesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse2002> {
             return ClassesApiFp(configuration).classesIndex(authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get the filtered list of classes.
+         * @summary Get filtered list of classes
+         * @param {string} keyword Keyword to filter classes
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        classesRecords(keyword: string, authorization: string, options?: any): AxiosPromise<InlineResponse2006> {
+            return ClassesApiFp(configuration).classesRecords(keyword, authorization, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -501,5 +578,17 @@ export class ClassesApi extends BaseAPI {
      */
     public classesIndex(authorization: string, options?: any) {
         return ClassesApiFp(this.configuration).classesIndex(authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get the filtered list of classes.
+     * @summary Get filtered list of classes
+     * @param {string} keyword Keyword to filter classes
+     * @param {string} authorization JWT token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClassesApi
+     */
+    public classesRecords(keyword: string, authorization: string, options?: any) {
+        return ClassesApiFp(this.configuration).classesRecords(keyword, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -19,8 +19,14 @@
 export interface InlineResponse20015 {
     /**
      * 
-     * @type {Parents}
+     * @type {boolean}
      * @memberof InlineResponse20015
      */
-    parent?: any;
+    success?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20015
+     */
+    message?: any;
 }

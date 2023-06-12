@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\SendEmailJob;
 
 use App\Models\Eleve;
+use App\Models\Classe;
 use App\Models\User;
 use App\Models\Permission;
 use App\Models\Role;
@@ -45,8 +46,11 @@ class EleveController extends Controller
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="eleves", type="array", @OA\Items(ref="#/components/schemas/Eleve"))
-     *         )
+     *             type="object",
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
+     *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Eleve"))
+     *         )   
      *     ),
      *     @OA\Response(
      *         response=401,
@@ -59,13 +63,12 @@ class EleveController extends Controller
      */
     public function index()
     {
-        $eleves = Eleve::has('user')->with('user')->get();
-
+        $eleves = Eleve::with('user', 'classe')->get();
 
         return response()->json([
             'message' => 'Liste des élèves',
             'success' => true,
-            'data' => $eleves
+            'content' => $eleves
         ]);
     }
 
@@ -106,7 +109,8 @@ class EleveController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Eleve not found")
+     *             @OA\Property(property="message", type="string", example="Eleve not found"),
+     *             @OA\Property(property="success", type="boolean", example="false"),
      *         )
      *     ),
      *     @OA\Response(
@@ -115,14 +119,16 @@ class EleveController extends Controller
      *         @OA\JsonContent(
      *             @OA\Property(property="message", type="string", example="Élève trouvé(e)"),
      *             @OA\Property(property="success", type="boolean", example="true"),
-     *             @OA\Property(property="data", type="object", ref="#/components/schemas/Eleve")
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Eleve")
      *         )
      *     )
      * )
      */
     public function view($eleveId)
     {
-        $eleve = Eleve::with('user')->find($eleveId);
+        $eleve = Eleve::with('user')
+                        ->has('classe')->with('classe')
+                        ->find($eleveId);
 
         if ($eleve) {
             $eleveData = $eleve->toArray();
@@ -131,7 +137,7 @@ class EleveController extends Controller
             return response()->json([
                 'message' => 'élève trouvé(e)',
                 'success' => true,
-                'data' => $eleveData
+                'content' => $eleveData
             ], 200);
         } else {
             return response()->json([
@@ -161,22 +167,24 @@ class EleveController extends Controller
      *         ),
      *         description="JWT token"
      *     ),
-     *      @OA\RequestBody(
+     *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(
-     *             required={"email", "password", "username", "first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "sexe", "telephone", "solvable", "redoublant", "user_id"},
-     *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
-     *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     *             @OA\Property(property="username", type="string", example="Doe"),
-     *             @OA\Property(property="first_name", type="string", example="John"),
-     *             @OA\Property(property="last_name", type="string", example="Smith"),
-     *             @OA\Property(property="date_de_naissance", type="string", format="date", example="1990-01-01"),
-     *             @OA\Property(property="lieu_de_naissance", type="string", example="Paris"),
-     *             @OA\Property(property="photo", type="string", nullable=true, example="https://example.com/photo.jpg"),
-     *             @OA\Property(property="sexe", type="string", example="Male"),
-     *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
-     *             @OA\Property(property="solvable", type="boolean", example="true"),
-     *             @OA\Property(property="redoublant", type="boolean", example="false")
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 required={"email", "firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "solvable", "redoublant", "classeId"},
+     *                 @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
+     *                 @OA\Property(property="firstName", type="string", example="John"),
+     *                 @OA\Property(property="lastName", type="string", example="Smith"),
+     *                 @OA\Property(property="dateDeNaissance", type="string", format="date", example="1990-01-01"),
+     *                 @OA\Property(property="lieuDeNaissance", type="string", example="Paris"),
+     *                 @OA\Property(property="photo", type="string", format="binary", nullable=true),
+     *                 @OA\Property(property="sexe", type="string", example="Male"),
+     *                 @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
+     *                 @OA\Property(property="solvable", type="boolean", example=true),
+     *                 @OA\Property(property="redoublant", type="boolean", example=false),
+     *                 @OA\Property(property="classeId", type="integer", example=1),
+     *             )
      *         )
      *     ),
      *     @OA\Response(
@@ -221,7 +229,9 @@ class EleveController extends Controller
      *         response=201,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="eleve", type="object", ref="#/components/schemas/Eleve"),
+     *             @OA\Property(property="message", type="string", example="Élève créé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Eleve")
      *         )
      *     )
      * )
@@ -231,17 +241,16 @@ class EleveController extends Controller
 
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
-            'username' => 'required|unique:users',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'date_de_naissance' => 'required|date',
-            'lieu_de_naissance' => 'required',
-            'photo' => 'nullable|image',
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'dateDeNaissance' => 'required|date',
+            'lieuDeNaissance' => 'required',
             'sexe' => 'required',
+            'photo' => 'nullable|image',
             'telephone' => 'required',
             'solvable' => 'required',
             'redoublant' => 'required',
+            'classeId' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -254,25 +263,53 @@ class EleveController extends Controller
 
         $user = User::create([
             'email' => $request->input('email'),
-            'username' => $request->input('username'),
-            'password' => bcrypt($request->input('password')),
+            'username' => $request->input('email'),
+            'password' => bcrypt($request->input('email')),
         ]);
 
+        $photo = NULL;
+
+        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+            $file = $request->file('photo');
+            
+            // Vérifiez le type MIME si nécessaire
+            $allowedTypes = ['image/jpeg', 'image/png'];
+            if (!in_array($file->getMimeType(), $allowedTypes)) {
+                return response()->json(['error' => 'Le fichier sélectionné n\'est pas une image.'], 400);
+            }
+            
+            // Déplacez le fichier vers le répertoire de stockage souhaité
+            $photo = $file->store($this->avatar_path);
+            
+        }
 
         $eleve = Eleve::create([
-            'user_id' => $user->id,
+            'userId' => $user->id,
+            'classeId' => $request->input('classeId'),
             'solvable' => boolval($request->input('solvable')),
             'redoublant' => boolval($request->input('redoublant')),
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'date_de_naissance' => $request->input('date_de_naissance'),
-            'lieu_de_naissance' => $request->input('lieu_de_naissance'),
-            'photo' => $request->file('photo') ? $request->file('photo')->store($this->avatar_path) : null,
+            'firstName' => $request->input('firstName'),
+            'lastName' => $request->input('lastName'),
+            'dateDeNaissance' => $request->input('dateDeNaissance'),
+            'lieuDeNaissance' => $request->input('lieuDeNaissance'),
+            'photo' => $photo,
             'sexe' => $request->input('sexe'),
             'telephone' => $request->input('telephone'),
         ]);
 
+        // update de classe de l'eleve...
+        $classe = Classe::find($request->classeId);
+        $classe->effectif++;
+        $classe->update([
+            'name' => $classe->name,
+            'shortName' => $classe->shortName,
+            'speciality' => $classe->speciality,
+            'no' => $classe->no,
+            'effectif' => $classe->effectif,
+        ]);
+
         $eleve->user = $user;
+        $eleve->classe = $classe;
 
         // Créer un eleve de base avec le rôle eleve
         $eleveRole = Role::where('name', 'eleve')->first();
@@ -290,10 +327,13 @@ class EleveController extends Controller
         //envoie du mail a l'utilisateur
         $details = array();
 
-        $details['greeting'] = "Hi " . $eleve->first_name;
-        $details['body'] = "Veuillez Modifier votre mot de passe pour assurer la confidentialite de vos donnees et de vos actions au sein de la plateforme . Pour cela, veuillez cliquer sur le ce lien pour proceder la la mise a jour de votre mot de passe .";
+        $details['greeting'] = "Hi " . $eleve->firstName;
+        $details['body'] = "Veuillez Modifier votre mot de passe pour assurer la confidentialite de vos donnees et de vos actions au sein de la plateforme . 
+                            \n Mot de passe actuel: $user->email
+                            \n Login actuel: $user->email
+                            Pour cela, veuillez cliquer sur le ce lien pour proceder la la mise a jour de votre mot de passe .";
         $details['actiontext'] = "Modifier mon mot de passe";
-        $details['actionurl'] = "http://www.gestiondiscipline.com/resetpassword";
+        $details['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
         $details['endtext'] = "Merci de rester fidele a cet etablissement";
 
         // envoi du mail
@@ -302,18 +342,27 @@ class EleveController extends Controller
         return response()->json([
             'message' => 'Eleve created successfully',
             'success' => true,
-            'data' => $eleve,
+            'content' => $eleve,
         ]);
     }
 
 
     /**
-     * @OA\Post(
-     *     path="/api/eleves/update",
+     * @OA\Put(
+     *     path="/api/eleves/update/{eleveId}",
      *     summary="Update a eleve's information",
      *     description="Update a eleve's information",
      *     operationId="updateEleve",
      *     tags={"eleves"},
+     *      @OA\Parameter(
+     *         name="eleveId",
+     *         in="path",
+     *         description="ID of eleve to update in this request",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ), 
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -324,21 +373,24 @@ class EleveController extends Controller
      *         ),
      *         description="JWT token"
      *     ),
-     *      @OA\RequestBody(
+     *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(
-     *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
-     *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     *             @OA\Property(property="username", type="string", example="Doe"),
-     *             @OA\Property(property="first_name", type="string", example="John"),
-     *             @OA\Property(property="last_name", type="string", example="Smith"),
-     *             @OA\Property(property="date_de_naissance", type="string", format="date", example="1990-01-01"),
-     *             @OA\Property(property="lieu_de_naissance", type="string", example="Paris"),
-     *             @OA\Property(property="photo", type="string", nullable=true, example="https://example.com/photo.jpg"),
-     *             @OA\Property(property="sexe", type="string", example="Male"),
-     *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
-     *             @OA\Property(property="solvable", type="boolean", example="true"),
-     *             @OA\Property(property="redoublant", type="boolean", example="false")
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 required={"email", "firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "solvable", "redoublant", "classeId"},
+     *                 @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
+     *                 @OA\Property(property="firstName", type="string", example="John"),
+     *                 @OA\Property(property="lastName", type="string", example="Smith"),
+     *                 @OA\Property(property="dateDeNaissance", type="string", format="date", example="1990-01-01"),
+     *                 @OA\Property(property="lieuDeNaissance", type="string", example="Paris"),
+     *                 @OA\Property(property="photo", type="string", format="binary", nullable=true),
+     *                 @OA\Property(property="sexe", type="string", example="Male"),
+     *                 @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
+     *                 @OA\Property(property="solvable", type="boolean", example=true),
+     *                 @OA\Property(property="redoublant", type="boolean", example=false),
+     *                 @OA\Property(property="classeId", type="integer", example=1),
+     *             )
      *         )
      *     ),
      *     @OA\Response(
@@ -373,31 +425,32 @@ class EleveController extends Controller
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="eleve", type="object", ref="#/components/schemas/Eleve"),
-     *         )
+     *             @OA\Property(property="message", type="string", example="Élève modifié qvec succèss"),
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Eleve")     
+     *          )
      *     )
      * )
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        // on récupère l'élève associé
-        $eleveFound = Eleve::find($request->id);
-        if ($eleveFound) {
-            $user = User::find($eleveFound->user_id);
 
+        // on récupère l'élève associé
+        $eleveFound = Eleve::find($id);
+        if ($eleveFound) {
+            $user = User::find($eleveFound->userId);
             $validator = Validator::make($request->all(), [
-                'id' => 'required',
                 'email' => 'required|email|unique:users,email,' . $user->id,
-                'username' => 'required|unique:users',
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'date_de_naissance' => 'required|date',
-                'lieu_de_naissance' => 'required',
-                'photo' => 'nullable|image',
+                'firstName' => 'required',
+                'lastName' => 'required',
+                'dateDeNaissance' => 'required|date',
+                'lieuDeNaissance' => 'required',
                 'sexe' => 'required',
+                'photo' => 'nullable|image',
                 'telephone' => 'required',
                 'solvable' => 'required',
                 'redoublant' => 'required',
+                'classeId' => 'required'
             ]);
         } else {
             return response()->json([
@@ -414,11 +467,8 @@ class EleveController extends Controller
             ], 400);
         }
 
-
-
         // Mise à jour des champs de l'objet User
         $user->email = $request->input('email');
-        $user->username = $request->input('username');
 
         // Suppression de l'ancienne photo si une nouvelle a été sélectionnée
         if ($request->hasFile('photo')) {
@@ -432,22 +482,53 @@ class EleveController extends Controller
         $user->save();
 
         // Mise à jour des champs de l'objet Eleve
-        $eleveFound->first_name = $request->input('first_name');
-        $eleveFound->last_name = $request->input('last_name');
-        $eleveFound->date_de_naissance = $request->input('date_de_naissance');
-        $eleveFound->lieu_de_naissance = $request->input('lieu_de_naissance');
+        $eleveFound->firstName = $request->input('firstName');
+        $eleveFound->lastName = $request->input('lastName');
+        $eleveFound->dateDeNaissance = $request->input('dateDeNaissance');
+        $eleveFound->lieuDeNaissance = $request->input('lieuDeNaissance');
         $eleveFound->sexe = $request->input('sexe');
         $eleveFound->telephone = $request->input('telephone');
         $eleveFound->solvable = boolval($request->input('solvable'));
         $eleveFound->redoublant = boolval($request->input('redoublant'));
+        
+        // update de classe de l'eleve...
+        
+        // si il change de classe
+        $classe = Classe::find($request->classeId);
+        
+        if($classe && $eleveFound->classeId != $request->classeId){
+
+            // update de l'ancienne classe
+            $oldClasse = Classe::find($eleveFound->classeId);
+            $oldClasse->update([
+                'name' => $oldClasse->name,
+                'shortName' => $oldClasse->shortName,
+                'speciality' => $oldClasse->speciality,
+                'no' => $oldClasse->no,
+                'effectif' => --$oldClasse->effectif,
+            ]);
+            
+            // update de la nouvelle classe
+            $classe->update([
+                'name' => $classe->name,
+                'shortName' => $classe->shortName,
+                'speciality' => $classe->speciality,
+                'no' => $classe->no,
+                'effectif' => ++$classe->effectif,
+            ]);
+
+        }
+        
+        $eleveFound->classeId = $request->input('classeId');
         $eleveFound->save();
-
-        $eleveFound = Eleve::with('user')->find($eleveFound->id);
-
+        
+        $eleveFound->user = $user;
+        $eleveFound->classe = $classe;
+        
         return response()->json([
             'message' => 'Eleve updated successfully',
             'success' => true,
-            'data' => $eleveFound
+            'content' => $eleveFound
         ]);
     }
 
@@ -493,9 +574,14 @@ class EleveController extends Controller
      *         )
      *     ),
      *     @OA\Response(
-     *         response=204,
-     *         description="Success",
-     *     )
+     *         response=200,
+     *         description="Permission deleted successfully",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Eleve deleted successfully")
+     *         )
+     *     ),
      * )
      */
     public function delete($eleveId)
@@ -505,7 +591,7 @@ class EleveController extends Controller
         if ($eleveFound) {
 
             //le user associe
-            $userFound = User::find($eleveFound->user_id);
+            $userFound = User::find($eleveFound->userId);
 
             // supperssion de l'image du user
             if ($userFound->photo) {
@@ -515,15 +601,25 @@ class EleveController extends Controller
             //suppression de l'eleve
             $eleveFound->delete();
 
+            // update de classe de l'eleve...
+            $classe = Classe::find($eleveFound->classeId);
+            $classe->update([
+                'name' => $classe->name,
+                'shortName' => $classe->shortName,
+                'speciality' => $classe->speciality,
+                'no' => $classe->no,
+                'effectif' => --$classe->effectif,
+            ]);
+
             return response()->json([
                 'message' => 'Eleve deleted successfully',
                 'success' => true,
-            ]);
+            ], 200);
         } else {
             return response()->json([
                 'message' => 'Eleve to delete was not found',
                 'success' => false,
-            ]);
+            ], 404);
         }
     }
 }

@@ -8,7 +8,6 @@ import DashBoard from '../Dashboard/DashBoard';
 import FormElements from '../Form/FormElements';
 import FormLayout from '../Form/FormLayout';
 import Profile from '../Profile';
-import Students from '../Students';
 import Parents from '../Parents';
 
 
@@ -36,6 +35,7 @@ import Permissions from '../Admin/Permission/Permissions.page';
 import Roles from '../Admin/Role/Roles.page';
 import CoursPage from "../Admin/cours/Cours.page";
 import Classes from '../Classe/Classes.page';
+import Eleves from '../Eleve/Eleves.page';
 import ReglementInterieurPage from '../ReglementInterieur/ReglementInterieur.page';
 import ReglePage from '../Regle/Regle.page';
 
@@ -58,7 +58,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
             <Route path="/admin/roles" element={<Roles />} />
             <Route path="/admin/users" element={<UserGrid />} />
             
-            <Route path="/students" element={<Students />} />
+            <Route path="/eleves" element={<Eleves />} />
             <Route path="/classes" element={<Classes />} />
             <Route path="/" element={<DashBoard />} />
             <Route path="/ui/buttons" element={<Buttons />} />

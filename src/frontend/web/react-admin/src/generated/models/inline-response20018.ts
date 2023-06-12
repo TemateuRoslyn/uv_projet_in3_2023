@@ -19,20 +19,8 @@
 export interface InlineResponse20018 {
     /**
      * 
-     * @type {boolean}
+     * @type {Parents}
      * @memberof InlineResponse20018
      */
-    success?: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20018
-     */
-    message?: any;
-    /**
-     * 
-     * @type {Permission}
-     * @memberof InlineResponse20018
-     */
-    content?: any;
+    parent?: any;
 }

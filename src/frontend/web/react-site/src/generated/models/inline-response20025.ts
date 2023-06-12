@@ -19,8 +19,8 @@
 export interface InlineResponse20025 {
     /**
      * 
-     * @type {Regle}
+     * @type {Professeur}
      * @memberof InlineResponse20025
      */
-    regle?: any;
+    eleve?: any;
 }

@@ -16,14 +16,15 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { ElevesCreateBody } from '../models';
-import { ElevesUpdateBody } from '../models';
-import { InlineResponse20011 } from '../models';
 import { InlineResponse20012 } from '../models';
+import { InlineResponse20013 } from '../models';
+import { InlineResponse20014 } from '../models';
+import { InlineResponse20015 } from '../models';
 import { InlineResponse2012 } from '../models';
-import { InlineResponse4005 } from '../models';
+import { InlineResponse4006 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse4042 } from '../models';
+import { InlineResponse4043 } from '../models';
 import { InlineResponse4221 } from '../models';
 /**
  * ElevesApi - axios parameter creator
@@ -34,15 +35,65 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Create a new eleve resource
          * @summary Create a new eleve
-         * @param {ElevesCreateBody} body 
+         * @param {string} email 
+         * @param {string} firstName 
+         * @param {string} lastName 
+         * @param {string} dateDeNaissance 
+         * @param {string} lieuDeNaissance 
+         * @param {string} photo 
+         * @param {string} sexe 
+         * @param {string} telephone 
+         * @param {boolean} solvable 
+         * @param {boolean} redoublant 
+         * @param {number} classeId 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createEleve: async (body: ElevesCreateBody, authorization: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            if (body === null || body === undefined) {
-                throw new RequiredError('body','Required parameter body was null or undefined when calling createEleve.');
+        createEleve: async (email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'email' is not null or undefined
+            if (email === null || email === undefined) {
+                throw new RequiredError('email','Required parameter email was null or undefined when calling createEleve.');
+            }
+            // verify required parameter 'firstName' is not null or undefined
+            if (firstName === null || firstName === undefined) {
+                throw new RequiredError('firstName','Required parameter firstName was null or undefined when calling createEleve.');
+            }
+            // verify required parameter 'lastName' is not null or undefined
+            if (lastName === null || lastName === undefined) {
+                throw new RequiredError('lastName','Required parameter lastName was null or undefined when calling createEleve.');
+            }
+            // verify required parameter 'dateDeNaissance' is not null or undefined
+            if (dateDeNaissance === null || dateDeNaissance === undefined) {
+                throw new RequiredError('dateDeNaissance','Required parameter dateDeNaissance was null or undefined when calling createEleve.');
+            }
+            // verify required parameter 'lieuDeNaissance' is not null or undefined
+            if (lieuDeNaissance === null || lieuDeNaissance === undefined) {
+                throw new RequiredError('lieuDeNaissance','Required parameter lieuDeNaissance was null or undefined when calling createEleve.');
+            }
+            // verify required parameter 'photo' is not null or undefined
+            if (photo === null || photo === undefined) {
+                throw new RequiredError('photo','Required parameter photo was null or undefined when calling createEleve.');
+            }
+            // verify required parameter 'sexe' is not null or undefined
+            if (sexe === null || sexe === undefined) {
+                throw new RequiredError('sexe','Required parameter sexe was null or undefined when calling createEleve.');
+            }
+            // verify required parameter 'telephone' is not null or undefined
+            if (telephone === null || telephone === undefined) {
+                throw new RequiredError('telephone','Required parameter telephone was null or undefined when calling createEleve.');
+            }
+            // verify required parameter 'solvable' is not null or undefined
+            if (solvable === null || solvable === undefined) {
+                throw new RequiredError('solvable','Required parameter solvable was null or undefined when calling createEleve.');
+            }
+            // verify required parameter 'redoublant' is not null or undefined
+            if (redoublant === null || redoublant === undefined) {
+                throw new RequiredError('redoublant','Required parameter redoublant was null or undefined when calling createEleve.');
+            }
+            // verify required parameter 'classeId' is not null or undefined
+            if (classeId === null || classeId === undefined) {
+                throw new RequiredError('classeId','Required parameter classeId was null or undefined when calling createEleve.');
             }
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
@@ -58,13 +109,58 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
 
             if (authorization !== undefined && authorization !== null) {
                 localVarHeaderParameter['Authorization'] = String(authorization);
             }
 
-            localVarHeaderParameter['Content-Type'] = 'application/json';
 
+            if (email !== undefined) { 
+                localVarFormParams.append('email', email as any);
+            }
+
+            if (firstName !== undefined) { 
+                localVarFormParams.append('firstName', firstName as any);
+            }
+
+            if (lastName !== undefined) { 
+                localVarFormParams.append('lastName', lastName as any);
+            }
+
+            if (dateDeNaissance !== undefined) { 
+                localVarFormParams.append('dateDeNaissance', dateDeNaissance as any);
+            }
+
+            if (lieuDeNaissance !== undefined) { 
+                localVarFormParams.append('lieuDeNaissance', lieuDeNaissance as any);
+            }
+
+            if (photo !== undefined) { 
+                localVarFormParams.append('photo', photo as any);
+            }
+
+            if (sexe !== undefined) { 
+                localVarFormParams.append('sexe', sexe as any);
+            }
+
+            if (telephone !== undefined) { 
+                localVarFormParams.append('telephone', telephone as any);
+            }
+
+            if (solvable !== undefined) { 
+                localVarFormParams.append('solvable', solvable as any);
+            }
+
+            if (redoublant !== undefined) { 
+                localVarFormParams.append('redoublant', redoublant as any);
+            }
+
+            if (classeId !== undefined) { 
+                localVarFormParams.append('classeId', classeId as any);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -75,8 +171,7 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -178,37 +273,138 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Update a eleve's information
          * @summary Update a eleve's information
-         * @param {ElevesUpdateBody} body 
+         * @param {string} email 
+         * @param {string} firstName 
+         * @param {string} lastName 
+         * @param {string} dateDeNaissance 
+         * @param {string} lieuDeNaissance 
+         * @param {string} photo 
+         * @param {string} sexe 
+         * @param {string} telephone 
+         * @param {boolean} solvable 
+         * @param {boolean} redoublant 
+         * @param {number} classeId 
          * @param {string} authorization JWT token
+         * @param {number} eleveId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateEleve: async (body: ElevesUpdateBody, authorization: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            if (body === null || body === undefined) {
-                throw new RequiredError('body','Required parameter body was null or undefined when calling updateEleve.');
+        updateEleve: async (email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, eleveId: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'email' is not null or undefined
+            if (email === null || email === undefined) {
+                throw new RequiredError('email','Required parameter email was null or undefined when calling updateEleve.');
+            }
+            // verify required parameter 'firstName' is not null or undefined
+            if (firstName === null || firstName === undefined) {
+                throw new RequiredError('firstName','Required parameter firstName was null or undefined when calling updateEleve.');
+            }
+            // verify required parameter 'lastName' is not null or undefined
+            if (lastName === null || lastName === undefined) {
+                throw new RequiredError('lastName','Required parameter lastName was null or undefined when calling updateEleve.');
+            }
+            // verify required parameter 'dateDeNaissance' is not null or undefined
+            if (dateDeNaissance === null || dateDeNaissance === undefined) {
+                throw new RequiredError('dateDeNaissance','Required parameter dateDeNaissance was null or undefined when calling updateEleve.');
+            }
+            // verify required parameter 'lieuDeNaissance' is not null or undefined
+            if (lieuDeNaissance === null || lieuDeNaissance === undefined) {
+                throw new RequiredError('lieuDeNaissance','Required parameter lieuDeNaissance was null or undefined when calling updateEleve.');
+            }
+            // verify required parameter 'photo' is not null or undefined
+            if (photo === null || photo === undefined) {
+                throw new RequiredError('photo','Required parameter photo was null or undefined when calling updateEleve.');
+            }
+            // verify required parameter 'sexe' is not null or undefined
+            if (sexe === null || sexe === undefined) {
+                throw new RequiredError('sexe','Required parameter sexe was null or undefined when calling updateEleve.');
+            }
+            // verify required parameter 'telephone' is not null or undefined
+            if (telephone === null || telephone === undefined) {
+                throw new RequiredError('telephone','Required parameter telephone was null or undefined when calling updateEleve.');
+            }
+            // verify required parameter 'solvable' is not null or undefined
+            if (solvable === null || solvable === undefined) {
+                throw new RequiredError('solvable','Required parameter solvable was null or undefined when calling updateEleve.');
+            }
+            // verify required parameter 'redoublant' is not null or undefined
+            if (redoublant === null || redoublant === undefined) {
+                throw new RequiredError('redoublant','Required parameter redoublant was null or undefined when calling updateEleve.');
+            }
+            // verify required parameter 'classeId' is not null or undefined
+            if (classeId === null || classeId === undefined) {
+                throw new RequiredError('classeId','Required parameter classeId was null or undefined when calling updateEleve.');
             }
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling updateEleve.');
             }
-            const localVarPath = `/api/eleves/update`;
+            // verify required parameter 'eleveId' is not null or undefined
+            if (eleveId === null || eleveId === undefined) {
+                throw new RequiredError('eleveId','Required parameter eleveId was null or undefined when calling updateEleve.');
+            }
+            const localVarPath = `/api/eleves/update/{eleveId}`
+                .replace(`{${"eleveId"}}`, encodeURIComponent(String(eleveId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
             if (configuration) {
                 baseOptions = configuration.baseOptions;
             }
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
 
             if (authorization !== undefined && authorization !== null) {
                 localVarHeaderParameter['Authorization'] = String(authorization);
             }
 
-            localVarHeaderParameter['Content-Type'] = 'application/json';
 
+            if (email !== undefined) { 
+                localVarFormParams.append('email', email as any);
+            }
+
+            if (firstName !== undefined) { 
+                localVarFormParams.append('firstName', firstName as any);
+            }
+
+            if (lastName !== undefined) { 
+                localVarFormParams.append('lastName', lastName as any);
+            }
+
+            if (dateDeNaissance !== undefined) { 
+                localVarFormParams.append('dateDeNaissance', dateDeNaissance as any);
+            }
+
+            if (lieuDeNaissance !== undefined) { 
+                localVarFormParams.append('lieuDeNaissance', lieuDeNaissance as any);
+            }
+
+            if (photo !== undefined) { 
+                localVarFormParams.append('photo', photo as any);
+            }
+
+            if (sexe !== undefined) { 
+                localVarFormParams.append('sexe', sexe as any);
+            }
+
+            if (telephone !== undefined) { 
+                localVarFormParams.append('telephone', telephone as any);
+            }
+
+            if (solvable !== undefined) { 
+                localVarFormParams.append('solvable', solvable as any);
+            }
+
+            if (redoublant !== undefined) { 
+                localVarFormParams.append('redoublant', redoublant as any);
+            }
+
+            if (classeId !== undefined) { 
+                localVarFormParams.append('classeId', classeId as any);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -219,8 +415,7 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -288,13 +483,23 @@ export const ElevesApiFp = function(configuration?: Configuration) {
         /**
          * Create a new eleve resource
          * @summary Create a new eleve
-         * @param {ElevesCreateBody} body 
+         * @param {string} email 
+         * @param {string} firstName 
+         * @param {string} lastName 
+         * @param {string} dateDeNaissance 
+         * @param {string} lieuDeNaissance 
+         * @param {string} photo 
+         * @param {string} sexe 
+         * @param {string} telephone 
+         * @param {boolean} solvable 
+         * @param {boolean} redoublant 
+         * @param {number} classeId 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createEleve(body: ElevesCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2012>> {
-            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).createEleve(body, authorization, options);
+        async createEleve(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2012>> {
+            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).createEleve(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, solvable, redoublant, classeId, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -308,7 +513,7 @@ export const ElevesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20015>> {
             const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).deleteEleve(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -322,7 +527,7 @@ export const ElevesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async elevesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20011>> {
+        async elevesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20012>> {
             const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).elevesIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -332,13 +537,24 @@ export const ElevesApiFp = function(configuration?: Configuration) {
         /**
          * Update a eleve's information
          * @summary Update a eleve's information
-         * @param {ElevesUpdateBody} body 
+         * @param {string} email 
+         * @param {string} firstName 
+         * @param {string} lastName 
+         * @param {string} dateDeNaissance 
+         * @param {string} lieuDeNaissance 
+         * @param {string} photo 
+         * @param {string} sexe 
+         * @param {string} telephone 
+         * @param {boolean} solvable 
+         * @param {boolean} redoublant 
+         * @param {number} classeId 
          * @param {string} authorization JWT token
+         * @param {number} eleveId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateEleve(body: ElevesUpdateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2012>> {
-            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).updateEleve(body, authorization, options);
+        async updateEleve(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, eleveId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20014>> {
+            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).updateEleve(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, solvable, redoublant, classeId, authorization, eleveId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -352,7 +568,7 @@ export const ElevesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20012>> {
+        async viewEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20013>> {
             const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).viewEleve(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -371,13 +587,23 @@ export const ElevesApiFactory = function (configuration?: Configuration, basePat
         /**
          * Create a new eleve resource
          * @summary Create a new eleve
-         * @param {ElevesCreateBody} body 
+         * @param {string} email 
+         * @param {string} firstName 
+         * @param {string} lastName 
+         * @param {string} dateDeNaissance 
+         * @param {string} lieuDeNaissance 
+         * @param {string} photo 
+         * @param {string} sexe 
+         * @param {string} telephone 
+         * @param {boolean} solvable 
+         * @param {boolean} redoublant 
+         * @param {number} classeId 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createEleve(body: ElevesCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse2012> {
-            return ElevesApiFp(configuration).createEleve(body, authorization, options).then((request) => request(axios, basePath));
+        createEleve(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, options?: any): AxiosPromise<InlineResponse2012> {
+            return ElevesApiFp(configuration).createEleve(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, solvable, redoublant, classeId, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete an eleve resource
@@ -387,7 +613,7 @@ export const ElevesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteEleve(authorization: string, id: number, options?: any): AxiosPromise<void> {
+        deleteEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20015> {
             return ElevesApiFp(configuration).deleteEleve(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -397,19 +623,30 @@ export const ElevesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        elevesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20011> {
+        elevesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20012> {
             return ElevesApiFp(configuration).elevesIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Update a eleve's information
          * @summary Update a eleve's information
-         * @param {ElevesUpdateBody} body 
+         * @param {string} email 
+         * @param {string} firstName 
+         * @param {string} lastName 
+         * @param {string} dateDeNaissance 
+         * @param {string} lieuDeNaissance 
+         * @param {string} photo 
+         * @param {string} sexe 
+         * @param {string} telephone 
+         * @param {boolean} solvable 
+         * @param {boolean} redoublant 
+         * @param {number} classeId 
          * @param {string} authorization JWT token
+         * @param {number} eleveId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateEleve(body: ElevesUpdateBody, authorization: string, options?: any): AxiosPromise<InlineResponse2012> {
-            return ElevesApiFp(configuration).updateEleve(body, authorization, options).then((request) => request(axios, basePath));
+        updateEleve(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, eleveId: number, options?: any): AxiosPromise<InlineResponse20014> {
+            return ElevesApiFp(configuration).updateEleve(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, solvable, redoublant, classeId, authorization, eleveId, options).then((request) => request(axios, basePath));
         },
         /**
          * Get information about a specific eleve
@@ -419,7 +656,7 @@ export const ElevesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20012> {
+        viewEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20013> {
             return ElevesApiFp(configuration).viewEleve(authorization, id, options).then((request) => request(axios, basePath));
         },
     };
@@ -435,14 +672,24 @@ export class ElevesApi extends BaseAPI {
     /**
      * Create a new eleve resource
      * @summary Create a new eleve
-     * @param {ElevesCreateBody} body 
+     * @param {string} email 
+     * @param {string} firstName 
+     * @param {string} lastName 
+     * @param {string} dateDeNaissance 
+     * @param {string} lieuDeNaissance 
+     * @param {string} photo 
+     * @param {string} sexe 
+     * @param {string} telephone 
+     * @param {boolean} solvable 
+     * @param {boolean} redoublant 
+     * @param {number} classeId 
      * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ElevesApi
      */
-    public createEleve(body: ElevesCreateBody, authorization: string, options?: any) {
-        return ElevesApiFp(this.configuration).createEleve(body, authorization, options).then((request) => request(this.axios, this.basePath));
+    public createEleve(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, options?: any) {
+        return ElevesApiFp(this.configuration).createEleve(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, solvable, redoublant, classeId, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Delete an eleve resource
@@ -470,14 +717,25 @@ export class ElevesApi extends BaseAPI {
     /**
      * Update a eleve's information
      * @summary Update a eleve's information
-     * @param {ElevesUpdateBody} body 
+     * @param {string} email 
+     * @param {string} firstName 
+     * @param {string} lastName 
+     * @param {string} dateDeNaissance 
+     * @param {string} lieuDeNaissance 
+     * @param {string} photo 
+     * @param {string} sexe 
+     * @param {string} telephone 
+     * @param {boolean} solvable 
+     * @param {boolean} redoublant 
+     * @param {number} classeId 
      * @param {string} authorization JWT token
+     * @param {number} eleveId ID of eleve to update in this request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ElevesApi
      */
-    public updateEleve(body: ElevesUpdateBody, authorization: string, options?: any) {
-        return ElevesApiFp(this.configuration).updateEleve(body, authorization, options).then((request) => request(this.axios, this.basePath));
+    public updateEleve(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, eleveId: number, options?: any) {
+        return ElevesApiFp(this.configuration).updateEleve(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, solvable, redoublant, classeId, authorization, eleveId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get information about a specific eleve
