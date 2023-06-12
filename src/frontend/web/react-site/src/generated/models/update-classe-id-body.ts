@@ -35,4 +35,10 @@ export interface UpdateClasseIdBody {
      * @memberof UpdateClasseIdBody
      */
     speciality?: any;
+    /**
+     * 100
+     * @type {number}
+     * @memberof UpdateClasseIdBody
+     */
+    effectif?: any;
 }

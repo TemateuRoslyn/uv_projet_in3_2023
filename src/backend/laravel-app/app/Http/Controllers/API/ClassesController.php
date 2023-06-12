@@ -268,6 +268,7 @@ class ClassesController extends Controller
      *              @OA\Property(property="name", type="string", readOnly=true, description="Terminal"),
      *              @OA\Property(property="shortName", type="string", readOnly=true, description="Tle"),
      *              @OA\Property(property="speciality", type="string", readOnly=true, description="C"),
+     *              @OA\Property(property="effectif", type="number", readOnly=true, description="100"),
      *         )
      *     ),
      *     @OA\Response(
@@ -306,7 +307,6 @@ class ClassesController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'shortName' => 'required',
-            'speciality' => 'required',
             'effectif' => 'required',
         ]);
 
@@ -348,6 +348,7 @@ class ClassesController extends Controller
             $classeFound->update([
                 'name' => $request->name,
                 'shortName' => $request->shortName,
+                'speciality' => NULL,
                 'no' => ++$nbClase,
                 'effectif' => $request->effectif,
             ]); 
@@ -355,7 +356,7 @@ class ClassesController extends Controller
     
         return response()->json([
             'success' => true,
-            'message' => 'Classe created successfully',
+            'message' => 'Classe updated successfully',
             'content' => $classeFound
         ], 201);
     }
