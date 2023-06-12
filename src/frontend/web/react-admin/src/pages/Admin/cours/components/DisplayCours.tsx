@@ -40,6 +40,8 @@ interface DisplayCoursProps {
     setShowDangerNotif: (value: boolean) => void,
     setDangerNotifMessage: (value: string) => void,
     setDangerNotifDescription: (value: string | null) => void,
+
+    setTokenExpired: () =>void,
 }
 
 const DisplayCours: React.FC<DisplayCoursProps> = (props) => {
@@ -71,7 +73,7 @@ const DisplayCours: React.FC<DisplayCoursProps> = (props) => {
                 }
             })
             .catch((error) => {
-                alert(error?.response?.data?.message);
+                props.setTokenExpired()
             })
             .finally(() => {
                 setShowIndicator(false);

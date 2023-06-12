@@ -53,8 +53,6 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
     if((props.isLoggedIn && props.isLoggedIn ===true) || (state.loggedIn && state.loggedIn === true)){
         return(
         <Routes>
-            <Route path="*" element={<DashBoard/>} />
-
             <Route path="/admin/permissions" element={<Permissions />} />
             <Route path="/admin/roles" element={<Roles />} />
             <Route path="/admin/users" element={<UserGrid />} />

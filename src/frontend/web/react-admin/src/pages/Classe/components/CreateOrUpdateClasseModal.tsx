@@ -63,9 +63,12 @@ const CreateOrUpdateClasseModal: React.FC<ModalProps> = (props) => {
     const handleSpecialitySelectionChange = (event: any) => setSpeciality(event.target.value)
 
 
-    useEffect(() => {
-        if(props.item?.speciality !== null || props.item?.speciality !== undefined){
+    useEffect(() => {        
+        if(props.item?.speciality !== null && props.item?.speciality !== undefined){
             setShowSpeciality(true)
+        }else {
+            setShowSpeciality(false)
+            setSpeciality(null)
         }
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === "Escape") { props.onClose(); }
@@ -82,12 +85,12 @@ const CreateOrUpdateClasseModal: React.FC<ModalProps> = (props) => {
 
         setIsLoading(true)
 
-        alert(showSpeciality)
+        const classObj = getClasseByName(name)        
 
         const apiParams: ClassesCreateBody = {
             name: name,
             shortName: shortName,
-            speciality: speciality === null || speciality ==='' || showSpeciality === false ?  null : speciality
+            speciality: classObj?.speciality === false ?  null : speciality,
         }          
 
         classesApi.classeCreate(apiParams, 'Bearer ' + token)
@@ -161,7 +164,6 @@ const CreateOrUpdateClasseModal: React.FC<ModalProps> = (props) => {
         });  
 
     }
-
     return (
         <div
             id="authentication-modal"
@@ -229,7 +231,7 @@ const CreateOrUpdateClasseModal: React.FC<ModalProps> = (props) => {
                         {/* 3 */}
 
                         {
-                            showSpeciality === false || props.item?.speciality === null ? null :
+                            showSpeciality === false  ? null :
                             <div>
                                 <label className="form-label form-class">
                                 Spécialité de la classe
