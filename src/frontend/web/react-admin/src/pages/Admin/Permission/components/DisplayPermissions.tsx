@@ -24,6 +24,7 @@ import { AgGridIndicator } from '../../../../components/AgGridIndicator';
 import { PermissionsApi } from '../../../../generated';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../../constants/LOCAL_STORAGE';
 import { DeleteItemModal } from '../../../../components/DeleteItemModal';
+import { TOKEN_EXPIRED } from '../../../../constants/RESPONSES_CODE';
 
 
 
@@ -42,6 +43,8 @@ interface DisplayPermissionsProps {
     setShowDangerNotif: (value: boolean) => void,
     setDangerNotifMessage: (value: string) => void,
     setDangerNotifDescription: (value: string | null) => void,
+
+    setTokenExpired: () => void,
 }
 
 const DisplayPermissions: React.FC<DisplayPermissionsProps> = (props) => {
@@ -74,7 +77,11 @@ const DisplayPermissions: React.FC<DisplayPermissionsProps> = (props) => {
         }
         })
         .catch((error) => {
-            alert(error?.response?.data?.message)
+            if(error?.response?.status === TOKEN_EXPIRED.status && error?.response?.data?.message === TOKEN_EXPIRED.data.message){
+                props.setTokenExpired()
+            }else {
+                alert(error?.response?.data?.message)
+            }
         })
         .finally(() => {
             setShowIndicator(false)
