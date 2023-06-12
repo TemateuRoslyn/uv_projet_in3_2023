@@ -36,7 +36,7 @@ const CreateOrUpdateClasseModal: React.FC<ModalProps> = (props) => {
     
     const [name, setName] = useState<string>(props.item ? props.item.name : CLASSE_LEVEL[0].name);
     const [shortName, setShortName] = useState<string>(props.item ? props.item.shortName : CLASSE_LEVEL[0].shorName);
-    const [speciality, setSpeciality] = useState<string | null>(props.item?.speciality ? props.item.speciality : CLASSE_ALL_SPECIALITIES[0].name);
+    const [speciality, setSpeciality] = useState<string | null>(props.item?.speciality ? props.item.speciality : null);
 
     const handleClasseSelectionChange = (event: any) => {
         const className: string = event.target.value
@@ -49,6 +49,7 @@ const CreateOrUpdateClasseModal: React.FC<ModalProps> = (props) => {
                 setShowAllSpecialities(true) 
                 setAllSpecialites(CLASSE_ALL_SPECIALITIES)
             } else {
+                setSpeciality(null)
                 setShowAllSpecialities(false) 
                 setAllSpecialites(CLASSE_SPECIALITIES)
             }
@@ -63,6 +64,9 @@ const CreateOrUpdateClasseModal: React.FC<ModalProps> = (props) => {
 
 
     useEffect(() => {
+        if(props.item?.speciality !== null || props.item?.speciality !== undefined){
+            setShowSpeciality(true)
+        }
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === "Escape") { props.onClose(); }
         };
@@ -78,10 +82,12 @@ const CreateOrUpdateClasseModal: React.FC<ModalProps> = (props) => {
 
         setIsLoading(true)
 
+        alert(showSpeciality)
+
         const apiParams: ClassesCreateBody = {
             name: name,
             shortName: shortName,
-            speciality: speciality === null || speciality ==='' ?  null : speciality
+            speciality: speciality === null || speciality ==='' || showSpeciality === false ?  null : speciality
         }          
 
         classesApi.classeCreate(apiParams, 'Bearer ' + token)
@@ -119,42 +125,42 @@ const CreateOrUpdateClasseModal: React.FC<ModalProps> = (props) => {
 
         setIsLoading(true)
 
+        const classObj = getClasseByName(name)        
+
         const apiParams: UpdateClasseIdBody = {
                 name: name,
                 shortName: shortName,
-                speciality: speciality === null || speciality ==='' ?  null : speciality
-        } 
-        console.log(apiParams);
-        
+                speciality: classObj?.speciality === false ?  null : speciality,
+                effectif: props.item?.effectif,
+        }         
 
-        // classesApi.classeUpdate(apiParams, 'Bearer ' + token, props.item?.id)
-        // .then((response) => {  
-        // if(response && response.data){                    
-        //     if(response.data.success === true){ 
-        //         props.onClose()
-        //         if(props.refresh) props.refresh()
+        classesApi.classeUpdate(apiParams, 'Bearer ' + token, props.item?.id)
+        .then((response) => {  
+        if(response && response.data){                    
+            if(response.data.success === true){ 
+                props.onClose()
+                if(props.refresh) props.refresh()
 
-        //         // notification
-        //         props.setSuccessNotifMessage(response.data.message)
-        //         props.setSuccessNotifDescription('Cette classe a ete correctement mise a jour, veuillez consulter le catalogue !')
-        //         props.setShowSuccessNotif(true)
-        //     }
-        // }
-        // })
-        // .catch((error) => {
-        //     alert(error?.response?.data?.message)
-        // })
-        // .finally(() => {
-        //     setIsLoading(false)
+                // notification
+                props.setSuccessNotifMessage(response.data.message)
+                props.setSuccessNotifDescription('Cette classe a ete correctement mise a jour, veuillez consulter le catalogue !')
+                props.setShowSuccessNotif(true)
+            }
+        }
+        })
+        .catch((error) => {
+            alert(error?.response?.data?.message)
+        })
+        .finally(() => {
+            setIsLoading(false)
 
-        //     // notification
-        //     setTimeout(() => {
-        //         props.setShowSuccessNotif(false)
-        //       }, 3000);
-        // });  
+            // notification
+            setTimeout(() => {
+                props.setShowSuccessNotif(false)
+              }, 3000);
+        });  
 
     }
-
 
     return (
         <div
@@ -223,7 +229,7 @@ const CreateOrUpdateClasseModal: React.FC<ModalProps> = (props) => {
                         {/* 3 */}
 
                         {
-                            showSpeciality === false && props.item?.speciality === null ? null :
+                            showSpeciality === false || props.item?.speciality === null ? null :
                             <div>
                                 <label className="form-label form-class">
                                 Spécialité de la classe
