@@ -10,7 +10,7 @@ import FormLayout from '../Form/FormLayout';
 import Profile from '../Profile';
 import Students from '../Students';
 import Parents from '../Parents';
-import Cours from '../Cours';
+
 import Enseignant from '../Enseignant';
 
 import Settings from '../Settings';
@@ -25,8 +25,6 @@ import AdminPermissionForm from '../Admin/AdminPermissionForm';
 import UserGrid from '../Admin/AdminUser';
 import AddFaults from '../Admin/Faults/AddFaults';
 import FaultsGrid from '../Admin/Faults/FaultsGrid';
-import AddReglement from '../Admin/ReglementInterieur/AddReglement';
-import ReglementGrid from '../Admin/ReglementInterieur/ReglementGrid';
 import AddConvocations from '../Admin/Convocations/AddConvocations';
 import ConvocationsGrid from '../Admin/Convocations/ConvocationsGrid';
 
@@ -37,6 +35,7 @@ import Permissions from '../Admin/Permission/Permissions.page';
 import Roles from '../Admin/Role/Roles.page';
 import CoursPage from "../Admin/cours/Cours.page";
 import Classes from '../Classe/Classes.page';
+import ReglementInterieurPage from '../ReglementInterieur/ReglementInterieur.page';
 
 interface AppSwitchProps {
     isLoggedIn: boolean
@@ -79,8 +78,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
             <Route path="/admin/newpermission" element={<AdminPermissionForm />} />
             <Route path="/faults/addfaults" element={<AddFaults/>} />
             <Route path="/faults/faults" element={<FaultsGrid />} />
-            <Route path="/reglement/addreglement" element={<AddReglement/>} />
-            <Route path="/reglement/reglements" element={<ReglementGrid />} />
+            <Route path="/reglements" element={<ReglementInterieurPage />} />
             <Route path="/convocation/addconvocation" element={<AddConvocations/>} />
             <Route path="/convocation/convocations" element={<ConvocationsGrid />} />
 
