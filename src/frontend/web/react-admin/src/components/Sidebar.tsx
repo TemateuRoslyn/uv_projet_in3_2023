@@ -172,7 +172,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </NavLink>
               </li>
               {/* <!-- Menu Item Enseignant --> */}
+              {/* <!-- Menu Item Enseignant --> */}
                 
+                 {/* <!-- Menu Item Cours --> */}
                  {/* <!-- Menu Item Cours --> */}
               <li>
                 <NavLink
@@ -199,11 +201,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </NavLink>
               </li>
               {/* <!-- Menu Item Cours --> */}
+              {/* <!-- Menu Item Cours --> */}
               {/* <!-- Menu Item convocation --> */}
               
                <SidebarLinkGroup
                 activeCondition={
-                  pathname === '/reglement' || pathname.includes('reglement')
+                  pathname === '/convocation' || pathname.includes('convocation')
                 }
               >
                 {(handleClick, open) => {
@@ -212,8 +215,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       <NavLink
                         to="#"
                         className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                          (pathname === '/reglement' ||
-                            pathname.includes('reglement')) &&
+                          (pathname === '/convocation' ||
+                            pathname.includes('convocation')) &&
                           'bg-graydark dark:bg-meta-4'
                         }`}
                         onClick={(e) => {
@@ -350,6 +353,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   Eleves
                 </NavLink>
               </li>
+              {/* <!-- Menu Item Students --> */}
               {/* <!-- Menu Item Students --> */}
                {/* <!-- Menu Item Parents --> */}
                <li>
@@ -660,6 +664,32 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </NavLink>
               </li>
               {/* <!-- Menu Item Reglement --> */}
+              {/* <!-- Menu Item Regles --> */}
+              <li>
+                <NavLink
+                  to="/regles"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    pathname.includes('regles') && 'bg-graydark dark:bg-meta-4'
+                  }`}
+                > 
+                  <svg
+                    className="fill-primary dark:fill-white"
+                    width="22"
+                    height="18"
+                    viewBox="0 0 22 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-width="1.5" stroke="currentColor"
+                      d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
+                      fill="none"
+                    />
+                  </svg>
+                  Regles
+                </NavLink>
+              </li>
+              {/* <!-- Menu Item Regles --> */}
             </ul>
           </div>
         </nav>

@@ -145,7 +145,7 @@ export const ReglesApiAxiosParamCreator = function (configuration?: Configuratio
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling findAllRegles.');
             }
-            const localVarPath = `/api/regles/findAll`;
+            const localVarPath = `/api/regle/findAll`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;

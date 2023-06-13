@@ -13,7 +13,7 @@ class RegleController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/regles/findAll",
+     *     path="/api/regle/findAll",
      *     summary="Find all regles",
      *     description="Retrieve a list of all regles with associated reglementInterieur",
      *     operationId="findAllRegles",
@@ -78,8 +78,9 @@ class RegleController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"libelle"},
-     *             @OA\Property(property="libelle", type="string", example="Ne pas bavarder en salle de cours"),
+     *           required={"libelle", "reglement_interieur_id"},
+     *             @OA\Property(property="libelle", type="string", format="text", example="Ne pas sortir sans avoir eu la permission"),
+     *             @OA\Property(property="reglement_interieur_id", type="integer", example=1)
      *         )
      *     ),
      *     @OA\Response(
