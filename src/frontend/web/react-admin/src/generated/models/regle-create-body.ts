@@ -23,4 +23,10 @@ export interface RegleCreateBody {
      * @memberof RegleCreateBody
      */
     libelle: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof RegleCreateBody
+     */
+    reglementInterieurId: any;
 }

@@ -11,6 +11,7 @@ import Profile from '../Profile';
 import Students from '../Students';
 import Parents from '../Parents';
 
+
 import Enseignant from '../Enseignant';
 
 import Settings from '../Settings';
@@ -36,6 +37,7 @@ import Roles from '../Admin/Role/Roles.page';
 import CoursPage from "../Admin/cours/Cours.page";
 import Classes from '../Classe/Classes.page';
 import ReglementInterieurPage from '../ReglementInterieur/ReglementInterieur.page';
+import ReglePage from '../Regle/Regle.page';
 
 interface AppSwitchProps {
     isLoggedIn: boolean
@@ -79,6 +81,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
             <Route path="/faults/addfaults" element={<AddFaults/>} />
             <Route path="/faults/faults" element={<FaultsGrid />} />
             <Route path="/reglements" element={<ReglementInterieurPage />} />
+            <Route path="/regles" element={<ReglePage />} />
             <Route path="/convocation/addconvocation" element={<AddConvocations/>} />
             <Route path="/convocation/convocations" element={<ConvocationsGrid />} />
 
