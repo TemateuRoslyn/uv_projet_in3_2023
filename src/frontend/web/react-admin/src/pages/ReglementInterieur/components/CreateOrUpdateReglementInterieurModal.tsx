@@ -133,7 +133,7 @@ const CreateOrUpdateReglementInterieurModal: React.FC<ModalProps> = (props) => {
       className="authentication-modal"
       onClick={props.onClose}
     >
-     <div className="modal-container relative items-center justify-center mx-auto  px-1  top-modal-animation" onClick={(event) => event.stopPropagation()}>
+     <div className="modal-container relative items-center justify-center mx-auto  top-modal-animation" onClick={(event) => event.stopPropagation()}>
                 <div className="modal-content bg-white bg-white rounded-sm border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
                <button onClick={props.onClose} className="close-button">
             <svg

@@ -3,12 +3,12 @@ import { AgGridReact } from 'ag-grid-react';
 import * as XLSX from 'xlsx';
 import { connect, useSelector } from 'react-redux';
 
-import { COURS_COLUMNS_DEFS } from '../../../../configs/ag-grid-column-def/cours';
-import { Cours } from '../../../../generated/models';
-import { ReduxProps } from '../../../../redux/configureStore';
+import { COURS_COLUMNS_DEFS } from '../../../configs/ag-grid-column-def/cours';
+import { Cours } from '../../../generated/models';
+import { ReduxProps } from '../../../redux/configureStore';
 import { Link } from 'react-router-dom';
 import CreateOrUpdateCoursModal from './CreateOrUpdateCoursModal';
-import { MODAL_MODE } from '../../../../constants/ENUM';
+import { MODAL_MODE } from '../../../constants/ENUM';
 
 import { 
     EditIcon, 
@@ -17,13 +17,13 @@ import {
     NewIcon, 
     RefreshIcon, 
     TrashIcon 
-} from '../../../../components/Icone';
+} from '../../../components/Icone';
 
 import './DisplayCours.css'
-import { AgGridIndicator } from '../../../../components/AgGridIndicator';
-import { CoursApi } from '../../../../generated';
-import { TOKEN_LOCAL_STORAGE_KEY } from '../../../../constants/LOCAL_STORAGE';
-import { DeleteItemModal } from '../../../../components/DeleteItemModal';
+import { AgGridIndicator } from '../../../components/AgGridIndicator';
+import { CoursApi } from '../../../generated';
+import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
+import { DeleteItemModal } from '../../../components/DeleteItemModal';
 
 interface DisplayCoursProps {
     cours: Cours[],

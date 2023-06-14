@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import DefaultLayout from '../../../layout/DefaultLayout';
-import Breadcrumb from '../../../components/Breadcrumb';
+import DefaultLayout from '../../layout/DefaultLayout';
+import Breadcrumb from '../../components/Breadcrumb';
 import DisplayCours from './components/DisplayCours';
-import { Cours } from '../../../generated/models';
-import { ReduxProps } from '../../../redux/configureStore';
-import { IS_LOGGED_LOCAL_STORAGE_KEY, TOKEN_LOCAL_STORAGE_KEY, USER_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
-import { AuthApi, CoursApi } from '../../../generated';
+import { Cours } from '../../generated/models';
+import { ReduxProps } from '../../redux/configureStore';
+import { IS_LOGGED_LOCAL_STORAGE_KEY, TOKEN_LOCAL_STORAGE_KEY, USER_LOCAL_STORAGE_KEY } from '../../constants/LOCAL_STORAGE';
+import { AuthApi, CoursApi } from '../../generated';
 
 import { 
   SuccessNotification,
   DangerNotification,
   WarningNotification,
-} from '../../../services/Notification.service';
-import { setIsLOggedAction } from '../../../redux/Actions/LoggedInAction';
-import { TOKEN_EXPIRED } from '../../../constants/RESPONSES_CODE';
+} from '../../services/Notification.service';
+import { setIsLOggedAction } from '../../redux/Actions/LoggedInAction';
+import { TOKEN_EXPIRED } from '../../constants/RESPONSES_CODE';
 
 
 const CoursPage = () => {

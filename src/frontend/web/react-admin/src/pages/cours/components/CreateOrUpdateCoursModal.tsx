@@ -2,13 +2,12 @@ import { useEffect, useState } from 'react';
 import { MODAL_MODE } from '../../../constants/ENUM';
 import { EditIcon, NewIcon } from '../../../components/Icone';
 import {
-  Regle,
-  RegleCreateBody,
-  ReglementInterieur,
-  RegleUpdateBody,
+  Cours,
+  CoursCreateBody,
+  UpdateCoursIdBody,
 } from '../../../generated/models';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
-import { ReglesApi } from '../../../generated';
+import { CoursApi } from '../../../generated';
 import { useSelector } from 'react-redux';
 import { ReduxProps } from '../../../redux/configureStore';
 import Indicator from '../../Authentication/components/Indicator';
@@ -18,8 +17,7 @@ interface ModalProps {
   title: string;
   onClose: () => void;
   refresh?: () => void;
-  item?: Regle | null;
-  reglements?: ReglementInterieur [] | null;
+  item?: Cours | null;
 
   setShowSuccessNotif: (value: boolean) => void;
   setSuccessNotifMessage: (value: string) => void;
@@ -30,24 +28,28 @@ interface ModalProps {
   setWarningNotifDescription: (value: string | null) => void;
 }
 
-const CreateOrUpdateRegleModal: React.FC<ModalProps> = (props) => {
-  
+const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
   const state = useSelector((state: ReduxProps) => state);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [libelle, setLibelle] = useState<string>(
     props.item ? props.item.libelle : ''
   );
-const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements ? props.reglements : [])
-  const [nameRegle, setNameRegle] = useState<string>(props.item ? props.item.reglement_interieur_id : props.reglements[0].id)
-  
-  
+  const [dateCour, setDateCour] = useState<string>(
+    props.item ? props.item.date_cour : ''
+  );
+  const [heureDebut, setHeureDebut] = useState<string>(
+    props.item ? props.item.heure_debut : ''
+  );
+  const [heureFin, setHeureFin] = useState<string>(
+    props.item ? props.item.heure_fin : ''
+  );
 
   const handleLibelleChange = (event: any) => setLibelle(event.target.value);
-    const handleRegleChange = (event: any) => {
-      setNameRegle(event.target.value);
-      
-    }
+  const handleDateCourChange = (event: any) => setDateCour(event.target.value);
+  const handleHeureDebutChange = (event: any) =>
+    setHeureDebut(event.target.value);
+  const handleHeureFinChange = (event: any) => setHeureFin(event.target.value);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -65,21 +67,19 @@ const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements 
     _event.preventDefault();
 
     const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    const regleApi = new ReglesApi({
-      ...state.environment,
-      accessToken: token,
-    });
+    const coursApi = new CoursApi({ ...state.environment, accessToken: token });
 
     setIsLoading(true);
 
-    const apiParams: RegleCreateBody = {
+    const apiParams: CoursCreateBody = {
       libelle: libelle,
-      reglement_interieur_id: nameRegle,
-      //reglementInterieurId: reglementInterieur,
+      date_cour: dateCour,
+      heure_debut: heureDebut,
+      heure_fin: heureFin,
     };
-   
-    regleApi
-      .createRegle(apiParams, 'Bearer ' + token)
+    console.log(apiParams);
+    coursApi
+      .createCours(apiParams, 'Bearer ' + token)
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {
@@ -88,7 +88,7 @@ const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements 
 
             props.setSuccessNotifMessage(response.data.message);
             props.setSuccessNotifDescription(
-              'A new regle has been successfully created!'
+              'A new course has been successfully created!'
             );
             props.setShowSuccessNotif(true);
           }
@@ -110,21 +110,20 @@ const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements 
     _event.preventDefault();
 
     const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    const regleApi = new ReglesApi({
-      ...state.environment,
-      accessToken: token,
-    });
+    const coursApi = new CoursApi({ ...state.environment, accessToken: token });
 
     setIsLoading(true);
-    
-    const apiParams: RegleUpdateBody = {
-      id: props.item.id,
+
+    const apiParams: UpdateCoursIdBody = {
+      id: props.item?.id,
       libelle: libelle,
-      reglement_interieur_id: nameRegle,
+      date_cour: dateCour,
+      heure_debut: heureDebut,
+      heure_fin: heureFin,
     };
 
-    regleApi
-      .updateRegle(apiParams, 'Bearer ' + token)
+    coursApi
+      .updateCours(apiParams, 'Bearer ' + token, props.item?.id)
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {
@@ -133,7 +132,7 @@ const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements 
 
             props.setSuccessNotifMessage(response.data.message);
             props.setSuccessNotifDescription(
-              'This regle has been successfully updated!'
+              'This course has been successfully updated!'
             );
             props.setShowSuccessNotif(true);
           }
@@ -154,12 +153,15 @@ const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements 
   return (
     <div
       id="authentication-modal"
-      className="authentication-modal"
+      className="authentication-modal pl-800 pt-20"
       onClick={props.onClose}
     >
-      <div className="modal-container relative items-center justify-center mx-auto  px-1  top-modal-animation" onClick={(event) => event.stopPropagation()}>
-                <div className="modal-content bg-white bg-white rounded-sm border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
-               <button onClick={props.onClose} className="close-button">
+      <div
+        className="modal-container top-modal-animation relative mx-auto items-center  justify-center  "
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="rounded-sm border border-stroke bg-white bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+          <button onClick={props.onClose} className="close-button">
             <svg
               aria-hidden="true"
               className="close-icon"
@@ -176,14 +178,17 @@ const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements 
             <span className="sr-only">Close modal</span>
           </button>
           <div className="modal-body">
-          <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
-                        <h2 className="modal-title  font-medium text-black dark:text-white">
-                        {props.title}
-                        </h2>
-                    </div>
+            <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+              <h2 className=" modal-title font-medium text-black dark:text-white">
+                {props.title}
+              </h2>
+            </div>
             <form className="modal-form">
               <div className="form-group">
-                <label htmlFor="libelle" className="form-label form-class mb-2.5 block text-black dark:text-white">
+                <label
+                  htmlFor="libelle"
+                  className="form-label form-class mb-2.5 block text-black dark:text-white"
+                >
                   Libelle
                 </label>
                 <input
@@ -192,34 +197,66 @@ const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements 
                   value={libelle}
                   disabled={props.mode === MODAL_MODE.view}
                   onChange={handleLibelleChange}
-                  placeholder="Enter a regle libelle"
-                  className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary dark:disabled:bg-black dark:text-white ${
+                  placeholder="Enter a course libelle"
+                  className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black ${
                     props.mode === MODAL_MODE.view ? 'disabled-input' : ''
                   }`}
                 />
               </div>
               <div className="form-group">
-                
-              <label htmlFor="reglement_interieur_id" className="form-label form-class mb-2.5 block text-black dark:text-white">
-    Reglement Interieur ID
-  </label>
-  <select
-    id="reglement_interieur_id"
-    className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary dark:disabled:bg-black dark:text-white ${
-      props.mode === MODAL_MODE.view ? 'disabled-input' : ''
-    }`}
-    value={nameRegle}
-    onChange = {handleRegleChange}
-     required
-  >
-    {reglementInterieurs.map((regle) => (
-      <option key={regle.id} value={regle.id}>
-        {regle.libelle}
-      </option> 
-    ))}
-  </select>
+                <label
+                  htmlFor="dateCour"
+                  className="form-label form-class mb-2.5 block text-black dark:text-white"
+                >
+                  Date
+                </label>
+                <input
+                  type="date"
+                  id="date_cour"
+                  value={dateCour}
+                  disabled={props.mode === MODAL_MODE.view}
+                  onChange={handleDateCourChange}
+                  className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black ${
+                    props.mode === MODAL_MODE.view ? 'disabled-input' : ''
+                  }`}
+                />
               </div>
-              
+              <div className="form-group">
+                <label
+                  htmlFor="heureDebut"
+                  className="form-label form-class mb-2.5 block text-black dark:text-white"
+                >
+                  Heure de début
+                </label>
+                <input
+                  type="date"
+                  id="heure_debut"
+                  value={heureDebut}
+                  disabled={props.mode === MODAL_MODE.view}
+                  onChange={handleHeureDebutChange}
+                  className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black ${
+                    props.mode === MODAL_MODE.view ? 'disabled-input' : ''
+                  }`}
+                />
+              </div>
+              <div className="form-group">
+                <label
+                  htmlFor="heureFin"
+                  className="form-label form-class mb-2.5 block text-black dark:text-white"
+                >
+                  Heure de fin
+                </label>
+                <input
+                  type="date"
+                  id="heure_fin"
+                  value={heureFin}
+                  disabled={props.mode === MODAL_MODE.view}
+                  onChange={handleHeureFinChange}
+                  className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black ${
+                    props.mode === MODAL_MODE.view ? 'disabled-input' : ''
+                  }`}
+                />
+              </div>
             </form>
             {props.mode === MODAL_MODE.view ? null : (
               <div className="form-actions bg-green-600">
@@ -268,4 +305,4 @@ const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements 
   );
 };
 
-export default CreateOrUpdateRegleModal;
+export default CreateOrUpdateCoursModal;

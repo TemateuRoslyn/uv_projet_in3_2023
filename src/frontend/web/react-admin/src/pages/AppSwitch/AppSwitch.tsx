@@ -33,7 +33,7 @@ import { connect,useSelector } from 'react-redux'
 import { ReduxProps } from '../../redux/configureStore';
 import Permissions from '../Admin/Permission/Permissions.page';
 import Roles from '../Admin/Role/Roles.page';
-import CoursPage from "../Admin/cours/Cours.page";
+import CoursPage from "../cours/Cours.page";
 import Classes from '../Classe/Classes.page';
 import Eleves from '../Eleve/Eleves.page';
 import ReglementInterieurPage from '../ReglementInterieur/ReglementInterieur.page';
@@ -91,7 +91,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
         return(
             <Routes>
                 <Route path="/auth/signin" element={<SignIn/>} />
-                <Route path="/auth/signup" element={<SignUp/>} />
+                {/* <Route path="/auth/signup" element={<SignUp/>} /> */}
                 <Route path="*" element={<SignIn/>} />
             </Routes>
         )

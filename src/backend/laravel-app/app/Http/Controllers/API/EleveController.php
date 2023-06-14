@@ -50,7 +50,7 @@ class EleveController extends Controller
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
      *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Eleve"))
-     *         )   
+     *         )
      *     ),
      *     @OA\Response(
      *         response=401,
@@ -271,16 +271,16 @@ class EleveController extends Controller
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
             $file = $request->file('photo');
-            
+
             // Vérifiez le type MIME si nécessaire
             $allowedTypes = ['image/jpeg', 'image/png'];
             if (!in_array($file->getMimeType(), $allowedTypes)) {
                 return response()->json(['error' => 'Le fichier sélectionné n\'est pas une image.'], 400);
             }
-            
+
             // Déplacez le fichier vers le répertoire de stockage souhaité
             $photo = $file->store($this->avatar_path);
-            
+
         }
 
         $eleve = Eleve::create([
@@ -328,13 +328,13 @@ class EleveController extends Controller
         $details = array();
 
         $details['greeting'] = "Hi " . $eleve->firstName;
-        $details['body'] = "Veuillez Modifier votre mot de passe pour assurer la confidentialite de vos donnees et de vos actions au sein de la plateforme . 
+        $details['body'] = "Veuillez Modifier votre mot de passe pour assurer la confidentialite de vos donnees et de vos actions au sein de la plateforme .
                             \n Mot de passe actuel: $user->email
                             \n Login actuel: $user->email
                             Pour cela, veuillez cliquer sur le ce lien pour proceder la la mise a jour de votre mot de passe .";
         $details['actiontext'] = "Modifier mon mot de passe";
         $details['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
-        $details['endtext'] = "Merci de rester fidele a cet etablissement";
+        $details['endtext'] = "Merci de rester fidele à cet etablissement";
 
         // envoi du mail
         Queue::push(new SendEmailJob($user, $details));
@@ -362,7 +362,7 @@ class EleveController extends Controller
      *         @OA\Schema(
      *             type="integer"
      *         )
-     *     ), 
+     *     ),
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -427,7 +427,7 @@ class EleveController extends Controller
      *         @OA\JsonContent(
      *             @OA\Property(property="message", type="string", example="Élève modifié qvec succèss"),
      *             @OA\Property(property="success", type="boolean", example="true"),
-     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Eleve")     
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Eleve")
      *          )
      *     )
      * )
@@ -490,12 +490,12 @@ class EleveController extends Controller
         $eleveFound->telephone = $request->input('telephone');
         $eleveFound->solvable = boolval($request->input('solvable'));
         $eleveFound->redoublant = boolval($request->input('redoublant'));
-        
+
         // update de classe de l'eleve...
-        
+
         // si il change de classe
         $classe = Classe::find($request->classeId);
-        
+
         if($classe && $eleveFound->classeId != $request->classeId){
 
             // update de l'ancienne classe
@@ -507,7 +507,7 @@ class EleveController extends Controller
                 'no' => $oldClasse->no,
                 'effectif' => --$oldClasse->effectif,
             ]);
-            
+
             // update de la nouvelle classe
             $classe->update([
                 'name' => $classe->name,
@@ -518,13 +518,13 @@ class EleveController extends Controller
             ]);
 
         }
-        
+
         $eleveFound->classeId = $request->input('classeId');
         $eleveFound->save();
-        
+
         $eleveFound->user = $user;
         $eleveFound->classe = $classe;
-        
+
         return response()->json([
             'message' => 'Eleve updated successfully',
             'success' => true,
