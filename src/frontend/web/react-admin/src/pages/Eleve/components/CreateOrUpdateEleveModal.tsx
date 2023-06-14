@@ -153,6 +153,7 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
         }
         })
         .catch((error) => {
+            alert(error.message);
             console.log(error?.response?.data);
             
         })
@@ -234,12 +235,12 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
                         <span className="sr-only">Close modal</span>
                     </button>
                     <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
-                        <h3 className="font-medium text-black dark:text-white">
+                        <h3 className=" modal-title font-medium text-black dark:text-white">
                         {props.title}
                         </h3>
                     </div>
-                    <form action="#" encType="multipart/form-data">
-                        <div className="p-6.5">
+                    <form action="#" encType="multipart/form-data" className="modal-form">
+                        <div>
 
                             {/* row 1 lastname, firstname, tel*/}
                             <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
