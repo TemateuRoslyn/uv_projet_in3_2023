@@ -133,9 +133,9 @@ const CreateOrUpdateReglementInterieurModal: React.FC<ModalProps> = (props) => {
       className="authentication-modal"
       onClick={props.onClose}
     >
-      <div className="modal-container top-modal-animation" onClick={(event) => event.stopPropagation()}>
-        <div className="modal-content">
-          <button onClick={props.onClose} className="close-button">
+     <div className="modal-container relative items-center justify-center mx-auto  px-1  top-modal-animation" onClick={(event) => event.stopPropagation()}>
+                <div className="modal-content bg-white bg-white rounded-sm border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
+               <button onClick={props.onClose} className="close-button">
             <svg
               aria-hidden="true"
               className="close-icon"
@@ -152,12 +152,14 @@ const CreateOrUpdateReglementInterieurModal: React.FC<ModalProps> = (props) => {
             <span className="sr-only">Close modal</span>
           </button>
           <div className="modal-body">
-            <div className="modal-header">
-              <h3 className="modal-title">{props.title}</h3>
-            </div>
+          <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+                        <h2 className="modal-title font-medium text-black dark:text-white">
+                        {props.title}
+                        </h2>
+                    </div>
             <form className="modal-form">
               <div className="form-group">
-                <label htmlFor="libelle" className="form-label">
+                <label htmlFor="libelle" className="form-label form-class mb-2.5 block text-black dark:text-white">
                   Libelle
                 </label>
                 <input
@@ -167,7 +169,7 @@ const CreateOrUpdateReglementInterieurModal: React.FC<ModalProps> = (props) => {
                   disabled={props.mode === MODAL_MODE.view}
                   onChange={handleLibelleChange}
                   placeholder="Enter a reglementInterieur libelle"
-                  className={`form-input ${props.mode === MODAL_MODE.view ? 'disabled-input' : ''}`}
+                  className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary dark:disabled:bg-black dark:text-white ${props.mode === MODAL_MODE.view ? 'disabled-input' : ''}`}
                 />
               </div>
               
