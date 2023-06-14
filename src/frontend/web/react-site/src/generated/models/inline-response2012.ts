@@ -19,8 +19,20 @@
 export interface InlineResponse2012 {
     /**
      * 
+     * @type {string}
+     * @memberof InlineResponse2012
+     */
+    message?: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse2012
+     */
+    success?: any;
+    /**
+     * 
      * @type {Eleve}
      * @memberof InlineResponse2012
      */
-    eleve?: any;
+    content?: any;
 }

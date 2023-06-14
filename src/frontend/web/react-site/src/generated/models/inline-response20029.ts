@@ -19,8 +19,8 @@
 export interface InlineResponse20029 {
     /**
      * 
-     * @type {ReglementInterieur}
+     * @type {Array&lt;ReglementInterieur&gt;}
      * @memberof InlineResponse20029
      */
-    reglement?: any;
+    reglements?: any;
 }

@@ -426,4 +426,80 @@ class ClassesController extends Controller
             'message' => 'Classe deleted successfully'
         ], 200);
     }
+
+
+    /**
+     * Get the filtered list of classes.
+     *
+     * @OA\Get(
+     *     path="/api/classes/records/{keyword}",
+     *     summary="Get filtered list of classes",
+     *     tags={"Classes"},
+     *     operationId="classesRecords",
+     *     @OA\Parameter(
+     *         name="keyword",
+     *         in="path",
+     *         description="Keyword to filter classes",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ), 
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Classe records successfully"),
+     *             @OA\Property(property="content", type="array", @OA\Items(type="string", example="Sixieme A 1:5"))
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid request",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Invalid request"),
+     *             @OA\Property(property="success", type="boolean", example=false)
+     *         )
+     *     )
+     * )
+     */
+    public function records($keyword)
+    {
+        $classes = Classe::where('name', 'like', "%{$keyword}%")
+            ->orWhere('speciality', 'like', "%{$keyword}%")
+            ->orWhere('no', 'like', "%{$keyword}%")
+            ->get();
+
+        $formattedClasses = $classes->map(function ($class) {
+            $name = $class->name;
+            $speciality = $class->speciality;
+            $no = $class->no;
+            $id = $class->id;
+
+            if ($speciality) {
+                return "{$name} {$speciality} {$no}:{$id}";
+            } else {
+                return "{$name} {$no}:{$id}";
+            }
+        });
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Classe records successfully',
+            'content' => $formattedClasses
+        ], 200);
+    }
 }

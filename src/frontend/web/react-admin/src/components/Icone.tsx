@@ -3,6 +3,7 @@ import React from "react";
 interface IconProps {
     size: number,
     color: string,
+    class?: string,
 }
 
 export  const TrashIcon: React.FC<IconProps> = (props) => {

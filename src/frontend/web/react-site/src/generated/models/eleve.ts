@@ -85,6 +85,18 @@ export interface Eleve {
     redoublant: any;
     /**
      * 
+     * @type {User}
+     * @memberof Eleve
+     */
+    user?: any;
+    /**
+     * 
+     * @type {Classe}
+     * @memberof Eleve
+     */
+    classe?: any;
+    /**
+     * 
      * @type {BaseModelpropertiescreatedAt}
      * @memberof Eleve
      */

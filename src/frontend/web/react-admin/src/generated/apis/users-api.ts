@@ -16,15 +16,16 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20034 } from '../models';
-import { InlineResponse20035 } from '../models';
-import { InlineResponse20036 } from '../models';
+import { InlineResponse20037 } from '../models';
+import { InlineResponse20038 } from '../models';
+import { InlineResponse20039 } from '../models';
 import { InlineResponse2018 } from '../models';
-import { InlineResponse40014 } from '../models';
 import { InlineResponse40015 } from '../models';
+import { InlineResponse40016 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse40414 } from '../models';
 import { InlineResponse40415 } from '../models';
+import { InlineResponse40416 } from '../models';
+import { InlineResponse40417 } from '../models';
 import { UpdateIdBody } from '../models';
 import { UsersCreateBody } from '../models';
 /**
@@ -65,6 +66,46 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             if (authorization !== undefined && authorization !== null) {
                 localVarHeaderParameter['Authorization'] = String(authorization);
             }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retourner l'avatar d'un user
+         * @summary Get an imgage by file name
+         * @param {string} filename Name of user avatar
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        downloadUserAvatar: async (filename: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'filename' is not null or undefined
+            if (filename === null || filename === undefined) {
+                throw new RequiredError('filename','Required parameter filename was null or undefined when calling downloadUserAvatar.');
+            }
+            const localVarPath = `/api/files/download/{filename}`
+                .replace(`{${"filename"}}`, encodeURIComponent(String(filename)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -292,8 +333,22 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20036>> {
+        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20039>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).deleteUser(userId, authorization, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Retourner l'avatar d'un user
+         * @summary Get an imgage by file name
+         * @param {string} filename Name of user avatar
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async downloadUserAvatar(filename: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).downloadUserAvatar(filename, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -321,7 +376,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20035>> {
+        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20038>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).userShow(userId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -351,7 +406,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20034>> {
+        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20037>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).usersIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -375,8 +430,18 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20036> {
+        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20039> {
             return UsersApiFp(configuration).deleteUser(userId, authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retourner l'avatar d'un user
+         * @summary Get an imgage by file name
+         * @param {string} filename Name of user avatar
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        downloadUserAvatar(filename: string, options?: any): AxiosPromise<void> {
+            return UsersApiFp(configuration).downloadUserAvatar(filename, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -396,7 +461,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20035> {
+        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20038> {
             return UsersApiFp(configuration).userShow(userId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -418,7 +483,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20034> {
+        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20037> {
             return UsersApiFp(configuration).usersIndex(authorization, options).then((request) => request(axios, basePath));
         },
     };
@@ -442,6 +507,17 @@ export class UsersApi extends BaseAPI {
      */
     public deleteUser(userId: string, authorization: string, options?: any) {
         return UsersApiFp(this.configuration).deleteUser(userId, authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Retourner l'avatar d'un user
+     * @summary Get an imgage by file name
+     * @param {string} filename Name of user avatar
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public downloadUserAvatar(filename: string, options?: any) {
+        return UsersApiFp(this.configuration).downloadUserAvatar(filename, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 

@@ -18,6 +18,7 @@ use App\Http\Controllers\API\ProfesseurController;
 use App\Http\Controllers\API\PersonnelController;
 use App\Http\Controllers\API\RegleController;
 use App\Http\Controllers\API\ReglementInterieurController;
+use App\Http\Controllers\API\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +43,12 @@ Route::prefix('auth')->group(function () {
     Route::middleware('jwt.verify')->post('user', [AuthController::class, 'user']);
 });
 
-
+Route::prefix('files')->group(function () {
+    // file download
+    Route::prefix('download')->group(function () {
+        Route::get('/', [UploadController::class, 'downloadUserAvatar']);
+    });
+});
 
 /**
  * secured routes
@@ -85,6 +91,7 @@ Route::middleware('jwt.verify')->group(function () {
     Route::prefix('classes')->group(function () {
         Route::get('findOne/{classeId}', [ClassesController::class, 'show']);
         Route::get('findAll', [ClassesController::class, 'index']);
+        Route::get('records/{keyword}', [ClassesController::class, 'records']);
 
         Route::middleware('permission:modifier_classe')->put('update/{classeId}', [ClassesController::class, 'update']);
         Route::middleware('permission:supprimer_classe')->delete('delete/{classeId}', [ClassesController::class, 'destroy']);
@@ -96,8 +103,8 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findOne/{eleveId}', [EleveController::class, 'view']);
         Route::get('findAll', [EleveController::class, 'index']);
 
-        Route::middleware('permission:modifier_eleve')->post('update', [EleveController::class, 'update']);
-        Route::middleware('permission:supprimer_eleve')->delete('delete/{eleve}', [EleveController::class, 'delete']);
+        Route::middleware('permission:modifier_eleve')->put('update/{eleveId}', [EleveController::class, 'update']);
+        Route::middleware('permission:supprimer_eleve')->delete('delete/{eleveId}', [EleveController::class, 'delete']);
         Route::middleware('permission:creer_eleve')->post('create', [EleveController::class, 'store']);
     });
 
@@ -165,4 +172,16 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findOne/{professeurId}', [ProfesseurController::class, 'view']);
         Route::get('findAll', [ProfesseurController::class, 'index']);
     });
+
+    Route::prefix('file')->group(function () {
+        // file upload
+        Route::prefix('upaload')->group(function () {
+            Route::post('eleves/{filename}', [UploadController::class, 'getEleveAvatar']);
+            Route::post('parents/{filename}', [UploadController::class, 'getParentAvatar']);
+            Route::post('personnels/{filename}', [UploadController::class, 'getPersonnelAvatar']);
+            Route::post('professeurs/{filename}', [UploadController::class, 'getProfesseurAvatar']);
+        });
+    });
+
+   
 });

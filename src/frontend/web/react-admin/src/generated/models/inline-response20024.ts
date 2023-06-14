@@ -31,7 +31,7 @@ export interface InlineResponse20024 {
     success?: any;
     /**
      * 
-     * @type {Regle}
+     * @type {Professeur}
      * @memberof InlineResponse20024
      */
     data?: any;
