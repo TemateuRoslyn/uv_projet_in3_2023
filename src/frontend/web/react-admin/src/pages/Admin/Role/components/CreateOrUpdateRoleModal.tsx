@@ -135,9 +135,9 @@ const CreateOrUpdateRoleModal: React.FC<ModalProps> = (props) => {
             className="authentication-modal"
             onClick={props.onClose}
         >
-            <div className="modal-container top-modal-animation" onClick={(event) => event.stopPropagation()}>
-                <div className="modal-content">
-                <button onClick={props.onClose} className="close-button">
+             <div className="modal-container relative items-center justify-center mx-auto  top-modal-animation" onClick={(event) => event.stopPropagation()}>
+                <div className="modal-content bg-white bg-white rounded-sm border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
+               <button onClick={props.onClose} className="close-button">
                     <svg aria-hidden="true" className="close-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
@@ -145,12 +145,14 @@ const CreateOrUpdateRoleModal: React.FC<ModalProps> = (props) => {
                 </button>
                 <div className="modal-body">
 
-                    <div className="modal-header">
-                        <h3 className="modal-title">{props.title}</h3>
+                <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+                        <h2 className="modal-title font-medium text-black dark:text-white">
+                        {props.title}
+                        </h2>
                     </div>
                     <form className="modal-form">
                     <div className="form-group">
-                        <label htmlFor="name" className="form-label">Name</label>
+                        <label htmlFor="name" className="form-label form-class mb-2.5 block text-black dark:text-white">Name</label>
                         <input
                         type="text"
                         id="name"
@@ -158,18 +160,18 @@ const CreateOrUpdateRoleModal: React.FC<ModalProps> = (props) => {
                         disabled={props.mode === MODAL_MODE.view ? true : false}
                         onChange={handleNameChange}
                         placeholder="Enter a role name"
-                        className={`form-input ${props.mode === MODAL_MODE.view ? 'disabled-input' : ''}`}
+                        className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary dark:disabled:bg-black dark:text-white ${props.mode === MODAL_MODE.view ? 'disabled-input' : ''}`}
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="description" className="form-label">Description</label>
+                        <label htmlFor="description" className="form-label form-class mb-2.5 block text-black dark:text-white">Description</label>
                         <textarea
                         id="description"
                         value={description}
                         onChange={handleDescriptionChange}
                         placeholder="Enter a role description"
                         rows={4}
-                        className={`form-input ${props.mode === MODAL_MODE.view ? 'disabled-input' : ''}`}
+                        className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary dark:disabled:bg-black dark:text-white ${props.mode === MODAL_MODE.view ? 'disabled-input' : ''}`}
                         />
                     </div>
                     <div className="form-actions bg-green-600">

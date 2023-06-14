@@ -3,6 +3,7 @@ import { Eleve } from "../../generated/models";
 import { ImageCellRender } from "../../components/AgGridCells/ImageCelleRender";
 import environment from "../../environments/environment";
 
+
 export const ELEVE_COLUMNS_DEFS: ColDef[] = [
   { 
     headerName: '#', 

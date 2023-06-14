@@ -104,8 +104,8 @@ const SignIn: React.FC<SignInProps> = (props) => {
   };
 
   return (
-    <div>
-      <div className="rounded-sm border h-full border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+    <div className='w-full h-full'>
+      <div className="rounded-sm mx-[15%] my-[5.5%] align-items-center justify-center justify-content-center border border-stroke bg-white shadow-xl shadow-graydark dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center h-full">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="py-17.5 px-26 text-center">
@@ -123,9 +123,9 @@ const SignIn: React.FC<SignInProps> = (props) => {
           </div>
           <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
-              <span className="mb-1.5 block font-medium">Start for free</span>
+              <span className="mb-1.5 block font-medium">Welcome back</span>
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Sign In to TailAdmin
+                Sign In to SchoolAdmin
               </h2>
               <form>
                 <div className="mb-4">
@@ -146,7 +146,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
 
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
-                    Re-type Password
+                  Password
                   </label>
                   <div className="relative">
                     <input
@@ -189,7 +189,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
   );
 };
 

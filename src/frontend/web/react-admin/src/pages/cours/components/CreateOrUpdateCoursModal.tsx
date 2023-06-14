@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
-import { MODAL_MODE } from "../../../../constants/ENUM";
-import { EditIcon, NewIcon } from "../../../../components/Icone";
-import { Cours, CoursCreateBody, UpdateCoursIdBody } from "../../../../generated/models";
-import { TOKEN_LOCAL_STORAGE_KEY } from "../../../../constants/LOCAL_STORAGE";
-import { CoursApi } from "../../../../generated";
-import { useSelector } from "react-redux";
-import { ReduxProps } from "../../../../redux/configureStore";
-import Indicator from "../../../Authentication/components/Indicator";
+import { useEffect, useState } from 'react';
+import { MODAL_MODE } from '../../../constants/ENUM';
+import { EditIcon, NewIcon } from '../../../components/Icone';
+import {
+  Cours,
+  CoursCreateBody,
+  UpdateCoursIdBody,
+} from '../../../generated/models';
+import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
+import { CoursApi } from '../../../generated';
+import { useSelector } from 'react-redux';
+import { ReduxProps } from '../../../redux/configureStore';
+import Indicator from '../../Authentication/components/Indicator';
 
 interface ModalProps {
   mode: MODAL_MODE;
@@ -28,25 +32,34 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
   const state = useSelector((state: ReduxProps) => state);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [libelle, setLibelle] = useState<string>(props.item ? props.item.libelle : "");
-  const [dateCour, setDateCour] = useState<string>(props.item ? props.item.date_cour : "");
-  const [heureDebut, setHeureDebut] = useState<string>(props.item ? props.item.heure_debut : "");
-  const [heureFin, setHeureFin] = useState<string>(props.item ? props.item.heure_fin : "");
+  const [libelle, setLibelle] = useState<string>(
+    props.item ? props.item.libelle : ''
+  );
+  const [dateCour, setDateCour] = useState<string>(
+    props.item ? props.item.date_cour : ''
+  );
+  const [heureDebut, setHeureDebut] = useState<string>(
+    props.item ? props.item.heure_debut : ''
+  );
+  const [heureFin, setHeureFin] = useState<string>(
+    props.item ? props.item.heure_fin : ''
+  );
 
   const handleLibelleChange = (event: any) => setLibelle(event.target.value);
   const handleDateCourChange = (event: any) => setDateCour(event.target.value);
-  const handleHeureDebutChange = (event: any) => setHeureDebut(event.target.value);
+  const handleHeureDebutChange = (event: any) =>
+    setHeureDebut(event.target.value);
   const handleHeureFinChange = (event: any) => setHeureFin(event.target.value);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
+      if (event.key === 'Escape') {
         props.onClose();
       }
     };
-    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown);
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, [props]);
 
@@ -66,7 +79,7 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
     };
     console.log(apiParams);
     coursApi
-      .createCours(apiParams, "Bearer " + token)
+      .createCours(apiParams, 'Bearer ' + token)
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {
@@ -75,7 +88,7 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
 
             props.setSuccessNotifMessage(response.data.message);
             props.setSuccessNotifDescription(
-              "A new course has been successfully created!"
+              'A new course has been successfully created!'
             );
             props.setShowSuccessNotif(true);
           }
@@ -110,7 +123,7 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
     };
 
     coursApi
-      .updateCours(apiParams, "Bearer " + token, props.item?.id)
+      .updateCours(apiParams, 'Bearer ' + token, props.item?.id)
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {
@@ -119,7 +132,7 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
 
             props.setSuccessNotifMessage(response.data.message);
             props.setSuccessNotifDescription(
-              "This course has been successfully updated!"
+              'This course has been successfully updated!'
             );
             props.setShowSuccessNotif(true);
           }
@@ -140,11 +153,14 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
   return (
     <div
       id="authentication-modal"
-      className="authentication-modal"
+      className="authentication-modal pl-800 pt-20"
       onClick={props.onClose}
     >
-      <div className="modal-container top-modal-animation" onClick={(event) => event.stopPropagation()}>
-        <div className="modal-content">
+      <div
+        className="modal-container top-modal-animation relative mx-auto items-center  justify-center  "
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="rounded-sm border border-stroke bg-white bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
           <button onClick={props.onClose} className="close-button">
             <svg
               aria-hidden="true"
@@ -162,12 +178,17 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
             <span className="sr-only">Close modal</span>
           </button>
           <div className="modal-body">
-            <div className="modal-header">
-              <h3 className="modal-title">{props.title}</h3>
+            <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+              <h2 className=" modal-title font-medium text-black dark:text-white">
+                {props.title}
+              </h2>
             </div>
             <form className="modal-form">
               <div className="form-group">
-                <label htmlFor="libelle" className="form-label">
+                <label
+                  htmlFor="libelle"
+                  className="form-label form-class mb-2.5 block text-black dark:text-white"
+                >
                   Libelle
                 </label>
                 <input
@@ -177,11 +198,16 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
                   disabled={props.mode === MODAL_MODE.view}
                   onChange={handleLibelleChange}
                   placeholder="Enter a course libelle"
-                  className={`form-input ${props.mode === MODAL_MODE.view ? 'disabled-input' : ''}`}
+                  className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black ${
+                    props.mode === MODAL_MODE.view ? 'disabled-input' : ''
+                  }`}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="dateCour" className="form-label">
+                <label
+                  htmlFor="dateCour"
+                  className="form-label form-class mb-2.5 block text-black dark:text-white"
+                >
                   Date
                 </label>
                 <input
@@ -190,11 +216,16 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
                   value={dateCour}
                   disabled={props.mode === MODAL_MODE.view}
                   onChange={handleDateCourChange}
-                  className={`form-input ${props.mode === MODAL_MODE.view ? 'disabled-input' : ''}`}
+                  className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black ${
+                    props.mode === MODAL_MODE.view ? 'disabled-input' : ''
+                  }`}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="heureDebut" className="form-label">
+                <label
+                  htmlFor="heureDebut"
+                  className="form-label form-class mb-2.5 block text-black dark:text-white"
+                >
                   Heure de début
                 </label>
                 <input
@@ -203,11 +234,16 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
                   value={heureDebut}
                   disabled={props.mode === MODAL_MODE.view}
                   onChange={handleHeureDebutChange}
-                  className={`form-input ${props.mode === MODAL_MODE.view ? 'disabled-input' : ''}`}
+                  className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black ${
+                    props.mode === MODAL_MODE.view ? 'disabled-input' : ''
+                  }`}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="heureFin" className="form-label">
+                <label
+                  htmlFor="heureFin"
+                  className="form-label form-class mb-2.5 block text-black dark:text-white"
+                >
                   Heure de fin
                 </label>
                 <input
@@ -216,31 +252,50 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
                   value={heureFin}
                   disabled={props.mode === MODAL_MODE.view}
                   onChange={handleHeureFinChange}
-                  className={`form-input ${props.mode === MODAL_MODE.view ? 'disabled-input' : ''}`}
+                  className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black ${
+                    props.mode === MODAL_MODE.view ? 'disabled-input' : ''
+                  }`}
                 />
               </div>
             </form>
             {props.mode === MODAL_MODE.view ? null : (
               <div className="form-actions bg-green-600">
                 <button onClick={props.onClose} className="cancel-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="button-icon">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                            Annuler
-                        </button>
-                        
-                        {props.mode !== MODAL_MODE.view && props.mode === MODAL_MODE.create ? 
-                            <button onClick={handleCreate} className="create-button" >
-                               {isLoading ? <Indicator height={5} border="white"/> : <NewIcon size={2} color="#fff" />}  
-                                <span className="ml-2">Créer </span>
-                            </button> : null }
-                        {props.mode !== MODAL_MODE.view && props.mode === MODAL_MODE.update ? 
-                            <button onClick={handleUpdate} className="create-button">
-                                <EditIcon color="#fff" size={18} />
-                                Enregistrer
-                            </button> : null
-                        } 
-               
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    className="button-icon"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                  Annuler
+                </button>
+
+                {props.mode !== MODAL_MODE.view &&
+                props.mode === MODAL_MODE.create ? (
+                  <button onClick={handleCreate} className="create-button">
+                    {isLoading ? (
+                      <Indicator height={5} border="white" />
+                    ) : (
+                      <NewIcon size={2} color="#fff" />
+                    )}
+                    <span className="ml-2">Créer </span>
+                  </button>
+                ) : null}
+                {props.mode !== MODAL_MODE.view &&
+                props.mode === MODAL_MODE.update ? (
+                  <button onClick={handleUpdate} className="create-button">
+                    <EditIcon color="#fff" size={18} />
+                    Enregistrer
+                  </button>
+                ) : null}
               </div>
             )}
           </div>
