@@ -35,7 +35,7 @@ class Fields extends StatelessWidget {
 
   bool? emailTap;
   bool? passwordTap;
-
+  
   Fields(
       {this.prefixIcon,
       this.labelText,
