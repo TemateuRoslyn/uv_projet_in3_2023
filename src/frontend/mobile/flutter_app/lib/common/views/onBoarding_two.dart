@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../styles/colors.dart';
 import '../utils/constants.dart';
 import '../utils/helper.dart';
+import '../widgets/common_widgets.dart';
 
 class OnBoardingTwo extends StatelessWidget {
   const OnBoardingTwo({super.key});
@@ -36,24 +37,17 @@ class OnBoardingTwo extends StatelessWidget {
             SizedBox(
               height: getHeight(150, context),
             ),
-            InkWell(
-              onTap: () => Navigator.push(
+            CommonWidgets.roundedNextButton(
+              action: () => Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => const OnBoardingThree())),
-              child: Container(
-                height: getHeight(50, context),
-                width: getWidth(50, context),
-                decoration: BoxDecoration(
-                    color: appColors.tinary,
-                    borderRadius: BorderRadius.circular(30.0)),
-                alignment: Alignment.center,
-                child: Icon(
-                  Icons.arrow_forward_ios_sharp,
-                  size: getHeight(15, context),
-                  color: Colors.white,
-                ),
-              ),
+              height: getHeight(50, context),
+              width: getWidth(50, context),
+              iconSize: getHeight(15, context),
+              color: appColors.tinary!,
+              iconColor: Colors.white,
+              iconData: Icons.arrow_forward_ios_sharp,
             ),
           ],
         ),

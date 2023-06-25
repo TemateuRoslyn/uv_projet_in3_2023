@@ -1,11 +1,8 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-// import '../../modules/auth/logic/register/register_cubit.dart';
 import '../styles/colors.dart';
 import '../utils/helper.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Fields extends StatelessWidget {
   final String fieldType;
@@ -36,6 +33,9 @@ class Fields extends StatelessWidget {
   final List<DropDownValueModel>? dropDownList;
   final Icon? dropDownPrefixIcon;
 
+  bool? emailTap;
+  bool? passwordTap;
+  
   Fields(
       {this.prefixIcon,
       this.labelText,
@@ -60,6 +60,8 @@ class Fields extends StatelessWidget {
       this.dropDownItemCount,
       this.dropDownList,
       this.dropDownPrefixIcon,
+      this.emailTap,
+      this.passwordTap,
       required this.fieldType,
       super.key});
 
@@ -73,23 +75,29 @@ class Fields extends StatelessWidget {
           onTap: onTapAction,
           cursorColor: appColors.primary,
           // initialValue: initialValue,
+          style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
+            filled: emailTap! ? true : false,
+            fillColor: Colors.white.withOpacity(0.1),
             prefixIcon: prefixIcon,
             labelText: labelText,
-            // labelStyle: TextStyle(
-            //   color: appColors.primary!.withOpacity(0.5),
-            // ),
+            labelStyle: const TextStyle(
+              color: Colors.white,
+            ),
             enabledBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(width: 1, color: Colors.black.withOpacity(0.05)),
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(width: 1, color: appColors.primary!),
             ),
             focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
               borderSide: BorderSide(
                   width: 1, color: appColors.primary!.withOpacity(0.5)),
             ),
             errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
                 borderSide: BorderSide(width: 1, color: Colors.red.shade800)),
             focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
                 borderSide: BorderSide(width: 1, color: Colors.red.shade800)),
             // hintStyle: const TextStyle(
             //   color: Colors.grey,
@@ -108,24 +116,33 @@ class Fields extends StatelessWidget {
         return TextFormField(
           onTap: onTapAction,
           cursorColor: appColors.primary,
+          keyboardType: TextInputType.visiblePassword,
           // initialValue: initialValue,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
           decoration: InputDecoration(
+            filled: passwordTap! ? true : false,
+            fillColor: Colors.white.withOpacity(0.1),
             prefixIcon: prefixIcon,
             labelText: labelText,
-            // labelStyle: TextStyle(
-            //   color: appColors.primary!.withOpacity(0.5),
-            // ),
+            labelStyle: const TextStyle(
+              color: Colors.white,
+            ),
             enabledBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(width: 1, color: Colors.black.withOpacity(0.05)),
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(width: 1, color: appColors.primary!),
             ),
             focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
               borderSide: BorderSide(
                   width: 1, color: appColors.primary!.withOpacity(0.5)),
             ),
             errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
                 borderSide: BorderSide(width: 1, color: Colors.red.shade800)),
             focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
                 borderSide: BorderSide(width: 1, color: Colors.red.shade800)),
             // hintStyle: const TextStyle(
             //   color: Colors.grey,

@@ -3,7 +3,7 @@ class AppImages {
   static String onBoardingTwo = 'assets/images/onBoardingTwo.png';
   static String onBoardingThree = 'assets/images/onBoardingThree.png';
   static String logo = 'assets/images/logo.png';
-  static String instagram = 'assets/images/instagram.jpeg';
+  static String login = 'assets/images/login.png';
   static String unknownPersonImg = 'assets/images/unknown_contact_img.png';
 }
 

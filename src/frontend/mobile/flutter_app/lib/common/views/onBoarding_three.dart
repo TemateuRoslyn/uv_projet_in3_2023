@@ -1,9 +1,11 @@
-import 'package:fltter_app/features/authentication/views/register_page.dart';
+
+import 'package:fltter_app/features/authentication/views/login_page.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/colors.dart';
 import '../utils/constants.dart';
 import '../utils/helper.dart';
+import '../widgets/common_widgets.dart';
 
 class OnBoardingThree extends StatelessWidget {
   const OnBoardingThree({super.key});
@@ -38,24 +40,16 @@ class OnBoardingThree extends StatelessWidget {
             SizedBox(
               height: getHeight(150, context),
             ),
-            InkWell(
-              onTap: () => Navigator.pushAndRemoveUntil(
+            CommonWidgets.roundedNextButton(
+              action: () => Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const RegisterPage()),
+                  MaterialPageRoute(builder: (context) => LoginPage()),
                   (route) => false),
-              child: Container(
-                height: getHeight(50, context),
-                width: getWidth(50, context),
-                decoration: BoxDecoration(
-                    color: appColors.tinary,
-                    borderRadius: BorderRadius.circular(30.0)),
-                alignment: Alignment.center,
-                child: Icon(
-                  Icons.check,
-                  size: getHeight(15, context),
-                  color: Colors.white,
-                ),
-              ),
+              height: getHeight(50, context),
+              iconSize: getHeight(15, context),
+              color: appColors.tinary!,
+              iconColor: Colors.white,
+              iconData: Icons.check,
             ),
           ],
         ),
