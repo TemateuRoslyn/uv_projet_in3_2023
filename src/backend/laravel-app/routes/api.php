@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // controllers
+use App\Http\Controllers\API\FauteController;
 use App\Http\Controllers\API\EleveController;
 use App\Http\Controllers\API\ClassesController;
 use App\Http\Controllers\API\AuthController;
@@ -181,6 +182,15 @@ Route::middleware('jwt.verify')->group(function () {
             Route::post('personnels/{filename}', [UploadController::class, 'getPersonnelAvatar']);
             Route::post('professeurs/{filename}', [UploadController::class, 'getProfesseurAvatar']);
         });
+    });
+
+     //faute
+     Route::prefix('faute')->group(function () {
+        Route::post('create', [FauteController::class, 'store']);
+        Route::post('update', [FauteController::class, 'update']);
+        Route::delete('delete/{fauteId}', [FauteController::class, 'delete']);
+        Route::get('findOne/{fauteId}', [FauteController::class, 'view']);
+        Route::get('findAll', [FauteController::class, 'index']);
     });
 
    

@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 
 use App\Models\Regle;
 
+
 class RegleSeeder extends Seeder
 {
     /**
