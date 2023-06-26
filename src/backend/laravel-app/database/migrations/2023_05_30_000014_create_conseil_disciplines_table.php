@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('conseil_disciplines', function (Blueprint $table) {
             $table->id();
+            $table->date('dateCd');
+            $table->time('heureDebutCd');
+            $table->time('heureFinCd');
+            $table->unsignedBigInteger('eleveId');
+            $table->foreign('eleveId')->references('id')->on('eleves');
             $table->timestamps();
-            $table->date('date_cd');
-            $table->date('heure_debut_cd');
-            $table->date('heure_fin_cd');
-            $table->unsignedBigInteger('eleve_id');
-            $table->foreign('eleve_id')->references('id')->on('eleves');
         });
     }
 
