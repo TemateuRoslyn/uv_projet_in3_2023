@@ -1,6 +1,6 @@
 import { ColDef } from "ag-grid-community";
 
-export const COURS_COLUMNS_DEFS: ColDef[] = [
+export const CONVOCATION_COLUMNS_DEFS: ColDef[] = [
   {
     headerName: '#',
     field: 'id',
@@ -19,28 +19,37 @@ export const COURS_COLUMNS_DEFS: ColDef[] = [
     width: 300,
   },
   {
-    headerName: 'Date du Cours',
-    field: 'date_cour',
+    headerName: 'Date Convocation',
+    field: 'date_convocation',
     filter: 'agDateColumnFilter',
     checkboxSelection: false,
     showDisabledCheckboxes: true,
     width: 300,
   },
   {
-    headerName: 'Heure de Début',
-    field: 'heure_debut',
+    headerName: 'Date RDV',
+    field: 'date_rdv',
     filter: 'agTextColumnFilter',
     checkboxSelection: false,
     showDisabledCheckboxes: true,
     width: 300,
   },
   {
-    headerName: 'Heure de Fin',
-    field: 'heure_fin',
+    headerName: 'Statut',
+    field: 'statut',
     filter: 'agTextColumnFilter',
     checkboxSelection: false,
     showDisabledCheckboxes: true,
     width: 300,
   },
+  {
+    headerName: 'Eleve Id',
+    field: 'eleve_id',
+    filter: 'agNumberColumnFilter',
+    checkboxSelection: false,
+    showDisabledCheckboxes: true,
+    width: 300,
+  },
+ 
  
 ];

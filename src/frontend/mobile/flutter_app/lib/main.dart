@@ -64,11 +64,8 @@ class _MyAppState extends State<MyApp> {
           ),
           BlocProvider<ProfileCubit>(
               create: (context) => ProfileCubit(
-                  authRepository: widget.authRepository,
                   internetCubit: widget.internetCubit)),
         ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
           title: 'Flutter Demo',
           theme: ThemeData(

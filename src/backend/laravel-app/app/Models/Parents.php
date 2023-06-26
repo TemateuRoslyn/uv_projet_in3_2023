@@ -56,7 +56,7 @@ class Parents extends Model
 
     public function eleve()
     {
-        return $this->belongsToMany(Eleve::class);
+        return $this->belongsToMany(Eleve::class, 'eleves_parents', 'eleve_id', 'parentId');
     }
 
     protected static function boot()
