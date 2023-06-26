@@ -1,9 +1,9 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { MODAL_MODE } from '../../../constants/ENUM';
 import { EditIcon, NewIcon } from '../../../components/Icone';
-import { Eleve, ElevesCreateBody } from '../../../generated/models';
+import { Professeur, ProfesseursCreateBody } from '../../../generated/models';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
-import { ClassesApi, ElevesApi } from '../../../generated';
+import { ClassesApi, ProfesseursApi } from '../../../generated';
 import { useSelector } from 'react-redux';
 import { ReduxProps } from '../../../redux/configureStore';
 import Indicator from '../../Authentication/components/Indicator';
@@ -21,7 +21,7 @@ interface ModalProps {
   title: string;
   onClose: () => void;
   refresh?: () => void;
-  item?: Eleve | null;
+  item?: Professeur | null;
 
   setShowSuccessNotif: (value: boolean) => void;
   setSuccessNotifMessage: (value: string) => void;
@@ -32,23 +32,23 @@ interface ModalProps {
   setWarningNotifDescription: (value: string | null) => void;
 }
 
-const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
+const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
   const state = useSelector((state: ReduxProps) => state);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [formValues, setFormValues] = useState({
     firstname: props.item ? props.item.firstName : '',
     lastname: props.item ? props.item.lastName : '',
-    tel: props.item ? props.item.telephone : '',
+    telephone: props.item ? props.item.telephone : '',
     email: props.item ? props.item.user?.email : '',
-    dateNaiss: props.item ? props.item.dateDeNaissance : '',
-    lieuNaiss: props.item ? props.item.lieuDeNaissance : '',
+    date_de_naissance: props.item ? props.item.dateDeNaissance : '',
+    lieu_de_naissance: props.item ? props.item.lieuDeNaissance : '',
     photo: props.item ? props.item.photo : null,
     sexe: props.item ? props.item.sexe : '',
-    solvable: props.item ? props.item.solvable : false,
-    redoublant: props.item ? props.item.redoublant : false,
-    classeId: props.item ? props.item.classe?.id : '',
-    speciality: props.item ? props.item.classe?.speciality : '',
+    classe_id: props.item ? props.item.classe?.id : '',
+    cour_id: props.item ? props.item.cour?.id : '',
+    username: props.item ? props.item.username?.id : '',
+   
   });
 
   const [matchList, setMatchList] = useState<string[]>([]);
@@ -108,8 +108,7 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
       if (event.key === 'Escape') {
         props.onClose();
       }
-    };: "https://pub.dev"
-
+    };
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
@@ -131,27 +130,19 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
     _event.preventDefault(); // stopper la soumissoin par defaut du formulaire...
 
     const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    const elevesApi = new ElevesApi({
+    const professeursApi = new ProfesseursApi({
       ...state.environment,
       accessToken: token,
     });
 
     setIsLoading(true);
 
-    elevesApi
-      .createEleve(
-        formValues.email,
-        formValues.firstname,
-        formValues.lastname,
-        formValues.dateNaiss,
-        formValues.lieuNaiss,
-        formValues.photo,
-        formValues.sexe,
-        formValues.tel,
-        formValues.solvable,
-        formValues.redoublant,
-        formValues.classeId,
-        'Bearer ' + token
+    professeursApi
+      .createProfesseur(
+        formValues,
+        'Bearer ' + token,
+        
+        
       )
       .then((response) => {
         if (response && response.data) {
@@ -162,7 +153,7 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
             // notification
             props.setSuccessNotifMessage(response.data.message);
             props.setSuccessNotifDescription(
-              "Une nouvelle eleve viens d'etre rajoutee au catalogue avec success ! "
+              "Une nouvelle professeur viens d'etre rajoutee au catalogue avec success ! "
             );
             props.setShowSuccessNotif(true);
           }
@@ -186,7 +177,7 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
     _event.preventDefault(); // stopper la soumissoin par defaut du formulaire...
 
     const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    const elevesApi = new ElevesApi({
+    const professeursApi = new ProfesseursApi({
       ...state.environment,
       accessToken: token,
     });
@@ -195,19 +186,17 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
 
     console.log(formValues);
 
-    elevesApi
-      .updateEleve(
+    professeursApi
+      .updateProfesseur(
         formValues.email,
-        formValues.firstname,
-        formValues.lastname,
-        formValues.dateNaiss,
-        formValues.lieuNaiss,
+        formValues.first_name,
+        formValues.last_name,
+        formValues.date_de_naissance,
+        formValues.lieu_de_naissance,
         formValues.photo,
         formValues.sexe,
-        formValues.tel,
-        formValues.solvable,
-        formValues.redoublant,
-        formValues.classeId,
+        formValues.telephone,
+        
         'Bearer ' + token,
         props.item?.id
       )
@@ -220,7 +209,7 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
             // notification
             props.setSuccessNotifMessage(response.data.message);
             props.setSuccessNotifDescription(
-              "Cet eleve viens d'etre modifie(e), vous pouvez le consulter  au catalogue avec success ! "
+              "Cet professeur viens d'etre modifie(e), vous pouvez le consulter  au catalogue avec success ! "
             );
             props.setShowSuccessNotif(true);
           }
@@ -286,7 +275,7 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
                     </label>
                     <input
                       name="firstname"
-                      value={formValues.firstname}
+                      value={formValues.first_name}
                       onChange={handleInputChange}
                       required
                       type="text"
@@ -301,7 +290,7 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
                     </label>
                     <input
                       name="lastname"
-                      value={formValues.lastname}
+                      value={formValues.last_name}
                       onChange={handleInputChange}
                       required
                       type="text"
@@ -312,17 +301,18 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
 
                   <div className="w-full xl:w-1/2">
                     <label className="mb-2.5 block text-black dark:text-white">
-                      Tel <span className="text-meta-1">*</span>
+                      Telephone <span className="text-meta-1">*</span>
                     </label>
                     <input
-                      name="tel"
-                      value={formValues.tel}
+                      name="telephone"
+                      value={formValues.telephone}
                       onChange={handleInputChange}
                       required
                       type="text"
-                      placeholder="Le numero de l'eleve"
+                      placeholder="Le numero du professeur"
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
+                  
                   </div>
                 </div>
 
@@ -378,23 +368,6 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
                     </select>
                   </div>
 
-                  <div className="w-full xl:w-1/3">
-                    <label className="mb-2.5 block text-black dark:text-white">
-                      Status <span className="text-meta-1">*</span>
-                    </label>
-                    <select
-                      name="redoublant"
-                      value={formValues.redoublant}
-                      onChange={handleInputChange}
-                      className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    >
-                      {STATUS.map((option, index) => (
-                        <option key={index} value={option.value}>
-                          {option.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
 
                   <div className="w-full xl:w-1/2">
                     <label className="mb-2.5 block text-black dark:text-white">
@@ -410,59 +383,23 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                   </div>
-                </div>
-
-                {/* row 3 solvable, dateNaiss, lieuNaiss*/}
-
-                <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                  <div className="w-full xl:w-1/3">
-                    <label className="mb-2.5 block text-black dark:text-white">
-                      Solvable <span className="text-meta-1">*</span>
-                    </label>
-                    <select
-                      name="solvable"
-                      value={formValues.solvable}
-                      onChange={handleInputChange}
-                      className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    >
-                      {SOLVABLE.map((option, index) => (
-                        <option key={index} value={option.value}>
-                          {option.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="w-full xl:w-1/3 ">
-                    <label className="mb-3 block text-black dark:text-white">
-                      Date de naissance <span className="text-meta-1">*</span>
-                    </label>
-                    <div className="relative">
-                      <input
-                        name="dateNaiss"
-                        value={formValues.dateNaiss}
-                        onChange={handleInputChange}
-                        type="date"
-                        className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                      />
-                    </div>
-                  </div>
-
                   <div className="w-full xl:w-1/2">
                     <label className="mb-2.5 block text-black dark:text-white">
-                      Lieu de Naissance <span className="text-meta-1">*</span>
+                    username <span className="text-meta-1">*</span>
                     </label>
                     <input
-                      name="lieuNaiss"
-                      value={formValues.lieuNaiss}
+                      name="username"
+                      value={formValues.username}
                       onChange={handleInputChange}
                       required
-                      type="text"
-                      placeholder="Enter your Place of Birth"
+                      type="username"
+                      placeholder="Enter your Email Address"
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                   </div>
                 </div>
+
+
 
                 {/* row 5 create | update, annuler */}
                 <div className="form-actions bg-green-600">
@@ -533,4 +470,4 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
   );
 };
 
-export default CreateOrUpdateEleveModal;
+export default CreateOrUpdateProfesseurModal;

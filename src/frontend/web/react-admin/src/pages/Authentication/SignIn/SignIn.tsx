@@ -26,6 +26,7 @@ import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
 import { setIsLOggedAction } from '../../../redux/Actions/LoggedInAction';
 import { setTokenAction } from '../../../redux/Actions/TokenAction';
 
+import "../../../index.css"
 
 interface SignInProps {}
 
@@ -75,6 +76,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
 
     authApi.authLogin(apiParams)
     .then((response) => {
+      
 
       setIsLoading(false)      
       if(response && response.data){
@@ -104,8 +106,9 @@ const SignIn: React.FC<SignInProps> = (props) => {
   };
 
   return (
-    <div className='w-full h-full'>
-      <div className="rounded-sm mx-[15%] my-[5.5%] align-items-center justify-center justify-content-center border border-stroke bg-white shadow-xl shadow-graydark dark:border-strokedark dark:bg-boxdark">
+    <div className='w: "https://pub.dev"
+    -full h-full no-scrollbar'>
+      <div className="no-scrollbar rounded-sm mx-[15%] my-[5.5%] align-items-center justify-center justify-content-center border border-stroke bg-white shadow-xl shadow-graydark dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center h-full">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="py-17.5 px-26 text-center">

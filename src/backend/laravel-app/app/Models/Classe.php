@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Eleve;
+use App\Models\Cour;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -44,5 +45,9 @@ class Classe extends Model
     public function eleves()
     {
         return $this->hasMany(Eleve::class);
+    }
+
+    public function cours(){
+        return $this->belongsToMany(Cour::class, 'cours_classes', 'courId', 'classeId');
     }
 }

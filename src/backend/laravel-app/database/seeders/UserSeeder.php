@@ -26,18 +26,26 @@ class UserSeeder extends Seeder
             'password' => bcrypt('maestros'),
         ]);
 
+        $user1 = User::create([
+            'email' => 'daiki@gmail.com',
+            'username' => 'daiki',
+            'password' => bcrypt('daiki'),
+        ]);
+
         // recupere le role admin
         $adminRole = Role::where('name', ADMIN_ROLE['name'])->first();
 
         // assigner le role
         if ($adminRole) {
             $user->roles()->attach($adminRole);
+            $user1->roles()->attach($adminRole);
         }
 
         // assigner les permission
         foreach (ADMINITRATEUR_PERMISSIONS as $permission) {
             $adminPerm = Permission::where('name', $permission['name'])->first();
             if ($adminPerm) {
+                $user1->permissions()->attach($adminPerm);
                 $user->permissions()->attach($adminPerm);
             }
         }

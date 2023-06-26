@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Classe;
+
 /**
  * @OA\Schema(
  *     required={"id", "libelle", "date_cour", "heure_debut", "heure_fin"},
@@ -40,5 +42,9 @@ class Cour extends Model
     public function professeur()
     {
         return $this->belongsTo(Professeur::class);
+    }
+
+    public function classe(){
+        return $this->belongsToMany(Classe::class, 'cours_classes', 'courId', 'classeId');
     }
 }
