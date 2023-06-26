@@ -6,6 +6,7 @@ import 'package:fltter_app/common/views/onBoarding_one.dart';
 import 'package:fltter_app/common/views/page_skeleton.dart';
 import 'package:fltter_app/common/views/splash_page.dart';
 import 'package:fltter_app/features/authentication/views/login_page.dart';
+import 'package:fltter_app/features/home/views/home_page.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,7 +87,8 @@ class _MyAppState extends State<MyApp> {
                 } else {
                   if (state is IsUnAuthenticated) {
                     navigatorKey.currentState!.pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()),
                         (route) => false);
                   }
 
