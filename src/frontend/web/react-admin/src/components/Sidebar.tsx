@@ -150,7 +150,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/* <!-- Menu Item Enseignant--> */}
               <li>
                 <NavLink
-                  to="/enseignant"
+                  to="/professeurs"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes('enseignant') && 'bg-graydark dark:bg-meta-4'
                     }`}
                 >
@@ -168,7 +168,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       stroke-width="1.5" stroke="currentColor"
                     />
                   </svg>
-                  Enseignant
+                Professeur
                 </NavLink>
               </li>
               {/* <!-- Menu Item Enseignant --> */}
