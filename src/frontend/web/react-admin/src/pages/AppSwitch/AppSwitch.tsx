@@ -11,8 +11,7 @@ import Profile from '../Profile';
 import Parents from '../Parents';
 
 
-import Enseignant from '../Enseignant';
-
+import Professeurs from '../Enseignant/Professeurs.page';
 import Settings from '../Settings';
 import Tables from '../Tables';
 import Alerts from '../UiElements/Alerts';
@@ -66,7 +65,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/parents" element={<Parents />} />
             <Route path="/cours" element={<CoursPage />} />
-            <Route path="/enseignant" element={<Enseignant />} />
+            <Route path="/professeurs" element={<Professeurs />} />
             
 
             <Route path="/forms/form-elements" element={<FormElements />} />
