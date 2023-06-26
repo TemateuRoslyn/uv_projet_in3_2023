@@ -19,6 +19,7 @@ use App\Http\Controllers\API\PersonnelController;
 use App\Http\Controllers\API\RegleController;
 use App\Http\Controllers\API\ReglementInterieurController;
 use App\Http\Controllers\API\UploadController;
+use App\Http\Controllers\API\FauteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +56,7 @@ Route::prefix('files')->group(function () {
  */
 Route::middleware('jwt.verify')->group(function () {
 
-    Route::middleware('role:'.ADMIN_ROLE['name'])->group(function () {
+    Route::middleware('role:' . ADMIN_ROLE['name'])->group(function () {
 
         // users
         Route::prefix('users')->group(function () {
@@ -183,5 +184,12 @@ Route::middleware('jwt.verify')->group(function () {
         });
     });
 
-   
+    //faute
+    Route::prefix('faute')->group(function () {
+        Route::post('create', [FauteController::class, 'store']);
+        Route::post('update', [FauteController::class, 'update']);
+        Route::delete('delete/{fauteId}', [FauteController::class, 'delete']);
+        Route::get('findOne/{fauteId}', [FauteController::class, 'view']);
+        Route::get('findAll', [FauteController::class, 'index']);
+    });
 });

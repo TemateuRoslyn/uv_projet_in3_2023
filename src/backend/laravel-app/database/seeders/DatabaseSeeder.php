@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             ProfesseurSeeder::class,
             ClasseSeeder::class,
             EleveSeeder::class,
+            FauteSeeder::class,
         ]);
     }
 }

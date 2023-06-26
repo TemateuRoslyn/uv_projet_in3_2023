@@ -270,7 +270,7 @@ class ProfesseurController extends Controller
         return response()->json([
             'message' => 'Professor created successfully',
             'success' => true,
-            'data' => $professeur
+            'content' => $professeur
         ]);
 
         // Créer un professeur de base avec le rôle professeur
