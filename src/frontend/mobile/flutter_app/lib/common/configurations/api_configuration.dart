@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class ApiConfiguration {
-  static String appDomainUrl = 'https://4310-129-0-103-12.ngrok-free.app/';
+  static String appDomainUrl = 'https://0205-129-0-80-177.ngrok-free.app/';
 
   static Dio dioClient = Dio(
     BaseOptions(
@@ -20,12 +20,12 @@ class ApiConfiguration {
   static String getErrorMessage(DioException error) {
     late String errorMessage;
 
-    if (error.response!.statusCode != 200 ||
-        error.response!.statusCode != 201) {
+    if (error.response!.statusCode != 404) {
       final errorContent = error.response!.data;
       errorMessage = errorContent['message'];
     } else {
-      errorMessage = 'Something went wrong, please try back later...';
+      errorMessage =
+          'Quelque chose s\'est mal passé, veuillez réesayer plus tard...';
     }
 
     return errorMessage;

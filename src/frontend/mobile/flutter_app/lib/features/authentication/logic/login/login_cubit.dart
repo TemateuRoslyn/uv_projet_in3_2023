@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:fltter_app/common/configurations/api_configuration.dart';
 import 'package:fltter_app/common/utils/enums.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +44,9 @@ class LoginCubit extends Cubit<LoginState> {
           loginStatus: ApiStatus.success,
           statusMessage: 'Connexion à votre compte réussie...'));
     } on DioException catch (e) {
+      final errorMessage = ApiConfiguration.getErrorMessage(e);
       emit(state.copyWith(
-          loginStatus: ApiStatus.failed, statusMessage: e.toString()));
+          loginStatus: ApiStatus.failed, statusMessage: errorMessage));
     }
   }
 }

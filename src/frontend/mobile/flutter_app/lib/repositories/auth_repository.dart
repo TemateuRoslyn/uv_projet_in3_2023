@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:fltter_app/common/models/user.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../common/configurations/api_configuration.dart';
@@ -79,6 +80,20 @@ class AuthRepository {
 
       saveUserIdInLocalStorage(userId);
       saveUserTokenInLocalStorage(token);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<User> getCurrentUser() async {
+    try {
+      final response = await dio.get(
+        'eleves/findOne/$_userId',
+        options: ApiConfiguration.getAuthorizationOptions(_userToken),
+      );
+      final userFound = User.fromJson(response.data!['content']);
+
+      return userFound;
     } catch (e) {
       rethrow;
     }
