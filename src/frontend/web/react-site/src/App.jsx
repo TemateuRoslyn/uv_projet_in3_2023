@@ -1,6 +1,6 @@
 import "./App.css"
 import Header from "./components/common/header/Header"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import About from "./components/about/About"
 import CourseHome from "./components/allcourses/CourseHome"
 import Team from "./components/team/Team"
@@ -17,16 +17,17 @@ const  App = () =>{
     <>
       <Router>
         <Header />
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/about' component={About} />
-          <Route exact path='/courses' component={CourseHome} />
-          <Route exact path='/team' component={Team} />
-          <Route exact path='/pricing' component={Pricing} />
-          <Route exact path='/journal' component={Blog} />
-          <Route exact path='/contact' component={Contact} />
-        </Switch>
-        <Route path='/login' component={Login} />
+        <Routes>
+          <Route exact path='/' element={<Home/>} />
+          <Route exact path='/about' element={<About/>} />
+          <Route exact path='/courses' element={<CourseHome/>} />
+          <Route exact path='/team' element={<Team/>} />
+          <Route exact path='/pricing' element={<Pricing/>} />
+          <Route exact path='/journal' element={<Blog/>} />
+          <Route exact path='/contact' element={<Contact/>} />
+          <Route exact path='/login' element={<Login/>} />
+        </Routes>
+        
         <Footer />
       </Router>
     </>

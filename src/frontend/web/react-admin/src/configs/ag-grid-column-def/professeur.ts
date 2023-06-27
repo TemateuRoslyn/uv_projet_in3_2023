@@ -64,10 +64,7 @@ export const PROFESSEUR_COLUMNS_DEFS: ColDef[] = [
     showDisabledCheckboxes: true,
     width: 120,
 
-  }
   },
-
-
 {
   headerName: 'Sexe',
     field: 'sexe',

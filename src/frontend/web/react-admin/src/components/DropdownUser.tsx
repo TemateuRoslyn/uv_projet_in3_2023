@@ -63,7 +63,7 @@ const DropdownUser = () => {
       dispatch(setIsLOggedAction(false));
       
       navigate("/");
-      : "https://pub.dev"
+     
 
     });
   }
