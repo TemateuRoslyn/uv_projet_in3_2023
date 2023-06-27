@@ -17,7 +17,7 @@ import {
     TrashIcon 
 } from '../../../components/Icone';
 
-import './DisplayEleves.css'
+import './DisplayParents.css'
 import { AgGridIndicator } from '../../../components/AgGridIndicator';
 import { ParentsApi } from '../../../generated';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
@@ -66,7 +66,7 @@ const DisplayParents: React.FC<DisplayElevesProps> = (props) => {
 
         setShowIndicator(true)
         
-        parentsApi.showAllParent('Bearer ' + token)
+        parentsApi.parentsIndex('Bearer ' + token)
         .then((response) => {  
         if(response && response.data){                    
             if(response.data.success === true){ 
@@ -174,7 +174,7 @@ const DisplayParents: React.FC<DisplayElevesProps> = (props) => {
 
         setShowIndicator(true)
 
-        parentsApi.deleteParent( parent.id, 'Bearer ' + token)
+        parentsApi.deleteParent( 'Bearer ' + token, parent.id )
         .then((response) => {  
         if(response && response.data){                    
             if(response.data.success === true){ 

@@ -8,7 +8,7 @@ export const PROFESSEUR_COLUMNS_DEFS: ColDef[] = [
   {
     headerName: '#',
     field: 'id',
-    filter: 'agNumberColumnFilter', 
+    filter: 'agNumberColumnFilter',
     headerCheckboxSelection: true,
   checkboxSelection: true,
   showDisabledCheckboxes: true,
