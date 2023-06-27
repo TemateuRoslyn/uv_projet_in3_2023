@@ -31,7 +31,7 @@ export interface InlineResponse2008 {
     success?: any;
     /**
      * 
-     * @type {Cour}
+     * @type {Array&lt;Cour&gt;}
      * @memberof InlineResponse2008
      */
     content?: any;

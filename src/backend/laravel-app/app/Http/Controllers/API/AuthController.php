@@ -154,8 +154,6 @@ class AuthController extends Controller
      *                   type="object",
      *                   @OA\Property(property="token", type="string", example="eyJ0eXAiOiJKV1QiLCJ...."),
      *                   @OA\Property(property="user", type="object", ref="#/components/schemas/User"),
-     *                   @OA\Property(property="roles", type="array", @OA\Items(ref="#/components/schemas/Role")),
-     *                   @OA\Property(property="permissions", type="array", @OA\Items(ref="#/components/schemas/Permission")),
      *               ),
      *         )
      *     )
@@ -179,6 +177,8 @@ class AuthController extends Controller
         }
 
         $user = User::find(auth()->user()->id);
+        $user->roles;
+        $user->permissions;
 
         // send response
         return response()->json([
@@ -187,8 +187,6 @@ class AuthController extends Controller
             "content" => [
                 'token' => $token,
                 'user' => $user,
-                'roles' => $user->roles,
-                'permissions' => $user->permissions,
                 ]
         ], 200);
 

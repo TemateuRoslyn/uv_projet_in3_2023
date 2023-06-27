@@ -19,20 +19,20 @@
 export interface InlineResponse2017 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse2017
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse2017
      */
     success?: any;
     /**
      * 
-     * @type {Role}
+     * @type {string}
      * @memberof InlineResponse2017
      */
-    content?: any;
+    message?: any;
+    /**
+     * 
+     * @type {Regle}
+     * @memberof InlineResponse2017
+     */
+    data?: any;
 }

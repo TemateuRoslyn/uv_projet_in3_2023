@@ -19,19 +19,13 @@
 export interface InlineResponse20017 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20017
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20017
      */
     success?: any;
     /**
      * 
-     * @type {Parents}
+     * @type {Array&lt;Faute&gt;}
      * @memberof InlineResponse20017
      */
     data?: any;

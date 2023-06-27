@@ -19,14 +19,8 @@
 export interface InlineResponse20022 {
     /**
      * 
-     * @type {boolean}
+     * @type {Parents}
      * @memberof InlineResponse20022
      */
-    success?: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20022
-     */
-    message?: any;
+    parent?: any;
 }
