@@ -139,7 +139,8 @@ class AuthController extends Controller
      *         response=401,
      *         description="Error - Unauthorized",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Invalid credentials")
+     *             @OA\Property(property="success", type="boolean", example="false"),
+     *             @OA\Property(property="message", type="string", example="Invalid credentials")
      *         )
      *     ),
      *     @OA\Response(
@@ -151,8 +152,10 @@ class AuthController extends Controller
      *             @OA\Property(
      *                   property="content",
      *                   type="object",
+     *                   @OA\Property(property="token", type="string", example="eyJ0eXAiOiJKV1QiLCJ...."),
      *                   @OA\Property(property="user", type="object", ref="#/components/schemas/User"),
-     *                   @OA\Property(property="token", type="string", example="eyJ0eXAiOiJKV1QiLCJ....")
+     *                   @OA\Property(property="roles", type="array", @OA\Items(ref="#/components/schemas/Role")),
+     *                   @OA\Property(property="permissions", type="array", @OA\Items(ref="#/components/schemas/Permission")),
      *               ),
      *         )
      *     )
@@ -172,8 +175,10 @@ class AuthController extends Controller
             return response()->json([
                 "success" => false,
                 "message" => "Invalid credentials"
-            ]);
+            ], 401);
         }
+
+        $user = User::find(auth()->user()->id);
 
         // send response
         return response()->json([
@@ -181,7 +186,9 @@ class AuthController extends Controller
             "message" => "Logged in successfully",
             "content" => [
                 'token' => $token,
-                'user' => auth()->user(),
+                'user' => $user,
+                'roles' => $user->roles,
+                'permissions' => $user->permissions,
                 ]
         ], 200);
 
