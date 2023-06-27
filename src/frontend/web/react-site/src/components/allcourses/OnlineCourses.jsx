@@ -35,8 +35,8 @@ const OnlineCourses = () => {
                   <img src={val.cover} />
                   <img src={val.hoverCover} alt='' className='show' />
                 </div>
-                <p><span>{val.cycle}</span></p>
-                <p><span>{val.serie}</span></p>
+                <h1>{val.courseName}</h1>
+                {/* <span>{val.course}</span> */}
               </div>
             ))}
           </div>

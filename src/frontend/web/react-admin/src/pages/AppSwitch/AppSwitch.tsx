@@ -8,7 +8,7 @@ import DashBoard from '../Dashboard/DashBoard';
 import FormElements from '../Form/FormElements';
 import FormLayout from '../Form/FormLayout';
 import Profile from '../Profile';
-import Parents from '../Parents';
+import Parents from '../Parent/Parents.page';
 
 
 import Professeurs from '../Enseignant/Professeurs.page';
