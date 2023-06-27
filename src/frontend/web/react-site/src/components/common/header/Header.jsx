@@ -18,29 +18,32 @@ const Header = () => {
               <Link to='/'>Home</Link>
             </li>
             <li>
-              <Link to='/courses'>All Courses</Link>
+              <Link to='/courses'>Nos programmes</Link>
             </li>
             <li>
               <Link to='/about'>About</Link>
             </li>
             <li>
-              <Link to='/team'>Team</Link>
+              <Link to='/team'>Nos enseignants</Link>
             </li>
             <li>
-              <Link to='/pricing'>Pricing</Link>
-            </li>
-            <li>
-              <Link to='/journal'>Journal</Link>
+              <Link to='/pricing'>Principal</Link>
             </li>
             <li>
               <Link to='/contact'>Contact</Link>
             </li>
             <li>
-              <Link to='/login'>Sign in</Link>
+              <Link to='/convocation'>Convocation</Link>
+            </li>
+            <li>
+              <Link to='/faute_sanction'>Mes fautes et sanctions</Link>
+            </li>
+            <li>
+              <Link to='/notification'>Notification</Link>
             </li>
           </ul>
           <div className='start'>
-            <div className='button'>GET CERTIFICATE</div>
+            <div className='button'><Link to='/login'>Mon compte personnel</Link></div>
           </div>
           <button className='togglle' onClick={() => setClick(!click)}>
             {click ?  <FontAwesomeIcon icon={faTimes} />:<FontAwesomeIcon icon={faBars} />}
