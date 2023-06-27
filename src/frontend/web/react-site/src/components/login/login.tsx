@@ -1,9 +1,111 @@
-import React from "react"
 import Back from "../common/back/Back"
 import "./login.css"
- 
-const Login = () => {
-    return (
+
+import { useNavigate } from 'react-router-dom';import { useEffect, useState } from 'react';
+import { AuthApi } from '../../generated';
+import { AuthLoginBody } from '../../generated/models';
+import Indicator from './components/Indicator';
+
+import { 
+  connect, 
+  useSelector,
+  useDispatch,
+ } from 'react-redux'
+
+import { ReduxProps } from '../../redux/configureStore';
+
+import { IS_LOGGED_LOCAL_STORAGE_KEY } from '../../constants/LOCAL_STORAGE';
+import { USER_LOCAL_STORAGE_KEY } from '../../constants/LOCAL_STORAGE';
+import { TOKEN_LOCAL_STORAGE_KEY } from '../../constants/LOCAL_STORAGE';
+import { setIsLOggedAction } from '../../redux/Actions/LoggedInAction';
+import { setTokenAction } from '../../redux/Actions/TokenAction';
+
+//import "../../../index.css"
+
+interface LoginProps {}
+
+
+const Login: React.FC<LoginProps> = (props) => {
+  
+
+  // redux states
+  const state = useSelector((state: ReduxProps) => state);
+  const dispatch = useDispatch()
+
+  // component states
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLogedIn, setIsLogedIn] = useState(false);
+  const [showotif, setShowNotif] = useState(false);
+  const [access_token, setAcessToken] = useState('');
+  const [store_user, setAaccessUser] = useState('');
+  
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isLogedIn === true) {
+      localStorage.setItem(TOKEN_LOCAL_STORAGE_KEY, access_token);
+      localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(store_user));
+      localStorage.setItem(IS_LOGGED_LOCAL_STORAGE_KEY, ''+isLogedIn);
+      dispatch(setTokenAction(access_token)); // on propage le token dans redux
+      dispatch(setIsLOggedAction(true)); // on force le parent à se mettre à jour
+    }
+  }, [isLogedIn, dispatch]);
+
+//const Login = () => {
+
+  const handleUsernameChange = (event: any) => setUsername(event.target.value);
+  const handlePasswordChange = (event: any) => setPassword(event.target.value);
+
+  const handleSubmit = (event: any) => {
+
+    const authApi = new AuthApi(state.environment);
+console.log("Here")
+    const apiParams: AuthLoginBody = {
+      username: username,
+      password: password,
+      persistent: false,
+    }
+
+    setIsLoading(true)
+    console.log("Here2")
+    authApi.authLogin(apiParams)
+    .then((response) => {
+      
+      console.log("Hereauth")
+      setIsLoading(false)      
+      if(response && response.data){
+
+        if(response.data.success === true){
+          const token_r = response?.data?.content?.token
+          const user_r = response?.data?.content?.user          
+          setAcessToken(token_r)
+          setAaccessUser(user_r)
+          setIsLogedIn(true)
+          console.log("Hereafter Authentication");
+          navigate("/")
+
+        }else if(response.data.success === false){
+          setIsLogedIn(false)
+          setShowNotif(true)
+        }
+      }
+      
+    })
+    .catch((error) => {
+      alert('Error')
+          })
+    .finally(() => {
+      console.log("Herefinal")
+      setIsLoading(false)
+    });
+    
+
+  };
+
+
+  
+  return (
     <>
       <Back title='Sign in' />
       <section className='login padding'>
@@ -13,7 +115,7 @@ const Login = () => {
                 alt="login"
                 />  
             </div>
-          <div className='right row'>
+          <div className='right row text-justify text-dark'>
             <h1>Login</h1>
             <p>Please sign in to continue</p>
             <form action=''>
@@ -36,8 +138,9 @@ const Login = () => {
                     </svg>
                 </span>
                 <input
-                    type="email"
-                    placeholder="Enter your email"
+                    value={username}
+                    onChange={handleUsernameChange}
+                    placeholder="Enter your username"
                     className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
@@ -66,17 +169,26 @@ const Login = () => {
                     </span>
                     <input
                       type="password"
+                      value={password}
+                      onChange={handlePasswordChange}
+                      
                       placeholder="Password"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                   </div>
                 </div>
-                <div className="sub">
+                
+                <div className="sub mb-5">
+                  {isLoading && (<Indicator widtf={8} height={8} border='primary'/>)}
                   <input
+                    onClick={handleSubmit}
                     type="submit"
-                    value="LOGIN"
+                    value="Sign In"
+                    disabled={isLoading}
+                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
                   />
                 </div>
+
                 <span>
                        Forgot Password?
                     </span>
@@ -91,10 +203,22 @@ const Login = () => {
             </form>
           </div>
         </div>
-        <div class="clear"></div>
+        <div className="clear"></div>
       </section>
     </>
   )
 }
 
-export default Login
+function mapStateToProps(state: ReduxProps): ReduxProps {
+  return { 
+      user: state.user,
+      environment: state.environment,
+      loggedIn: state.loggedIn,
+      access_token: state.access_token,
+  };
+} 
+export default connect(mapStateToProps)(Login)
+
+
+
+

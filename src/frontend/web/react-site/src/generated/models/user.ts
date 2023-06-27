@@ -48,6 +48,12 @@ export interface User {
      */
     permissions?: any;
     /**
+     * 
+     * @type {Parents | Eleve | Professeur | Personnel}
+     * @memberof User
+     */
+    model?: any;
+    /**
      * Datetime marker of verification status
      * @type {Date}
      * @memberof User

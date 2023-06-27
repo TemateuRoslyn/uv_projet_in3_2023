@@ -20,10 +20,10 @@ import { FauteCreateBody } from '../models';
 import { InlineResponse20017 } from '../models';
 import { InlineResponse20018 } from '../models';
 import { InlineResponse2013 } from '../models';
-import { InlineResponse4007 } from '../models';
+import { InlineResponse4008 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse4044 } from '../models';
-import { InlineResponse4046 } from '../models';
+import { InlineResponse4045 } from '../models';
+import { InlineResponse4047 } from '../models';
 /**
  * FautesApi - axios parameter creator
  * @export

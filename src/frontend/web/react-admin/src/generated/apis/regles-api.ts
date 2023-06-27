@@ -20,10 +20,10 @@ import { InlineResponse20030 } from '../models';
 import { InlineResponse20031 } from '../models';
 import { InlineResponse20032 } from '../models';
 import { InlineResponse2017 } from '../models';
-import { InlineResponse4007 } from '../models';
 import { InlineResponse4008 } from '../models';
+import { InlineResponse4009 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse40412 } from '../models';
+import { InlineResponse40413 } from '../models';
 import { RegleCreateBody } from '../models';
 import { RegleUpdateBody } from '../models';
 /**

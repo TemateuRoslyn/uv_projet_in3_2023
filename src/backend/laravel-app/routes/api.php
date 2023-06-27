@@ -18,6 +18,7 @@ use App\Http\Controllers\API\ProfesseurController;
 use App\Http\Controllers\API\PersonnelController;
 use App\Http\Controllers\API\RegleController;
 use App\Http\Controllers\API\ReglementInterieurController;
+use App\Http\Controllers\API\ConseilDisciplineController;
 use App\Http\Controllers\API\UploadController;
 use App\Http\Controllers\API\FauteController;
 
@@ -172,6 +173,16 @@ Route::middleware('jwt.verify')->group(function () {
         Route::delete('delete/{professeurId}', [ProfesseurController::class, 'delete']);
         Route::get('findOne/{professeurId}', [ProfesseurController::class, 'view']);
         Route::get('findAll', [ProfesseurController::class, 'index']);
+    });
+
+    // conseil_disciplines
+    Route::prefix('conseil_discipline')->group(function () {
+        Route::middleware('permission:creer_conseil_discipline')->post('create', [ConseilDisciplineController::class, 'store']);
+        Route::middleware('permission:modifier_conseil_discipline')->put('update/{conseil_disciplineId}', [ConseilDisciplineController::class, 'update']);
+        Route::middleware('permission:supprimer_conseil_discipline')->delete('delete/{conseil_disciplineId}', [ConseilDisciplineController::class, 'delete']);
+
+        Route::get('findOne/{conseil_disciplineId}', [ConseilDisciplineController::class, 'view']);
+        Route::get('findAll', [ConseilDisciplineController::class, 'index']);
     });
 
     Route::prefix('file')->group(function () {
