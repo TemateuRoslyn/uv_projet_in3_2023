@@ -89,7 +89,7 @@ class _PageSkeletonState extends State<PageSkeleton> {
                         onPressed: () => _navigationCubit
                             .changeNavigationType(NavigationType.profile),
                         icon: Icon(
-                          Icons.person_2,
+                          Icons.person,
                           size: getHeight(30, context),
                           color: navigationType == NavigationType.profile
                               ? appColors.secondary
