@@ -19,13 +19,19 @@
 export interface InlineResponse20031 {
     /**
      * 
+     * @type {string}
+     * @memberof InlineResponse20031
+     */
+    message?: any;
+    /**
+     * 
      * @type {boolean}
      * @memberof InlineResponse20031
      */
     success?: any;
     /**
      * 
-     * @type {ReglementInterieur}
+     * @type {Regle}
      * @memberof InlineResponse20031
      */
     data?: any;

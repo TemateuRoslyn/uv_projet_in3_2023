@@ -20,9 +20,10 @@ use Illuminate\Notifications\Notifiable;
  *     required={"email", "password", "username"},
  *     @OA\Xml(name="User"),
  *     @OA\Property(property="id", type="integer", readOnly=true, example="1"),
- *     @OA\Property(property="role", type="string", readOnly=true, description="User role"),
  *     @OA\Property(property="email", type="string", readOnly=true, format="email", description="User unique email address", example="user@gmail.com"),
  *     @OA\Property(property="username", type="string", readOnly=true, description="username", example="maestros21"),
+ *     @OA\Property(property="roles", type="array", @OA\Items(ref="#/components/schemas/Role")),
+ *     @OA\Property(property="permissions", type="array", @OA\Items(ref="#/components/schemas/Permission")),
  *     @OA\Property(property="email_verified_at", type="string", readOnly=true, format="date-time", description="Datetime marker of verification status", example="2019-02-25 12:59:20"),
  *     @OA\Property(property="password", type="string", readOnly=true, format="password", description="User password", example="secret"),
  *     @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),
@@ -45,7 +46,9 @@ class User  extends Authenticatable implements JWTSubject
     protected $fillable = [
         'email',
         'username',
-        'password'
+        'password',
+        'roles',
+        'permissions',
     ];
 
     protected $hidden = [

@@ -397,6 +397,8 @@ class EleveController extends Controller
      *         response=400,
      *         description="Error - Invalid request data",
      *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Eleve non trouve(e)"),
+     *             @OA\Property(property="success", type="boolean", example="false"),
      *             @OA\Property(property="error", type="object", example={
      *                 "email": {
      *                     "The email field is required."
@@ -418,7 +420,8 @@ class EleveController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Eleve not found")
+     *             @OA\Property(property="message", type="string", example="Eleve non trouve(e)"),
+     *             @OA\Property(property="success", type="boolean", example="false"),
      *         )
      *     ),
      *     @OA\Response(
@@ -456,7 +459,7 @@ class EleveController extends Controller
             return response()->json([
                 'message' => 'Student not exists',
                 'success' => false,
-            ], 400);
+            ], 404);
         }
 
         if ($validator->fails()) {

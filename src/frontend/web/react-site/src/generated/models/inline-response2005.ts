@@ -29,4 +29,10 @@ export interface InlineResponse2005 {
      * @memberof InlineResponse2005
      */
     message?: any;
+    /**
+     * 
+     * @type {Classe}
+     * @memberof InlineResponse2005
+     */
+    content?: any;
 }

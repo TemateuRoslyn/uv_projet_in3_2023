@@ -19,8 +19,8 @@
 export interface InlineResponse20032 {
     /**
      * 
-     * @type {ReglementInterieur}
+     * @type {Regle}
      * @memberof InlineResponse20032
      */
-    reglement?: any;
+    regle?: any;
 }

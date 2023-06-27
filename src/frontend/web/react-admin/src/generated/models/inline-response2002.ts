@@ -19,20 +19,8 @@
 export interface InlineResponse2002 {
     /**
      * 
-     * @type {boolean}
-     * @memberof InlineResponse2002
-     */
-    success?: any;
-    /**
-     * 
      * @type {string}
      * @memberof InlineResponse2002
      */
     message?: any;
-    /**
-     * 
-     * @type {Array&lt;Classe&gt;}
-     * @memberof InlineResponse2002
-     */
-    content?: any;
 }

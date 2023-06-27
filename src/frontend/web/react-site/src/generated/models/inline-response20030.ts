@@ -25,13 +25,7 @@ export interface InlineResponse20030 {
     success?: any;
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20030
-     */
-    message?: any;
-    /**
-     * 
-     * @type {ReglementInterieur}
+     * @type {Array&lt;Regle&gt;}
      * @memberof InlineResponse20030
      */
     data?: any;
