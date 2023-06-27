@@ -17,7 +17,7 @@ if %running% == yes (
   php artisan jwt:secret
   php artisan serve
 ) else (
-  composer install
+  composer update
   composer dumpautoload
   php artisan l5-swagger:generate
   pphp artisan migrate:fresh --seed

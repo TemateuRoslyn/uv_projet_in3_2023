@@ -7,6 +7,9 @@ import Team from "./components/team/Team"
 import Pricing from "./components/pricing/Pricing"
 import Blog from "./components/blog/Blog"
 import Contact from "./components/contact/Contact"
+import Convocation from "./components/convocation/Convocation"
+import FauteSanction from "./components/fautesanction/FauteSanction"
+import Notification from "./components/notification/Notification"
 import Login from "./components/login/login"
 import Footer from "./components/common/footer/Footer"
 import Home from "./components/home/Home"
@@ -17,17 +20,21 @@ const  App = () =>{
     <>
       <Router>
         <Header />
-        <Routes>
-          <Route exact path='/' element={<Home/>} />
-          <Route exact path='/about' element={<About/>} />
-          <Route exact path='/courses' element={<CourseHome/>} />
-          <Route exact path='/team' element={<Team/>} />
-          <Route exact path='/pricing' element={<Pricing/>} />
-          <Route exact path='/journal' element={<Blog/>} />
-          <Route exact path='/contact' element={<Contact/>} />
-          <Route exact path='/login' element={<Login/>} />
-        </Routes>
-        
+
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/about' component={About} />
+          <Route exact path='/courses' component={CourseHome} />
+          <Route exact path='/team' component={Team} />
+          <Route exact path='/pricing' component={Pricing} />
+          <Route exact path='/journal' component={Blog} />
+          <Route exact path='/contact' component={Contact} />
+          <Route exact path='/convocation' component={Convocation} />
+          <Route exact path='/faute_sanction' component={FauteSanction} />  
+          <Route path='/notification' component={Notification} />  
+        </Switch>
+        <Route path='/login' component={Login} />
+
         <Footer />
       </Router>
     </>
