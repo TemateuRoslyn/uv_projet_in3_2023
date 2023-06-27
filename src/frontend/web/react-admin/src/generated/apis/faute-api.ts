@@ -18,9 +18,9 @@ import { Configuration } from '../configuration';
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { FauteUpdateBody } from '../models';
 import { InlineResponse20019 } from '../models';
-import { InlineResponse4008 } from '../models';
+import { InlineResponse4009 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse4045 } from '../models';
+import { InlineResponse4046 } from '../models';
 /**
  * FauteApi - axios parameter creator
  * @export

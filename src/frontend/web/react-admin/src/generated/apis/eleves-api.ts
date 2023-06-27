@@ -22,9 +22,11 @@ import { InlineResponse20015 } from '../models';
 import { InlineResponse20016 } from '../models';
 import { InlineResponse2012 } from '../models';
 import { InlineResponse4006 } from '../models';
+import { InlineResponse4007 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse4042 } from '../models';
 import { InlineResponse4043 } from '../models';
+import { InlineResponse4044 } from '../models';
 import { InlineResponse4221 } from '../models';
 /**
  * ElevesApi - axios parameter creator
