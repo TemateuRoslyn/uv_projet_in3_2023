@@ -7,6 +7,9 @@ import Team from "./components/team/Team"
 import Pricing from "./components/pricing/Pricing"
 import Blog from "./components/blog/Blog"
 import Contact from "./components/contact/Contact"
+import Convocation from "./components/convocation/Convocation"
+import FauteSanction from "./components/fautesanction/FauteSanction"
+import Notification from "./components/notification/Notification"
 import Login from "./components/login/login"
 import Footer from "./components/common/footer/Footer"
 import Home from "./components/home/Home"
@@ -25,6 +28,9 @@ const  App = () =>{
           <Route exact path='/pricing' component={Pricing} />
           <Route exact path='/journal' component={Blog} />
           <Route exact path='/contact' component={Contact} />
+          <Route exact path='/convocation' component={Convocation} />
+          <Route exact path='/faute_sanction' component={FauteSanction} />  
+          <Route path='/notification' component={Notification} />  
         </Switch>
         <Route path='/login' component={Login} />
         <Footer />
