@@ -29,4 +29,10 @@ export interface InlineResponse40016Error {
      * @memberof InlineResponse40016Error
      */
     username?: any;
+    /**
+     * 
+     * @type {Array&lt;string&gt;}
+     * @memberof InlineResponse40016Error
+     */
+    password?: any;
 }

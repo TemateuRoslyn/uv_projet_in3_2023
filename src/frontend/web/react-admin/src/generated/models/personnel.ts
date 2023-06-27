@@ -14,19 +14,31 @@
 /**
  * 
  * @export
- * @interface InlineResponse40410
+ * @interface Personnel
  */
-export interface InlineResponse40410 {
+export interface Personnel extends User {
+    /**
+     * 
+     * @type {number}
+     * @memberof Personnel
+     */
+    id?: ;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse40410
+     * @memberof Personnel
      */
-    message?: any;
+    fonction?: ;
     /**
      * 
-     * @type {boolean}
-     * @memberof InlineResponse40410
+     * @type {BaseModelpropertiesupdatedAt}
+     * @memberof Personnel
      */
-    success?: any;
+    updatedAt?: ;
+    /**
+     * 
+     * @type {BaseModelpropertiesdeletedAt}
+     * @memberof Personnel
+     */
+    deletedAt?: ;
 }

@@ -6,6 +6,10 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 use App\Models\Notification;
 use App\Models\Role;
+use App\Models\Eleve;
+use App\Models\Personnel;
+use App\Models\Professeur;
+use App\Models\Parents;
 use App\Models\Permission;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,6 +28,16 @@ use Illuminate\Notifications\Notifiable;
  *     @OA\Property(property="username", type="string", readOnly=true, description="username", example="maestros21"),
  *     @OA\Property(property="roles", type="array", @OA\Items(ref="#/components/schemas/Role")),
  *     @OA\Property(property="permissions", type="array", @OA\Items(ref="#/components/schemas/Permission")),
+ *     @OA\Property(
+ *               property="model",
+ *               type="object",
+ *               oneOf={
+ *                   @OA\Schema(ref="#/components/schemas/Parents"),
+ *                   @OA\Schema(ref="#/components/schemas/Eleve"),
+ *                   @OA\Schema(ref="#/components/schemas/Professeur"),
+ *                   @OA\Schema(ref="#/components/schemas/Personnel"),
+ *               }
+ *      ), 
  *     @OA\Property(property="email_verified_at", type="string", readOnly=true, format="date-time", description="Datetime marker of verification status", example="2019-02-25 12:59:20"),
  *     @OA\Property(property="password", type="string", readOnly=true, format="password", description="User password", example="secret"),
  *     @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),
@@ -49,6 +63,7 @@ class User  extends Authenticatable implements JWTSubject
         'password',
         'roles',
         'permissions',
+        'model', // qui pourrat etre : Eleve, Parent, Professeur ou Personnel
     ];
 
     protected $hidden = [
@@ -60,6 +75,48 @@ class User  extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // eleve 
+    public function eleve()
+    {
+        return $this->hasOne(Eleve::class, 'userId');
+    }
+    public function getEleveAttribute()
+    {
+        return $this->eleve()->first();
+    }
+
+    // professeur
+    public function professeur()
+    {
+        return $this->hasOne(Professeur::class, 'userId');
+    }
+    public function getProfesseurAttribute()
+    {
+        return $this->professeur()->first();
+    }
+
+    // parents
+    public function parents()
+    {
+        return $this->hasOne(Parents::class, 'userId');
+    }
+    public function getParentsAttribute()
+    {
+        return $this->parents()->first();
+    }
+
+    // personnel
+    public function personnel()
+    {
+        return $this->hasOne(Personnel::class, 'userId');
+    }
+    public function getPersonnelAttribute()
+    {
+        return $this->personnel()->first();
+    }
+    
+
 
     public function notifications()
     {

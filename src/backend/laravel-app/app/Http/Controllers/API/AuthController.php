@@ -13,6 +13,11 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
 
+use App\Models\Eleve;
+use App\Models\Parents;
+use App\Models\Personnel;
+use App\Models\Professeur;
+
 class AuthController extends Controller
 {
     /**
@@ -179,6 +184,17 @@ class AuthController extends Controller
         $user = User::find(auth()->user()->id);
         $user->roles;
         $user->permissions;
+
+        // on recupere les donnees personnel du user qui se connecte:
+        if($user->roles->contains('name', ELEVE_ROLE['name'])){
+            $user->model = $user->eleve;
+        } elseif ($user->roles->contains('name', PARENT_ROLE['name'])){
+            $user->model = $user->parents;
+        } elseif ($user->roles->contains('name', PROFESSEUR_ROLE['name'])){
+            $user->model = $user->professeur;
+        } elseif ($user->roles->contains('name', PERSONNEL_ROLE['name'])){
+            $user->model = $user->personnel;
+        }
 
         // send response
         return response()->json([

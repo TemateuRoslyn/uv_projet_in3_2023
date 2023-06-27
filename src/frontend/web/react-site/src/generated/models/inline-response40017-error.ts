@@ -14,19 +14,19 @@
 /**
  * 
  * @export
- * @interface InlineResponse40410
+ * @interface InlineResponse40017Error
  */
-export interface InlineResponse40410 {
+export interface InlineResponse40017Error {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse40410
+     * @type {Array&lt;string&gt;}
+     * @memberof InlineResponse40017Error
      */
-    message?: any;
+    email?: any;
     /**
      * 
-     * @type {boolean}
-     * @memberof InlineResponse40410
+     * @type {Array&lt;string&gt;}
+     * @memberof InlineResponse40017Error
      */
-    success?: any;
+    username?: any;
 }
