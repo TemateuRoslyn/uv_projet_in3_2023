@@ -110,7 +110,7 @@ class _MyAppState extends State<MyApp> {
                 } else {
                   if (state is IsUnAuthenticated) {
                     navigatorKey.currentState!.pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(builder: (context) => Courses()),
                         (route) => false);
                   }
 

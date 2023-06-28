@@ -5,6 +5,7 @@ class AppImages {
   static String logo = 'assets/images/logo.png';
   static String login = 'assets/images/login.png';
   static String unknownPersonImg = 'assets/images/unknown_contact_img.png';
+  static String suggestionBox = 'assets/images/suggestionBox.png';
 }
 
 const kUserToken = 'userToken';
