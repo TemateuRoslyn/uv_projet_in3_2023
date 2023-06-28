@@ -13,9 +13,11 @@ class ReglementInterieurController extends Controller
     /**
      * @OA\Get(
      *     path="/api/reglement/findAll",
-     *     summary="Get all reglementInterieur",
-     *     description="Retrieve a list of all reglementInterieur",
-     *     operationId="findAllreglementInterieurs",
+     *     summary="Get all disciplinary councils",
+     *     description="Retrieve a list of all disciplinary councils with associated eleve",
+     *     operationId="reglementInterieursIndex",
+     *     tags={"ReglementInterieurs"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -26,13 +28,13 @@ class ReglementInterieurController extends Controller
      *         ),
      *         description="JWT token"
      *     ),
-     *     security={{"bearerAuth":{}}},
-     *     tags={"ReglementInterieur"},
      *     @OA\Response(
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="reglements", type="array", @OA\Items(ref="#/components/schemas/ReglementInterieur"))
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Reglement Interieurs retrieved successfully"),
+     *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/ReglementInterieur"))
      *         )
      *     ),
      *     @OA\Response(
@@ -45,13 +47,14 @@ class ReglementInterieurController extends Controller
      * )
      */
 
-    public function showAll()
+    public function index()
     {
         $reglements = ReglementInterieur::all();
 
         return response()->json([
+            'message' => 'Reglement Interieurs retrieved successfully',
             'success' => true,
-            'data' => $reglements
+            'content' => $reglements
         ], 200);
     }
 
@@ -61,8 +64,8 @@ class ReglementInterieurController extends Controller
      *     path="/api/reglement/create",
      *     summary="Create a new reglementInterieur",
      *     description="Create a new reglementInterieur resource",
-     *     operationId="createreglementInterieur",
-     *     tags={"ReglementInterieur"},
+     *     operationId="createReglementInterieur",
+     *     tags={"ReglementInterieurs"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -84,7 +87,7 @@ class ReglementInterieurController extends Controller
      *         response=400,
      *         description="Error - Invalid request data",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Could not create this "),
+     *             @OA\Property(property="message", type="string", example="Could not create this Reglement Interieur"),
      *             @OA\Property(property="success", type="boolean", example=false),
      *             @OA\Property(property="error", type="object", example={
      *                 "libelle": {
@@ -99,7 +102,7 @@ class ReglementInterieurController extends Controller
      *         @OA\JsonContent(
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="message", type="string", example="ReglementInterieur created successfully"),
-     *             @OA\Property(property="data", ref="#/components/schemas/ReglementInterieur")
+     *             @OA\Property(property="content", ref="#/components/schemas/ReglementInterieur")
      *         )
      *     )
      * )
@@ -126,7 +129,7 @@ class ReglementInterieurController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'ReglementInterieur created successfully',
-            'data' => $reglement
+            'content' => $reglement
         ], 200);
     }
 
@@ -135,8 +138,8 @@ class ReglementInterieurController extends Controller
      *     path="/api/reglement/findOne/{id}",
      *     summary="Get reglement information",
      *     description="Get information about a specific reglementInterieur",
-     *     operationId="showOneReglementInterieur",
-     *     tags={"ReglementInterieur"},
+     *     operationId="viewReglementInterieur",
+     *     tags={"ReglementInterieurs"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -167,7 +170,8 @@ class ReglementInterieurController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="reglementInterieur not found")
+     *             @OA\Property(property="success", type="boolean", example="false"),
+     *             @OA\Property(property="message", type="string", example="reglementInterieur not found")
      *         )
      *     ),
      *     @OA\Response(
@@ -175,12 +179,12 @@ class ReglementInterieurController extends Controller
      *         description="Success",
      *         @OA\JsonContent(
      *             @OA\Property(property="success", type="boolean", example="true"),
-     *             @OA\Property(property="data", type="object", ref="#/components/schemas/ReglementInterieur")
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/ReglementInterieur")
      *         )
      *     )
      * )
      */
-    public function showIndex(string $id)
+    public function view(string $id)
     {
         $reglement = ReglementInterieur::find($id);
 
@@ -193,7 +197,7 @@ class ReglementInterieurController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $reglement
+            'content' => $reglement
         ], 200);
     }
 
@@ -203,8 +207,8 @@ class ReglementInterieurController extends Controller
      *     path="/api/reglement/update",
      *     summary="Update a reglementInterieur's information",
      *     description="Update a reglementInterieur's information",
-     *     operationId="updatereglementInterieur",
-     *     tags={"ReglementInterieur"},
+     *     operationId="updateReglementInterieur",
+     *     tags={"ReglementInterieurs"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -226,6 +230,8 @@ class ReglementInterieurController extends Controller
      *         response=400,
      *         description="Error - Invalid request data",
      *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="The given data was invalid"),
+     *             @OA\Property(property="success", type="boolean", example=false),
      *             @OA\Property(property="error", type="object", example={
      *                "libelle": {
      *                     "The libelle field is required."
@@ -244,14 +250,17 @@ class ReglementInterieurController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="ReglementInterieur not found")
+     *             @OA\Property(property="success", type="boolean", example=false),
+     *             @OA\Property(property="message", type="string", example="ReglementInterieur not found")
      *         )
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="reglement", type="object", ref="#/components/schemas/ReglementInterieur"),
+     *             @OA\Property(property="message", type="string", example="Reglement Interieur updated successfully"),
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/ReglementInterieur"),
      *         )
      *     )
      * )
@@ -266,7 +275,7 @@ class ReglementInterieurController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'The given data was invalid',
-                'errors' => $validator->errors(),
+                'error' => $validator->errors(),
                 'success' => false
             ], 400);
         }
@@ -287,7 +296,7 @@ class ReglementInterieurController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'ReglementInterieur updated successfully',
-            'data' => $reglement
+            'content' => $reglement
         ], 200);
     }
 
@@ -298,7 +307,7 @@ class ReglementInterieurController extends Controller
      *     summary="Delete a reglementInterieur",
      *     description="Delete a reglementInterieur resource",
      *     operationId="deleteReglementInterieur",
-     *     tags={"ReglementInterieur"},
+     *     tags={"ReglementInterieurs"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -330,12 +339,17 @@ class ReglementInterieurController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="ReglementInterieur not found")
+     *             @OA\Property(property="success", type="boolean", example=false),
+     *             @OA\Property(property="message", type="string", example="ReglementInterieur not found")
      *         )
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Reglement Interieur deleted successfully"),
+     *         )
      *     )
      * )
      */

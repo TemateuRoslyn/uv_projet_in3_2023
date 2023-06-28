@@ -15,7 +15,7 @@ class ConseilDisciplineController extends Controller
      *     summary="Get all disciplinary councils",
      *     description="Retrieve a list of all disciplinary councils with associated eleve",
      *     operationId="conseilDisciplinesIndex",
-     *     tags={"conseilDisciplines"},
+     *     tags={"ConseilDisciplines"},
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="Authorization",
@@ -63,7 +63,7 @@ class ConseilDisciplineController extends Controller
      *     summary="Get disciplinary council information",
      *     description="Get information about a specific disciplinary council",
      *     operationId="viewConseilDiscipline",
-     *     tags={"conseilDisciplines"},
+     *     tags={"ConseilDisciplines"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -134,7 +134,7 @@ class ConseilDisciplineController extends Controller
      *     summary="Create a new disciplinary council",
      *     description="Create a new disciplinary council resource",
      *     operationId="createConseilDiscipline",
-     *     tags={"conseilDisciplines"},
+     *     tags={"ConseilDisciplines"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
