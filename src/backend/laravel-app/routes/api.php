@@ -192,9 +192,9 @@ Route::middleware('jwt.verify')->group(function () {
 
     //professeurs
     Route::prefix('professeurs')->group(function () {
-        Route::post('create', [ProfesseurController::class, 'store']);
-        Route::post('update/{professeurId}', [ProfesseurController::class, 'update']);
-        Route::delete('delete/{professeurId}', [ProfesseurController::class, 'delete']);
+        Route::middleware('permission:creer_professeur')->post('create', [ProfesseurController::class, 'store']);
+        Route::middleware('permission:modifier_professeur')->post('update/{professeurId}', [ProfesseurController::class, 'update']);
+        Route::middleware('permission:supprimer_professeur')->delete('delete/{professeurId}', [ProfesseurController::class, 'delete']);
         Route::get('findOne/{professeurId}', [ProfesseurController::class, 'view']);
         Route::get('findAll', [ProfesseurController::class, 'index']);
     });
@@ -211,18 +211,18 @@ Route::middleware('jwt.verify')->group(function () {
 
        //faute
        Route::prefix('faute')->group(function () {
-        Route::post('create', [FauteController::class, 'store']);
-        Route::post('update/{fauteId}', [FauteController::class, 'update']);
-        Route::delete('delete/{fauteId}', [FauteController::class, 'delete']);
+        Route::middleware('permission:creer_faute')->post('create', [FauteController::class, 'store']);
+        Route::middleware('permission:modifier_faute')->post('update/{fauteId}', [FauteController::class, 'update']);
+        Route::middleware('permission:supprimer_faute')->delete('delete/{fauteId}', [FauteController::class, 'delete']);
         Route::get('findOne/{fauteId}', [FauteController::class, 'view']);
         Route::get('findAll', [FauteController::class, 'index']);
     });
 
      //convocation
      Route::prefix('convocation')->group(function () {
-        Route::post('create', [ConvocationController::class, 'store']);
-        Route::post('update/{convocationId}', [ConvocationController::class, 'update']);
-        Route::delete('delete/{convocationId}', [ConvocationController::class, 'delete']);
+        Route::middleware('permission:creer_convocation')->post('create', [ConvocationController::class, 'store']);
+        Route::middleware('permission:modifier_convocation')->post('update/{convocationId}', [ConvocationController::class, 'update']);
+        Route::middleware('permission:supprimer_convocation')->delete('delete/{convocationId}', [ConvocationController::class, 'delete']);
         Route::get('findOne/{convocationId}', [ConvocationController::class, 'view']);
         Route::get('findAll', [ConvocationController::class, 'index']);
     });
