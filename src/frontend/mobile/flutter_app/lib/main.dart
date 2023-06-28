@@ -5,6 +5,7 @@ import 'package:fltter_app/common/views/onBoarding_one.dart';
 import 'package:fltter_app/common/views/page_skeleton.dart';
 import 'package:fltter_app/common/views/splash_page.dart';
 import 'package:fltter_app/features/authentication/views/login_page.dart';
+import 'package:fltter_app/features/home/views/suggestion_box.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
@@ -63,9 +64,12 @@ class _MyAppState extends State<MyApp> {
             create: (context) => NavigationCubit(),
           ),
           BlocProvider<ProfileCubit>(
-              create: (context) => ProfileCubit(
-                  internetCubit: widget.internetCubit)),
+            create: (context) => ProfileCubit(
+                internetCubit: widget.internetCubit,
+                authRepository: widget.authRepository),
+          ),
         ],
+        child: MaterialApp(
           navigatorKey: navigatorKey,
           title: 'Flutter Demo',
           theme: ThemeData(
@@ -94,7 +98,7 @@ class _MyAppState extends State<MyApp> {
                 } else {
                   if (state is IsUnAuthenticated) {
                     navigatorKey.currentState!.pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(builder: (context) => Suggestion()),
                         (route) => false);
                   }
 

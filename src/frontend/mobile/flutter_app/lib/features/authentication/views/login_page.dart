@@ -39,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
         fieldType: 'simpleInput',
         prefixIcon: const Icon(Icons.email_outlined, color: Colors.white),
         labelText: 'Email',
+        hintText: 'Entrez votre username ...',
         controller: _loginCubit.email,
         emailTap: emailTap,
         onTapAction: () => setState(() {
@@ -48,16 +49,12 @@ class _LoginPageState extends State<LoginPage> {
           if (email!.isEmpty) {
             return 'Ce champ est requis...';
           }
-          // if (!RegExp(
-          //   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-          // ).hasMatch(email)) {
-          //   return 'Veuillez entrez une adresse mail valide...';
-          // }
           return null;
         },
       ),
       Fields(
         fieldType: 'passwordInput',
+        hintText: "Entrez votre mot de passe ...",
         prefixIcon: IconButton(
           onPressed: () => setState(() {
             showPassword = !showPassword;

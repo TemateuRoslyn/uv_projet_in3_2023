@@ -1,4 +1,5 @@
 {
+
   "name": "",
   "version": "",
   "description": "OpenAPI client for ",
@@ -25,3 +26,4 @@
     "typescript": "^3.6.4"
   }
 }
+

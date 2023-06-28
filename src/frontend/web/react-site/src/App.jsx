@@ -1,6 +1,6 @@
 import "./App.css"
 import Header from "./components/common/header/Header"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import About from "./components/about/About"
 import CourseHome from "./components/allcourses/CourseHome"
 import Team from "./components/team/Team"
@@ -20,6 +20,7 @@ const  App = () =>{
     <>
       <Router>
         <Header />
+
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/about' component={About} />
@@ -33,6 +34,7 @@ const  App = () =>{
           <Route path='/notification' component={Notification} />  
         </Switch>
         <Route path='/login' component={Login} />
+
         <Footer />
       </Router>
     </>

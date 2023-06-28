@@ -19,7 +19,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final List<ProfileOption> profileOptions = [
       ProfileOption(
-        icon: Icons.person_2,
+        icon: Icons.person,
         backgroundColor: profileIsSelected ? appColors.primary! : Colors.white,
         iconColor: profileIsSelected ? Colors.white : Colors.grey,
         text: 'Profile',

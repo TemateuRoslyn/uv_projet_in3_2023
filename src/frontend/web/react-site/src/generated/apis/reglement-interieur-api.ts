@@ -20,11 +20,11 @@ import { InlineResponse20033 } from '../models';
 import { InlineResponse20034 } from '../models';
 import { InlineResponse20035 } from '../models';
 import { InlineResponse20036 } from '../models';
-import { InlineResponse40012 } from '../models';
-import { InlineResponse4008 } from '../models';
+import { InlineResponse40013 } from '../models';
+import { InlineResponse4009 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse40413 } from '../models';
 import { InlineResponse40414 } from '../models';
+import { InlineResponse40415 } from '../models';
 import { ReglementCreateBody } from '../models';
 import { ReglementUpdateBody } from '../models';
 /**

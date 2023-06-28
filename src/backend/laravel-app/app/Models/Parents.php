@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  *     @OA\Property(property="telephone", type="string", example="+33123456789"),
  *     @OA\Property(property="user_id", type="integer", example="1"),
  *     @OA\Property(property="user", ref="#/components/schemas/User"),
+ *     @OA\Property(property="eleves", ref="#/components/schemas/Eleve"),
  *     @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),
  *     @OA\Property(property="updated_at", ref="#/components/schemas/BaseModel/properties/updated_at"),
  *     @OA\Property(property="deleted_at", ref="#/components/schemas/BaseModel/properties/deleted_at")
@@ -38,25 +39,25 @@ class Parents extends Model
 
     protected $fillable = [
         'profession',
-        'first_name',
-        'last_name',
-        'date_de_naissance',
-        'lieu_de_naissance',
+        'firstName',
+        'lastName',
+        'dateDeNaissance',
+        'lieuDeNaissance',
         'photo',
         'sexe',
         'telephone',
-        'user_id',
+        'userId',
         'user',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'userId');
     }
 
-    public function eleve()
+    public function eleves()
     {
-        return $this->belongsToMany(Eleve::class, 'eleves_parents', 'eleve_id', 'parentId');
+        return $this->belongsToMany(Eleve::class, 'eleve_parent', 'parentId', 'eleveId');
     }
 
     protected static function boot()

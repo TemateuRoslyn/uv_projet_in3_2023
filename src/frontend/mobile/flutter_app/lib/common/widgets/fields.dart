@@ -8,6 +8,8 @@ class Fields extends StatelessWidget {
   final String fieldType;
   final Widget? prefixIcon;
   final String? labelText;
+  final String hintText;
+
   final Function()? onTapAction;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
@@ -61,6 +63,7 @@ class Fields extends StatelessWidget {
       this.dropDownPrefixIcon,
       this.emailTap,
       this.passwordTap,
+      required this.hintText,
       required this.fieldType,
       super.key});
 
@@ -111,6 +114,47 @@ class Fields extends StatelessWidget {
           onChanged: onChanged,
         );
 
+      case 'descriptionInput':
+        return TextField(
+          keyboardType: TextInputType.multiline,
+          maxLines: 4,
+          onTap: onTapAction,
+          cursorColor: appColors.primary,
+          // initialValue: initialValue,
+          style: const TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            // filled: emailTap! ? true : false,
+            fillColor: Colors.white.withOpacity(0.1),
+            prefixIcon: prefixIcon,
+            labelText: labelText,
+            hintText: '',
+            labelStyle: const TextStyle(
+              color: Colors.black,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(width: 1, color: appColors.primary!),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(
+                  width: 1, color: appColors.primary!.withOpacity(0.5)),
+            ),
+            errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide(width: 1, color: Colors.red.shade800)),
+            focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide(width: 1, color: Colors.red.shade800)),
+            // hintStyle: const TextStyle(
+            //   color: Colors.grey,
+            // ),
+            contentPadding: EdgeInsets.symmetric(
+              vertical: getHeight(20, context),
+              horizontal: getWidth(16, context),
+            ),
+          ),
+        );
       case 'passwordInput':
         return TextFormField(
           onTap: onTapAction,

@@ -18,6 +18,7 @@ use App\Http\Controllers\API\ProfesseurController;
 use App\Http\Controllers\API\PersonnelController;
 use App\Http\Controllers\API\RegleController;
 use App\Http\Controllers\API\ReglementInterieurController;
+use App\Http\Controllers\API\ConseilDisciplineController;
 use App\Http\Controllers\API\UploadController;
 use App\Http\Controllers\API\FauteController;
 
@@ -120,21 +121,21 @@ Route::middleware('jwt.verify')->group(function () {
 
     // parents
     Route::prefix('parents')->group(function () {
-        Route::get('findAll', [ParentsController::class, 'showAll']);
-        Route::get('findOne/{parentId}', [ParentsController::class, 'showIndex']);
+        Route::get('findAll', [ParentsController::class, 'index']);
+        Route::get('findOne/{parentId}', [ParentsController::class, 'view']);
 
+        Route::middleware('permission:modifier_parent')->post('update/{parentId}', [ParentsController::class, 'update']);
         Route::middleware('permission:creer_parent')->post('create', [ParentsController::class, 'store']);
-        Route::middleware('permission:modifier_parent')->post('update', [ParentsController::class, 'update']);
         Route::middleware('permission:supprimer_parent')->delete('delete/{parentId}', [ParentsController::class, 'delete']);
     });
 
     // Reglement Interieur
     Route::prefix('reglement')->group(function () {
-        Route::get('findAll', [ReglementInterieurController::class, 'showAll']);
-        Route::post('create', [ReglementInterieurController::class, 'store']);
-        Route::get('findOne/{reglementId}', [ReglementInterieurController::class, 'showIndex']);
-        Route::post('update', [ReglementInterieurController::class, 'update']);
-        Route::delete('delete/{reglementId}', [ReglementInterieurController::class, 'delete']);
+        Route::get('findAll', [ReglementInterieurController::class, 'index']);
+        Route::get('findOne/{reglementId}', [ReglementInterieurController::class, 'view']);
+        Route::middleware('permission:creer_reglement_interieur')->post('create', [ReglementInterieurController::class, 'store']);
+        Route::middleware('permission:modifier_reglement_interieur')->post('update', [ReglementInterieurController::class, 'update']);
+        Route::middleware('permission:supprimer_reglement_interieur')->delete('delete/{reglementId}', [ReglementInterieurController::class, 'delete']);
     });
 
     // Regle
@@ -172,6 +173,16 @@ Route::middleware('jwt.verify')->group(function () {
         Route::delete('delete/{professeurId}', [ProfesseurController::class, 'delete']);
         Route::get('findOne/{professeurId}', [ProfesseurController::class, 'view']);
         Route::get('findAll', [ProfesseurController::class, 'index']);
+    });
+
+    // conseil_disciplines
+    Route::prefix('conseil_discipline')->group(function () {
+        Route::middleware('permission:creer_conseil_discipline')->post('create', [ConseilDisciplineController::class, 'store']);
+        Route::middleware('permission:modifier_conseil_discipline')->put('update/{conseil_disciplineId}', [ConseilDisciplineController::class, 'update']);
+        Route::middleware('permission:supprimer_conseil_discipline')->delete('delete/{conseil_disciplineId}', [ConseilDisciplineController::class, 'delete']);
+
+        Route::get('findOne/{conseil_disciplineId}', [ConseilDisciplineController::class, 'view']);
+        Route::get('findAll', [ConseilDisciplineController::class, 'index']);
     });
 
     Route::prefix('file')->group(function () {
