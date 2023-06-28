@@ -19,8 +19,20 @@
 export interface InlineResponse20020 {
     /**
      * 
-     * @type {Array&lt;Parents&gt;}
+     * @type {boolean}
      * @memberof InlineResponse20020
      */
-    data?: any;
+    success?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20020
+     */
+    message?: any;
+    /**
+     * 
+     * @type {Cour}
+     * @memberof InlineResponse20020
+     */
+    content?: any;
 }

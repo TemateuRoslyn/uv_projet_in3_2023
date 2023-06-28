@@ -198,16 +198,6 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll', [ConseilDisciplineController::class, 'index']);
     });
 
-    Route::prefix('file')->group(function () {
-        // file upload
-        Route::prefix('upaload')->group(function () {
-            Route::post('eleves/{filename}', [UploadController::class, 'getEleveAvatar']);
-            Route::post('parents/{filename}', [UploadController::class, 'getParentAvatar']);
-            Route::post('personnels/{filename}', [UploadController::class, 'getPersonnelAvatar']);
-            Route::post('professeurs/{filename}', [UploadController::class, 'getProfesseurAvatar']);
-        });
-    });
-
        //faute
        Route::prefix('faute')->group(function () {
         Route::post('create', [FauteController::class, 'store']);
@@ -232,7 +222,7 @@ Route::middleware('jwt.verify')->group(function () {
     Route::prefix('reparations')->group(function () {
         Route::middleware('permission:creer_reparation')->post('create', [ReparationController::class, 'store']);
         Route::middleware('permission:modifier_reparation')->post('update/{reparationId}', [ReparationController::class, 'update']);
-        Route::middleware('permission:supprimer_reparation')->ddelete('delete/{reparationId}', [ReparationController::class, 'delete']);
+        Route::middleware('permission:supprimer_reparation')->delete('delete/{reparationId}', [ReparationController::class, 'delete']);
         Route::get('findOne/{reparationId}', [ReparationController::class, 'view']);
         Route::get('findAll', [ReparationController::class, 'index']);
     });

@@ -31,7 +31,7 @@ export interface InlineResponse20013 {
     message?: any;
     /**
      * 
-     * @type {Array&lt;Eleve&gt;}
+     * @type {Array&lt;Convocation&gt;}
      * @memberof InlineResponse20013
      */
     content?: any;

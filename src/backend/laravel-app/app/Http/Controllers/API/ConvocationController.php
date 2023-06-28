@@ -27,7 +27,7 @@ class ConvocationController extends Controller
      *         description="JWT token"
      *     ),
      *     security={{"bearerAuth":{}}},
-     *     tags={"convocations"},
+     *     tags={"convocation"},
      *     @OA\Response(
      *         response=200,
      *         description="Success",
@@ -64,7 +64,7 @@ class ConvocationController extends Controller
      *     summary="Get convocation information",
      *     description="Get information about a specific convocation",
      *     operationId="viewConvocation",
-     *     tags={"Convocation"},
+     *     tags={"convocation"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -141,7 +141,7 @@ class ConvocationController extends Controller
      *     summary="Create a new convocation",
      *     description="Create a new convocation resource",
      *     operationId="createConvocation",
-     *     tags={"Convocation"},
+     *     tags={"convocation"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -228,11 +228,11 @@ class ConvocationController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/convocations/update/{convocationId}",
+     *     path="/api/convocation/update/{convocationId}",
      *     summary="Update a convocation's information",
      *     description="Update a convocation's information",
      *     operationId="updateConvocation",
-     *     tags={"convocationS"},
+     *     tags={"convocation"},
      *      @OA\Parameter(
      *         name="convocationId",
      *         in="path",
@@ -351,11 +351,11 @@ class ConvocationController extends Controller
     }
    /**
      * @OA\Delete (
-     *     path="/api/convocations/delete/{id}",
+     *     path="/api/convocation/delete/{id}",
      *     summary="Delete an convocation",
      *     description="Delete an convocation resource",
      *     operationId="deleteConvocation",
-     *     tags={"convocations"},
+     *     tags={"convocation"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -372,7 +372,7 @@ class ConvocationController extends Controller
      *         description="ID of convocation to delete",
      *         required=true,
      *         @OA\Schema(
-     *             type="integeIlluminate\Database\QueryException: SQLSTATE[42S22]: Column not found: 1054 Unknown column &#039;personnels.personnelId&#039; in &#039;where clause&#039; (Connection: mysql, SQL: select * from `convocations` where exists (select * from `personnels` where `convocations`.`id` = `personnels`.`personnelId`)) in file /home/valery/uv_projet_in3_2023/src/backend/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 795r"
+     *             type="integer"
      *         )
      *     ),
      *
