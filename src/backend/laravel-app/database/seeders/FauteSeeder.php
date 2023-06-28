@@ -27,8 +27,8 @@ class FauteSeeder extends Seeder
         Faute::create([
             'libelle' => 'escalade et destruction du mur de l\'ecole',
             'gravite' => 'gravite de la faute',
-            'eleve_id' => $eleve->id,
-            'regle_id' => $regle->id,
+            'eleveId' => $eleve->id,
+            'regleId' => $regle->id,
         ]);
     }
 }

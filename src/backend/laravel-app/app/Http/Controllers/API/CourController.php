@@ -125,6 +125,7 @@ class CourController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Course retrieved successfully',
+
             'content' => $cour
         ], 200);
     }
@@ -178,7 +179,7 @@ class CourController extends Controller
      *         description="Success",
      *         @OA\JsonContent(
      *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Course created successfully"),
+     *             @OA\Property(property="message", type="string", example="Cours created successfully"),
      *             @OA\Property(property="content", ref="#/components/schemas/Cour")
      *         )
      *     )
@@ -277,7 +278,7 @@ class CourController extends Controller
      *         description="Success",
      *         @OA\JsonContent(
      *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
+     *             @OA\Property(property="message", type="string", example="Cours updated successfully"),
      *             @OA\Property(property="content", type="object", ref="#/components/schemas/Cour"),
      *         )
      *     )
@@ -332,7 +333,7 @@ class CourController extends Controller
      * @OA\Delete (
      *     path="/api/cours/delete/{id}",
      *     summary="Delete a cour",
-     *     description="Delete a cour resource",
+     *     description="Delete a cours resource",
      *     operationId="deleteCours",
      *     tags={"cours"},
      *     @OA\Parameter(
@@ -348,7 +349,7 @@ class CourController extends Controller
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID of cour to delete",
+     *         description="ID of cours to delete",
      *         required=true,
      *         @OA\Schema(
      *             type="integer"
@@ -374,8 +375,8 @@ class CourController extends Controller
      *         description="Success",
      *         @OA\JsonContent(
      *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
-     *         )  
+     *             @OA\Property(property="message", type="string", example="Cours deleted successfully"),
+     *         )
      *     )
      * )
      */

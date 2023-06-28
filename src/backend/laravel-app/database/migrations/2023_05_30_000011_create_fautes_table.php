@@ -16,10 +16,10 @@ return new class extends Migration
             $table->timestamps();
             $table->string('libelle');
             $table->string('gravite');
-            $table->unsignedBigInteger('eleve_id');
-            $table->foreign('eleve_id')->references('id')->on('eleves');
-            $table->unsignedBigInteger('regle_id');
-            $table->foreign('regle_id')->references('id')->on('regles');
+            $table->unsignedBigInteger('eleveId');
+            $table->foreign('eleveId')->references('id')->on('eleves');
+            $table->unsignedBigInteger('regleId');
+            $table->foreign('regleId')->references('id')->on('regles');
         });
     }
 

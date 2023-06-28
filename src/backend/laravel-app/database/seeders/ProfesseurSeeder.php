@@ -36,16 +36,16 @@ class ProfesseurSeeder extends Seeder
 
         // Création du professeur associé à l'utilisateur et au cour
         Professeur::create([
-            'statut' => 'Actif',
-            'first_name' => 'professeurName',
-            'last_name' => 'professeurLastName ',
-            'date_de_naissance' => '2000/05/2',
-            'lieu_de_naissance' => 'nkong',
+            'statut' => 'CENSEUR',
+            'firstName' => 'professeurName',
+            'lastName' => 'professeurLastName ',
+            'dateDeNaissance' => '2000/05/2',
+            'lieuDeNaissance' => 'nkong',
             'photo' => 'photo.png',
             'sexe' => 'm',
             'telephone' => '+237666534899',
-            'user_id' => $user->id,
-            'cour_id' => $cour->id,
+            'userId' => $user->id,
+            'courId' => $cour->id,
         ]);
 
 
@@ -57,7 +57,7 @@ class ProfesseurSeeder extends Seeder
         if ($professeurRole) {
             $user->roles()->attach($professeurRole);
         }
-        
+
         //assigner les permissions des profs
         foreach (PROFESSEUR_PERMISSIONS as $permission) {
             $professeurPermis = Permission::where('name', $permission['name'])->first();

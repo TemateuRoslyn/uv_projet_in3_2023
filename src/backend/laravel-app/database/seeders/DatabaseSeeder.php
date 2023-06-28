@@ -10,7 +10,11 @@ use Database\Seeders\RegleSeeder;
 use Database\Seeders\CoursSeeder;
 use Database\Seeders\ClasseSeeder;
 use Database\Seeders\EleveSeeder;
-
+use Database\Seeders\ProfesseurSeeder;
+use Database\Seeders\FauteSeeder;
+use Database\Seeders\PersonnelSeeder;
+use Database\Seeders\ConvocationSeeder;
+use Database\Seeders\NotificationSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,8 +31,9 @@ class DatabaseSeeder extends Seeder
             ClasseSeeder::class,
             EleveSeeder::class,
             FauteSeeder::class,
-            ConseilDisciplineSeeder::class,
-            ParentSeeder::class,
+            PersonnelSeeder::class,
+            NotificationSeeder::class,
+            ConvocationSeeder::class,
         ]);
     }
 }
