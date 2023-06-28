@@ -49,6 +49,18 @@ export interface Faute {
     regleId: any;
     /**
      * 
+     * @type {Eleve}
+     * @memberof Faute
+     */
+    eleve?: any;
+    /**
+     * 
+     * @type {Regle}
+     * @memberof Faute
+     */
+    regle?: any;
+    /**
+     * 
      * @type {BaseModelpropertiescreatedAt}
      * @memberof Faute
      */

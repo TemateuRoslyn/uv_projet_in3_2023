@@ -85,6 +85,12 @@ export interface Parents {
     user: any;
     /**
      * 
+     * @type {Eleve}
+     * @memberof Parents
+     */
+    eleves?: any;
+    /**
+     * 
      * @type {BaseModelpropertiescreatedAt}
      * @memberof Parents
      */

@@ -79,6 +79,18 @@ export interface Professeur {
     statut: any;
     /**
      * 
+     * @type {User}
+     * @memberof Professeur
+     */
+    user?: any;
+    /**
+     * 
+     * @type {Cour}
+     * @memberof Professeur
+     */
+    cour?: any;
+    /**
+     * 
      * @type {BaseModelpropertiescreatedAt}
      * @memberof Professeur
      */

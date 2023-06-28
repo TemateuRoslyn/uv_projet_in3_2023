@@ -31,7 +31,7 @@ export interface InlineResponse20015 {
     success?: any;
     /**
      * 
-     * @type {Eleve}
+     * @type {Convocation}
      * @memberof InlineResponse20015
      */
     content?: any;

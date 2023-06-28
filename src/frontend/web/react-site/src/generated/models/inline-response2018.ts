@@ -31,7 +31,7 @@ export interface InlineResponse2018 {
     success?: any;
     /**
      * 
-     * @type {Role}
+     * @type {Professeur}
      * @memberof InlineResponse2018
      */
     content?: any;
