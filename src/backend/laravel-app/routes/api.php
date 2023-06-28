@@ -23,6 +23,7 @@ use App\Http\Controllers\API\UploadController;
 use App\Http\Controllers\API\FauteController;
 use App\Http\Controllers\API\ConvocationController;
 use App\Http\Controllers\API\MembreConseilController;
+use App\Http\Controllers\API\ReparationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -225,5 +226,15 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll', [ConvocationController::class, 'index']);
     });
 
+
+
+    //Reparations
+    Route::prefix('reparations')->group(function () {
+        Route::middleware('permission:creer_reparation')->post('create', [ReparationController::class, 'store']);
+        Route::middleware('permission:modifier_reparation')->post('update/{reparationId}', [ReparationController::class, 'update']);
+        Route::middleware('permission:supprimer_reparation')->ddelete('delete/{reparationId}', [ReparationController::class, 'delete']);
+        Route::get('findOne/{reparationId}', [ReparationController::class, 'view']);
+        Route::get('findAll', [ReparationController::class, 'index']);
+    });
 
 });
