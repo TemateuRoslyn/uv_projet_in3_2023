@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('membre_conseils', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('id_chef');
-            $table->unsignedBigInteger('id_surveillant_G');
-            $table->unsignedBigInteger('id_representant_E');
+            $table->unsignedBigInteger('idChef');
+            $table->unsignedBigInteger('idSurveillantG');
+            $table->unsignedBigInteger('idRepresentantE');
 
-            $table->foreign('id_chef')->references('id')->on('users');
-            $table->foreign('id_surveillant_G')->references('id')->on('users');
-            $table->foreign('id_representant_E')->references('id')->on('parents');
+            $table->foreign('idChef')->references('id')->on('personnels');
+            $table->foreign('idSurveillantG')->references('id')->on('personnels');
+            $table->foreign('idRepresentantE')->references('id')->on('parents');
 
             $table->timestamps();
         });

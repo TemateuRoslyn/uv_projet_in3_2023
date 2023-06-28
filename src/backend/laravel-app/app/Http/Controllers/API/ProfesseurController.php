@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Professeur;
 use App\Models\User;
+use App\Models\Permission;
 use App\Models\Role;
 
 class ProfesseurController extends Controller
@@ -38,7 +39,9 @@ class ProfesseurController extends Controller
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="professeurs", type="array", @OA\Items(ref="#/components/schemas/Professeur"))
+     *              @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
+     *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Professeur"))
      *         )
      *     ),
      *     @OA\Response(
@@ -58,15 +61,15 @@ class ProfesseurController extends Controller
         return response()->json([
             'message' => 'Liste des professeurs',
             'success' => true,
-            'data' => $professeurs
+            'content' => $professeurs
         ]);
     }
 
-    /**
+/**
      * @OA\Get(
-     *     path="/api/professeurs/findOne/{id}",
+     *     path="/api/professeur/findOne/{id}",
      *     summary="Get professeur information",
-     *     description="Get information about a specific professor",
+     *     description="Get information about a specific professeur",
      *     operationId="viewProfesseur",
      *     tags={"professeurs"},
      *     @OA\Parameter(
@@ -99,16 +102,17 @@ class ProfesseurController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Professeur not found")
+     *             @OA\Property(property="message", type="string", example="professeur not found"),
+     *             @OA\Property(property="success", type="boolean", example="false"),
      *         )
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Professeur trouvé(e)"),
+     *             @OA\Property(property="message", type="string", example="professeur trouvé(e)"),
      *             @OA\Property(property="success", type="boolean", example="true"),
-     *             @OA\Property(property="data", type="object", ref="#/components/schemas/Professeur")
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Professeur")
      *         )
      *     )
      * )
@@ -124,7 +128,7 @@ class ProfesseurController extends Controller
             return response()->json([
                 'message' => 'professeur trouvé(e)',
                 'success' => true,
-                'data' => $professeurIdData
+                'content' => $professeurIdData
             ], 200);
         } else {
             return response()->json([
@@ -137,8 +141,8 @@ class ProfesseurController extends Controller
     /**
      * @OA\Post(
      *     path="/api/professeurs/create",
-     *     summary="Create a new professeur",
-     *     description="Create a new professeur resource",
+     *     summary="Create a new professorr",
+     *     description="Create a new professor resource",
      *     operationId="createProfesseur",
      *     tags={"professeurs"},
      *     @OA\Parameter(
@@ -154,18 +158,17 @@ class ProfesseurController extends Controller
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"email", "password", "username", "first_name", "last_name", "date_de_naissance", "lieu_de_naissance", "sexe", "telephone", "solvable", "redoublant", "user_id"},
+     *             required={"email", "firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "statut", "courId"},
      *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
-     *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     *             @OA\Property(property="username", type="string", example="Doe"),
-     *             @OA\Property(property="first_name", type="string", example="John"),
-     *             @OA\Property(property="last_name", type="string", example="Smith"),
-     *             @OA\Property(property="date_de_naissance", type="string", format="date", example="1990-01-01"),
-     *             @OA\Property(property="lieu_de_naissance", type="string", example="Paris"),
+     *             @OA\Property(property="firstName", type="string", example="John"),
+     *             @OA\Property(property="lastName", type="string", example="Smith"),
+     *             @OA\Property(property="dateDeNaissance", type="string", format="date", example="1990-01-01"),
+     *             @OA\Property(property="lieuDeNaissance", type="string", example="Paris"),
      *             @OA\Property(property="photo", type="string", nullable=true, example="https://example.com/photo.jpg"),
      *             @OA\Property(property="sexe", type="string", example="Male"),
      *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
      *             @OA\Property(property="statut", type="string", example="censeur"),
+     *              @OA\Property(property="courId", type="integer", example=2),
      *         )
      *     ),
      *     @OA\Response(
@@ -210,7 +213,9 @@ class ProfesseurController extends Controller
      *         response=201,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="professeur", type="object", ref="#/components/schemas/Professeur"),
+     *              @OA\Property(property="message", type="string", example="professeur créé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Professeur"),
      *         )
      *     )
      * )
@@ -222,15 +227,15 @@ class ProfesseurController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
             'username' => 'required|unique:users',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'date_de_naissance' => 'required|date',
-            'lieu_de_naissance' => 'required',
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'dateDeNaissance' => 'required|date',
+            'lieuDeNaissance' => 'required',
             'photo' => 'nullable|image',
             'sexe' => 'required',
             'telephone' => 'required',
             'statut' => 'required',
-            'cour_id' => 'required',
+            'courId' => 'required',
 
         ]);
 
@@ -248,17 +253,30 @@ class ProfesseurController extends Controller
             'password' => bcrypt($request->input('password')),
         ]);
 
+        $photo = NULL;
 
+        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+            $file = $request->file('photo');
 
+            // Vérifiez le type MIME si nécessaire
+            $allowedTypes = ['image/jpeg', 'image/png'];
+            if (!in_array($file->getMimeType(), $allowedTypes)) {
+                return response()->json(['error' => 'Le fichier sélectionné n\'est pas une image.'], 400);
+            }
+
+            // Déplacez le fichier vers le répertoire de stockage souhaité
+            $photo = $file->store($this->avatar_path);
+
+        }
 
         $professeur = Professeur::create([
-            'cour_id' => $request->input('cour_id'),
-            'user_id' => $user->id,
+            'courId' => $request->input('courId'),
+            'userId' => $user->id,
             'statut' => $request->input('statut'),
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'date_de_naissance' => $request->input('date_de_naissance'),
-            'lieu_de_naissance' => $request->input('lieu_de_naissance'),
+            'firstName' => $request->input('first_name'),
+            'lastName' => $request->input('last_name'),
+            'dateDeNaissance' => $request->input('date_de_naissance'),
+            'lieuDeNaissance' => $request->input('lieu_de_naissance'),
             'photo' => $request->file('photo') ? $request->file('photo')->store($this->avatar_path) : null,
             'sexe' => $request->input('sexe'),
             'telephone' => $request->input('telephone'),
@@ -267,28 +285,29 @@ class ProfesseurController extends Controller
         $professeur->user = $user;
         $professeur->cours = Cour::with('professeur')->find($professeur->id);
 
-        return response()->json([
-            'message' => 'Professor created successfully',
-            'success' => true,
-            'content' => $professeur
-        ]);
-
         // Créer un professeur de base avec le rôle professeur
         $professeurRole = Role::where('name', 'professeur')->first();
 
         $user->roles()->attach($professeurRole);
+          // assigner les permission
+          foreach (PROFESSEUR_PERMISSIONS as $permission) {
+            $professeurPerm = Permission::where('name', $permission['name'])->first();
+            if ($professeurPerm) {
+                $user->permissions()->attach($professeurPerm);
+            }
+        }
 
 
         return response()->json([
             'message' => 'professor created successfully',
             'success' => true,
-            'data' => $professeur
+            'content' => $professeur
         ]);
     }
 
 
     /**
-     * @OA\Post(
+     * @OA\Put(
      *     path="/api/professeurs/update",
      *     summary="Update a professeur's information",
      *     description="Update a professeur's information",
@@ -306,18 +325,22 @@ class ProfesseurController extends Controller
      *     ),
      *      @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(
-     *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
-     *             @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     *             @OA\Property(property="username", type="string", example="Doe"),
-     *             @OA\Property(property="first_name", type="string", example="John"),
-     *             @OA\Property(property="last_name", type="string", example="Smith"),
-     *             @OA\Property(property="date_de_naissance", type="string", format="date", example="1990-01-01"),
-     *             @OA\Property(property="lieu_de_naissance", type="string", example="Paris"),
-     *             @OA\Property(property="photo", type="string", nullable=true, example="https://example.com/photo.jpg"),
-     *             @OA\Property(property="sexe", type="string", example="Male"),
-     *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
-     *             @OA\Property(property="statut", type="string", example="Censeur"),
+     *      @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 required={"email", "firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "statut", "courId"},
+     *                 @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
+     *                 @OA\Property(property="firstName", type="string", example="John"),
+     *                 @OA\Property(property="lastName", type="string", example="Smith"),
+     *                 @OA\Property(property="dateDeNaissance", type="string", format="date", example="1990-01-01"),
+     *                 @OA\Property(property="lieuDeNaissance", type="string", example="Paris"),
+     *                 @OA\Property(property="photo", type="string", format="binary", nullable=true),
+     *                 @OA\Property(property="sexe", type="string", example="Male"),
+     *                 @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
+     *                 @OA\Property(property="statut", type="string", example="censeur"),
+     *                 @OA\Property(property="courId", type="integer", example=1),
+     *
+     *             )
      *         )
      *     ),
      *     @OA\Response(
@@ -352,32 +375,35 @@ class ProfesseurController extends Controller
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="eleve", type="object", ref="#/components/schemas/Professeur"),
+     *             @OA\Property(property="message", type="string", example="professeur modifié qvec succèss"),
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Professeur"),
      *         )
      *     )
      * )
      */
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
 
         // on récupère le professeur associé
-        $professeurFound = Professeur::find($request->id);
+        $professeurFound = Professeur::find($id);
         if ($professeurFound) {
-            $user = User::find($professeurFound->user_id);
+            $user = User::find($professeurFound->userId);
 
             $validator = Validator::make($request->all(), [
                 'id' => 'required',
                 'email' => 'required|email|unique:users,email,' . $user->id,
 
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'date_de_naissance' => 'required|date',
-                'lieu_de_naissance' => 'required',
+                'firstName' => 'required',
+                'lastName' => 'required',
+                'dateDeNaissance' => 'required|date',
+                'lieuDeNaissance' => 'required',
                 'photo' => 'nullable|image',
                 'sexe' => 'required',
                 'telephone' => 'required',
                 'statut' => 'required',
+               'courId' => 'required'
             ]);
         } else {
             return response()->json([
@@ -411,21 +437,54 @@ class ProfesseurController extends Controller
 
         // Mise à jour des champs de l'objet Professeur
 
-        $professeurFound->first_name = $request->input('first_name');
-        $professeurFound->last_name = $request->input('last_name');
-        $professeurFound->date_de_naissance = $request->input('date_de_naissance');
-        $professeurFound->lieu_de_naissance = $request->input('lieu_de_naissance');
+        $professeurFound->firstName = $request->input('firstName');
+        $professeurFound->lastName = $request->input('lastName');
+        $professeurFound->dateDeNaissance = $request->input('dateDeNaissance');
+        $professeurFound->lieuDeNaissance = $request->input('lieuDeNaissance');
         $professeurFound->sexe = $request->input('sexe');
         $professeurFound->telephone = $request->input('telephone');
         $professeurFound->statut =  $request->input('statut');
+
+          // update de cour de professeur...
+
+        // si il change de cour
+        $cour = Cour::find($request->courId);
+
+        if($cour && $professeurFound->courId != $request->courId){
+
+            // update de l'ancienne cour
+            $oldCour = Cour::find($professeurFound->courId);
+            $oldCour->update([
+                'libelle' => $oldCour->libelle,
+                'date_cour' => $oldCour->date_cour,
+                'heure_debut' => $oldCour->heure_debut,
+                'heure_fin' => $oldCour->heure_fin,
+
+            ]);
+
+            // update de la nouvelle classe
+            $cour->update([
+                'libelle' => $cour->libelle,
+                'date_cour' => $cour->date_cour,
+                'heure_debut' => $cour->heure_debut,
+                'heure_fin' => $cour->heure_fin,
+            ]);
+
+        }
+
+
+        $professeurFound->courId = $request->input('courId');
         $professeurFound->save();
 
-        $professeurFound = Professeur::with('user')->find($professeurFound->id);
+        $professeurFound->user = $user;
+        $professeurFound->cour = $cour;
+/////
+        //$professeurFound = Professeur::with('user')->find($professeurFound->id);
 
         return response()->json([
             'message' => 'Professeur updated successfully',
             'success' => true,
-            'data' => $professeurFound
+            'content' => $professeurFound
         ]);
     }
 
@@ -471,10 +530,15 @@ class ProfesseurController extends Controller
      *             @OA\Property(property="error", type="string", example="Professor not found")
      *         )
      *     ),
-     *     @OA\Response(
-     *         response=204,
-     *         description="Success",
-     *     )
+     *    @OA\Response(
+     *         response=200,
+     *         description="Permission deleted successfully",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="professeur deleted successfully")
+     *         )
+     *     ),
      * )
      */
 
@@ -487,13 +551,23 @@ class ProfesseurController extends Controller
             //le user associe
             $userFound = User::find($professeurFound->user_id);
 
-            // supperssion de l'image du user
+            // suppresion de l'image du user
             if ($userFound->photo) {
                 Storage::delete($userFound->photo);
             }
 
             //suppression du professeur
             $professeurFound->delete();
+
+            // update du cour du prof...
+            $cour = Cour::find($professeurFound->courId);
+            $cour->update([
+                'libelle' => $cour->libelle,
+                'date_cour' => $cour->date_cour,
+                'heure_debut' => $cour->heure_debut,
+                'heure_fin' => $cour->heure_fin,
+            ]);
+
 
             return response()->json([
                 'message' => 'professeur deleted successfully',

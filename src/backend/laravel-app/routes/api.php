@@ -21,6 +21,8 @@ use App\Http\Controllers\API\ReglementInterieurController;
 use App\Http\Controllers\API\ConseilDisciplineController;
 use App\Http\Controllers\API\UploadController;
 use App\Http\Controllers\API\FauteController;
+use App\Http\Controllers\API\ConvocationController;
+use App\Http\Controllers\API\MembreConseilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,13 +112,23 @@ Route::middleware('jwt.verify')->group(function () {
         Route::middleware('permission:creer_eleve')->post('create', [EleveController::class, 'store']);
     });
 
+    // membreconseils
+    Route::prefix('membreconseils')->group(function () {
+        Route::get('findOne/{membreconseilId}', [MembreConseilController::class, 'view']);
+        Route::get('findAll', [MembreConseilController::class, 'index']);
+
+        Route::middleware('permission:modifier_conseil')->put('update/{eleveId}', [MembreConseilController::class, 'update']);
+        Route::middleware('permission:supprimer_conseil')->delete('delete/{eleveId}', [MembreConseilController::class, 'delete']);
+        Route::middleware('permission:creer_conseil')->post('create', [MembreConseilController::class, 'store']);
+    });
+
     // notifications
     Route::prefix('notification')->group(function () {
-        Route::get('/', [NotificationController::class, 'showAll']);
-        Route::post('/', [NotificationController::class, 'store']);
-        Route::get('/{id}', [NotificationController::class, 'showIndex']);
-        Route::put('/{id}', [NotificationController::class, 'update']);
-        Route::delete('/{id}', [NotificationController::class, 'delete']);
+        Route::get('findAll/', [NotificationController::class, 'index']);
+        Route::post('create/', [NotificationController::class, 'store']);
+        Route::get('findOne/{id}', [NotificationController::class, 'view']);
+        Route::post('update/{id}', [NotificationController::class, 'update']);
+        Route::delete('delete/{id}', [NotificationController::class, 'delete']);
     });
 
     // parents
@@ -158,18 +170,18 @@ Route::middleware('jwt.verify')->group(function () {
 
     // personnel
     Route::prefix('personnel')->group(function () {
-        Route::get('findAll', [PersonnelController::class, 'showAll']);
-        Route::get('findOne/{personnelId}', [PersonnelController::class, 'showIndex']);
+        Route::get('findAll', [PersonnelController::class, 'index']);
+        Route::get('findOne/{personnelId}', [PersonnelController::class, 'view']);
 
         Route::middleware('permission:creer_personnel')->post('create', [PersonnelController::class, 'store']);
-        Route::middleware('permission:modifier_personnel')->post('update', [PersonnelController::class, 'update']);
+        Route::middleware('permission:modifier_personnel')->post('update/{personnelId}', [PersonnelController::class, 'update']);
         Route::middleware('permission:supprimer_personnel')->delete('delete/{personnelId}', [PersonnelController::class, 'delete']);
     });
 
     //professeurs
     Route::prefix('professeurs')->group(function () {
         Route::post('create', [ProfesseurController::class, 'store']);
-        Route::post('update', [ProfesseurController::class, 'update']);
+        Route::post('update/{professeurId}', [ProfesseurController::class, 'update']);
         Route::delete('delete/{professeurId}', [ProfesseurController::class, 'delete']);
         Route::get('findOne/{professeurId}', [ProfesseurController::class, 'view']);
         Route::get('findAll', [ProfesseurController::class, 'index']);
@@ -195,12 +207,23 @@ Route::middleware('jwt.verify')->group(function () {
         });
     });
 
-    //faute
-    Route::prefix('faute')->group(function () {
+       //faute
+       Route::prefix('faute')->group(function () {
         Route::post('create', [FauteController::class, 'store']);
-        Route::post('update', [FauteController::class, 'update']);
+        Route::put('update/{fauteId}', [FauteController::class, 'update']);
         Route::delete('delete/{fauteId}', [FauteController::class, 'delete']);
         Route::get('findOne/{fauteId}', [FauteController::class, 'view']);
         Route::get('findAll', [FauteController::class, 'index']);
     });
+
+     //convocation
+     Route::prefix('convocation')->group(function () {
+        Route::post('create', [ConvocationController::class, 'store']);
+        Route::post('update/{convocationId}', [ConvocationController::class, 'update']);
+        Route::delete('delete/{convocationId}', [ConvocationController::class, 'delete']);
+        Route::get('findOne/{convocationId}', [ConvocationController::class, 'view']);
+        Route::get('findAll', [ConvocationController::class, 'index']);
+    });
+
+
 });

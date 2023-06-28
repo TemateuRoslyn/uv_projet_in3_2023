@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string("libelle");
             $table->integer("view");
-            $table->string("name");
+            $table->unsignedBigInteger('userId');
+            $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

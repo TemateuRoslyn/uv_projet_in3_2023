@@ -13,8 +13,16 @@ return new class extends Migration
     {
         Schema::create('personnels', function (Blueprint $table) {
             $table->id();
+            $table->string('firstName');
+            $table->string('lastName');
+            $table->date('dateDeNaissance');
+            $table->string('lieuDeNaissance');
+            $table->string('photo')->nullable();
+            $table->string('sexe');
+            $table->string('telephone')->nullable();
             $table->string('fonction');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->unsignedBigInteger('userId');
+            $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -24,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('personnels');
     }
 };
