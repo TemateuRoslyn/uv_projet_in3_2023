@@ -9,4 +9,6 @@ class AppImages {
 
 const kUserToken = 'userToken';
 const kUserId = 'userId';
+const kUserIdBasedOnType = 'userIdBasedOnType';
+const kUserType = 'userType';
 const kIsFirstUsage = 'isFirstUsage';

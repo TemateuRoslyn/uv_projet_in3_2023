@@ -1,9 +1,6 @@
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:fltter_app/common/models/user.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
 import '../common/configurations/api_configuration.dart';
 import '../common/utils/constants.dart';
 
@@ -20,10 +17,14 @@ class AuthRepository {
   final flutterSecureStorage = const FlutterSecureStorage();
 
   late int _userId;
+  // late int _userIdBasedOnType;
   late String _userToken;
+  late String _userType;
 
   int get getUserId => _userId;
+  // int get getUserIdBasedOnType => _userIdBasedOnType;
   String get getUserToken => _userToken;
+  String get getUserType => _userType;
 
   Stream<AuthStatus> getStatus() async* {
     final userToken = await flutterSecureStorage.read(key: kUserToken);
@@ -33,6 +34,9 @@ class AuthRepository {
 
     if (userToken != null && userToken != '') {
       _userId = int.parse((await flutterSecureStorage.read(key: kUserId))!);
+      // _userIdBasedOnType = int.parse(
+      //     (await flutterSecureStorage.read(key: kUserIdBasedOnType))!);
+      _userType = (await flutterSecureStorage.read(key: kUserType))!;
       _userToken = userToken;
       yield AuthStatus.authenticated;
     } else {
@@ -62,9 +66,39 @@ class AuthRepository {
     _userId = userId;
   }
 
+  // void saveUserIdBasedOnTypeInLocalStorage(int userIdBasedOnType) async {
+  //   await flutterSecureStorage.write(
+  //       key: kUserId, value: userIdBasedOnType.toString());
+  //   _userIdBasedOnType = userIdBasedOnType;
+  // }
+
   void saveUserTokenInLocalStorage(String userToken) async {
     await flutterSecureStorage.write(key: kUserToken, value: userToken);
     _userToken = userToken;
+  }
+
+  void saveUserTypeInLocalStorage(String userType) async {
+    await flutterSecureStorage.write(key: kUserType, value: userType);
+    _userType = userType;
+  }
+
+  String getCurrentUserType(int userType) {
+    switch (userType) {
+      case 1:
+        return 'users';
+      case 2:
+        return 'eleves';
+      case 3:
+        return 'parents';
+      case 4:
+        return 'professeurs';
+      case 5:
+        return 'personnels';
+      case 6:
+        return 'admin';
+      default:
+        return 'users';
+    }
   }
 
   Future<void> login(String userName, String password) async {
@@ -75,11 +109,17 @@ class AuthRepository {
         "persistent": "true"
       });
 
-      final userId = response.data['content']['user']['id'];
+      final userId = response.data['content']['user']['model']['id'];
+      // final userIdBasedOnType =
+      //     (response.data['content']['user']['roles'] as List)[0]['id'];
       final token = response.data['content']['token'];
+      final userType =
+          (response.data['content']['user']['roles'] as List)[0]['id'];
 
       saveUserIdInLocalStorage(userId);
       saveUserTokenInLocalStorage(token);
+      saveUserTypeInLocalStorage(getCurrentUserType(userType));
+      // saveUserIdBasedOnTypeInLocalStorage(userIdBasedOnType);
     } catch (e) {
       rethrow;
     }
@@ -88,11 +128,10 @@ class AuthRepository {
   Future<User> getCurrentUser() async {
     try {
       final response = await dio.get(
-        'eleves/findOne/$_userId',
+        '$_userType/findOne/$_userId',
         options: ApiConfiguration.getAuthorizationOptions(_userToken),
       );
       final userFound = User.fromJson(response.data!['content']);
-
       return userFound;
     } catch (e) {
       rethrow;
