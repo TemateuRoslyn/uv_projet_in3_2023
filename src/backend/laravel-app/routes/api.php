@@ -22,6 +22,7 @@ use App\Http\Controllers\API\ConseilDisciplineController;
 use App\Http\Controllers\API\UploadController;
 use App\Http\Controllers\API\FauteController;
 use App\Http\Controllers\API\ConvocationController;
+use App\Http\Controllers\API\MembreConseilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,6 +110,16 @@ Route::middleware('jwt.verify')->group(function () {
         Route::middleware('permission:modifier_eleve')->put('update/{eleveId}', [EleveController::class, 'update']);
         Route::middleware('permission:supprimer_eleve')->delete('delete/{eleveId}', [EleveController::class, 'delete']);
         Route::middleware('permission:creer_eleve')->post('create', [EleveController::class, 'store']);
+    });
+
+    // membreconseils
+    Route::prefix('membreconseils')->group(function () {
+        Route::get('findOne/{membreconseilId}', [MembreConseilController::class, 'view']);
+        Route::get('findAll', [MembreConseilController::class, 'index']);
+
+        Route::middleware('permission:modifier_conseil')->put('update/{eleveId}', [MembreConseilController::class, 'update']);
+        Route::middleware('permission:supprimer_conseil')->delete('delete/{eleveId}', [MembreConseilController::class, 'delete']);
+        Route::middleware('permission:creer_conseil')->post('create', [MembreConseilController::class, 'store']);
     });
 
     // notifications

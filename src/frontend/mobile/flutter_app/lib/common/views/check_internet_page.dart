@@ -1,21 +1,24 @@
-import 'package:fltter_app/common/styles/colors.dart';
+import 'package:fltter_app/common/widgets/common_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../logics/internet/internet_cubit.dart';
-import '../utils/helper.dart';
 
 class CheckInternetConnectionPage extends StatefulWidget {
   const CheckInternetConnectionPage({
     super.key,
-    required this.refreshFunction,
+    // required this.refreshFunction,
     required this.positionFromTop,
     required this.body,
+    required this.color,
+    this.helper,
   });
 
   final Widget body;
-  final void Function()? refreshFunction;
+  // final void Function()? refreshFunction;
   final double positionFromTop;
+  final int? helper; // 0 = no data in current state, 1 = data in state
+  final Color color;
 
   @override
   State<CheckInternetConnectionPage> createState() =>
@@ -31,21 +34,28 @@ class _CheckInternetConnectionPageState
         if (state is Connected) {
           return widget.body;
         } else {
-          return Padding(
-            padding: EdgeInsets.only(
-                top: getHeight(widget.positionFromTop, context),
-                left: getWidth(50, context),
-                right: getWidth(50, context)),
-            child: Text(
-              'Assurez vous d\'être connecté à internet...',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: getHeight(12, context),
-                height: getHeight(1.5, context),
-                color: Colors.white,
-              ),
-            ),
-          );
+          if (widget.helper != null) {
+            switch (widget.helper) {
+              case 0:
+                return CommonWidgets.noInternetWidget(
+                  positionFromTop: widget.positionFromTop,
+                  context: context,
+                  color: widget.color,
+                );
+              case 1:
+                return widget.body;
+              default:
+                return CommonWidgets.noInternetWidget(
+                    positionFromTop: widget.positionFromTop,
+                    context: context,
+                    color: widget.color);
+            }
+          } else {
+            return CommonWidgets.noInternetWidget(
+                positionFromTop: widget.positionFromTop,
+                context: context,
+                color: widget.color);
+          }
         }
       },
     );

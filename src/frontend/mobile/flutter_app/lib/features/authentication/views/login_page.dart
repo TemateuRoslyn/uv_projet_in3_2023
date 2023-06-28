@@ -109,98 +109,103 @@ class _LoginPageState extends State<LoginPage> {
                       (route) => false);
                 }
               },
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: getHeight(50, context),
-                  ),
-                  Center(
-                    child: Image.asset(
-                      AppImages.onBoardingOne,
-                      height: getHeight(200, context),
-                      width: getWidth(200, context),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: getHeight(50, context),
                     ),
-                  ),
-                  SizedBox(
-                    height: getHeight(30, context),
-                  ),
-                  Text(
-                    'Connexion',
-                    style: TextStyle(
-                        fontSize: getHeight(30, context),
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                  SizedBox(
-                    height: getHeight(10, context),
-                  ),
-                  Text(
-                    'Connectez vous pour continuer.',
-                    style: TextStyle(
-                        fontSize: getHeight(15, context), color: Colors.white),
-                  ),
-                  SizedBox(
-                    height: getHeight(40, context),
-                  ),
-
-                  // login fields part
-                  Form(
-                    key: _loginCubit.loginForm,
-                    child: Column(
-                      children: loginFields.map((field) {
-                        return Padding(
-                          padding: EdgeInsets.only(top: getHeight(10, context)),
-                          child: field,
-                        );
-                      }).toList(),
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: getHeight(30, context),
-                  ),
-                  BlocBuilder<LoginCubit, LoginState>(
-                    builder: (context, state) {
-                      return Center(
-                        child: Column(
-                          children: [
-                            CommonWidgets.commonButton(
-                              press: () {
-                                _loginCubit.checkIfFieldsAreEmpty();
-                              },
-                              text: 'Connexion',
-                              color: appColors.ligthGreen!,
-                              roundedBorders: true,
-                              context: context,
-                            ),
-                            SizedBox(
-                              height: getWidth(10, context),
-                            ),
-                            state.loginStatus == ApiStatus.isLoading
-                                ? CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    color: appColors.onBoardingTwo,
-                                  )
-                                : const SizedBox()
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                  Center(
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Mot de passe oublié ?',
-                        style: TextStyle(
-                            fontSize: getHeight(15, context),
-                            fontWeight: FontWeight.bold,
-                            color: appColors.ligthGreen),
+                    Center(
+                      child: Image.asset(
+                        AppImages.onBoardingOne,
+                        height: getHeight(200, context),
+                        width: getWidth(200, context),
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: getHeight(30, context),
+                    ),
+                    Text(
+                      'Connexion',
+                      style: TextStyle(
+                          fontSize: getHeight(30, context),
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    SizedBox(
+                      height: getHeight(10, context),
+                    ),
+                    Text(
+                      'Connectez vous pour continuer.',
+                      style: TextStyle(
+                          fontSize: getHeight(15, context),
+                          color: Colors.white),
+                    ),
+                    SizedBox(
+                      height: getHeight(40, context),
+                    ),
+
+                    // login fields part
+                    Form(
+                      key: _loginCubit.loginForm,
+                      child: Column(
+                        children: loginFields.map((field) {
+                          return Padding(
+                            padding:
+                                EdgeInsets.only(top: getHeight(10, context)),
+                            child: field,
+                          );
+                        }).toList(),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: getHeight(30, context),
+                    ),
+                    BlocBuilder<LoginCubit, LoginState>(
+                      builder: (context, state) {
+                        return Center(
+                          child: Column(
+                            children: [
+                              CommonWidgets.commonButton(
+                                press: () {
+                                  FocusScope.of(context).unfocus();
+                                  _loginCubit.checkIfFieldsAreEmpty();
+                                },
+                                text: 'Connexion',
+                                color: appColors.ligthGreen!,
+                                roundedBorders: true,
+                                context: context,
+                              ),
+                              SizedBox(
+                                height: getWidth(10, context),
+                              ),
+                              state.loginStatus == ApiStatus.isLoading
+                                  ? CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      color: appColors.onBoardingTwo,
+                                    )
+                                  : const SizedBox()
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                    Center(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Mot de passe oublié ?',
+                          style: TextStyle(
+                              fontSize: getHeight(15, context),
+                              fontWeight: FontWeight.bold,
+                              color: appColors.ligthGreen),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
