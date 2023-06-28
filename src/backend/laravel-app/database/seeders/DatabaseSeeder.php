@@ -34,6 +34,9 @@ class DatabaseSeeder extends Seeder
             PersonnelSeeder::class,
             NotificationSeeder::class,
             ConvocationSeeder::class,
+            ConseilDisciplineSeeder::class,
+            ParentSeeder::class,
+            ReparationSeeder::class,
         ]);
     }
 }
