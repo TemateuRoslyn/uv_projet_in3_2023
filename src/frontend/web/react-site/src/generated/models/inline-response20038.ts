@@ -19,14 +19,8 @@
 export interface InlineResponse20038 {
     /**
      * 
-     * @type {boolean}
+     * @type {Array&lt;ReglementInterieur&gt;}
      * @memberof InlineResponse20038
      */
-    success?: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse20038
-     */
-    message?: any;
+    reglements?: any;
 }

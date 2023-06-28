@@ -16,17 +16,17 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20039 } from '../models';
-import { InlineResponse20040 } from '../models';
-import { InlineResponse20041 } from '../models';
-import { InlineResponse20042 } from '../models';
-import { InlineResponse20043 } from '../models';
-import { InlineResponse40017 } from '../models';
-import { InlineResponse40018 } from '../models';
+import { InlineResponse20025 } from '../models';
+import { InlineResponse20026 } from '../models';
+import { InlineResponse20027 } from '../models';
+import { InlineResponse2014 } from '../models';
+import { InlineResponse40012 } from '../models';
+import { InlineResponse40013 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse40418 } from '../models';
-import { InlineResponse40419 } from '../models';
-import { InlineResponse4221 } from '../models';
+import { InlineResponse40410 } from '../models';
+import { InlineResponse4049 } from '../models';
+import { ParentsCreateBody } from '../models';
+import { ParentsUpdateBody } from '../models';
 /**
  * ParentsApi - axios parameter creator
  * @export
@@ -34,165 +34,13 @@ import { InlineResponse4221 } from '../models';
 export const ParentsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Create a new parent resource
-         * @summary Create a new parent
-         * @param {string} email 
-         * @param {string} firstName 
-         * @param {string} lastName 
-         * @param {string} username 
-         * @param {string} dateDeNaissance 
-         * @param {string} lieuDeNaissance 
-         * @param {string} photo 
-         * @param {string} sexe 
-         * @param {string} telephone 
-         * @param {string} profession 
-         * @param {Array&lt;number&gt;} eleveIds 
-         * @param {string} authorization JWT token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createParent: async (email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'email' is not null or undefined
-            if (email === null || email === undefined) {
-                throw new RequiredError('email','Required parameter email was null or undefined when calling createParent.');
-            }
-            // verify required parameter 'firstName' is not null or undefined
-            if (firstName === null || firstName === undefined) {
-                throw new RequiredError('firstName','Required parameter firstName was null or undefined when calling createParent.');
-            }
-            // verify required parameter 'lastName' is not null or undefined
-            if (lastName === null || lastName === undefined) {
-                throw new RequiredError('lastName','Required parameter lastName was null or undefined when calling createParent.');
-            }
-            // verify required parameter 'username' is not null or undefined
-            if (username === null || username === undefined) {
-                throw new RequiredError('username','Required parameter username was null or undefined when calling createParent.');
-            }
-            // verify required parameter 'dateDeNaissance' is not null or undefined
-            if (dateDeNaissance === null || dateDeNaissance === undefined) {
-                throw new RequiredError('dateDeNaissance','Required parameter dateDeNaissance was null or undefined when calling createParent.');
-            }
-            // verify required parameter 'lieuDeNaissance' is not null or undefined
-            if (lieuDeNaissance === null || lieuDeNaissance === undefined) {
-                throw new RequiredError('lieuDeNaissance','Required parameter lieuDeNaissance was null or undefined when calling createParent.');
-            }
-            // verify required parameter 'photo' is not null or undefined
-            if (photo === null || photo === undefined) {
-                throw new RequiredError('photo','Required parameter photo was null or undefined when calling createParent.');
-            }
-            // verify required parameter 'sexe' is not null or undefined
-            if (sexe === null || sexe === undefined) {
-                throw new RequiredError('sexe','Required parameter sexe was null or undefined when calling createParent.');
-            }
-            // verify required parameter 'telephone' is not null or undefined
-            if (telephone === null || telephone === undefined) {
-                throw new RequiredError('telephone','Required parameter telephone was null or undefined when calling createParent.');
-            }
-            // verify required parameter 'profession' is not null or undefined
-            if (profession === null || profession === undefined) {
-                throw new RequiredError('profession','Required parameter profession was null or undefined when calling createParent.');
-            }
-            // verify required parameter 'eleveIds' is not null or undefined
-            if (eleveIds === null || eleveIds === undefined) {
-                throw new RequiredError('eleveIds','Required parameter eleveIds was null or undefined when calling createParent.');
-            }
-            // verify required parameter 'authorization' is not null or undefined
-            if (authorization === null || authorization === undefined) {
-                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling createParent.');
-            }
-            const localVarPath = `/api/parents/create`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-            const localVarFormParams = new FormData();
-
-            if (authorization !== undefined && authorization !== null) {
-                localVarHeaderParameter['Authorization'] = String(authorization);
-            }
-
-
-            if (email !== undefined) { 
-                localVarFormParams.append('email', email as any);
-            }
-
-            if (firstName !== undefined) { 
-                localVarFormParams.append('firstName', firstName as any);
-            }
-
-            if (lastName !== undefined) { 
-                localVarFormParams.append('lastName', lastName as any);
-            }
-
-            if (username !== undefined) { 
-                localVarFormParams.append('username', username as any);
-            }
-
-            if (dateDeNaissance !== undefined) { 
-                localVarFormParams.append('dateDeNaissance', dateDeNaissance as any);
-            }
-
-            if (lieuDeNaissance !== undefined) { 
-                localVarFormParams.append('lieuDeNaissance', lieuDeNaissance as any);
-            }
-
-            if (photo !== undefined) { 
-                localVarFormParams.append('photo', photo as any);
-            }
-
-            if (sexe !== undefined) { 
-                localVarFormParams.append('sexe', sexe as any);
-            }
-
-            if (telephone !== undefined) { 
-                localVarFormParams.append('telephone', telephone as any);
-            }
-
-            if (profession !== undefined) { 
-                localVarFormParams.append('profession', profession as any);
-            }
-            if (eleveIds) {
-                eleveIds.forEach((element) => {
-                    localVarFormParams.append('eleveIds', element as any);
-                })
-            }
-
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Delete an parent resource
-         * @summary Delete an parent
-         * @param {string} authorization JWT token
+         * Delete a parent resource
+         * @summary Delete a parent
          * @param {number} id ID of parent to delete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteParent: async (authorization: string, id: number, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authorization' is not null or undefined
-            if (authorization === null || authorization === undefined) {
-                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling deleteParent.');
-            }
+        deleteParent: async (id: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling deleteParent.');
@@ -209,10 +57,6 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authorization !== undefined && authorization !== null) {
-                localVarHeaderParameter['Authorization'] = String(authorization);
-            }
-
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -232,15 +76,10 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Retrieve a list of all parents
          * @summary Get all parents
-         * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parentsIndex: async (authorization: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authorization' is not null or undefined
-            if (authorization === null || authorization === undefined) {
-                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling parentsIndex.');
-            }
+        showAllParent: async (options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/parents/findAll`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -252,10 +91,6 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authorization !== undefined && authorization !== null) {
-                localVarHeaderParameter['Authorization'] = String(authorization);
-            }
-
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -266,159 +101,6 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Update a parent's information
-         * @summary Update a parent's information
-         * @param {string} email 
-         * @param {string} firstName 
-         * @param {string} lastName 
-         * @param {string} username 
-         * @param {string} dateDeNaissance 
-         * @param {string} lieuDeNaissance 
-         * @param {string} photo 
-         * @param {string} sexe 
-         * @param {string} telephone 
-         * @param {string} profession 
-         * @param {Array&lt;number&gt;} eleveIds 
-         * @param {string} authorization JWT token
-         * @param {number} parentId ID of parent to update in this request
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateParent: async (email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'email' is not null or undefined
-            if (email === null || email === undefined) {
-                throw new RequiredError('email','Required parameter email was null or undefined when calling updateParent.');
-            }
-            // verify required parameter 'firstName' is not null or undefined
-            if (firstName === null || firstName === undefined) {
-                throw new RequiredError('firstName','Required parameter firstName was null or undefined when calling updateParent.');
-            }
-            // verify required parameter 'lastName' is not null or undefined
-            if (lastName === null || lastName === undefined) {
-                throw new RequiredError('lastName','Required parameter lastName was null or undefined when calling updateParent.');
-            }
-            // verify required parameter 'username' is not null or undefined
-            if (username === null || username === undefined) {
-                throw new RequiredError('username','Required parameter username was null or undefined when calling updateParent.');
-            }
-            // verify required parameter 'dateDeNaissance' is not null or undefined
-            if (dateDeNaissance === null || dateDeNaissance === undefined) {
-                throw new RequiredError('dateDeNaissance','Required parameter dateDeNaissance was null or undefined when calling updateParent.');
-            }
-            // verify required parameter 'lieuDeNaissance' is not null or undefined
-            if (lieuDeNaissance === null || lieuDeNaissance === undefined) {
-                throw new RequiredError('lieuDeNaissance','Required parameter lieuDeNaissance was null or undefined when calling updateParent.');
-            }
-            // verify required parameter 'photo' is not null or undefined
-            if (photo === null || photo === undefined) {
-                throw new RequiredError('photo','Required parameter photo was null or undefined when calling updateParent.');
-            }
-            // verify required parameter 'sexe' is not null or undefined
-            if (sexe === null || sexe === undefined) {
-                throw new RequiredError('sexe','Required parameter sexe was null or undefined when calling updateParent.');
-            }
-            // verify required parameter 'telephone' is not null or undefined
-            if (telephone === null || telephone === undefined) {
-                throw new RequiredError('telephone','Required parameter telephone was null or undefined when calling updateParent.');
-            }
-            // verify required parameter 'profession' is not null or undefined
-            if (profession === null || profession === undefined) {
-                throw new RequiredError('profession','Required parameter profession was null or undefined when calling updateParent.');
-            }
-            // verify required parameter 'eleveIds' is not null or undefined
-            if (eleveIds === null || eleveIds === undefined) {
-                throw new RequiredError('eleveIds','Required parameter eleveIds was null or undefined when calling updateParent.');
-            }
-            // verify required parameter 'authorization' is not null or undefined
-            if (authorization === null || authorization === undefined) {
-                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling updateParent.');
-            }
-            // verify required parameter 'parentId' is not null or undefined
-            if (parentId === null || parentId === undefined) {
-                throw new RequiredError('parentId','Required parameter parentId was null or undefined when calling updateParent.');
-            }
-            const localVarPath = `/api/parents/update/{parentId}`
-                .replace(`{${"parentId"}}`, encodeURIComponent(String(parentId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-            const localVarFormParams = new FormData();
-
-            if (authorization !== undefined && authorization !== null) {
-                localVarHeaderParameter['Authorization'] = String(authorization);
-            }
-
-
-            if (email !== undefined) { 
-                localVarFormParams.append('email', email as any);
-            }
-
-            if (firstName !== undefined) { 
-                localVarFormParams.append('firstName', firstName as any);
-            }
-
-            if (lastName !== undefined) { 
-                localVarFormParams.append('lastName', lastName as any);
-            }
-
-            if (username !== undefined) { 
-                localVarFormParams.append('username', username as any);
-            }
-
-            if (dateDeNaissance !== undefined) { 
-                localVarFormParams.append('dateDeNaissance', dateDeNaissance as any);
-            }
-
-            if (lieuDeNaissance !== undefined) { 
-                localVarFormParams.append('lieuDeNaissance', lieuDeNaissance as any);
-            }
-
-            if (photo !== undefined) { 
-                localVarFormParams.append('photo', photo as any);
-            }
-
-            if (sexe !== undefined) { 
-                localVarFormParams.append('sexe', sexe as any);
-            }
-
-            if (telephone !== undefined) { 
-                localVarFormParams.append('telephone', telephone as any);
-            }
-
-            if (profession !== undefined) { 
-                localVarFormParams.append('profession', profession as any);
-            }
-            if (eleveIds) {
-                eleveIds.forEach((element) => {
-                    localVarFormParams.append('eleveIds', element as any);
-                })
-            }
-
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -428,22 +110,17 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Get information about a specific parent
          * @summary Get parent information
-         * @param {string} authorization JWT token
-         * @param {number} id ID of parent to get information for
+         * @param {number} parentId ID of the parent to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewparent: async (authorization: string, id: number, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authorization' is not null or undefined
-            if (authorization === null || authorization === undefined) {
-                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling viewparent.');
-            }
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling viewparent.');
+        showOneParent: async (parentId: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'parentId' is not null or undefined
+            if (parentId === null || parentId === undefined) {
+                throw new RequiredError('parentId','Required parameter parentId was null or undefined when calling showOneParent.');
             }
             const localVarPath = `/api/parents/findOne/{parentId}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace(`{${"parentId"}}`, encodeURIComponent(String(parentId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -454,9 +131,46 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authorization !== undefined && authorization !== null) {
-                localVarHeaderParameter['Authorization'] = String(authorization);
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
             }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Create a new parent resource
+         * @summary Create a new parent
+         * @param {ParentsCreateBody} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        storeParent: async (body: ParentsCreateBody, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new RequiredError('body','Required parameter body was null or undefined when calling storeParent.');
+            }
+            const localVarPath = `/api/parents/create`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -468,6 +182,51 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Update a parent's information
+         * @summary Update a parent's information
+         * @param {ParentsUpdateBody} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateParent: async (body: ParentsUpdateBody, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new RequiredError('body','Required parameter body was null or undefined when calling updateParent.');
+            }
+            const localVarPath = `/api/parents/update`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -484,40 +243,14 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
 export const ParentsApiFp = function(configuration?: Configuration) {
     return {
         /**
-         * Create a new parent resource
-         * @summary Create a new parent
-         * @param {string} email 
-         * @param {string} firstName 
-         * @param {string} lastName 
-         * @param {string} username 
-         * @param {string} dateDeNaissance 
-         * @param {string} lieuDeNaissance 
-         * @param {string} photo 
-         * @param {string} sexe 
-         * @param {string} telephone 
-         * @param {string} profession 
-         * @param {Array&lt;number&gt;} eleveIds 
-         * @param {string} authorization JWT token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20041>> {
-            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).createParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * Delete an parent resource
-         * @summary Delete an parent
-         * @param {string} authorization JWT token
+         * Delete a parent resource
+         * @summary Delete a parent
          * @param {number} id ID of parent to delete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteParent(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20043>> {
-            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).deleteParent(authorization, id, options);
+        async deleteParent(id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).deleteParent(id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -526,38 +259,11 @@ export const ParentsApiFp = function(configuration?: Configuration) {
         /**
          * Retrieve a list of all parents
          * @summary Get all parents
-         * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async parentsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20039>> {
-            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).parentsIndex(authorization, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * Update a parent's information
-         * @summary Update a parent's information
-         * @param {string} email 
-         * @param {string} firstName 
-         * @param {string} lastName 
-         * @param {string} username 
-         * @param {string} dateDeNaissance 
-         * @param {string} lieuDeNaissance 
-         * @param {string} photo 
-         * @param {string} sexe 
-         * @param {string} telephone 
-         * @param {string} profession 
-         * @param {Array&lt;number&gt;} eleveIds 
-         * @param {string} authorization JWT token
-         * @param {number} parentId ID of parent to update in this request
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async updateParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20042>> {
-            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).updateParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, parentId, options);
+        async showAllParent(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20025>> {
+            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).showAllParent(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -566,13 +272,40 @@ export const ParentsApiFp = function(configuration?: Configuration) {
         /**
          * Get information about a specific parent
          * @summary Get parent information
-         * @param {string} authorization JWT token
-         * @param {number} id ID of parent to get information for
+         * @param {number} parentId ID of the parent to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewparent(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20040>> {
-            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).viewparent(authorization, id, options);
+        async showOneParent(parentId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20026>> {
+            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).showOneParent(parentId, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Create a new parent resource
+         * @summary Create a new parent
+         * @param {ParentsCreateBody} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async storeParent(body: ParentsCreateBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2014>> {
+            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).storeParent(body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Update a parent's information
+         * @summary Update a parent's information
+         * @param {ParentsUpdateBody} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateParent(body: ParentsUpdateBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20027>> {
+            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).updateParent(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -588,79 +321,53 @@ export const ParentsApiFp = function(configuration?: Configuration) {
 export const ParentsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
-         * Create a new parent resource
-         * @summary Create a new parent
-         * @param {string} email 
-         * @param {string} firstName 
-         * @param {string} lastName 
-         * @param {string} username 
-         * @param {string} dateDeNaissance 
-         * @param {string} lieuDeNaissance 
-         * @param {string} photo 
-         * @param {string} sexe 
-         * @param {string} telephone 
-         * @param {string} profession 
-         * @param {Array&lt;number&gt;} eleveIds 
-         * @param {string} authorization JWT token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any): AxiosPromise<InlineResponse20041> {
-            return ParentsApiFp(configuration).createParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Delete an parent resource
-         * @summary Delete an parent
-         * @param {string} authorization JWT token
+         * Delete a parent resource
+         * @summary Delete a parent
          * @param {number} id ID of parent to delete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteParent(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20043> {
-            return ParentsApiFp(configuration).deleteParent(authorization, id, options).then((request) => request(axios, basePath));
+        deleteParent(id: number, options?: any): AxiosPromise<void> {
+            return ParentsApiFp(configuration).deleteParent(id, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieve a list of all parents
          * @summary Get all parents
-         * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parentsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20039> {
-            return ParentsApiFp(configuration).parentsIndex(authorization, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Update a parent's information
-         * @summary Update a parent's information
-         * @param {string} email 
-         * @param {string} firstName 
-         * @param {string} lastName 
-         * @param {string} username 
-         * @param {string} dateDeNaissance 
-         * @param {string} lieuDeNaissance 
-         * @param {string} photo 
-         * @param {string} sexe 
-         * @param {string} telephone 
-         * @param {string} profession 
-         * @param {Array&lt;number&gt;} eleveIds 
-         * @param {string} authorization JWT token
-         * @param {number} parentId ID of parent to update in this request
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any): AxiosPromise<InlineResponse20042> {
-            return ParentsApiFp(configuration).updateParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, parentId, options).then((request) => request(axios, basePath));
+        showAllParent(options?: any): AxiosPromise<InlineResponse20025> {
+            return ParentsApiFp(configuration).showAllParent(options).then((request) => request(axios, basePath));
         },
         /**
          * Get information about a specific parent
          * @summary Get parent information
-         * @param {string} authorization JWT token
-         * @param {number} id ID of parent to get information for
+         * @param {number} parentId ID of the parent to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewparent(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20040> {
-            return ParentsApiFp(configuration).viewparent(authorization, id, options).then((request) => request(axios, basePath));
+        showOneParent(parentId: number, options?: any): AxiosPromise<InlineResponse20026> {
+            return ParentsApiFp(configuration).showOneParent(parentId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Create a new parent resource
+         * @summary Create a new parent
+         * @param {ParentsCreateBody} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        storeParent(body: ParentsCreateBody, options?: any): AxiosPromise<InlineResponse2014> {
+            return ParentsApiFp(configuration).storeParent(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Update a parent's information
+         * @summary Update a parent's information
+         * @param {ParentsUpdateBody} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateParent(body: ParentsUpdateBody, options?: any): AxiosPromise<InlineResponse20027> {
+            return ParentsApiFp(configuration).updateParent(body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -673,83 +380,57 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
  */
 export class ParentsApi extends BaseAPI {
     /**
-     * Create a new parent resource
-     * @summary Create a new parent
-     * @param {string} email 
-     * @param {string} firstName 
-     * @param {string} lastName 
-     * @param {string} username 
-     * @param {string} dateDeNaissance 
-     * @param {string} lieuDeNaissance 
-     * @param {string} photo 
-     * @param {string} sexe 
-     * @param {string} telephone 
-     * @param {string} profession 
-     * @param {Array&lt;number&gt;} eleveIds 
-     * @param {string} authorization JWT token
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ParentsApi
-     */
-    public createParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any) {
-        return ParentsApiFp(this.configuration).createParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     * Delete an parent resource
-     * @summary Delete an parent
-     * @param {string} authorization JWT token
+     * Delete a parent resource
+     * @summary Delete a parent
      * @param {number} id ID of parent to delete
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ParentsApi
      */
-    public deleteParent(authorization: string, id: number, options?: any) {
-        return ParentsApiFp(this.configuration).deleteParent(authorization, id, options).then((request) => request(this.axios, this.basePath));
+    public deleteParent(id: number, options?: any) {
+        return ParentsApiFp(this.configuration).deleteParent(id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Retrieve a list of all parents
      * @summary Get all parents
-     * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ParentsApi
      */
-    public parentsIndex(authorization: string, options?: any) {
-        return ParentsApiFp(this.configuration).parentsIndex(authorization, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     * Update a parent's information
-     * @summary Update a parent's information
-     * @param {string} email 
-     * @param {string} firstName 
-     * @param {string} lastName 
-     * @param {string} username 
-     * @param {string} dateDeNaissance 
-     * @param {string} lieuDeNaissance 
-     * @param {string} photo 
-     * @param {string} sexe 
-     * @param {string} telephone 
-     * @param {string} profession 
-     * @param {Array&lt;number&gt;} eleveIds 
-     * @param {string} authorization JWT token
-     * @param {number} parentId ID of parent to update in this request
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ParentsApi
-     */
-    public updateParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any) {
-        return ParentsApiFp(this.configuration).updateParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, parentId, options).then((request) => request(this.axios, this.basePath));
+    public showAllParent(options?: any) {
+        return ParentsApiFp(this.configuration).showAllParent(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get information about a specific parent
      * @summary Get parent information
-     * @param {string} authorization JWT token
-     * @param {number} id ID of parent to get information for
+     * @param {number} parentId ID of the parent to get information for
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ParentsApi
      */
-    public viewparent(authorization: string, id: number, options?: any) {
-        return ParentsApiFp(this.configuration).viewparent(authorization, id, options).then((request) => request(this.axios, this.basePath));
+    public showOneParent(parentId: number, options?: any) {
+        return ParentsApiFp(this.configuration).showOneParent(parentId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Create a new parent resource
+     * @summary Create a new parent
+     * @param {ParentsCreateBody} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ParentsApi
+     */
+    public storeParent(body: ParentsCreateBody, options?: any) {
+        return ParentsApiFp(this.configuration).storeParent(body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Update a parent's information
+     * @summary Update a parent's information
+     * @param {ParentsUpdateBody} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ParentsApi
+     */
+    public updateParent(body: ParentsUpdateBody, options?: any) {
+        return ParentsApiFp(this.configuration).updateParent(body, options).then((request) => request(this.axios, this.basePath));
     }
 }

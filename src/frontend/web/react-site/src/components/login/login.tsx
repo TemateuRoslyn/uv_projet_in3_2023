@@ -22,7 +22,9 @@ import { setTokenAction } from '../../redux/Actions/TokenAction';
 
 //import "../../../index.css"
 
-interface LoginProps {}
+interface LoginProps {
+  isLoggedIn: boolean
+}
 
 
 const Login: React.FC<LoginProps> = (props) => {
@@ -39,10 +41,11 @@ const Login: React.FC<LoginProps> = (props) => {
   const [isLogedIn, setIsLogedIn] = useState(false);
   const [showotif, setShowNotif] = useState(false);
   const [access_token, setAcessToken] = useState('');
-  const [store_user, setAaccessUser] = useState('');
+  const [store_user, setAccessUser] = useState('');
   
   const navigate = useNavigate();
   useEffect(() => {
+    console.log("UseEffect");
     if (isLogedIn === true) {
       localStorage.setItem(TOKEN_LOCAL_STORAGE_KEY, access_token);
       localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(store_user));
@@ -50,6 +53,7 @@ const Login: React.FC<LoginProps> = (props) => {
       dispatch(setTokenAction(access_token)); // on propage le token dans redux
       dispatch(setIsLOggedAction(true)); // on force le parent à se mettre à jour
     }
+    console.log("IS Loggin UseEffect");
   }, [isLogedIn, dispatch]);
 
 //const Login = () => {
@@ -57,7 +61,7 @@ const Login: React.FC<LoginProps> = (props) => {
   const handleUsernameChange = (event: any) => setUsername(event.target.value);
   const handlePasswordChange = (event: any) => setPassword(event.target.value);
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
 
     const authApi = new AuthApi(state.environment);
 console.log("Here")
@@ -69,7 +73,7 @@ console.log("Here")
 
     setIsLoading(true)
     console.log("Here2")
-    authApi.authLogin(apiParams)
+    await authApi.authLogin(apiParams)
     .then((response) => {
       
       console.log("Hereauth")
@@ -80,10 +84,14 @@ console.log("Here")
           const token_r = response?.data?.content?.token
           const user_r = response?.data?.content?.user          
           setAcessToken(token_r)
-          setAaccessUser(user_r)
+          setAccessUser(user_r)
           setIsLogedIn(true)
           console.log("Hereafter Authentication");
-          navigate("/")
+          console.log(user_r);
+         
+     
+      
+
 
         }else if(response.data.success === false){
           setIsLogedIn(false)
@@ -96,10 +104,11 @@ console.log("Here")
       alert('Error')
           })
     .finally(() => {
-      console.log("Herefinal")
+      
       setIsLoading(false)
+      
     });
-    
+    //navigate("/");
 
   };
 

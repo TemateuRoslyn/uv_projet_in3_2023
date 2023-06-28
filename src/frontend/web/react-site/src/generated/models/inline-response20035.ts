@@ -25,14 +25,8 @@ export interface InlineResponse20035 {
     success?: any;
     /**
      * 
-     * @type {string}
+     * @type {Array&lt;Regle&gt;}
      * @memberof InlineResponse20035
      */
-    message?: any;
-    /**
-     * 
-     * @type {Array&lt;Notification&gt;}
-     * @memberof InlineResponse20035
-     */
-    content?: any;
+    data?: any;
 }

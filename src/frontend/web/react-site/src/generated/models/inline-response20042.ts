@@ -19,19 +19,19 @@
 export interface InlineResponse20042 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20042
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20042
      */
     success?: any;
     /**
      * 
-     * @type {Parents}
+     * @type {string}
+     * @memberof InlineResponse20042
+     */
+    message?: any;
+    /**
+     * 
+     * @type {Array&lt;Role&gt;}
      * @memberof InlineResponse20042
      */
     content?: any;

@@ -28,6 +28,18 @@ export interface ParentsCreateBody {
      * @type {string}
      * @memberof ParentsCreateBody
      */
+    password: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof ParentsCreateBody
+     */
+    username?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof ParentsCreateBody
+     */
     firstName: any;
     /**
      * 
@@ -35,12 +47,6 @@ export interface ParentsCreateBody {
      * @memberof ParentsCreateBody
      */
     lastName: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParentsCreateBody
-     */
-    username: any;
     /**
      * 
      * @type {string}
@@ -77,10 +83,4 @@ export interface ParentsCreateBody {
      * @memberof ParentsCreateBody
      */
     profession: any;
-    /**
-     * 
-     * @type {Array&lt;number&gt;}
-     * @memberof ParentsCreateBody
-     */
-    eleveIds: any;
 }
