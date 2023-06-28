@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('parents', function (Blueprint $table) {
             $table->id();
             $table->string('profession');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->date('date_de_naissance');
-            $table->string('lieu_de_naissance');
+            $table->string('firstName');
+            $table->string('lastName');
+            $table->date('dateDeNaissance');
+            $table->string('lieuDeNaissance');
             $table->string('photo')->nullable();
             $table->string('sexe');
             $table->string('telephone')->nullable();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('userId');
+            $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

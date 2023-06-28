@@ -67,7 +67,7 @@ class Eleve extends Model
 
     public function parents()
     {
-        return $this->belongsToMany(Parents::class, 'eleves_parents', 'eleveId', 'parentId');
+        return $this->belongsToMany(Parents::class, 'eleve_parent', 'eleveId', 'parentId');
     }
 
     protected static function boot()
