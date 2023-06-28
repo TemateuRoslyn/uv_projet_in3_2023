@@ -2,27 +2,20 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
-use App\Models\Eleve;
-use App\Models\Regle;
-
-use Illuminate\Support\Facades\Validator;
+use App\Models\Convocation;
 use Illuminate\Http\Request;
-use App\Models\Faute;
-use App\Models\User;
-use App\Models\Role;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
+use App\Models\Personnel;
 
-class FauteController extends Controller
+class ConvocationController extends Controller
 {
-
     /**
      * @OA\Get(
-     *     path="/api/faute/findAll",
-     *     summary="Find all mistakes",
-     *     description="Retrieve a list of all mistakes with associated eleves and regles",
-     *     operationId="indexFautes",
-     *     tags={"Fautes"},
-     *     security={{"bearerAuth":{}}},
+     *     path="/api/convocation/findAll",
+     *     summary="Get all convocation",
+     *     description="Retrieve a list of all convocation",
+     *     operationId="indexConvocation",
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -33,8 +26,8 @@ class FauteController extends Controller
      *         ),
      *         description="JWT token"
      *     ),
-     *  security={{"bearerAuth":{}}},
-     *     tags={"fautes"},
+     *     security={{"bearerAuth":{}}},
+     *     tags={"convocations"},
      *     @OA\Response(
      *         response=200,
      *         description="Success",
@@ -42,12 +35,11 @@ class FauteController extends Controller
      *             type="object",
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
-     *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Faute")
-     *         )
+     *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Convocation"))
      *         )
      *     ),
      *     @OA\Response(
-     *         response=300,
+     *         response=401,
      *         description="Error - Unauthorized",
      *         @OA\JsonContent(
      *             @OA\Property(property="error", type="string", example="Unauthorized")
@@ -57,22 +49,22 @@ class FauteController extends Controller
      */
     public function index()
     {
-        $fautes = Faute::has('regle')->has('eleve')->with(['regle', 'eleve'])->get();
+        $convocations = Convocation::has('personnel')->with( 'personnel')->get();
 
         return response()->json([
-            'message' => 'Liste des fautes',
+            'message' => 'Liste des convocations',
             'success' => true,
-            'content' => $fautes
-        ],200);
+            'content' => $convocations
+        ]);
     }
 
-    /**
+     /**
      * @OA\Get(
-     *     path="/api/faute/findOne/{id}",
-     *     summary="Get mistake information",
-     *     description="Get information about a specific mistake",
-     *     operationId="viewFaute",
-     *     tags={"Fautes"},
+     *     path="/api/convocation/findOne/{id}",
+     *     summary="Get convocation information",
+     *     description="Get information about a specific convocation",
+     *     operationId="viewConvocation",
+     *     tags={"Convocation"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -86,7 +78,7 @@ class FauteController extends Controller
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID of Faute to get information for",
+     *         description="ID of Convocation to get information for",
      *         required=true,
      *         @OA\Schema(
      *             type="integer"
@@ -103,7 +95,7 @@ class FauteController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *               @OA\Property(property="message", type="string", example="Faute not found"),
+     *               @OA\Property(property="message", type="string", example="Convocation not found"),
      *             @OA\Property(property="success", type="boolean", example="false"),
      *
      *         )
@@ -112,28 +104,32 @@ class FauteController extends Controller
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Faute trouvé(e)"),
+     *             @OA\Property(property="message", type="string", example="Convocation trouvé(e)"),
      *             @OA\Property(property="success", type="boolean", example="true"),
-     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Faute")
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Convocation")
      *         )
      *     )
      * )
      */
-    public function view($fauteId)
+    public function view($convocationId)
     {
 
-        $faute = Faute::with(['eleve', 'regle'])->find($fauteId);
+        $convocation = Convocation::with('personnel')->find($convocationId);
 
 
-        if ($faute) {
+        if ($convocation) {
+
+            $convocationData = $convocation->toArray();
+            $convocationData['firstName'] = $convocation->personnel->firstName;
+
             return response()->json([
-                'message' => 'faute trouvé(e)',
+                'message' => 'convocation trouvé(e)',
                 'success' => true,
-                'content' => $faute
+                'content' => $convocationData
             ], 200);
         } else {
             return response()->json([
-                'message' => 'faute non trouvée',
+                'message' => 'convocation non trouvée',
                 'success' => false,
             ], 404);
         }
@@ -141,11 +137,11 @@ class FauteController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/faute/create",
-     *     summary="Create a new Mistake",
-     *     description="Create a new Mistake resource",
-     *     operationId="createMistake",
-     *     tags={"Fautes"},
+     *     path="/api/convocation/create",
+     *     summary="Create a new convocation",
+     *     description="Create a new convocation resource",
+     *     operationId="createConvocation",
+     *     tags={"Convocation"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -159,11 +155,12 @@ class FauteController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *           required={"libelle", "gravite", "eleveId", "regleId"},
-     *             @OA\Property(property="libelle", type="string", format="text", example="Etre sorti sans avoir eu la permission"),
-     *             @OA\Property(property="gravite", type="string", format="text", example="grave avec recessivite"),
-     *             @OA\Property(property="eleveId", type="integer", example=2),
-     *             @OA\Property(property="regleId", type="integer", example=3)
+     *           required={"libelle", "dateConvocation", "dateRdv", "statut","personnelId"},
+     *             @OA\Property(property="libelle", type="string", example="vous X eleve dans mon etablissement"),
+     *                 @OA\Property(property="dateConvocation", type="string", format="date", example="1990-01-01"),
+     *                 @OA\Property(property="dateRdv", type="string", format="date", example="1990-01-01"),
+     *                 @OA\Property(property="statut", type="string", example="achevee,annulee"),
+     *                 @OA\Property(property="personnelId", type="integer", readOnly=true, example="1"),
      *         )
      *     ),
      *     @OA\Response(
@@ -180,12 +177,12 @@ class FauteController extends Controller
      *         )
      *     ),
      *     @OA\Response(
-     *         response=200,
+     *         response=201,
      *         description="Success",
      *         @OA\JsonContent(
      *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Faute created successfully"),
-     *             @OA\Property(property="content", ref="#/components/schemas/Faute")
+     *             @OA\Property(property="message", type="string", example="Convocation created successfully"),
+     *             @OA\Property(property="content", ref="#/components/schemas/Convocation")
      *         )
      *     )
      * )
@@ -195,45 +192,56 @@ class FauteController extends Controller
 
         $validator = Validator::make($request->all(), [
             'libelle' => 'required|string|max:255',
-            'gravite' => 'required',
-            'eleveId' => 'required|integer',
-            'regleId' => 'required|integer',
-
+            'dateConvocation' => 'required|date',
+            'dateRdv' => 'required|date',
+            'statut' => 'required',
+            'personnelId' => 'required',
 
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Could not create this mistake',
+                'message' => 'Could not create this convocation',
                 'success' => false,
                 'error' => $validator->errors()
             ], 400);
         }
 
-        $fautte = Faute::create([
-            'eleveId' => $request->input('eleveId'),
-            'regleId' => $request->input('regleId'),
+        $convocation = Convocation::create([
             'libelle' => $request->input('libelle'),
-            'gravite' => $request->input('gravite'),
+            'dateConvocation' => $request->input('dateConvocation'),
+            'dateRdv' => $request->input('dateRdv'),
+            'statut' => $request->input('statut'),
+            'personnelId' => $request->input('personnelId'),
         ]);
 
 
-        $fautte->eleve = Eleve::with('faute')->find($fautte->id);
-        $fautte->regle = Regle::with('faute')->find($fautte->id);
+        $convocation->personnel = Personnel::with('convocation')->find($convocation->id);
 
         return response()->json([
-            'message' => 'Mistake created successfully',
+            'message' => 'convocation created successfully',
             'success' => true,
-            'content' => $fautte
+            'content' => $convocation
         ], 200);
     }
+
+
     /**
      * @OA\Put(
-     *     path="/api/faute/update",
-     *     summary="Update a mistake's information",
-     *     description="Update a mistake's information",
-     *     operationId="updatemistake",
-     *     tags={"Faute"},
+     *     path="/api/convocations/update/{convocationId}",
+     *     summary="Update a convocation's information",
+     *     description="Update a convocation's information",
+     *     operationId="updateConvocation",
+     *     tags={"convocationS"},
+     *      @OA\Parameter(
+     *         name="convocationId",
+     *         in="path",
+     *         description="ID of convocation to update in this request",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -247,11 +255,13 @@ class FauteController extends Controller
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *              required={"libelle","gravite","eleveId","regleId"},
+     *              required={"libelle","dateConvocation","dateRdv","statut","personnelId"},
      *             @OA\Property(property="libelle", type="string", format="text", example="Etre assidue"),
-     *             @OA\Property(property="gravite", type="string", format="text",  example="grave"),
-     *             @OA\Property(property="eleveId", type="integer", example=1),
-     *             @OA\Property(property="regleId", type="integer", example=3)
+     *             @OA\Property(property="dateConvocation", type="string", format="date", example="1990-01-01"),
+     *             @OA\Property(property="dateRdv", type="string", format="date", example="1990-01-01"),
+     *             @OA\Property(property="statut", type="string", format="text",  example="grave"),
+     *             @OA\Property(property="personnelId", type="integer", example=1),
+     *
      *         )
      *     ),
      *     @OA\Response(
@@ -259,13 +269,15 @@ class FauteController extends Controller
      *         description="Error - Invalid request data",
      *         @OA\JsonContent(
      *             @OA\Property(property="error", type="object", example={
-     *                "libelle": {
+     *                 "libelle": {
      *                     "The libelle field is required."
+     *                 },
+     *                 "statut": {
+     *                     "The statut field is required."
      *                 }
      *             })
      *         )
      *     ),
-     *
      *     @OA\Response(
      *         response=401,
      *         description="Error - Unauthorized",
@@ -277,72 +289,73 @@ class FauteController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="mistake not found")
+     *             @OA\Property(property="error", type="string", example="Convocation not found")
      *         )
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Faute modifié qvec succèss"),
+     *             @OA\Property(property="message", type="string", example="Convocation modifié avec succèss"),
      *             @OA\Property(property="success", type="boolean", example="true"),
-     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Faute"),
-     *         )
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Convocation")
+     *          )
      *     )
      * )
      */
-
     public function update(Request $request, $id)
     {
-        // on récupère la faute associé
-        $fauteFound = Faute::find($id);
-        if ($fauteFound) {
+        // on récupère la convocation associé
+        $convocationFound = Convocation::find($id);
+        if ($convocationFound) {
 
             $validator = Validator::make($request->all(), [
                 'libelle' => 'required',
-                'gravite' => 'required',
-                'eleveId' => 'required|integer',
-                'regleId' => 'required|integer',
+                'dateConvocation' => 'required|date',
+                'dateRdv' => 'required|date',
+                'statut' => 'required',
+                'personnelId' => 'required|integer',
+
             ]);
         } else {
             return response()->json([
-                'message' => 'Course not exists',
+                'message' => 'convocation not exists',
                 'success' => false,
             ], 400);
         }
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Could not update this course',
+                'message' => 'Could not update this convocation',
                 'success' => false,
                 'error' => $validator->errors()
             ], 400);
         }
 
 
-        // Mise à jour des champs de l'objet faute
-        $fauteFound->libelle = $request->input('libelle');
-        $fauteFound->gravite = $request->input('gravite');
-        $fauteFound->eleveId = $request->input('eleveId');
-        $fauteFound->regleId = $request->input('regleId');
+        // Mise à jour des champs de l'objet convocation
+        $convocationFound->libelle = $request->input('libelle');
+        $convocationFound->dateConvocation = $request->input('dateConvocation');
+        $convocationFound->dateRdv = $request->input('dateRdv');
+        $convocationFound->statut = $request->input('statut');
+        $convocationFound->personnelId = $request->input('personnelId');
 
 
-        $fauteFound->save();
+        $convocationFound->save();
 
         return response()->json([
-            'message' => 'Mistake updated successfully',
+            'message' => 'Convocation updated successfully',
             'success' => true,
-            'content' => $fauteFound
-        ], 200);
+            'content' => $convocationFound
+        ]);
     }
-
-    /**
+   /**
      * @OA\Delete (
-     *     path="/api/faute/delete/{id}",
-     *     summary="Delete a mistake",
-     *     description="Delete a mistake resource",
-     *     operationId="deleteMistake",
-     *     tags={"Fautes"},
+     *     path="/api/convocations/delete/{id}",
+     *     summary="Delete an convocation",
+     *     description="Delete an convocation resource",
+     *     operationId="deleteConvocation",
+     *     tags={"convocations"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -356,10 +369,10 @@ class FauteController extends Controller
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID of mistake to delete",
+     *         description="ID of convocation to delete",
      *         required=true,
      *         @OA\Schema(
-     *             type="integer"
+     *             type="integeIlluminate\Database\QueryException: SQLSTATE[42S22]: Column not found: 1054 Unknown column &#039;personnels.personnelId&#039; in &#039;where clause&#039; (Connection: mysql, SQL: select * from `convocations` where exists (select * from `personnels` where `convocations`.`id` = `personnels`.`personnelId`)) in file /home/valery/uv_projet_in3_2023/src/backend/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 795r"
      *         )
      *     ),
      *
@@ -374,37 +387,39 @@ class FauteController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Mistake not found")
+     *             @OA\Property(property="error", type="string", example="convocation not found")
      *         )
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Success",
-     *        @OA\JsonContent(
+     *         description="Permission deleted successfully",
+     *         @OA\JsonContent(
      *             type="object",
-     *                type="object",
      *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Faute deleted successfully")
-     *     )
-     * )
+     *             @OA\Property(property="message", type="string", example="convocation deleted successfully")
+     *         )
+     *     ),
      * )
      */
-    public function delete($fauteId)
+    public function delete($convocationId)
     {
-        $faute = Faute::find($fauteId);
+        $convocation = Convocation::find($convocationId);
 
-        if (!$faute) {
+        if ($convocation) {
+            $convocation->delete();
             return response()->json([
-                'message' => 'Mistake not found',
-                'success' => false
-            ], 404);
+                'message' => 'convocation deleted successfully',
+                'success' => true,
+            ], 202);
         }
 
-        $faute->delete();
 
         return response()->json([
-            'success' => true,
-            'message' => 'Mistake deleted successfully'
-        ], 200);
+            'message' => 'convocation not found',
+            'success' => false
+        ], 404);
     }
+
+
+
 }

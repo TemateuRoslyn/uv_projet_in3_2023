@@ -8,13 +8,15 @@ use App\Models\Eleve;
 
 /**
  * @OA\Schema(
- *     required={"libelle", "gravite","eleve_id","regle_id"},
+ *     required={"libelle", "gravite","eleveId","regleId"},
  *     @OA\Xml(name="Faute"),
  *     @OA\Property(property="id", type="integer", readOnly=true, example="1"),
  *     @OA\Property(property="libelle", type="string", example="escalade"),
  *     @OA\Property(property="gravite", type="string", example="recidif"),
- *   @OA\Property(property="eleve_id", type="integer", readOnly=true, example="1"),
- *   @OA\Property(property="regle_id", type="integer", readOnly=true, example="1"),
+ *     @OA\Property(property="eleveId", type="integer", readOnly=true, example="1"),
+ *     @OA\Property(property="regleId", type="integer", readOnly=true, example="1"),
+ *     @OA\Property(property="eleve", type="object", ref="#/components/schemas/Eleve"),
+ *     @OA\Property(property="regle", type="object", ref="#/components/schemas/Regle"),
  *     @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),
  *     @OA\Property(property="updated_at", ref="#/components/schemas/BaseModel/properties/updated_at"),
  *     @OA\Property(property="deleted_at", ref="#/components/schemas/BaseModel/properties/deleted_at")
@@ -36,15 +38,17 @@ class Faute extends Model
         'id',
         'libelle',
         'gravite',
-        'eleve_id',
-        'regle_id'
+        'eleveId',
+        'regleId',
+        'eleve',
+        'regle'
     ];
     public function regle()
     {
-        return $this->belongsTo(Regle::class);
+        return $this->belongsTo(Regle::class, 'regleId');
     }
     public function eleve()
     {
-        return $this->belongsTo(Eleve::class);
+        return $this->belongsTo(Eleve::class, 'eleveId');
     }
 }

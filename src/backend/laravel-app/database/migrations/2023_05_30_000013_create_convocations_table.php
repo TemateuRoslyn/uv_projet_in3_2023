@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('libelle');
-            $table->date('date_convocation');
-            $table->date('date_rdv');
+            $table->date('dateConvocation');
+            $table->date('dateRdv');
             $table->string('statut');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('personnelId');
+            $table->foreign('personnelId')->references('id')->on('personnels');
         });
     }
 
