@@ -31,7 +31,6 @@ class LoginCubit extends Cubit<LoginState> {
           statusMessage:
               'Veuillez respecter les procedures qui s\'affichent...'));
     } else {
-      // set fields in state here
       emit(state.copyWith(emial: email.text, password: password.text));
       proceedToLogin();
     }

@@ -5,9 +5,10 @@ import 'package:fltter_app/common/views/onBoarding_one.dart';
 import 'package:fltter_app/common/views/page_skeleton.dart';
 import 'package:fltter_app/common/views/splash_page.dart';
 import 'package:fltter_app/features/authentication/views/login_page.dart';
-import 'package:fltter_app/features/home/views/suggestion_box.dart';
+import 'package:fltter_app/features/home/logic/home_cubit.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
+import 'package:fltter_app/repositories/home_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,15 +24,21 @@ void main() {
   runApp(MyApp(
     authRepository: AuthRepository(),
     internetCubit: InternetCubit(connectivity: Connectivity()),
+    // homeRepository: HomeRepository(),
   ));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp(
-      {required this.authRepository, required this.internetCubit, super.key});
+  const MyApp({
+    super.key,
+    required this.authRepository,
+    required this.internetCubit,
+    // required this.homeRepository,
+  });
 
   final AuthRepository authRepository;
   final InternetCubit internetCubit;
+  // final HomeRepository homeRepository;
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -64,9 +71,14 @@ class _MyAppState extends State<MyApp> {
             create: (context) => NavigationCubit(),
           ),
           BlocProvider<ProfileCubit>(
-            create: (context) => ProfileCubit(
-                internetCubit: widget.internetCubit,
-                authRepository: widget.authRepository),
+              create: (context) => ProfileCubit(
+                  authRepository: widget.authRepository,
+                  internetCubit: widget.internetCubit)),
+          BlocProvider<HomeCubit>(
+            create: (context) => HomeCubit(
+                homeRepository:
+                    HomeRepository(authRepository: widget.authRepository),
+                internetCubit: widget.internetCubit),
           ),
         ],
         child: MaterialApp(
@@ -98,7 +110,7 @@ class _MyAppState extends State<MyApp> {
                 } else {
                   if (state is IsUnAuthenticated) {
                     navigatorKey.currentState!.pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => Suggestion()),
+                        MaterialPageRoute(builder: (context) => LoginPage()),
                         (route) => false);
                   }
 
