@@ -13,19 +13,19 @@ return new class extends Migration
     {
         Schema::create('sanction_prevus', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('libelle');
-            $table->string('niveau_gravite');
+            $table->string('niveauGravite');
             $table->string('motif');
-            $table->date('duree_validite');
-            $table->unsignedBigInteger('eleve_id');
-            $table->foreign('eleve_id')->references('id')->on('eleves');
-            $table->unsignedBigInteger('convocation_id');
-            $table->foreign('convocation_id')->references('id')->on('convocations');
-            $table->unsignedBigInteger('regle_id');
-            $table->foreign('regle_id')->references('id')->on('regles');
-            $table->unsignedBigInteger('faute_id');
-            $table->foreign('faute_id')->references('id')->on('fautes');
+            $table->date('dureeValidite');
+            $table->unsignedBigInteger('eleveId');
+            $table->foreign('eleveId')->references('id')->on('eleves');
+            $table->unsignedBigInteger('convocationId');
+            $table->foreign('convocationId')->references('id')->on('convocations');
+            $table->unsignedBigInteger('regleId');
+            $table->foreign('regleId')->references('id')->on('regles');
+            $table->unsignedBigInteger('fauteId');
+            $table->foreign('fauteId')->references('id')->on('fautes');
+            $table->timestamps();
         });
     }
 
