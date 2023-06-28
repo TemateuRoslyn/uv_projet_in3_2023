@@ -348,7 +348,7 @@ class EleveController extends Controller
 
 
     /**
-     * @OA\Put(
+     * @OA\Post(
      *     path="/api/eleves/update/{eleveId}",
      *     summary="Update a eleve's information",
      *     description="Update a eleve's information",

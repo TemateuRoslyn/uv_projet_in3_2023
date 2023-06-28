@@ -16,89 +16,29 @@
  * @export
  * @interface Personnel
  */
-export interface Personnel {
+export interface Personnel extends User {
     /**
      * 
      * @type {number}
      * @memberof Personnel
      */
-    id?: any;
-    /**
-     * User role
-     * @type {string}
-     * @memberof Personnel
-     */
-    role?: any;
+    id?: ;
     /**
      * 
      * @type {string}
      * @memberof Personnel
      */
-    firstName: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof Personnel
-     */
-    lastName: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof Personnel
-     */
-    dateDeNaissance: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof Personnel
-     */
-    lieuDeNaissance: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof Personnel
-     */
-    photo: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof Personnel
-     */
-    sexe: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof Personnel
-     */
-    telephone: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof Personnel
-     */
-    fonction: any;
-    /**
-     * 
-     * @type {User}
-     * @memberof Personnel
-     */
-    user?: any;
-    /**
-     * 
-     * @type {BaseModelpropertiescreatedAt}
-     * @memberof Personnel
-     */
-    createdAt?: any;
+    fonction?: ;
     /**
      * 
      * @type {BaseModelpropertiesupdatedAt}
      * @memberof Personnel
      */
-    updatedAt?: any;
+    updatedAt?: ;
     /**
      * 
      * @type {BaseModelpropertiesdeletedAt}
      * @memberof Personnel
      */
-    deletedAt?: any;
+    deletedAt?: ;
 }

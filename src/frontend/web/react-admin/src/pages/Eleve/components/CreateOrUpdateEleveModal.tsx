@@ -276,6 +276,7 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
               action="#"
               encType="multipart/form-data"
               className="modal-form"
+          
             >
               <div>
                 {/* row 1 lastname, firstname, tel*/}

@@ -49,12 +49,14 @@ const SignIn: React.FC<SignInProps> = (props) => {
   
 
   useEffect(() => {
+    console.log("UseEffect");
     if (isLogedIn === true) {
       localStorage.setItem(TOKEN_LOCAL_STORAGE_KEY, access_token);
       localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(store_user));
       localStorage.setItem(IS_LOGGED_LOCAL_STORAGE_KEY, ''+isLogedIn);
       dispatch(setTokenAction(access_token)); // on propage le token dans redux
       dispatch(setIsLOggedAction(true)); // on force le parent à se mettre à jour
+      console.log("IS Loggin UseEffect");
     }
   }, [isLogedIn, dispatch]);
 
@@ -106,8 +108,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
   };
 
   return (
-    <div className='w: "https://pub.dev"
-    -full h-full no-scrollbar'>
+    <div className='w-full h-full no-scrollbar'>
       <div className="no-scrollbar rounded-sm mx-[15%] my-[5.5%] align-items-center justify-center justify-content-center border border-stroke bg-white shadow-xl shadow-graydark dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center h-full">
           <div className="hidden w-full xl:block xl:w-1/2">

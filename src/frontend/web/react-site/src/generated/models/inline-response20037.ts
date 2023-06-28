@@ -19,20 +19,8 @@
 export interface InlineResponse20037 {
     /**
      * 
-     * @type {string}
+     * @type {Regle}
      * @memberof InlineResponse20037
      */
-    message?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse20037
-     */
-    success?: any;
-    /**
-     * 
-     * @type {Notification}
-     * @memberof InlineResponse20037
-     */
-    content?: any;
+    regle?: any;
 }
