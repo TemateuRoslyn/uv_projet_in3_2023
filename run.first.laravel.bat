@@ -20,7 +20,7 @@ if %running% == yes (
   composer update
   composer dumpautoload
   php artisan l5-swagger:generate
-  pphp artisan migrate:fresh --seed
+  php artisan migrate:fresh --seed
   php artisan jwt:secret
   php artisan serve
 )
