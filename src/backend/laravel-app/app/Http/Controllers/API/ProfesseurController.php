@@ -225,8 +225,6 @@ class ProfesseurController extends Controller
 
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
-            'username' => 'required|unique:users',
             'firstName' => 'required',
             'lastName' => 'required',
             'dateDeNaissance' => 'required|date',
@@ -249,8 +247,8 @@ class ProfesseurController extends Controller
 
         $user = User::create([
             'email' => $request->input('email'),
-            'username' => $request->input('username'),
-            'password' => bcrypt($request->input('password')),
+            'username' => $request->input('email'),
+            'password' => bcrypt($request->input('email')),
         ]);
 
         $photo = NULL;
@@ -273,10 +271,10 @@ class ProfesseurController extends Controller
             'courId' => $request->input('courId'),
             'userId' => $user->id,
             'statut' => $request->input('statut'),
-            'firstName' => $request->input('first_name'),
-            'lastName' => $request->input('last_name'),
-            'dateDeNaissance' => $request->input('date_de_naissance'),
-            'lieuDeNaissance' => $request->input('lieu_de_naissance'),
+            'firstName' => $request->input('firstName'),
+            'lastName' => $request->input('lastName'),
+            'dateDeNaissance' => $request->input('dateDeNaissance'),
+            'lieuDeNaissance' => $request->input('lieuDeNaissance'),
             'photo' => $request->file('photo') ? $request->file('photo')->store($this->avatar_path) : null,
             'sexe' => $request->input('sexe'),
             'telephone' => $request->input('telephone'),
@@ -392,9 +390,7 @@ class ProfesseurController extends Controller
             $user = User::find($professeurFound->userId);
 
             $validator = Validator::make($request->all(), [
-                'id' => 'required',
                 'email' => 'required|email|unique:users,email,' . $user->id,
-
                 'firstName' => 'required',
                 'lastName' => 'required',
                 'dateDeNaissance' => 'required|date',
@@ -549,7 +545,7 @@ class ProfesseurController extends Controller
         if ($professeurFound) {
 
             //le user associe
-            $userFound = User::find($professeurFound->user_id);
+            $userFound = User::find($professeurFound->userId);
 
             // suppresion de l'image du user
             if ($userFound->photo) {
