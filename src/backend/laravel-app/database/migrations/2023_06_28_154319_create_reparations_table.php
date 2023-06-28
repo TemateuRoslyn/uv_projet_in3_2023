@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('reparations', function (Blueprint $table) {
             $table->id();
+            $table->string('demarcheMediation');
+            $table->unsignedBigInteger('fauteId');
+            $table->foreign('fauteId')->references('id')->on('fautes');
             $table->timestamps();
-            $table->string('demarche_mediation');
-            $table->unsignedBigInteger('faute_id');
-            $table->foreign('faute_id')->references('id')->on('fautes');
         });
     }
 
