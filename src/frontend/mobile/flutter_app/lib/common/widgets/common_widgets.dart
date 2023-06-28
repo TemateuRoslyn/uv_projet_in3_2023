@@ -53,4 +53,25 @@ class CommonWidgets {
       ),
     );
   }
+
+  static Widget noInternetWidget({
+    required double positionFromTop,
+    required BuildContext context,
+    required Color color,
+  }) {
+    return Padding(
+      padding: EdgeInsets.only(
+          top: getHeight(positionFromTop, context),
+          left: getWidth(50, context),
+          right: getWidth(50, context)),
+      child: Text(
+        'Assurez vous d\'être connecté à internet...',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            fontSize: getHeight(12, context),
+            height: getHeight(1.5, context),
+            color: color),
+      ),
+    );
+  }
 }

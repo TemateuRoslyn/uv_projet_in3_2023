@@ -1,8 +1,11 @@
 import 'package:fltter_app/common/styles/colors.dart';
 import 'package:fltter_app/common/utils/constants.dart';
 import 'package:fltter_app/common/utils/helper.dart';
-import 'package:fltter_app/common/views/page_skeleton.dart';
+import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../common/models/user.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -14,6 +17,16 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   bool profileIsSelected = true;
   bool modifyProfileIsSelected = false;
+  late User _currentUser;
+  late ProfileCubit _profileCubit;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _profileCubit = context.read<ProfileCubit>();
+    _currentUser = _profileCubit.state.currentUser!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
     final List colonnes = [
       {
         'text1': 'Hello...',
-        'text2': 'Frank Takou',
+        'text2': '${_currentUser.firstName} ${_currentUser.lastName}',
         'isFirst': true,
       },
       {
@@ -205,12 +218,17 @@ class Colonne extends StatelessWidget {
           SizedBox(
             height: getHeight(10, context),
           ),
-          Text(
-            text2,
-            style: TextStyle(
-                fontSize: getHeight(15, context),
-                color: Colors.white,
-                fontWeight: FontWeight.bold),
+          SizedBox(
+            width: getWidth(isFirst ? 100 : 20, context),
+            child: Text(
+              text2,
+              textAlign: isFirst ? null : TextAlign.center,
+              style: TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                  fontSize: getHeight(15, context),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
