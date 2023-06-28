@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('demarcheMediation');
             $table->unsignedBigInteger('fauteId');
-            $table->foreign('fauteId')->references('id')->on('fautes');
+            $table->foreign('fauteId')->references('id')->on('fautes')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ class ReglementInterieurController extends Controller
     /**
      * @OA\Get(
      *     path="/api/reglement/findAll",
-     *     summary="Get all disciplinary councils",
+     *     summary="Get all Reglement Interieurs",
      *     description="Retrieve a list of all disciplinary councils with associated eleve",
      *     operationId="reglementInterieursIndex",
      *     tags={"ReglementInterieurs"},
@@ -266,7 +266,7 @@ class ReglementInterieurController extends Controller
      * )
      */
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'libelle' => 'required|string|max:255',
@@ -280,7 +280,7 @@ class ReglementInterieurController extends Controller
             ], 400);
         }
 
-        $reglement = ReglementInterieur::find($request->id);
+        $reglement = ReglementInterieur::find($id);
 
         if (!$reglement) {
             return response()->json([
