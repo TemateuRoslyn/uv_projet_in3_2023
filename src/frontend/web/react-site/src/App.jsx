@@ -3,7 +3,7 @@ import Header from "./components/common/header/Header"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import About from "./components/about/About"
 import CourseHome from "./components/allcourses/CourseHome"
-import Team from "./components/team/Team"
+import Enseignants from "./components/team/Team"
 import Pricing from "./components/pricing/Pricing"
 import Blog from "./components/blog/Blog"
 import Contact from "./components/contact/Contact"
@@ -13,27 +13,31 @@ import Notification from "./components/notification/Notification"
 import Login from "./components/login/login"
 import Footer from "./components/common/footer/Footer"
 import Home from "./components/home/Home"
+import Proviseur from "./components/team/proviseur"
 
 
-const  App = () =>{
+const App = () => {
   return (
     <>
       <Router>
         <Header />
+        <Routes>
+          <Route exact path='/' element={<Home />} />
+          <Route exact path='/about' element={<About />} />
+          <Route exact path='/courses' element={<CourseHome />} />
+          <Route exact path='/enseignant' element={<Enseignants />} />
+          <Route exact path='/pricing' element={<Pricing />} />
+          <Route exact path='/journal' element={<Blog />} />
+          <Route exact path='/contact' element={<Contact />} />
+          <Route exact path='/convocation' element={<Convocation />} />
 
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/about' component={About} />
-          <Route exact path='/courses' component={CourseHome} />
-          <Route exact path='/team' component={Team} />
-          <Route exact path='/pricing' component={Pricing} />
-          <Route exact path='/journal' component={Blog} />
-          <Route exact path='/contact' component={Contact} />
-          <Route exact path='/convocation' component={Convocation} />
-          <Route exact path='/faute_sanction' component={FauteSanction} />  
-          <Route path='/notification' component={Notification} />  
-        </Switch>
-        <Route path='/login' component={Login} />
+          <Route exact path='/faute_sanction' element={<FauteSanction />} />
+          <Route path='/notification' element={<Notification />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/proviseur' element={<Proviseur />} />
+
+        </Routes>
+
 
         <Footer />
       </Router>

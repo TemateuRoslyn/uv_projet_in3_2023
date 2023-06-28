@@ -245,12 +245,6 @@ export const online = [
 ]
 export const team = [
   {
-    cover: "./images/team/t1.webp",
-    name: "Ph.D Adrian Molises",
-    work: "PROVISEUR",
-    
-  },
-  {
     cover: "./images/team/t2.webp",
     name: "Ph.D Arthur MaGregor",
     work: "DIRECTEUR GENERAL",

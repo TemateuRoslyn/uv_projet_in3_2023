@@ -15,22 +15,22 @@ const Header = () => {
         <nav className='flexSB'>
           <ul className={click ? "mobile-nav" : "flexSB "} onClick={() => setClick(false)}>
             <li>
-              <Link to='/'>Home</Link>
+              <Link to='/'>Acceuil</Link>
             </li>
             <li>
-              <Link to='/courses'>Nos programmes</Link>
+              <Link to='/courses'>Cours</Link>
             </li>
             <li>
-              <Link to='/about'>About</Link>
+              <Link to='/about'>A propos</Link>
             </li>
             <li>
-              <Link to='/team'>Nos enseignants</Link>
+              <Link to='/enseignant'>Enseignants</Link>
             </li>
             <li>
-              <Link to='/pricing'>Principal</Link>
+              <Link to='/proviseur'>Proviseur</Link>
             </li>
             <li>
-              <Link to='/contact'>Contact</Link>
+              <Link to='/contact'>Contacts</Link>
             </li>
             <li>
               <Link to='/convocation'>Convocation</Link>
@@ -46,10 +46,10 @@ const Header = () => {
             <div className='button'><Link to='/login'>Mon compte personnel</Link></div>
           </div>
           <button className='togglle' onClick={() => setClick(!click)}>
-            {click ?  <FontAwesomeIcon icon={faTimes} />:<FontAwesomeIcon icon={faBars} />}
+            {click ? <FontAwesomeIcon icon={faTimes} /> : <FontAwesomeIcon icon={faBars} />}
           </button>
         </nav>
-      </header>
+      </header >
     </>
   )
 }

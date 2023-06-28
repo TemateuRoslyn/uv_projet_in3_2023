@@ -1,22 +1,60 @@
 import React from 'react';
-import '../styles.css';
+import Back from '../common/back/Back';
 
-function PageProviseur() {
+const Proviseur = () => {
     return (
-        <div className="page-container">
-            <h1>Le proviseur de notre lycée</h1>
-            <img src="./images/team/t1.webp" alt="Photo du proviseur" />
+        <>
+            <Back title="Proviseur" />
+            <div className="container bg-white  m-5 p-5">
 
+                <div className="flex items-center gap-10 shadow-2xl">
+                    <div className='img brightness-100' >
+                        <img src="./images/team/t1.webp" />
+                    </div>
+                    <div>
+                        <div className="informations shadow-lg items-centers  ">
+                            <div className="text-center p-5 ">
+                                <p class="border-2 p-2 italic bg-[#1eb299] font-bold text-white">
+                                    INFORMATIONS SUR MONSIEUR ADRIAN MOLISES PROVISEUR DU LYCEE DE ...
+                                </p>
+                            </div>
+                            <div>
+                                <div className="text-center p-5">
+                                    <strong>PRESENTATION</strong>
+                                    <h6>ADRIAN MOLISES est un leader expérimenté et passionné qui travaille à créer une culture d'apprentissage dynamique et inclusive pour les élèves et les enseignants.</h6>
+                                </div>
+                                <div className="text-center p-5">
+                                    <strong>BIBIOGRAPHIE</strong>
 
-            <div className="informations">
-                <p>  Bienvenue sur le site Web de notre etablissement, MR.. Adrian Molises ,chef d'établissement de ce  lycée d'excellence.Ph.D Adrian Molises est un leader expérimenté et passionné qui travaille à créer une culture d'apprentissage dynamique et inclusive pour les élèves et les enseignants.</p><br />
-                <p><strong>bibiographie:</strong>  MR..Adrian Molises est un éducateur expérimenté qui a travaillé dans le système éducatif pendant plus de 20 ans. Diplômé en éducation de l'Universite de dschamg, il est un chef d'établissement dévoué  </p><br />
-                <p><strong>responsabilite:</strong> Responsabilités : En tant que chef d'établissement de lycée, Kelie est responsable de la gestion quotidienne de l'établissement. Ses responsabilités comprennent la supervision des enseignants, l'élaboration de politiques d'éducation, la planification budgétaire et la collaboration avec les parents et la communauté.</p><br />
-                <p><strong>phylosophie educative:</strong> MR.. croit que chaque élève a le potentiel de réussir, et son travail consiste à créer un environnement éducatif stimulant qui permet à chaque élève de réaliser son plein potentiel. En mettant l'accent sur la collaboration, la diversité et l'innovation, MR:Ph.D Adrian crée une culture de l'apprentissage qui stimule la réflexion critique et l'engagement des élèves.</p><br />
-                <p><strong>Initiatives:</strong> MR.. a lancé plusieurs initiatives pour améliorer l'expérience d'apprentissage des élèves dans son lycée. Parmi elles, citons l'intégration d'outils technologiques innovants dans les cours, l'organisation de clubs de discussion pour les élèves et l'amélioration de la communication avec les parents.</p><br />
+                                    <ul>
+                                        <li>Diplômé en éducation de l'Université de Dschang.</li>
+                                        <li>20 ans d'expérience dans l'enseignement.</li>
+                                        <li> A travaillé en tant que professeur de langue anglaise.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="text-center p-5">
+                                <strong>RESPONSABILITES</strong>
+                                <ul>
+                                    <li>Superviser la direction du lycée.</li>
+                                    <li>Travailler avec les enseignants et les parents pour améliorer les résultats des élèves.</li>
+                                    <li>Assurer la discipline et le respect des règles dans l'établissement.</li>
+                                    <li>Contacter les établissements scolaires voisins pour organiser des événements inter-écoles.</li>
+                                </ul>
+                            </div>
+                            <div className="text-center p-5">
+                                <strong>PHILOSOPHIE EDUCATIVE</strong>
+                                <h6>ADRIAN MOLISES croit que chaque élève a le potentiel de réussir à condition qu'il soit encouragé et soutenu dans un environnement stimulant et inclusif.</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
-        </div>
-    );
+        </>
 
+
+
+    );
 }
+export default Proviseur;
