@@ -121,11 +121,11 @@ Route::middleware('jwt.verify')->group(function () {
 
     // parents
     Route::prefix('parents')->group(function () {
-        Route::get('findAll', [ParentsController::class, 'showAll']);
-        Route::get('findOne/{parentId}', [ParentsController::class, 'showIndex']);
+        Route::get('findAll', [ParentsController::class, 'index']);
+        Route::get('findOne/{parentId}', [ParentsController::class, 'view']);
 
+        Route::middleware('permission:modifier_parent')->post('update/{parentId}', [ParentsController::class, 'update']);
         Route::middleware('permission:creer_parent')->post('create', [ParentsController::class, 'store']);
-        Route::middleware('permission:modifier_parent')->post('update', [ParentsController::class, 'update']);
         Route::middleware('permission:supprimer_parent')->delete('delete/{parentId}', [ParentsController::class, 'delete']);
     });
 

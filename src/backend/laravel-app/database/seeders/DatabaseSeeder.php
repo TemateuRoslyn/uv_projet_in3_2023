@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             EleveSeeder::class,
             FauteSeeder::class,
             ConseilDisciplineSeeder::class,
+            ParentSeeder::class,
         ]);
     }
 }
