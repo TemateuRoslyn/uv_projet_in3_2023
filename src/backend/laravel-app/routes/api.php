@@ -24,6 +24,7 @@ use App\Http\Controllers\API\FauteController;
 use App\Http\Controllers\API\ConvocationController;
 use App\Http\Controllers\API\MembreConseilController;
 use App\Http\Controllers\API\ReparationController;
+use App\Http\Controllers\API\SanctionPrevuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,6 +112,16 @@ Route::middleware('jwt.verify')->group(function () {
         Route::middleware('permission:modifier_eleve')->put('update/{eleveId}', [EleveController::class, 'update']);
         Route::middleware('permission:supprimer_eleve')->delete('delete/{eleveId}', [EleveController::class, 'delete']);
         Route::middleware('permission:creer_eleve')->post('create', [EleveController::class, 'store']);
+    });
+
+    // sanctionprevus
+    Route::prefix('sanctionprevus')->group(function () {
+        Route::get('findOne/{sanctionprevuId}', [SanctionPrevuController::class, 'view']);
+        Route::get('findAll', [SanctionPrevuController::class, 'index']);
+
+        Route::middleware('permission:modifier_sanction')->put('update/{sanctionprevuId}', [SanctionPrevuController::class, 'update']);
+        Route::middleware('permission:supprimer_sanction')->delete('delete/{sanctionprevuId}', [SanctionPrevuController::class, 'delete']);
+        Route::middleware('permission:creer_sanction')->post('create', [SanctionPrevuController::class, 'store']);
     });
 
     // membreconseils
