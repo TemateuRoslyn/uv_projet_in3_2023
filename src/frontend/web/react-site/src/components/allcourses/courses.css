@@ -1,3 +1,23 @@
+.section {
+  width: 50%;
+  margin: 0 auto;
+}
+.section h1 {
+  font-weight: 500;
+  font-size: 45px;
+  margin: 20px 0;
+  line-height: 45px;
+}
+.section li {
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 45px;
+}
+.programme {
+  background-color: #fff;
+  padding: 30px 0;
+}
+
 .coursesCard {
   padding: 50px 0;
 }
@@ -23,7 +43,6 @@
   text-align: left;
 }
 .coursesCard .text h1 {
-  font-size: 30px;
   font-weight: 500;
   line-height: 45px;
 }

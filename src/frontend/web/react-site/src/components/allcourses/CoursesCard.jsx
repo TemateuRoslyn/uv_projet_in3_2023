@@ -6,7 +6,15 @@ const CoursesCard = () => {
   return (
     <>
       <section className='coursesCard'>
-        <div className='container grid2'>
+      <div className='text programme'>
+        <ul className="section">
+          <h1>Nous disposons de trois sections</h1>
+          <li>Section Anglophone</li>
+          <li>Section Francophone</li>
+          <li>Section Bilingue</li>
+        </ul>
+      </div>
+        {/* <div className='container grid2'>
           {coursesCard.map((val) => (
             <div className='items'>
               <div className='content flex'>
@@ -50,7 +58,7 @@ const CoursesCard = () => {
               <button className='outline-btn'>ENROLL NOW !</button>
             </div>
           ))}
-        </div>
+        </div> */}
       </section>
     </>
   )
