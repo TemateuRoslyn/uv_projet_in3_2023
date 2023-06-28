@@ -14,7 +14,7 @@ if %running% == yes (
   php artisan l5-swagger:generate
   php artisan serve
 ) else (
-  pphp artisan migrate:fresh --seed
+  php artisan migrate:fresh --seed
   php artisan l5-swagger:generate
   php artisan serve
 )
