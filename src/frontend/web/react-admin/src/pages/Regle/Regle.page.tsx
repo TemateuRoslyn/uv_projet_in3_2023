@@ -7,7 +7,7 @@ import DisplayRegle from './components/DisplayRegle';
 import { Regle, ReglementInterieur } from '../../generated/models';
 import { ReduxProps } from '../../redux/configureStore';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../constants/LOCAL_STORAGE';
-import { ReglesApi, ReglementInterieurApi } from '../../generated';
+import { ReglementInterieursApi, ReglesApi } from '../../generated';
 
 import { 
   SuccessNotification,
@@ -39,7 +39,7 @@ const ReglePage = () => {
   useEffect(() => {  
     const apiParams: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
     const regleApi = new ReglesApi({...state.environment, accessToken: apiParams});
-    const reglementInterieurApi = new ReglementInterieurApi({...state.environment, accessToken: apiParams});
+    const reglementInterieurApi = new ReglementInterieursApi({...state.environment, accessToken: apiParams});
        
     setIsLoading(true);
     
@@ -58,11 +58,11 @@ const ReglePage = () => {
       .finally(() => {
         setIsLoading(false);
       });
-    reglementInterieurApi.findAllreglementInterieurs('Bearer' + apiParams)
+    reglementInterieurApi.reglementInterieursIndex('Bearer' + apiParams)
       .then((response)=>{
           if (response && response.data) {                    
               if (response.data.success === true) { 
-                  setReglementInterieur(response.data.data);
+                  setReglementInterieur(response.data.content);
                 
                   
               }

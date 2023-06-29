@@ -21,7 +21,7 @@ import {
 
 import './DisplayRegle.css'
 import { AgGridIndicator } from '../../../components/AgGridIndicator';
-import { ReglementInterieurApi, ReglesApi } from '../../../generated';
+import { ReglementInterieursApi, ReglesApi } from '../../../generated';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
 import { DeleteItemModal } from '../../../components/DeleteItemModal';
 
@@ -61,7 +61,7 @@ const DisplayRegle: React.FC<DisplayRegleProps> = (props) => {
     const onGridReady = useCallback(() => {
         const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
         const regleApi = new ReglesApi({...state.environment, accessToken: token});
-        const reglementInterieurApi = new ReglementInterieurApi({...state.environment, accessToken: token});
+        const reglementInterieurApi = new ReglementInterieursApi({...state.environment, accessToken: token});
         setShowIndicator(true);
 
         regleApi.findAllRegles('Bearer ' + token)
@@ -79,11 +79,11 @@ const DisplayRegle: React.FC<DisplayRegleProps> = (props) => {
             .finally(() => {
                 setShowIndicator(false);
             });
-        reglementInterieurApi.findAllreglementInterieurs('Bearer' + token)
+        reglementInterieurApi.reglementInterieursIndex('Bearer' + token)
             .then((response)=>{
                 if (response && response.data) {                    
                     if (response.data.success === true) { 
-                        setReglementInterieur(response.data.data);
+                        setReglementInterieur(response.data.content);
                         
                     }
                 }
@@ -188,17 +188,17 @@ const DisplayRegle: React.FC<DisplayRegleProps> = (props) => {
 
         regleApi.deleteRegle('Bearer ' + token,regleItem.id)
             .then((response) => {  
-                if (response && response.data) {                    
-                    if (response.data.success === true) { 
-                        setShowDeleteModal(false);
-                        onGridReady();
+                // if (response && response.data) {                    
+                //     if (response.data.success === true) { 
+                //         setShowDeleteModal(false);
+                //         onGridReady();
 
-                        // notification
-                        props.setDangerNotifMessage(response.data.message);
-                        props.setDangerNotifDescription('Ce regle a été supprimé avec succès');
-                        props.setShowDangerNotif(true);
-                    }
-                }
+                //         // notification
+                //         props.setDangerNotifMessage(response.data.message);
+                //         props.setDangerNotifDescription('Ce regle a été supprimé avec succès');
+                //         props.setShowDangerNotif(true);
+                //     }
+                // }
             })
             .catch((error) => {
                 alert(error?.response?.data?.message);
@@ -269,7 +269,7 @@ const DisplayRegle: React.FC<DisplayRegleProps> = (props) => {
 
             {showDeleteModal && (
                 <DeleteItemModal 
-                    itemName={regleItem.libelle} 
+                    itemName={'corrige ca toto'} 
                     onClose={() => setShowDeleteModal(false)} 
                     refresh={onGridReady}
                     onConfirm={() => processDeleteItem()}
