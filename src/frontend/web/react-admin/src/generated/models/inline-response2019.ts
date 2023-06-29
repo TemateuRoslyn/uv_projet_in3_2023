@@ -31,7 +31,7 @@ export interface InlineResponse2019 {
     message?: any;
     /**
      * 
-     * @type {User}
+     * @type {Regle}
      * @memberof InlineResponse2019
      */
     data?: any;

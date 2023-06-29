@@ -47,7 +47,7 @@ const CreateOrUpdateReglementInterieurModal: React.FC<ModalProps> = (props) => {
     _event.preventDefault();
 
     const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    const reglementInterieurApi = new ReglementInterieurApi({ ...state.environment, accessToken: token });
+    const reglementInterieurApi = new ReglementInterieursApi({ ...state.environment, accessToken: token });
 
     setIsLoading(true);
 
@@ -88,7 +88,7 @@ const CreateOrUpdateReglementInterieurModal: React.FC<ModalProps> = (props) => {
     _event.preventDefault();
 
     const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    const reglementInterieurApi = new ReglementInterieurApi({ ...state.environment, accessToken: token });
+    const reglementInterieurApi = new ReglementInterieursApi({ ...state.environment, accessToken: token });
 
     setIsLoading(true);
 

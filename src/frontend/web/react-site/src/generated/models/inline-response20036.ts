@@ -31,8 +31,8 @@ export interface InlineResponse20036 {
     success?: any;
     /**
      * 
-     * @type {Regle}
+     * @type {Notification}
      * @memberof InlineResponse20036
      */
-    data?: any;
+    content?: any;
 }

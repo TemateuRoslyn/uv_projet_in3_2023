@@ -17,10 +17,10 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { FauteUpdateBody } from '../models';
-import { InlineResponse20024 } from '../models';
-import { InlineResponse40011 } from '../models';
+import { InlineResponse20029 } from '../models';
+import { InlineResponse40012 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse4047 } from '../models';
+import { InlineResponse40410 } from '../models';
 /**
  * FauteApi - axios parameter creator
  * @export
@@ -51,7 +51,7 @@ export const FauteApiAxiosParamCreator = function (configuration?: Configuration
             if (configuration) {
                 baseOptions = configuration.baseOptions;
             }
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -96,7 +96,7 @@ export const FauteApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updatemistake(body: FauteUpdateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20024>> {
+        async updatemistake(body: FauteUpdateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20029>> {
             const localVarAxiosArgs = await FauteApiAxiosParamCreator(configuration).updatemistake(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -120,7 +120,7 @@ export const FauteApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatemistake(body: FauteUpdateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20024> {
+        updatemistake(body: FauteUpdateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20029> {
             return FauteApiFp(configuration).updatemistake(body, authorization, options).then((request) => request(axios, basePath));
         },
     };
