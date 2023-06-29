@@ -20,49 +20,58 @@ class CourseComponent extends StatelessWidget {
       onTap: () {},
       child: FittedBox(
         fit: BoxFit.contain,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: getWidth(20, context)),
+        child: Container(
+          margin: EdgeInsets.only(bottom: getHeight(25, context)),
           child: Row(
             children: [
-              CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: 60,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(100),
                 child: Image.asset(
-                  AppImages.logo,
-                  color: Colors.grey,
+                  AppImages.unknownPersonImg,
+                  height: getHeight(65, context),
+                  width: getWidth(65, context),
+                  // color: Colors.white,
                 ),
               ),
+              SizedBox(
+                width: getWidth(10, context),
+              ),
               Container(
-                padding: EdgeInsets.only(left: getWidth(25, context)),
-                height: getHeight(100, context),
-                width: getWidth(500, context),
+                // height: getHeight(100, context),
+                width: getWidth(400, context),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: appColors.tinary,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      courseTitle,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: getHeight(30, context),
-                        fontWeight: FontWeight.bold,
-                        height: getHeight(2, context),
-                        color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: appColors.primary),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: getWidth(10, context), horizontal: 25),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        courseTitle,
+                        // textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: getHeight(20, context),
+                            height: getHeight(1.5, context),
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    Text(
-                      teacherName,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: getHeight(30, context),
-                        height: getHeight(1.5, context),
-                        color: Colors.white,
+                      SizedBox(
+                        height: getHeight(10, context),
                       ),
-                    ),
-                  ],
+                      Text(
+                        teacherName,
+                        // textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: getHeight(15, context),
+                          height: getHeight(1.5, context),
+                          color: Colors.white.withOpacity(0.7),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

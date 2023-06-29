@@ -39,7 +39,7 @@ class _ReglementsInterieursState extends State<ReglementsInterieurs> {
           return CheckInternetConnectionPage(
             helper: state.ri.isEmpty ? 0 : 1,
             positionFromTop: (screenSize.height / 2),
-            color: appColors.primary!,
+            errorTextColor: appColors.primary!,
             body: state.riStatus == ApiStatus.isLoading
                 ? Padding(
                     padding: EdgeInsets.only(

@@ -3,11 +3,11 @@ import 'package:fltter_app/common/models/reglements_interieurs.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
 
 class HomeRepository {
-  HomeRepository({
-    required this.authRepository,
-  }) {}
+  // HomeRepository({
+  //   required this.authRepository,
+  // }) {}
 
-  final AuthRepository authRepository;
+  // final AuthRepository authRepository;
 
   final dio = ApiConfiguration.dioClient;
 
@@ -16,7 +16,7 @@ class HomeRepository {
       final response = await dio.get(
         'reglement/findAll',
         options: ApiConfiguration.getAuthorizationOptions(
-            authRepository.getUserToken),
+            AuthRepository.getUserToken),
       );
       final List<ReglementInterieur> riData = [];
 

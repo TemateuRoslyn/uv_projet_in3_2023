@@ -7,6 +7,7 @@ import 'package:fltter_app/common/views/splash_page.dart';
 import 'package:fltter_app/features/authentication/views/login_page.dart';
 import 'package:fltter_app/features/home/logic/home_cubit.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
+import 'package:fltter_app/features/profile/views/profile_page.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
 import 'package:fltter_app/repositories/home_repository.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +77,8 @@ class _MyAppState extends State<MyApp> {
           BlocProvider<HomeCubit>(
             create: (context) => HomeCubit(
                 homeRepository:
-                    HomeRepository(authRepository: widget.authRepository),
+                    // HomeRepository(authRepository: widget.authRepository),
+                    HomeRepository(),
                 internetCubit: widget.internetCubit),
           ),
         ],
@@ -110,7 +112,7 @@ class _MyAppState extends State<MyApp> {
                 } else {
                   if (state is IsUnAuthenticated) {
                     navigatorKey.currentState!.pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => Courses()),
+                        MaterialPageRoute(builder: (context) => LoginPage()),
                         (route) => false);
                   }
 

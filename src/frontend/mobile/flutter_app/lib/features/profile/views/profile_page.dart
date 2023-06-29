@@ -1,11 +1,14 @@
 import 'package:fltter_app/common/styles/colors.dart';
 import 'package:fltter_app/common/utils/constants.dart';
 import 'package:fltter_app/common/utils/helper.dart';
+import 'package:fltter_app/common/views/check_internet_page.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
+import 'package:fltter_app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/models/user.dart';
+import '../../../common/utils/enums.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -17,19 +20,27 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   bool profileIsSelected = true;
   bool modifyProfileIsSelected = false;
-  late User _currentUser;
+  User? _currentUser;
   late ProfileCubit _profileCubit;
+  late String currentUserType;
 
   @override
   void initState() {
     super.initState();
 
     _profileCubit = context.read<ProfileCubit>();
-    _currentUser = _profileCubit.state.currentUser!;
+    currentUserType = AuthRepository.getUserType;
+    if (_profileCubit.state.currentUser != null) {
+      _currentUser = _profileCubit.state.currentUser!;
+    } else {
+      _profileCubit.getCurrentUser();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
     final List<ProfileOption> profileOptions = [
       ProfileOption(
         icon: Icons.person,
@@ -83,7 +94,9 @@ class _ProfilePageState extends State<ProfilePage> {
     final List colonnes = [
       {
         'text1': 'Hello...',
-        'text2': '${_currentUser.firstName} ${_currentUser.lastName}',
+        'text2': _currentUser == null
+            ? ''
+            : '${_currentUser!.firstName} ${_currentUser!.lastName}',
         'isFirst': true,
       },
       {
@@ -98,93 +111,165 @@ class _ProfilePageState extends State<ProfilePage> {
       }
     ];
 
-    return Expanded(
-      child: ListView(
-        children: [
-          Container(
-            padding: EdgeInsets.only(
-                top: getHeight(
-                  20,
-                  context,
-                ),
-                left: getWidth(10, context)),
-            // height: getHeight(50, context),
-            width: double.infinity,
-            // color: Colors.amber,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Paramètres',
-                  style: TextStyle(
-                      fontSize: getHeight(20, context),
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-                SizedBox(
-                  height: getHeight(30, context),
-                ),
-                Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image.asset(
-                        AppImages.unknownPersonImg,
-                        height: getHeight(60, context),
-                        width: getWidth(60, context),
-                        // color: Colors.white,
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      builder: (context, state) {
+        return CheckInternetConnectionPage(
+          helper: state.currentUser == null ? 0 : 1,
+          positionFromTop: (screenSize.height / 2),
+          errorTextColor: Colors.white,
+          body: state.status == ApiStatus.isLoading
+              ? Padding(
+                  padding: EdgeInsets.only(
+                      top: getHeight((screenSize.height / 2), context)),
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: appColors.onBoardingTwo,
+                    ),
+                  ),
+                )
+              : state.status == ApiStatus.failed
+                  ? Padding(
+                      padding: EdgeInsets.only(
+                          top: getHeight((screenSize.height / 2), context),
+                          left: getWidth(50, context),
+                          right: getWidth(50, context)),
+                      child: Column(
+                        children: [
+                          Text(
+                            state.statusMessage,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: getHeight(12, context),
+                              height: getHeight(1.5, context),
+                              color: Colors.white,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () async {
+                              await _profileCubit.getCurrentUser();
+                            },
+                            child: Text(
+                              'Recharger',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                fontSize: getHeight(12, context),
+                                color: appColors.secondary,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  : Expanded(
+                      child: ListView(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(
+                                top: getHeight(
+                                  20,
+                                  context,
+                                ),
+                                left: getWidth(10, context)),
+                            // height: getHeight(50, context),
+                            width: double.infinity,
+                            // color: Colors.amber,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Paramètres',
+                                  style: TextStyle(
+                                      fontSize: getHeight(20, context),
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                                SizedBox(
+                                  height: getHeight(30, context),
+                                ),
+                                Row(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: Image.asset(
+                                        AppImages.unknownPersonImg,
+                                        height: getHeight(60, context),
+                                        width: getWidth(60, context),
+                                        // color: Colors.white,
+                                      ),
+                                    ),
+                                    if (currentUserType == 'eleves') ...[
+                                      ...colonnes.map((colonne) => Colonne(
+                                          isFirst: colonne['isFirst'],
+                                          text1: colonne['text1'],
+                                          text2: colonne['text2'])),
+                                    ],
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin:
+                                EdgeInsets.only(top: getHeight(30, context)),
+                            padding:
+                                EdgeInsets.only(top: getHeight(30, context)),
+                            height: getHeight(600, context),
+                            width: double.infinity,
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(40),
+                                    topRight: Radius.circular(40))),
+                            child: Column(
+                                children: currentUserType == 'eleves'
+                                    ? [
+                                        // profile options part
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal:
+                                                  getWidth(65, context)),
+                                          child: Row(
+                                              children: profileOptions
+                                                  .map((profileOption) =>
+                                                      profileOption)
+                                                  .toList()),
+                                        ),
+                                        SizedBox(
+                                          height: getHeight(20, context),
+                                        ),
+                                        const Divider(
+                                          thickness: 5,
+                                        ),
+                                        ...ListTile.divideTiles(
+                                                context: context,
+                                                color: Colors.grey,
+                                                tiles: profileTiles
+                                                    .map((profileTile) =>
+                                                        ProfileTile(
+                                                            icon: profileTile[
+                                                                'icon'],
+                                                            text: profileTile[
+                                                                'text']))
+                                                    .toList())
+                                            .toList(),
+                                      ]
+                                    : [
+                                        Text(
+                                          'Mes Enfants',
+                                          style: TextStyle(
+                                              fontSize: getHeight(20, context),
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
+                                      ]),
+                          ),
+                        ],
                       ),
                     ),
-                    ...colonnes.map((colonne) => Colonne(
-                        isFirst: colonne['isFirst'],
-                        text1: colonne['text1'],
-                        text2: colonne['text2'])),
-                  ],
-                )
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: getHeight(30, context)),
-            padding: EdgeInsets.only(top: getHeight(30, context)),
-            height: getHeight(600, context),
-            width: double.infinity,
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40),
-                    topRight: Radius.circular(40))),
-            child: Column(
-              children: [
-                // profile options part
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: getWidth(65, context)),
-                  child: Row(
-                      children: profileOptions
-                          .map((profileOption) => profileOption)
-                          .toList()),
-                ),
-                SizedBox(
-                  height: getHeight(20, context),
-                ),
-                const Divider(
-                  thickness: 5,
-                ),
-                ...ListTile.divideTiles(
-                        context: context,
-                        color: Colors.grey,
-                        tiles: profileTiles
-                            .map((profileTile) => ProfileTile(
-                                icon: profileTile['icon'],
-                                text: profileTile['text']))
-                            .toList())
-                    .toList(),
-              ],
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

@@ -2,16 +2,13 @@ import 'package:fltter_app/common/styles/colors.dart';
 import 'package:fltter_app/common/utils/helper.dart';
 import 'package:fltter_app/common/widgets/common_widgets.dart';
 import 'package:fltter_app/common/widgets/fields.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class Suggestion extends StatelessWidget {
-  // const Suggestion({super.key});
-  bool decsriptionTap = false;
-  bool subjectDescription = false;
+  const Suggestion({super.key});
 
-  Suggestion({super.key});
+  // bool decsriptionTap = false;
+  // bool subjectDescription = false;
 
   @override
   Widget build(BuildContext context) {
