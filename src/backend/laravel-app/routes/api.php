@@ -119,7 +119,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findOne/{sanctionprevuId}', [SanctionPrevuController::class, 'view']);
         Route::get('findAll', [SanctionPrevuController::class, 'index']);
 
-        Route::middleware('permission:modifier_sanction')->put('update/{sanctionprevuId}', [SanctionPrevuController::class, 'update']);
+        Route::middleware('permission:modifier_sanction')->post('update/{sanctionprevuId}', [SanctionPrevuController::class, 'update']);
         Route::middleware('permission:supprimer_sanction')->delete('delete/{sanctionprevuId}', [SanctionPrevuController::class, 'delete']);
         Route::middleware('permission:creer_sanction')->post('create', [SanctionPrevuController::class, 'store']);
     });
@@ -203,7 +203,7 @@ Route::middleware('jwt.verify')->group(function () {
     // conseil_disciplines
     Route::prefix('conseil_discipline')->group(function () {
         Route::middleware('permission:creer_conseil_discipline')->post('create', [ConseilDisciplineController::class, 'store']);
-        Route::middleware('permission:modifier_conseil_discipline')->put('update/{conseil_disciplineId}', [ConseilDisciplineController::class, 'update']);
+        Route::middleware('permission:modifier_conseil_discipline')->post('update/{conseil_disciplineId}', [ConseilDisciplineController::class, 'update']);
         Route::middleware('permission:supprimer_conseil_discipline')->delete('delete/{conseil_disciplineId}', [ConseilDisciplineController::class, 'delete']);
 
         Route::get('findOne/{conseil_disciplineId}', [ConseilDisciplineController::class, 'view']);
