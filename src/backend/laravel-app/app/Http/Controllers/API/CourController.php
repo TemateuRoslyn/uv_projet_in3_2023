@@ -220,7 +220,7 @@ class CourController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/cours/update",
+     *     path="/api/cours/update/{coursId}",
      *     summary="Update a cour's information",
      *     description="Update a cour's information",
      *     operationId="updateCours",

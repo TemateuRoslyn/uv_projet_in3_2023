@@ -305,12 +305,21 @@ class ProfesseurController extends Controller
 
 
     /**
-     * @OA\Put(
-     *     path="/api/professeurs/update",
+     * @OA\Post(
+     *     path="/api/professeurs/update/{professeurId}",
      *     summary="Update a professeur's information",
      *     description="Update a professeur's information",
      *     operationId="updateProfesseur",
      *     tags={"professeurs"},
+     *      @OA\Parameter(
+     *         name="professeurId",
+     *         in="path",
+     *         description="ID of professeur to update in this request",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -345,6 +354,8 @@ class ProfesseurController extends Controller
      *         response=400,
      *         description="Error - Invalid request data",
      *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="The given data are invalid"),
+     *             @OA\Property(property="success", type="boolean", example="false"),
      *             @OA\Property(property="error", type="object", example={
      *                 "email": {
      *                     "The email field is required."
@@ -366,14 +377,15 @@ class ProfesseurController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Professor not found")
+     *             @OA\Property(property="message", type="string", example="Professor not found")
+     *             @OA\Property(property="success", type="boolean", example="false"),
      *         )
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="professeur modifié qvec succèss"),
+     *             @OA\Property(property="message", type="string", example="professeur modifié avec succèss"),
      *             @OA\Property(property="success", type="boolean", example="true"),
      *             @OA\Property(property="content", type="object", ref="#/components/schemas/Professeur"),
      *         )
@@ -405,7 +417,7 @@ class ProfesseurController extends Controller
             return response()->json([
                 'message' => 'Teacher not exists',
                 'success' => false,
-            ], 400);
+            ], 404);
         }
 
         if ($validator->fails()) {
