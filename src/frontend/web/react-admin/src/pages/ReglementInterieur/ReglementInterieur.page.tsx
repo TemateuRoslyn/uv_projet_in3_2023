@@ -7,13 +7,13 @@ import DisplayReglementInterieur from './components/DisplayReglementInterieur';
 import { ReglementInterieur } from '../../generated/models';
 import { ReduxProps } from '../../redux/configureStore';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../constants/LOCAL_STORAGE';
-import { ReglementInterieurApi } from '../../generated';
 
 import { 
   SuccessNotification,
   DangerNotification,
   WarningNotification,
 } from '../../services/Notification.service';
+import { ReglementInterieursApi } from '../../generated';
 
 
 const ReglementInterieurPage = () => {
@@ -37,15 +37,15 @@ const ReglementInterieurPage = () => {
 
   useEffect(() => {  
     const apiParams: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    const reglementInterieurApi = new ReglementInterieurApi({...state.environment, accessToken: apiParams});
+    const reglementInterieurApi = new ReglementInterieursApi({...state.environment, accessToken: apiParams});
 
     setIsLoading(true);
     
-    reglementInterieurApi.findAllreglementInterieurs('Bearer ' + apiParams)
+    reglementInterieurApi.reglementInterieursIndex('Bearer ' + apiParams)
       .then((response) => {  
         if (response && response.data) {        
           if (response.data.success === true) {
-            setReglementInterieur(response.data.data);
+            setReglementInterieur(response.data.content);
             console.log(response.data);
           }
         }

@@ -3,7 +3,6 @@ import { MODAL_MODE } from "../../../constants/ENUM";
 import { EditIcon, NewIcon } from "../../../components/Icone";
 import { ReglementInterieur, ReglementCreateBody, ReglementUpdateBody } from "../../../generated/models";
 import { TOKEN_LOCAL_STORAGE_KEY } from "../../../constants/LOCAL_STORAGE";
-import { ReglementInterieurApi } from "../../../generated";
 import { useSelector } from "react-redux";
 import { ReduxProps } from "../../../redux/configureStore";
 import Indicator from "../../Authentication/components/Indicator";
