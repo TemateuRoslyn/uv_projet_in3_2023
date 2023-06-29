@@ -127,20 +127,21 @@ Route::middleware('jwt.verify')->group(function () {
     // membreconseils
     Route::prefix('membreconseils')->group(function () {
         Route::get('findOne/{membreconseilId}', [MembreConseilController::class, 'view']);
-        Route::get('findAll', [MembreConseilController::class, 'index']);
+        Route::get('findAll/', [MembreConseilController::class, 'index']);
 
         Route::middleware('permission:modifier_conseil')->put('update/{eleveId}', [MembreConseilController::class, 'update']);
         Route::middleware('permission:supprimer_conseil')->delete('delete/{eleveId}', [MembreConseilController::class, 'delete']);
-        Route::middleware('permission:creer_conseil')->post('create', [MembreConseilController::class, 'store']);
+        Route::middleware('permission:creer_conseil')->post('create/', [MembreConseilController::class, 'store']);
     });
 
     // notifications
     Route::prefix('notification')->group(function () {
+        Route::get('findOne/{notificationId}', [NotificationController::class, 'view']);
         Route::get('findAll/', [NotificationController::class, 'index']);
-        Route::post('create/', [NotificationController::class, 'store']);
-        Route::get('findOne/{id}', [NotificationController::class, 'view']);
-        Route::post('update/{id}', [NotificationController::class, 'update']);
-        Route::delete('delete/{id}', [NotificationController::class, 'delete']);
+
+        Route::middleware('permission:modifier_notification')->post('update/{notificationId}', [NotificationController::class, 'update']);
+        Route::middleware('permission:supprimer_notification')->delete('delete/{notificationId}', [NotificationController::class, 'delete']);
+        Route::middleware('permission:creer_notification')->post('create/', [NotificationController::class, 'store']);
     });
 
     // parents
