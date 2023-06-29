@@ -2,6 +2,7 @@ import 'package:fltter_app/common/utils/enums.dart';
 import 'package:fltter_app/common/views/check_internet_page.dart';
 import 'package:fltter_app/features/home/views/fautes_sanctions_page.dart';
 import 'package:fltter_app/features/home/views/reglements_interieurs_page.dart';
+import 'package:fltter_app/features/home/views/suggestion_box.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,8 +57,14 @@ class _HomePageState extends State<HomePage> {
         'subtitle': 'Mes conseils de discipline',
         'onPressAction': () {}
       },
-      {'image': '', 'subtitle': 'Boîte à suggestions', 'onPressAction': () {}},
+      {
+        'image': '',
+        'subtitle': 'Boîte à suggestions',
+        'onPressAction': () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const Suggestion()))
+      },
       {'image': '', 'subtitle': 'Rapport de notes', 'onPressAction': () {}},
+      {'image': '', 'subtitle': 'Mes convocations', 'onPressAction': () {}},
       {
         'image': '',
         'subtitle': 'Mon profile',
@@ -74,7 +81,7 @@ class _HomePageState extends State<HomePage> {
         return CheckInternetConnectionPage(
             helper: state.currentUser == null ? 0 : 1,
             positionFromTop: (screenSize.height / 2),
-            color: Colors.white,
+            errorTextColor: Colors.white,
             body: state.status == ApiStatus.isLoading
                 ? Padding(
                     padding: EdgeInsets.only(

@@ -16,15 +16,15 @@ class AuthRepository {
   final dio = ApiConfiguration.dioClient;
   final flutterSecureStorage = const FlutterSecureStorage();
 
-  late int _userId;
+  static late int _userId;
   // late int _userIdBasedOnType;
-  late String _userToken;
-  late String _userType;
+  static late String _userToken;
+  static late String _userType;
 
-  int get getUserId => _userId;
+  static int get getUserId => _userId;
   // int get getUserIdBasedOnType => _userIdBasedOnType;
-  String get getUserToken => _userToken;
-  String get getUserType => _userType;
+  static String get getUserToken => _userToken;
+  static String get getUserType => _userType;
 
   Stream<AuthStatus> getStatus() async* {
     final userToken = await flutterSecureStorage.read(key: kUserToken);
@@ -37,6 +37,7 @@ class AuthRepository {
       // _userIdBasedOnType = int.parse(
       //     (await flutterSecureStorage.read(key: kUserIdBasedOnType))!);
       _userType = (await flutterSecureStorage.read(key: kUserType))!;
+      // _userType = 'parents';
       _userToken = userToken;
       yield AuthStatus.authenticated;
     } else {

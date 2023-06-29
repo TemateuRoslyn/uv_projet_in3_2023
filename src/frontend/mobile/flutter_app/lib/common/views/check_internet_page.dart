@@ -10,7 +10,7 @@ class CheckInternetConnectionPage extends StatefulWidget {
     // required this.refreshFunction,
     required this.positionFromTop,
     required this.body,
-    required this.color,
+    required this.errorTextColor,
     this.helper,
   });
 
@@ -18,7 +18,7 @@ class CheckInternetConnectionPage extends StatefulWidget {
   // final void Function()? refreshFunction;
   final double positionFromTop;
   final int? helper; // 0 = no data in current state, 1 = data in state
-  final Color color;
+  final Color errorTextColor;
 
   @override
   State<CheckInternetConnectionPage> createState() =>
@@ -40,7 +40,7 @@ class _CheckInternetConnectionPageState
                 return CommonWidgets.noInternetWidget(
                   positionFromTop: widget.positionFromTop,
                   context: context,
-                  color: widget.color,
+                  color: widget.errorTextColor,
                 );
               case 1:
                 return widget.body;
@@ -48,13 +48,13 @@ class _CheckInternetConnectionPageState
                 return CommonWidgets.noInternetWidget(
                     positionFromTop: widget.positionFromTop,
                     context: context,
-                    color: widget.color);
+                    color: widget.errorTextColor);
             }
           } else {
             return CommonWidgets.noInternetWidget(
                 positionFromTop: widget.positionFromTop,
                 context: context,
-                color: widget.color);
+                color: widget.errorTextColor);
           }
         }
       },
