@@ -31,8 +31,8 @@ export interface InlineResponse20027 {
     success?: any;
     /**
      * 
-     * @type {Faute}
+     * @type {Regle}
      * @memberof InlineResponse20027
      */
-    content?: any;
+    data?: any;
 }

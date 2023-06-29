@@ -19,19 +19,19 @@
 export interface InlineResponse2014 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse2014
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse2014
      */
     success?: any;
     /**
      * 
-     * @type {MembreConseil}
+     * @type {string}
+     * @memberof InlineResponse2014
+     */
+    message?: any;
+    /**
+     * 
+     * @type {Permission}
      * @memberof InlineResponse2014
      */
     content?: any;

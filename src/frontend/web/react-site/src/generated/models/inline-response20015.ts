@@ -19,20 +19,14 @@
 export interface InlineResponse20015 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20015
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20015
      */
     success?: any;
     /**
      * 
-     * @type {Convocation}
+     * @type {string}
      * @memberof InlineResponse20015
      */
-    content?: any;
+    message?: any;
 }

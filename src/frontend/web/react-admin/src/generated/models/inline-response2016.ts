@@ -31,8 +31,8 @@ export interface InlineResponse2016 {
     message?: any;
     /**
      * 
-     * @type {Permission}
+     * @type {Regle}
      * @memberof InlineResponse2016
      */
-    content?: any;
+    data?: any;
 }

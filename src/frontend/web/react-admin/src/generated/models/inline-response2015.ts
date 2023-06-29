@@ -19,20 +19,8 @@
 export interface InlineResponse2015 {
     /**
      * 
-     * @type {string}
+     * @type {Professeur}
      * @memberof InlineResponse2015
      */
-    message?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse2015
-     */
-    success?: any;
-    /**
-     * 
-     * @type {Notification}
-     * @memberof InlineResponse2015
-     */
-    content?: any;
+    professeur?: any;
 }

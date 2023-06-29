@@ -22,31 +22,43 @@ export interface ProfesseursUpdateBody {
      * @type {string}
      * @memberof ProfesseursUpdateBody
      */
-    email: any;
+    email?: any;
     /**
      * 
      * @type {string}
      * @memberof ProfesseursUpdateBody
      */
-    firstName: any;
+    password?: any;
     /**
      * 
      * @type {string}
      * @memberof ProfesseursUpdateBody
      */
-    lastName: any;
+    username?: any;
     /**
      * 
      * @type {string}
      * @memberof ProfesseursUpdateBody
      */
-    dateDeNaissance: any;
+    firstName?: any;
     /**
      * 
      * @type {string}
      * @memberof ProfesseursUpdateBody
      */
-    lieuDeNaissance: any;
+    lastName?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProfesseursUpdateBody
+     */
+    dateDeNaissance?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProfesseursUpdateBody
+     */
+    lieuDeNaissance?: any;
     /**
      * 
      * @type {string}
@@ -58,23 +70,17 @@ export interface ProfesseursUpdateBody {
      * @type {string}
      * @memberof ProfesseursUpdateBody
      */
-    sexe: any;
+    sexe?: any;
     /**
      * 
      * @type {string}
      * @memberof ProfesseursUpdateBody
      */
-    telephone: any | null;
+    telephone?: any | null;
     /**
      * 
      * @type {string}
      * @memberof ProfesseursUpdateBody
      */
-    statut: any;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProfesseursUpdateBody
-     */
-    courId: any;
+    statut?: any;
 }

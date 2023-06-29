@@ -14,13 +14,19 @@
 /**
  * 
  * @export
- * @interface InlineResponse20032
+ * @interface InlineResponse40016Error
  */
-export interface InlineResponse20032 {
+export interface InlineResponse40016Error {
     /**
      * 
-     * @type {ReglementInterieur}
-     * @memberof InlineResponse20032
+     * @type {Array&lt;string&gt;}
+     * @memberof InlineResponse40016Error
      */
-    reglement?: any;
+    email?: any;
+    /**
+     * 
+     * @type {Array&lt;string&gt;}
+     * @memberof InlineResponse40016Error
+     */
+    username?: any;
 }

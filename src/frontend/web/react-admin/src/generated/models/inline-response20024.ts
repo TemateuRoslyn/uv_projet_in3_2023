@@ -31,8 +31,8 @@ export interface InlineResponse20024 {
     success?: any;
     /**
      * 
-     * @type {Eleve}
+     * @type {Professeur}
      * @memberof InlineResponse20024
      */
-    content?: any;
+    data?: any;
 }
