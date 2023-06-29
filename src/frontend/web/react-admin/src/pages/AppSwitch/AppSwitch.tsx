@@ -46,7 +46,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
     const state = useSelector((state: ReduxProps) => state);
     console.log('isLoggedIn' + props.isLoggedIn);
     console.log('state loggedIn' + state.loggedIn);
-    console.log(state);
+   
     
 
     if((props.isLoggedIn && props.isLoggedIn ===true) || (state.loggedIn && state.loggedIn === true)){

@@ -31,8 +31,8 @@ export interface InlineResponse2014 {
     success?: any;
     /**
      * 
-     * @type {Parents}
+     * @type {MembreConseil}
      * @memberof InlineResponse2014
      */
-    data?: any;
+    content?: any;
 }

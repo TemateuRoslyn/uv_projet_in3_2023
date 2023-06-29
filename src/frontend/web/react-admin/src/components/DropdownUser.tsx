@@ -24,6 +24,8 @@ const DropdownUser = () => {
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
 
+  const adminUser = JSON.parse(localStorage.getItem(USER_LOCAL_STORAGE_KEY));
+  console.log(adminUser);
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
@@ -77,10 +79,10 @@ const DropdownUser = () => {
         to="#"
       >
         <span className="hidden text-right lg:block">
-          <span className="block text-sm font-medium text-black dark:text-white">
-            Thomas Anree
+          <span className="block text-md font-medium text-black dark:text-white">
+            {adminUser.username}
           </span>
-          <span className="block text-xs">UX Designer</span>
+          <span className="block text-xs">{adminUser.email}</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">

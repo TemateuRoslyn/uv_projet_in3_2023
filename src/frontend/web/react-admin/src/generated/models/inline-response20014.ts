@@ -31,7 +31,7 @@ export interface InlineResponse20014 {
     success?: any;
     /**
      * 
-     * @type {Cour}
+     * @type {Convocation}
      * @memberof InlineResponse20014
      */
     content?: any;

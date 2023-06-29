@@ -19,8 +19,20 @@
 export interface InlineResponse20037 {
     /**
      * 
-     * @type {Regle}
+     * @type {string}
      * @memberof InlineResponse20037
      */
-    regle?: any;
+    message?: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse20037
+     */
+    success?: any;
+    /**
+     * 
+     * @type {Notification}
+     * @memberof InlineResponse20037
+     */
+    content?: any;
 }

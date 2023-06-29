@@ -31,8 +31,8 @@ export interface InlineResponse20039 {
     message?: any;
     /**
      * 
-     * @type {ReglementInterieur}
+     * @type {Array&lt;Parents&gt;}
      * @memberof InlineResponse20039
      */
-    data?: any;
+    content?: any;
 }

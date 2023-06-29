@@ -8,9 +8,7 @@ export const PROFESSEUR_COLUMNS_DEFS: ColDef[] = [
   {
     headerName: '#',
     field: 'id',
-    filter: 'agNumberColumnFilter', fouelefack@fouelefack - HP - Notebook: ~/Documents/Workspace / uv_projet_in3_2023$ git rebase - i
-    Pas d'information de suivi distant pour la branche actuelle.
-    Veuillez spécifier sur quelle branche vous souhaiter rebaser.
+    filter: 'agNumberColumnFilter', 
     headerCheckboxSelection: true,
   checkboxSelection: true,
   showDisabledCheckboxes: true,
@@ -27,17 +25,15 @@ export const PROFESSEUR_COLUMNS_DEFS: ColDef[] = [
 },
 {
   headerName: 'nom',
-    field: 'last_name',
+    field: 'lastName',
       filter: 'agTextColumnFilter',
         checkboxSelection: false,
-          showDisabledCheckboxes: true, fouelefack@fouelefack-HP - Notebook: ~/Documents/Workspace / uv_projet_in3_2023$ git rebase - i
-    Pas d'information de suivi distant pour la branche actuelle.
-    Veuillez spécifier sur quelle branche vous souhaiter rebaser.
+          showDisabledCheckboxes: true, 
     width: 200
 },
 {
   headerName: 'prenom',
-    field: 'first_name',
+    field: 'firstName',
       filter: 'agTextColumnFilter',
         checkboxSelection: false,
           showDisabledCheckboxes: true,
@@ -45,7 +41,7 @@ export const PROFESSEUR_COLUMNS_DEFS: ColDef[] = [
 },
 {
   headerName: 'dateDeNaissance',
-    field: 'date_de_naissance',
+    field: 'dateDeNaissance',
       filter: 'agTextColumnFilter',
         checkboxSelection: false,
           showDisabledCheckboxes: true,
@@ -54,7 +50,7 @@ export const PROFESSEUR_COLUMNS_DEFS: ColDef[] = [
 
 {
   headerName: 'lieuDeNaissance',
-    field: 'lieu_de_naissance',
+    field: 'lieuDeNaissance',
       filter: 'agTextColumnFilter',
         checkboxSelection: false,
           showDisabledCheckboxes: true,
@@ -62,7 +58,7 @@ export const PROFESSEUR_COLUMNS_DEFS: ColDef[] = [
 },
 {
   headerName: 'Statut',
-    field: 'redoublant',
+    field: 'statut',
       filter: 'agTextColumnFilter',
         checkboxSelection: false,
           showDisabledCheckboxes: true,
@@ -82,7 +78,7 @@ export const PROFESSEUR_COLUMNS_DEFS: ColDef[] = [
   },
 {
   headerName: 'email',
-    field: 'email',
+    field: 'user.email',
       filter: 'agTextColumnFilter',
         checkboxSelection: false,
           showDisabledCheckboxes: true,
@@ -98,7 +94,14 @@ export const PROFESSEUR_COLUMNS_DEFS: ColDef[] = [
 },
 {
   headerName: 'cour_id',
-    field: 'cour_id',
+    field: 'courId',
+      filter: 'agTextColumnFilter',
+        checkboxSelection: false,
+          showDisabledCheckboxes: true,
+            width: 200
+},{
+  headerName: 'CourLibelle',
+    field: 'cour',
       filter: 'agTextColumnFilter',
         checkboxSelection: false,
           showDisabledCheckboxes: true,

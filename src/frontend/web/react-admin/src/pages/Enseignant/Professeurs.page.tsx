@@ -44,7 +44,7 @@ const Professeurs = () => {
     professeursApi.professeursIndex('Bearer ' + apiParams)
     .then((response) => {  
       if(response && response.data){        
-        if(response.data.success === true){ setProfesseurs(response.data.data) }
+        if(response.data.success === true){ setProfesseurs(response.data.content) }
       }
     })
     .catch((error) => {
