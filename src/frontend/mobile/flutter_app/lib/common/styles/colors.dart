@@ -9,6 +9,7 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color? onBoardingThree;
   final Color? yellow;
   final Color? ligthGreen;
+  final Color? white;
 
   AppColors({
     required this.primary,
@@ -19,6 +20,7 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.onBoardingThree,
     required this.yellow,
     required this.ligthGreen,
+    required this.white,
   });
 
   @override
@@ -31,6 +33,7 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? onBoardingThree,
     Color? yellow,
     Color? ligthGreen,
+    Color? white,
   }) {
     return AppColors(
       primary: primary ?? this.primary,
@@ -40,7 +43,8 @@ class AppColors extends ThemeExtension<AppColors> {
       onBoardingTwo: onBoardingTwo ?? this.onBoardingTwo,
       onBoardingThree: onBoardingThree ?? this.onBoardingThree,
       yellow: yellow ?? this.yellow,
-      ligthGreen: yellow ?? this.ligthGreen,
+      ligthGreen: ligthGreen ?? this.ligthGreen,
+      white: white ?? this.white,
     );
   }
 
@@ -59,6 +63,7 @@ class AppColors extends ThemeExtension<AppColors> {
       onBoardingThree: Color.lerp(onBoardingThree, other.onBoardingThree, t),
       yellow: Color.lerp(yellow, other.yellow, t),
       ligthGreen: Color.lerp(ligthGreen, other.ligthGreen, t),
+      white: Color.lerp(white, other.white, t),
     );
   }
 }
@@ -73,4 +78,5 @@ final appColors = AppColors(
   onBoardingThree: const Color(0xffffd4d4),
   yellow: const Color(0xffCCA424),
   ligthGreen: const Color(0xffa4cccc),
+  white: const Color(0xffffffff),
 );
