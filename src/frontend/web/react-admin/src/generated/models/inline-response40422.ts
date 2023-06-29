@@ -29,4 +29,10 @@ export interface InlineResponse40422 {
      * @memberof InlineResponse40422
      */
     success?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse40422
+     */
+    error?: any;
 }

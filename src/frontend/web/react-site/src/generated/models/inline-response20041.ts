@@ -19,8 +19,20 @@
 export interface InlineResponse20041 {
     /**
      * 
-     * @type {ReglementInterieur}
+     * @type {string}
      * @memberof InlineResponse20041
      */
-    reglement?: any;
+    message?: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse20041
+     */
+    success?: any;
+    /**
+     * 
+     * @type {Parents}
+     * @memberof InlineResponse20041
+     */
+    content?: any;
 }

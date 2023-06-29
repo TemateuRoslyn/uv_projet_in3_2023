@@ -21,7 +21,7 @@ import {
 
 import './DisplayReglementInterieur.css'
 import { AgGridIndicator } from '../../../components/AgGridIndicator';
-import { ReglementInterieurApi } from '../../../generated';
+import { ReglementInterieursApi } from '../../../generated';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
 import { DeleteItemModal } from '../../../components/DeleteItemModal';
 
@@ -58,7 +58,7 @@ const DisplayReglementInterieur: React.FC<DisplayReglementInterieurProps> = (pro
 
     const onGridReady = useCallback(() => {
         const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-        const reglementInterieurApi = new ReglementInterieurApi({...state.environment, accessToken: token});
+        const reglementInterieurApi = new ReglementInterieursApi({...state.environment, accessToken: token});
 
         setShowIndicator(true);
 
@@ -162,7 +162,7 @@ const DisplayReglementInterieur: React.FC<DisplayReglementInterieurProps> = (pro
 
     const processDeleteItem = () => {
         const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-        const reglementInterieurApi = new ReglementInterieurApi({...state.environment, accessToken: token});
+        const reglementInterieurApi = new ReglementInterieursApi({...state.environment, accessToken: token});
 
         setShowIndicator(true);
 
