@@ -81,6 +81,10 @@ class AuthRepository {
   void saveUserTypeInLocalStorage(String userType) async {
     await flutterSecureStorage.write(key: kUserType, value: userType);
     _userType = userType;
+
+    print(AuthRepository.getUserType);
+
+    print('object');
   }
 
   String getCurrentUserType(int userType) {

@@ -47,67 +47,68 @@ class _PageSkeletonState extends State<PageSkeleton> {
               ? appColors.primary
               : Colors.white,
           body: SafeArea(
-            child: _currentUserType == 'parents'
-                ? const ProfilePage()
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // skeleton body here
-                      if (navigationType == NavigationType.home)
-                        const HomePage(),
-                      if (navigationType == NavigationType.stats)
-                        const SizedBox(),
-                      if (navigationType == NavigationType.profile)
-                        const ProfilePage(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // skeleton body here
+                if (_currentUserType != 'parents') ...[
+                  if (navigationType == NavigationType.home) const HomePage(),
+                  if (navigationType == NavigationType.stats) const SizedBox(),
+                  if (navigationType == NavigationType.profile)
+                    const ProfilePage(),
+                ],
 
-                      // global navigation bar here
-                      Container(
-                        height: getHeight(80, context),
-                        width: double.infinity,
-                        color: navigationType == NavigationType.home
-                            ? appColors.primary
-                            : const Color(0xfffafafa),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            IconButton(
-                              onPressed: () => _navigationCubit
-                                  .changeNavigationType(NavigationType.home),
-                              icon: Icon(
-                                Icons.holiday_village,
-                                size: getHeight(30, context),
-                                color: navigationType == NavigationType.home
-                                    ? appColors.secondary
-                                    : Colors.grey,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () => _navigationCubit
-                                  .changeNavigationType(NavigationType.stats),
-                              icon: Icon(
-                                Icons.stacked_bar_chart,
-                                size: getHeight(30, context),
-                                color: navigationType == NavigationType.stats
-                                    ? appColors.secondary
-                                    : Colors.grey,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () => _navigationCubit
-                                  .changeNavigationType(NavigationType.profile),
-                              icon: Icon(
-                                Icons.person,
-                                size: getHeight(30, context),
-                                color: navigationType == NavigationType.profile
-                                    ? appColors.secondary
-                                    : Colors.grey,
-                              ),
-                            ),
-                          ],
+                if (_currentUserType == 'parents') const ProfilePage(),
+
+                // global navigation bar here
+                if (_currentUserType != 'parents')
+                  Container(
+                    height: getHeight(80, context),
+                    width: double.infinity,
+                    color: navigationType == NavigationType.home
+                        ? appColors.primary
+                        : const Color(0xfffafafa),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        IconButton(
+                          onPressed: () => _navigationCubit
+                              .changeNavigationType(NavigationType.home),
+                          icon: Icon(
+                            Icons.holiday_village,
+                            size: getHeight(30, context),
+                            color: navigationType == NavigationType.home
+                                ? appColors.secondary
+                                : Colors.grey,
+                          ),
                         ),
-                      )
-                    ],
-                  ),
+                        IconButton(
+                          onPressed: () => _navigationCubit
+                              .changeNavigationType(NavigationType.stats),
+                          icon: Icon(
+                            Icons.stacked_bar_chart,
+                            size: getHeight(30, context),
+                            color: navigationType == NavigationType.stats
+                                ? appColors.secondary
+                                : Colors.grey,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () => _navigationCubit
+                              .changeNavigationType(NavigationType.profile),
+                          icon: Icon(
+                            Icons.person,
+                            size: getHeight(30, context),
+                            color: navigationType == NavigationType.profile
+                                ? appColors.secondary
+                                : Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+              ],
+            ),
           ),
         );
       },

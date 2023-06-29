@@ -94,6 +94,7 @@ class Courses extends StatelessWidget {
                   right: getWidth(10, context)),
               children: coursesComponents
                   .map((coursesComponents) => CourseComponent(
+                        currentUserType: 'eleves',
                         courseTitle: coursesComponents['courseTitle'],
                         teacherName: coursesComponents['teacherName'],
                         onPressAction: coursesComponents['onPressAction'],

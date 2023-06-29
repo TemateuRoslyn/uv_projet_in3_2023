@@ -3,6 +3,7 @@ import 'package:fltter_app/common/utils/enums.dart';
 import 'package:fltter_app/common/utils/helper.dart';
 import 'package:fltter_app/common/views/check_internet_page.dart';
 import 'package:fltter_app/common/views/page_skeleton_two.dart';
+import 'package:fltter_app/common/widgets/common_widgets.dart';
 import 'package:fltter_app/features/home/logic/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +25,7 @@ class _ReglementsInterieursState extends State<ReglementsInterieurs> {
     super.initState();
 
     _homeCubit = context.read<HomeCubit>();
-    _homeCubit.getAllReglementInterieur();
+    _homeCubit.getDataByType('ri');
   }
 
   @override
@@ -41,49 +42,17 @@ class _ReglementsInterieursState extends State<ReglementsInterieurs> {
             positionFromTop: (screenSize.height / 2),
             errorTextColor: appColors.primary!,
             body: state.riStatus == ApiStatus.isLoading
-                ? Padding(
-                    padding: EdgeInsets.only(
-                        top: getHeight((screenSize.height / 2), context)),
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: appColors.primary,
-                      ),
-                    ),
-                  )
+                ? CommonWidgets.circularProgressIndicatorWidget(
+                    positionFromTop: (screenSize.height / 2),
+                    context: context,
+                    color: appColors.primary!)
                 : state.riStatus == ApiStatus.failed
-                    ? Padding(
-                        padding: EdgeInsets.only(
-                            top: getHeight((screenSize.height / 2), context),
-                            left: getWidth(50, context),
-                            right: getWidth(50, context)),
-                        child: Column(
-                          children: [
-                            Text(
-                              state.riStatusMessage,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: getHeight(12, context),
-                                height: getHeight(1.5, context),
-                                color: appColors.primary,
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () =>
-                                  _homeCubit.getAllReglementInterieur(),
-                              child: Text(
-                                'Recharger',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  fontSize: getHeight(12, context),
-                                  color: appColors.secondary,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
+                    ? CommonWidgets.loadingStatusFailedWidget(
+                        positionFromTop: (screenSize.height / 2),
+                        context: context,
+                        statusMessage: state.riStatusMessage,
+                        color: appColors.primary!,
+                        reloadFunction: () => _homeCubit.getDataByType('ri'))
                     : Expanded(
                         child: ListView(
                         padding: EdgeInsets.only(

@@ -54,12 +54,13 @@ class Convocation extends StatelessWidget {
                   children: convocationsComponents
                       .map((convocationsComponents) => ConvocationComponent(
                             libelle: convocationsComponents['libelle'],
-                            date: convocationsComponents['date'],
-                            start_at: convocationsComponents['start_at'],
-                            end_at: convocationsComponents['end_at'],
+                            // date: convocationsComponents['date'],
+                            subtitle1: convocationsComponents['start_at'],
+                            subtitle2: convocationsComponents['end_at'],
                             statut: convocationsComponents['statut'],
-                            onPressAction:
-                                convocationsComponents['onPressAction'],
+                            isFrom: 'convocations',
+                            // onPressAction:
+                            //     convocationsComponents['onPressAction'],
                           ))
                       .toList()),
             )

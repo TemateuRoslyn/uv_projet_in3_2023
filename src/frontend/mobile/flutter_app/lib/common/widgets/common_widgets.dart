@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../styles/colors.dart';
 import '../utils/helper.dart';
 
 class CommonWidgets {
@@ -71,6 +72,62 @@ class CommonWidgets {
             fontSize: getHeight(12, context),
             height: getHeight(1.5, context),
             color: color),
+      ),
+    );
+  }
+
+  static Widget circularProgressIndicatorWidget({
+    required double positionFromTop,
+    required BuildContext context,
+    required Color color,
+  }) {
+    return Padding(
+      padding: EdgeInsets.only(top: getHeight(positionFromTop, context)),
+      child: Center(
+        child: CircularProgressIndicator(
+          strokeWidth: 2,
+          color: color,
+        ),
+      ),
+    );
+  }
+
+  static Widget loadingStatusFailedWidget({
+    required double positionFromTop,
+    required BuildContext context,
+    required String statusMessage,
+    required Color color,
+    required void Function()? reloadFunction,
+  }) {
+    return Padding(
+      padding: EdgeInsets.only(
+          top: getHeight(positionFromTop, context),
+          left: getWidth(50, context),
+          right: getWidth(50, context)),
+      child: Column(
+        children: [
+          Text(
+            statusMessage,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: getHeight(12, context),
+              height: getHeight(1.5, context),
+              color: color,
+            ),
+          ),
+          TextButton(
+            onPressed: reloadFunction,
+            child: Text(
+              'Recharger',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                decoration: TextDecoration.underline,
+                fontSize: getHeight(12, context),
+                color: appColors.secondary,
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
