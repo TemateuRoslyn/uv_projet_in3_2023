@@ -283,7 +283,7 @@ class SanctionPrevuController extends Controller
 
 
     /**
-     * @OA\Put(
+     * @OA\Post(
      *     path="/api/sanctionprevus/update/{sanctionprevuId}",
      *     summary="Update a sanctionprevu's information",
      *     description="Update a sanctionprevu's information",

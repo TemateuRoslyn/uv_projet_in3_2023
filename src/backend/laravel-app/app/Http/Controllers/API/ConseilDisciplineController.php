@@ -230,8 +230,8 @@ class ConseilDisciplineController extends Controller
     }
 
     /**
-     * @OA\Put(
-     *     path="/api/conseil_discipline/update",
+     * @OA\Post(
+     *     path="/api/conseil_discipline/update/{conseilDisciplineId}",
      *     summary="Update a disciplinary council's information",
      *     description="Update a disciplinary council's information",
      *     operationId="updateConseilDiscipline",

@@ -228,8 +228,8 @@ class FauteController extends Controller
         ], 200);
     }
     /**
-     * @OA\Put(
-     *     path="/api/faute/update",
+     * @OA\Post(
+     *     path="/api/faute/update/{fauteId}",
      *     summary="Update a mistake's information",
      *     description="Update a mistake's information",
      *     operationId="updatemistake",
