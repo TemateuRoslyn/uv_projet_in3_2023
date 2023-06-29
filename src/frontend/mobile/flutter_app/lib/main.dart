@@ -5,7 +5,9 @@ import 'package:fltter_app/common/views/onBoarding_one.dart';
 import 'package:fltter_app/common/views/page_skeleton.dart';
 import 'package:fltter_app/common/views/splash_page.dart';
 import 'package:fltter_app/features/authentication/views/login_page.dart';
-import 'package:fltter_app/features/home/logic/home_cubit.dart';
+import 'package:fltter_app/features/home/views/convocation.dart';
+import 'package:fltter_app/features/home/views/suggestion_box.dart';
+import 'package:fltter_app/features/home/widgets/convocation_component.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
 import 'package:fltter_app/features/profile/views/profile_page.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
@@ -16,6 +18,7 @@ import 'common/configurations/routes.dart';
 import 'common/logics/navigation/navigation_cubit.dart';
 import 'features/authentication/logic/authentication/bloc/authentication_bloc.dart';
 import 'features/authentication/logic/login/login_cubit.dart';
+import 'features/home/logic/home_cubit.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -112,7 +115,7 @@ class _MyAppState extends State<MyApp> {
                 } else {
                   if (state is IsUnAuthenticated) {
                     navigatorKey.currentState!.pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(builder: (context) => Convocation()),
                         (route) => false);
                   }
 
