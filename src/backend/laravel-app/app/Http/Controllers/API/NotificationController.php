@@ -159,6 +159,7 @@ class NotificationController extends Controller
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 required={"email", "labelle", "view"},
+     *                 @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
      *                 @OA\Property(property="libelle", type="string", example="Call Out"),
      *                 @OA\Property(property="view", type="integer", example="1"),
      *             )
@@ -170,10 +171,10 @@ class NotificationController extends Controller
      *         @OA\JsonContent(
      *             @OA\Property(property="error", type="object", example={
      *                 "email": {
-     *                     "The libelle field is required."
+     *                     "The email field is required."
      *                 },
-     *                 "password": {
-     *                     "The password field is required."
+     *                 "libelle": {
+     *                     "The libelle field is required."
      *                 }
      *             })
      *         )
@@ -206,7 +207,7 @@ class NotificationController extends Controller
      *         response=201,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Notification Created"),
+     *             @OA\Property(property="message", type="string", example="Notification Created Successfully"),
      *             @OA\Property(property="success", type="boolean", example="true"),
      *             @OA\Property(property="content", type="object", ref="#/components/schemas/Notification")
      *         )
@@ -218,7 +219,7 @@ class NotificationController extends Controller
         $validator = Validator::make($request->all(), [
             'libelle' => 'required|string|max:255',
             'view' => 'required|integer',
-            'email' => 'required|email|unique:users'
+            'email' => 'required|email|unique:users',
         ]);
 
         if ($validator->fails()) {
@@ -283,7 +284,7 @@ class NotificationController extends Controller
      *                 required={"email", "labelle", "view"},
      *                 @OA\Property(property="libelle", type="string", example="Call Out"),
      *                 @OA\Property(property="view", type="integer", example="1"),
-     *             )
+     *                 @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),             )
      *         )
      *     ),
      *     @OA\Response(
@@ -362,6 +363,7 @@ class NotificationController extends Controller
             $notificationFound->libelle = $request->input('libelle');
             $notificationFound->view = $request->input('view');
 
+            $notificationFound->save();
             $notificationFound->user = $user;
 
         return response()->json([
@@ -438,13 +440,13 @@ class NotificationController extends Controller
             return response()->json([
                 'message' => 'Notification deleted successfully',
                 'success' => true,
+            ], 200);
+        }else{
+            return response()->json([
+                'message' => 'Notification not found',
+                'success' => false
             ], 404);
         }
 
-
-        return response()->json([
-            'message' => 'Notification not found',
-            'success' => false
-        ]);
     }
 }
