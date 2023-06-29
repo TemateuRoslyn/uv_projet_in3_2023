@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('regles', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('libelle');
-            $table->unsignedBigInteger('reglement_interieur_id');
-            $table->foreign('reglement_interieur_id')->references('id')->on('reglement_interieurs');
+            $table->unsignedBigInteger('reglementInterieurId');
+            $table->foreign('reglementInterieurId')->references('id')->on('reglement_interieurs')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

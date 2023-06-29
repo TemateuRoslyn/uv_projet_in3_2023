@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('reglement_interieurs', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('libelle');
+            $table->timestamps();
         });
     }
 

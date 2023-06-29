@@ -159,17 +159,17 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll', [ReglementInterieurController::class, 'index']);
         Route::get('findOne/{reglementId}', [ReglementInterieurController::class, 'view']);
         Route::middleware('permission:creer_reglement_interieur')->post('create', [ReglementInterieurController::class, 'store']);
-        Route::middleware('permission:modifier_reglement_interieur')->post('update', [ReglementInterieurController::class, 'update']);
+        Route::middleware('permission:modifier_reglement_interieur')->post('update/{reglementId}', [ReglementInterieurController::class, 'update']);
         Route::middleware('permission:supprimer_reglement_interieur')->delete('delete/{reglementId}', [ReglementInterieurController::class, 'delete']);
     });
 
     // Regle
     Route::prefix('regle')->group(function () {
-        Route::get('findAll', [RegleController::class, 'showAll']);
-        Route::post('create', [RegleController::class, 'store']);
-        Route::get('findOne/{regleId}', [RegleController::class, 'showIndex']);
-        Route::post('update', [RegleController::class, 'update']);
-        Route::delete('delete/{regleId}', [RegleController::class, 'delete']);
+        Route::get('findAll', [RegleController::class, 'index']);
+        Route::get('findOne/{regleId}', [RegleController::class, 'view']);
+        Route::middleware('permission:creer_regle')->post('create', [RegleController::class, 'store']);
+        Route::middleware('permission:modifier_regle')->post('update/{regleId}', [RegleController::class, 'update']);
+        Route::middleware('permission:supprimer_regle')->delete('delete/{regleId}', [RegleController::class, 'delete']);
     });
 
     // cours

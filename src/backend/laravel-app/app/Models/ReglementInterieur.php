@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *     required={"libelle"},
  *     @OA\Xml(name="ReglementInterieur"),
  *     @OA\Property(property="id", type="integer", readOnly=true, example="1"),
- *     @OA\Property(property="role", type="string", readOnly=true, description="Un nouveau reglement interieur"),
+ *     @OA\Property(property="libelle", type="string", readOnly=true, description="Un nouveau reglement interieur"),
  *     @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),
  *     @OA\Property(property="updated_at", ref="#/components/schemas/BaseModel/properties/updated_at"),
  *     @OA\Property(property="deleted_at", ref="#/components/schemas/BaseModel/properties/deleted_at")
@@ -31,4 +31,7 @@ class ReglementInterieur extends Model
     protected $fillable = [
         'libelle'
     ];
+    public function regle(){
+        return $this->belongsToMany(Regle::class, 'reglementInterieurId');
+    }
 }

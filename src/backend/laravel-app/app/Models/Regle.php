@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @OA\Schema(
- *     required={"libelle"},
+ *     required={"libelle", "reglementInterieurId", "reglementInterieur"},
  *     @OA\Xml(name="Regle"),
  *     @OA\Property(property="id", type="integer", readOnly=true, example="1"),
- *     @OA\Property(property="role", type="string", readOnly=true, description="Une regle"),
+ *     @OA\Property(property="reglementInterieurId", type="integer", example=1),
+ *     @OA\Property(property="libelle", type="string", readOnly=true, description="Une regle"),
+ *     @OA\Property(property="reglementInterieur", ref="#/components/schemas/ReglementInterieur"),
  *     @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),
  *     @OA\Property(property="updated_at", ref="#/components/schemas/BaseModel/properties/updated_at"),
  *     @OA\Property(property="deleted_at", ref="#/components/schemas/BaseModel/properties/deleted_at")
@@ -31,11 +33,12 @@ class Regle extends Model
 
     protected $fillable = [
         'libelle',
-        'reglement_interieur_id'
+        'reglementInterieurId',
+        'reglementInterieur',
     ];
 
     public function reglementInterieur()
     {
-        return $this->belongsTo(ReglementInterieur::class);
+        return $this->belongsTo(ReglementInterieur::class, 'reglementInterieurId');
     }
 }

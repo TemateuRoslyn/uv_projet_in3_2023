@@ -14,9 +14,9 @@ class RegleController extends Controller
     /**
      * @OA\Get(
      *     path="/api/regle/findAll",
-     *     summary="Find all regles",
+     *     summary="Get all regles",
      *     description="Retrieve a list of all regles with associated reglementInterieur",
-     *     operationId="findAllRegles",
+     *     operationId="reglesIndex",
      *     tags={"Regles"},
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
@@ -33,8 +33,9 @@ class RegleController extends Controller
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Regles retrieved successfully"),
      *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/Regle"))
+     *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Regle"))
      *         )
      *     ),
      *     @OA\Response(
@@ -46,14 +47,15 @@ class RegleController extends Controller
      *     )
      * )
      */
-    public function showAll()
+    public function index()
     {
         $regles = Regle::has('reglementInterieur')->with('reglementInterieur')->get();
         //$regles = Regle::all();
 
         return response()->json([
+            'message' => 'Regles retrieved successfully',
             'success' => true,
-            'data' => $regles
+            'content' => $regles
         ], 200);
     }
 
@@ -78,9 +80,9 @@ class RegleController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *           required={"libelle", "reglement_interieur_id"},
+     *           required={"libelle", "reglementInterieurId"},
      *             @OA\Property(property="libelle", type="string", format="text", example="Ne pas sortir sans avoir eu la permission"),
-     *             @OA\Property(property="reglement_interieur_id", type="integer", example=1)
+     *             @OA\Property(property="reglementInterieurId", type="integer", example=1)
      *         )
      *     ),
      *     @OA\Response(
@@ -88,21 +90,24 @@ class RegleController extends Controller
      *         description="Error - Invalid request data",
      *         @OA\JsonContent(
      *             @OA\Property(property="message", type="string", example="The given data was invalid"),
+     *             @OA\Property(property="success", type="boolean", example=false),
      *             @OA\Property(property="errors", type="object", example={
      *                 "libelle": {
      *                     "The libelle field is required."
-     *                 }
+     *                 },
+     *                 "reglementInterieurId": {
+     *                     "The id of the reglement interieur is required."
+     *                 },
      *             }),
-     *             @OA\Property(property="success", type="boolean", example=false)
      *         )
      *     ),
      *     @OA\Response(
-     *         response=201,
+     *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
      *             @OA\Property(property="success", type="boolean", example=true),
      *             @OA\Property(property="message", type="string", example="Regle created successfully"),
-     *             @OA\Property(property="data", ref="#/components/schemas/Regle")
+     *             @OA\Property(property="content", ref="#/components/schemas/Regle")
      *         )
      *     )
      * )
@@ -111,7 +116,7 @@ class RegleController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'libelle' => 'required|string|max:255',
-            'reglement_interieur_id' => 'required|integer'
+            'reglementInterieurId' => 'required|integer|exists:reglement_interieurs,id',
         ]);
 
         if ($validator->fails()) {
@@ -124,23 +129,22 @@ class RegleController extends Controller
 
         $regles = Regle::create([
             'libelle' => $request->libelle,
-            'reglement_interieur_id' => $request->reglement_interieur_id
+            'reglementInterieurId' => $request->reglementInterieurId
         ]);
 
         return response()->json([
             'success' => true,
             'message' => 'Regle created successfully',
-            'data' => $regles
-        ], 201);
+            'content' => $regles
+        ], 200);
     }
-
 
     /**
      * @OA\Get(
      *     path="/api/regle/findOne/{id}",
      *     summary="Get regle information",
      *     description="Get information about a specific regle",
-     *     operationId="findOneRegle",
+     *     operationId="viewRegle",
      *     tags={"Regles"},
      *     @OA\Parameter(
      *         name="Authorization",
@@ -172,21 +176,22 @@ class RegleController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Regle not found")
+     *             @OA\Property(property="success", type="boolean", example="false"),
+     *             @OA\Property(property="message", type="string", example="Regle not found")
      *         )
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Regle trouvé(e)"),
+     *             @OA\Property(property="message", type="string", example="Regle trouvée"),
      *             @OA\Property(property="success", type="boolean", example="true"),
-     *             @OA\Property(property="data", type="object", ref="#/components/schemas/Regle")
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Regle")
      *         )
      *     )
      * )
      */
-    public function showIndex(string $id)
+    public function view(string $id)
     {
         $regle = Regle::with('reglementInterieur')->find($id);
         //$regle = Regle::find($id);
@@ -199,8 +204,9 @@ class RegleController extends Controller
         }
 
         return response()->json([
+            'message' => 'Regle trouvée',
             'success' => true,
-            'data' => $regle
+            'content' => $regle
         ], 200);
     }
 
@@ -224,19 +230,24 @@ class RegleController extends Controller
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *              required={"libelle", "reglement_interieur_id"},
+     *              required={"libelle", "reglementInterieurId"},
      *             @OA\Property(property="libelle", type="string", format="text", example="Ne pas sortir sans avoir eu la permission"),
-     *             @OA\Property(property="reglement_interieur_id", type="integer", example=1)
+     *             @OA\Property(property="reglementInterieurId", type="integer", example=1)
      *         )
      *     ),
      *     @OA\Response(
      *         response=400,
      *         description="Error - Invalid request data",
      *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="The given data was invalid"),
+     *             @OA\Property(property="success", type="boolean", example=false),
      *             @OA\Property(property="error", type="object", example={
      *                "libelle": {
      *                     "The libelle field is required."
-     *                 }
+     *                 },
+     *                "reglementInterieurId": {
+     *                     "The id of the reglementInterieur is required."
+     *                 },
      *             })
      *         )
      *     ),
@@ -251,24 +262,27 @@ class RegleController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Regle not found")
+     *             @OA\Property(property="success", type="boolean", example=false),
+     *             @OA\Property(property="message", type="string", example="Regle not found")
      *         )
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="regle", type="object", ref="#/components/schemas/Regle"),
+     *             @OA\Property(property="message", type="string", example="Regle updated successfully"),
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Regle"),
      *         )
      *     )
      * )
      */
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'libelle' => 'required|string|max:255',
-            'reglement_interieur_id' => 'required|integer'
+            'reglementInterieurId' => 'required|integer|exists:reglement_interieurs,id',
         ]);
 
         if ($validator->fails()) {
@@ -279,7 +293,7 @@ class RegleController extends Controller
             ], 400);
         }
 
-        $regle = Regle::find($request->id);
+        $regle = Regle::find($id);
 
         if (!$regle) {
             return response()->json([
@@ -290,13 +304,13 @@ class RegleController extends Controller
 
         $regle->update([
             'libelle' => $request->libelle,
-            'reglement_interieur_id' => $request->reglement_interieur_id,
+            'reglementInterieurId' => $request->reglementInterieurId,
         ]);
 
         return response()->json([
             'success' => true,
             'message' => 'Regle updated successfully',
-            'data' => $regle
+            'content' => $regle
         ], 200);
     }
 
@@ -338,12 +352,17 @@ class RegleController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Regle not found")
+     *             @OA\Property(property="success", type="boolean", example=false),
+     *             @OA\Property(property="message", type="string", example="Regle not found")
      *         )
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Regle deleted successfully"),
+     *         )
      *     )
      * )
      */

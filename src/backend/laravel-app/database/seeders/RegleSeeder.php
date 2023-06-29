@@ -16,7 +16,7 @@ class RegleSeeder extends Seeder
     {
         Regle::create([
             'libelle' => 'regle de l\'ecole',
-            'reglement_interieur_id' => '1'
+            'reglementInterieurId' => '1'
         ]);
     }
 }
