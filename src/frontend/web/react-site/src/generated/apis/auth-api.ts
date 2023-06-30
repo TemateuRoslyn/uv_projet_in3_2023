@@ -20,7 +20,6 @@ import { AuthLoginBody } from '../models';
 import { AuthRegisterBody } from '../models';
 import { InlineResponse200 } from '../models';
 import { InlineResponse2001 } from '../models';
-import { InlineResponse2002 } from '../models';
 import { InlineResponse201 } from '../models';
 import { InlineResponse400 } from '../models';
 import { InlineResponse401 } from '../models';
@@ -211,7 +210,7 @@ export const AuthApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authLogin(body: AuthLoginBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
+        async authLogin(body: AuthLoginBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse201>> {
             const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).authLogin(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -225,7 +224,7 @@ export const AuthApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authLogout(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
+        async authLogout(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
             const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).authLogout(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -252,7 +251,7 @@ export const AuthApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authUser(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
+        async authUser(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
             const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).authUser(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -275,7 +274,7 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authLogin(body: AuthLoginBody, options?: any): AxiosPromise<InlineResponse200> {
+        authLogin(body: AuthLoginBody, options?: any): AxiosPromise<InlineResponse201> {
             return AuthApiFp(configuration).authLogin(body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -285,7 +284,7 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authLogout(authorization: string, options?: any): AxiosPromise<InlineResponse2002> {
+        authLogout(authorization: string, options?: any): AxiosPromise<InlineResponse2001> {
             return AuthApiFp(configuration).authLogout(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -304,7 +303,7 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authUser(options?: any): AxiosPromise<InlineResponse2001> {
+        authUser(options?: any): AxiosPromise<InlineResponse200> {
             return AuthApiFp(configuration).authUser(options).then((request) => request(axios, basePath));
         },
     };

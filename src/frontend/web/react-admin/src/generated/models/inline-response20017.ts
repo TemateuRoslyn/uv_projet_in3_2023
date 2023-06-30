@@ -31,8 +31,8 @@ export interface InlineResponse20017 {
     success?: any;
     /**
      * 
-     * @type {Array&lt;Cour&gt;}
+     * @type {Parents}
      * @memberof InlineResponse20017
      */
-    content?: any;
+    data?: any;
 }

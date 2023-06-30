@@ -19,20 +19,8 @@
 export interface InlineResponse20023 {
     /**
      * 
-     * @type {string}
+     * @type {Array&lt;Professeur&gt;}
      * @memberof InlineResponse20023
      */
-    message?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse20023
-     */
-    success?: any;
-    /**
-     * 
-     * @type {Eleve}
-     * @memberof InlineResponse20023
-     */
-    content?: any;
+    professeurs?: any;
 }

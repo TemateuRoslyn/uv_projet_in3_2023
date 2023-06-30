@@ -29,4 +29,10 @@ export interface InlineResponse20012 {
      * @memberof InlineResponse20012
      */
     message?: any;
+    /**
+     * 
+     * @type {Array&lt;Eleve&gt;}
+     * @memberof InlineResponse20012
+     */
+    content?: any;
 }
