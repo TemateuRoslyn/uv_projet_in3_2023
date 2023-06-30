@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Cour;
+use App\Models\CoursClasse;
 use Illuminate\Http\Request;
 
 class CourController extends Controller
@@ -50,7 +51,7 @@ class CourController extends Controller
 
     public function index()
     {
-        $cours = Cour::all();
+        $cours = Cour::with('classes', 'professeur')->get();
 
         return response()->json([
             'success' => true,
@@ -113,7 +114,7 @@ class CourController extends Controller
 
     public function show($coursId)
     {
-        $cour = Cour::find($coursId);
+        $cour = Cour::with('classes', 'professeur')->find($coursId);
 
         if (!$cour) {
             return response()->json([
@@ -155,6 +156,7 @@ class CourController extends Controller
      *             @OA\Property(property="date_cour", type="string", format="date", example="2023-06-05"),
      *             @OA\Property(property="heure_debut", type="string", example="09:00"),
      *             @OA\Property(property="heure_fin", type="string", example="10:30"),
+     *              @OA\Property(property="classesId", type="array", example="[1,2]", @OA\Items(type="integer")),
      *
      *         )
      *     ),
@@ -192,6 +194,7 @@ class CourController extends Controller
             'date_cour' => 'required|date',
             'heure_debut' => 'required|date',
             'heure_fin' => 'required|date',
+            'classesId' => 'required|array'
         ]);
 
         if ($validator->fails()) {
@@ -208,6 +211,16 @@ class CourController extends Controller
             'heure_fin' => $request->heure_fin,
             //  'professeur_id' => $request->professeur_id,
         ]);
+
+        foreach ($request->classesId as $classeId) {
+            CoursClasse::create([
+                'courId' => $cour->id,
+                'classeId' => $classeId
+            ]);
+        }
+
+        $cour->load('classes');
+        $cour->load('professeur');
 
         return response()->json([
             'success' => true,
@@ -243,6 +256,7 @@ class CourController extends Controller
      *             @OA\Property(property="date_cour", type="string", format="date", example="1990-01-01"),
      *             @OA\Property(property="heure_debut", type="string", example="12-03-34"),
      *             @OA\Property(property="heure_fin", type="string", example="12-03-34"),
+     *              @OA\Property(property="classesId", type="array", example="[1,2]", @OA\Items(type="integer")),
      *         )
      *     ),
      *     @OA\Response(
@@ -285,10 +299,10 @@ class CourController extends Controller
      * )
      */
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         // on récupère le cour associé
-        $courFound = Cour::find($request->id);
+        $courFound = Cour::find($id);
         if ($courFound) {
 
             $validator = Validator::make($request->all(), [
@@ -296,6 +310,7 @@ class CourController extends Controller
                 'date_cour' => 'required|date',
                 'heure_debut' => 'required|date',
                 'heure_fin' => 'required|date',
+                'classesId' => 'required|array'
             ]);
         } else {
             return response()->json([
@@ -321,6 +336,18 @@ class CourController extends Controller
         //   $courFound->professeur_id = $request->input('professeur_id');
 
         $courFound->save();
+
+        CoursClasse::where('courId', $courFound->id)->delete();
+
+        foreach ($request->classesId as $classeId) {
+            CoursClasse::create([
+                'courId' => $courFound->id,
+                'classeId' => $classeId
+            ]);
+        }
+
+        $courFound->load('classes');
+        $courFound->load('professeur');
 
         return response()->json([
             'message' => 'Course updated successfully',
@@ -392,6 +419,8 @@ class CourController extends Controller
             ], 404);
         }
 
+        $cour->classes()->detach();
+        CoursClasse::where('courId', $cour->id)->delete();
         $cour->delete();
 
         return response()->json([
