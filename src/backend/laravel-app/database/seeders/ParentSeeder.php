@@ -5,6 +5,10 @@ namespace Database\Seeders;
 use App\Models\Eleve;
 use App\Models\Parents;
 use App\Models\User;
+use App\Models\Role;
+use App\Models\Permission;
+
+
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -41,5 +45,21 @@ class ParentSeeder extends Seeder
 
         //Associer le parent a ses eleves
         $parent->eleves()->attach([$eleve->id, $eleve1->id]);
+
+        // Recuperer le rôle l'eleve
+        $parentRole = Role::where('name', PARENT_ROLE['name'])->first();
+
+        //assigner le role
+        if ($parentRole) {
+            $user->roles()->attach($parentRole);
+        }
+
+
+        foreach (PARENT_PERMISSIONS as $permission) {
+            $parentPermis = Permission::where('name', $permission['name'])->first();
+            if ($parentPermis) {
+                $user->permissions()->attach($parentPermis);
+            }
+        }
     }
 }

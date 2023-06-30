@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Classe;
 use App\Models\Cour;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -16,7 +17,6 @@ class ProfesseurController extends Controller
 {
     private $avatar_path = "assets/avatars/professeurs";
 
-    //doc d'index
     /**
      * @OA\Get(
      *     path="/api/professeurs/findAll",
@@ -40,7 +40,7 @@ class ProfesseurController extends Controller
      *         description="Success",
      *         @OA\JsonContent(
      *              @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
+     *             @OA\Property(property="message", type="string", example="Liste des professeurs"),
      *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Professeur"))
      *         )
      *     ),
@@ -55,8 +55,12 @@ class ProfesseurController extends Controller
      */
     public function index()
     {
-        $professeurs = Professeur::has('user')->with('user')->get();
-
+        $professeurs = Professeur::with('user', 'cour')->get();
+        foreach ($professeurs as $professeur) {
+            $str = str_replace(array('[', ']'), '', $professeur->classesId);
+            $classIds = array_map('intval', explode(',', $str));
+            $professeur->classes = Classe::whereIn('id', $classIds)->get();
+        }
 
         return response()->json([
             'message' => 'Liste des professeurs',
@@ -67,7 +71,7 @@ class ProfesseurController extends Controller
 
 /**
      * @OA\Get(
-     *     path="/api/professeur/findOne/{id}",
+     *     path="/api/professeurs/findOne/{id}",
      *     summary="Get professeur information",
      *     description="Get information about a specific professeur",
      *     operationId="viewProfesseur",
@@ -119,11 +123,18 @@ class ProfesseurController extends Controller
      */
     public function view($professeurId)
     {
-        $professeur = Professeur::with('user')->find($professeurId);
+        $professeur = Professeur::with('user')
+                                ->has('cour')->with('cour')
+                                ->find($professeurId);
 
         if ($professeur) {
             $professeurIdData = $professeur->toArray();
             $professeurIdData['email'] = $professeur->user->email;
+
+            $str = str_replace(array('[', ']'), '', $professeur->classesId);
+            $classIds = array_map('intval', explode(',', $str));
+            //dd($classIds);
+            $professeurIdData['classes'] = Classe::whereIn('id', $classIds)->get();
 
             return response()->json([
                 'message' => 'professeur trouvé(e)',
@@ -158,17 +169,18 @@ class ProfesseurController extends Controller
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"email", "firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "statut", "courId"},
+     *             required={"firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "statut", "courId","classesId","email"},
      *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
      *             @OA\Property(property="firstName", type="string", example="John"),
      *             @OA\Property(property="lastName", type="string", example="Smith"),
      *             @OA\Property(property="dateDeNaissance", type="string", format="date", example="1990-01-01"),
      *             @OA\Property(property="lieuDeNaissance", type="string", example="Paris"),
-     *             @OA\Property(property="photo", type="string", nullable=true, example="https://example.com/photo.jpg"),
+     *                 @OA\Property(property="photo", type="string", format="binary", nullable=true),
      *             @OA\Property(property="sexe", type="string", example="Male"),
      *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
      *             @OA\Property(property="statut", type="string", example="censeur"),
      *              @OA\Property(property="courId", type="integer", example=2),
+     *              @OA\Property(property="classesId", type="array", example="[1,2]", @OA\Items(type="integer")),
      *         )
      *     ),
      *     @OA\Response(
@@ -179,8 +191,8 @@ class ProfesseurController extends Controller
      *                 "email": {
      *                     "The email field is required."
      *                 },
-     *                 "password": {
-     *                     "The password field is required."
+     *                 "classesId": {
+     *                     "The classesId field is required."
      *                 }
      *             })
      *         )
@@ -200,11 +212,11 @@ class ProfesseurController extends Controller
      *                 "email": {
      *                     "The email must be a valid email address."
      *                 },
-     *                 "password": {
-     *                     "The password must be at least 8 characters."
+     *                 "firstName": {
+     *                     "The firstName must be at least 8 characters."
      *                 },
-     *                 "username": {
-     *                     "The username field is required."
+     *                 "lastName": {
+     *                     "The lastName field is required."
      *                 }
      *             })
      *         )
@@ -234,6 +246,8 @@ class ProfesseurController extends Controller
             'telephone' => 'required',
             'statut' => 'required',
             'courId' => 'required',
+            'classesId' => 'required|array',
+
 
         ]);
 
@@ -268,6 +282,7 @@ class ProfesseurController extends Controller
         }
 
         $professeur = Professeur::create([
+            'classesId' => json_encode($request->input('classesId')),
             'courId' => $request->input('courId'),
             'userId' => $user->id,
             'statut' => $request->input('statut'),
@@ -275,13 +290,16 @@ class ProfesseurController extends Controller
             'lastName' => $request->input('lastName'),
             'dateDeNaissance' => $request->input('dateDeNaissance'),
             'lieuDeNaissance' => $request->input('lieuDeNaissance'),
-            'photo' => $request->file('photo') ? $request->file('photo')->store($this->avatar_path) : null,
+            'photo' => $photo,
             'sexe' => $request->input('sexe'),
             'telephone' => $request->input('telephone'),
         ]);
 
         $professeur->user = $user;
-        $professeur->cours = Cour::with('professeur')->find($professeur->id);
+        $professeur->cours = Cour::find($professeur->courId);
+        $str = str_replace(array('[', ']'), '', $professeur->classesId);
+        $classIds = array_map('intval', explode(',', $str));
+        $professeur->classes = Classe::whereIn('id', $classIds)->get();
 
         // Créer un professeur de base avec le rôle professeur
         $professeurRole = Role::where('name', 'professeur')->first();
@@ -335,17 +353,18 @@ class ProfesseurController extends Controller
      *      @OA\MediaType(
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
-     *                 required={"email", "firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "statut", "courId"},
-     *                 @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
-     *                 @OA\Property(property="firstName", type="string", example="John"),
-     *                 @OA\Property(property="lastName", type="string", example="Smith"),
-     *                 @OA\Property(property="dateDeNaissance", type="string", format="date", example="1990-01-01"),
-     *                 @OA\Property(property="lieuDeNaissance", type="string", example="Paris"),
+     *                 required={"firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "statut", "courId","classesId","email"},
+     *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
+     *             @OA\Property(property="firstName", type="string", example="John"),
+     *             @OA\Property(property="lastName", type="string", example="Smith"),
+     *             @OA\Property(property="dateDeNaissance", type="string", format="date", example="1990-01-01"),
+     *             @OA\Property(property="lieuDeNaissance", type="string", example="Paris"),
      *                 @OA\Property(property="photo", type="string", format="binary", nullable=true),
-     *                 @OA\Property(property="sexe", type="string", example="Male"),
-     *                 @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
-     *                 @OA\Property(property="statut", type="string", example="censeur"),
-     *                 @OA\Property(property="courId", type="integer", example=1),
+     *             @OA\Property(property="sexe", type="string", example="Male"),
+     *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
+     *             @OA\Property(property="statut", type="string", example="censeur"),
+     *              @OA\Property(property="courId", type="integer", example=2),
+     *              @OA\Property(property="classesId", type="array", example="[1,2]", @OA\Items(type="integer")),
      *
      *             )
      *         )
@@ -357,11 +376,11 @@ class ProfesseurController extends Controller
      *             @OA\Property(property="message", type="string", example="The given data are invalid"),
      *             @OA\Property(property="success", type="boolean", example="false"),
      *             @OA\Property(property="error", type="object", example={
-     *                 "email": {
-     *                     "The email field is required."
+     *                 "sexe": {
+     *                     "The sexe field is required."
      *                 },
-     *                 "password": {
-     *                     "The password field is required."
+     *                 "statut": {
+     *                     "The statut field is required."
      *                 }
      *             })
      *         )
@@ -377,7 +396,7 @@ class ProfesseurController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Professor not found")
+     *             @OA\Property(property="message", type="string", example="professeur not found"),
      *             @OA\Property(property="success", type="boolean", example="false"),
      *         )
      *     ),
@@ -411,7 +430,8 @@ class ProfesseurController extends Controller
                 'sexe' => 'required',
                 'telephone' => 'required',
                 'statut' => 'required',
-               'courId' => 'required'
+               'courId' => 'required',
+               'classesId' => 'required|array'
             ]);
         } else {
             return response()->json([
@@ -452,6 +472,7 @@ class ProfesseurController extends Controller
         $professeurFound->sexe = $request->input('sexe');
         $professeurFound->telephone = $request->input('telephone');
         $professeurFound->statut =  $request->input('statut');
+        $professeurFound->classesId =  json_encode($request->input('classesId'));
 
           // update de cour de professeur...
 
@@ -486,7 +507,9 @@ class ProfesseurController extends Controller
 
         $professeurFound->user = $user;
         $professeurFound->cour = $cour;
-/////
+        $str = str_replace(array('[', ']'), '', $professeurFound->classesId);
+        $classIds = array_map('intval', explode(',', $str));
+        $professeurFound->classes = Classe::whereIn('id', $classIds)->get();
         //$professeurFound = Professeur::with('user')->find($professeurFound->id);
 
         return response()->json([

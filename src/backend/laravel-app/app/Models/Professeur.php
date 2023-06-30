@@ -17,9 +17,10 @@ use Illuminate\Database\Eloquent\Model;
  *     @OA\Property(property="photo", type="string", format="url", example="https://example.com/photo.jpg"),
  *     @OA\Property(property="sexe", type="string", example="male"),
  *     @OA\Property(property="telephone", type="string", example="+33123456789"),
- *     @OA\Property(property="statut", type="string", example="surveillant general"),
- *     @OA\Property(property="user", type="object", ref="#/components/schemas/User"),
+*     @OA\Property(property="user", type="object", ref="#/components/schemas/User"),
  *     @OA\Property(property="cour", type="object", ref="#/components/schemas/Cour"),
+ *     @OA\Property(property="classesId", type="array",example="[1,2]", @OA\Items(type="integer")),
+ *     @OA\Property(property="classes", type="array", @OA\Items(ref="#/components/schemas/Classe")),
  *     @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),
  *     @OA\Property(property="updated_at", ref="#/components/schemas/BaseModel/properties/updated_at"),
  *     @OA\Property(property="deleted_at", ref="#/components/schemas/BaseModel/properties/deleted_at")
@@ -32,7 +33,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class Professeur
  *
  * @package App\Models
- * */
+ */
 
 class Professeur extends Model
 {
@@ -48,15 +49,20 @@ class Professeur extends Model
         'userId',
         'user',
         'courId',
-        'cour'
+        'cour',
+        'classesId',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'userId');
     }
-    public function cours()
+    public function cour()
     {
         return $this->belongsTo(Cour::class, 'courId');
+    }
+    public function classes()
+    {
+        return $this->belongsToMany(Classe::class);
     }
 }
