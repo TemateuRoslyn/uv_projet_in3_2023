@@ -41,4 +41,8 @@ class Regle extends Model
     {
         return $this->belongsTo(ReglementInterieur::class, 'reglementInterieurId');
     }
+    public function faute()
+    {
+        return $this->hasMany(Faute::class);
+    }
 }

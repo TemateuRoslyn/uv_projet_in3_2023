@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @OA\Schema(
- *     required={"date_cd", "heure_debut_cd", "heure_fin_cd"},
+ *     required={"date_cd", "heure_debut_cd", "heure_fin_cd", "eleveId", "eleve"},
  *     @OA\Xml(name="ConseilDiscipline"),
  *     @OA\Property(property="id", type="integer", readOnly=true, example="1"),
  *     @OA\Property(property="date_cd", type="string", format="date", example="2023-04-01"),
  *     @OA\Property(property="heure_debut_cd", type="string", format="date", example="11:00:00"),
  *     @OA\Property(property="heure_fin_cd", type="string", format="date", example="13:00:00"),
+ *     @OA\Property(property="eleveId", type="integer", readOnly=true, example="1"),
+ *     @OA\Property(property="eleve", type="object", ref="#/components/schemas/Eleve"),
  *     @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),
  *     @OA\Property(property="updated_at", ref="#/components/schemas/BaseModel/properties/updated_at"),
  *     @OA\Property(property="deleted_at", ref="#/components/schemas/BaseModel/properties/deleted_at")
@@ -33,10 +35,10 @@ class ConseilDiscipline extends Model
         'heureDebutCd',
         'heureFinCd',
         'eleveId',
-
+        'eleve',
     ];
     public function eleve()
     {
-        return $this->hasOne(Eleve::class);
+        return $this->belongsTo(Eleve::class, 'eleveId');
     }
 }
