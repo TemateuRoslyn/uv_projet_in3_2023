@@ -63,6 +63,6 @@ class Professeur extends Model
     }
     public function classes()
     {
-        return $this->belongsToMany(Classe::class);
+        return $this->belongsToMany(Classe::class, 'classe_professeurs', 'professeurId', 'classeId');
     }
 }

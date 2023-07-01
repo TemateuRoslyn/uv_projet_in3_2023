@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 use App\Models\Classe;
+use App\Models\ClasseProfesseur;
+use App\Models\CoursClasse;
 
 
 class ClassesController extends Controller
@@ -160,6 +162,9 @@ class ClassesController extends Controller
             ]);
         }
 
+        $classe->load('eleves');
+        $classe->load('cours');
+        $classe->load('professeurs');
         return response()->json([
             'success' => true,
             'message' => 'Classe created successfully',
@@ -315,7 +320,7 @@ class ClassesController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Could not create this classe',
+                'message' => 'Could not update this classe',
                 'success' => false,
                 'error' => $validator->errors()
             ], 400);
@@ -356,6 +361,10 @@ class ClassesController extends Controller
                 'effectif' => $request->effectif,
             ]);
         }
+
+        $classeFound->load('eleves');
+        $classeFound->load('cours');
+        $classeFound->load('professeurs');
 
         return response()->json([
             'success' => true,
@@ -422,6 +431,10 @@ class ClassesController extends Controller
             ], 404);
         }
 
+        $classe->professeurs()->detach();
+        $classe->cours()->detach();
+        ClasseProfesseur::where('classeId', $classe->id)->delete();
+        CoursClasse::where('classeId', $classe->id)->delete();
         $classe->delete();
 
         return response()->json([

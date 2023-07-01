@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\Professeur;
 use App\Models\User;
 use App\Models\Permission;
+use App\Models\ClasseProfesseur;
 use App\Models\Role;
 
 class ProfesseurController extends Controller
@@ -55,12 +56,7 @@ class ProfesseurController extends Controller
      */
     public function index()
     {
-        $professeurs = Professeur::with('user', 'cour')->get();
-        foreach ($professeurs as $professeur) {
-            $str = str_replace(array('[', ']'), '', $professeur->classesId);
-            $classIds = array_map('intval', explode(',', $str));
-            $professeur->classes = Classe::whereIn('id', $classIds)->get();
-        }
+        $professeurs = Professeur::with('user', 'cour', 'classes')->get();
 
         return response()->json([
             'message' => 'Liste des professeurs',
@@ -125,16 +121,12 @@ class ProfesseurController extends Controller
     {
         $professeur = Professeur::with('user')
                                 ->has('cour')->with('cour')
+                                ->has('classes')->with('classes')
                                 ->find($professeurId);
 
         if ($professeur) {
             $professeurIdData = $professeur->toArray();
             $professeurIdData['email'] = $professeur->user->email;
-
-            $str = str_replace(array('[', ']'), '', $professeur->classesId);
-            $classIds = array_map('intval', explode(',', $str));
-            //dd($classIds);
-            $professeurIdData['classes'] = Classe::whereIn('id', $classIds)->get();
 
             return response()->json([
                 'message' => 'professeur trouvé(e)',
@@ -282,7 +274,6 @@ class ProfesseurController extends Controller
         }
 
         $professeur = Professeur::create([
-            'classesId' => json_encode($request->input('classesId')),
             'courId' => $request->input('courId'),
             'userId' => $user->id,
             'statut' => $request->input('statut'),
@@ -295,11 +286,16 @@ class ProfesseurController extends Controller
             'telephone' => $request->input('telephone'),
         ]);
 
+        foreach ($request->classesId as $classeId) {
+            ClasseProfesseur::create([
+                'professeurId' => $professeur->id,
+                'classeId' => $classeId
+            ]);
+        }
+
+        $professeur->load('classes');
         $professeur->user = $user;
         $professeur->cours = Cour::find($professeur->courId);
-        $str = str_replace(array('[', ']'), '', $professeur->classesId);
-        $classIds = array_map('intval', explode(',', $str));
-        $professeur->classes = Classe::whereIn('id', $classIds)->get();
 
         // Créer un professeur de base avec le rôle professeur
         $professeurRole = Role::where('name', 'professeur')->first();
@@ -472,7 +468,6 @@ class ProfesseurController extends Controller
         $professeurFound->sexe = $request->input('sexe');
         $professeurFound->telephone = $request->input('telephone');
         $professeurFound->statut =  $request->input('statut');
-        $professeurFound->classesId =  json_encode($request->input('classesId'));
 
           // update de cour de professeur...
 
@@ -507,9 +502,15 @@ class ProfesseurController extends Controller
 
         $professeurFound->user = $user;
         $professeurFound->cour = $cour;
-        $str = str_replace(array('[', ']'), '', $professeurFound->classesId);
-        $classIds = array_map('intval', explode(',', $str));
-        $professeurFound->classes = Classe::whereIn('id', $classIds)->get();
+        ClasseProfesseur::where('professeurId', $professeurFound->id)->delete();
+        foreach ($request->classesId as $classeId) {
+            ClasseProfesseur::create([
+                'professeurId' => $professeurFound->id,
+                'classeId' => $classeId
+            ]);
+        }
+
+        $professeurFound->load('classes');
         //$professeurFound = Professeur::with('user')->find($professeurFound->id);
 
         return response()->json([
@@ -588,6 +589,8 @@ class ProfesseurController extends Controller
             }
 
             //suppression du professeur
+            $professeurFound->classes()->detach();
+            ClasseProfesseur::where('professeurId', $professeurFound->id)->delete();
             $professeurFound->delete();
 
             // update du cour du prof...

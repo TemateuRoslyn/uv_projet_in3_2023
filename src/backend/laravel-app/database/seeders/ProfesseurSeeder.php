@@ -48,7 +48,6 @@ class ProfesseurSeeder extends Seeder
             'telephone' => '+237666534899',
             'userId' => $user->id,
             'courId' => $cour->id,
-            'classesId' => json_encode([1,2,3,4]),
         ]);
 
 
