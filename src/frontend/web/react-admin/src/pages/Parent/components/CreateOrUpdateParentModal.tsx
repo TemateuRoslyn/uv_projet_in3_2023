@@ -5,15 +5,11 @@ import { Parents, ParentsCreateBody } from '../../../generated/models';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
 import { ClassesApi, ParentsApi } from '../../../generated';
 import { useSelector } from 'react-redux';
-import { ReduxProps } from '../../../redux/configureStore';n
-import Indicator from '../../Authentication/components/Indicator';
+import { ReduxProps } from '../../../redux/configureStore';
 import {
-  CLASSE_LEVEL,
   SEXE,
-  SOLVABLE,
-  STATUS,
-  getClasseByName,
 } from '../../../constants/ITEMS';
+import Indicator from '../../Authentication/components/Indicator';
 import CustomSelectInput from '../../../components/CustomSelects/CustomSelectInput';
 
 interface ModalProps {
@@ -32,7 +28,7 @@ interface ModalProps {
   setWarningNotifDescription: (value: string | null) => void;
 }
 
-const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
+const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
   const state = useSelector((state: ReduxProps) => state);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -45,10 +41,11 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
     lieuNaiss: props.item ? props.item.lieuDeNaissance : '',
     photo: props.item ? props.item.photo : null,
     sexe: props.item ? props.item.sexe : '',
-    // solvable: props.item ? props.item.solvable : false,
-    // redoublant: props.item ? props.item.redoublant : false,
-    // classeId: props.item ? props.item.classe?.id : '',
-    // speciality: props.item ? props.item.classe?.speciality : '',
+    profession: props.item ? props.item.profession : '',
+    eleveIds: props.item ? props.item.eleves?.id : '',
+    username: props.item ? props.item.user?.username : '',
+    option: props.item ? props.item.user?.role : '',
+    parentId: props.item ? props.item.id : '',
   });
 
   const [matchList, setMatchList] = useState<string[]>([]);
@@ -138,8 +135,18 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
     setIsLoading(true);
 
     parentsApi
-      .storeParent(
-        formValues,
+      .createParent(
+        formValues.email,
+        formValues.firstname,
+        formValues.lastname,
+        formValues.username,
+        formValues.dateNaiss,
+        formValues.lieuNaiss,
+        formValues.photo,
+        formValues.sexe,
+        formValues.tel,
+        formValues.profession,
+        formValues.eleveIds,
         'Bearer ' + token
       )
       .then((response) => {
@@ -172,7 +179,7 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
   };
 
   const handleUpdate = (_event: any) => {
-    _event.preventDefault(); // stopper la soumissoin par defaut du formulaire...
+    // _event.preventDefault(); // stopper la soumissoin par defaut du formulaire...
 
     const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
     const parentsApi = new ParentsApi({
@@ -186,8 +193,20 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
 
     parentsApi
       .updateParent(
-        formValues,
-        'Bearer ' + token
+        formValues.email,
+        formValues.firstname,
+        formValues.lastname,
+        formValues.username,
+        formValues.dateNaiss,
+        formValues.lieuNaiss,
+        formValues.photo,
+        formValues.sexe,
+        formValues.tel,
+        formValues.profession,
+        formValues.eleveIds,
+        'Bearer ' + token,
+        formValues.parentId,
+        formValues.option
       )
       .then((response) => {
         if (response && response.data) {
@@ -287,26 +306,25 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                   </div>
-
-                  <div className="w-full xl:w-1/2">
-                    <label className="mb-2.5 block text-black dark:text-white">
-                      Tel <span className="text-meta-1">*</span>
-                    </label>
-                    <input
-                      name="tel"
-                      value={formValues.tel}
-                      onChange={handleInputChange}
-                      required
-                      type="text"
-                      placeholder="Le numero du parent"
-                      className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    />
-                  </div>
+                  <div className="w-full xl:w-1/3">
+                      <label className="mb-2.5 block text-black dark:text-white">
+                        Tel <span className="text-meta-1">*</span>
+                      </label>
+                      <input
+                        name="tel"
+                        value={formValues.tel}
+                        onChange={handleInputChange}
+                        required
+                        type="text"
+                        placeholder="Le numero du parent"
+                        className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      />
+                    </div>
                 </div>
 
                 {/* row 2 class, serie, photo*/}
                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                  <CustomSelectInput
+                  {/* <CustomSelectInput
                     required={true}
                     inputLabel="Salle de classe"
                     inputPlaceholder="Saisir le nom d'une classe"
@@ -317,7 +335,7 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
                     matchList={matchList}
                     selectOptionEvent={handleOptionSelect}
                     typingInputEvent={handleTypingInput}
-                  />
+                  /> */}
 
                   <div className="w-full xl:w-5/6">
                     <label className="mb-3 block text-black dark:text-white">
@@ -356,24 +374,6 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
                     </select>
                   </div>
 
-                  {/* <div className="w-full xl:w-1/3">
-                    <label className="mb-2.5 block text-black dark:text-white">
-                      Status <span className="text-meta-1">*</span>
-                    </label>
-                    <select
-                      name="redoublant"
-                      value={formValues.redoublant}
-                      onChange={handleInputChange}
-                      className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    >
-                      {STATUS.map((option, index) => (
-                        <option key={index} value={option.value}>
-                          {option.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div> */}
-
                   <div className="w-full xl:w-1/2">
                     <label className="mb-2.5 block text-black dark:text-white">
                       Email <span className="text-meta-1">*</span>
@@ -393,24 +393,6 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
                 {/* row 3 solvable, dateNaiss, lieuNaiss*/}
 
                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                  {/* <div className="w-full xl:w-1/3">
-                    <label className="mb-2.5 block text-black dark:text-white">
-                      Solvable <span className="text-meta-1">*</span>
-                    </label>
-                    <select
-                      name="solvable"
-                      value={formValues.solvable}
-                      onChange={handleInputChange}
-                      className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    >
-                      {SOLVABLE.map((option, index) => (
-                        <option key={index} value={option.value}>
-                          {option.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div> */}
-
                   <div className="w-full xl:w-1/3 ">
                     <label className="mb-3 block text-black dark:text-white">
                       Date de naissance <span className="text-meta-1">*</span>
@@ -435,7 +417,7 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
                       value={formValues.lieuNaiss}
                       onChange={handleInputChange}
                       required
-                      type="text"
+                      type="text" 
                       placeholder="Enter your Place of Birth"
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
@@ -511,4 +493,4 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
   );
 };
 
-export default CreateOrUpdateEleveModal;
+export default CreateOrUpdateParentModal;
