@@ -28,7 +28,8 @@ return new class extends Migration
             $table->unsignedBigInteger('courId');
             $table->foreign('courId')->references('id')->on('cours')->onDelete('cascade');
 
-            $table->timestamps();;
+            $table->json('classesId');
+            $table->timestamps();
         });
     }
 

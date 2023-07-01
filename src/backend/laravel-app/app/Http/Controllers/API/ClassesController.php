@@ -29,7 +29,7 @@ class ClassesController extends Controller
      *             example="Bearer {your_token}"
      *         ),
      *         description="JWT token"
-     *     ),     
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
@@ -50,13 +50,13 @@ class ClassesController extends Controller
      *         @OA\JsonContent(
      *             @OA\Property(property="error", type="string", example="Unauthorized")
      *         )
-     *      )     
+     *      )
      *  )
      */
-    
+
     public function index()
     {
-        $classes = Classe::all();
+        $classes = Classe::with('eleves', 'cours', 'professeurs')->get();
 
         return response()->json([
             'success' => true,
@@ -82,7 +82,7 @@ class ClassesController extends Controller
      *             example="Bearer {your_token}"
      *         ),
      *         description="JWT token"
-     *     ),    
+     *     ),
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -118,7 +118,7 @@ class ClassesController extends Controller
      *     )
      * )
      */
-    
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -136,7 +136,7 @@ class ClassesController extends Controller
 
         // on attribut le numero de la classe
         $classe = NULL;
-        
+
         if($request->speciality){
             $nbClase = Classe::where('name', $request->name)
                               ->whereIn('speciality', [$request->speciality])
@@ -158,8 +158,8 @@ class ClassesController extends Controller
                 'no' => ++$nbClase,
                 'effectif' => 0,
             ]);
-        }        
-    
+        }
+
         return response()->json([
             'success' => true,
             'message' => 'Classe created successfully',
@@ -184,7 +184,7 @@ class ClassesController extends Controller
      *             example="Bearer {your_token}"
      *         ),
      *         description="JWT token"
-     *     ),      
+     *     ),
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -217,7 +217,10 @@ class ClassesController extends Controller
      */
     public function show($id)
     {
-        $classe = Classe::find($id);
+        $classe = Classe::with('eleves')
+                        ->has('cours')->with('cours')
+                        ->has('professeurs')->with('professeurs')
+                        ->find($id);
 
         if (!$classe) {
             return response()->json([
@@ -234,7 +237,7 @@ class ClassesController extends Controller
     }
 
 
-   
+
     /**
      * Update the specified classe.
      *
@@ -242,7 +245,7 @@ class ClassesController extends Controller
      *     path="/api/classes/update/{classeId}",
      *     summary="Update a specific classe",
      *     tags={"Classes"},
-     *     operationId="classeUpdate",     
+     *     operationId="classeUpdate",
      *     @OA\Parameter(
      *         name="classeId",
      *         in="path",
@@ -261,7 +264,7 @@ class ClassesController extends Controller
      *             example="Bearer {your_token}"
      *         ),
      *         description="JWT token"
-     *     ),     
+     *     ),
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -328,7 +331,7 @@ class ClassesController extends Controller
         }
 
         // on attribut le numero de la classe
-        
+
         if($request->speciality){
             $nbClase = Classe::where('name', $request->name)
                               ->whereIn('speciality', [$request->speciality])
@@ -340,7 +343,7 @@ class ClassesController extends Controller
                 'speciality' => $request->speciality,
                 'no' => ++$nbClase,
                 'effectif' => $request->effectif,
-            ]);                 
+            ]);
 
         } else {
             $nbClase = Classe::where('name', $request->name)
@@ -351,9 +354,9 @@ class ClassesController extends Controller
                 'speciality' => NULL,
                 'no' => ++$nbClase,
                 'effectif' => $request->effectif,
-            ]); 
-        }        
-    
+            ]);
+        }
+
         return response()->json([
             'success' => true,
             'message' => 'Classe updated successfully',
@@ -387,7 +390,7 @@ class ClassesController extends Controller
      *             example="Bearer {your_token}"
      *         ),
      *         description="JWT token"
-     *     ),     
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Classe deleted successfully",
@@ -454,7 +457,7 @@ class ClassesController extends Controller
      *             example="Bearer {your_token}"
      *         ),
      *         description="JWT token"
-     *     ), 
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Success",

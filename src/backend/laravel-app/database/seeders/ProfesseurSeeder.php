@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\Cour;
+use App\Models\Classe;
 use App\Models\User;
 use App\Models\Professeur;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -34,6 +35,7 @@ class ProfesseurSeeder extends Seeder
 
         ]);
 
+
         // Création du professeur associé à l'utilisateur et au cour
         Professeur::create([
             'statut' => 'CENSEUR',
@@ -46,6 +48,7 @@ class ProfesseurSeeder extends Seeder
             'telephone' => '+237666534899',
             'userId' => $user->id,
             'courId' => $cour->id,
+            'classesId' => json_encode([1,2,3,4]),
         ]);
 
 

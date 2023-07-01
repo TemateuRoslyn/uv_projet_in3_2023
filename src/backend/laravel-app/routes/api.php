@@ -25,6 +25,7 @@ use App\Http\Controllers\API\ConvocationController;
 use App\Http\Controllers\API\MembreConseilController;
 use App\Http\Controllers\API\ReparationController;
 use App\Http\Controllers\API\SanctionPrevuController;
+use App\Http\Controllers\API\AvoirMembreConseilDisciplineController;
 
 /*
 |--------------------------------------------------------------------------
@@ -208,6 +209,16 @@ Route::middleware('jwt.verify')->group(function () {
 
         Route::get('findOne/{conseil_disciplineId}', [ConseilDisciplineController::class, 'view']);
         Route::get('findAll', [ConseilDisciplineController::class, 'index']);
+    });
+
+    // avoirmembreconseildisciplines
+    Route::prefix('avoirmembreconseildisciplines')->group(function () {
+        Route::middleware('permission:creer_conseil_discipline')->post('create', [AvoirMembreConseilDisciplineController::class, 'store']);
+        Route::middleware('permission:modifier_conseil_discipline')->put('update/{conseil_disciplineId}', [AvoirMembreConseilDisciplineController::class, 'update']);
+        Route::middleware('permission:supprimer_conseil_discipline')->delete('delete/{conseil_disciplineId}', [AvoirMembreConseilDisciplineController::class, 'delete']);
+
+        Route::get('findOne/{conseil_disciplineId}', [AvoirMembreConseilDisciplineController::class, 'view']);
+        Route::get('findAll', [AvoirMembreConseilDisciplineController::class, 'index']);
     });
 
        //faute
