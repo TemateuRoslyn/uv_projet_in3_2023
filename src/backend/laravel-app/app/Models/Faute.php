@@ -51,4 +51,9 @@ class Faute extends Model
     {
         return $this->belongsTo(Eleve::class, 'eleveId');
     }
+
+    public function convocation()
+    {
+        return $this->belongsTo(Convocation::class);
+    }
 }
