@@ -15,6 +15,7 @@ use Database\Seeders\ProfesseurSeeder;
 use Database\Seeders\FauteSeeder;
 use Database\Seeders\PersonnelSeeder;
 use Database\Seeders\ConvocationSeeder;
+use Database\Seeders\ClasseProfesseurSeeder;
 use Database\Seeders\NotificationSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
             ConseilDisciplineSeeder::class,
             ParentSeeder::class,
             ReparationSeeder::class,
+            ClasseProfesseurSeeder::class,
         ]);
     }
 }

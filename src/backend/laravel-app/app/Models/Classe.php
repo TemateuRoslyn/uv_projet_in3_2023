@@ -50,16 +50,16 @@ class Classe extends Model
 
     public function eleves()
     {
-        return $this->belongsToMany(Eleve::class);
+        return $this->hasMany(Eleve::class, 'classeId');
     }
 
     public function cours()
     {
-        return $this->belongsToMany(Cour::class);
+        return $this->belongsToMany(Cour::class, 'cours_classes', 'courId', 'classeId');
     }
 
     public function professeurs()
     {
-        return $this->belongsToMany(Cour::class);
+        return $this->belongsToMany(Professeur::class, 'classe_professeurs', 'professeurId', 'classeId');
     }
 }
