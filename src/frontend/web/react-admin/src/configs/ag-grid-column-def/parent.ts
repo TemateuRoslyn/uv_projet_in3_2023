@@ -40,6 +40,17 @@ export const PARENT_COLUMNS_DEFS: ColDef[] = [
     width: 200
   },
   { 
+    headerName: 'Username', 
+    field: 'user.username',
+    filter: 'agTextColumnFilter',
+    checkboxSelection: false,
+    showDisabledCheckboxes: true,
+    width: 200,
+    cellRenderer: (params: ValueGetterParams<Parents>) => {
+      return params.data?.user?.username ? params.data?.user?.username: null;
+    }
+  },
+  { 
     headerName: 'Sexe', 
     field: 'sexe',
     filter: 'agTextColumnFilter',
@@ -49,5 +60,33 @@ export const PARENT_COLUMNS_DEFS: ColDef[] = [
     // cellRenderer: (params: ValueGetterParams<Eleve>) => {
     //   return params.data?.classe?.name;
     // }
+    
+  },
+  { 
+    headerName: 'Téléphone', 
+    field: 'telephone',
+    filter: 'agTextColumnFilter',
+    checkboxSelection: false,
+    showDisabledCheckboxes: true,
+    width: 200
+  },
+  { 
+    headerName: 'Email', 
+    field: 'user.email',
+    filter: 'agTextColumnFilter',
+    checkboxSelection: false,
+    showDisabledCheckboxes: true,
+    width: 200,
+    cellRenderer: (params: ValueGetterParams<Parents>) => {
+      return params.data?.user?.email ? params.data?.user?.email: null;
+    }
+  },
+  { 
+    headerName: 'Profession', 
+    field: 'profession',
+    filter: 'agTextColumnFilter',
+    checkboxSelection: false,
+    showDisabledCheckboxes: true,
+    width: 200
   },
 ];
