@@ -16,7 +16,7 @@ import {
 import DisplayParents from './components/DisplayParents';
 
 
-const Parents = () => {
+const Parent = () => {
 
   const state = useSelector((state: ReduxProps) => state);
   const [parents, setParents] = useState<Parents[]>([]);
@@ -41,8 +41,8 @@ const Parents = () => {
 
     setIsLoading(true)
     
-    parentsApi.showAllParent('Bearer ' + apiParams)
-    .then((response) => {  
+    parentsApi.parentsIndex('Bearer ' + apiParams)
+    .then((response) => {   
       if(response && response.data){        
         if(response.data.success === true){ setParents(response.data.content) }
       }
@@ -82,4 +82,4 @@ const Parents = () => {
   );
 };
 
-export default Parents;
+export default Parent;

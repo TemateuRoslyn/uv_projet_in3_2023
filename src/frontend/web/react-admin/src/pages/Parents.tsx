@@ -1,8 +1,6 @@
 import { AgGridReact } from 'ag-grid-react';
 import * as XLSX from 'xlsx';
-
 import Breadcrumb from '../components/Breadcrumb';
-import ChatCard from '../components/ChatCard.js';
 import DefaultLayout from '../layout/DefaultLayout';
 import { Component, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -24,41 +22,27 @@ const Parents = () => {
   const [rowData, setRowData] = useState();
   const [columnDefs, setColumnDefs] = useState([
         { 
-          field: 'athlete', 
+          field: 'profession', 
           filter: 'agTextColumnFilter',
           headerCheckboxSelection: true, 
           checkboxSelection: true,
           showDisabledCheckboxes: true,
         },
         { 
-          field: 'age',
+          field: 'firstName',
           filter: 'agNumberColumnFilter',
-          checkboxSelection: true,
-          showDisabledCheckboxes: true,
-          width: 100,
-          minWidth: 80,
-          maxWidth: 200,
-          tooltipValueGetter: (_p: any) => Math.random()
         },
         { 
-          field: 'country', 
+          field: 'lastName', 
           filter: 'agMultiColumnFilter',
         },
-        { field: 'year',
+        { field: 'dateDeNaissance',
           filter: 'agSetColumnFilter' ,
-          cellRendererSelector: (p: { value: number; }) => {
-      
-            if (p.value==2008) {
-              return {component: PullComp};
-            }
-          } 
         },
-        { field: 'date',  filter: 'agDateColumnFilter' },
-        { field: 'sport' },
-        { field: 'gold' },
-        { field: 'silver' },
-        { field: 'bronze' },
-        { field: 'total' }
+        { field: 'lieuDeNaissance',  filter: 'agDateColumnFilter' },
+        { field: 'photo' },
+        { field: 'sexe' },
+        { field: 'telephone' },
   ]);
 
   useEffect(() => {
@@ -134,9 +118,9 @@ const Parents = () => {
               />
             </div>
 
-          <div className="ag-theme-alpine" style={{height: 400}}>
-          <AgGridReact 
-          ref={gridRef}
+          {/* <div className="ag-theme-alpine" style={{height: 400}}>
+            <AgGridReact 
+              ref={gridRef}
               rowData={rowData} 
               animateRows={true} 
               columnDefs={columnDefs} 
@@ -150,10 +134,9 @@ const Parents = () => {
               // sideBar={'columns'}
               // isRowSelectable={isRowSelectable}
               onGridReady={onGridReady}
-              onFirstDataRendered={onFirstDataRendered}
-                
-              /> 
-          </div>
+              onFirstDataRendered={onFirstDataRendered}     
+            /> 
+          </div> */}
 
       </div>
     </DefaultLayout>

@@ -48,7 +48,7 @@ class ConseilDisciplineController extends Controller
 
     public function index()
     {
-        $conseil_discipline = ConseilDiscipline::all();
+        $conseil_discipline = ConseilDiscipline::with('eleve')->has('eleve')->get();
 
         return response()->json([
             'success' => true,
@@ -112,7 +112,7 @@ class ConseilDisciplineController extends Controller
 
     public function view($conseil_disciplineId)
     {
-        $conseil_discipline = ConseilDiscipline::find($conseil_disciplineId);
+        $conseil_discipline = ConseilDiscipline::with('eleve')->find($conseil_disciplineId);
 
         if (!$conseil_discipline) {
             return response()->json([
@@ -221,6 +221,8 @@ class ConseilDisciplineController extends Controller
             'heureFinCd' => $request->input('heureFinCd'),
             'eleveId' => $request->input('eleveId'),
         ]);
+        //Information sur l'eleve qui assiste au conseil de discipline
+        $conseil_discipline->load('eleve');
 
         return response()->json([
             'success' => true,
@@ -336,6 +338,9 @@ class ConseilDisciplineController extends Controller
         $conseil_discipline->heureFinCd = $request->input('heureFinCd');
         $conseil_discipline->eleveId = $request->input('eleveId');
         $conseil_discipline->save();
+
+        //Information sur l'eleve qui assiste au conseil de discipline
+        $conseil_discipline->load('eleve');
 
         return response()->json([
             'success' => true,

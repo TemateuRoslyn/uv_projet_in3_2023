@@ -21,24 +21,19 @@ const App = () => {
     <>
       <Router>
         <Header />
-        <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route exact path='/about' element={<About />} />
-          <Route exact path='/courses' element={<CourseHome />} />
-          <Route exact path='/enseignant' element={<Enseignants />} />
-          <Route exact path='/pricing' element={<Pricing />} />
-          <Route exact path='/journal' element={<Blog />} />
-          <Route exact path='/contact' element={<Contact />} />
-          <Route exact path='/convocation' element={<Convocation />} />
-
-          <Route exact path='/faute_sanction' element={<FauteSanction />} />
-          <Route path='/notification' element={<Notification />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/proviseur' element={<Proviseur />} />
-
-        </Routes>
-
-
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/about' component={About} />
+          <Route exact path='/courses' component={CourseHome} />
+          <Route exact path='/team' component={Team} />
+          <Route exact path='/pricing' component={Pricing} />
+          <Route exact path='/journal' component={Blog} />
+          <Route exact path='/contact' component={Contact} />
+          <Route exact path='/convocation' component={Convocation} />
+          <Route exact path='/faute_sanction' component={FauteSanction} />  
+          <Route path='/notification' component={Notification} />  
+        </Switch>
+        <Route path='/login' component={Login} />
         <Footer />
       </Router>
     </>
