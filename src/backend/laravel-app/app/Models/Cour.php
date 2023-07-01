@@ -41,10 +41,11 @@ class Cour extends Model
     ];
     public function professeur()
     {
-        return $this->belongsTo(Professeur::class);
+        return $this->hasOne(Professeur::class, 'courId');
     }
 
-    public function classe(){
+    public function classes()
+    {
         return $this->belongsToMany(Classe::class, 'cours_classes', 'courId', 'classeId');
     }
 }

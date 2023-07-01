@@ -175,9 +175,9 @@ Route::middleware('jwt.verify')->group(function () {
 
     // cours
     Route::prefix('cours')->group(function () {
-        Route::post('create', [CourController::class, 'store']);
-        Route::post('update', [CourController::class, 'update']);
-        Route::delete('delete/{coursId}', [CourController::class, 'delete']);
+        Route::middleware('permission:creer_cours')->post('create', [CourController::class, 'store']);
+        Route::middleware('permission:modifier_cours')->post('update/{coursId}', [CourController::class, 'update']);
+        Route::middleware('permission:supprimer_cours')->delete('delete/{coursId}', [CourController::class, 'delete']);
         Route::get('findOne/{coursId}', [CourController::class, 'show']);
         Route::get('findAll', [CourController::class, 'index']);
     });

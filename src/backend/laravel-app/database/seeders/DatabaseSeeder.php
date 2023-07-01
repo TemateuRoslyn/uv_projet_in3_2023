@@ -9,6 +9,7 @@ use Database\Seeders\ReglementInterieurSeeder;
 use Database\Seeders\RegleSeeder;
 use Database\Seeders\CoursSeeder;
 use Database\Seeders\ClasseSeeder;
+use Database\Seeders\CoursClasseSeeder;
 use Database\Seeders\EleveSeeder;
 use Database\Seeders\ProfesseurSeeder;
 use Database\Seeders\FauteSeeder;
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
             CoursSeeder::class,
             ProfesseurSeeder::class,
             ClasseSeeder::class,
+            CoursClasseSeeder::class,
             EleveSeeder::class,
             FauteSeeder::class,
             PersonnelSeeder::class,
