@@ -131,6 +131,8 @@ class RegleController extends Controller
             'libelle' => $request->libelle,
             'reglementInterieurId' => $request->reglementInterieurId
         ]);
+        //information sur le reglement interieur associe a la regle
+        $regles->load('reglementInterieur');
 
         return response()->json([
             'success' => true,
@@ -306,6 +308,8 @@ class RegleController extends Controller
             'libelle' => $request->libelle,
             'reglementInterieurId' => $request->reglementInterieurId,
         ]);
+        //information sur le reglement interieur associe a la regle
+        $regle->load('reglementInterieur');
 
         return response()->json([
             'success' => true,

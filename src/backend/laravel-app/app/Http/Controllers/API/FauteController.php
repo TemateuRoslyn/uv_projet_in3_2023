@@ -216,10 +216,7 @@ class FauteController extends Controller
             'libelle' => $request->input('libelle'),
             'gravite' => $request->input('gravite'),
         ]);
-
-
-        $fautte->eleve = Eleve::with('faute')->find($fautte->id);
-        $fautte->regle = Regle::with('faute')->find($fautte->id);
+        $fautte->load('eleve', 'regle');
 
         return response()->json([
             'message' => 'Mistake created successfully',
@@ -325,9 +322,8 @@ class FauteController extends Controller
         $fauteFound->gravite = $request->input('gravite');
         $fauteFound->eleveId = $request->input('eleveId');
         $fauteFound->regleId = $request->input('regleId');
-
-
         $fauteFound->save();
+        $fauteFound->load('eleve', 'regle');
 
         return response()->json([
             'message' => 'Mistake updated successfully',
