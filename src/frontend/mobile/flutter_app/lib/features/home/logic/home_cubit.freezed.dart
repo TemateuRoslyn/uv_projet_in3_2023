@@ -16,9 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeState {
+// reglement interieur variables
   ApiStatus get riStatus => throw _privateConstructorUsedError;
   List<ReglementInterieur> get ri => throw _privateConstructorUsedError;
-  String get riStatusMessage => throw _privateConstructorUsedError;
+  String get riStatusMessage =>
+      throw _privateConstructorUsedError; // fautes variables
+  ApiStatus get fauteStatus => throw _privateConstructorUsedError;
+  List<Faute> get fautes => throw _privateConstructorUsedError;
+  String get fauteStatusMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -33,7 +38,10 @@ abstract class $HomeStateCopyWith<$Res> {
   $Res call(
       {ApiStatus riStatus,
       List<ReglementInterieur> ri,
-      String riStatusMessage});
+      String riStatusMessage,
+      ApiStatus fauteStatus,
+      List<Faute> fautes,
+      String fauteStatusMessage});
 }
 
 /// @nodoc
@@ -52,6 +60,9 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? riStatus = null,
     Object? ri = null,
     Object? riStatusMessage = null,
+    Object? fauteStatus = null,
+    Object? fautes = null,
+    Object? fauteStatusMessage = null,
   }) {
     return _then(_value.copyWith(
       riStatus: null == riStatus
@@ -65,6 +76,18 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       riStatusMessage: null == riStatusMessage
           ? _value.riStatusMessage
           : riStatusMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+      fauteStatus: null == fauteStatus
+          ? _value.fauteStatus
+          : fauteStatus // ignore: cast_nullable_to_non_nullable
+              as ApiStatus,
+      fautes: null == fautes
+          ? _value.fautes
+          : fautes // ignore: cast_nullable_to_non_nullable
+              as List<Faute>,
+      fauteStatusMessage: null == fauteStatusMessage
+          ? _value.fauteStatusMessage
+          : fauteStatusMessage // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -80,7 +103,10 @@ abstract class _$$_InitialCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
   $Res call(
       {ApiStatus riStatus,
       List<ReglementInterieur> ri,
-      String riStatusMessage});
+      String riStatusMessage,
+      ApiStatus fauteStatus,
+      List<Faute> fautes,
+      String fauteStatusMessage});
 }
 
 /// @nodoc
@@ -96,6 +122,9 @@ class __$$_InitialCopyWithImpl<$Res>
     Object? riStatus = null,
     Object? ri = null,
     Object? riStatusMessage = null,
+    Object? fauteStatus = null,
+    Object? fautes = null,
+    Object? fauteStatusMessage = null,
   }) {
     return _then(_$_Initial(
       riStatus: null == riStatus
@@ -110,6 +139,18 @@ class __$$_InitialCopyWithImpl<$Res>
           ? _value.riStatusMessage
           : riStatusMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      fauteStatus: null == fauteStatus
+          ? _value.fauteStatus
+          : fauteStatus // ignore: cast_nullable_to_non_nullable
+              as ApiStatus,
+      fautes: null == fautes
+          ? _value._fautes
+          : fautes // ignore: cast_nullable_to_non_nullable
+              as List<Faute>,
+      fauteStatusMessage: null == fauteStatusMessage
+          ? _value.fauteStatusMessage
+          : fauteStatusMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -120,9 +161,14 @@ class _$_Initial implements _Initial {
   const _$_Initial(
       {this.riStatus = ApiStatus.init,
       final List<ReglementInterieur> ri = const [],
-      this.riStatusMessage = ''})
-      : _ri = ri;
+      this.riStatusMessage = '',
+      this.fauteStatus = ApiStatus.init,
+      final List<Faute> fautes = const [],
+      this.fauteStatusMessage = ''})
+      : _ri = ri,
+        _fautes = fautes;
 
+// reglement interieur variables
   @override
   @JsonKey()
   final ApiStatus riStatus;
@@ -138,10 +184,26 @@ class _$_Initial implements _Initial {
   @override
   @JsonKey()
   final String riStatusMessage;
+// fautes variables
+  @override
+  @JsonKey()
+  final ApiStatus fauteStatus;
+  final List<Faute> _fautes;
+  @override
+  @JsonKey()
+  List<Faute> get fautes {
+    if (_fautes is EqualUnmodifiableListView) return _fautes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_fautes);
+  }
+
+  @override
+  @JsonKey()
+  final String fauteStatusMessage;
 
   @override
   String toString() {
-    return 'HomeState(riStatus: $riStatus, ri: $ri, riStatusMessage: $riStatusMessage)';
+    return 'HomeState(riStatus: $riStatus, ri: $ri, riStatusMessage: $riStatusMessage, fauteStatus: $fauteStatus, fautes: $fautes, fauteStatusMessage: $fauteStatusMessage)';
   }
 
   @override
@@ -153,12 +215,23 @@ class _$_Initial implements _Initial {
                 other.riStatus == riStatus) &&
             const DeepCollectionEquality().equals(other._ri, _ri) &&
             (identical(other.riStatusMessage, riStatusMessage) ||
-                other.riStatusMessage == riStatusMessage));
+                other.riStatusMessage == riStatusMessage) &&
+            (identical(other.fauteStatus, fauteStatus) ||
+                other.fauteStatus == fauteStatus) &&
+            const DeepCollectionEquality().equals(other._fautes, _fautes) &&
+            (identical(other.fauteStatusMessage, fauteStatusMessage) ||
+                other.fauteStatusMessage == fauteStatusMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, riStatus,
-      const DeepCollectionEquality().hash(_ri), riStatusMessage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      riStatus,
+      const DeepCollectionEquality().hash(_ri),
+      riStatusMessage,
+      fauteStatus,
+      const DeepCollectionEquality().hash(_fautes),
+      fauteStatusMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -171,14 +244,23 @@ abstract class _Initial implements HomeState {
   const factory _Initial(
       {final ApiStatus riStatus,
       final List<ReglementInterieur> ri,
-      final String riStatusMessage}) = _$_Initial;
+      final String riStatusMessage,
+      final ApiStatus fauteStatus,
+      final List<Faute> fautes,
+      final String fauteStatusMessage}) = _$_Initial;
 
-  @override
+  @override // reglement interieur variables
   ApiStatus get riStatus;
   @override
   List<ReglementInterieur> get ri;
   @override
   String get riStatusMessage;
+  @override // fautes variables
+  ApiStatus get fauteStatus;
+  @override
+  List<Faute> get fautes;
+  @override
+  String get fauteStatusMessage;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>

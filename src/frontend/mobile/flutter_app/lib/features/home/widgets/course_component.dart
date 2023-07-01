@@ -5,14 +5,17 @@ import '../../../common/utils/constants.dart';
 import '../../../common/utils/helper.dart';
 
 class CourseComponent extends StatelessWidget {
-  const CourseComponent(
-      {super.key,
-      required this.onPressAction,
-      required this.courseTitle,
-      required this.teacherName});
+  const CourseComponent({
+    super.key,
+    required this.onPressAction,
+    required this.courseTitle,
+    required this.teacherName,
+    required this.currentUserType,
+  });
   final String courseTitle;
   final String teacherName;
   final void Function()? onPressAction;
+  final String currentUserType;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,9 @@ class CourseComponent extends StatelessWidget {
                 width: getWidth(400, context),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: appColors.primary),
+                    color: currentUserType == 'parents'
+                        ? appColors.tinary
+                        : appColors.primary),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: getWidth(10, context), horizontal: 25),

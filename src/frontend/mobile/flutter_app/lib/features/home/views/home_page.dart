@@ -1,8 +1,9 @@
 import 'package:fltter_app/common/utils/enums.dart';
 import 'package:fltter_app/common/views/check_internet_page.dart';
+import 'package:fltter_app/common/widgets/common_widgets.dart';
 import 'package:fltter_app/features/home/views/fautes_sanctions_page.dart';
 import 'package:fltter_app/features/home/views/reglements_interieurs_page.dart';
-import 'package:fltter_app/features/home/views/suggestion_box.dart';
+import 'package:fltter_app/features/home/views/suggestion_page.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,50 +84,17 @@ class _HomePageState extends State<HomePage> {
             positionFromTop: (screenSize.height / 2),
             errorTextColor: Colors.white,
             body: state.status == ApiStatus.isLoading
-                ? Padding(
-                    padding: EdgeInsets.only(
-                        top: getHeight((screenSize.height / 2), context)),
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: appColors.onBoardingTwo,
-                      ),
-                    ),
-                  )
+                ? CommonWidgets.circularProgressIndicatorWidget(
+                    positionFromTop: (screenSize.height / 2),
+                    context: context,
+                    color: appColors.onBoardingTwo!)
                 : state.status == ApiStatus.failed
-                    ? Padding(
-                        padding: EdgeInsets.only(
-                            top: getHeight((screenSize.height / 2), context),
-                            left: getWidth(50, context),
-                            right: getWidth(50, context)),
-                        child: Column(
-                          children: [
-                            Text(
-                              state.statusMessage,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: getHeight(12, context),
-                                height: getHeight(1.5, context),
-                                color: Colors.white,
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () async {
-                                await _profileCubit.getCurrentUser();
-                              },
-                              child: Text(
-                                'Recharger',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  fontSize: getHeight(12, context),
-                                  color: appColors.secondary,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
+                    ? CommonWidgets.loadingStatusFailedWidget(
+                        positionFromTop: (screenSize.height / 2),
+                        context: context,
+                        statusMessage: state.statusMessage,
+                        color: Colors.white,
+                        reloadFunction: () => _profileCubit.getCurrentUser())
                     : Expanded(
                         child: ListView(
                           children: [
@@ -155,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                                         Colonne(
                                             text1:
                                                 '${currentUser!.firstName} ${currentUser.lastName}',
-                                            text2: currentUser.classe['name']),
+                                            text2: currentUser.classe!['name']),
                                       ],
                                     ),
                                   ),

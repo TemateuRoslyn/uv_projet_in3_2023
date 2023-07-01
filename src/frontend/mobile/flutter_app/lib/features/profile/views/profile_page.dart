@@ -2,6 +2,8 @@ import 'package:fltter_app/common/styles/colors.dart';
 import 'package:fltter_app/common/utils/constants.dart';
 import 'package:fltter_app/common/utils/helper.dart';
 import 'package:fltter_app/common/views/check_internet_page.dart';
+import 'package:fltter_app/common/widgets/common_widgets.dart';
+import 'package:fltter_app/features/home/widgets/course_component.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
@@ -118,50 +120,17 @@ class _ProfilePageState extends State<ProfilePage> {
           positionFromTop: (screenSize.height / 2),
           errorTextColor: Colors.white,
           body: state.status == ApiStatus.isLoading
-              ? Padding(
-                  padding: EdgeInsets.only(
-                      top: getHeight((screenSize.height / 2), context)),
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: appColors.onBoardingTwo,
-                    ),
-                  ),
-                )
+              ? CommonWidgets.circularProgressIndicatorWidget(
+                  positionFromTop: (screenSize.height / 2),
+                  context: context,
+                  color: appColors.onBoardingTwo!)
               : state.status == ApiStatus.failed
-                  ? Padding(
-                      padding: EdgeInsets.only(
-                          top: getHeight((screenSize.height / 2), context),
-                          left: getWidth(50, context),
-                          right: getWidth(50, context)),
-                      child: Column(
-                        children: [
-                          Text(
-                            state.statusMessage,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: getHeight(12, context),
-                              height: getHeight(1.5, context),
-                              color: Colors.white,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () async {
-                              await _profileCubit.getCurrentUser();
-                            },
-                            child: Text(
-                              'Recharger',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                fontSize: getHeight(12, context),
-                                color: appColors.secondary,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    )
+                  ? CommonWidgets.loadingStatusFailedWidget(
+                      positionFromTop: (screenSize.height / 2),
+                      context: context,
+                      statusMessage: state.statusMessage,
+                      color: Colors.white,
+                      reloadFunction: () => _profileCubit.getCurrentUser())
                   : Expanded(
                       child: ListView(
                         children: [
@@ -178,13 +147,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Paramètres',
-                                  style: TextStyle(
-                                      fontSize: getHeight(20, context),
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
+                                if (currentUserType != 'parents')
+                                  Text(
+                                    'Paramètres',
+                                    style: TextStyle(
+                                        fontSize: getHeight(20, context),
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
                                 SizedBox(
                                   height: getHeight(30, context),
                                 ),
@@ -199,8 +169,23 @@ class _ProfilePageState extends State<ProfilePage> {
                                         // color: Colors.white,
                                       ),
                                     ),
+                                    if (currentUserType == 'parents') ...[
+                                      Colonne(
+                                          currentUserType: currentUserType,
+                                          isFirst: true,
+                                          text1: 'Hello...',
+                                          text2:
+                                              '${state.currentUser!.firstName} ${state.currentUser!.lastName}'),
+                                      Colonne(
+                                        currentUserType: currentUserType,
+                                        isFirst: false,
+                                        text1: 'Profession',
+                                        text2: state.currentUser!.profession!,
+                                      ),
+                                    ],
                                     if (currentUserType == 'eleves') ...[
                                       ...colonnes.map((colonne) => Colonne(
+                                          currentUserType: currentUserType,
                                           isFirst: colonne['isFirst'],
                                           text1: colonne['text1'],
                                           text2: colonne['text2'])),
@@ -210,61 +195,82 @@ class _ProfilePageState extends State<ProfilePage> {
                               ],
                             ),
                           ),
-                          Container(
-                            margin:
-                                EdgeInsets.only(top: getHeight(30, context)),
-                            padding:
-                                EdgeInsets.only(top: getHeight(30, context)),
-                            height: getHeight(600, context),
-                            width: double.infinity,
-                            decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(40),
-                                    topRight: Radius.circular(40))),
-                            child: Column(
-                                children: currentUserType == 'eleves'
-                                    ? [
-                                        // profile options part
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal:
-                                                  getWidth(65, context)),
-                                          child: Row(
-                                              children: profileOptions
-                                                  .map((profileOption) =>
-                                                      profileOption)
-                                                  .toList()),
-                                        ),
-                                        SizedBox(
-                                          height: getHeight(20, context),
-                                        ),
-                                        const Divider(
-                                          thickness: 5,
-                                        ),
-                                        ...ListTile.divideTiles(
-                                                context: context,
-                                                color: Colors.grey,
-                                                tiles: profileTiles
-                                                    .map((profileTile) =>
-                                                        ProfileTile(
-                                                            icon: profileTile[
-                                                                'icon'],
-                                                            text: profileTile[
-                                                                'text']))
-                                                    .toList())
-                                            .toList(),
-                                      ]
-                                    : [
-                                        Text(
-                                          'Mes Enfants',
-                                          style: TextStyle(
-                                              fontSize: getHeight(20, context),
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white),
-                                        ),
-                                      ]),
-                          ),
+                          currentUserType == 'parents'
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                    bottom: getHeight(20, context),
+                                    top: getHeight(50, context),
+                                    right: getWidth(20, context),
+                                    left: getWidth(20, context),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Mes Enfants...',
+                                        style: TextStyle(
+                                            fontSize: getHeight(20, context),
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      ),
+                                      SizedBox(
+                                        height: getHeight(20, context),
+                                      ),
+                                      ...state.currentUser!.eleves!
+                                          .map((e) => CourseComponent(
+                                              currentUserType: currentUserType,
+                                              onPressAction: () {},
+                                              courseTitle:
+                                                  '${e.firstName} ${e.lastName}',
+                                              teacherName: 'classe ici'))
+                                          .toList(),
+                                    ],
+                                  ),
+                                )
+                              : Container(
+                                  margin: EdgeInsets.only(
+                                      top: getHeight(30, context)),
+                                  padding: EdgeInsets.only(
+                                      top: getHeight(30, context)),
+                                  height: getHeight(600, context),
+                                  width: double.infinity,
+                                  decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(40),
+                                          topRight: Radius.circular(40))),
+                                  child: Column(children: [
+                                    // profile options part
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: getWidth(65, context)),
+                                      child: Row(
+                                          children: profileOptions
+                                              .map((profileOption) =>
+                                                  profileOption)
+                                              .toList()),
+                                    ),
+                                    SizedBox(
+                                      height: getHeight(20, context),
+                                    ),
+                                    const Divider(
+                                      thickness: 5,
+                                    ),
+                                    ...ListTile.divideTiles(
+                                            context: context,
+                                            color: Colors.grey,
+                                            tiles: profileTiles
+                                                .map((profileTile) =>
+                                                    ProfileTile(
+                                                        icon:
+                                                            profileTile['icon'],
+                                                        text: profileTile[
+                                                            'text']))
+                                                .toList())
+                                        .toList(),
+                                  ]),
+                                ),
                         ],
                       ),
                     ),
@@ -280,11 +286,13 @@ class Colonne extends StatelessWidget {
     required this.text1,
     required this.text2,
     required this.isFirst,
+    required this.currentUserType,
   });
 
   final String text1;
   final String text2;
   final bool isFirst;
+  final String currentUserType;
 
   @override
   Widget build(BuildContext context) {
@@ -304,7 +312,9 @@ class Colonne extends StatelessWidget {
             height: getHeight(10, context),
           ),
           SizedBox(
-            width: getWidth(isFirst ? 100 : 20, context),
+            width: currentUserType == 'parents'
+                ? getWidth(120, context)
+                : getWidth(isFirst ? 100 : 20, context),
             child: Text(
               text2,
               textAlign: isFirst ? null : TextAlign.center,
@@ -407,3 +417,5 @@ class ProfileOption extends StatelessWidget {
     );
   }
 }
+
+// 
