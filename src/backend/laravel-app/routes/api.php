@@ -239,6 +239,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::middleware('permission:supprimer_convocation')->delete('delete/{convocationId}', [ConvocationController::class, 'delete']);
         Route::get('findOne/{convocationId}', [ConvocationController::class, 'view']);
         Route::get('findAll', [ConvocationController::class, 'index']);
+        Route::get('findAll/eleve/{eleveId}', [ConvocationController::class, 'viewConvocationEleve']);
     });
 
 

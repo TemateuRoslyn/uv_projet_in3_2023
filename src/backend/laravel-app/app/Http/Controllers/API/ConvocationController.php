@@ -34,7 +34,7 @@ class ConvocationController extends Controller
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
+     *             @OA\Property(property="message", type="string", example="Liste des convocations"),
      *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Convocation"))
      *         )
      *     ),
@@ -49,7 +49,7 @@ class ConvocationController extends Controller
      */
     public function index()
     {
-        $convocations = Convocation::has('personnel')->with( 'personnel')->get();
+        $convocations = Convocation::with( 'personnel', 'eleve')->get();
 
         return response()->json([
             'message' => 'Liste des convocations',
@@ -114,7 +114,9 @@ class ConvocationController extends Controller
     public function view($convocationId)
     {
 
-        $convocation = Convocation::with('personnel')->find($convocationId);
+        $convocation = Convocation::with('personnel')
+                                    ->has('eleve')->with('eleve')
+                                    ->find($convocationId);
 
 
         if ($convocation) {
@@ -130,6 +132,79 @@ class ConvocationController extends Controller
         } else {
             return response()->json([
                 'message' => 'convocation non trouvée',
+                'success' => false,
+            ], 404);
+        }
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/convocation/findAll/eleve/{eleveId}",
+     *     summary="Get convocation information for a student",
+     *     description="Get information about all specific convocation to a student",
+     *     operationId="viewFonvocationEleve",
+     *     tags={"convocation"},
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of Eleve to get information for",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Error - Not found",
+     *         @OA\JsonContent(
+     *               @OA\Property(property="message", type="string", example="convocations de l\'eleve non trouvé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="false"),
+     *
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="convocations de l\'eleve trouvé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Convocation")
+     *         )
+     *     )
+     * )
+     */
+    public function viewConvocationEleve($eleveId)
+    {
+
+        $eleve = Convocation::where('eleveId', $eleveId)->with(['eleve', 'personnel'])->get();
+
+
+        if ($eleve) {
+            return response()->json([
+                'message' => 'convocations de l\'eleve trouvé(e)',
+                'success' => true,
+                'content' => $eleve
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'convocations de l\'eleve non trouvée',
                 'success' => false,
             ], 404);
         }
@@ -155,12 +230,13 @@ class ConvocationController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *           required={"libelle", "dateConvocation", "dateRdv", "statut","personnelId"},
+     *           required={"libelle", "dateConvocation", "dateRdv", "statut","personnelId", "eleveId"},
      *             @OA\Property(property="libelle", type="string", example="vous X eleve dans mon etablissement"),
      *                 @OA\Property(property="dateConvocation", type="string", format="date", example="1990-01-01"),
      *                 @OA\Property(property="dateRdv", type="string", format="date", example="1990-01-01"),
      *                 @OA\Property(property="statut", type="string", example="achevee,annulee"),
-     *                 @OA\Property(property="personnelId", type="integer", readOnly=true, example="1"),
+     *                 @OA\Property(property="personnelId", type="integer", example="1"),
+     *                 @OA\Property(property="eleveId", type="integer", example="1"),
      *         )
      *     ),
      *     @OA\Response(
@@ -196,6 +272,7 @@ class ConvocationController extends Controller
             'dateRdv' => 'required|date',
             'statut' => 'required',
             'personnelId' => 'required',
+            'eleveId' => 'required',
 
         ]);
 
@@ -213,10 +290,11 @@ class ConvocationController extends Controller
             'dateRdv' => $request->input('dateRdv'),
             'statut' => $request->input('statut'),
             'personnelId' => $request->input('personnelId'),
+            'eleveId' => $request->input('eleveId'),
         ]);
 
 
-        $convocation->personnel = Personnel::with('convocation')->find($convocation->id);
+        $convocation->load('personnel', 'eleve');
 
         return response()->json([
             'message' => 'convocation created successfully',
@@ -315,6 +393,7 @@ class ConvocationController extends Controller
                 'dateRdv' => 'required|date',
                 'statut' => 'required',
                 'personnelId' => 'required|integer',
+                'eleveId' => 'required|integer',
 
             ]);
         } else {
@@ -339,9 +418,12 @@ class ConvocationController extends Controller
         $convocationFound->dateRdv = $request->input('dateRdv');
         $convocationFound->statut = $request->input('statut');
         $convocationFound->personnelId = $request->input('personnelId');
+        $convocationFound->eleveId = $request->input('eleveId');
 
 
         $convocationFound->save();
+
+        $convocationFound->load('personnel', 'eleve');
 
         return response()->json([
             'message' => 'Convocation updated successfully',
@@ -392,7 +474,7 @@ class ConvocationController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Permission deleted successfully",
+     *         description="convocation deleted successfully",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="success", type="boolean", example=true),
