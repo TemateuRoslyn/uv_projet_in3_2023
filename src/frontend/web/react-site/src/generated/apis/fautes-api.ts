@@ -17,11 +17,11 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { FautesCreateBody } from '../models';
-import { InlineResponse20032 } from '../models';
 import { InlineResponse20033 } from '../models';
 import { InlineResponse20034 } from '../models';
 import { InlineResponse20035 } from '../models';
-import { InlineResponse20037 } from '../models';
+import { InlineResponse20036 } from '../models';
+import { InlineResponse20038 } from '../models';
 import { InlineResponse4008 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse40414 } from '../models';
@@ -292,7 +292,7 @@ export const FautesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createMistake(body: FautesCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20035>> {
+        async createMistake(body: FautesCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20036>> {
             const localVarAxiosArgs = await FautesApiAxiosParamCreator(configuration).createMistake(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -307,7 +307,7 @@ export const FautesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteMistake(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20037>> {
+        async deleteMistake(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20038>> {
             const localVarAxiosArgs = await FautesApiAxiosParamCreator(configuration).deleteMistake(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -321,7 +321,7 @@ export const FautesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async indexFautes(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20032>> {
+        async indexFautes(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20033>> {
             const localVarAxiosArgs = await FautesApiAxiosParamCreator(configuration).indexFautes(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -336,7 +336,7 @@ export const FautesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewFaute(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20033>> {
+        async viewFaute(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20034>> {
             const localVarAxiosArgs = await FautesApiAxiosParamCreator(configuration).viewFaute(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -351,7 +351,7 @@ export const FautesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewFauteEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20034>> {
+        async viewFauteEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20035>> {
             const localVarAxiosArgs = await FautesApiAxiosParamCreator(configuration).viewFauteEleve(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -375,7 +375,7 @@ export const FautesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createMistake(body: FautesCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20035> {
+        createMistake(body: FautesCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20036> {
             return FautesApiFp(configuration).createMistake(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -386,7 +386,7 @@ export const FautesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteMistake(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20037> {
+        deleteMistake(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20038> {
             return FautesApiFp(configuration).deleteMistake(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -396,7 +396,7 @@ export const FautesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        indexFautes(authorization: string, options?: any): AxiosPromise<InlineResponse20032> {
+        indexFautes(authorization: string, options?: any): AxiosPromise<InlineResponse20033> {
             return FautesApiFp(configuration).indexFautes(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -407,7 +407,7 @@ export const FautesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewFaute(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20033> {
+        viewFaute(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20034> {
             return FautesApiFp(configuration).viewFaute(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -418,7 +418,7 @@ export const FautesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewFauteEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20034> {
+        viewFauteEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20035> {
             return FautesApiFp(configuration).viewFauteEleve(authorization, id, options).then((request) => request(axios, basePath));
         },
     };

@@ -49,12 +49,6 @@ export interface Cour {
     heureFin: any;
     /**
      * 
-     * @type {Professeur}
-     * @memberof Cour
-     */
-    professeur?: any;
-    /**
-     * 
      * @type {BaseModelpropertiescreatedAt}
      * @memberof Cour
      */

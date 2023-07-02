@@ -14,19 +14,13 @@
 /**
  * 
  * @export
- * @interface RegleUpdateBody
+ * @interface InlineResponse4227
  */
-export interface RegleUpdateBody {
+export interface InlineResponse4227 {
     /**
      * 
-     * @type {string}
-     * @memberof RegleUpdateBody
+     * @type {any}
+     * @memberof InlineResponse4227
      */
-    libelle: any;
-    /**
-     * 
-     * @type {number}
-     * @memberof RegleUpdateBody
-     */
-    reglementInterieurId: any;
+    error?: any;
 }

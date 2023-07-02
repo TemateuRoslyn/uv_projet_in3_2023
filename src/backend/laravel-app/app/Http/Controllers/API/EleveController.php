@@ -625,4 +625,82 @@ class EleveController extends Controller
             ], 404);
         }
     }
+
+
+    /**
+     * Get the filtered list of Students.
+     *
+     * @OA\Get(
+     *     path="/api/eleves/records/{keyword}",
+     *     summary="Get filtered list of eleves",
+     *     tags={"eleves"},
+     *     operationId="elevesRecords",
+     *     @OA\Parameter(
+     *         name="keyword",
+     *         in="path",
+     *         description="Keyword to filter eleves",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Eleves records successfully"),
+     *             @OA\Property(property="content", type="array", @OA\Items(type="string", example="Tonfack"))
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid request",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Invalid request"),
+     *             @OA\Property(property="success", type="boolean", example=false)
+     *         )
+     *     )
+     * )
+     */
+    public function records($keyword)
+    {
+        $eleves = Eleve::whereHas('user', function ($query) use ($keyword) {
+            $query->where('email', 'like', "%{$keyword}%");
+        })->orWhere('telephone', 'like', "%{$keyword}%")
+        ->orWhere('firstName', 'like', "%{$keyword}%")
+        ->orWhere('lastName', 'like', "%{$keyword}%")
+        ->get();
+
+        // dd($eleves);
+
+        $formattedEleve = $eleves->map(function ($eleve) {
+            $tel = $eleve->telephone;
+            $email = $eleve->user->email;
+            $firstName = $eleve->firstName;
+            $lastName = $eleve->lastName;
+            $classe = $eleve->classe->name.' '.$eleve->classe->speciality;
+            $id = $eleve->id;
+
+            return "{$email} {$firstName} {$lastName} {$tel} {$classe}:{$id}";
+        });
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Eleve records successfully',
+            'content' => $formattedEleve,
+        ], 200);
+    }
 }

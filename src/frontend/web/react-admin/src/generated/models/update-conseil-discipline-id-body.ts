@@ -41,10 +41,4 @@ export interface UpdateConseilDisciplineIdBody {
      * @memberof UpdateConseilDisciplineIdBody
      */
     eleveId: any;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateConseilDisciplineIdBody
-     */
-    fauteId: any;
 }

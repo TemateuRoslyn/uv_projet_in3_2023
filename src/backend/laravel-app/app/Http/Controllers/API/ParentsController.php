@@ -12,6 +12,8 @@ use App\Models\Parents;
 use App\Models\Permission;
 use App\Models\User;
 use App\Models\Role;
+use PhpParser\Node\Expr\Cast\Object_;
+use Ramsey\Uuid\Type\Integer;
 
 class ParentsController extends Controller
 {
@@ -188,12 +190,11 @@ class ParentsController extends Controller
      *             @OA\Property(property="success", type="boolean", example=false),
      *             @OA\Property(property="error", type="object", example={
      *                 "email": { "The email field is required."},
-     *                 "password": {"The password field is required."},
      *                 "username": {"The username field is required."},
-     *                 "first_name": {"The first name field is required."},
-     *                 "last_name": {"The last name field is required."},
-     *                 "date_de_naissance": {"The date de naissance field is required."},
-     *                 "lieu_de_naissance": {"The lieu de naissance field is required."},
+     *                 "firstName": {"The first name field is required."},
+     *                 "lastName": {"The last name field is required."},
+     *                 "dateDeNaissance": {"The date de naissance field is required."},
+     *                 "lieuDeNaissance": {"The lieu de naissance field is required."},
      *                 "sexe": {"The sexe field is required."},
      *                 "telephone": {"The telephone field is required."},
      *                 "profession": {"The profession field is required."},
@@ -215,9 +216,6 @@ class ParentsController extends Controller
      *             @OA\Property(property="error", type="object", example={
      *                 "email": {
      *                     "The email must be a valid email address."
-     *                 },
-     *                 "password": {
-     *                     "The password must be at least 8 characters."
      *                 },
      *                 "username": {
      *                     "The username field is required."
@@ -241,7 +239,6 @@ class ParentsController extends Controller
 
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
             'username' => 'required|unique:users',
             'firstName' => 'required',
             'lastName' => 'required',
@@ -251,9 +248,13 @@ class ParentsController extends Controller
             'sexe' => 'required',
             'telephone' => 'required',
             'profession' => 'required',
-            'eleveIds' => 'required|array',
+            'eleveIds' => 'required',
             'eleveIds.*' => 'required|integer|exists:eleves,id',
         ]);
+
+        //generation automatique du mot de passe
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $password = substr(str_shuffle($characters), 0, 10);
 
         if ($validator->fails()) {
             return response()->json([
@@ -266,9 +267,24 @@ class ParentsController extends Controller
         $user = User::create([
             'email' => $request->input('email'),
             'username' => $request->input('username'),
-            'password' => bcrypt($request->input('password')),
+            'password' => bcrypt($password),
         ]);
 
+        $photo = NULL;
+
+        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+            $file = $request->file('photo');
+
+            // Vérifiez le type MIME si nécessaire
+            $allowedTypes = ['image/jpeg', 'image/png'];
+            if (!in_array($file->getMimeType(), $allowedTypes)) {
+                return response()->json(['error' => 'Le fichier sélectionné n\'est pas une image.'], 400);
+            }
+
+            // Déplacez le fichier vers le répertoire de stockage souhaité
+            $photo = $file->store($this->avatar_path);
+
+        }
 
         $parent = Parents::create([
             'userId' => $user->id,
@@ -277,13 +293,23 @@ class ParentsController extends Controller
             'lastName' => $request->input('lastName'),
             'dateDeNaissance' => $request->input('dateDeNaissance'),
             'lieuDeNaissance' => $request->input('lieuDeNaissance'),
-            'photo' => $request->file('photo') ? $request->file('photo')->store($this->avatar_path) : null,
+            'photo' => $photo,
             'sexe' => $request->input('sexe'),
             'telephone' => $request->input('telephone'),
         ]);
 
+        /*Recupere le tableau contenant les ids des eleves puis verifie si ce
+        n'etait pas une chaine de caractere si oui converti en tableau*/
+        $tmp = $request->input('eleveIds');
+        if (is_string($tmp)) {
+            $eleveIds = array_unique(array_map('intval', explode(',', $tmp)));
+        } else {
+            $eleveIds = array_unique($tmp);
+        }
+        //var_dump($eleveIds);
+        //dd(gettype($eleveIds));
+
         //Atache les eleves du parent
-        $eleveIds = $request->input('eleveIds');
         foreach ($eleveIds as $eleveId) {
             $parent->eleves()->attach($eleveId);
         }
@@ -410,7 +436,7 @@ class ParentsController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email|unique:users,email,' . $user->id,
-                'username' => 'required|unique:users',
+                'username' => 'required|exists:users',
                 'firstName' => 'required',
                 'lastName' => 'required',
                 'dateDeNaissance' => 'required|date',
@@ -419,7 +445,7 @@ class ParentsController extends Controller
                 'sexe' => 'required',
                 'telephone' => 'required',
                 'profession' => 'required',
-                'eleveIds' => 'required|array',
+                'eleveIds' => 'required',
                 'eleveIds.*' => 'required|integer|exists:eleves,id',
             ]);
         } else {
@@ -456,8 +482,15 @@ class ParentsController extends Controller
             $parentFound->eleves()->detach($parentFound->eleveIds);
         }
 
+        /*Recupere le tableau contenant les ids des eleves puis verifie si ce
+        n'etait pas une chaine de caractere si oui converti en tableau*/
+        $tmp = $request->input('eleveIds');
+        if (is_string($tmp)) {
+            $eleveIds = array_unique(array_map('intval', explode(',', $tmp)));
+        } else {
+            $eleveIds = array_unique($tmp);
+        }
         //Atache les eleves du parent
-        $eleveIds = $request->input('eleveIds');
         foreach ($eleveIds as $eleveId) {
             $parentFound->eleves()->attach($eleveId);
         }

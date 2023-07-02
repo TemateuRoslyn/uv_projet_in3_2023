@@ -58,7 +58,7 @@ export interface Parents {
      * @type {string}
      * @memberof Parents
      */
-    photo: any;
+    photo?: any;
     /**
      * 
      * @type {string}
@@ -82,7 +82,7 @@ export interface Parents {
      * @type {User}
      * @memberof Parents
      */
-    user?: any;
+    user: any;
     /**
      * 
      * @type {Eleve}
