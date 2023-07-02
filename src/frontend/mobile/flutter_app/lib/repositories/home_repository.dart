@@ -1,7 +1,9 @@
 import 'package:fltter_app/common/configurations/api_configuration.dart';
+import 'package:fltter_app/common/models/convocation.dart';
 import 'package:fltter_app/common/models/reglement_interieur.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
 
+import '../common/models/conseil_discipline.dart';
 import '../common/models/faute.dart';
 
 class HomeRepository {
@@ -36,7 +38,7 @@ class HomeRepository {
   Future<List<Faute>> getAllUserFautes() async {
     try {
       final response = await dio.get(
-        'faute/findOne/${AuthRepository.getUserId}',
+        'fautes/findAll/eleve/${AuthRepository.getUserId}',
         options: ApiConfiguration.getAuthorizationOptions(
             AuthRepository.getUserToken),
       );
@@ -48,6 +50,46 @@ class HomeRepository {
       }
 
       return fautes;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<ConseilDiscipline>> getAllUserCD() async {
+    try {
+      final response = await dio.get(
+        'conseil_discipline/findAll/eleve/${AuthRepository.getUserId}',
+        options: ApiConfiguration.getAuthorizationOptions(
+            AuthRepository.getUserToken),
+      );
+      final List<ConseilDiscipline> cds = [];
+
+      final cdData = response.data!['content'] as List;
+      for (var cd in cdData) {
+        cds.add(ConseilDiscipline.fromJson(cd));
+      }
+
+      return cds;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<Convocation>> getAllUserConvocations() async {
+    try {
+      final response = await dio.get(
+        'convocation/findAll/eleve/${AuthRepository.getUserId}',
+        options: ApiConfiguration.getAuthorizationOptions(
+            AuthRepository.getUserToken),
+      );
+      final List<Convocation> convocations = [];
+
+      final convocationsData = response.data!['content'] as List;
+      for (var convocation in convocationsData) {
+        convocations.add(Convocation.fromJson(convocation));
+      }
+
+      return convocations;
     } catch (e) {
       rethrow;
     }

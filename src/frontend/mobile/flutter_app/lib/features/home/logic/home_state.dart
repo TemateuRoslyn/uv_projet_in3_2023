@@ -12,5 +12,15 @@ class HomeState with _$HomeState {
     @Default(ApiStatus.init) ApiStatus fauteStatus,
     @Default([]) List<Faute> fautes,
     @Default('') String fauteStatusMessage,
+
+    // conseil discipline variables
+    @Default(ApiStatus.init) ApiStatus cdStatus,
+    @Default([]) List<ConseilDiscipline> cds,
+    @Default('') String cdStatusMessage,
+
+    // covocations variables
+    @Default(ApiStatus.init) ApiStatus convocationStatus,
+    @Default([]) List<Convocation> convocations,
+    @Default('') String convocationStatusMessage,
   }) = _Initial;
 }

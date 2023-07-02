@@ -1,7 +1,9 @@
 import 'package:fltter_app/common/utils/enums.dart';
 import 'package:fltter_app/common/views/check_internet_page.dart';
 import 'package:fltter_app/common/widgets/common_widgets.dart';
-import 'package:fltter_app/features/home/views/fautes_sanctions_page.dart';
+import 'package:fltter_app/features/home/views/conseil_discipline_page.dart';
+import 'package:fltter_app/features/home/views/convocation_page.dart';
+import 'package:fltter_app/features/home/views/fautes_page.dart';
 import 'package:fltter_app/features/home/views/reglements_interieurs_page.dart';
 import 'package:fltter_app/features/home/views/suggestion_page.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
@@ -39,12 +41,24 @@ class _HomePageState extends State<HomePage> {
     final screenSize = MediaQuery.of(context).size;
 
     final List<Map<String, dynamic>> homeComponents = [
-      {'image': '', 'subtitle': 'Dashboard', 'onPressAction': () {}},
       {
         'image': '',
-        'subtitle': 'Mes fautes et sanctions',
+        'subtitle': 'Mes fautes',
+        'onPressAction': () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const FautesPage()))
+      },
+      {'image': '', 'subtitle': 'Mes sanctions', 'onPressAction': () {}},
+      {
+        'image': '',
+        'subtitle': 'Mes convocations',
+        'onPressAction': () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const ConvocationPage()))
+      },
+      {
+        'image': '',
+        'subtitle': 'Mes conseils de discipline',
         'onPressAction': () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const FautesEtSanctionsPage()))
+            builder: (context) => const ConseilDisciplinePage()))
       },
       {
         'image': '',
@@ -55,17 +69,11 @@ class _HomePageState extends State<HomePage> {
       {'image': '', 'subtitle': 'Mes cours', 'onPressAction': () {}},
       {
         'image': '',
-        'subtitle': 'Mes conseils de discipline',
-        'onPressAction': () {}
-      },
-      {
-        'image': '',
         'subtitle': 'Boîte à suggestions',
         'onPressAction': () => Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const Suggestion()))
       },
-      {'image': '', 'subtitle': 'Rapport de notes', 'onPressAction': () {}},
-      {'image': '', 'subtitle': 'Mes convocations', 'onPressAction': () {}},
+      // {'image': '', 'subtitle': 'Rapport de notes', 'onPressAction': () {}},
       {
         'image': '',
         'subtitle': 'Mon profile',

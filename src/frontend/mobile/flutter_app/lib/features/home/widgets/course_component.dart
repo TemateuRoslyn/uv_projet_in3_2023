@@ -7,7 +7,7 @@ import '../../../common/utils/helper.dart';
 class CourseComponent extends StatelessWidget {
   const CourseComponent({
     super.key,
-    required this.onPressAction,
+    this.onPressAction,
     required this.courseTitle,
     required this.teacherName,
     required this.currentUserType,
@@ -20,7 +20,7 @@ class CourseComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onPressAction,
       child: FittedBox(
         fit: BoxFit.contain,
         child: Container(

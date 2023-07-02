@@ -9,14 +9,14 @@ import '../../../common/utils/enums.dart';
 import '../../../common/widgets/common_widgets.dart';
 import '../widgets/convocation_component.dart';
 
-class FautesEtSanctionsPage extends StatefulWidget {
-  const FautesEtSanctionsPage({super.key});
+class FautesPage extends StatefulWidget {
+  const FautesPage({super.key});
 
   @override
-  State<FautesEtSanctionsPage> createState() => _FautesEtSanctionsPageState();
+  State<FautesPage> createState() => _FautesPageState();
 }
 
-class _FautesEtSanctionsPageState extends State<FautesEtSanctionsPage> {
+class _FautesPageState extends State<FautesPage> {
   late HomeCubit _homeCubit;
 
   @override
@@ -34,6 +34,9 @@ class _FautesEtSanctionsPageState extends State<FautesEtSanctionsPage> {
     return PageSkeletonTwo(
         headerText: 'Mes fautes et sanctions',
         body: BlocBuilder<HomeCubit, HomeState>(
+          buildWhen: (previous, current) =>
+              (previous.fauteStatus != current.fauteStatus ||
+                  previous.fautes != current.fautes),
           builder: (context, state) {
             return CheckInternetConnectionPage(
               helper: state.fautes.isEmpty ? 0 : 1,
@@ -48,7 +51,7 @@ class _FautesEtSanctionsPageState extends State<FautesEtSanctionsPage> {
                       ? CommonWidgets.loadingStatusFailedWidget(
                           positionFromTop: (screenSize.height / 2),
                           context: context,
-                          statusMessage: state.riStatusMessage,
+                          statusMessage: state.fauteStatusMessage,
                           color: appColors.primary!,
                           reloadFunction: () =>
                               _homeCubit.getDataByType('fautes'))
@@ -58,17 +61,15 @@ class _FautesEtSanctionsPageState extends State<FautesEtSanctionsPage> {
                               top: getHeight(20, context),
                               left: getWidth(10, context),
                               right: getWidth(10, context)),
-                          children: List.generate(
-                              15,
-                              (index) => const ConvocationComponent(
-                                    libelle: 'Faute: libelle',
-                                    // date: 'date',
-                                    subtitle1: 'Règle: start_at',
-                                    subtitle2: 'Règlement interieur: end_at',
-                                    statut: 'Gravité',
+                          children: state.fautes
+                              .map((faute) => ConvocationComponent(
+                                    libelle: 'Faute: ${faute.libelle}',
+                                    subtitle1: 'Règle: ${faute.regle.libelle}',
+                                    statut: 'Gravité: ${faute.gravite}',
                                     isFrom: 'fautes_santions',
                                     // onPressAction: () {},
-                                  )),
+                                  ))
+                              .toList(),
                         )),
             );
           },

@@ -35,7 +35,9 @@ class _ReglementsInterieursState extends State<ReglementsInterieurs> {
     return PageSkeletonTwo(
       headerText: 'Reglements Interirieurs',
       body: BlocBuilder<HomeCubit, HomeState>(
-        // buildWhen: (previous, current) => previous.ri != current.ri,
+        buildWhen: (previous, current) =>
+            (previous.riStatus != current.riStatus ||
+                previous.ri != current.ri),
         builder: (context, state) {
           return CheckInternetConnectionPage(
             helper: state.ri.isEmpty ? 0 : 1,
