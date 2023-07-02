@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @OA\Schema(
- *     required={"date_cd", "heure_debut_cd", "heure_fin_cd", "eleveId", "eleve"},
+ *     required={"dateCd", "heureDebutCd", "heureFinCd", "eleveId"},
  *     @OA\Xml(name="ConseilDiscipline"),
  *     @OA\Property(property="id", type="integer", readOnly=true, example="1"),
- *     @OA\Property(property="date_cd", type="string", format="date", example="2023-04-01"),
- *     @OA\Property(property="heure_debut_cd", type="string", format="date", example="11:00:00"),
- *     @OA\Property(property="heure_fin_cd", type="string", format="date", example="13:00:00"),
+ *     @OA\Property(property="dateCd", type="string", format="date", example="2023-04-01"),
+ *     @OA\Property(property="heureDebutCd", type="string", format="date", example="11:00:00"),
+ *     @OA\Property(property="heureFinCd", type="string", format="date", example="13:00:00"),
  *     @OA\Property(property="eleveId", type="integer", readOnly=true, example="1"),
  *     @OA\Property(property="eleve", type="object", ref="#/components/schemas/Eleve"),
  *     @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),

@@ -17,7 +17,7 @@ class FauteController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/faute/findAll",
+     *     path="/api/fautes/findAll",
      *     summary="Find all mistakes",
      *     description="Retrieve a list of all mistakes with associated eleves and regles",
      *     operationId="indexFautes",
@@ -41,7 +41,7 @@ class FauteController extends Controller
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
+     *             @OA\Property(property="message", type="string", example="Liste des fautes"),
      *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Faute")
      *         )
      *         )
@@ -57,18 +57,18 @@ class FauteController extends Controller
      */
     public function index()
     {
-        $fautes = Faute::has('regle')->has('eleve')->with(['regle', 'eleve'])->get();
+        $fautes = Faute::with('regle', 'eleve')->get();
 
         return response()->json([
             'message' => 'Liste des fautes',
             'success' => true,
             'content' => $fautes
-        ],200);
+        ], 200);
     }
 
     /**
      * @OA\Get(
-     *     path="/api/faute/findOne/{id}",
+     *     path="/api/fautes/findOne/{id}",
      *     summary="Get mistake information",
      *     description="Get information about a specific mistake",
      *     operationId="viewFaute",
@@ -139,9 +139,83 @@ class FauteController extends Controller
         }
     }
 
+
+    /**
+     * @OA\Get(
+     *     path="/api/fautes/findAll/eleve/{eleveId}",
+     *     summary="Get mistake information for a student",
+     *     description="Get information about all specific mistake to a student",
+     *     operationId="viewFauteEleve",
+     *     tags={"Fautes"},
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of Eleve to get information for",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Error - Not found",
+     *         @OA\JsonContent(
+     *               @OA\Property(property="message", type="string", example="fautes de l\'eleve non trouvé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="false"),
+     *
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="fautes de l\'eleve trouvé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Faute")
+     *         )
+     *     )
+     * )
+     */
+    public function viewFautesEleve($eleveId)
+    {
+
+        $eleve = Faute::where('eleveId', $eleveId)->with(['eleve', 'regle'])->get();
+
+
+        if ($eleve) {
+            return response()->json([
+                'message' => 'fautes de l\'eleve trouvé(e)',
+                'success' => true,
+                'content' => $eleve
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'fautes de l\'eleve non trouvée',
+                'success' => false,
+            ], 404);
+        }
+    }
+
     /**
      * @OA\Post(
-     *     path="/api/faute/create",
+     *     path="/api/fautes/create",
      *     summary="Create a new Mistake",
      *     description="Create a new Mistake resource",
      *     operationId="createMistake",
@@ -195,7 +269,7 @@ class FauteController extends Controller
 
         $validator = Validator::make($request->all(), [
             'libelle' => 'required|string|max:255',
-            'gravite' => 'required',
+            'gravite' => 'required|string',
             'eleveId' => 'required|integer',
             'regleId' => 'required|integer',
 
@@ -226,7 +300,7 @@ class FauteController extends Controller
     }
     /**
      * @OA\Post(
-     *     path="/api/faute/update/{fauteId}",
+     *     path="/api/fautes/update/{fauteId}",
      *     summary="Update a mistake's information",
      *     description="Update a mistake's information",
      *     operationId="updatemistake",
@@ -281,7 +355,7 @@ class FauteController extends Controller
      *         response=200,
      *         description="Success",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Faute modifié qvec succèss"),
+     *             @OA\Property(property="message", type="string", example="Faute modifié avec succèss"),
      *             @OA\Property(property="success", type="boolean", example="true"),
      *             @OA\Property(property="content", type="object", ref="#/components/schemas/Faute"),
      *         )
@@ -296,16 +370,16 @@ class FauteController extends Controller
         if ($fauteFound) {
 
             $validator = Validator::make($request->all(), [
-                'libelle' => 'required',
-                'gravite' => 'required',
+                'libelle' => 'required|string|max:255',
+                'gravite' => 'required|string',
                 'eleveId' => 'required|integer',
                 'regleId' => 'required|integer',
             ]);
         } else {
             return response()->json([
-                'message' => 'Course not exists',
+                'message' => 'Faute not exists',
                 'success' => false,
-            ], 400);
+            ], 404);
         }
 
         if ($validator->fails()) {
@@ -334,7 +408,7 @@ class FauteController extends Controller
 
     /**
      * @OA\Delete (
-     *     path="/api/faute/delete/{id}",
+     *     path="/api/fautes/delete/{id}",
      *     summary="Delete a mistake",
      *     description="Delete a mistake resource",
      *     operationId="deleteMistake",

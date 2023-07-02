@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @OA\Schema(
- *     required={"libelle", "reglementInterieurId", "reglementInterieur"},
+ *     required={"libelle", "reglementInterieurId"},
  *     @OA\Xml(name="Regle"),
  *     @OA\Property(property="id", type="integer", readOnly=true, example="1"),
  *     @OA\Property(property="reglementInterieurId", type="integer", example=1),
@@ -41,8 +41,10 @@ class Regle extends Model
     {
         return $this->belongsTo(ReglementInterieur::class, 'reglementInterieurId');
     }
-    public function faute()
+
+    public function fautes()
     {
-        return $this->hasMany(Faute::class);
+        return $this->hasMany(Faute::class, 'regleId');
     }
+
 }

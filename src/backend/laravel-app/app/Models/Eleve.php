@@ -65,6 +65,11 @@ class Eleve extends Model
         return $this->belongsTo(Classe::class, 'classeId');
     }
 
+    public function fautes()
+    {
+        return $this->hasMany(Faute::class, 'eleveId');
+    }
+
     public function parents()
     {
         return $this->belongsToMany(Parents::class, 'eleve_parent', 'eleveId', 'parentId');

@@ -128,6 +128,80 @@ class ConseilDisciplineController extends Controller
         ], 200);
     }
 
+
+    /**
+     * @OA\Get(
+     *     path="/api/conseil_discipline/findAll/eleve/{eleveId}",
+     *     summary="Get conseil_discipline information for a student",
+     *     description="Get information about all specific conseil_discipline to a student",
+     *     operationId="viewConseilDisciplineEleve",
+     *     tags={"ConseilDisciplines"},
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of Eleve to get information for",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Error - Not found",
+     *         @OA\JsonContent(
+     *               @OA\Property(property="message", type="string", example="conseil_discipline de l\'eleve non trouvé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="false"),
+     *
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="conseil_discipline de l\'eleve trouvé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/ConseilDiscipline")
+     *         )
+     *     )
+     * )
+     */
+    public function viewConseilDisciplineEleve($eleveId)
+    {
+
+        $conseildiscipline = ConseilDiscipline::where('eleveId', $eleveId)->with(['eleve'])->get();
+
+
+        if ($conseildiscipline) {
+            return response()->json([
+                'message' => 'conseil_discipline de l\'eleve trouvé(e)',
+                'success' => true,
+                'content' => $conseildiscipline
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'conseil_discipline de l\'eleve non trouvée',
+                'success' => false,
+            ], 404);
+        }
+    }
+
     /**
      * @OA\Post(
      *     path="/api/conseil_discipline/create",
@@ -413,6 +487,7 @@ class ConseilDisciplineController extends Controller
             ], 404);
         }
 
+        // $conseil_discipline->eleve()->detach();
         $conseil_discipline->delete();
 
         return response()->json([

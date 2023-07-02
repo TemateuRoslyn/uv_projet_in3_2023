@@ -203,12 +203,13 @@ Route::middleware('jwt.verify')->group(function () {
 
     // conseil_disciplines
     Route::prefix('conseil_discipline')->group(function () {
-        Route::middleware('permission:creer_conseil_discipline')->post('create', [ConseilDisciplineController::class, 'store']);
-        Route::middleware('permission:modifier_conseil_discipline')->post('update/{conseil_disciplineId}', [ConseilDisciplineController::class, 'update']);
-        Route::middleware('permission:supprimer_conseil_discipline')->delete('delete/{conseil_disciplineId}', [ConseilDisciplineController::class, 'delete']);
+        Route::middleware('permission:creer_conseil')->post('create', [ConseilDisciplineController::class, 'store']);
+        Route::middleware('permission:modifier_conseil')->post('update/{conseil_disciplineId}', [ConseilDisciplineController::class, 'update']);
+        Route::middleware('permission:supprimer_conseil')->delete('delete/{conseil_disciplineId}', [ConseilDisciplineController::class, 'delete']);
 
         Route::get('findOne/{conseil_disciplineId}', [ConseilDisciplineController::class, 'view']);
         Route::get('findAll', [ConseilDisciplineController::class, 'index']);
+        Route::get('findAll/eleve/{eleveId}', [ConseilDisciplineController::class, 'viewConseilDisciplineEleve']);
     });
 
     // avoirmembreconseildisciplines
@@ -221,13 +222,14 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll', [AvoirMembreConseilDisciplineController::class, 'index']);
     });
 
-       //faute
-       Route::prefix('faute')->group(function () {
+       //fautes
+       Route::prefix('fautes')->group(function () {
         Route::middleware('permission:creer_faute')->post('create', [FauteController::class, 'store']);
         Route::middleware('permission:modifier_faute')->post('update/{fauteId}', [FauteController::class, 'update']);
         Route::middleware('permission:supprimer_faute')->delete('delete/{fauteId}', [FauteController::class, 'delete']);
         Route::get('findOne/{fauteId}', [FauteController::class, 'view']);
         Route::get('findAll', [FauteController::class, 'index']);
+        Route::get('findAll/eleve/{eleveId}', [FauteController::class, 'viewFautesEleve']);
     });
 
      //convocation
