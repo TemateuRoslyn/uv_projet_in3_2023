@@ -16,6 +16,7 @@ use App\Models\Classe;
  *     @OA\Property(property="date_cour", type="string", format="date", example="1990-01-01"),
  *     @OA\Property(property="heure_debut", type="string", format="date", example="1990-01-01"),
  *     @OA\Property(property="heure_fin", type="string", format="date", example="1990-01-01"),
+ *     @OA\Property(property="professeur", type="object", ref="#/components/schemas/Professeur"),
  *     @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),
  *     @OA\Property(property="updated_at", ref="#/components/schemas/BaseModel/properties/updated_at"),
  *     @OA\Property(property="deleted_at", ref="#/components/schemas/BaseModel/properties/deleted_at")
@@ -37,6 +38,7 @@ class Cour extends Model
         'date_cour',
         'heure_debut',
         'heure_fin',
+        'professeur'
         //  'professeur_id',
     ];
     public function professeur()

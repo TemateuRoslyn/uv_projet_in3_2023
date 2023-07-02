@@ -15,15 +15,19 @@ class ClasseProfesseurSeeder extends Seeder
     {
         ClasseProfesseur::create([
             'professeurId' => 1,
-            'classeId' => 1,
-        ]);
-        ClasseProfesseur::create([
-            'professeurId' => 1,
             'classeId' => 2,
         ]);
         ClasseProfesseur::create([
-            'professeurId' => 1,
-            'classeId' => 3,
+            'professeurId' => 2,
+            'classeId' => 1,
+        ]);
+        ClasseProfesseur::create([
+            'professeurId' => 3,
+            'classeId' => 1,
+        ]);
+        ClasseProfesseur::create([
+            'professeurId' => 4,
+            'classeId' => 2,
         ]);
     }
 }
