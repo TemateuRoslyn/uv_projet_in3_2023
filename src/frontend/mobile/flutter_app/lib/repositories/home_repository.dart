@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:fltter_app/common/configurations/api_configuration.dart';
 import 'package:fltter_app/common/models/convocation.dart';
 import 'package:fltter_app/common/models/reglement_interieur.dart';
@@ -5,6 +7,7 @@ import 'package:fltter_app/repositories/auth_repository.dart';
 
 import '../common/models/conseil_discipline.dart';
 import '../common/models/faute.dart';
+import '../common/models/suggestion.dart';
 
 class HomeRepository {
   // HomeRepository({
@@ -90,6 +93,21 @@ class HomeRepository {
       }
 
       return convocations;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> insertSuggestion(String suggestion) async {
+    try {
+      final response = await dio.post(
+        '/suggestion/create',
+        data: {'description': suggestion},
+        options: ApiConfiguration.getAuthorizationOptions(
+          AuthRepository.getUserToken,
+        ),
+      );
+      // Gérer la réponse ou effectuer des actions supplémentaires si nécessaire
     } catch (e) {
       rethrow;
     }

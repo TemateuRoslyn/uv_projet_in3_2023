@@ -31,7 +31,9 @@ mixin _$HomeState {
       throw _privateConstructorUsedError; // covocations variables
   ApiStatus get convocationStatus => throw _privateConstructorUsedError;
   List<Convocation> get convocations => throw _privateConstructorUsedError;
-  String get convocationStatusMessage => throw _privateConstructorUsedError;
+  String get convocationStatusMessage =>
+      throw _privateConstructorUsedError; //Box suggession variables
+  String get suggestionInsertStatus => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -55,7 +57,8 @@ abstract class $HomeStateCopyWith<$Res> {
       String cdStatusMessage,
       ApiStatus convocationStatus,
       List<Convocation> convocations,
-      String convocationStatusMessage});
+      String convocationStatusMessage,
+      String suggestionInsertStatus});
 }
 
 /// @nodoc
@@ -83,6 +86,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? convocationStatus = null,
     Object? convocations = null,
     Object? convocationStatusMessage = null,
+    Object? suggestionInsertStatus = null,
   }) {
     return _then(_value.copyWith(
       riStatus: null == riStatus
@@ -133,6 +137,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.convocationStatusMessage
           : convocationStatusMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      suggestionInsertStatus: null == suggestionInsertStatus
+          ? _value.suggestionInsertStatus
+          : suggestionInsertStatus // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -156,7 +164,8 @@ abstract class _$$_InitialCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
       String cdStatusMessage,
       ApiStatus convocationStatus,
       List<Convocation> convocations,
-      String convocationStatusMessage});
+      String convocationStatusMessage,
+      String suggestionInsertStatus});
 }
 
 /// @nodoc
@@ -181,6 +190,7 @@ class __$$_InitialCopyWithImpl<$Res>
     Object? convocationStatus = null,
     Object? convocations = null,
     Object? convocationStatusMessage = null,
+    Object? suggestionInsertStatus = null,
   }) {
     return _then(_$_Initial(
       riStatus: null == riStatus
@@ -231,6 +241,10 @@ class __$$_InitialCopyWithImpl<$Res>
           ? _value.convocationStatusMessage
           : convocationStatusMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      suggestionInsertStatus: null == suggestionInsertStatus
+          ? _value.suggestionInsertStatus
+          : suggestionInsertStatus // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -250,7 +264,8 @@ class _$_Initial implements _Initial {
       this.cdStatusMessage = '',
       this.convocationStatus = ApiStatus.init,
       final List<Convocation> convocations = const [],
-      this.convocationStatusMessage = ''})
+      this.convocationStatusMessage = '',
+      this.suggestionInsertStatus = ''})
       : _ri = ri,
         _fautes = fautes,
         _cds = cds,
@@ -320,10 +335,14 @@ class _$_Initial implements _Initial {
   @override
   @JsonKey()
   final String convocationStatusMessage;
+//Box suggession variables
+  @override
+  @JsonKey()
+  final String suggestionInsertStatus;
 
   @override
   String toString() {
-    return 'HomeState(riStatus: $riStatus, ri: $ri, riStatusMessage: $riStatusMessage, fauteStatus: $fauteStatus, fautes: $fautes, fauteStatusMessage: $fauteStatusMessage, cdStatus: $cdStatus, cds: $cds, cdStatusMessage: $cdStatusMessage, convocationStatus: $convocationStatus, convocations: $convocations, convocationStatusMessage: $convocationStatusMessage)';
+    return 'HomeState(riStatus: $riStatus, ri: $ri, riStatusMessage: $riStatusMessage, fauteStatus: $fauteStatus, fautes: $fautes, fauteStatusMessage: $fauteStatusMessage, cdStatus: $cdStatus, cds: $cds, cdStatusMessage: $cdStatusMessage, convocationStatus: $convocationStatus, convocations: $convocations, convocationStatusMessage: $convocationStatusMessage, suggestionInsertStatus: $suggestionInsertStatus)';
   }
 
   @override
@@ -352,7 +371,9 @@ class _$_Initial implements _Initial {
                 .equals(other._convocations, _convocations) &&
             (identical(
                     other.convocationStatusMessage, convocationStatusMessage) ||
-                other.convocationStatusMessage == convocationStatusMessage));
+                other.convocationStatusMessage == convocationStatusMessage) &&
+            (identical(other.suggestionInsertStatus, suggestionInsertStatus) ||
+                other.suggestionInsertStatus == suggestionInsertStatus));
   }
 
   @override
@@ -369,7 +390,8 @@ class _$_Initial implements _Initial {
       cdStatusMessage,
       convocationStatus,
       const DeepCollectionEquality().hash(_convocations),
-      convocationStatusMessage);
+      convocationStatusMessage,
+      suggestionInsertStatus);
 
   @JsonKey(ignore: true)
   @override
@@ -391,7 +413,8 @@ abstract class _Initial implements HomeState {
       final String cdStatusMessage,
       final ApiStatus convocationStatus,
       final List<Convocation> convocations,
-      final String convocationStatusMessage}) = _$_Initial;
+      final String convocationStatusMessage,
+      final String suggestionInsertStatus}) = _$_Initial;
 
   @override // reglement interieur variables
   ApiStatus get riStatus;
@@ -417,6 +440,8 @@ abstract class _Initial implements HomeState {
   List<Convocation> get convocations;
   @override
   String get convocationStatusMessage;
+  @override //Box suggession variables
+  String get suggestionInsertStatus;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>
