@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('statut');
             $table->unsignedBigInteger('personnelId');
             $table->foreign('personnelId')->references('id')->on('personnels');
+            $table->unsignedBigInteger('eleveId');
+            $table->foreign('eleveId')->references('id')->on('eleves');
         });
     }
 
