@@ -20,7 +20,6 @@ use Illuminate\Database\Eloquent\Model;
  *     @OA\Property(property="effectif", type="integer", readOnly=true, description="100"),
  *     @OA\Property(property="eleves", type="object", ref="#/components/schemas/Eleve"),
  *     @OA\Property(property="cours", type="object", ref="#/components/schemas/Cour"),
- *     @OA\Property(property="professeurs", type="object", ref="#/components/schemas/Professeur"),
  *     @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),
  *     @OA\Property(property="updated_at", ref="#/components/schemas/BaseModel/properties/updated_at"),
  *     @OA\Property(property="deleted_at", ref="#/components/schemas/BaseModel/properties/deleted_at")
@@ -45,7 +44,6 @@ class Classe extends Model
         'effectif',
         'eleves',
         'cours',
-        'professeurs'
     ];
 
     public function eleves()

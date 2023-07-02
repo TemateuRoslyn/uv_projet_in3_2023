@@ -25,6 +25,24 @@ class ProfesseurSeeder extends Seeder
             'username' => 'professeurname',
             'password' => bcrypt('password'),
         ]);
+        // Création de l'utilisateur
+        $user1 = User::create([
+            'email' => 'kratos@example.com',
+            'username' => 'kratos',
+            'password' => bcrypt('kratos'),
+        ]);
+        // Création de l'utilisateur
+        $user2 = User::create([
+            'email' => 'cesar@example.com',
+            'username' => 'cesar',
+            'password' => bcrypt('cesar'),
+        ]);
+        // Création de l'utilisateur
+        $user3 = User::create([
+            'email' => 'lucie@example.com',
+            'username' => 'lucie',
+            'password' => bcrypt('lucie'),
+        ]);
 
         // Création du cour
         $cour = Cour::create([
@@ -48,6 +66,45 @@ class ProfesseurSeeder extends Seeder
             'telephone' => '+237666534899',
             'userId' => $user->id,
             'courId' => $cour->id,
+        ]);
+        // Création du professeur associé à l'utilisateur et au cour
+        Professeur::create([
+            'statut' => 'CENSEUR',
+            'firstName' => 'professeurName',
+            'lastName' => 'professeurLastName ',
+            'dateDeNaissance' => '2000/05/2',
+            'lieuDeNaissance' => 'nkong',
+            'photo' => 'photo.png',
+            'sexe' => 'm',
+            'telephone' => '+237666534899',
+            'userId' => $user1->id,
+            'courId' => 1,
+        ]);
+        // Création du professeur associé à l'utilisateur et au cour
+        Professeur::create([
+            'statut' => 'CENSEUR',
+            'firstName' => 'professeurName',
+            'lastName' => 'professeurLastName ',
+            'dateDeNaissance' => '2000/05/2',
+            'lieuDeNaissance' => 'nkong',
+            'photo' => 'photo.png',
+            'sexe' => 'm',
+            'telephone' => '+237666534899',
+            'userId' => $user2->id,
+            'courId' => 2,
+        ]);
+        // Création du professeur associé à l'utilisateur et au cour
+        Professeur::create([
+            'statut' => 'CENSEUR',
+            'firstName' => 'professeurName',
+            'lastName' => 'professeurLastName ',
+            'dateDeNaissance' => '2000/05/2',
+            'lieuDeNaissance' => 'nkong',
+            'photo' => 'photo.png',
+            'sexe' => 'm',
+            'telephone' => '+237666534899',
+            'userId' => $user3->id,
+            'courId' => 3,
         ]);
 
 

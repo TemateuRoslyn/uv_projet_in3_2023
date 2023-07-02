@@ -25,6 +25,7 @@ use App\Http\Controllers\API\ConvocationController;
 use App\Http\Controllers\API\MembreConseilController;
 use App\Http\Controllers\API\ReparationController;
 use App\Http\Controllers\API\SanctionPrevuController;
+use App\Http\Controllers\API\SuggestionsController;
 use App\Http\Controllers\API\AvoirMembreConseilDisciplineController;
 
 /*
@@ -240,6 +241,16 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findOne/{convocationId}', [ConvocationController::class, 'view']);
         Route::get('findAll', [ConvocationController::class, 'index']);
         Route::get('findAll/eleve/{eleveId}', [ConvocationController::class, 'viewConvocationEleve']);
+    });
+
+
+    // suggestion
+    Route::prefix('suggestion')->group(function () {
+        Route::post('create', [SuggestionsController::class, 'store']);
+        Route::post('update/{suggestionId}', [SuggestionsController::class, 'update']);
+        Route::delete('delete/{suggestionId}', [SuggestionsController::class, 'delete']);
+        Route::get('findOne/{suggestionId}', [SuggestionsController::class, 'view']);
+        Route::get('findAll', [SuggestionsController::class, 'index']);
     });
 
 

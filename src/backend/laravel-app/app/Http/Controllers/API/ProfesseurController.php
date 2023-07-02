@@ -56,7 +56,7 @@ class ProfesseurController extends Controller
      */
     public function index()
     {
-        $professeurs = Professeur::with('user', 'cour', 'classes')->get();
+        $professeurs = Professeur::with('user', 'cour.classes')->get();
 
         return response()->json([
             'message' => 'Liste des professeurs',
@@ -119,9 +119,7 @@ class ProfesseurController extends Controller
      */
     public function view($professeurId)
     {
-        $professeur = Professeur::with('user')
-                                ->has('cour')->with('cour')
-                                ->has('classes')->with('classes')
+        $professeur = Professeur::with('user', 'cour.classes')
                                 ->find($professeurId);
 
         if ($professeur) {
@@ -172,7 +170,6 @@ class ProfesseurController extends Controller
      *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
      *             @OA\Property(property="statut", type="string", example="censeur"),
      *              @OA\Property(property="courId", type="integer", example=2),
-     *              @OA\Property(property="classesId", type="array", example="[1,2]", @OA\Items(type="integer")),
      *         )
      *     ),
      *     @OA\Response(
@@ -238,7 +235,6 @@ class ProfesseurController extends Controller
             'telephone' => 'required',
             'statut' => 'required',
             'courId' => 'required',
-            'classesId' => 'required|array',
 
 
         ]);
@@ -286,16 +282,8 @@ class ProfesseurController extends Controller
             'telephone' => $request->input('telephone'),
         ]);
 
-        foreach ($request->classesId as $classeId) {
-            ClasseProfesseur::create([
-                'professeurId' => $professeur->id,
-                'classeId' => $classeId
-            ]);
-        }
-
-        $professeur->load('classes');
         $professeur->user = $user;
-        $professeur->cours = Cour::find($professeur->courId);
+        $professeur->cours = Cour::with('classes')->find($professeur->courId);
 
         // Créer un professeur de base avec le rôle professeur
         $professeurRole = Role::where('name', 'professeur')->first();
@@ -360,7 +348,6 @@ class ProfesseurController extends Controller
      *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
      *             @OA\Property(property="statut", type="string", example="censeur"),
      *              @OA\Property(property="courId", type="integer", example=2),
-     *              @OA\Property(property="classesId", type="array", example="[1,2]", @OA\Items(type="integer")),
      *
      *             )
      *         )
@@ -427,7 +414,6 @@ class ProfesseurController extends Controller
                 'telephone' => 'required',
                 'statut' => 'required',
                'courId' => 'required',
-               'classesId' => 'required|array'
             ]);
         } else {
             return response()->json([
@@ -477,7 +463,7 @@ class ProfesseurController extends Controller
         if($cour && $professeurFound->courId != $request->courId){
 
             // update de l'ancienne cour
-            $oldCour = Cour::find($professeurFound->courId);
+            $oldCour = Cour::with('classes')->find($professeurFound->courId);
             $oldCour->update([
                 'libelle' => $oldCour->libelle,
                 'date_cour' => $oldCour->date_cour,
@@ -502,13 +488,6 @@ class ProfesseurController extends Controller
 
         $professeurFound->user = $user;
         $professeurFound->cour = $cour;
-        ClasseProfesseur::where('professeurId', $professeurFound->id)->delete();
-        foreach ($request->classesId as $classeId) {
-            ClasseProfesseur::create([
-                'professeurId' => $professeurFound->id,
-                'classeId' => $classeId
-            ]);
-        }
 
         $professeurFound->load('classes');
         //$professeurFound = Professeur::with('user')->find($professeurFound->id);
@@ -589,8 +568,6 @@ class ProfesseurController extends Controller
             }
 
             //suppression du professeur
-            $professeurFound->classes()->detach();
-            ClasseProfesseur::where('professeurId', $professeurFound->id)->delete();
             $professeurFound->delete();
 
             // update du cour du prof...

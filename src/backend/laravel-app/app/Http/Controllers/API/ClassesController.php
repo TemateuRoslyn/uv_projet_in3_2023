@@ -58,7 +58,7 @@ class ClassesController extends Controller
 
     public function index()
     {
-        $classes = Classe::with('eleves', 'cours', 'professeurs')->get();
+        $classes = Classe::with('eleves', 'cours.professeur')->get();
 
         return response()->json([
             'success' => true,
@@ -222,9 +222,7 @@ class ClassesController extends Controller
      */
     public function show($id)
     {
-        $classe = Classe::with('eleves')
-                        ->has('cours')->with('cours')
-                        ->has('professeurs')->with('professeurs')
+        $classe = Classe::with('eleves','cours.professeur')
                         ->find($id);
 
         if (!$classe) {

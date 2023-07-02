@@ -18,11 +18,15 @@ class CoursClasseSeeder extends Seeder
             'classeId' => 1,
         ]);
         CoursClasse::create([
-            'courId' => 1,
+            'courId' => 2,
+            'classeId' => 1,
+        ]);
+        CoursClasse::create([
+            'courId' => 3,
             'classeId' => 2,
         ]);
         CoursClasse::create([
-            'courId' => 2,
+            'courId' => 4,
             'classeId' => 2,
         ]);
     }
