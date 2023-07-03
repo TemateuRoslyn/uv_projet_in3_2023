@@ -160,9 +160,9 @@ Route::middleware('jwt.verify')->group(function () {
     Route::prefix('reglement')->group(function () {
         Route::get('findAll', [ReglementInterieurController::class, 'index']);
         Route::get('findOne/{reglementId}', [ReglementInterieurController::class, 'view']);
-        Route::middleware('permission:creer_reglement_interieur')->post('create', [ReglementInterieurController::class, 'store']);
-        Route::middleware('permission:modifier_reglement_interieur')->post('update/{reglementId}', [ReglementInterieurController::class, 'update']);
-        Route::middleware('permission:supprimer_reglement_interieur')->delete('delete/{reglementId}', [ReglementInterieurController::class, 'delete']);
+        Route::middleware('permission:creer_reglement_interieure')->post('create', [ReglementInterieurController::class, 'store']);
+        Route::middleware('permission:modifier_reglement_interieure')->post('update/{reglementId}', [ReglementInterieurController::class, 'update']);
+        Route::middleware('permission:supprimer_reglement_interieure')->delete('delete/{reglementId}', [ReglementInterieurController::class, 'delete']);
     });
 
     // Regle

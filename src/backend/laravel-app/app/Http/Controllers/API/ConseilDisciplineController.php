@@ -48,7 +48,7 @@ class ConseilDisciplineController extends Controller
 
     public function index()
     {
-        $conseil_discipline = ConseilDiscipline::with('eleve')->has('eleve')->get();
+        $conseil_discipline = ConseilDiscipline::with('eleve', 'faute.regle.reglementInterieur')->has('eleve')->get();
 
         return response()->json([
             'success' => true,
@@ -112,7 +112,7 @@ class ConseilDisciplineController extends Controller
 
     public function view($conseil_disciplineId)
     {
-        $conseil_discipline = ConseilDiscipline::with('eleve')->find($conseil_disciplineId);
+        $conseil_discipline = ConseilDiscipline::with('eleve', 'faute.regle.reglementInterieur')->find($conseil_disciplineId);
 
         if (!$conseil_discipline) {
             return response()->json([
@@ -185,7 +185,7 @@ class ConseilDisciplineController extends Controller
     public function viewConseilDisciplineEleve($eleveId)
     {
 
-        $conseildiscipline = ConseilDiscipline::where('eleveId', $eleveId)->with(['eleve'])->get();
+        $conseildiscipline = ConseilDiscipline::where('eleveId', $eleveId)->with(['eleve','faute.regle.reglementInterieur'])->get();
 
 
         if ($conseildiscipline) {
@@ -224,11 +224,12 @@ class ConseilDisciplineController extends Controller
      *         @OA\MediaType(
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
-     *                 required={"dateCd", "heureDebutCd", "heureFinCd", "eleveId"},
+     *                 required={"dateCd", "heureDebutCd", "heureFinCd", "eleveId","fauteId"},
      *                 @OA\Property(property="dateCd", type="string", format="date", example="2023-06-05"),
      *                 @OA\Property(property="heureDebutCd", type="string", example="09:00:00"),
      *                 @OA\Property(property="heureFinCd", type="string", example="10:00:00"),
-     *                 @OA\Property(property="eleveId", type="integer", example=1)
+     *                 @OA\Property(property="eleveId", type="integer", example=1),
+     *                 @OA\Property(property="fauteId", type="integer", example=1)
      *             )
      *         )
      *     ),
@@ -280,6 +281,7 @@ class ConseilDisciplineController extends Controller
             'heureDebutCd' => 'required|date_format:H:i:s',
             'heureFinCd' => 'required|date_format:H:i:s|after:heure_debut_cd',
             'eleveId' => 'required|integer',
+            'fauteId' => 'required|integer',
         ]);
 
         if ($validator->fails()) {
@@ -294,9 +296,10 @@ class ConseilDisciplineController extends Controller
             'heureDebutCd' => $request->input('heureDebutCd'),
             'heureFinCd' => $request->input('heureFinCd'),
             'eleveId' => $request->input('eleveId'),
+            'fauteId' => $request->input('fauteId'),
         ]);
         //Information sur l'eleve qui assiste au conseil de discipline
-        $conseil_discipline->load('eleve');
+        $conseil_discipline->load('eleve', 'faute.regle.reglementInterieur');
 
         return response()->json([
             'success' => true,
@@ -325,11 +328,12 @@ class ConseilDisciplineController extends Controller
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *              required={"dateCd", "heureDebutCd", "heureFinCd", "eleveId"},
+     *              required={"dateCd", "heureDebutCd", "heureFinCd", "eleveId","fauteId"},
      *             @OA\Property(property="dateCd", type="string", format="date", example="1990-01-01"),
      *             @OA\Property(property="heureDebutCd", type="string", example="09:00:00"),
      *             @OA\Property(property="heureFinCd", type="string", example="11:00:00"),
-     *             @OA\Property(property="eleveId", type="integer", example=1)
+     *             @OA\Property(property="eleveId", type="integer", example=1),
+     *             @OA\Property(property="fauteId", type="integer", example=1)
      *           )
      *     ),
      *     @OA\Response(
@@ -390,6 +394,7 @@ class ConseilDisciplineController extends Controller
                 'heureDebutCd' => 'required|date_format:H:i:s',
                 'heureFinCd' => 'required|date_format:H:i:s|after:heure_debut_cd',
                 'eleveId' => 'required|integer',
+                'fauteId' => 'required|integer',
             ]);
         }else{
             return response()->json([
@@ -411,10 +416,11 @@ class ConseilDisciplineController extends Controller
         $conseil_discipline->heureDebutCd = $request->input('heureDebutCd');
         $conseil_discipline->heureFinCd = $request->input('heureFinCd');
         $conseil_discipline->eleveId = $request->input('eleveId');
+        $conseil_discipline->fauteId = $request->input('fauteId');
         $conseil_discipline->save();
 
         //Information sur l'eleve qui assiste au conseil de discipline
-        $conseil_discipline->load('eleve');
+        $conseil_discipline->load('eleve','faute.regle.reglementInterieur');
 
         return response()->json([
             'success' => true,

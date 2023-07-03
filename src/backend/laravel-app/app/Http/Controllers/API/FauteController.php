@@ -57,7 +57,7 @@ class FauteController extends Controller
      */
     public function index()
     {
-        $fautes = Faute::with('regle', 'eleve')->get();
+        $fautes = Faute::with('regle.reglementInterieur', 'eleve')->get();
 
         return response()->json([
             'message' => 'Liste des fautes',
@@ -122,7 +122,7 @@ class FauteController extends Controller
     public function view($fauteId)
     {
 
-        $faute = Faute::with(['eleve', 'regle'])->find($fauteId);
+        $faute = Faute::with(['eleve', 'regle.reglementInterieur'])->find($fauteId);
 
 
         if ($faute) {
@@ -196,7 +196,7 @@ class FauteController extends Controller
     public function viewFautesEleve($eleveId)
     {
 
-        $eleve = Faute::where('eleveId', $eleveId)->with(['eleve', 'regle'])->get();
+        $eleve = Faute::where('eleveId', $eleveId)->with(['eleve', 'regle.reglementInterieur'])->get();
 
 
         if ($eleve) {
@@ -290,7 +290,7 @@ class FauteController extends Controller
             'libelle' => $request->input('libelle'),
             'gravite' => $request->input('gravite'),
         ]);
-        $fautte->load('eleve', 'regle');
+        $fautte->load('eleve', 'regle.reglementInterieur');
 
         return response()->json([
             'message' => 'Mistake created successfully',
@@ -397,7 +397,7 @@ class FauteController extends Controller
         $fauteFound->eleveId = $request->input('eleveId');
         $fauteFound->regleId = $request->input('regleId');
         $fauteFound->save();
-        $fauteFound->load('eleve', 'regle');
+        $fauteFound->load('eleve', 'regle.reglementInterieur');
 
         return response()->json([
             'message' => 'Mistake updated successfully',

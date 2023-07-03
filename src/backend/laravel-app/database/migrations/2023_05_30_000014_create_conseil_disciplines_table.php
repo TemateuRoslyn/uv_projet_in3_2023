@@ -18,6 +18,8 @@ return new class extends Migration
             $table->time('heureFinCd');
             $table->unsignedBigInteger('eleveId');
             $table->foreign('eleveId')->references('id')->on('eleves');
+            $table->unsignedBigInteger('fauteId');
+            $table->foreign('fauteId')->references('id')->on('fautes');
             $table->timestamps();
         });
     }

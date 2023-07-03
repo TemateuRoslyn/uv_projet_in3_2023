@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @OA\Schema(
- *     required={"profession", "username", "firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "photo", "sexe", "telephone", "userId", "user"},
+ *     required={"profession", "username", "firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "photo", "sexe", "telephone", "userId"},
  *     @OA\Xml(name="Parents"),
  *     @OA\Property(property="id", type="integer", readOnly=true, example="1"),
  *     @OA\Property(property="profession", type="string", example="Engineer"),

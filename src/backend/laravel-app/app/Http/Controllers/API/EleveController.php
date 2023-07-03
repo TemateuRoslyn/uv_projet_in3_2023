@@ -63,7 +63,7 @@ class EleveController extends Controller
      */
     public function index()
     {
-        $eleves = Eleve::with('user', 'classe')->get();
+        $eleves = Eleve::with('user', 'classe', 'parents')->get();
 
         return response()->json([
             'message' => 'Liste des élèves',
@@ -128,6 +128,7 @@ class EleveController extends Controller
     {
         $eleve = Eleve::with('user')
                         ->has('classe')->with('classe')
+                        ->has('parents')->with('parents')
                         ->find($eleveId);
 
         if ($eleve) {
@@ -310,6 +311,7 @@ class EleveController extends Controller
 
         $eleve->user = $user;
         $eleve->classe = $classe;
+        $eleve->load('parents');
 
         // Créer un eleve de base avec le rôle eleve
         $eleveRole = Role::where('name', 'eleve')->first();
@@ -527,6 +529,7 @@ class EleveController extends Controller
 
         $eleveFound->user = $user;
         $eleveFound->classe = $classe;
+        $eleveFound->load('parents');
 
         return response()->json([
             'message' => 'Eleve updated successfully',
@@ -593,12 +596,9 @@ class EleveController extends Controller
 
         if ($eleveFound) {
 
-            //le user associe
-            $userFound = User::find($eleveFound->userId);
-
             // supperssion de l'image du user
-            if ($userFound->photo) {
-                Storage::delete($userFound->photo);
+            if ($eleveFound->photo) {
+                Storage::delete($eleveFound->photo);
             }
 
             //suppression de l'eleve

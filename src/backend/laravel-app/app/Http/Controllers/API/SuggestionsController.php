@@ -301,13 +301,13 @@ class SuggestionsController extends Controller
         ]);
     }
 
-       /**
+    /**
      * @OA\Delete (
      *     path="/api/suggestion/delete/{id}",
-     *     summary="Delete a suggestion",
-     *     description="Delete a suggestion resource",
-     *     operationId="deleteSuggestion,
-     *     tags={"suggestions"},
+     *     summary="Delete an suggestion",
+     *     description="Delete an suggestion resource",
+     *     operationId="deleteSuggestion",
+     *     tags={"professeurs"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -342,17 +342,17 @@ class SuggestionsController extends Controller
      *             @OA\Property(property="error", type="string", example="suggestion not found")
      *         )
      *     ),
-     *     @OA\Response(
+     *    @OA\Response(
      *         response=200,
-     *         description="Success",
+     *         description="suggestion deleted successfully",
      *         @OA\JsonContent(
+     *             type="object",
      *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="suggestion deleted successfully"),
+     *             @OA\Property(property="message", type="string", example="suggestion deleted successfully")
      *         )
-     *     )
+     *     ),
      * )
      */
-
     public function delete($suggestionId)
     {
         $suggestion = Suggestion::find($suggestionId);
