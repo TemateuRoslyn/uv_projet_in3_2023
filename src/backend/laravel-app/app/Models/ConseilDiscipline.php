@@ -13,8 +13,10 @@ use Illuminate\Database\Eloquent\Model;
  *     @OA\Property(property="dateCd", type="string", format="date", example="2023-04-01"),
  *     @OA\Property(property="heureDebutCd", type="string", format="date", example="11:00:00"),
  *     @OA\Property(property="heureFinCd", type="string", format="date", example="13:00:00"),
- *     @OA\Property(property="eleveId", type="integer", readOnly=true, example="1"),
+ *     @OA\Property(property="eleveId", type="integer", example="1"),
  *     @OA\Property(property="eleve", type="object", ref="#/components/schemas/Eleve"),
+ *     @OA\Property(property="fauteId", type="integer", example="1"),
+ *     @OA\Property(property="faute", type="object", ref="#/components/schemas/Faute"),
  *     @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),
  *     @OA\Property(property="updated_at", ref="#/components/schemas/BaseModel/properties/updated_at"),
  *     @OA\Property(property="deleted_at", ref="#/components/schemas/BaseModel/properties/deleted_at")
@@ -35,10 +37,16 @@ class ConseilDiscipline extends Model
         'heureDebutCd',
         'heureFinCd',
         'eleveId',
+        'fauteId',
+        'faute',
         'eleve',
     ];
     public function eleve()
     {
         return $this->belongsTo(Eleve::class, 'eleveId');
+    }
+    public function faute()
+    {
+        return $this->belongsTo(Faute::class, 'fauteId');
     }
 }

@@ -58,7 +58,7 @@ class ParentsController extends Controller
     {
         // $parents = Parents::has('eleves')->with('eleves')->get();
         // $parents = Parents::has('user')->with('user')->get();
-        $parents = Parents::whereHas('eleves')->whereHas('user')->with('user', 'eleves')->get();
+        $parents = Parents::whereHas('eleves.classe')->whereHas('user')->with('user', 'eleves.classe')->get();
 
 
         return response()->json([
@@ -122,7 +122,7 @@ class ParentsController extends Controller
      */
     public function view($parentId)
     {
-        $parent = Parents::whereHas('eleves')->whereHas('user')->with('user', 'eleves')->find($parentId);
+        $parent = Parents::whereHas('eleves.classe')->whereHas('user')->with('user', 'eleves.classe')->find($parentId);
             // $parentData = Parents::with('eleves')->find($parentId);
             // $parent = Parents::with('user')->find($parentId);
 
@@ -300,7 +300,7 @@ class ParentsController extends Controller
             }
         }
 
-        $parent = Parents::whereHas('eleves')->whereHas('user')->with('user', 'eleves')->find($parent->id);
+        $parent = Parents::whereHas('eleves.classe')->whereHas('user')->with('user', 'eleves.classe')->find($parent->id);
 
         return response()->json([
             'message' => 'Parent created successfully',
@@ -430,7 +430,6 @@ class ParentsController extends Controller
         }
 
         if ($validator->fails()) {
-            dd($validator);
             return response()->json([
                 'message' => 'Could not update this parent',
                 'success' => false,
@@ -472,7 +471,7 @@ class ParentsController extends Controller
         $parentFound->profession = $request->input('profession');
         $parentFound->save();
 
-        $parentFound = Parents::whereHas('eleves')->whereHas('user')->with('user', 'eleves')->find($parentFound->id);
+        $parentFound = Parents::whereHas('eleves.classe')->whereHas('user')->with('user', 'eleves.classe')->find($parentFound->id);
         // $parentFound = Parents::with('user')->find($parentFound->id);
         // $parentFound = Parents::with('eleves')->find($parentFound->id);
 
