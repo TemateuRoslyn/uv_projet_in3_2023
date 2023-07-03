@@ -7,6 +7,8 @@ import 'package:fltter_app/repositories/home_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../common/configurations/api_configuration.dart';
+import '../../../common/models/conseil_discipline.dart';
+import '../../../common/models/convocation.dart';
 import '../../../common/models/faute.dart';
 
 part 'home_state.dart';
@@ -24,7 +26,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   void getDataByType(String dataType) async {
     // ri = reglements interierieurs
-    // fs = fautes et sanctions
+    // cd = conseil discipline
     final isOnline = await internetCubit.checkInternetConnection();
     switch (dataType) {
       case 'ri':
@@ -55,6 +57,34 @@ class HomeCubit extends Cubit<HomeState> {
           }
         }
         break;
+      case 'cd':
+        {
+          emit(state.copyWith(cdStatus: ApiStatus.isLoading));
+          if (isOnline) {
+            proceedTogetAllUserCD();
+          } else {
+            emit(state.copyWith(
+                cds: [],
+                cdStatus: ApiStatus.failed,
+                cdStatusMessage:
+                    'Veuillez consulter votre connexion internet. Cliquez pour recharger une fois la connection retablie.'));
+          }
+        }
+        break;
+      case 'convocations':
+        {
+          emit(state.copyWith(convocationStatus: ApiStatus.isLoading));
+          if (isOnline) {
+            proceedTogetAllUserConvocation();
+          } else {
+            emit(state.copyWith(
+                convocations: [],
+                convocationStatus: ApiStatus.failed,
+                convocationStatusMessage:
+                    'Veuillez consulter votre connexion internet. Cliquez pour recharger une fois la connection retablie.'));
+          }
+        }
+        break;
       default:
     }
   }
@@ -80,6 +110,31 @@ class HomeCubit extends Cubit<HomeState> {
           fautes: [],
           fauteStatus: ApiStatus.failed,
           fauteStatusMessage: errorMessage));
+    }
+  }
+
+  void proceedTogetAllUserCD() async {
+    try {
+      final cds = await homeRepository.getAllUserCD();
+      emit(state.copyWith(cdStatus: ApiStatus.success, cds: cds));
+    } on DioException catch (e) {
+      final errorMessage = ApiConfiguration.getErrorMessage(e);
+      emit(state.copyWith(
+          cds: [], cdStatus: ApiStatus.failed, cdStatusMessage: errorMessage));
+    }
+  }
+
+  void proceedTogetAllUserConvocation() async {
+    try {
+      final convocations = await homeRepository.getAllUserConvocations();
+      emit(state.copyWith(
+          convocationStatus: ApiStatus.success, convocations: convocations));
+    } on DioException catch (e) {
+      final errorMessage = ApiConfiguration.getErrorMessage(e);
+      emit(state.copyWith(
+          convocations: [],
+          convocationStatus: ApiStatus.failed,
+          convocationStatusMessage: errorMessage));
     }
   }
 }

@@ -1,71 +1,81 @@
+import 'package:fltter_app/common/styles/colors.dart';
+import 'package:fltter_app/common/views/check_internet_page.dart';
+import 'package:fltter_app/common/views/page_skeleton_two.dart';
+import 'package:fltter_app/features/home/logic/home_cubit.dart';
 import 'package:fltter_app/features/home/widgets/convocation_component.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../../../common/utils/enums.dart';
 import '../../../common/utils/helper.dart';
+import '../../../common/widgets/common_widgets.dart';
 
-class Convocation extends StatelessWidget {
-  Convocation({super.key});
-  final List<Map<String, dynamic>> convocationsComponents = [
-    {
-      'libelle': 'Retard',
-      'date': '12-05-2015',
-      'start_at': '10:00',
-      'end_at': '12:00',
-      'statut': 'En cours',
-      'onPressAction': () {}
-    },
-    {
-      'libelle': 'Fraude',
-      'date': '20-06-2023',
-      'start_at': '09:30',
-      'end_at': '12:00',
-      'statut': 'Expire',
-      'onPressAction': () {}
-    },
-    {
-      'libelle': 'Absence',
-      'date': '15-11-2020',
-      'start_at': '08:30',
-      'end_at': '15:30',
-      'statut': 'En cours',
-      'onPressAction': () {}
-    },
-    {
-      'libelle': 'Absence non justifie',
-      'date': '11-11-2011',
-      'start_at': '7:00',
-      'end_at': '15:00',
-      'statut': 'Expire',
-      'onPressAction': () {}
-    },
-  ];
+class ConvocationPage extends StatefulWidget {
+  const ConvocationPage({super.key});
+
+  @override
+  State<ConvocationPage> createState() => _ConvocationPageState();
+}
+
+class _ConvocationPageState extends State<ConvocationPage> {
+  late HomeCubit _homeCubit;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _homeCubit = context.read<HomeCubit>();
+    _homeCubit.getDataByType('convocations');
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.symmetric(vertical: getHeight(30, context)),
-              child: Wrap(
-                  runSpacing: getHeight(20, context),
-                  spacing: getWidth(50, context),
-                  children: convocationsComponents
-                      .map((convocationsComponents) => ConvocationComponent(
-                            libelle: convocationsComponents['libelle'],
-                            // date: convocationsComponents['date'],
-                            subtitle1: convocationsComponents['start_at'],
-                            subtitle2: convocationsComponents['end_at'],
-                            statut: convocationsComponents['statut'],
-                            isFrom: 'convocations',
-                            // onPressAction:
-                            //     convocationsComponents['onPressAction'],
-                          ))
-                      .toList()),
-            )
-          ],
-        ),
+    final screenSize = MediaQuery.of(context).size;
+
+    return PageSkeletonTwo(
+      headerText: 'Mes convocations',
+      body: BlocBuilder<HomeCubit, HomeState>(
+        buildWhen: (previous, current) =>
+            (previous.convocationStatus != current.convocationStatus ||
+                previous.convocations != current.convocations),
+        builder: (context, state) {
+          return CheckInternetConnectionPage(
+            positionFromTop: (screenSize.height / 2),
+            errorTextColor: appColors.primary!,
+            body: state.convocationStatus == ApiStatus.isLoading
+                ? CommonWidgets.circularProgressIndicatorWidget(
+                    positionFromTop: (screenSize.height / 2),
+                    context: context,
+                    color: appColors.primary!)
+                : state.convocationStatus == ApiStatus.failed
+                    ? CommonWidgets.loadingStatusFailedWidget(
+                        positionFromTop: (screenSize.height / 2),
+                        context: context,
+                        statusMessage: state.convocationStatusMessage,
+                        color: appColors.primary!,
+                        reloadFunction: () =>
+                            _homeCubit.getDataByType('convocations'))
+                    : Expanded(
+                        child: ListView(
+                        padding: EdgeInsets.only(
+                            top: getHeight(20, context),
+                            left: getWidth(10, context),
+                            right: getWidth(10, context)),
+                        children: state.convocations
+                            .map((convocation) => ConvocationComponent(
+                                  libelle: 'Faute: ${convocation.libelle}',
+                                  subtitle1:
+                                      'Date de convocation: ${convocation.dateConvocation}',
+                                  subtitle2:
+                                      'Date de RDV: ${convocation.dateRdv}',
+                                  statut: convocation.statut,
+                                  isFrom: 'convocations',
+                                  // onPressAction: () {},
+                                ))
+                            .toList(),
+                      )),
+          );
+        },
       ),
     );
   }

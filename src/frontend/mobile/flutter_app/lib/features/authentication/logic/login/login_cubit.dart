@@ -21,7 +21,7 @@ class LoginCubit extends Cubit<LoginState> {
   final TextEditingController password = TextEditingController();
   final GlobalKey<FormState> loginForm = GlobalKey<FormState>();
 
-  void checkIfFieldsAreEmpty() {
+  void checkIfFieldsAreEmpty() async {
     emit(state.copyWith(loginStatus: ApiStatus.isLoading));
     final isValid = loginForm.currentState!.validate();
 
@@ -32,11 +32,11 @@ class LoginCubit extends Cubit<LoginState> {
               'Veuillez respecter les procedures qui s\'affichent...'));
     } else {
       emit(state.copyWith(emial: email.text, password: password.text));
-      proceedToLogin();
+      await proceedToLogin();
     }
   }
 
-  void proceedToLogin() async {
+  Future<void> proceedToLogin() async {
     try {
       await authRepository.login(state.emial, state.password);
       emit(state.copyWith(

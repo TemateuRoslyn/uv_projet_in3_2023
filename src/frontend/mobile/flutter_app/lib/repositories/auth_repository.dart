@@ -62,7 +62,7 @@ class AuthRepository {
         key: kIsFirstUsage, value: 'is-not-first-usage');
   }
 
-  void saveUserIdInLocalStorage(int userId) async {
+  Future<void> saveUserIdInLocalStorage(int userId) async {
     await flutterSecureStorage.write(key: kUserId, value: userId.toString());
     _userId = userId;
   }
@@ -73,18 +73,14 @@ class AuthRepository {
   //   _userIdBasedOnType = userIdBasedOnType;
   // }
 
-  void saveUserTokenInLocalStorage(String userToken) async {
+  Future<void> saveUserTokenInLocalStorage(String userToken) async {
     await flutterSecureStorage.write(key: kUserToken, value: userToken);
     _userToken = userToken;
   }
 
-  void saveUserTypeInLocalStorage(String userType) async {
+  Future<void> saveUserTypeInLocalStorage(String userType) async {
     await flutterSecureStorage.write(key: kUserType, value: userType);
     _userType = userType;
-
-    print(AuthRepository.getUserType);
-
-    print('object');
   }
 
   String getCurrentUserType(int userType) {
@@ -121,9 +117,9 @@ class AuthRepository {
       final userType =
           (response.data['content']['user']['roles'] as List)[0]['id'];
 
-      saveUserIdInLocalStorage(userId);
-      saveUserTokenInLocalStorage(token);
-      saveUserTypeInLocalStorage(getCurrentUserType(userType));
+      await saveUserIdInLocalStorage(userId);
+      await saveUserTokenInLocalStorage(token);
+      await saveUserTypeInLocalStorage(getCurrentUserType(userType));
       // saveUserIdBasedOnTypeInLocalStorage(userIdBasedOnType);
     } catch (e) {
       rethrow;

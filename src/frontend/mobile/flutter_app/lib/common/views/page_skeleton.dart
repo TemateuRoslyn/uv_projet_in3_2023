@@ -1,6 +1,5 @@
 import 'package:fltter_app/common/utils/enums.dart';
 import 'package:fltter_app/common/utils/helper.dart';
-import 'package:fltter_app/common/views/check_internet_page.dart';
 import 'package:fltter_app/features/home/views/home_page.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';

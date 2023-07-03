@@ -23,7 +23,15 @@ mixin _$HomeState {
       throw _privateConstructorUsedError; // fautes variables
   ApiStatus get fauteStatus => throw _privateConstructorUsedError;
   List<Faute> get fautes => throw _privateConstructorUsedError;
-  String get fauteStatusMessage => throw _privateConstructorUsedError;
+  String get fauteStatusMessage =>
+      throw _privateConstructorUsedError; // conseil discipline variables
+  ApiStatus get cdStatus => throw _privateConstructorUsedError;
+  List<ConseilDiscipline> get cds => throw _privateConstructorUsedError;
+  String get cdStatusMessage =>
+      throw _privateConstructorUsedError; // covocations variables
+  ApiStatus get convocationStatus => throw _privateConstructorUsedError;
+  List<Convocation> get convocations => throw _privateConstructorUsedError;
+  String get convocationStatusMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -41,7 +49,13 @@ abstract class $HomeStateCopyWith<$Res> {
       String riStatusMessage,
       ApiStatus fauteStatus,
       List<Faute> fautes,
-      String fauteStatusMessage});
+      String fauteStatusMessage,
+      ApiStatus cdStatus,
+      List<ConseilDiscipline> cds,
+      String cdStatusMessage,
+      ApiStatus convocationStatus,
+      List<Convocation> convocations,
+      String convocationStatusMessage});
 }
 
 /// @nodoc
@@ -63,6 +77,12 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? fauteStatus = null,
     Object? fautes = null,
     Object? fauteStatusMessage = null,
+    Object? cdStatus = null,
+    Object? cds = null,
+    Object? cdStatusMessage = null,
+    Object? convocationStatus = null,
+    Object? convocations = null,
+    Object? convocationStatusMessage = null,
   }) {
     return _then(_value.copyWith(
       riStatus: null == riStatus
@@ -89,6 +109,30 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.fauteStatusMessage
           : fauteStatusMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      cdStatus: null == cdStatus
+          ? _value.cdStatus
+          : cdStatus // ignore: cast_nullable_to_non_nullable
+              as ApiStatus,
+      cds: null == cds
+          ? _value.cds
+          : cds // ignore: cast_nullable_to_non_nullable
+              as List<ConseilDiscipline>,
+      cdStatusMessage: null == cdStatusMessage
+          ? _value.cdStatusMessage
+          : cdStatusMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+      convocationStatus: null == convocationStatus
+          ? _value.convocationStatus
+          : convocationStatus // ignore: cast_nullable_to_non_nullable
+              as ApiStatus,
+      convocations: null == convocations
+          ? _value.convocations
+          : convocations // ignore: cast_nullable_to_non_nullable
+              as List<Convocation>,
+      convocationStatusMessage: null == convocationStatusMessage
+          ? _value.convocationStatusMessage
+          : convocationStatusMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -106,7 +150,13 @@ abstract class _$$_InitialCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
       String riStatusMessage,
       ApiStatus fauteStatus,
       List<Faute> fautes,
-      String fauteStatusMessage});
+      String fauteStatusMessage,
+      ApiStatus cdStatus,
+      List<ConseilDiscipline> cds,
+      String cdStatusMessage,
+      ApiStatus convocationStatus,
+      List<Convocation> convocations,
+      String convocationStatusMessage});
 }
 
 /// @nodoc
@@ -125,6 +175,12 @@ class __$$_InitialCopyWithImpl<$Res>
     Object? fauteStatus = null,
     Object? fautes = null,
     Object? fauteStatusMessage = null,
+    Object? cdStatus = null,
+    Object? cds = null,
+    Object? cdStatusMessage = null,
+    Object? convocationStatus = null,
+    Object? convocations = null,
+    Object? convocationStatusMessage = null,
   }) {
     return _then(_$_Initial(
       riStatus: null == riStatus
@@ -151,6 +207,30 @@ class __$$_InitialCopyWithImpl<$Res>
           ? _value.fauteStatusMessage
           : fauteStatusMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      cdStatus: null == cdStatus
+          ? _value.cdStatus
+          : cdStatus // ignore: cast_nullable_to_non_nullable
+              as ApiStatus,
+      cds: null == cds
+          ? _value._cds
+          : cds // ignore: cast_nullable_to_non_nullable
+              as List<ConseilDiscipline>,
+      cdStatusMessage: null == cdStatusMessage
+          ? _value.cdStatusMessage
+          : cdStatusMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+      convocationStatus: null == convocationStatus
+          ? _value.convocationStatus
+          : convocationStatus // ignore: cast_nullable_to_non_nullable
+              as ApiStatus,
+      convocations: null == convocations
+          ? _value._convocations
+          : convocations // ignore: cast_nullable_to_non_nullable
+              as List<Convocation>,
+      convocationStatusMessage: null == convocationStatusMessage
+          ? _value.convocationStatusMessage
+          : convocationStatusMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -164,9 +244,17 @@ class _$_Initial implements _Initial {
       this.riStatusMessage = '',
       this.fauteStatus = ApiStatus.init,
       final List<Faute> fautes = const [],
-      this.fauteStatusMessage = ''})
+      this.fauteStatusMessage = '',
+      this.cdStatus = ApiStatus.init,
+      final List<ConseilDiscipline> cds = const [],
+      this.cdStatusMessage = '',
+      this.convocationStatus = ApiStatus.init,
+      final List<Convocation> convocations = const [],
+      this.convocationStatusMessage = ''})
       : _ri = ri,
-        _fautes = fautes;
+        _fautes = fautes,
+        _cds = cds,
+        _convocations = convocations;
 
 // reglement interieur variables
   @override
@@ -200,10 +288,42 @@ class _$_Initial implements _Initial {
   @override
   @JsonKey()
   final String fauteStatusMessage;
+// conseil discipline variables
+  @override
+  @JsonKey()
+  final ApiStatus cdStatus;
+  final List<ConseilDiscipline> _cds;
+  @override
+  @JsonKey()
+  List<ConseilDiscipline> get cds {
+    if (_cds is EqualUnmodifiableListView) return _cds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_cds);
+  }
+
+  @override
+  @JsonKey()
+  final String cdStatusMessage;
+// covocations variables
+  @override
+  @JsonKey()
+  final ApiStatus convocationStatus;
+  final List<Convocation> _convocations;
+  @override
+  @JsonKey()
+  List<Convocation> get convocations {
+    if (_convocations is EqualUnmodifiableListView) return _convocations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_convocations);
+  }
+
+  @override
+  @JsonKey()
+  final String convocationStatusMessage;
 
   @override
   String toString() {
-    return 'HomeState(riStatus: $riStatus, ri: $ri, riStatusMessage: $riStatusMessage, fauteStatus: $fauteStatus, fautes: $fautes, fauteStatusMessage: $fauteStatusMessage)';
+    return 'HomeState(riStatus: $riStatus, ri: $ri, riStatusMessage: $riStatusMessage, fauteStatus: $fauteStatus, fautes: $fautes, fauteStatusMessage: $fauteStatusMessage, cdStatus: $cdStatus, cds: $cds, cdStatusMessage: $cdStatusMessage, convocationStatus: $convocationStatus, convocations: $convocations, convocationStatusMessage: $convocationStatusMessage)';
   }
 
   @override
@@ -220,7 +340,19 @@ class _$_Initial implements _Initial {
                 other.fauteStatus == fauteStatus) &&
             const DeepCollectionEquality().equals(other._fautes, _fautes) &&
             (identical(other.fauteStatusMessage, fauteStatusMessage) ||
-                other.fauteStatusMessage == fauteStatusMessage));
+                other.fauteStatusMessage == fauteStatusMessage) &&
+            (identical(other.cdStatus, cdStatus) ||
+                other.cdStatus == cdStatus) &&
+            const DeepCollectionEquality().equals(other._cds, _cds) &&
+            (identical(other.cdStatusMessage, cdStatusMessage) ||
+                other.cdStatusMessage == cdStatusMessage) &&
+            (identical(other.convocationStatus, convocationStatus) ||
+                other.convocationStatus == convocationStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._convocations, _convocations) &&
+            (identical(
+                    other.convocationStatusMessage, convocationStatusMessage) ||
+                other.convocationStatusMessage == convocationStatusMessage));
   }
 
   @override
@@ -231,7 +363,13 @@ class _$_Initial implements _Initial {
       riStatusMessage,
       fauteStatus,
       const DeepCollectionEquality().hash(_fautes),
-      fauteStatusMessage);
+      fauteStatusMessage,
+      cdStatus,
+      const DeepCollectionEquality().hash(_cds),
+      cdStatusMessage,
+      convocationStatus,
+      const DeepCollectionEquality().hash(_convocations),
+      convocationStatusMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -247,7 +385,13 @@ abstract class _Initial implements HomeState {
       final String riStatusMessage,
       final ApiStatus fauteStatus,
       final List<Faute> fautes,
-      final String fauteStatusMessage}) = _$_Initial;
+      final String fauteStatusMessage,
+      final ApiStatus cdStatus,
+      final List<ConseilDiscipline> cds,
+      final String cdStatusMessage,
+      final ApiStatus convocationStatus,
+      final List<Convocation> convocations,
+      final String convocationStatusMessage}) = _$_Initial;
 
   @override // reglement interieur variables
   ApiStatus get riStatus;
@@ -261,6 +405,18 @@ abstract class _Initial implements HomeState {
   List<Faute> get fautes;
   @override
   String get fauteStatusMessage;
+  @override // conseil discipline variables
+  ApiStatus get cdStatus;
+  @override
+  List<ConseilDiscipline> get cds;
+  @override
+  String get cdStatusMessage;
+  @override // covocations variables
+  ApiStatus get convocationStatus;
+  @override
+  List<Convocation> get convocations;
+  @override
+  String get convocationStatusMessage;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>

@@ -3,8 +3,10 @@ import 'package:fltter_app/common/utils/constants.dart';
 import 'package:fltter_app/common/utils/helper.dart';
 import 'package:fltter_app/common/views/check_internet_page.dart';
 import 'package:fltter_app/common/widgets/common_widgets.dart';
+import 'package:fltter_app/features/home/logic/home_cubit.dart';
 import 'package:fltter_app/features/home/widgets/course_component.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
+import 'package:fltter_app/features/profile/views/parent_consultation_page.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
   bool modifyProfileIsSelected = false;
   User? _currentUser;
   late ProfileCubit _profileCubit;
+  late HomeCubit _homeCubit;
   late String currentUserType;
 
   @override
@@ -31,6 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
 
     _profileCubit = context.read<ProfileCubit>();
+    _homeCubit = context.read<HomeCubit>();
     currentUserType = AuthRepository.getUserType;
     if (_profileCubit.state.currentUser != null) {
       _currentUser = _profileCubit.state.currentUser!;
@@ -103,12 +107,12 @@ class _ProfilePageState extends State<ProfilePage> {
       },
       {
         'text1': 'Faute(s)',
-        'text2': '0',
+        'text2': _homeCubit.state.fautes.length.toString(),
         'isFirst': false,
       },
       {
         'text1': 'Sanction(s)',
-        'text2': '0',
+        'text2': _homeCubit.state.convocations.length.toString(),
         'isFirst': false,
       }
     ];
@@ -220,7 +224,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                       ...state.currentUser!.eleves!
                                           .map((e) => CourseComponent(
                                               currentUserType: currentUserType,
-                                              onPressAction: () {},
+                                              onPressAction: () => Navigator.of(
+                                                      context)
+                                                  .push(MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ParentConsultationPage(
+                                                            childId: e.id,
+                                                          ))),
                                               courseTitle:
                                                   '${e.firstName} ${e.lastName}',
                                               teacherName: 'classe ici'))

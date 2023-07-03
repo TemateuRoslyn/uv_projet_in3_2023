@@ -1,7 +1,6 @@
 import 'package:fltter_app/common/styles/colors.dart';
 import 'package:fltter_app/common/utils/helper.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class ConvocationComponent extends StatelessWidget {
   const ConvocationComponent({
@@ -9,8 +8,8 @@ class ConvocationComponent extends StatelessWidget {
     required this.libelle,
     // required this.date,
     required this.subtitle1,
-    required this.subtitle2,
-    required this.statut,
+    this.subtitle2,
+    this.statut,
     required this.isFrom,
     // required this.onPressAction,
   });
@@ -18,8 +17,8 @@ class ConvocationComponent extends StatelessWidget {
   final String libelle;
   // final String date;
   final String subtitle1;
-  final String subtitle2;
-  final String statut;
+  final String? subtitle2;
+  final String? statut;
   final String isFrom;
   // final void Function()? onPressAction;
 
@@ -87,7 +86,7 @@ class ConvocationComponent extends StatelessWidget {
                 ),
                 Text(
                   // DateFormat('dd-MM-yyyy').format(DateTime.now()),
-                  subtitle2,
+                  subtitle2!,
                   style: TextStyle(
                     fontSize: getHeight(15, context),
                     color: Colors.white,
@@ -105,37 +104,43 @@ class ConvocationComponent extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            SizedBox(
-              height: getHeight(10, context),
-            ),
-            Text(
-              // DateFormat('dd-MM-yyyy').format(DateTime.now()),
-              subtitle2,
-              style: TextStyle(
-                fontSize: getHeight(15, context),
-                color: Colors.white,
-              ),
-            ),
+            // SizedBox(
+            //   height: getHeight(10, context),
+            // ),
+            // Text(
+            //   // DateFormat('dd-MM-yyyy').format(DateTime.now()),
+            //   subtitle2,
+            //   style: TextStyle(
+            //     fontSize: getHeight(15, context),
+            //     color: Colors.white,
+            //   ),
+            // ),
           ],
           SizedBox(
             height: getHeight(10, context),
           ),
-          Container(
-            width: getWidth(130, context),
-            // height: getHeight(20, context),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: isFrom == 'convocations' ? Colors.green : Colors.teal,
-            ),
-            alignment: Alignment.center,
-            child: Text(
-              statut,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: getHeight(15, context),
+          if (statut != null)
+            Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: getWidth(10, context),
+                  vertical: getHeight(5, context)),
+              width: getWidth(130, context),
+              // height: getHeight(20, context),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color:
+                    isFrom == 'convocations' ? Colors.green : appColors.tinary,
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                statut!,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: getHeight(15, context),
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
