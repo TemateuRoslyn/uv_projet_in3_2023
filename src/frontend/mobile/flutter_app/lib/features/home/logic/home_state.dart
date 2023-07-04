@@ -22,5 +22,8 @@ class HomeState with _$HomeState {
     @Default(ApiStatus.init) ApiStatus convocationStatus,
     @Default([]) List<Convocation> convocations,
     @Default('') String convocationStatusMessage,
+
+    //Box suggession variables
+    @Default('') String suggestionInsertStatus,
   }) = _Initial;
 }

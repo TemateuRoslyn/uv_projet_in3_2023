@@ -10,6 +10,7 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color? yellow;
   final Color? ligthGreen;
   final Color? white;
+  final Color? black;
 
   AppColors({
     required this.primary,
@@ -21,6 +22,7 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.yellow,
     required this.ligthGreen,
     required this.white,
+    required this.black,
   });
 
   @override
@@ -34,6 +36,7 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? yellow,
     Color? ligthGreen,
     Color? white,
+    Color? black,
   }) {
     return AppColors(
       primary: primary ?? this.primary,
@@ -45,6 +48,7 @@ class AppColors extends ThemeExtension<AppColors> {
       yellow: yellow ?? this.yellow,
       ligthGreen: ligthGreen ?? this.ligthGreen,
       white: white ?? this.white,
+      black: black ?? this.black,
     );
   }
 
@@ -64,6 +68,7 @@ class AppColors extends ThemeExtension<AppColors> {
       yellow: Color.lerp(yellow, other.yellow, t),
       ligthGreen: Color.lerp(ligthGreen, other.ligthGreen, t),
       white: Color.lerp(white, other.white, t),
+      black: Color.lerp(black, other.black, t),
     );
   }
 }
@@ -79,4 +84,5 @@ final appColors = AppColors(
   yellow: const Color(0xffCCA424),
   ligthGreen: const Color(0xffa4cccc),
   white: const Color(0xffffffff),
+  black: const Color(0xFF000000),
 );

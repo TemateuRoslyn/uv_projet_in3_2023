@@ -1,9 +1,13 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:fltter_app/common/logics/internet/internet_cubit.dart';
 import 'package:fltter_app/common/models/reglement_interieur.dart';
+import 'package:fltter_app/common/models/suggestion.dart';
 import 'package:fltter_app/common/utils/enums.dart';
 import 'package:fltter_app/repositories/home_repository.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../common/configurations/api_configuration.dart';
@@ -23,6 +27,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   final HomeRepository homeRepository;
   final InternetCubit internetCubit;
+  final TextEditingController suggestion = TextEditingController();
 
   void getDataByType(String dataType) async {
     // ri = reglements interierieurs
@@ -136,5 +141,13 @@ class HomeCubit extends Cubit<HomeState> {
           convocationStatus: ApiStatus.failed,
           convocationStatusMessage: errorMessage));
     }
+  }
+
+  void insertSuggestion() async {
+    // final suggestion = Suggestion(description: suggestion.);
+    try {
+      await homeRepository.insertSuggestion(suggestion.text);
+      emit(state.copyWith(suggestionInsertStatus: 'success'));
+    } catch (e) {}
   }
 }
