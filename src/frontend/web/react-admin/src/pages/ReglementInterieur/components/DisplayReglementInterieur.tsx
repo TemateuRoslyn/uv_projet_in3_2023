@@ -21,7 +21,7 @@ import {
 
 import './DisplayReglementInterieur.css';
 import { AgGridIndicator } from '../../../components/AgGridIndicator';
-import { ReglementInterieurApi } from '../../../generated';
+import { ReglementInterieursApi } from '../../../generated/apis/reglement-interieurs-api';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
 import { DeleteItemModal } from '../../../components/DeleteItemModal';
 
@@ -63,29 +63,28 @@ const DisplayReglementInterieur: React.FC<DisplayReglementInterieurProps> = (
 
   const onGridReady = useCallback(() => {
     const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    const reglementInterieurApi = new ReglementInterieurApi({
+    const reglementInterieurApi = new ReglementInterieursApi({
       ...state.environment,
       accessToken: token,
     });
 
     setShowIndicator(true);
 
-    reglementInterieurApi
-      .findAllreglementInterieurs('Bearer ' + token)
-      .then((response) => {
-        if (response && response.data) {
-          if (response.data.success === true) {
-            setReglementInterieur(response.data.data);
-          }
-        }
-      })
-      .catch((error) => {
-        alert(error?.response?.data?.message);
-      })
-      .finally(() => {
-        setShowIndicator(false);
-      });
-  }, []);
+        reglementInterieurApi.reglementInterieursIndex('Bearer ' + token)
+            .then((response) => {  
+                if (response && response.data) {                    
+                    if (response.data.success === true) { 
+                        setReglementInterieur(response.data.content); 
+                    }
+                }
+            })
+            .catch((error) => {
+                alert(error?.response?.data?.message);
+            })
+            .finally(() => {
+                setShowIndicator(false);
+            });  
+    }, []);
 
   const onQuickFilterChanged = useCallback(() => {
     const quickFilterValue = document.getElementById('quickFilter')?.value;

@@ -19,8 +19,14 @@
 export interface InlineResponse4005 {
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof InlineResponse4005
      */
-    error?: any;
+    message?: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse4005
+     */
+    success?: any;
 }

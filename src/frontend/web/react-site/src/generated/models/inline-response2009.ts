@@ -31,7 +31,7 @@ export interface InlineResponse2009 {
     message?: any;
     /**
      * 
-     * @type {Cour}
+     * @type {Classe}
      * @memberof InlineResponse2009
      */
     content?: any;

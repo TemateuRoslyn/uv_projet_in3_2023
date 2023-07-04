@@ -93,18 +93,14 @@ export const PROFESSEUR_COLUMNS_DEFS: ColDef[] = [
             width: 200
 },
 {
-  headerName: 'cour_id',
-    field: 'courId',
-      filter: 'agTextColumnFilter',
-        checkboxSelection: false,
-          showDisabledCheckboxes: true,
-            width: 200
-},{
-  headerName: 'CourLibelle',
+  headerName: 'Libelle',
     field: 'cour',
       filter: 'agTextColumnFilter',
         checkboxSelection: false,
           showDisabledCheckboxes: true,
-            width: 200
+            width: 200,
+            cellRenderer: (params: ValueGetterParams<Professeur>) => {
+              return params.data?.cour?.libelle ? params.data?.cour?.libelle: null;
+            }
 },
 ];

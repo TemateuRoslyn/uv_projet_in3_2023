@@ -144,7 +144,7 @@ const DisplayProfesseurs: React.FC<DisplayProfesseursProps> = (props) => {
                 setProfesseur(rowData[0])
                 setShowCreateOrUpdateModal(true);
                 setModalMode(MODAL_MODE.view)
-                setModalTitle("Detail d'une professeur")
+                setModalTitle("Detail d'un professeur")
             } else if (rowData && rowData.length > 1) {
                 alert('Vous devez selectionner une seule ligne pour voir les details !')
             }else {

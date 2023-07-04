@@ -1,5 +1,7 @@
-import { ColDef } from "ag-grid-community";
-import StatusCoursBtn from "../../pages/Admin/Cours/components/StatusPermissionBtn" // Replace "path/to" with the actual path to the StatusCoursBtn component
+// import StatusCoursBtn from "../../pages/Admin/Cours/components/StatusPermissionBtn" // Replace "path/to" with the actual path to the StatusCoursBtn component
+import { ReglementInterieur } from "../../generated/models";
+import { ColDef, ValueGetterParams } from "ag-grid-community";
+
 
 export const REGLEMENTINTERIEUR_COLUMNS_DEFS: ColDef[] = [
   {
@@ -13,11 +15,13 @@ export const REGLEMENTINTERIEUR_COLUMNS_DEFS: ColDef[] = [
   },
   {
     headerName: 'Libellé',
-    field: 'libelle',
+    field: 'Libelle',
     filter: 'agTextColumnFilter',
     checkboxSelection: false,
     showDisabledCheckboxes: true,
     width: 300,
+    cellRenderer: (params: ValueGetterParams<ReglementInterieur>) => {
+      return params.data?.libelle;
+    }
   },
- 
 ];

@@ -25,14 +25,14 @@ export interface InlineResponse40010 {
     message?: any;
     /**
      * 
-     * @type {any}
-     * @memberof InlineResponse40010
-     */
-    errors?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse40010
      */
     success?: any;
+    /**
+     * 
+     * @type {any}
+     * @memberof InlineResponse40010
+     */
+    error?: any;
 }

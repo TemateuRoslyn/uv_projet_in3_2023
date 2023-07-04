@@ -38,8 +38,8 @@ const CreateOrUpdateRegleModal: React.FC<ModalProps> = (props) => {
   const [libelle, setLibelle] = useState<string>(
     props.item ? props.item.libelle : ''
   );
-const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements ? props.reglements : [])
-  const [nameRegle, setNameRegle] = useState<string>(props.item ? props.item.reglement_interieur_id : props.reglements[0].id)
+  const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements ? props.reglements : [])
+  const [nameRegle, setNameRegle] = useState<string>(props.item ? props.item.reglementInterieurId : props.reglements[0].id)
   
   
 
@@ -74,7 +74,7 @@ const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements 
 
     const apiParams: RegleCreateBody = {
       libelle: libelle,
-      reglement_interieur_id: nameRegle,
+      reglementInterieurId: nameRegle,
       //reglementInterieurId: reglementInterieur,
     };
    
@@ -118,14 +118,14 @@ const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements 
     setIsLoading(true);
     
     const apiParams: RegleUpdateBody = {
-      id: props.item.id,
       libelle: libelle,
-      reglement_interieur_id: nameRegle,
-    };
+      reglementInterieurId: nameRegle,
+    }; 
+    console.log(apiParams);
 
     regleApi
-      .updateRegle(apiParams, 'Bearer ' + token)
-      .then((response) => {
+      .updateRegle(apiParams, 'Bearer ' + token, props.item?.id)
+      .then((response) => { 
         if (response && response.data) {
           if (response.data.success === true) {
             props.onClose();
@@ -201,66 +201,84 @@ const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements 
               <div className="form-group">
                 
               <label htmlFor="reglement_interieur_id" className="form-label form-class mb-2.5 block text-black dark:text-white">
-    Reglement Interieur ID
-  </label>
-  <select
-    id="reglement_interieur_id"
-    className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary dark:disabled:bg-black dark:text-white ${
-      props.mode === MODAL_MODE.view ? 'disabled-input' : ''
-    }`}
-    value={nameRegle}
-    onChange = {handleRegleChange}
-     required
-  >
-    {reglementInterieurs.map((regle) => (
-      <option key={regle.id} value={regle.id}>
-        {regle.libelle}
-      </option> 
-    ))}
-  </select>
+                Reglement Interieur ID
+              </label>
+              <select
+                id="reglement_interieur_id"
+                className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary dark:disabled:bg-black dark:text-white ${
+                  props.mode === MODAL_MODE.view ? 'disabled-input' : ''
+                }`}
+                value={nameRegle}
+                onChange = {handleRegleChange}
+                required
+              >
+                {reglementInterieurs.map((regle) => (
+                  <option key={regle.id} value={regle.id}>
+                    {regle.libelle}
+                  </option> 
+                ))}
+              </select>
               </div>
-              
-            </form>
-            {props.mode === MODAL_MODE.view ? null : (
               <div className="form-actions bg-green-600">
-                <button onClick={props.onClose} className="cancel-button">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    className="button-icon"
+                  <button
+                    onClick={props.onClose}
+                    className="ml-2 flex w-1/4 justify-center rounded bg-secondary p-3 font-medium text-white"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                  Annuler
-                </button>
+                    <span className="mt-1">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        className="button-icon"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </span>
+                    Annuler
+                  </button>
 
-                {props.mode !== MODAL_MODE.view &&
-                props.mode === MODAL_MODE.create ? (
-                  <button onClick={handleCreate} className="create-button">
-                    {isLoading ? (
-                      <Indicator height={5} border="white" />
-                    ) : (
-                      <NewIcon size={2} color="#fff" />
-                    )}
-                    <span className="ml-2">Créer </span>
-                  </button>
-                ) : null}
-                {props.mode !== MODAL_MODE.view &&
-                props.mode === MODAL_MODE.update ? (
-                  <button onClick={handleUpdate} className="create-button">
-                    <EditIcon color="#fff" size={18} />
-                    Enregistrer
-                  </button>
-                ) : null}
-              </div>
-            )}
+                  {props.mode !== MODAL_MODE.view &&
+                  props.mode === MODAL_MODE.create ? (
+                    <button
+                      onClick={handleCreate}
+                      disabled={isLoading}
+                      className="ml-2 flex w-1/4 justify-center rounded bg-success p-3 font-medium text-white"
+                    >
+                      <span className="mt-1 mr-2">
+                        {isLoading ? (
+                          <Indicator widtf={5} height={5} border="white" />
+                        ) : (
+                          <NewIcon size={2} color="#fff" />
+                        )}
+                      </span>
+                      Créer
+                    </button>
+                  ) : null}
+                  {props.mode !== MODAL_MODE.view &&
+                  props.mode === MODAL_MODE.update ? (
+                    <button
+                      onClick={handleUpdate}
+                      disabled={isLoading}
+                      className="ml-2 flex w-1/4 justify-center rounded bg-success p-3 font-medium text-white"
+                    >
+                      <span className="mt-1 mr-2">
+                        {isLoading ? (
+                          <Indicator widtf={5} height={5} border="white" />
+                        ) : (
+                          <EditIcon color="#fff" size={18} />
+                        )}
+                      </span>
+                      Enregistrer
+                    </button>
+                  ) : null}
+                </div>
+            </form>
           </div>
         </div>
       </div>

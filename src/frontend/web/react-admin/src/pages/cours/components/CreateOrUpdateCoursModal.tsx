@@ -73,9 +73,9 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
 
     const apiParams: CoursCreateBody = {
       libelle: libelle,
-      date_cour: dateCour,
-      heure_debut: heureDebut,
-      heure_fin: heureFin,
+      dateCour: dateCour,
+      heureDebut: heureDebut,
+      heureFin: heureFin,
     };
     console.log(apiParams);
     coursApi

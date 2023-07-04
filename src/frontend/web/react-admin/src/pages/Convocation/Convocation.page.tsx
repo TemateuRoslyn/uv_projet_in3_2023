@@ -6,10 +6,10 @@ import Breadcrumb from '../../components/Breadcrumb';
 import { Convocation } from '../../generated/models';
 import { ReduxProps } from '../../redux/configureStore';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../constants/LOCAL_STORAGE';
-import { ConvocationsApi } from '../../generated';
+import { ConvocationApi } from '../../generated/apis/convocation-api'; 
 
 import { 
-  SuccessNotification,
+  SuccessNotification, 
   DangerNotification,
   WarningNotification,
  } from '../../services/Notification.service';
@@ -35,13 +35,13 @@ const Convocations = () => {
   const [warningNotifDescription, setWarningNotifDescription] = useState<string | null>(null);
 
 
-  useEffect(() => {  
+  useEffect(() => {  :
     const apiParams: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    const convocationsApi = new ConvocationsApi({...state.environment, accessToken: apiParams});
+    const convocationApi = new ConvocationApi({...state.environment, accessToken: apiParams});
 
     setIsLoading(true)
     
-    convocationsApi.convocationsIndex('Bearer ' + apiParams)
+    convocationApi.convocationsIndex('Bearer ' + apiParams)
     .then((response) => {  
       if(response && response.data){        
         if(response.data.success === true){ setConvocations(response.data.content) }

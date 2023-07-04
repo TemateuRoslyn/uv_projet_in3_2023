@@ -3,7 +3,7 @@ import { AgGridReact } from 'ag-grid-react';
 import * as XLSX from 'xlsx';
 import { connect, useSelector } from 'react-redux';
 
-import { REGLEMENTINTERIEUR_COLUMNS_DEFS } from '../../../configs/ag-grid-column-def/reglementinterieur';
+import { REGLEMENTINTERIEUR_COLUMNS_DEFS } from '../../../configs/ag-grid-column-def/regle';
 import { Regle, ReglementInterieur } from '../../../generated/models';
 import { ReduxProps } from '../../../redux/configureStore';
 import { Link } from 'react-router-dom';
@@ -21,7 +21,7 @@ import {
 
 import './DisplayRegle.css';
 import { AgGridIndicator } from '../../../components/AgGridIndicator';
-import { ReglementInterieurApi, ReglesApi } from '../../../generated';
+import { ReglementInterieursApi, ReglesApi } from '../../../generated';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
 import { DeleteItemModal } from '../../../components/DeleteItemModal';
 
@@ -66,18 +66,18 @@ const DisplayRegle: React.FC<DisplayRegleProps> = (props) => {
       ...state.environment,
       accessToken: token,
     });
-    const reglementInterieurApi = new ReglementInterieurApi({
+    const reglementInterieurApi = new ReglementInterieursApi({
       ...state.environment,
       accessToken: token,
     });
     setShowIndicator(true);
 
     regleApi
-      .findAllRegles('Bearer ' + token)
+      .reglesIndex('Bearer ' + token)
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {
-            setRegle(response.data.data);
+            setRegle(response.data.content);
           }
         }
       })

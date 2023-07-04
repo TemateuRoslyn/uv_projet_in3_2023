@@ -13,7 +13,7 @@ import {
   DangerNotification,
   WarningNotification,
 } from '../../services/Notification.service';
-import { ReglementInterieurApi } from '../../generated';
+import { ReglementInterieursApi } from '../../generated/apis/reglement-interieurs-api';
 
 const ReglementInterieurPage = () => {
   const state = useSelector((state: ReduxProps) => state);
@@ -42,10 +42,7 @@ const ReglementInterieurPage = () => {
 
   useEffect(() => {
     const apiParams: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    const reglementInterieurApi = new ReglementInterieurApi({
-      ...state.environment,
-      accessToken: apiParams,
-    });
+    const reglementInterieurApi = new ReglementInterieursApi({...state.environment, accessToken: apiParams});
 
     setIsLoading(true);
 

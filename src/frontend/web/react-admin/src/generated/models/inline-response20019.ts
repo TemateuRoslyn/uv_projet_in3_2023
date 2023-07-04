@@ -19,19 +19,19 @@
 export interface InlineResponse20019 {
     /**
      * 
-     * @type {boolean}
-     * @memberof InlineResponse20019
-     */
-    success?: any;
-    /**
-     * 
      * @type {string}
      * @memberof InlineResponse20019
      */
     message?: any;
     /**
      * 
-     * @type {Array&lt;Permission&gt;}
+     * @type {boolean}
+     * @memberof InlineResponse20019
+     */
+    success?: any;
+    /**
+     * 
+     * @type {Convocation}
      * @memberof InlineResponse20019
      */
     content?: any;

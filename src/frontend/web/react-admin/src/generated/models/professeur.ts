@@ -73,10 +73,28 @@ export interface Professeur {
     telephone: any;
     /**
      * 
-     * @type {string}
+     * @type {User}
      * @memberof Professeur
      */
-    statut: any;
+    user?: any;
+    /**
+     * 
+     * @type {Cour}
+     * @memberof Professeur
+     */
+    cour?: any;
+    /**
+     * 
+     * @type {Array&lt;number&gt;}
+     * @memberof Professeur
+     */
+    classesId?: any;
+    /**
+     * 
+     * @type {Array&lt;Classe&gt;}
+     * @memberof Professeur
+     */
+    classes?: any;
     /**
      * 
      * @type {BaseModelpropertiescreatedAt}

@@ -8,11 +8,8 @@ import { useSelector } from 'react-redux';
 import { ReduxProps } from '../../../redux/configureStore';
 import Indicator from '../../Authentication/components/Indicator';
 import {
-  CLASSE_LEVEL,
   SEXE,
-  SOLVABLE,
-  STATUS,
-  getClasseByName,
+  STATUS_P,
 } from '../../../constants/ITEMS';
 import CustomSelectInput from '../../../components/CustomSelects/CustomSelectInput';
 
@@ -45,11 +42,13 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
     lieu_de_naissance: props.item ? props.item.lieuDeNaissance : '',
     photo: props.item ? props.item.photo : null,
     sexe: props.item ? props.item.sexe : '',
-    classe_id: props.item ? props.item.classe?.id : '',
     cour_id: props.item ? props.item.cour?.id : '',
-    username: props.item ? props.item.username?.id : '',
+    libelle: props.item ? props.item.cour?.libelle : '',
+    username: props.item ? props.item.user?.username : '',
+    statut: props.item ? props.item.statut?.id : '',
    
   });
+  
 
   const [matchList, setMatchList] = useState<string[]>([]);
 
@@ -136,13 +135,24 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
     });
 
     setIsLoading(true);
+    const createBody:ProfesseursCreateBody = { 
+      email: formValues.email,
+      firstName:formValues.firstname,
+      lastName: formValues.username,
+      dateDeNaissance: formValues.date_de_naissance,
+      lieuDeNaissance: formValues.lieu_de_naissance,
+      photo: formValues.photo,
+      sexe: formValues.sexe,
+      telephone: formValues.telephone,
+      statut: formValues.statut,
+      courId: formValues.cour_id,
+    };
+    console.log(createBody);
 
     professeursApi
       .createProfesseur(
-        formValues,
+        createBody,
         'Bearer ' + token,
-        
-        
       )
       .then((response) => {
         if (response && response.data) {
@@ -189,14 +199,15 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
     professeursApi
       .updateProfesseur(
         formValues.email,
-        formValues.first_name,
-        formValues.last_name,
+        formValues.firstname,
+        formValues.lastname,
         formValues.date_de_naissance,
         formValues.lieu_de_naissance,
         formValues.photo,
         formValues.sexe,
         formValues.telephone,
-        
+        formValues.statut,
+        formValues.cour_id,
         'Bearer ' + token,
         props.item?.id
       )
@@ -274,8 +285,8 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
                       First name <span className="text-meta-1">*</span>
                     </label>
                     <input
-                      name="firstname"
-                      value={formValues.first_name}
+                      name="firstName"
+                      value={formValues.firstname}
                       onChange={handleInputChange}
                       required
                       type="text"
@@ -289,8 +300,8 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
                       Last name <span className="text-meta-1">*</span>
                     </label>
                     <input
-                      name="lastname"
-                      value={formValues.last_name}
+                      name="lastName"
+                      value={formValues.lastname}
                       onChange={handleInputChange}
                       required
                       type="text"
@@ -312,13 +323,43 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
                       placeholder="Le numero du professeur"
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
-                  
                   </div>
                 </div>
+                {/* birth information*/}
+                <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
+                  <div className="w-full xl:w-1/3 ">
+                    <label className="mb-3 block text-black dark:text-white">
+                        Date de naissance <span className="text-meta-1">*</span>
+                    </label>
+                    <div className="relative">
+                      <input
+                        name="dateDeNaissance"
+                        value={formValues.date_de_naissance}
+                        onChange={handleInputChange}
+                        type="date"
+                        className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      />
+                    </div>
+                  </div>
 
+                  <div className="w-full xl:w-1/2">
+                    <label className="mb-2.5 block text-black dark:text-white">
+                      Lieu de Naissance <span className="text-meta-1">*</span>
+                    </label>
+                    <input
+                      name="lieuDeNaissance"
+                      value={formValues.lieu_de_naissance}
+                      onChange={handleInputChange}
+                      required
+                      type="text" 
+                      placeholder="Enter your Place of Birth"
+                      className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    />
+                  </div> 
+                </div>
                 {/* row 2 class, serie, photo*/}
                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                  <CustomSelectInput
+                  {/* <CustomSelectInput
                     required={true}
                     inputLabel="Salle de classe"
                     inputPlaceholder="Saisir le nom d'une classe"
@@ -329,7 +370,7 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
                     matchList={matchList}
                     selectOptionEvent={handleOptionSelect}
                     typingInputEvent={handleTypingInput}
-                  />
+                  /> */}
 
                   <div className="w-full xl:w-5/6">
                     <label className="mb-3 block text-black dark:text-white">
@@ -371,36 +412,23 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
 
                   <div className="w-full xl:w-1/2">
                     <label className="mb-2.5 block text-black dark:text-white">
-                      Email <span className="text-meta-1">*</span>
+                      Statut <span className="text-meta-1">*</span>
                     </label>
-                    <input
-                      name="email"
-                      value={formValues.email}
+                    <select
+                      name="statut"
+                      value={formValues.statut}
                       onChange={handleInputChange}
-                      required
-                      type="email"
-                      placeholder="Enter your Email Address"
-                      className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    />
+                      className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    >
+                      {STATUS_P.map((option, index) => (
+                        <option key={index}>
+                          {option.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-                  <div className="w-full xl:w-1/2">
-                    <label className="mb-2.5 block text-black dark:text-white">
-                    username <span className="text-meta-1">*</span>
-                    </label>
-                    <input
-                      name="username"
-                      value={formValues.username}
-                      onChange={handleInputChange}
-                      required
-                      type="username"
-                      placeholder="Enter your Email Address"
-                      className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    />
-                  </div>
+                  
                 </div>
-
-
-
                 {/* row 5 create | update, annuler */}
                 <div className="form-actions bg-green-600">
                   <button

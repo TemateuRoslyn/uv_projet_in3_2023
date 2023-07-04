@@ -39,6 +39,13 @@ export const SOLVABLE: {name: string, value: boolean}[] = [
     {name: "Impeyé", value: false},
 ]
 
+export const STATUS_P: {name: string}[] = [
+    {name: "Proviseur"},
+    {name: "Censeur"},
+    {name: "SG"},
+    {name: "Enseignant"},
+]
+
 export const STATUS: {name: string, value: boolean}[] = [
     {name: "Nouveau(elle)", value: true},
     {name: "Redoublant(e)", value: false},
