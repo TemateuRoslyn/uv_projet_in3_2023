@@ -17,6 +17,8 @@
  * @interface InlineResponse20029
  */
 export interface InlineResponse20029 {
+    data(data: any): unknown;
+    success: boolean;
     /**
      * 
      * @type {Array&lt;ReglementInterieur&gt;}

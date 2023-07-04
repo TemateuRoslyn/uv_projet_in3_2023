@@ -10,6 +10,7 @@ import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../common/logics/navigation/navigation_cubit.dart';
+import '../../../common/models/suggestion.dart';
 import '../../../common/styles/colors.dart';
 import '../../../common/utils/constants.dart';
 import '../../../common/utils/helper.dart';
@@ -71,7 +72,7 @@ class _HomePageState extends State<HomePage> {
         'image': '',
         'subtitle': 'Boîte à suggestions',
         'onPressAction': () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const Suggestion()))
+            .push(MaterialPageRoute(builder: (context) => const Suggestions()))
       },
       // {'image': '', 'subtitle': 'Rapport de notes', 'onPressAction': () {}},
       {
