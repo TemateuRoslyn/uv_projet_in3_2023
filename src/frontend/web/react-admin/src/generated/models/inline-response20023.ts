@@ -31,7 +31,7 @@ export interface InlineResponse20023 {
     success?: any;
     /**
      * 
-     * @type {Eleve}
+     * @type {Array&lt;Cour&gt;}
      * @memberof InlineResponse20023
      */
     content?: any;

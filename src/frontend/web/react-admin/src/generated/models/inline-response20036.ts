@@ -31,7 +31,7 @@ export interface InlineResponse20036 {
     success?: any;
     /**
      * 
-     * @type {Notification}
+     * @type {Faute}
      * @memberof InlineResponse20036
      */
     content?: any;

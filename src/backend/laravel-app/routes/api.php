@@ -181,6 +181,8 @@ Route::middleware('jwt.verify')->group(function () {
         Route::middleware('permission:supprimer_cours')->delete('delete/{coursId}', [CourController::class, 'delete']);
         Route::get('findOne/{coursId}', [CourController::class, 'show']);
         Route::get('findAll', [CourController::class, 'index']);
+
+        Route::get('records/{keyword}', [CourController::class, 'records']);
     });
 
     // personnel
@@ -223,8 +225,8 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll', [AvoirMembreConseilDisciplineController::class, 'index']);
     });
 
-       //fautes
-       Route::prefix('fautes')->group(function () {
+    //fautes
+    Route::prefix('fautes')->group(function () {
         Route::middleware('permission:creer_faute')->post('create', [FauteController::class, 'store']);
         Route::middleware('permission:modifier_faute')->post('update/{fauteId}', [FauteController::class, 'update']);
         Route::middleware('permission:supprimer_faute')->delete('delete/{fauteId}', [FauteController::class, 'delete']);
@@ -233,8 +235,8 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll/eleve/{eleveId}', [FauteController::class, 'viewFautesEleve']);
     });
 
-     //convocation
-     Route::prefix('convocation')->group(function () {
+    //convocation
+    Route::prefix('convocation')->group(function () {
         Route::middleware('permission:creer_convocation')->post('create', [ConvocationController::class, 'store']);
         Route::middleware('permission:modifier_convocation')->post('update/{convocationId}', [ConvocationController::class, 'update']);
         Route::middleware('permission:supprimer_convocation')->delete('delete/{convocationId}', [ConvocationController::class, 'delete']);
@@ -263,5 +265,4 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findOne/{reparationId}', [ReparationController::class, 'view']);
         Route::get('findAll', [ReparationController::class, 'index']);
     });
-
 });

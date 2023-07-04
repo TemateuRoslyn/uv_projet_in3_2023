@@ -31,7 +31,7 @@ export interface InlineResponse20111 {
     success?: any;
     /**
      * 
-     * @type {SanctionPrevu}
+     * @type {Role}
      * @memberof InlineResponse20111
      */
     content?: any;

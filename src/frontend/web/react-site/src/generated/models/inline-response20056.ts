@@ -31,7 +31,7 @@ export interface InlineResponse20056 {
     success?: any;
     /**
      * 
-     * @type {Array&lt;Regle&gt;}
+     * @type {Personnel}
      * @memberof InlineResponse20056
      */
     content?: any;

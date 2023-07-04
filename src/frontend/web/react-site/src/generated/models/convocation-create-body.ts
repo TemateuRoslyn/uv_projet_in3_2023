@@ -47,4 +47,10 @@ export interface ConvocationCreateBody {
      * @memberof ConvocationCreateBody
      */
     personnelId: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConvocationCreateBody
+     */
+    eleveId: any;
 }

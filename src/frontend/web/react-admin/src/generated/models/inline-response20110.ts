@@ -31,7 +31,7 @@ export interface InlineResponse20110 {
     success?: any;
     /**
      * 
-     * @type {Role}
+     * @type {Reparation}
      * @memberof InlineResponse20110
      */
     content?: any;

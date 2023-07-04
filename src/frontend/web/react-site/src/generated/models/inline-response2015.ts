@@ -31,7 +31,7 @@ export interface InlineResponse2015 {
     success?: any;
     /**
      * 
-     * @type {Notification}
+     * @type {MembreConseil}
      * @memberof InlineResponse2015
      */
     content?: any;

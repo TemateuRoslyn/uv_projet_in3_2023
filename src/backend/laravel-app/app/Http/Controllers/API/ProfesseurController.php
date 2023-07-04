@@ -65,7 +65,7 @@ class ProfesseurController extends Controller
         ]);
     }
 
-/**
+    /**
      * @OA\Get(
      *     path="/api/professeurs/findOne/{id}",
      *     summary="Get professeur information",
@@ -120,7 +120,7 @@ class ProfesseurController extends Controller
     public function view($professeurId)
     {
         $professeur = Professeur::with('user', 'cour.classes')
-                                ->find($professeurId);
+            ->find($professeurId);
 
         if ($professeur) {
             $professeurIdData = $professeur->toArray();
@@ -158,19 +158,22 @@ class ProfesseurController extends Controller
      *     ),
      *      @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(
-     *             required={"firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "statut", "courId","classesId","email"},
-     *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
-     *             @OA\Property(property="firstName", type="string", example="John"),
-     *             @OA\Property(property="lastName", type="string", example="Smith"),
-     *             @OA\Property(property="dateDeNaissance", type="string", format="date", example="1990-01-01"),
-     *             @OA\Property(property="lieuDeNaissance", type="string", example="Paris"),
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *               required={"firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "statut", "courId","classesId","email"},
+     *               @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
+     *                @OA\Property(property="firstName", type="string", example="John"),
+     *              @OA\Property(property="lastName", type="string", example="Smith"),
+     *              @OA\Property(property="dateDeNaissance", type="string", format="date", example="1990-01-01"),
+     *               @OA\Property(property="lieuDeNaissance", type="string", example="Paris"),
      *                 @OA\Property(property="photo", type="string", format="binary", nullable=true),
-     *             @OA\Property(property="sexe", type="string", example="Male"),
-     *             @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
-     *             @OA\Property(property="statut", type="string", example="censeur"),
+     *              @OA\Property(property="sexe", type="string", example="Male"),
+     *              @OA\Property(property="telephone", type="string", nullable=true, example="+33123456789"),
+     *              @OA\Property(property="statut", type="string", example="censeur"),
      *              @OA\Property(property="courId", type="integer", example=2),
-     *         )
+     *             )
+     *          )
      *     ),
      *     @OA\Response(
      *         response=400,
@@ -266,7 +269,6 @@ class ProfesseurController extends Controller
 
             // Déplacez le fichier vers le répertoire de stockage souhaité
             $photo = $file->store($this->avatar_path);
-
         }
 
         $professeur = Professeur::create([
@@ -289,8 +291,8 @@ class ProfesseurController extends Controller
         $professeurRole = Role::where('name', 'professeur')->first();
 
         $user->roles()->attach($professeurRole);
-          // assigner les permission
-          foreach (PROFESSEUR_PERMISSIONS as $permission) {
+        // assigner les permission
+        foreach (PROFESSEUR_PERMISSIONS as $permission) {
             $professeurPerm = Permission::where('name', $permission['name'])->first();
             if ($professeurPerm) {
                 $user->permissions()->attach($professeurPerm);
@@ -413,7 +415,7 @@ class ProfesseurController extends Controller
                 'sexe' => 'required',
                 'telephone' => 'required',
                 'statut' => 'required',
-               'courId' => 'required',
+                'courId' => 'required',
             ]);
         } else {
             return response()->json([
@@ -455,12 +457,12 @@ class ProfesseurController extends Controller
         $professeurFound->telephone = $request->input('telephone');
         $professeurFound->statut =  $request->input('statut');
 
-          // update de cour de professeur...
+        // update de cour de professeur...
 
         // si il change de cour
         $cour = Cour::find($request->courId);
 
-        if($cour && $professeurFound->courId != $request->courId){
+        if ($cour && $professeurFound->courId != $request->courId) {
 
             // update de l'ancienne cour
             $oldCour = Cour::with('classes')->find($professeurFound->courId);
@@ -479,7 +481,6 @@ class ProfesseurController extends Controller
                 'heure_debut' => $cour->heure_debut,
                 'heure_fin' => $cour->heure_fin,
             ]);
-
         }
 
 

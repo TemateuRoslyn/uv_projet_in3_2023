@@ -41,4 +41,10 @@ export interface UpdateCoursIdBody {
      * @memberof UpdateCoursIdBody
      */
     heureFin: any;
+    /**
+     * 
+     * @type {Array&lt;number&gt;}
+     * @memberof UpdateCoursIdBody
+     */
+    classesId?: any;
 }
