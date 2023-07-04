@@ -16,17 +16,19 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20023 } from '../models';
-import { InlineResponse20024 } from '../models';
-import { InlineResponse20025 } from '../models';
-import { InlineResponse2015 } from '../models';
-import { InlineResponse4006 } from '../models';
+import { InlineResponse20052 } from '../models';
+import { InlineResponse20053 } from '../models';
+import { InlineResponse20054 } from '../models';
+import { InlineResponse20055 } from '../models';
+import { InlineResponse2018 } from '../models';
+import { InlineResponse40010 } from '../models';
+import { InlineResponse40022 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse4047 } from '../models';
-import { InlineResponse4048 } from '../models';
+import { InlineResponse40424 } from '../models';
+import { InlineResponse40425 } from '../models';
+import { InlineResponse40426 } from '../models';
 import { InlineResponse4221 } from '../models';
 import { ProfesseursCreateBody } from '../models';
-import { ProfesseursUpdateBody } from '../models';
 /**
  * ProfesseursApi - axios parameter creator
  * @export
@@ -34,8 +36,8 @@ import { ProfesseursUpdateBody } from '../models';
 export const ProfesseursApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Create a new professeur resource
-         * @summary Create a new professeur
+         * Create a new professor resource
+         * @summary Create a new professorr
          * @param {ProfesseursCreateBody} body 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
@@ -180,21 +182,72 @@ export const ProfesseursApiAxiosParamCreator = function (configuration?: Configu
         /**
          * Update a professeur's information
          * @summary Update a professeur's information
-         * @param {ProfesseursUpdateBody} body 
+         * @param {string} email 
+         * @param {string} firstName 
+         * @param {string} lastName 
+         * @param {string} dateDeNaissance 
+         * @param {string} lieuDeNaissance 
+         * @param {string} photo 
+         * @param {string} sexe 
+         * @param {string} telephone 
+         * @param {string} statut 
+         * @param {number} courId 
          * @param {string} authorization JWT token
+         * @param {number} professeurId ID of professeur to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateProfesseur: async (body: ProfesseursUpdateBody, authorization: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            if (body === null || body === undefined) {
-                throw new RequiredError('body','Required parameter body was null or undefined when calling updateProfesseur.');
+        updateProfesseur: async (email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'email' is not null or undefined
+            if (email === null || email === undefined) {
+                throw new RequiredError('email','Required parameter email was null or undefined when calling updateProfesseur.');
+            }
+            // verify required parameter 'firstName' is not null or undefined
+            if (firstName === null || firstName === undefined) {
+                throw new RequiredError('firstName','Required parameter firstName was null or undefined when calling updateProfesseur.');
+            }
+            // verify required parameter 'lastName' is not null or undefined
+            if (lastName === null || lastName === undefined) {
+                throw new RequiredError('lastName','Required parameter lastName was null or undefined when calling updateProfesseur.');
+            }
+            // verify required parameter 'dateDeNaissance' is not null or undefined
+            if (dateDeNaissance === null || dateDeNaissance === undefined) {
+                throw new RequiredError('dateDeNaissance','Required parameter dateDeNaissance was null or undefined when calling updateProfesseur.');
+            }
+            // verify required parameter 'lieuDeNaissance' is not null or undefined
+            if (lieuDeNaissance === null || lieuDeNaissance === undefined) {
+                throw new RequiredError('lieuDeNaissance','Required parameter lieuDeNaissance was null or undefined when calling updateProfesseur.');
+            }
+            // verify required parameter 'photo' is not null or undefined
+            if (photo === null || photo === undefined) {
+                throw new RequiredError('photo','Required parameter photo was null or undefined when calling updateProfesseur.');
+            }
+            // verify required parameter 'sexe' is not null or undefined
+            if (sexe === null || sexe === undefined) {
+                throw new RequiredError('sexe','Required parameter sexe was null or undefined when calling updateProfesseur.');
+            }
+            // verify required parameter 'telephone' is not null or undefined
+            if (telephone === null || telephone === undefined) {
+                throw new RequiredError('telephone','Required parameter telephone was null or undefined when calling updateProfesseur.');
+            }
+            // verify required parameter 'statut' is not null or undefined
+            if (statut === null || statut === undefined) {
+                throw new RequiredError('statut','Required parameter statut was null or undefined when calling updateProfesseur.');
+            }
+            // verify required parameter 'courId' is not null or undefined
+            if (courId === null || courId === undefined) {
+                throw new RequiredError('courId','Required parameter courId was null or undefined when calling updateProfesseur.');
             }
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling updateProfesseur.');
             }
-            const localVarPath = `/api/professeurs/update`;
+            // verify required parameter 'professeurId' is not null or undefined
+            if (professeurId === null || professeurId === undefined) {
+                throw new RequiredError('professeurId','Required parameter professeurId was null or undefined when calling updateProfesseur.');
+            }
+            const localVarPath = `/api/professeurs/update/{professeurId}`
+                .replace(`{${"professeurId"}}`, encodeURIComponent(String(professeurId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -204,13 +257,54 @@ export const ProfesseursApiAxiosParamCreator = function (configuration?: Configu
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
 
             if (authorization !== undefined && authorization !== null) {
                 localVarHeaderParameter['Authorization'] = String(authorization);
             }
 
-            localVarHeaderParameter['Content-Type'] = 'application/json';
 
+            if (email !== undefined) { 
+                localVarFormParams.append('email', email as any);
+            }
+
+            if (firstName !== undefined) { 
+                localVarFormParams.append('firstName', firstName as any);
+            }
+
+            if (lastName !== undefined) { 
+                localVarFormParams.append('lastName', lastName as any);
+            }
+
+            if (dateDeNaissance !== undefined) { 
+                localVarFormParams.append('dateDeNaissance', dateDeNaissance as any);
+            }
+
+            if (lieuDeNaissance !== undefined) { 
+                localVarFormParams.append('lieuDeNaissance', lieuDeNaissance as any);
+            }
+
+            if (photo !== undefined) { 
+                localVarFormParams.append('photo', photo as any);
+            }
+
+            if (sexe !== undefined) { 
+                localVarFormParams.append('sexe', sexe as any);
+            }
+
+            if (telephone !== undefined) { 
+                localVarFormParams.append('telephone', telephone as any);
+            }
+
+            if (statut !== undefined) { 
+                localVarFormParams.append('statut', statut as any);
+            }
+
+            if (courId !== undefined) { 
+                localVarFormParams.append('courId', courId as any);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -221,8 +315,7 @@ export const ProfesseursApiAxiosParamCreator = function (configuration?: Configu
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -230,7 +323,7 @@ export const ProfesseursApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Get information about a specific professor
+         * Get information about a specific professeur
          * @summary Get professeur information
          * @param {string} authorization JWT token
          * @param {number} id ID of professeur to get information for
@@ -246,7 +339,7 @@ export const ProfesseursApiAxiosParamCreator = function (configuration?: Configu
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling viewProfesseur.');
             }
-            const localVarPath = `/api/professeurs/findOne/{id}`
+            const localVarPath = `/api/professeur/findOne/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -288,14 +381,14 @@ export const ProfesseursApiAxiosParamCreator = function (configuration?: Configu
 export const ProfesseursApiFp = function(configuration?: Configuration) {
     return {
         /**
-         * Create a new professeur resource
-         * @summary Create a new professeur
+         * Create a new professor resource
+         * @summary Create a new professorr
          * @param {ProfesseursCreateBody} body 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createProfesseur(body: ProfesseursCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2015>> {
+        async createProfesseur(body: ProfesseursCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2018>> {
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).createProfesseur(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -310,7 +403,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20055>> {
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).deleteProfesseur(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -324,7 +417,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async professeursIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20023>> {
+        async professeursIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20052>> {
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).professeursIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -334,27 +427,37 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
         /**
          * Update a professeur's information
          * @summary Update a professeur's information
-         * @param {ProfesseursUpdateBody} body 
+         * @param {string} email 
+         * @param {string} firstName 
+         * @param {string} lastName 
+         * @param {string} dateDeNaissance 
+         * @param {string} lieuDeNaissance 
+         * @param {string} photo 
+         * @param {string} sexe 
+         * @param {string} telephone 
+         * @param {string} statut 
+         * @param {number} courId 
          * @param {string} authorization JWT token
+         * @param {number} professeurId ID of professeur to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateProfesseur(body: ProfesseursUpdateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20025>> {
-            const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).updateProfesseur(body, authorization, options);
+        async updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20054>> {
+            const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).updateProfesseur(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, statut, courId, authorization, professeurId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
         },
         /**
-         * Get information about a specific professor
+         * Get information about a specific professeur
          * @summary Get professeur information
          * @param {string} authorization JWT token
          * @param {number} id ID of professeur to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20024>> {
+        async viewProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20053>> {
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).viewProfesseur(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -371,14 +474,14 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
 export const ProfesseursApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
-         * Create a new professeur resource
-         * @summary Create a new professeur
+         * Create a new professor resource
+         * @summary Create a new professorr
          * @param {ProfesseursCreateBody} body 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createProfesseur(body: ProfesseursCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse2015> {
+        createProfesseur(body: ProfesseursCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse2018> {
             return ProfesseursApiFp(configuration).createProfesseur(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -389,7 +492,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteProfesseur(authorization: string, id: number, options?: any): AxiosPromise<void> {
+        deleteProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20055> {
             return ProfesseursApiFp(configuration).deleteProfesseur(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -399,29 +502,39 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        professeursIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20023> {
+        professeursIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20052> {
             return ProfesseursApiFp(configuration).professeursIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Update a professeur's information
          * @summary Update a professeur's information
-         * @param {ProfesseursUpdateBody} body 
+         * @param {string} email 
+         * @param {string} firstName 
+         * @param {string} lastName 
+         * @param {string} dateDeNaissance 
+         * @param {string} lieuDeNaissance 
+         * @param {string} photo 
+         * @param {string} sexe 
+         * @param {string} telephone 
+         * @param {string} statut 
+         * @param {number} courId 
          * @param {string} authorization JWT token
+         * @param {number} professeurId ID of professeur to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateProfesseur(body: ProfesseursUpdateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20025> {
-            return ProfesseursApiFp(configuration).updateProfesseur(body, authorization, options).then((request) => request(axios, basePath));
+        updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): AxiosPromise<InlineResponse20054> {
+            return ProfesseursApiFp(configuration).updateProfesseur(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, statut, courId, authorization, professeurId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get information about a specific professor
+         * Get information about a specific professeur
          * @summary Get professeur information
          * @param {string} authorization JWT token
          * @param {number} id ID of professeur to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20024> {
+        viewProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20053> {
             return ProfesseursApiFp(configuration).viewProfesseur(authorization, id, options).then((request) => request(axios, basePath));
         },
     };
@@ -435,8 +548,8 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
  */
 export class ProfesseursApi extends BaseAPI {
     /**
-     * Create a new professeur resource
-     * @summary Create a new professeur
+     * Create a new professor resource
+     * @summary Create a new professorr
      * @param {ProfesseursCreateBody} body 
      * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
@@ -472,17 +585,27 @@ export class ProfesseursApi extends BaseAPI {
     /**
      * Update a professeur's information
      * @summary Update a professeur's information
-     * @param {ProfesseursUpdateBody} body 
+     * @param {string} email 
+     * @param {string} firstName 
+     * @param {string} lastName 
+     * @param {string} dateDeNaissance 
+     * @param {string} lieuDeNaissance 
+     * @param {string} photo 
+     * @param {string} sexe 
+     * @param {string} telephone 
+     * @param {string} statut 
+     * @param {number} courId 
      * @param {string} authorization JWT token
+     * @param {number} professeurId ID of professeur to update in this request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfesseursApi
      */
-    public updateProfesseur(body: ProfesseursUpdateBody, authorization: string, options?: any) {
-        return ProfesseursApiFp(this.configuration).updateProfesseur(body, authorization, options).then((request) => request(this.axios, this.basePath));
+    public updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any) {
+        return ProfesseursApiFp(this.configuration).updateProfesseur(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, statut, courId, authorization, professeurId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Get information about a specific professor
+     * Get information about a specific professeur
      * @summary Get professeur information
      * @param {string} authorization JWT token
      * @param {number} id ID of professeur to get information for

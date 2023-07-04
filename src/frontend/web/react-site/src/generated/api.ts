@@ -12,13 +12,22 @@
  * Do not edit the class manually.
  */export * from './apis/auth-api';
 export * from './apis/classes-api';
+export * from './apis/conseil-disciplines-api';
+export * from './apis/convocation-api';
 export * from './apis/cours-api';
 export * from './apis/eleves-api';
+export * from './apis/faute-api';
+export * from './apis/fautes-api';
+export * from './apis/membreconseils-api';
+export * from './apis/notification-api';
 export * from './apis/parents-api';
 export * from './apis/permissions-api';
+export * from './apis/personnel-api';
 export * from './apis/professeurs-api';
-export * from './apis/reglement-interieur-api';
+export * from './apis/reglement-interieurs-api';
 export * from './apis/regles-api';
+export * from './apis/reparations-api';
 export * from './apis/roles-api';
+export * from './apis/sanctionprevus-api';
 export * from './apis/users-api';
 

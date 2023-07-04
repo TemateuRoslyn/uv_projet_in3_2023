@@ -24,12 +24,6 @@ export interface User {
      */
     id?: any;
     /**
-     * User role
-     * @type {string}
-     * @memberof User
-     */
-    role?: any;
-    /**
      * User unique email address
      * @type {string}
      * @memberof User
@@ -41,6 +35,24 @@ export interface User {
      * @memberof User
      */
     username: any;
+    /**
+     * 
+     * @type {Array&lt;Role&gt;}
+     * @memberof User
+     */
+    roles?: any;
+    /**
+     * 
+     * @type {Array&lt;Permission&gt;}
+     * @memberof User
+     */
+    permissions?: any;
+    /**
+     * 
+     * @type {Parents | Eleve | Professeur | Personnel}
+     * @memberof User
+     */
+    model?: any;
     /**
      * Datetime marker of verification status
      * @type {Date}

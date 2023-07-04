@@ -379,7 +379,7 @@ class ProfesseurController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="professeur not found"),
+     *             @OA\Property(property="message", type="string", example="Professor not found"),
      *             @OA\Property(property="success", type="boolean", example="false"),
      *         )
      *     ),

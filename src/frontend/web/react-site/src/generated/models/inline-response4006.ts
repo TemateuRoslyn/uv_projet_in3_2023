@@ -19,8 +19,20 @@
 export interface InlineResponse4006 {
     /**
      * 
+     * @type {string}
+     * @memberof InlineResponse4006
+     */
+    message?: any;
+    /**
+     * 
      * @type {any}
      * @memberof InlineResponse4006
      */
-    error?: any;
+    errors?: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse4006
+     */
+    success?: any;
 }

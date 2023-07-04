@@ -37,7 +37,7 @@ class ParentSeeder extends Seeder
             'lastName' => 'Midas',
             'dateDeNaissance' => '2000/05/2',
             'lieuDeNaissance' => 'nkong',
-            'photo' => 'assets/avatars/parents/midas.JPG',
+            'photo' => 'assets/avatars/parents/user.png',
             'sexe' => 'Masculin',
             'telephone' => '+237666534899',
             'userId' => $user->id,

@@ -7,7 +7,7 @@ import DisplayRegle from './components/DisplayRegle';
 import { Regle, ReglementInterieur } from '../../generated/models';
 import { ReduxProps } from '../../redux/configureStore';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../constants/LOCAL_STORAGE';
-import { ReglementInterieurApi, ReglesApi } from '../../generated';
+import { ReglementInterieursApi, ReglesApi } from '../../generated';
 
 import {
   SuccessNotification,
@@ -47,7 +47,7 @@ const ReglePage = () => {
       ...state.environment,
       accessToken: apiParams,
     });
-    const reglementInterieurApi = new ReglementInterieurApi({
+    const reglementInterieurApi = new ReglementInterieursApi({
       ...state.environment,
       accessToken: apiParams,
     });

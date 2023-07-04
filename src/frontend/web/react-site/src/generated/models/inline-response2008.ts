@@ -19,19 +19,19 @@
 export interface InlineResponse2008 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse2008
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse2008
      */
     success?: any;
     /**
      * 
-     * @type {Cour}
+     * @type {string}
+     * @memberof InlineResponse2008
+     */
+    message?: any;
+    /**
+     * 
+     * @type {Array&lt;ConseilDiscipline&gt;}
      * @memberof InlineResponse2008
      */
     content?: any;

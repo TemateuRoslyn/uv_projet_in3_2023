@@ -24,11 +24,23 @@ export interface Regle {
      */
     id?: any;
     /**
+     * 
+     * @type {number}
+     * @memberof Regle
+     */
+    reglementInterieurId: any;
+    /**
      * Une regle
      * @type {string}
      * @memberof Regle
      */
-    role?: any;
+    libelle: any;
+    /**
+     * 
+     * @type {ReglementInterieur}
+     * @memberof Regle
+     */
+    reglementInterieur: any;
     /**
      * 
      * @type {BaseModelpropertiescreatedAt}

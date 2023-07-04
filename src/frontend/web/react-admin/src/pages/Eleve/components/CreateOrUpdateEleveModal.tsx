@@ -170,7 +170,9 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
       })
       .catch((error) => {
         alert(error.message);
-        console.log(error?.response?.data);
+        console.log('---- student creation -   Start  ---------');
+        console.log(error);
+        console.log('---- student creation -   End  ---------');
       })
       .finally(() => {
         setIsLoading(false);

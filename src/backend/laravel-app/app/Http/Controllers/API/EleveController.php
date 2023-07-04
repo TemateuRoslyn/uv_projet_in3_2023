@@ -327,19 +327,19 @@ class EleveController extends Controller
         }
 
         //envoie du mail a l'utilisateur
-        $details = array();
+        // $details = array();
 
-        $details['greeting'] = "Hi " . $eleve->firstName;
-        $details['body'] = "Veuillez Modifier votre mot de passe pour assurer la confidentialite de vos donnees et de vos actions au sein de la plateforme .
-                            \n Mot de passe actuel: $user->email
-                            \n Login actuel: $user->email
-                            Pour cela, veuillez cliquer sur le ce lien pour proceder la la mise a jour de votre mot de passe .";
-        $details['actiontext'] = "Modifier mon mot de passe";
-        $details['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
-        $details['endtext'] = "Merci de rester fidele à cet etablissement";
+        // $details['greeting'] = "Hi " . $eleve->firstName;
+        // $details['body'] = "Veuillez Modifier votre mot de passe pour assurer la confidentialite de vos donnees et de vos actions au sein de la plateforme .
+        //                     \n Mot de passe actuel: $user->email
+        //                     \n Login actuel: $user->email
+        //                     Pour cela, veuillez cliquer sur le ce lien pour proceder la la mise a jour de votre mot de passe .";
+        // $details['actiontext'] = "Modifier mon mot de passe";
+        // $details['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
+        // $details['endtext'] = "Merci de rester fidele à cet etablissement";
 
-        // envoi du mail
-        Queue::push(new SendEmailJob($user, $details));
+        // // envoi du mail
+        // Queue::push(new SendEmailJob($user, $details));
 
         return response()->json([
             'message' => 'Eleve created successfully',

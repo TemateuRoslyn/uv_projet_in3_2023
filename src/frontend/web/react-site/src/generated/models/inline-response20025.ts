@@ -19,8 +19,14 @@
 export interface InlineResponse20025 {
     /**
      * 
-     * @type {Professeur}
+     * @type {boolean}
      * @memberof InlineResponse20025
      */
-    eleve?: any;
+    success?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20025
+     */
+    message?: any;
 }

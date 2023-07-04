@@ -28,18 +28,6 @@ export interface ProfesseursCreateBody {
      * @type {string}
      * @memberof ProfesseursCreateBody
      */
-    password: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProfesseursCreateBody
-     */
-    username: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProfesseursCreateBody
-     */
     firstName: any;
     /**
      * 
@@ -82,5 +70,11 @@ export interface ProfesseursCreateBody {
      * @type {string}
      * @memberof ProfesseursCreateBody
      */
-    statut?: any;
+    statut: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProfesseursCreateBody
+     */
+    courId: any;
 }

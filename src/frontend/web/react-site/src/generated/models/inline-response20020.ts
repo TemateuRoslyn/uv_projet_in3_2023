@@ -31,7 +31,7 @@ export interface InlineResponse20020 {
     message?: any;
     /**
      * 
-     * @type {Permission}
+     * @type {Cour}
      * @memberof InlineResponse20020
      */
     content?: any;
