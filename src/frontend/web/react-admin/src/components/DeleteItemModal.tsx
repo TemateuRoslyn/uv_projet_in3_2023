@@ -11,13 +11,13 @@ export const DeleteItemModal: React.FC<NotificationModalProps> = (props) => {
       id="popup-modal"
       tabIndex={-1}
       onClick={props.onClose}
-      className="top-modal-animation fixed top-0 left-0 right-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+      className="top-modal-animation   fixed top-0 left-0 right-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden p-4 md:inset-0"
     >
       <div
         className="relative w-full max-w-md"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="dark:bg-gray-700 relative rounded-lg  bg-white">
+        <div className=" relative rounded-lg bg-white  dark:bg-black">
           <button
             type="button"
             onClick={props.onClose}
@@ -39,7 +39,7 @@ export const DeleteItemModal: React.FC<NotificationModalProps> = (props) => {
             </svg>
             <span className="sr-only">Annuler</span>
           </button>
-          <div className="p-6 text-center">
+          <div className=" p-6 text-center">
             <svg
               aria-hidden="true"
               className="text-gray-400 dark:text-gray-200 mx-auto mb-4 h-14 w-14"
@@ -58,7 +58,7 @@ export const DeleteItemModal: React.FC<NotificationModalProps> = (props) => {
             <h3 className="text-black-800 dark:text-black-gray mb-5 text-lg font-normal">{`Etes-vous sur de vouloir supprimer ce item: ${props.itemName} ? `}</h3>
             <button
               type="button"
-              className="confirm-button bg-white"
+              className="hover:bg-gray-100 focus:ring-red-200 border-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:focus:ring-gray-600 rounded-lg border bg-white px-5 py-2.5 text-sm font-medium text-danger hover:text-graydark focus:z-10 focus:outline-none focus:ring-4 dark:hover:bg-graydark dark:hover:text-white"
               onClick={props.onConfirm}
             >
               Oui, je suis certain(e)
@@ -67,7 +67,7 @@ export const DeleteItemModal: React.FC<NotificationModalProps> = (props) => {
               data-modal-hide="popup-modal"
               type="button"
               onClick={props.onClose}
-              className="text-gray-500 hover:bg-gray-100 focus:ring-gray-200 border-gray-200 hover:text-gray-900 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:bg-gray-600 dark:focus:ring-gray-600 rounded-lg border bg-white px-5 py-2.5 text-sm font-medium focus:z-10 focus:outline-none focus:ring-4 dark:hover:text-white"
+              className="text-gray-500 focus:ring-gray-200 border-gray-200 hover:text-gray-900 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:bg-gray-600 dark:focus:ring-gray-600 rounded-lg border bg-white px-5 py-2.5 text-sm font-medium hover:bg-graydark focus:z-10 focus:outline-none focus:ring-4 dark:hover:text-white"
             >
               No, annuler
             </button>

@@ -17,8 +17,6 @@
  * @interface InlineResponse20029
  */
 export interface InlineResponse20029 {
-    data(data: any): unknown;
-    success: boolean;
     /**
      * 
      * @type {string}
@@ -33,7 +31,7 @@ export interface InlineResponse20029 {
     success?: any;
     /**
      * 
-     * @type {Faute}
+     * @type {Eleve}
      * @memberof InlineResponse20029
      */
     content?: any;

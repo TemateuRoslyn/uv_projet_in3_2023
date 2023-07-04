@@ -31,7 +31,7 @@ export interface InlineResponse20033 {
     success?: any;
     /**
      * 
-     * @type {MembreConseil}
+     * @type {Faute}
      * @memberof InlineResponse20033
      */
     content?: any;

@@ -16,17 +16,17 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20039 } from '../models';
-import { InlineResponse20040 } from '../models';
-import { InlineResponse20041 } from '../models';
-import { InlineResponse20042 } from '../models';
-import { InlineResponse20043 } from '../models';
-import { InlineResponse40017 } from '../models';
-import { InlineResponse40018 } from '../models';
+import { InlineResponse20046 } from '../models';
+import { InlineResponse20047 } from '../models';
+import { InlineResponse20048 } from '../models';
+import { InlineResponse20049 } from '../models';
+import { InlineResponse20050 } from '../models';
+import { InlineResponse40019 } from '../models';
+import { InlineResponse40020 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse40418 } from '../models';
-import { InlineResponse40419 } from '../models';
-import { InlineResponse4221 } from '../models';
+import { InlineResponse40424 } from '../models';
+import { InlineResponse40425 } from '../models';
+import { InlineResponse4222 } from '../models';
 /**
  * ParentsApi - axios parameter creator
  * @export
@@ -501,7 +501,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20041>> {
+        async createParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20048>> {
             const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).createParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -516,7 +516,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteParent(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20043>> {
+        async deleteParent(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20050>> {
             const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).deleteParent(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -530,7 +530,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async parentsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20039>> {
+        async parentsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20046>> {
             const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).parentsIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -556,7 +556,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20042>> {
+        async updateParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20049>> {
             const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).updateParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, parentId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -571,7 +571,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewparent(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20040>> {
+        async viewparent(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20047>> {
             const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).viewparent(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -605,7 +605,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any): AxiosPromise<InlineResponse20041> {
+        createParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any): AxiosPromise<InlineResponse20048> {
             return ParentsApiFp(configuration).createParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -616,7 +616,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteParent(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20043> {
+        deleteParent(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20050> {
             return ParentsApiFp(configuration).deleteParent(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -626,7 +626,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        parentsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20039> {
+        parentsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20046> {
             return ParentsApiFp(configuration).parentsIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -648,7 +648,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any): AxiosPromise<InlineResponse20042> {
+        updateParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any): AxiosPromise<InlineResponse20049> {
             return ParentsApiFp(configuration).updateParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, parentId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -659,7 +659,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewparent(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20040> {
+        viewparent(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20047> {
             return ParentsApiFp(configuration).viewparent(authorization, id, options).then((request) => request(axios, basePath));
         },
     };

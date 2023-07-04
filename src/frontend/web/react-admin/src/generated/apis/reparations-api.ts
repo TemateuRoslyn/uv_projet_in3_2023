@@ -16,17 +16,17 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20066 } from '../models';
-import { InlineResponse20067 } from '../models';
-import { InlineResponse20068 } from '../models';
-import { InlineResponse20069 } from '../models';
-import { InlineResponse2019 } from '../models';
-import { InlineResponse40027 } from '../models';
-import { InlineResponse40028 } from '../models';
+import { InlineResponse20073 } from '../models';
+import { InlineResponse20074 } from '../models';
+import { InlineResponse20075 } from '../models';
+import { InlineResponse20076 } from '../models';
+import { InlineResponse20110 } from '../models';
+import { InlineResponse40030 } from '../models';
+import { InlineResponse40031 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse40430 } from '../models';
-import { InlineResponse40431 } from '../models';
-import { InlineResponse4046 } from '../models';
+import { InlineResponse40411 } from '../models';
+import { InlineResponse40436 } from '../models';
+import { InlineResponse40437 } from '../models';
 /**
  * ReparationsApi - axios parameter creator
  * @export
@@ -328,7 +328,7 @@ export const ReparationsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createReparation(demarcheMediation: string, fauteId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2019>> {
+        async createReparation(demarcheMediation: string, fauteId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20110>> {
             const localVarAxiosArgs = await ReparationsApiAxiosParamCreator(configuration).createReparation(demarcheMediation, fauteId, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -343,7 +343,7 @@ export const ReparationsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteReparation(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20069>> {
+        async deleteReparation(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20076>> {
             const localVarAxiosArgs = await ReparationsApiAxiosParamCreator(configuration).deleteReparation(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -357,7 +357,7 @@ export const ReparationsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reparationsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20066>> {
+        async reparationsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20073>> {
             const localVarAxiosArgs = await ReparationsApiAxiosParamCreator(configuration).reparationsIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -374,7 +374,7 @@ export const ReparationsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updatReparation(demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20068>> {
+        async updatReparation(demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20075>> {
             const localVarAxiosArgs = await ReparationsApiAxiosParamCreator(configuration).updatReparation(demarcheMediation, fauteId, authorization, reparationId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -389,7 +389,7 @@ export const ReparationsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewReparation(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20067>> {
+        async viewReparation(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20074>> {
             const localVarAxiosArgs = await ReparationsApiAxiosParamCreator(configuration).viewReparation(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -414,7 +414,7 @@ export const ReparationsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createReparation(demarcheMediation: string, fauteId: number, authorization: string, options?: any): AxiosPromise<InlineResponse2019> {
+        createReparation(demarcheMediation: string, fauteId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20110> {
             return ReparationsApiFp(configuration).createReparation(demarcheMediation, fauteId, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -425,7 +425,7 @@ export const ReparationsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteReparation(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20069> {
+        deleteReparation(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20076> {
             return ReparationsApiFp(configuration).deleteReparation(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -435,7 +435,7 @@ export const ReparationsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reparationsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20066> {
+        reparationsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20073> {
             return ReparationsApiFp(configuration).reparationsIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -448,7 +448,7 @@ export const ReparationsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatReparation(demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options?: any): AxiosPromise<InlineResponse20068> {
+        updatReparation(demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options?: any): AxiosPromise<InlineResponse20075> {
             return ReparationsApiFp(configuration).updatReparation(demarcheMediation, fauteId, authorization, reparationId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -459,7 +459,7 @@ export const ReparationsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewReparation(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20067> {
+        viewReparation(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20074> {
             return ReparationsApiFp(configuration).viewReparation(authorization, id, options).then((request) => request(axios, basePath));
         },
     };

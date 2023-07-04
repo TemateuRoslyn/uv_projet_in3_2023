@@ -40,7 +40,7 @@ export interface Regle {
      * @type {ReglementInterieur}
      * @memberof Regle
      */
-    reglementInterieur: any;
+    reglementInterieur?: any;
     /**
      * 
      * @type {BaseModelpropertiescreatedAt}

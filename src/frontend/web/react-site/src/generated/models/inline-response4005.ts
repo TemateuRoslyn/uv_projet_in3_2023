@@ -29,10 +29,4 @@ export interface InlineResponse4005 {
      * @memberof InlineResponse4005
      */
     success?: any;
-    /**
-     * 
-     * @type {any}
-     * @memberof InlineResponse4005
-     */
-    error?: any;
 }

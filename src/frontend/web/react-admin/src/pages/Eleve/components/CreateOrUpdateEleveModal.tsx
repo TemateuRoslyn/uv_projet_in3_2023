@@ -137,7 +137,7 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
     });
 
     setIsLoading(true);
-
+    console.log(formValues);
     elevesApi
       .createEleve(
         formValues.email,
@@ -278,7 +278,6 @@ const CreateOrUpdateEleveModal: React.FC<ModalProps> = (props) => {
               action="#"
               encType="multipart/form-data"
               className="modal-form"
-          
             >
               <div>
                 {/* row 1 lastname, firstname, tel*/}

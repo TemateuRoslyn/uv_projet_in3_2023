@@ -29,4 +29,10 @@ export interface InlineResponse20069 {
      * @memberof InlineResponse20069
      */
     message?: any;
+    /**
+     * 
+     * @type {ReglementInterieur}
+     * @memberof InlineResponse20069
+     */
+    content?: any;
 }

@@ -3,7 +3,7 @@ import { MODAL_MODE } from '../../../constants/ENUM';
 import { EditIcon, NewIcon } from '../../../components/Icone';
 import { Professeur, ProfesseursCreateBody } from '../../../generated/models';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
-import { ClassesApi, ProfesseursApi } from '../../../generated';
+import { CoursApi, ProfesseursApi } from '../../../generated';
 import { useSelector } from 'react-redux';
 import { ReduxProps } from '../../../redux/configureStore';
 import Indicator from '../../Authentication/components/Indicator';
@@ -45,10 +45,10 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
     lieu_de_naissance: props.item ? props.item.lieuDeNaissance : '',
     photo: props.item ? props.item.photo : null,
     sexe: props.item ? props.item.sexe : '',
+    statut: props.item ? props.item.statut : '',
     classe_id: props.item ? props.item.classe?.id : '',
     cour_id: props.item ? props.item.cour?.id : '',
     username: props.item ? props.item.username?.id : '',
-   
   });
 
   const [matchList, setMatchList] = useState<string[]>([]);
@@ -56,13 +56,13 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
   const handleTypingInput = (keyword: string) => {
     if (keyword.length > 0) {
       const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-      const classesApi = new ClassesApi({
+      const coursApi = new CoursApi({
         ...state.environment,
         accessToken: token,
       });
 
-      classesApi
-        .classesRecords(keyword, 'Bearer ' + token)
+      coursApi
+        .coursRecords(keyword, 'Bearer ' + token)
         .then((response) => {
           if (response && response.data) {
             if (response.data.success === true) {
@@ -80,7 +80,7 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
   const handleOptionSelect = (option: string) => {
     setFormValues((prevValues) => ({
       ...prevValues,
-      classeId: extractIdFromString(option),
+      cour_id: extractIdFromString(option),
     }));
   };
 
@@ -121,6 +121,7 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
       const id = parseInt(matches[1], 10);
       if (!isNaN(id)) {
         return id;
+        console.log(id);
       }
     }
     return null;
@@ -137,13 +138,34 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
 
     setIsLoading(true);
 
+    const apiParams: ProfesseursCreateBody = {
+      email: formValues.email,
+      firstName: formValues.firstname,
+      lastName: formValues.lastname,
+      statut: formValues.statut,
+      sexe: formValues.sexe,
+      courId: formValues.cour_id,
+      lieuDeNaissance: formValues.lieu_de_naissance,
+      dateDeNaissance: formValues.date_de_naissance,
+      telephone: formValues.telephone,
+      photo: formValues.photo.name,
+    };
+
+    console.log(apiParams);
+
     professeursApi
       .createProfesseur(
-        formValues,
-        'Bearer ' + token,
-        
-        
-      )
+        formValues.email,
+        formValues.firstname,
+        formValues.lastname,
+        formValues.date_de_naissance,
+        formValues.lieu_de_naissance,
+        formValues.photo,
+        formValues.sexe,
+        formValues.telephone,
+        formValues.statut,
+        formValues.cour_id,
+         'Bearer ' + token)
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {
@@ -184,19 +206,21 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
 
     setIsLoading(true);
 
-    console.log(formValues);
+    console.log(formValues, props);
 
     professeursApi
       .updateProfesseur(
         formValues.email,
-        formValues.first_name,
-        formValues.last_name,
+        formValues.firstname,
+        formValues.lastname,
         formValues.date_de_naissance,
         formValues.lieu_de_naissance,
         formValues.photo,
         formValues.sexe,
         formValues.telephone,
-        
+        formValues.statut,
+        formValues.cour_id,
+
         'Bearer ' + token,
         props.item?.id
       )
@@ -275,7 +299,7 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
                     </label>
                     <input
                       name="firstname"
-                      value={formValues.first_name}
+                      value={formValues.firstname}
                       onChange={handleInputChange}
                       required
                       type="text"
@@ -290,7 +314,7 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
                     </label>
                     <input
                       name="lastname"
-                      value={formValues.last_name}
+                      value={formValues.lastname}
                       onChange={handleInputChange}
                       required
                       type="text"
@@ -312,7 +336,6 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
                       placeholder="Le numero du professeur"
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
-                  
                   </div>
                 </div>
 
@@ -320,8 +343,8 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
                   <CustomSelectInput
                     required={true}
-                    inputLabel="Salle de classe"
-                    inputPlaceholder="Saisir le nom d'une classe"
+                    inputLabel="Cours"
+                    inputPlaceholder="Saisir le nom d'un cours"
                     wrapperStyle="w-full xl:w-1/3"
                     labelStyle="mb-2.5 block text-black dark:text-white"
                     inputStyle="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
@@ -346,6 +369,21 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
                       <p>Selected File: {formValues.photo.name}</p>
                     )}
                   </div>
+
+                  <div className="w-full xl:w-1/3">
+                    <label className="mb-2.5 block text-black dark:text-white">
+                      Statut <span className="text-meta-1">*</span>
+                    </label>
+                    <input
+                      name="statut"
+                      value={formValues.statut}
+                      onChange={handleInputChange}
+                      required
+                      type="text"
+                      placeholder="Enter your Statut"
+                      className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    />
+                  </div>
                 </div>
 
                 {/* row 3  sexe, status, email*/}
@@ -368,7 +406,6 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
                     </select>
                   </div>
 
-
                   <div className="w-full xl:w-1/2">
                     <label className="mb-2.5 block text-black dark:text-white">
                       Email <span className="text-meta-1">*</span>
@@ -383,23 +420,40 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                   </div>
+                  
+                </div>
+
+                <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
+                  <div className="w-full xl:w-1/3 ">
+                    <label className="mb-3 block text-black dark:text-white">
+                      Date de naissance <span className="text-meta-1">*</span>
+                    </label>
+                    <div className="relative">
+                      <input
+                        name="date_de_naissance"
+                        value={formValues.date_de_naissance}
+                        onChange={handleInputChange}
+                        type="date"
+                        className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      />
+                    </div>
+                  </div>
+
                   <div className="w-full xl:w-1/2">
                     <label className="mb-2.5 block text-black dark:text-white">
-                    username <span className="text-meta-1">*</span>
+                      Lieu de Naissance <span className="text-meta-1">*</span>
                     </label>
                     <input
-                      name="username"
-                      value={formValues.username}
+                      name="lieu_de_naissance"
+                      value={formValues.lieu_de_naissance}
                       onChange={handleInputChange}
                       required
-                      type="username"
-                      placeholder="Enter your Email Address"
+                      type="text"
+                      placeholder="Enter your Place of Birth"
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                   </div>
                 </div>
-
-
 
                 {/* row 5 create | update, annuler */}
                 <div className="form-actions bg-green-600">

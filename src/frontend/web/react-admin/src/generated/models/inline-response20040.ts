@@ -31,7 +31,7 @@ export interface InlineResponse20040 {
     success?: any;
     /**
      * 
-     * @type {Parents}
+     * @type {MembreConseil}
      * @memberof InlineResponse20040
      */
     content?: any;
