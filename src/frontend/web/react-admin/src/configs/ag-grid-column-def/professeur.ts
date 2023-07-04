@@ -40,22 +40,22 @@ export const PROFESSEUR_COLUMNS_DEFS: ColDef[] = [
             width: 200
 },
 {
-  headerName: 'dateDeNaissance',
+  headerName: 'Date de Naissance',
     field: 'dateDeNaissance',
       filter: 'agTextColumnFilter',
         checkboxSelection: false,
           showDisabledCheckboxes: true,
-            width: 200
+            width: 160
 },
 
-{
-  headerName: 'lieuDeNaissance',
-    field: 'lieuDeNaissance',
-      filter: 'agTextColumnFilter',
-        checkboxSelection: false,
-          showDisabledCheckboxes: true,
-            width: 200
-},
+// {
+//   headerName: 'lieuDeNaissance',
+//     field: 'lieuDeNaissance',
+//       filter: 'agTextColumnFilter',
+//         checkboxSelection: false,
+//           showDisabledCheckboxes: true,
+//             width: 200
+// },
 {
   headerName: 'Statut',
     field: 'statut',
@@ -76,14 +76,14 @@ export const PROFESSEUR_COLUMNS_DEFS: ColDef[] = [
     //   return params.data?.classe?.name;
     // }
   },
-{
-  headerName: 'email',
-    field: 'user.email',
-      filter: 'agTextColumnFilter',
-        checkboxSelection: false,
-          showDisabledCheckboxes: true,
-            width: 200
-},
+// {
+//   headerName: 'email',
+//     field: 'user.email',
+//       filter: 'agTextColumnFilter',
+//         checkboxSelection: false,
+//           showDisabledCheckboxes: true,
+//             width: 200
+// },
 {
   headerName: 'telephone',
     field: 'telephone',
@@ -93,18 +93,11 @@ export const PROFESSEUR_COLUMNS_DEFS: ColDef[] = [
             width: 200
 },
 {
-  headerName: 'cour_id',
-    field: 'courId',
-      filter: 'agTextColumnFilter',
-        checkboxSelection: false,
-          showDisabledCheckboxes: true,
-            width: 200
-},{
   headerName: 'CourLibelle',
-    field: 'cour',
+    field: 'cour.libelle',
       filter: 'agTextColumnFilter',
         checkboxSelection: false,
           showDisabledCheckboxes: true,
-            width: 200
+            width: 120
 },
 ];

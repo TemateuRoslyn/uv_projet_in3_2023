@@ -19,8 +19,8 @@
 export interface InlineResponse2001 {
     /**
      * 
-     * @type {string}
+     * @type {User}
      * @memberof InlineResponse2001
      */
-    message?: any;
+    user?: any;
 }

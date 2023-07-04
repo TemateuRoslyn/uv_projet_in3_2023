@@ -29,4 +29,10 @@ export interface InlineResponse20011 {
      * @memberof InlineResponse20011
      */
     message?: any;
+    /**
+     * 
+     * @type {ConseilDiscipline}
+     * @memberof InlineResponse20011
+     */
+    content?: any;
 }

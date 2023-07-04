@@ -19,8 +19,20 @@
 export interface InlineResponse20032 {
     /**
      * 
-     * @type {ReglementInterieur}
+     * @type {string}
      * @memberof InlineResponse20032
      */
-    reglement?: any;
+    message?: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse20032
+     */
+    success?: any;
+    /**
+     * 
+     * @type {MembreConseil}
+     * @memberof InlineResponse20032
+     */
+    content?: any;
 }

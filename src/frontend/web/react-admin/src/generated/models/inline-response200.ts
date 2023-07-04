@@ -19,8 +19,20 @@
 export interface InlineResponse200 {
     /**
      * 
-     * @type {User}
+     * @type {boolean}
      * @memberof InlineResponse200
      */
-    user?: any;
+    success?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse200
+     */
+    message?: any;
+    /**
+     * 
+     * @type {InlineResponse200Content}
+     * @memberof InlineResponse200
+     */
+    content?: any;
 }

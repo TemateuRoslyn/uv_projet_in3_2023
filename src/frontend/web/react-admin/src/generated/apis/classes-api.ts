@@ -17,11 +17,11 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { ClassesCreateBody } from '../models';
-import { InlineResponse2002 } from '../models';
 import { InlineResponse2003 } from '../models';
 import { InlineResponse2004 } from '../models';
 import { InlineResponse2005 } from '../models';
 import { InlineResponse2006 } from '../models';
+import { InlineResponse2007 } from '../models';
 import { InlineResponse2011 } from '../models';
 import { InlineResponse4001 } from '../models';
 import { InlineResponse4002 } from '../models';
@@ -367,7 +367,7 @@ export const ClassesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async classeDelete(classeId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2005>> {
+        async classeDelete(classeId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2006>> {
             const localVarAxiosArgs = await ClassesApiAxiosParamCreator(configuration).classeDelete(classeId, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -382,7 +382,7 @@ export const ClassesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async classeShow(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2003>> {
+        async classeShow(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004>> {
             const localVarAxiosArgs = await ClassesApiAxiosParamCreator(configuration).classeShow(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -398,7 +398,7 @@ export const ClassesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async classeUpdate(body: UpdateClasseIdBody, authorization: string, classeId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004>> {
+        async classeUpdate(body: UpdateClasseIdBody, authorization: string, classeId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2005>> {
             const localVarAxiosArgs = await ClassesApiAxiosParamCreator(configuration).classeUpdate(body, authorization, classeId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -412,7 +412,7 @@ export const ClassesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async classesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
+        async classesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2003>> {
             const localVarAxiosArgs = await ClassesApiAxiosParamCreator(configuration).classesIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -427,7 +427,7 @@ export const ClassesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async classesRecords(keyword: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2006>> {
+        async classesRecords(keyword: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2007>> {
             const localVarAxiosArgs = await ClassesApiAxiosParamCreator(configuration).classesRecords(keyword, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -462,7 +462,7 @@ export const ClassesApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        classeDelete(classeId: number, authorization: string, options?: any): AxiosPromise<InlineResponse2005> {
+        classeDelete(classeId: number, authorization: string, options?: any): AxiosPromise<InlineResponse2006> {
             return ClassesApiFp(configuration).classeDelete(classeId, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -473,7 +473,7 @@ export const ClassesApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        classeShow(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse2003> {
+        classeShow(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse2004> {
             return ClassesApiFp(configuration).classeShow(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -485,7 +485,7 @@ export const ClassesApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        classeUpdate(body: UpdateClasseIdBody, authorization: string, classeId: number, options?: any): AxiosPromise<InlineResponse2004> {
+        classeUpdate(body: UpdateClasseIdBody, authorization: string, classeId: number, options?: any): AxiosPromise<InlineResponse2005> {
             return ClassesApiFp(configuration).classeUpdate(body, authorization, classeId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -495,7 +495,7 @@ export const ClassesApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        classesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse2002> {
+        classesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse2003> {
             return ClassesApiFp(configuration).classesIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -506,7 +506,7 @@ export const ClassesApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        classesRecords(keyword: string, authorization: string, options?: any): AxiosPromise<InlineResponse2006> {
+        classesRecords(keyword: string, authorization: string, options?: any): AxiosPromise<InlineResponse2007> {
             return ClassesApiFp(configuration).classesRecords(keyword, authorization, options).then((request) => request(axios, basePath));
         },
     };

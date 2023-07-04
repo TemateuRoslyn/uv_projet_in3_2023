@@ -28,10 +28,10 @@ import { InlineResponse40411 } from '../models';
 import { ReglementCreateBody } from '../models';
 import { ReglementUpdateBody } from '../models';
 /**
- * ReglementInterieurApi - axios parameter creator
+ * ReglementInterieursApi - axios parameter creator
  * @export
  */
-export const ReglementInterieurApiAxiosParamCreator = function (configuration?: Configuration) {
+export const ReglementInterieursApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * Create a new reglementInterieur resource
@@ -282,10 +282,10 @@ export const ReglementInterieurApiAxiosParamCreator = function (configuration?: 
 };
 
 /**
- * ReglementInterieurApi - functional programming interface
+ * ReglementInterieursApi - functional programming interface
  * @export
  */
-export const ReglementInterieurApiFp = function(configuration?: Configuration) {
+export const ReglementInterieursApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Create a new reglementInterieur resource
@@ -296,7 +296,7 @@ export const ReglementInterieurApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async createreglementInterieur(body: ReglementCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20030>> {
-            const localVarAxiosArgs = await ReglementInterieurApiAxiosParamCreator(configuration).createreglementInterieur(body, authorization, options);
+            const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).createreglementInterieur(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -311,7 +311,7 @@ export const ReglementInterieurApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async deleteReglementInterieur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await ReglementInterieurApiAxiosParamCreator(configuration).deleteReglementInterieur(authorization, id, options);
+            const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).deleteReglementInterieur(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -325,7 +325,7 @@ export const ReglementInterieurApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async findAllreglementInterieurs(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20029>> {
-            const localVarAxiosArgs = await ReglementInterieurApiAxiosParamCreator(configuration).findAllreglementInterieurs(authorization, options);
+            const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).findAllreglementInterieurs(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -340,7 +340,7 @@ export const ReglementInterieurApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async showOneReglementInterieur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20031>> {
-            const localVarAxiosArgs = await ReglementInterieurApiAxiosParamCreator(configuration).showOneReglementInterieur(authorization, id, options);
+            const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).showOneReglementInterieur(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -355,7 +355,7 @@ export const ReglementInterieurApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async updatereglementInterieur(body: ReglementUpdateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20032>> {
-            const localVarAxiosArgs = await ReglementInterieurApiAxiosParamCreator(configuration).updatereglementInterieur(body, authorization, options);
+            const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).updatereglementInterieur(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -365,10 +365,10 @@ export const ReglementInterieurApiFp = function(configuration?: Configuration) {
 };
 
 /**
- * ReglementInterieurApi - factory interface
+ * ReglementInterieursApi - factory interface
  * @export
  */
-export const ReglementInterieurApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+export const ReglementInterieursApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
          * Create a new reglementInterieur resource
@@ -379,7 +379,7 @@ export const ReglementInterieurApiFactory = function (configuration?: Configurat
          * @throws {RequiredError}
          */
         createreglementInterieur(body: ReglementCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20030> {
-            return ReglementInterieurApiFp(configuration).createreglementInterieur(body, authorization, options).then((request) => request(axios, basePath));
+            return ReglementInterieursApiFp(configuration).createreglementInterieur(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete a reglementInterieur resource
@@ -390,7 +390,7 @@ export const ReglementInterieurApiFactory = function (configuration?: Configurat
          * @throws {RequiredError}
          */
         deleteReglementInterieur(authorization: string, id: number, options?: any): AxiosPromise<void> {
-            return ReglementInterieurApiFp(configuration).deleteReglementInterieur(authorization, id, options).then((request) => request(axios, basePath));
+            return ReglementInterieursApiFp(configuration).deleteReglementInterieur(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieve a list of all reglementInterieur
@@ -400,7 +400,7 @@ export const ReglementInterieurApiFactory = function (configuration?: Configurat
          * @throws {RequiredError}
          */
         findAllreglementInterieurs(authorization: string, options?: any): AxiosPromise<InlineResponse20029> {
-            return ReglementInterieurApiFp(configuration).findAllreglementInterieurs(authorization, options).then((request) => request(axios, basePath));
+            return ReglementInterieursApiFp(configuration).findAllreglementInterieurs(authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Get information about a specific reglementInterieur
@@ -411,7 +411,7 @@ export const ReglementInterieurApiFactory = function (configuration?: Configurat
          * @throws {RequiredError}
          */
         showOneReglementInterieur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20031> {
-            return ReglementInterieurApiFp(configuration).showOneReglementInterieur(authorization, id, options).then((request) => request(axios, basePath));
+            return ReglementInterieursApiFp(configuration).showOneReglementInterieur(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
          * Update a reglementInterieur's information
@@ -422,18 +422,18 @@ export const ReglementInterieurApiFactory = function (configuration?: Configurat
          * @throws {RequiredError}
          */
         updatereglementInterieur(body: ReglementUpdateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20032> {
-            return ReglementInterieurApiFp(configuration).updatereglementInterieur(body, authorization, options).then((request) => request(axios, basePath));
+            return ReglementInterieursApiFp(configuration).updatereglementInterieur(body, authorization, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * ReglementInterieurApi - object-oriented interface
+ * ReglementInterieursApi - object-oriented interface
  * @export
- * @class ReglementInterieurApi
+ * @class ReglementInterieursApi
  * @extends {BaseAPI}
  */
-export class ReglementInterieurApi extends BaseAPI {
+export class ReglementInterieursApi extends BaseAPI {
     /**
      * Create a new reglementInterieur resource
      * @summary Create a new reglementInterieur
@@ -441,10 +441,10 @@ export class ReglementInterieurApi extends BaseAPI {
      * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ReglementInterieurApi
+     * @memberof ReglementInterieursApi
      */
     public createreglementInterieur(body: ReglementCreateBody, authorization: string, options?: any) {
-        return ReglementInterieurApiFp(this.configuration).createreglementInterieur(body, authorization, options).then((request) => request(this.axios, this.basePath));
+        return ReglementInterieursApiFp(this.configuration).createreglementInterieur(body, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Delete a reglementInterieur resource
@@ -453,10 +453,10 @@ export class ReglementInterieurApi extends BaseAPI {
      * @param {number} id ID of reglementInterieur to delete
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ReglementInterieurApi
+     * @memberof ReglementInterieursApi
      */
     public deleteReglementInterieur(authorization: string, id: number, options?: any) {
-        return ReglementInterieurApiFp(this.configuration).deleteReglementInterieur(authorization, id, options).then((request) => request(this.axios, this.basePath));
+        return ReglementInterieursApiFp(this.configuration).deleteReglementInterieur(authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Retrieve a list of all reglementInterieur
@@ -464,10 +464,10 @@ export class ReglementInterieurApi extends BaseAPI {
      * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ReglementInterieurApi
+     * @memberof ReglementInterieursApi
      */
     public findAllreglementInterieurs(authorization: string, options?: any) {
-        return ReglementInterieurApiFp(this.configuration).findAllreglementInterieurs(authorization, options).then((request) => request(this.axios, this.basePath));
+        return ReglementInterieursApiFp(this.configuration).findAllreglementInterieurs(authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get information about a specific reglementInterieur
@@ -476,10 +476,10 @@ export class ReglementInterieurApi extends BaseAPI {
      * @param {number} id ID of reglementInterieur to get information for
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ReglementInterieurApi
+     * @memberof ReglementInterieursApi
      */
     public showOneReglementInterieur(authorization: string, id: number, options?: any) {
-        return ReglementInterieurApiFp(this.configuration).showOneReglementInterieur(authorization, id, options).then((request) => request(this.axios, this.basePath));
+        return ReglementInterieursApiFp(this.configuration).showOneReglementInterieur(authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update a reglementInterieur's information
@@ -488,9 +488,9 @@ export class ReglementInterieurApi extends BaseAPI {
      * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ReglementInterieurApi
+     * @memberof ReglementInterieursApi
      */
     public updatereglementInterieur(body: ReglementUpdateBody, authorization: string, options?: any) {
-        return ReglementInterieurApiFp(this.configuration).updatereglementInterieur(body, authorization, options).then((request) => request(this.axios, this.basePath));
+        return ReglementInterieursApiFp(this.configuration).updatereglementInterieur(body, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 }

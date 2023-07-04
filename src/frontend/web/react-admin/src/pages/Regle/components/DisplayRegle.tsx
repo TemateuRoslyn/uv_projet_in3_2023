@@ -21,7 +21,7 @@ import {
 
 import './DisplayRegle.css';
 import { AgGridIndicator } from '../../../components/AgGridIndicator';
-import { ReglementInterieurApi, ReglesApi } from '../../../generated';
+import { ReglementInterieursApi, ReglesApi } from '../../../generated';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
 import { DeleteItemModal } from '../../../components/DeleteItemModal';
 
@@ -66,7 +66,7 @@ const DisplayRegle: React.FC<DisplayRegleProps> = (props) => {
       ...state.environment,
       accessToken: token,
     });
-    const reglementInterieurApi = new ReglementInterieurApi({
+    const reglementInterieurApi = new ReglementInterieursApi({
       ...state.environment,
       accessToken: token,
     });
