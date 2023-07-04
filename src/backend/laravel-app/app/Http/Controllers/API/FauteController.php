@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 use App\Models\Faute;
 use App\Models\User;
 use App\Models\Role;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Queue;
+use App\Jobs\SendEmailJob;
 
 class FauteController extends Controller
 {
@@ -57,7 +60,7 @@ class FauteController extends Controller
      */
     public function index()
     {
-        $fautes = Faute::with('regle.reglementInterieur', 'eleve')->get();
+        $fautes = Faute::with('regle.reglementInterieur', 'eleve.user')->get();
 
         return response()->json([
             'message' => 'Liste des fautes',
@@ -122,7 +125,7 @@ class FauteController extends Controller
     public function view($fauteId)
     {
 
-        $faute = Faute::with(['eleve', 'regle.reglementInterieur'])->find($fauteId);
+        $faute = Faute::with(['eleve.user', 'regle.reglementInterieur'])->find($fauteId);
 
 
         if ($faute) {
@@ -196,7 +199,7 @@ class FauteController extends Controller
     public function viewFautesEleve($eleveId)
     {
 
-        $eleve = Faute::where('eleveId', $eleveId)->with(['eleve', 'regle.reglementInterieur'])->get();
+        $eleve = Faute::where('eleveId', $eleveId)->with(['eleve.user', 'regle.reglementInterieur'])->get();
 
 
         if ($eleve) {
@@ -270,8 +273,20 @@ class FauteController extends Controller
         $validator = Validator::make($request->all(), [
             'libelle' => 'required|string|max:255',
             'gravite' => 'required|string',
-            'eleveId' => 'required|integer',
-            'regleId' => 'required|integer',
+            'eleveId' => [
+                'required',
+                'integer',
+                Rule::exists('eleves', 'id')->where(function ($query) use ($request) {
+                    $query->where('id', $request->eleveId);
+                })
+            ],
+            'regleId' => [
+                'required',
+                'integer',
+                Rule::exists('regles', 'id')->where(function ($query) use ($request) {
+                    $query->where('id', $request->regleId);
+                })
+            ],
 
 
         ]);
@@ -290,7 +305,41 @@ class FauteController extends Controller
             'libelle' => $request->input('libelle'),
             'gravite' => $request->input('gravite'),
         ]);
-        $fautte->load('eleve', 'regle.reglementInterieur');
+        $fautte->load('eleve.user', 'regle.reglementInterieur');
+
+        $eleve = Eleve::find($request->eleveId);
+        $parents = $eleve->parents;
+
+        //envoie du mail a l'eleve
+        $details = array();
+
+        $details['greeting'] = "Hi " . $eleve->firstName;
+        $details['body'] = "Vous avez commis une faute ( $fautte->libelle ) car vous avez enfrein une une des regles de l'etablissement .
+                            \n
+                            \n  Cet etablissement est un lieu d'apprentissage, ou doit reigner le travail et la discipline. Pour nous aider a faire de vous des Hommes de demain, vous devez connaitre et respecter les regles et reglements interieurs de l'etablissement renseignes sur la plateforme .";
+        $details['actiontext'] = "Details de la Faute";
+        $details['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
+        $details['endtext'] = "Merci de rester fidele à cet etablissement";
+
+        // envoi du mail
+        Queue::push(new SendEmailJob($eleve->user, $details));
+
+        //envoie du mail aux parents
+        foreach ($parents as $parent) {
+            $detailsP = array();
+
+            $detailsP['greeting'] = "Hi " . $parent->firstName;
+            $detailsP['body'] = "Votre enfant " . $eleve->firstName . $eleve->lastName . " a commis une faute ( $fautte->libelle ) car il/elle a enfrein une une des regles de l'etablissement .
+                                \n
+                                \n  Cet etablissement est un lieu d'apprentissage, ou doit reigner le travail et la discipline. Pour nous aider a faire de votre enfant un Homme ( une Femme ) de demain, vous devez veiller a la bonne education de votre enfant et de lui faire connaitre et respecter les regles et reglements interieurs de l'etablissement renseignes sur la plateforme .";
+            $detailsP['actiontext'] = "Details de la Faute";
+            $detailsP['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
+            $detailsP['endtext'] = "Merci de rester fidele à cet etablissement";
+
+            // envoi du mail
+            Queue::push(new SendEmailJob($parent->user, $detailsP));
+            $detailsP = array();
+        }
 
         return response()->json([
             'message' => 'Mistake created successfully',
@@ -372,8 +421,20 @@ class FauteController extends Controller
             $validator = Validator::make($request->all(), [
                 'libelle' => 'required|string|max:255',
                 'gravite' => 'required|string',
-                'eleveId' => 'required|integer|exists:eleves,id',
-                'regleId' => 'required|integer|exists:regles,id',
+                'eleveId' => [
+                    'required',
+                    'integer',
+                    Rule::exists('eleves', 'id')->where(function ($query) use ($request) {
+                        $query->where('id', $request->eleveId);
+                    })
+                ],
+                'regleId' => [
+                    'required',
+                    'integer',
+                    Rule::exists('regles', 'id')->where(function ($query) use ($request) {
+                        $query->where('id', $request->regleId);
+                    })
+                ],
             ]);
         } else {
             return response()->json([
@@ -397,8 +458,41 @@ class FauteController extends Controller
         $fauteFound->eleveId = $request->input('eleveId');
         $fauteFound->regleId = $request->input('regleId');
         $fauteFound->save();
-        $fauteFound->load('eleve', 'regle.reglementInterieur');
+        $fauteFound->load('eleve.user', 'regle.reglementInterieur');
 
+        $eleve = Eleve::find($request->eleveId);
+        $parents = $eleve->parents;
+
+        //envoie du mail a l'eleve
+        $details = array();
+
+        $details['greeting'] = "Hi " . $eleve->firstName;
+        $details['body'] = "Vous avez commis une faute ( $fauteFound->libelle ) car vous avez enfrein une une des regles de l'etablissement .
+                            \n
+                            \n  Cet etablissement est un lieu d'apprentissage, ou doit reigner le travail et la discipline. Pour nous aider a faire de vous des Hommes de demain, vous devez connaitre et respecter les regles et reglements interieurs de l'etablissement renseignes sur la plateforme .";
+        $details['actiontext'] = "Details de la Faute";
+        $details['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
+        $details['endtext'] = "Merci de rester fidele à cet etablissement";
+
+        // envoi du mail
+        Queue::push(new SendEmailJob($eleve->user, $details));
+
+        //envoie du mail aux parents
+        foreach ($parents as $parent) {
+            $detailsP = array();
+
+            $detailsP['greeting'] = "Hi " . $parent->firstName;
+            $detailsP['body'] = "Votre enfant nomme " . $eleve->firstName . $eleve->lastName . " a commis une faute ( $fauteFound->libelle ) car il/elle a enfrein une une des regles de l'etablissement .
+                                \n
+                                \n  Cet etablissement est un lieu d'apprentissage, ou doit reigner le travail et la discipline. Pour nous aider a faire de votre enfant un Homme ( une Femme ) de demain, vous devez veiller a la bonne education de votre enfant et de lui faire connaitre et respecter les regles et reglements interieurs de l'etablissement renseignes sur la plateforme .";
+            $detailsP['actiontext'] = "Details de la Faute";
+            $detailsP['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
+            $detailsP['endtext'] = "Merci de rester fidele à cet etablissement";
+
+            // envoi du mail
+            Queue::push(new SendEmailJob($parent->user, $detailsP));
+            $detailsP = array();
+        }
         return response()->json([
             'message' => 'Mistake updated successfully',
             'success' => true,
@@ -469,12 +563,15 @@ class FauteController extends Controller
                 'success' => false
             ], 404);
         }
+        else
+        {
 
-        $faute->delete();
+            $faute->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Mistake deleted successfully'
-        ], 200);
+            return response()->json([
+                'success' => true,
+                'message' => 'Mistake deleted successfully'
+            ], 200);
+        }
     }
 }
