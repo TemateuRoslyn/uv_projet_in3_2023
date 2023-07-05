@@ -161,7 +161,7 @@ class ProfesseurController extends Controller
      *         @OA\MediaType(
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
-     *               required={"firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "statut", "courId","classesId","email"},
+     *               required={"firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "statut", "courId","email"},
      *               @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
      *                @OA\Property(property="firstName", type="string", example="John"),
      *              @OA\Property(property="lastName", type="string", example="Smith"),
@@ -238,8 +238,6 @@ class ProfesseurController extends Controller
             'telephone' => 'required',
             'statut' => 'required',
             'courId' => 'required|integer|exists:cours,id',
-            'classesId' => 'required|array',
-            'classeId.*' => 'required|integer|exists:classes,id',
         ]);
 
         if ($validator->fails()) {
@@ -309,7 +307,7 @@ class ProfesseurController extends Controller
 
 
     /**
-     * @OA\put(
+     * @OA\Post(
      *     path="/api/professeurs/update/{professeurId}",
      *     summary="Update a professeur's information",
      *     description="Update a professeur's information",
@@ -339,7 +337,7 @@ class ProfesseurController extends Controller
      *      @OA\MediaType(
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
-     *                 required={"firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "statut", "courId","classesId","email"},
+     *                 required={"firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "statut", "courId","email"},
      *             @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
      *             @OA\Property(property="firstName", type="string", example="John"),
      *             @OA\Property(property="lastName", type="string", example="Smith"),
@@ -416,7 +414,6 @@ class ProfesseurController extends Controller
                 'telephone' => 'required',
                 'statut' => 'required',
                 'courId' => 'required|exists:cours,id',
-               'classesId' => 'required|array'
             ]);
         } else {
             return response()->json([

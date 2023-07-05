@@ -213,8 +213,8 @@ class RegleController extends Controller
     }
 
     /**
-     * @OA\put(
-     *     path="/api/regle/update/{regleid}",
+     * @OA\post(
+     *     path="/api/regle/update/{regleId}",
      *     summary="Update a regle's information",
      *     description="Update a regle's information",
      *     operationId="updateRegle",
@@ -235,6 +235,15 @@ class RegleController extends Controller
      *              required={"libelle", "reglementInterieurId"},
      *             @OA\Property(property="libelle", type="string", format="text", example="Ne pas sortir sans avoir eu la permission"),
      *             @OA\Property(property="reglementInterieurId", type="integer", example=1)
+     *         )
+     *     ),
+     * @OA\Parameter(
+     *         name="regleId",
+     *         in="path",
+     *         description="ID of eleve to update in this request",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
      *         )
      *     ),
      *     @OA\Response(
@@ -280,7 +289,7 @@ class RegleController extends Controller
      * )
      */
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $regleid)
     {
         $validator = Validator::make($request->all(), [
             'libelle' => 'required|string|max:255',
@@ -295,7 +304,7 @@ class RegleController extends Controller
             ], 400);
         }
 
-        $regle = Regle::find($id);
+        $regle = Regle::find($regleid);
 
         if (!$regle) {
             return response()->json([

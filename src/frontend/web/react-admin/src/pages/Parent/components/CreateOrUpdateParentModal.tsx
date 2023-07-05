@@ -52,7 +52,6 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
 
 
   // --------------------- begin multi select props ---------------------
-
   const [matchList, setMatchList] = useState<string[]>([
     'Option A - du text random:1',
     'Option B - du text random:2',

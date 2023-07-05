@@ -5,7 +5,8 @@ import {
   Regle,
   RegleCreateBody,
   ReglementInterieur,
-  RegleUpdateBody,
+  
+  UpdateRegleidBody,
 } from '../../../generated/models';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
 import { ReglesApi } from '../../../generated';
@@ -39,7 +40,7 @@ const CreateOrUpdateRegleModal: React.FC<ModalProps> = (props) => {
     props.item ? props.item.libelle : ''
   );
 const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements ? props.reglements : [])
-  const [nameRegle, setNameRegle] = useState<string>(props.item ? props.item.reglement_interieur_id : props.reglements[0].id)
+  const [nameRegle, setNameRegle] = useState<string>(props.item ? props.item.reglementInterieurId : props.reglements[0].id)
   
   
 
@@ -74,7 +75,7 @@ const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements 
 
     const apiParams: RegleCreateBody = {
       libelle: libelle,
-      reglement_interieur_id: nameRegle,
+      reglementInterieurId: nameRegle,
       //reglementInterieurId: reglementInterieur,
     };
    
@@ -117,14 +118,13 @@ const [reglementInterieurs, setReglementInterieurs] = useState(props.reglements 
 
     setIsLoading(true);
     
-    const apiParams: RegleUpdateBody = {
-      id: props.item.id,
+    const apiParams: UpdateRegleidBody = {
       libelle: libelle,
-      reglement_interieur_id: nameRegle,
+      reglementInterieurId: nameRegle,
     };
 
     regleApi
-      .updateRegle(apiParams, 'Bearer ' + token)
+      .updateRegle(apiParams, 'Bearer ' + token, props.item?.id)
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {

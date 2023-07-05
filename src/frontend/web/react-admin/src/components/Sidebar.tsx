@@ -58,8 +58,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+      className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
+        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}
     >
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
@@ -105,11 +106,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li>
                 <NavLink
                   to="/"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${(pathname === '/' ||
-                    pathname.includes('dashboard')) &&
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    (pathname === '/' || pathname.includes('dashboard')) &&
                     'bg-graydark dark:bg-meta-4'
-                    }`}
-                /* onClick={(e) => {
+                  }`}
+                  /* onClick={(e) => {
                   e.preventDefault();
                   sidebarExpanded
                     ? handleClick()
@@ -142,7 +143,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     />
                   </svg>
                   Dashboard
-
                 </NavLink>
               </li>
               {/* <!-- Menu Item Dashboard --> */}
@@ -151,8 +151,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li>
                 <NavLink
                   to="/professeurs"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes('enseignant') && 'bg-graydark dark:bg-meta-4'
-                    }`}
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    pathname.includes('enseignant') &&
+                    'bg-graydark dark:bg-meta-4'
+                  }`}
                 >
                   <svg
                     className="fill-current"
@@ -165,17 +167,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     <path
                       d="M16 4c-3.855 0-7 3.145-7 7c0 2.379 1.21 4.484 3.031 5.75C7.926 18.352 5 22.352 5 27h2c0-4.398 3.191-8.074 7.375-8.844L15 20h2l.625-1.844C21.809 18.926 25 22.602 25 27h2c0-4.648-2.926-8.648-7.031-10.25C21.789 15.484 23 13.379 23 11c0-3.855-3.145-7-7-7zm0 2c2.773 0 5 2.227 5 5s-2.227 5-5 5s-5-2.227-5-5s2.227-5 5-5zm-1 15l-1 6h4l-1-6z"
                       // fill="none"
-                      stroke-width="1.5" stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke="currentColor"
                     />
                   </svg>
-                Professeur
+                  Professeur
                 </NavLink>
               </li>
               {/* <!-- Menu Item Enseignant --> */}
               {/* <!-- Menu Item Enseignant --> */}
-                
-                 {/* <!-- Menu Item Cours --> */}
-                 {/* <!-- Menu Item Cours --> */}
+
+              {/* <!-- Menu Item Cours --> */}
+              {/* <!-- Menu Item Cours --> */}
               <li>
                 <NavLink
                   to="/cours"
@@ -192,9 +195,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                     d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
-                     stroke-width="1.5" stroke="currentColor"
-                     fill="none"
+                      d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      fill="none"
                     />
                   </svg>
                   Cours
@@ -203,14 +207,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/* <!-- Menu Item Cours --> */}
               {/* <!-- Menu Item Cours --> */}
               {/* <!-- Menu Item convocation --> */}
-              
+
               <li>
                 <NavLink
                   to="/convocations"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes('convocations') && 'bg-graydark dark:bg-meta-4'
+                    pathname.includes('convocations') &&
+                    'bg-graydark dark:bg-meta-4'
                   }`}
-                > 
+                >
                   <svg
                     className="fill-primary dark:fill-white"
                     width="22"
@@ -220,7 +225,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-width="1.5" stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke="currentColor"
                       d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
                       fill="none"
                     />
@@ -228,7 +234,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   Convocations
                 </NavLink>
               </li>
-               {/* <SidebarLinkGroup
+              {/* <SidebarLinkGroup
                 activeCondition={
                   pathname === '/convocation' || pathname.includes('convocation')
                 }
@@ -322,9 +328,36 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </SidebarLinkGroup>
               */}
               {/* <!-- Menu Item convocation --> */}
-              
 
+              {/* <!-- Menu Item conseilDisciplines --> */}
 
+              <li>
+                <NavLink
+                  to="/conseilDiscipline"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    pathname.includes('conseilDiscipline') &&
+                    'bg-graydark dark:bg-meta-4'
+                  }`}
+                >
+                  <svg
+                    className="fill-primary dark:fill-white"
+                    width="22"
+                    height="18"
+                    viewBox="0 0 22 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
+                      fill="none"
+                    />
+                  </svg>
+                  ConseilDisciplines
+                </NavLink>
+              </li>
+              {/* <!-- Menu Item conseilDiscipline --> */}
 
               {/* <!-- Menu Item Classes --> */}
               <li>
@@ -333,7 +366,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes('classes') && 'bg-graydark dark:bg-meta-4'
                   }`}
-                > 
+                >
                   <svg
                     className="fill-primary dark:fill-white"
                     width="22"
@@ -343,7 +376,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-width="1.5" stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke="currentColor"
                       d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
                       fill="none"
                     />
@@ -352,14 +386,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </NavLink>
               </li>
               {/* <!-- Menu Item Classes --> */}
-               {/* <!-- Menu Item Students --> */}
+              {/* <!-- Menu Item Students --> */}
               <li>
                 <NavLink
                   to="/eleves"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes('eleves') && 'bg-graydark dark:bg-meta-4'
                   }`}
-                > 
+                >
                   <svg
                     className="fill-primary dark:fill-white"
                     width="22"
@@ -369,7 +403,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-width="1.5" stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke="currentColor"
                       d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
                       fill="none"
                     />
@@ -379,8 +414,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </li>
               {/* <!-- Menu Item Students --> */}
               {/* <!-- Menu Item Students --> */}
-               {/* <!-- Menu Item Parents --> */}
-               <li>
+              {/* <!-- Menu Item Parents --> */}
+              <li>
                 <NavLink
                   to="/parents"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
@@ -396,7 +431,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-width="1.5" stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke="currentColor"
                       d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
                       fill="none"
                     />
@@ -410,9 +446,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li>
                 <NavLink
                   to="/calendar"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes('calendar') &&
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    pathname.includes('calendar') &&
                     'bg-graydark dark:bg-meta-4'
-                    }`}
+                  }`}
                 >
                   <svg
                     className="fill-current"
@@ -509,7 +546,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-                        <li>
+                          <li>
                             <NavLink
                               to="/admin/users"
                               className={({ isActive }) =>
@@ -551,9 +588,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </SidebarLinkGroup>
               {/* <!-- Menu Item Admin --> */}
 
-
-               {/* <!-- Menu Item Fautes --> */}
-               <SidebarLinkGroup
+              {/* <!-- Menu Item Fautes --> */}
+              <SidebarLinkGroup
                 activeCondition={
                   pathname === '/faults' || pathname.includes('faults')
                 }
@@ -630,7 +666,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-                        <li>
+                          <li>
                             <NavLink
                               to="/faults/addfaults"
                               className={({ isActive }) =>
@@ -652,7 +688,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               Lister
                             </NavLink>
                           </li>
-                          
                         </ul>
                       </div>
                       {/* <!-- Dropdown Menu End --> */}
@@ -667,9 +702,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 <NavLink
                   to="/reglements"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes('reglements') && 'bg-graydark dark:bg-meta-4'
+                    pathname.includes('reglements') &&
+                    'bg-graydark dark:bg-meta-4'
                   }`}
-                > 
+                >
                   <svg
                     className="fill-primary dark:fill-white"
                     width="22"
@@ -679,7 +715,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-width="1.5" stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke="currentColor"
                       d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
                       fill="none"
                     />
@@ -695,7 +732,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes('regles') && 'bg-graydark dark:bg-meta-4'
                   }`}
-                > 
+                >
                   <svg
                     className="fill-primary dark:fill-white"
                     width="22"
@@ -705,7 +742,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-width="1.5" stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke="currentColor"
                       d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
                       fill="none"
                     />

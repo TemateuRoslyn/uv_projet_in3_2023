@@ -3,7 +3,7 @@ import { AgGridReact } from 'ag-grid-react';
 import * as XLSX from 'xlsx';
 import { connect, useSelector } from 'react-redux';
 
-import { REGLEMENTINTERIEUR_COLUMNS_DEFS } from '../../../configs/ag-grid-column-def/reglementinterieur';
+import { REGLE_COLUMNS_DEFS } from '../../../configs/ag-grid-column-def/regle';
 import { Regle, ReglementInterieur } from '../../../generated/models';
 import { ReduxProps } from '../../../redux/configureStore';
 import { Link } from 'react-router-dom';
@@ -73,11 +73,11 @@ const DisplayRegle: React.FC<DisplayRegleProps> = (props) => {
     setShowIndicator(true);
 
     regleApi
-      .findAllRegles('Bearer ' + token)
+      .reglesIndex('Bearer ' + token)
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {
-            setRegle(response.data.data);
+            setRegle(response.data.content);
           }
         }
       })
@@ -175,6 +175,7 @@ const DisplayRegle: React.FC<DisplayRegleProps> = (props) => {
       }
     }
   };
+  console.log(regle);
 
   const handleDeleteItem = () => {
     if (gridRef.current && gridRef.current.api) {
@@ -323,7 +324,7 @@ const DisplayRegle: React.FC<DisplayRegleProps> = (props) => {
               ref={gridRef}
               rowData={regle}
               animateRows={true}
-              columnDefs={REGLEMENTINTERIEUR_COLUMNS_DEFS}
+              columnDefs={REGLE_COLUMNS_DEFS}
               defaultColDef={defaultColDef}
               rowSelection={'multiple'}
               suppressRowClickSelection={true}

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { MODAL_MODE } from "../../../constants/ENUM";
 import { EditIcon, NewIcon } from "../../../components/Icone";
-import { ReglementInterieur, ReglementCreateBody, ReglementUpdateBody } from "../../../generated/models";
+import { ReglementInterieur, ReglementCreateBody } from "../../../generated/models";
 import { TOKEN_LOCAL_STORAGE_KEY } from "../../../constants/LOCAL_STORAGE";
 import { useSelector } from "react-redux";
 import { ReduxProps } from "../../../redux/configureStore";
 import Indicator from "../../Authentication/components/Indicator";
+import { ReglementInterieursApi } from "../../../generated";
+import { ReglementUpdateBody } from "../../../api/models";
 
 interface ModalProps {
   mode: MODAL_MODE;
@@ -57,7 +59,7 @@ const CreateOrUpdateReglementInterieurModal: React.FC<ModalProps> = (props) => {
     };
     console.log(apiParams);
     reglementInterieurApi
-      .createreglementInterieur(apiParams, "Bearer " + token)
+      .createReglementInterieur(apiParams, "Bearer " + token)
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {
@@ -93,13 +95,13 @@ const CreateOrUpdateReglementInterieurModal: React.FC<ModalProps> = (props) => {
     setIsLoading(true);
 
     const apiParams: ReglementUpdateBody = {
-      id: props.item?.id,
+      
       libelle: libelle,
       
     };
 
     reglementInterieurApi
-      .updatereglementInterieur(apiParams, "Bearer " + token, props.item?.id)
+      .updateReglementInterieur(apiParams, "Bearer " + token, props.item?.id)
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {

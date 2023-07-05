@@ -14,7 +14,7 @@ import {
   STATUS,
   getClasseByName,
 } from '../../../constants/ITEMS';
-import CustomSelectInput from '../../../components/CustomSelects/CustomMultiSelectInput';
+import CustomSelectInput from '../../../components/CustomSelects/CustomSelectInput';
 
 interface ModalProps {
   mode: MODAL_MODE;
@@ -37,18 +37,18 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [formValues, setFormValues] = useState({
-    firstname: props.item ? props.item.firstName : '',
+    firstName : props.item ? props.item.firstName : '',
     lastname: props.item ? props.item.lastName : '',
     telephone: props.item ? props.item.telephone : '',
     email: props.item ? props.item.user?.email : '',
-    date_de_naissance: props.item ? props.item.dateDeNaissance : '',
-    lieu_de_naissance: props.item ? props.item.lieuDeNaissance : '',
+    dateDeNaissance: props.item ? props.item.dateDeNaissance : '',
+    lieuDeNaissance: props.item ? props.item.lieuDeNaissance : '',
     photo: props.item ? props.item.photo : null,
     sexe: props.item ? props.item.sexe : '',
     statut: props.item ? props.item.statut : '',
-    classe_id: props.item ? props.item.classe?.id : '',
-    cour_id: props.item ? props.item.cour?.id : '',
-    username: props.item ? props.item.username?.id : '',
+    classeId: props.item ? props.item.classes?.id : '',
+    courId: props.item ? props.item.cour?.id : '',
+    //username: props.item ? props.item.username?.id : '',
   });
 
   const [matchList, setMatchList] = useState<string[]>([]);
@@ -80,7 +80,7 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
   const handleOptionSelect = (option: string) => {
     setFormValues((prevValues) => ({
       ...prevValues,
-      cour_id: extractIdFromString(option),
+      courId: extractIdFromString(option),
     }));
   };
 
@@ -120,8 +120,9 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
     if (matches && matches[1]) {
       const id = parseInt(matches[1], 10);
       if (!isNaN(id)) {
-        return id;
         console.log(id);
+        return id;
+        
       }
     }
     return null;
@@ -140,13 +141,13 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
 
     const apiParams: ProfesseursCreateBody = {
       email: formValues.email,
-      firstName: formValues.firstname,
+      firstName: formValues.firstName,
       lastName: formValues.lastname,
       statut: formValues.statut,
       sexe: formValues.sexe,
-      courId: formValues.cour_id,
-      lieuDeNaissance: formValues.lieu_de_naissance,
-      dateDeNaissance: formValues.date_de_naissance,
+      courId: formValues.courId,
+      lieuDeNaissance: formValues.lieuDeNaissance,
+      dateDeNaissance: formValues.dateDeNaissance,
       telephone: formValues.telephone,
       photo: formValues.photo.name,
     };
@@ -156,15 +157,15 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
     professeursApi
       .createProfesseur(
         formValues.email,
-        formValues.firstname,
+        formValues.firstName,
         formValues.lastname,
-        formValues.date_de_naissance,
-        formValues.lieu_de_naissance,
+        formValues.dateDeNaissance,
+        formValues.lieuDeNaissance,
         formValues.photo,
         formValues.sexe,
         formValues.telephone,
         formValues.statut,
-        formValues.cour_id,
+        formValues.courId,
          'Bearer ' + token)
       .then((response) => {
         if (response && response.data) {
@@ -206,20 +207,20 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
 
     setIsLoading(true);
 
-    console.log(formValues, props);
+    console.log(formValues);
 
     professeursApi
       .updateProfesseur(
         formValues.email,
-        formValues.firstname,
+        formValues.firstName,
         formValues.lastname,
-        formValues.date_de_naissance,
-        formValues.lieu_de_naissance,
+        formValues.dateDeNaissance,
+        formValues.lieuDeNaissance,
         formValues.photo,
         formValues.sexe,
         formValues.telephone,
         formValues.statut,
-        formValues.cour_id,
+        formValues.courId,
 
         'Bearer ' + token,
         props.item?.id
@@ -298,8 +299,8 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
                       First name <span className="text-meta-1">*</span>
                     </label>
                     <input
-                      name="firstname"
-                      value={formValues.firstname}
+                      name="firstName"
+                      value={formValues.firstName}
                       onChange={handleInputChange}
                       required
                       type="text"
@@ -430,8 +431,8 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
                     </label>
                     <div className="relative">
                       <input
-                        name="date_de_naissance"
-                        value={formValues.date_de_naissance}
+                        name="dateDeNaissance"
+                        value={formValues.dateDeNaissance}
                         onChange={handleInputChange}
                         type="date"
                         className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
@@ -444,8 +445,8 @@ const CreateOrUpdateProfesseurModal: React.FC<ModalProps> = (props) => {
                       Lieu de Naissance <span className="text-meta-1">*</span>
                     </label>
                     <input
-                      name="lieu_de_naissance"
-                      value={formValues.lieu_de_naissance}
+                      name="lieuDeNaissance"
+                      value={formValues.lieuDeNaissance}
                       onChange={handleInputChange}
                       required
                       type="text"

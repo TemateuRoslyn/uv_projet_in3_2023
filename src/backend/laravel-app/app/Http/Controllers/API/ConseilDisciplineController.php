@@ -278,8 +278,8 @@ class ConseilDisciplineController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'dateCd' => 'required|date',
-            'heureDebutCd' => 'required|date_format:H:i:s',
-            'heureFinCd' => 'required|date_format:H:i:s|after:heure_debut_cd',
+            'heureDebutCd' => 'required|date_format:H:i',
+            'heureFinCd' => 'required|date_format:H:i|after:heure_debut_cd',
             'eleveId' => 'required|integer|exists:eleves,id',
             'fauteId' => 'required|integer|exists:fautes,id',
         ]);
@@ -335,6 +335,15 @@ class ConseilDisciplineController extends Controller
      *             @OA\Property(property="eleveId", type="integer", example=1),
      *             @OA\Property(property="fauteId", type="integer", example=1)
      *           )
+     *     ),
+     * @OA\Parameter(
+     *         name="conseilDisciplineId",
+     *         in="path",
+     *         description="ID of eleve to update in this request",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
      *     ),
      *     @OA\Response(
      *         response=400,
