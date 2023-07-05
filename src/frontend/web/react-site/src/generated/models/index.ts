@@ -269,7 +269,7 @@ export * from './update-parent-id-body';
 export * from './update-permission-id-body';
 export * from './update-personnel-id-body';
 export * from './update-professeur-id-body';
-export * from './update-regleid-body';
+export * from './update-regle-id-body';
 export * from './update-reglement-id-body';
 export * from './update-reparation-id-body';
 export * from './update-role-id-body';

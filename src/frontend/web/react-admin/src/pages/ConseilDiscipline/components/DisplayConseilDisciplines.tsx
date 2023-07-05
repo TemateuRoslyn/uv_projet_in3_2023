@@ -210,7 +210,7 @@ const DisplayConseilDisciplines: React.FC<DisplayConseilDisciplinesProps> = (
           props.setShowDangerNotif(false);
         }, 3000);
       });
-    +'' + conseilDiscipline.lastName;
+    
   };
 
   console.log(conseilDisciplines);

@@ -26,7 +26,7 @@ import { InlineResponse40027 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse40433 } from '../models';
 import { RegleCreateBody } from '../models';
-import { UpdateRegleidBody } from '../models';
+import { UpdateRegleIdBody } from '../models';
 /**
  * ReglesApi - axios parameter creator
  * @export
@@ -180,13 +180,13 @@ export const ReglesApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Update a regle's information
          * @summary Update a regle's information
-         * @param {UpdateRegleidBody} body 
+         * @param {UpdateRegleIdBody} body 
          * @param {string} authorization JWT token
          * @param {number} regleId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateRegle: async (body: UpdateRegleidBody, authorization: string, regleId: number, options: any = {}): Promise<RequestArgs> => {
+        updateRegle: async (body: UpdateRegleIdBody, authorization: string, regleId: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling updateRegle.');
@@ -199,7 +199,7 @@ export const ReglesApiAxiosParamCreator = function (configuration?: Configuratio
             if (regleId === null || regleId === undefined) {
                 throw new RequiredError('regleId','Required parameter regleId was null or undefined when calling updateRegle.');
             }
-            const localVarPath = `/api/regle/update/{regleid}`
+            const localVarPath = `/api/regle/update/{regleId}`
                 .replace(`{${"regleId"}}`, encodeURIComponent(String(regleId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -340,13 +340,13 @@ export const ReglesApiFp = function(configuration?: Configuration) {
         /**
          * Update a regle's information
          * @summary Update a regle's information
-         * @param {UpdateRegleidBody} body 
+         * @param {UpdateRegleIdBody} body 
          * @param {string} authorization JWT token
          * @param {number} regleId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateRegle(body: UpdateRegleidBody, authorization: string, regleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20068>> {
+        async updateRegle(body: UpdateRegleIdBody, authorization: string, regleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20068>> {
             const localVarAxiosArgs = await ReglesApiAxiosParamCreator(configuration).updateRegle(body, authorization, regleId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -412,13 +412,13 @@ export const ReglesApiFactory = function (configuration?: Configuration, basePat
         /**
          * Update a regle's information
          * @summary Update a regle's information
-         * @param {UpdateRegleidBody} body 
+         * @param {UpdateRegleIdBody} body 
          * @param {string} authorization JWT token
          * @param {number} regleId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateRegle(body: UpdateRegleidBody, authorization: string, regleId: number, options?: any): AxiosPromise<InlineResponse20068> {
+        updateRegle(body: UpdateRegleIdBody, authorization: string, regleId: number, options?: any): AxiosPromise<InlineResponse20068> {
             return ReglesApiFp(configuration).updateRegle(body, authorization, regleId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -480,14 +480,14 @@ export class ReglesApi extends BaseAPI {
     /**
      * Update a regle's information
      * @summary Update a regle's information
-     * @param {UpdateRegleidBody} body 
+     * @param {UpdateRegleIdBody} body 
      * @param {string} authorization JWT token
      * @param {number} regleId ID of eleve to update in this request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReglesApi
      */
-    public updateRegle(body: UpdateRegleidBody, authorization: string, regleId: number, options?: any) {
+    public updateRegle(body: UpdateRegleIdBody, authorization: string, regleId: number, options?: any) {
         return ReglesApiFp(this.configuration).updateRegle(body, authorization, regleId, options).then((request) => request(this.axios, this.basePath));
     }
     /**

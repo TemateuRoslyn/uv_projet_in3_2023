@@ -203,16 +203,16 @@ const DisplayRegle: React.FC<DisplayRegleProps> = (props) => {
     regleApi
       .deleteRegle('Bearer ' + token, regleItem.id)
       .then((response) => {
-        // if (response && response.data) {
-        //     if (response.data.success === true) {
-        //         setShowDeleteModal(false);
-        //         onGridReady();
-        //         // notification
-        //         props.setDangerNotifMessage(response.data.message);
-        //         props.setDangerNotifDescription('Ce regle a été supprimé avec succès');
-        //         props.setShowDangerNotif(true);
-        //     }
-        // }
+         if (response && response.data) {
+             if (response.data.success === true) {
+                 setShowDeleteModal(false);
+                onGridReady();
+                 // notification
+                 props.setDangerNotifMessage(response.data.message);
+                 props.setDangerNotifDescription('Ce regle a été supprimé avec succès');
+                 props.setShowDangerNotif(true);
+             }
+         }
       })
       .catch((error) => {
         alert(error?.response?.data?.message);
