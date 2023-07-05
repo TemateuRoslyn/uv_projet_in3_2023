@@ -127,9 +127,9 @@ class EleveController extends Controller
     public function view($eleveId)
     {
         $eleve = Eleve::with('user')
-                        ->has('classe')->with('classe')
-                        ->has('parents')->with('parents')
-                        ->find($eleveId);
+            ->has('classe')->with('classe')
+            ->has('parents')->with('parents')
+            ->find($eleveId);
 
         if ($eleve) {
             $eleveData = $eleve->toArray();
@@ -281,7 +281,6 @@ class EleveController extends Controller
 
             // Déplacez le fichier vers le répertoire de stockage souhaité
             $photo = $file->store($this->avatar_path);
-
         }
 
         $eleve = Eleve::create([
@@ -350,7 +349,7 @@ class EleveController extends Controller
 
 
     /**
-     * @OA\Post(
+     * @OA\put(
      *     path="/api/eleves/update/{eleveId}",
      *     summary="Update a eleve's information",
      *     description="Update a eleve's information",
@@ -501,7 +500,7 @@ class EleveController extends Controller
         // si il change de classe
         $classe = Classe::find($request->classeId);
 
-        if($classe && $eleveFound->classeId != $request->classeId){
+        if ($classe && $eleveFound->classeId != $request->classeId) {
 
             // update de l'ancienne classe
             $oldClasse = Classe::find($eleveFound->classeId);
@@ -521,7 +520,6 @@ class EleveController extends Controller
                 'no' => $classe->no,
                 'effectif' => ++$classe->effectif,
             ]);
-
         }
 
         $eleveFound->classeId = $request->input('classeId');

@@ -213,7 +213,7 @@ class RegleController extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\put(
      *     path="/api/regle/update/{regleid}",
      *     summary="Update a regle's information",
      *     description="Update a regle's information",

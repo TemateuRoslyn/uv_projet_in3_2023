@@ -123,8 +123,8 @@ class ParentsController extends Controller
     public function view($parentId)
     {
         $parent = Parents::whereHas('eleves.classe')->whereHas('user')->with('user', 'eleves.classe')->find($parentId);
-            // $parentData = Parents::with('eleves')->find($parentId);
-            // $parent = Parents::with('user')->find($parentId);
+        // $parentData = Parents::with('eleves')->find($parentId);
+        // $parent = Parents::with('user')->find($parentId);
 
         if ($parent) {
             $parentData = $parent->toArray();
@@ -310,7 +310,7 @@ class ParentsController extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\put(
      *     path="/api/parents/update/{parentId}",
      *     summary="Update a parent's information",
      *     description="Update a parent's information",
@@ -482,7 +482,7 @@ class ParentsController extends Controller
         ]);
     }
 
-/**
+    /**
      * @OA\Delete (
      *     path="/api/parents/delete/{id}",
      *     summary="Delete an parent",

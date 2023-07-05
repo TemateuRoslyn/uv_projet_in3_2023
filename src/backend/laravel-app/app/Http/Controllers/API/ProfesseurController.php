@@ -309,7 +309,7 @@ class ProfesseurController extends Controller
 
 
     /**
-     * @OA\Post(
+     * @OA\put(
      *     path="/api/professeurs/update/{professeurId}",
      *     summary="Update a professeur's information",
      *     description="Update a professeur's information",
