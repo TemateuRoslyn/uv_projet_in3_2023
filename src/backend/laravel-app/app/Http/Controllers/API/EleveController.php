@@ -599,8 +599,16 @@ class EleveController extends Controller
                 Storage::delete($eleveFound->photo);
             }
 
+            //recherche le parent associe a l'eleve
+            $parent = $eleveFound->parent;
+
             //suppression de l'eleve
             $eleveFound->delete();
+
+            //Verifie si l'eleve etait le dernier en fant du parent si oui supprime le parent
+            if ($parent && $parent->eleves->isEmpty()) {
+                $parent->delete();
+            }
 
             // update de classe de l'eleve...
             $classe = Classe::find($eleveFound->classeId);
