@@ -33,7 +33,11 @@ mixin _$HomeState {
   List<Convocation> get convocations => throw _privateConstructorUsedError;
   String get convocationStatusMessage =>
       throw _privateConstructorUsedError; //Box suggession variables
-  String get suggestionInsertStatus => throw _privateConstructorUsedError;
+  String get suggestionInsertStatus =>
+      throw _privateConstructorUsedError; // parent consultation variables
+  ApiStatus get parentConsultationStatus => throw _privateConstructorUsedError;
+  String get parentConsultationStatusMessage =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -58,7 +62,9 @@ abstract class $HomeStateCopyWith<$Res> {
       ApiStatus convocationStatus,
       List<Convocation> convocations,
       String convocationStatusMessage,
-      String suggestionInsertStatus});
+      String suggestionInsertStatus,
+      ApiStatus parentConsultationStatus,
+      String parentConsultationStatusMessage});
 }
 
 /// @nodoc
@@ -87,6 +93,8 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? convocations = null,
     Object? convocationStatusMessage = null,
     Object? suggestionInsertStatus = null,
+    Object? parentConsultationStatus = null,
+    Object? parentConsultationStatusMessage = null,
   }) {
     return _then(_value.copyWith(
       riStatus: null == riStatus
@@ -141,6 +149,14 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.suggestionInsertStatus
           : suggestionInsertStatus // ignore: cast_nullable_to_non_nullable
               as String,
+      parentConsultationStatus: null == parentConsultationStatus
+          ? _value.parentConsultationStatus
+          : parentConsultationStatus // ignore: cast_nullable_to_non_nullable
+              as ApiStatus,
+      parentConsultationStatusMessage: null == parentConsultationStatusMessage
+          ? _value.parentConsultationStatusMessage
+          : parentConsultationStatusMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -165,7 +181,9 @@ abstract class _$$_InitialCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
       ApiStatus convocationStatus,
       List<Convocation> convocations,
       String convocationStatusMessage,
-      String suggestionInsertStatus});
+      String suggestionInsertStatus,
+      ApiStatus parentConsultationStatus,
+      String parentConsultationStatusMessage});
 }
 
 /// @nodoc
@@ -191,6 +209,8 @@ class __$$_InitialCopyWithImpl<$Res>
     Object? convocations = null,
     Object? convocationStatusMessage = null,
     Object? suggestionInsertStatus = null,
+    Object? parentConsultationStatus = null,
+    Object? parentConsultationStatusMessage = null,
   }) {
     return _then(_$_Initial(
       riStatus: null == riStatus
@@ -245,6 +265,14 @@ class __$$_InitialCopyWithImpl<$Res>
           ? _value.suggestionInsertStatus
           : suggestionInsertStatus // ignore: cast_nullable_to_non_nullable
               as String,
+      parentConsultationStatus: null == parentConsultationStatus
+          ? _value.parentConsultationStatus
+          : parentConsultationStatus // ignore: cast_nullable_to_non_nullable
+              as ApiStatus,
+      parentConsultationStatusMessage: null == parentConsultationStatusMessage
+          ? _value.parentConsultationStatusMessage
+          : parentConsultationStatusMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -265,7 +293,9 @@ class _$_Initial implements _Initial {
       this.convocationStatus = ApiStatus.init,
       final List<Convocation> convocations = const [],
       this.convocationStatusMessage = '',
-      this.suggestionInsertStatus = ''})
+      this.suggestionInsertStatus = '',
+      this.parentConsultationStatus = ApiStatus.init,
+      this.parentConsultationStatusMessage = ''})
       : _ri = ri,
         _fautes = fautes,
         _cds = cds,
@@ -339,10 +369,17 @@ class _$_Initial implements _Initial {
   @override
   @JsonKey()
   final String suggestionInsertStatus;
+// parent consultation variables
+  @override
+  @JsonKey()
+  final ApiStatus parentConsultationStatus;
+  @override
+  @JsonKey()
+  final String parentConsultationStatusMessage;
 
   @override
   String toString() {
-    return 'HomeState(riStatus: $riStatus, ri: $ri, riStatusMessage: $riStatusMessage, fauteStatus: $fauteStatus, fautes: $fautes, fauteStatusMessage: $fauteStatusMessage, cdStatus: $cdStatus, cds: $cds, cdStatusMessage: $cdStatusMessage, convocationStatus: $convocationStatus, convocations: $convocations, convocationStatusMessage: $convocationStatusMessage, suggestionInsertStatus: $suggestionInsertStatus)';
+    return 'HomeState(riStatus: $riStatus, ri: $ri, riStatusMessage: $riStatusMessage, fauteStatus: $fauteStatus, fautes: $fautes, fauteStatusMessage: $fauteStatusMessage, cdStatus: $cdStatus, cds: $cds, cdStatusMessage: $cdStatusMessage, convocationStatus: $convocationStatus, convocations: $convocations, convocationStatusMessage: $convocationStatusMessage, suggestionInsertStatus: $suggestionInsertStatus, parentConsultationStatus: $parentConsultationStatus, parentConsultationStatusMessage: $parentConsultationStatusMessage)';
   }
 
   @override
@@ -373,7 +410,14 @@ class _$_Initial implements _Initial {
                     other.convocationStatusMessage, convocationStatusMessage) ||
                 other.convocationStatusMessage == convocationStatusMessage) &&
             (identical(other.suggestionInsertStatus, suggestionInsertStatus) ||
-                other.suggestionInsertStatus == suggestionInsertStatus));
+                other.suggestionInsertStatus == suggestionInsertStatus) &&
+            (identical(
+                    other.parentConsultationStatus, parentConsultationStatus) ||
+                other.parentConsultationStatus == parentConsultationStatus) &&
+            (identical(other.parentConsultationStatusMessage,
+                    parentConsultationStatusMessage) ||
+                other.parentConsultationStatusMessage ==
+                    parentConsultationStatusMessage));
   }
 
   @override
@@ -391,7 +435,9 @@ class _$_Initial implements _Initial {
       convocationStatus,
       const DeepCollectionEquality().hash(_convocations),
       convocationStatusMessage,
-      suggestionInsertStatus);
+      suggestionInsertStatus,
+      parentConsultationStatus,
+      parentConsultationStatusMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -414,7 +460,9 @@ abstract class _Initial implements HomeState {
       final ApiStatus convocationStatus,
       final List<Convocation> convocations,
       final String convocationStatusMessage,
-      final String suggestionInsertStatus}) = _$_Initial;
+      final String suggestionInsertStatus,
+      final ApiStatus parentConsultationStatus,
+      final String parentConsultationStatusMessage}) = _$_Initial;
 
   @override // reglement interieur variables
   ApiStatus get riStatus;
@@ -442,6 +490,10 @@ abstract class _Initial implements HomeState {
   String get convocationStatusMessage;
   @override //Box suggession variables
   String get suggestionInsertStatus;
+  @override // parent consultation variables
+  ApiStatus get parentConsultationStatus;
+  @override
+  String get parentConsultationStatusMessage;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>

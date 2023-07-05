@@ -12,8 +12,8 @@ class User {
   final String sexe;
   final String telephone;
   final int? userId;
+  final List<Map<String, dynamic>>? childrenAndThierClasses;
   final Map<String, dynamic>? classe;
-  final List<User>? eleves;
   final String? createdAt;
   final String? updatedAt;
 
@@ -31,8 +31,8 @@ class User {
     required this.sexe,
     required this.telephone,
     this.userId,
+    this.childrenAndThierClasses,
     this.classe,
-    this.eleves,
     this.createdAt,
     this.updatedAt,
   });
@@ -51,8 +51,8 @@ class User {
     String? sexe,
     String? telephone,
     int? userId,
+    List<Map<String, dynamic>>? childrenAndThierClasses,
     Map<String, dynamic>? classe,
-    List<User>? eleves,
     String? createdAt,
     String? updatedAt,
   }) =>
@@ -70,17 +70,26 @@ class User {
           sexe: sexe ?? this.sexe,
           telephone: telephone ?? this.telephone,
           userId: userId ?? this.userId,
+          childrenAndThierClasses:
+              childrenAndThierClasses ?? this.childrenAndThierClasses,
           classe: classe ?? this.classe,
-          eleves: eleves ?? this.eleves,
           createdAt: createdAt ?? this.createdAt,
           updatedAt: updatedAt ?? this.updatedAt);
 
   factory User.fromJson(Map<String, dynamic> json) {
-    List<User> eleves = [];
+    List<Map<String, dynamic>> children = [];
+
     if (json['eleves'] != null) {
-      final elevesData = json['eleves'] as List;
-      for (var data in elevesData) {
-        eleves.add(User.fromJson(data));
+      final childData = json['eleves'] as List;
+      for (var data in childData) {
+        final childData = User.fromJson(data);
+        final hisClass = data['classe'];
+        final childAndHisClass = {
+          'child': childData,
+          'hisClass': hisClass,
+        };
+
+        children.add(childAndHisClass);
       }
     }
 
@@ -98,8 +107,8 @@ class User {
         sexe: json['sexe'],
         telephone: json['telephone'],
         userId: json['userId'],
+        childrenAndThierClasses: children,
         classe: json['classe'],
-        eleves: eleves,
         createdAt: json['created_at'],
         updatedAt: json['updated_at']);
   }

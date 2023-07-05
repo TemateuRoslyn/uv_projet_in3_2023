@@ -38,10 +38,18 @@ class HomeRepository {
     }
   }
 
-  Future<List<Faute>> getAllUserFautes() async {
+  Future<List<Faute>> getAllUserFautes({int? userId}) async {
+    late int userIdToSend;
+
+    if (userId == null) {
+      userIdToSend = AuthRepository.getUserId;
+    } else {
+      userIdToSend = userId;
+    }
+
     try {
       final response = await dio.get(
-        'fautes/findAll/eleve/${AuthRepository.getUserId}',
+        'fautes/findAll/eleve/$userIdToSend',
         options: ApiConfiguration.getAuthorizationOptions(
             AuthRepository.getUserToken),
       );
@@ -58,10 +66,18 @@ class HomeRepository {
     }
   }
 
-  Future<List<ConseilDiscipline>> getAllUserCD() async {
+  Future<List<ConseilDiscipline>> getAllUserCD({int? userId}) async {
+    late int userIdToSend;
+
+    if (userId == null) {
+      userIdToSend = AuthRepository.getUserId;
+    } else {
+      userIdToSend = userId;
+    }
+
     try {
       final response = await dio.get(
-        'conseil_discipline/findAll/eleve/${AuthRepository.getUserId}',
+        'conseil_discipline/findAll/eleve/$userIdToSend',
         options: ApiConfiguration.getAuthorizationOptions(
             AuthRepository.getUserToken),
       );
@@ -78,10 +94,18 @@ class HomeRepository {
     }
   }
 
-  Future<List<Convocation>> getAllUserConvocations() async {
+  Future<List<Convocation>> getAllUserConvocations({int? userId}) async {
+    late int userIdToSend;
+
+    if (userId == null) {
+      userIdToSend = AuthRepository.getUserId;
+    } else {
+      userIdToSend = userId;
+    }
+
     try {
       final response = await dio.get(
-        'convocation/findAll/eleve/${AuthRepository.getUserId}',
+        'convocation/findAll/eleve/$userIdToSend',
         options: ApiConfiguration.getAuthorizationOptions(
             AuthRepository.getUserToken),
       );

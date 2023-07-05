@@ -6,12 +6,18 @@ import 'package:fltter_app/features/home/widgets/convocation_component.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../../../common/models/user.dart';
 import '../../../common/utils/enums.dart';
 import '../../../common/utils/helper.dart';
 import '../../../common/widgets/common_widgets.dart';
 
 class ConvocationPage extends StatefulWidget {
-  const ConvocationPage({super.key});
+  const ConvocationPage({
+    super.key,
+    this.childInfos,
+  });
+
+  final User? childInfos;
 
   @override
   State<ConvocationPage> createState() => _ConvocationPageState();
@@ -25,7 +31,12 @@ class _ConvocationPageState extends State<ConvocationPage> {
     super.initState();
 
     _homeCubit = context.read<HomeCubit>();
-    _homeCubit.getDataByType('convocations');
+    if (widget.childInfos == null) {
+      _homeCubit.getDataByType(dataType: 'convocations');
+    } else {
+      _homeCubit.getDataByType(
+          dataType: 'convocations', childId: widget.childInfos!.id);
+    }
   }
 
   @override
@@ -48,32 +59,37 @@ class _ConvocationPageState extends State<ConvocationPage> {
                     context: context,
                     color: appColors.primary!)
                 : state.convocationStatus == ApiStatus.failed
-                    ? CommonWidgets.loadingStatusFailedWidget(
+                    ? CommonWidgets.failedStatusWidget(
                         positionFromTop: (screenSize.height / 2),
                         context: context,
                         statusMessage: state.convocationStatusMessage,
                         color: appColors.primary!,
                         reloadFunction: () =>
-                            _homeCubit.getDataByType('convocations'))
-                    : Expanded(
-                        child: ListView(
-                        padding: EdgeInsets.only(
-                            top: getHeight(20, context),
-                            left: getWidth(10, context),
-                            right: getWidth(10, context)),
-                        children: state.convocations
-                            .map((convocation) => ConvocationComponent(
-                                  libelle: 'Faute: ${convocation.libelle}',
-                                  subtitle1:
-                                      'Date de convocation: ${convocation.dateConvocation}',
-                                  subtitle2:
-                                      'Date de RDV: ${convocation.dateRdv}',
-                                  statut: convocation.statut,
-                                  isFrom: 'convocations',
-                                  // onPressAction: () {},
-                                ))
-                            .toList(),
-                      )),
+                            _homeCubit.getDataByType(dataType: 'convocations'))
+                    : state.convocations.isEmpty
+                        ? CommonWidgets.noDataWidget(
+                            positionFromTop: (screenSize.height / 2),
+                            context: context,
+                            color: appColors.primary!)
+                        : Expanded(
+                            child: ListView(
+                            padding: EdgeInsets.only(
+                                top: getHeight(20, context),
+                                left: getWidth(10, context),
+                                right: getWidth(10, context)),
+                            children: state.convocations
+                                .map((convocation) => ConvocationComponent(
+                                      libelle: 'Faute: ${convocation.libelle}',
+                                      subtitle1:
+                                          'Date de convocation: ${convocation.dateConvocation}',
+                                      subtitle2:
+                                          'Date de RDV: ${convocation.dateRdv}',
+                                      statut: convocation.statut,
+                                      isFrom: 'convocations',
+                                      // onPressAction: () {},
+                                    ))
+                                .toList(),
+                          )),
           );
         },
       ),

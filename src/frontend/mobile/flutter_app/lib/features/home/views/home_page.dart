@@ -48,7 +48,6 @@ class _HomePageState extends State<HomePage> {
         'onPressAction': () => Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const FautesPage()))
       },
-      {'image': '', 'subtitle': 'Mes sanctions', 'onPressAction': () {}},
       {
         'image': '',
         'subtitle': 'Mes convocations',
@@ -61,6 +60,7 @@ class _HomePageState extends State<HomePage> {
         'onPressAction': () => Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => const ConseilDisciplinePage()))
       },
+      {'image': '', 'subtitle': 'Mes sanctions', 'onPressAction': () {}},
       {
         'image': '',
         'subtitle': 'Reglements interieurs',
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                     context: context,
                     color: appColors.onBoardingTwo!)
                 : state.status == ApiStatus.failed
-                    ? CommonWidgets.loadingStatusFailedWidget(
+                    ? CommonWidgets.failedStatusWidget(
                         positionFromTop: (screenSize.height / 2),
                         context: context,
                         statusMessage: state.statusMessage,
