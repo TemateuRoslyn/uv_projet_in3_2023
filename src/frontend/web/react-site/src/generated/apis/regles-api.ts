@@ -21,8 +21,10 @@ import { InlineResponse20067 } from '../models';
 import { InlineResponse20068 } from '../models';
 import { InlineResponse20069 } from '../models';
 import { InlineResponse20070 } from '../models';
+import { InlineResponse20071 } from '../models';
 import { InlineResponse40026 } from '../models';
 import { InlineResponse40027 } from '../models';
+import { InlineResponse4005 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse40433 } from '../models';
 import { RegleCreateBody } from '../models';
@@ -147,6 +149,55 @@ export const ReglesApiAxiosParamCreator = function (configuration?: Configuratio
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling reglesIndex.');
             }
             const localVarPath = `/api/regle/findAll`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get the filtered list of regles.
+         * @summary Get filtered list of regles
+         * @param {string} keyword Keyword to filter regles
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reglesRecords: async (keyword: string, authorization: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'keyword' is not null or undefined
+            if (keyword === null || keyword === undefined) {
+                throw new RequiredError('keyword','Required parameter keyword was null or undefined when calling reglesRecords.');
+            }
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling reglesRecords.');
+            }
+            const localVarPath = `/api/regle/records/{keyword}`
+                .replace(`{${"keyword"}}`, encodeURIComponent(String(keyword)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -338,6 +389,21 @@ export const ReglesApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Get the filtered list of regles.
+         * @summary Get filtered list of regles
+         * @param {string} keyword Keyword to filter regles
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async reglesRecords(keyword: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20071>> {
+            const localVarAxiosArgs = await ReglesApiAxiosParamCreator(configuration).reglesRecords(keyword, authorization, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Update a regle's information
          * @summary Update a regle's information
          * @param {UpdateRegleIdBody} body 
@@ -410,6 +476,17 @@ export const ReglesApiFactory = function (configuration?: Configuration, basePat
             return ReglesApiFp(configuration).reglesIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
+         * Get the filtered list of regles.
+         * @summary Get filtered list of regles
+         * @param {string} keyword Keyword to filter regles
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reglesRecords(keyword: string, authorization: string, options?: any): AxiosPromise<InlineResponse20071> {
+            return ReglesApiFp(configuration).reglesRecords(keyword, authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Update a regle's information
          * @summary Update a regle's information
          * @param {UpdateRegleIdBody} body 
@@ -476,6 +553,18 @@ export class ReglesApi extends BaseAPI {
      */
     public reglesIndex(authorization: string, options?: any) {
         return ReglesApiFp(this.configuration).reglesIndex(authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get the filtered list of regles.
+     * @summary Get filtered list of regles
+     * @param {string} keyword Keyword to filter regles
+     * @param {string} authorization JWT token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReglesApi
+     */
+    public reglesRecords(keyword: string, authorization: string, options?: any) {
+        return ReglesApiFp(this.configuration).reglesRecords(keyword, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update a regle's information

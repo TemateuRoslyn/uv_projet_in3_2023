@@ -31,5 +31,16 @@ export const FAUTES_COLUMNS_DEFS: ColDef[] = [
         showDisabledCheckboxes: true,
         width: 200
     },
-
+    {
+      headerName: 'Eleve',
+      field: 'eleve',
+      valueGetter: function(params) {
+          var eleve = params.data.eleve;
+          return eleve.firstName + ' ' + eleve.lastName;
+      },
+      filter: 'agNumberColumnFilter',
+      checkboxSelection: false,
+      showDisabledCheckboxes: true,
+      width: 300,
+    }
 ];

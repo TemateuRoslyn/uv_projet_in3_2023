@@ -88,7 +88,8 @@ const CardThree = () => {
         </div>
 
         <span className="flex items-center gap-1 text-sm font-medium text-meta-3">
-          {(conseilDisciplines.length/eleves.length)*100}%
+
+          {(Math.round((conseilDisciplines.length/eleves.length)*10000)/100).toString()}%
           <svg
             className="fill-meta-3"
             width="10"

@@ -59,7 +59,7 @@ class SanctionPrevuController extends Controller
      */
     public function index()
     {
-        $sanctionprevus = SanctionPrevu::with('eleve.user','faute.regle.reglementInterieur')->get();
+        $sanctionprevus = SanctionPrevu::with('eleve.user','faute.regle.reglementInterieur', 'eleve.classe')->has('eleve')->get();
 
         return response()->json([
             'message' => 'Liste des sanctions prevus',
@@ -374,7 +374,7 @@ class SanctionPrevuController extends Controller
 
 
     /**
-     * @OA\put(
+     * @OA\post(
      *     path="/api/sanctionprevus/update/{sanctionprevuId}",
      *     summary="Update a sanctionprevu's information",
      *     description="Update a sanctionprevu's information",

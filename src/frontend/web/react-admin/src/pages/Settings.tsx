@@ -1,5 +1,5 @@
 import Breadcrumb from '../components/Breadcrumb';
-import userThree from '../images/user/user-03.png';
+import userThree from '../images/user/userAdmin.png';
 import DefaultLayout from '../layout/DefaultLayout';
 
 const Settings = () => {

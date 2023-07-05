@@ -65,8 +65,7 @@ const CustomMultiSelectInput: React.FC<CustomMultiSelectInputProps> = ({
     typingInputEvent(value);
   };
 
-  console.log(matchList);
-  
+ 
 
   const isEmpty = () => matchList.length === 0;
 

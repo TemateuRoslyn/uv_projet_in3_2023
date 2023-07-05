@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect, useDispatch, useSelector } from 'react-redux'
 
-import UserOne from '../images/user/user-01.png';
+import UserOne from '../images/user/userAdmin.png';
 import { 
   IS_LOGGED_LOCAL_STORAGE_KEY, 
   TOKEN_LOCAL_STORAGE_KEY, 
@@ -86,7 +86,7 @@ const DropdownUser = () => {
         </span>
 
         <span className="h-12 w-12 rounded-full">
-          <img src={adminUser.photo? adminUser.photo:UserOne} alt="User" />
+          <img src={adminUser.photo? adminUser.photo:UserOne} alt="User" className=" rounded-full" />
         </span>
 
         <svg

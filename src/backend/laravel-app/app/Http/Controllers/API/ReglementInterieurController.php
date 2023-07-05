@@ -210,6 +210,15 @@ class ReglementInterieurController extends Controller
      *     operationId="updateReglementInterieur",
      *     tags={"ReglementInterieurs"},
      *     @OA\Parameter(
+     *         name="reglementId",
+     *         in="path",
+     *         description="ID of reglement to update in this request",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
      *         required=true,

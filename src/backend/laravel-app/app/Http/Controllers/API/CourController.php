@@ -191,10 +191,11 @@ class CourController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'libelle' => 'required',
-            'date_cour' => 'required|date',
-            'heure_debut' => 'required|date',
-            'heure_fin' => 'required|date',
-            'classesId' => 'required|array'
+            'dateCour' => 'required|date',
+            'heureDebut' => 'required|date',
+            'heureFin' => 'required|date',
+            'classesId' => 'required',
+            'classesId.*' => 'required|integer|exists:classes,id',
         ]);
 
         if ($validator->fails()) {
@@ -206,13 +207,21 @@ class CourController extends Controller
         }
         $cour = Cour::create([
             'libelle' => $request->libelle,
-            'date_cour' => $request->date_cour,
-            'heure_debut' => $request->heure_debut,
-            'heure_fin' => $request->heure_fin,
+            'date_cour' => $request->dateCour,
+            'heure_debut' => $request->heureDebut,
+            'heure_fin' => $request->heureFin,
             //  'professeur_id' => $request->professeur_id,
         ]);
+            /*Recupere le tableau contenant les ids des eleves puis verifie si ce
+        n'etait pas une chaine de caractere si oui converti en tableau*/
+        $tmp = $request->input('classesId');
+        if (is_string($tmp)) {
+            $classeIds = array_unique(array_map('intval', explode(',', $tmp)));
+        } else {
+            $classeIds = array_unique($tmp);
+        }
 
-        foreach ($request->classesId as $classeId) {
+        foreach ($classeIds as $classeId){//($request->classesId as $classeId) {
             CoursClasse::create([
                 'courId' => $cour->id,
                 'classeId' => $classeId

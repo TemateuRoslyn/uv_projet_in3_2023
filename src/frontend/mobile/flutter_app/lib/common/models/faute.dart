@@ -4,7 +4,7 @@ class Faute {
   final int id;
   final String createdAt;
   final String updatedAt;
-  final String libelle;
+  final String ;
   final String gravite;
   final int regleId;
   final Regle regle;

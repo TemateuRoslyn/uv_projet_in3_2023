@@ -16,6 +16,15 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:src/frontend/web/react-site/src/api/apis/suggestions-api.ts
+=======
+<<<<<<< HEAD
+import { InlineResponse20086 } from '../models';
+import { InlineResponse20087 } from '../models';
+>>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/apis/suggestions-api.ts
+>>>>>>> 0b7e9d7 (Testing)
 import { InlineResponse20088 } from '../models';
 import { InlineResponse20089 } from '../models';
 import { InlineResponse20090 } from '../models';
@@ -24,7 +33,25 @@ import { InlineResponse40035 } from '../models';
 import { InlineResponse40036 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse40445 } from '../models';
+<<<<<<< HEAD
 import { InlineResponse40446 } from '../models';
+=======
+<<<<<<< HEAD:src/frontend/web/react-site/src/api/apis/suggestions-api.ts
+import { InlineResponse40446 } from '../models';
+=======
+=======
+import { InlineResponse20085 } from '../models';
+import { InlineResponse20086 } from '../models';
+import { InlineResponse20087 } from '../models';
+import { InlineResponse20088 } from '../models';
+import { InlineResponse40036 } from '../models';
+import { InlineResponse40037 } from '../models';
+import { InlineResponse401 } from '../models';
+import { InlineResponse40443 } from '../models';
+import { InlineResponse40444 } from '../models';
+>>>>>>> 7faa1c6 (maj reglement interieur)
+>>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/apis/suggestions-api.ts
+>>>>>>> 0b7e9d7 (Testing)
 import { SuggestionCreateBody } from '../models';
 import { UpdateCoursIdBody1 } from '../models';
 /**
@@ -201,7 +228,15 @@ export const SuggestionsApiAxiosParamCreator = function (configuration?: Configu
             if (configuration) {
                 baseOptions = configuration.baseOptions;
             }
+<<<<<<< HEAD
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+=======
+<<<<<<< HEAD
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+=======
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+>>>>>>> 7faa1c6 (maj reglement interieur)
+>>>>>>> 0b7e9d7 (Testing)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -246,7 +281,19 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         async createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20090>> {
+=======
+<<<<<<< HEAD:src/frontend/web/react-site/src/api/apis/suggestions-api.ts
+        async createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20090>> {
+=======
+<<<<<<< HEAD
+        async createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20088>> {
+=======
+        async createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20087>> {
+>>>>>>> 7faa1c6 (maj reglement interieur)
+>>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/apis/suggestions-api.ts
+>>>>>>> 0b7e9d7 (Testing)
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).createSuggestion(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -260,7 +307,19 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         async findAllSuggestion(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20088>> {
+=======
+<<<<<<< HEAD:src/frontend/web/react-site/src/api/apis/suggestions-api.ts
+        async findAllSuggestion(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20088>> {
+=======
+<<<<<<< HEAD
+        async findAllSuggestion(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20086>> {
+=======
+        async findAllSuggestion(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20085>> {
+>>>>>>> 7faa1c6 (maj reglement interieur)
+>>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/apis/suggestions-api.ts
+>>>>>>> 0b7e9d7 (Testing)
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).findAllSuggestion(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -275,7 +334,19 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         async findOneSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20089>> {
+=======
+<<<<<<< HEAD:src/frontend/web/react-site/src/api/apis/suggestions-api.ts
+        async findOneSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20089>> {
+=======
+<<<<<<< HEAD
+        async findOneSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20087>> {
+=======
+        async findOneSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20086>> {
+>>>>>>> 7faa1c6 (maj reglement interieur)
+>>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/apis/suggestions-api.ts
+>>>>>>> 0b7e9d7 (Testing)
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).findOneSuggestion(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -290,7 +361,19 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         async updateSuggestion(body: UpdateCoursIdBody1, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
+=======
+<<<<<<< HEAD:src/frontend/web/react-site/src/api/apis/suggestions-api.ts
+        async updateSuggestion(body: UpdateCoursIdBody1, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
+=======
+<<<<<<< HEAD
+        async updateSuggestion(body: UpdateCoursIdBody1, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20089>> {
+=======
+        async updateSuggestion(body: UpdateCoursIdBody1, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20088>> {
+>>>>>>> 7faa1c6 (maj reglement interieur)
+>>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/apis/suggestions-api.ts
+>>>>>>> 0b7e9d7 (Testing)
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).updateSuggestion(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -314,7 +397,19 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20090> {
+=======
+<<<<<<< HEAD:src/frontend/web/react-site/src/api/apis/suggestions-api.ts
+        createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20090> {
+=======
+<<<<<<< HEAD
+        createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20088> {
+=======
+        createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20087> {
+>>>>>>> 7faa1c6 (maj reglement interieur)
+>>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/apis/suggestions-api.ts
+>>>>>>> 0b7e9d7 (Testing)
             return SuggestionsApiFp(configuration).createSuggestion(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -324,7 +419,19 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         findAllSuggestion(authorization: string, options?: any): AxiosPromise<InlineResponse20088> {
+=======
+<<<<<<< HEAD:src/frontend/web/react-site/src/api/apis/suggestions-api.ts
+        findAllSuggestion(authorization: string, options?: any): AxiosPromise<InlineResponse20088> {
+=======
+<<<<<<< HEAD
+        findAllSuggestion(authorization: string, options?: any): AxiosPromise<InlineResponse20086> {
+=======
+        findAllSuggestion(authorization: string, options?: any): AxiosPromise<InlineResponse20085> {
+>>>>>>> 7faa1c6 (maj reglement interieur)
+>>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/apis/suggestions-api.ts
+>>>>>>> 0b7e9d7 (Testing)
             return SuggestionsApiFp(configuration).findAllSuggestion(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -335,7 +442,19 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         findOneSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20089> {
+=======
+<<<<<<< HEAD:src/frontend/web/react-site/src/api/apis/suggestions-api.ts
+        findOneSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20089> {
+=======
+<<<<<<< HEAD
+        findOneSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20087> {
+=======
+        findOneSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20086> {
+>>>>>>> 7faa1c6 (maj reglement interieur)
+>>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/apis/suggestions-api.ts
+>>>>>>> 0b7e9d7 (Testing)
             return SuggestionsApiFp(configuration).findOneSuggestion(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -346,7 +465,19 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         updateSuggestion(body: UpdateCoursIdBody1, authorization: string, options?: any): AxiosPromise<InlineResponse20091> {
+=======
+<<<<<<< HEAD:src/frontend/web/react-site/src/api/apis/suggestions-api.ts
+        updateSuggestion(body: UpdateCoursIdBody1, authorization: string, options?: any): AxiosPromise<InlineResponse20091> {
+=======
+<<<<<<< HEAD
+        updateSuggestion(body: UpdateCoursIdBody1, authorization: string, options?: any): AxiosPromise<InlineResponse20089> {
+=======
+        updateSuggestion(body: UpdateCoursIdBody1, authorization: string, options?: any): AxiosPromise<InlineResponse20088> {
+>>>>>>> 7faa1c6 (maj reglement interieur)
+>>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/apis/suggestions-api.ts
+>>>>>>> 0b7e9d7 (Testing)
             return SuggestionsApiFp(configuration).updateSuggestion(body, authorization, options).then((request) => request(axios, basePath));
         },
     };

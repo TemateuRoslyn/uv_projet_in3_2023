@@ -1,10 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../images/logo/logo.png';
+//import Logo from '../images/logo/logo.png';
+import Logo from "../pages/Authentication/SignIn/components/logo.png"
 import DarkModeSwitcher from './DarkModeSwitcher';
 import DropdownMessage from './DropdownMessage';
 import DropdownNotification from './DropdownNotification';
 import DropdownUser from './DropdownUser';
 import { useState } from 'react';
+
 import Indicator from '../pages/Authentication/components/Indicator';
 
 const Header = (props: {
@@ -29,7 +31,8 @@ const Header = (props: {
     { name: "Fautes", path: "/fautes" },
     { name: "Reglement Interieur", path: "/reglements" },
     { name: "Regles", path: "/regles" },
-    { name: "Suggestions", path: "/suggestions" }
+    { name: "Suggestions", path: "/suggestions" },
+    { name: "Sanction Prevu", path: "/sanctionPrevus" }
   ];
   
 
@@ -125,12 +128,26 @@ const Header = (props: {
           {/* <!-- Hamburger Toggle BTN --> */}
 
           <Link className="block flex-shrink-0 lg:hidden" to="/">
-            <img src={Logo} alt="Logo" width={64} height={64}/>
+            {/* <img src={Logo} alt="Logo" /> */}
+            <div className='flex text-center justify-content-center justify-center'>
+            <div className="mb-2.5 inline-block flex">
+              <span>
+                
+                <img className="hidden dark:block" src={Logo} alt="Logo" width={70} height={70} /> 
+       
+                <img className="dark:hidden" src={Logo} alt="Logo" width={70} height={70} />
+               
+              </span>
+              <span className="text-bolder pt-5 justify-content-center align-items-center ">
+              School Discipline 
+              </span>
+              </div> 
+              </div>
           </Link>
         </div>
 
         <div className="hidden sm:block">
-          <form method="POST" >
+          <form>
             <div className="relative w-full">
               <button className="absolute top-1/2 left-0 -translate-y-1/2">
                 <svg

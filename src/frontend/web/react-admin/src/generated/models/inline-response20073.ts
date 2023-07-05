@@ -25,6 +25,12 @@ export interface InlineResponse20073 {
     success?: any;
     /**
      * 
+     * @type {string}
+     * @memberof InlineResponse20073
+     */
+    message?: any;
+    /**
+     * 
      * @type {ReglementInterieur}
      * @memberof InlineResponse20073
      */

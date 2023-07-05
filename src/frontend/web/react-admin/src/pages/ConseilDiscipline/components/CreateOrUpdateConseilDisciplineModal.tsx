@@ -4,8 +4,6 @@ import { EditIcon, NewIcon } from '../../../components/Icone';
 import {
   ConseilDiscipline,
   ConseilDisciplineCreateBody,
-  EleveAndKeywordEleveIdBody,
-  EleveEleveIdBody,
   UpdateConseilDisciplineIdBody,
 } from '../../../generated/models';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
@@ -13,14 +11,6 @@ import { ElevesApi, ConseilDisciplinesApi, FautesApi } from '../../../generated'
 import { useSelector } from 'react-redux';
 import { ReduxProps } from '../../../redux/configureStore';
 import Indicator from '../../Authentication/components/Indicator';
-import {
-  CLASSE_LEVEL,
-  SEXE,
-  SOLVABLE,
-  STATUS,
-  getEleveByName,
-} from '../../../constants/ITEMS';
-import CustomSelectInpuupdateConvocationt from '../../../components/CustomSelects/CustomSelectInput';
 import CustomSelectInput from '../../../components/CustomSelects/CustomSelectInput';
 
 interface ModalProps {
