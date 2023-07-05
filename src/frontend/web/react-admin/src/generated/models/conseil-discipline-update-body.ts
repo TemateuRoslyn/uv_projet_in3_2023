@@ -14,31 +14,31 @@
 /**
  * 
  * @export
- * @interface CoursUpdateBody
+ * @interface ConseilDisciplineUpdateBody
  */
-export interface CoursUpdateBody {
+export interface ConseilDisciplineUpdateBody {
     /**
      * 
      * @type {string}
-     * @memberof CoursUpdateBody
+     * @memberof ConseilDisciplineUpdateBody
      */
-    libelle: any;
+    dateCd: any;
     /**
      * 
      * @type {string}
-     * @memberof CoursUpdateBody
+     * @memberof ConseilDisciplineUpdateBody
      */
-    dateCour: any;
+    heureDebutCd: any;
     /**
      * 
      * @type {string}
-     * @memberof CoursUpdateBody
+     * @memberof ConseilDisciplineUpdateBody
      */
-    heureDebut: any;
+    heureFinCd: any;
     /**
      * 
-     * @type {string}
-     * @memberof CoursUpdateBody
+     * @type {number}
+     * @memberof ConseilDisciplineUpdateBody
      */
-    heureFin: any;
+    eleveId: any;
 }

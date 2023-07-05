@@ -7,12 +7,12 @@ import DisplayRegle from './components/DisplayRegle';
 import { Regle, ReglementInterieur } from '../../generated/models';
 import { ReduxProps } from '../../redux/configureStore';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../constants/LOCAL_STORAGE';
-import { ReglementInterieursApi, ReglesApi } from '../../generated';
-
-import {
+import { ReglesApi } from '../../generated';
+import { ReglementInterieursApi } from '../../generated/apis/reglement-interieurs-api';
+import { 
   SuccessNotification,
   DangerNotification,
-  WarningNotification,
+  WarningNotification, 
 } from '../../services/Notification.service';
 
 const ReglePage = () => {
@@ -43,15 +43,9 @@ const ReglePage = () => {
 
   useEffect(() => {
     const apiParams: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    const regleApi = new ReglesApi({
-      ...state.environment,
-      accessToken: apiParams,
-    });
-    const reglementInterieurApi = new ReglementInterieursApi({
-      ...state.environment,
-      accessToken: apiParams,
-    });
-
+    const regleApi = new ReglesApi({...state.environment, accessToken: apiParams});
+    const reglementInterieurApi = new ReglementInterieursApi({...state.environment, accessToken: apiParams});
+       
     setIsLoading(true);
 
     regleApi

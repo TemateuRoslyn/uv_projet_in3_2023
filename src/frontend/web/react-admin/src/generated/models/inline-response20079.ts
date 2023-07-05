@@ -19,14 +19,20 @@
 export interface InlineResponse20079 {
     /**
      * 
+     * @type {string}
+     * @memberof InlineResponse20079
+     */
+    message?: any;
+    /**
+     * 
      * @type {boolean}
      * @memberof InlineResponse20079
      */
     success?: any;
     /**
      * 
-     * @type {string}
+     * @type {Reparation}
      * @memberof InlineResponse20079
      */
-    message?: any;
+    content?: any;
 }

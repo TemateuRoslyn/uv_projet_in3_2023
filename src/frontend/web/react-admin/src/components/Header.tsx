@@ -29,7 +29,8 @@ const Header = (props: {
     { name: "Fautes", path: "/fautes" },
     { name: "Reglement Interieur", path: "/reglements" },
     { name: "Regles", path: "/regles" },
-    { name: "Suggestions", path: "/suggestions" }
+    { name: "Suggestions", path: "/suggestions" },
+    { name: "Sanction Prevu", path: "/sanctionPrevus" }
   ];
   
 
@@ -125,12 +126,12 @@ const Header = (props: {
           {/* <!-- Hamburger Toggle BTN --> */}
 
           <Link className="block flex-shrink-0 lg:hidden" to="/">
-            <img src={Logo} alt="Logo" width={64} height={64}/>
+            <img src={Logo} alt="Logo" />
           </Link>
         </div>
 
         <div className="hidden sm:block">
-          <form method="POST" >
+          <form>
             <div className="relative w-full">
               <button className="absolute top-1/2 left-0 -translate-y-1/2">
                 <svg

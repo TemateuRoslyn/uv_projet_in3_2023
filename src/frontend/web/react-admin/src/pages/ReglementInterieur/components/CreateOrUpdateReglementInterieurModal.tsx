@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MODAL_MODE } from "../../../constants/ENUM";
+import { MODAL_MODE } from '../../../constants/ENUM';
 import { EditIcon, NewIcon } from "../../../components/Icone";
 import { ReglementInterieur, ReglementCreateBody } from "../../../generated/models";
 import { TOKEN_LOCAL_STORAGE_KEY } from "../../../constants/LOCAL_STORAGE";
@@ -55,7 +55,6 @@ const CreateOrUpdateReglementInterieurModal: React.FC<ModalProps> = (props) => {
 
     const apiParams: ReglementCreateBody = {
       libelle: libelle,
-     
     };
     console.log(apiParams);
     reglementInterieurApi
@@ -99,6 +98,7 @@ const CreateOrUpdateReglementInterieurModal: React.FC<ModalProps> = (props) => {
       libelle: libelle,
       
     };
+    console.log(apiParams);
 
     reglementInterieurApi
       .updateReglementInterieur(apiParams, "Bearer " + token, props.item?.id)
@@ -107,7 +107,6 @@ const CreateOrUpdateReglementInterieurModal: React.FC<ModalProps> = (props) => {
           if (response.data.success === true) {
             props.onClose();
             if (props.refresh) props.refresh();
-
             props.setSuccessNotifMessage(response.data.message);
             props.setSuccessNotifDescription(
               "This reglementInterieur has been successfully updated!"
@@ -173,31 +172,66 @@ const CreateOrUpdateReglementInterieurModal: React.FC<ModalProps> = (props) => {
                   className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary dark:disabled:bg-black dark:text-white ${props.mode === MODAL_MODE.view ? 'disabled-input' : ''}`}
                 />
               </div>
-              
-            </form>
-            {props.mode === MODAL_MODE.view ? null : (
               <div className="form-actions bg-green-600">
-                <button onClick={props.onClose} className="cancel-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="button-icon">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                            Annuler
-                        </button>
-                        
-                        {props.mode !== MODAL_MODE.view && props.mode === MODAL_MODE.create ? 
-                            <button onClick={handleCreate} className="create-button" >
-                               {isLoading ? <Indicator height={5} border="white"/> : <NewIcon size={2} color="#fff" />}  
-                                <span className="ml-2">Créer </span>
-                            </button> : null }
-                        {props.mode !== MODAL_MODE.view && props.mode === MODAL_MODE.update ? 
-                            <button onClick={handleUpdate} className="create-button">
-                                <EditIcon color="#fff" size={18} />
-                                Enregistrer
-                            </button> : null
-                        } 
-               
-              </div>
-            )}
+                  <button
+                    onClick={props.onClose}
+                    className="ml-2 flex w-1/4 justify-center rounded bg-secondary p-3 font-medium text-white"
+                  >
+                    <span className="mt-1">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        className="button-icon"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </span>
+                    Annuler
+                  </button>
+
+                  {props.mode !== MODAL_MODE.view &&
+                  props.mode === MODAL_MODE.create ? (
+                    <button
+                      onClick={handleCreate}
+                      disabled={isLoading}
+                      className="ml-2 flex w-1/4 justify-center rounded bg-success p-3 font-medium text-white"
+                    >
+                      <span className="mt-1 mr-2">
+                        {isLoading ? (
+                          <Indicator widtf={5} height={5} border="white" />
+                        ) : (
+                          <NewIcon size={2} color="#fff" />
+                        )}
+                      </span>
+                      Créer
+                    </button>
+                  ) : null}
+                  {props.mode !== MODAL_MODE.view &&
+                  props.mode === MODAL_MODE.update ? (
+                    <button
+                      onClick={handleUpdate}
+                      disabled={isLoading}
+                      className="ml-2 flex w-1/4 justify-center rounded bg-success p-3 font-medium text-white"
+                    >
+                      <span className="mt-1 mr-2">
+                        {isLoading ? (
+                          <Indicator widtf={5} height={5} border="white" />
+                        ) : (
+                          <EditIcon color="#fff" size={18} />
+                        )}
+                      </span>
+                      Enregistrer
+                    </button>
+                  ) : null}
+                </div>
+            </form>
           </div>
         </div>
       </div>

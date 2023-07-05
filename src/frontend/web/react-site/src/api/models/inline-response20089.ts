@@ -28,11 +28,25 @@ export interface InlineResponse20089 {
      * @type {boolean}
      * @memberof InlineResponse20089
      */
+<<<<<<< HEAD
     success?: any;
+=======
+<<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response20089.ts
+    success?: any;
+=======
+    message?: any;
+<<<<<<< HEAD
+>>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/models/inline-response20089.ts
+>>>>>>> 0b7e9d7 (Testing)
     /**
      * 
      * @type {Suggestion}
      * @memberof InlineResponse20089
      */
     content?: any;
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 7faa1c6 (maj reglement interieur)
+>>>>>>> 0b7e9d7 (Testing)
 }

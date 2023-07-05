@@ -14,25 +14,31 @@
 /**
  * 
  * @export
- * @interface InlineResponse40039
+ * @interface FauteUpdateBody
  */
-export interface InlineResponse40039 {
+export interface FauteUpdateBody {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse40039
+     * @memberof FauteUpdateBody
      */
-    message?: any;
+    libelle: any;
     /**
      * 
-     * @type {boolean}
-     * @memberof InlineResponse40039
+     * @type {string}
+     * @memberof FauteUpdateBody
      */
-    success?: any;
+    gravite: any;
     /**
      * 
-     * @type {InlineResponse40039Error}
-     * @memberof InlineResponse40039
+     * @type {number}
+     * @memberof FauteUpdateBody
      */
-    error?: any;
+    eleveId: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof FauteUpdateBody
+     */
+    regleId: any;
 }

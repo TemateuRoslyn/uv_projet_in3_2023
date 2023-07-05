@@ -64,6 +64,19 @@
 .aboutHome .item:hover p {
   color: #fff;
 }
+.logo{
+  width: 100%;
+  float: left;
+}
+.reglement{
+  width: 80%;
+  padding: 80px 50px;
+  margin: 0 auto;
+  background-color: white;
+}
+.slogan{
+  width: 50%;
+}
 /*----------awrapper------------*/
 .awrapper {
   background-image: url("../../../public/images/awrapper.webp");

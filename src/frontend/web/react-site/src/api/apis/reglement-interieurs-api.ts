@@ -183,12 +183,19 @@ export const ReglementInterieursApiAxiosParamCreator = function (configuration?:
          * @summary Update a reglementInterieur's information
          * @param {UpdateReglementIdBody} body 
          * @param {string} authorization JWT token
+<<<<<<< HEAD
          * @param {number} reglementId2 ID of reglement to update in this request
+=======
+>>>>>>> 0b7e9d7 (Testing)
          * @param {number} reglementId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         updateReglementInterieur: async (body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options: any = {}): Promise<RequestArgs> => {
+=======
+        updateReglementInterieur: async (body: UpdateReglementIdBody, authorization: string, reglementId: number, options: any = {}): Promise<RequestArgs> => {
+>>>>>>> 0b7e9d7 (Testing)
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling updateReglementInterieur.');
@@ -197,16 +204,22 @@ export const ReglementInterieursApiAxiosParamCreator = function (configuration?:
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling updateReglementInterieur.');
             }
+<<<<<<< HEAD
             // verify required parameter 'reglementId2' is not null or undefined
             if (reglementId2 === null || reglementId2 === undefined) {
                 throw new RequiredError('reglementId2','Required parameter reglementId2 was null or undefined when calling updateReglementInterieur.');
             }
+=======
+>>>>>>> 0b7e9d7 (Testing)
             // verify required parameter 'reglementId' is not null or undefined
             if (reglementId === null || reglementId === undefined) {
                 throw new RequiredError('reglementId','Required parameter reglementId was null or undefined when calling updateReglementInterieur.');
             }
             const localVarPath = `/api/reglement/update/{reglementId}`
+<<<<<<< HEAD
                 .replace(`{${"reglementId"}}`, encodeURIComponent(String(reglementId)))
+=======
+>>>>>>> 0b7e9d7 (Testing)
                 .replace(`{${"reglementId"}}`, encodeURIComponent(String(reglementId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -349,13 +362,21 @@ export const ReglementInterieursApiFp = function(configuration?: Configuration) 
          * @summary Update a reglementInterieur's information
          * @param {UpdateReglementIdBody} body 
          * @param {string} authorization JWT token
+<<<<<<< HEAD
          * @param {number} reglementId2 ID of reglement to update in this request
+=======
+>>>>>>> 0b7e9d7 (Testing)
          * @param {number} reglementId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         async updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20073>> {
             const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).updateReglementInterieur(body, authorization, reglementId2, reglementId, options);
+=======
+        async updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20073>> {
+            const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).updateReglementInterieur(body, authorization, reglementId, options);
+>>>>>>> 0b7e9d7 (Testing)
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -422,13 +443,21 @@ export const ReglementInterieursApiFactory = function (configuration?: Configura
          * @summary Update a reglementInterieur's information
          * @param {UpdateReglementIdBody} body 
          * @param {string} authorization JWT token
+<<<<<<< HEAD
          * @param {number} reglementId2 ID of reglement to update in this request
+=======
+>>>>>>> 0b7e9d7 (Testing)
          * @param {number} reglementId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options?: any): AxiosPromise<InlineResponse20073> {
             return ReglementInterieursApiFp(configuration).updateReglementInterieur(body, authorization, reglementId2, reglementId, options).then((request) => request(axios, basePath));
+=======
+        updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId: number, options?: any): AxiosPromise<InlineResponse20073> {
+            return ReglementInterieursApiFp(configuration).updateReglementInterieur(body, authorization, reglementId, options).then((request) => request(axios, basePath));
+>>>>>>> 0b7e9d7 (Testing)
         },
         /**
          * Get information about a specific reglementInterieur
@@ -491,14 +520,22 @@ export class ReglementInterieursApi extends BaseAPI {
      * @summary Update a reglementInterieur's information
      * @param {UpdateReglementIdBody} body 
      * @param {string} authorization JWT token
+<<<<<<< HEAD
      * @param {number} reglementId2 ID of reglement to update in this request
+=======
+>>>>>>> 0b7e9d7 (Testing)
      * @param {number} reglementId ID of eleve to update in this request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReglementInterieursApi
      */
+<<<<<<< HEAD
     public updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options?: any) {
         return ReglementInterieursApiFp(this.configuration).updateReglementInterieur(body, authorization, reglementId2, reglementId, options).then((request) => request(this.axios, this.basePath));
+=======
+    public updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId: number, options?: any) {
+        return ReglementInterieursApiFp(this.configuration).updateReglementInterieur(body, authorization, reglementId, options).then((request) => request(this.axios, this.basePath));
+>>>>>>> 0b7e9d7 (Testing)
     }
     /**
      * Get information about a specific reglementInterieur
