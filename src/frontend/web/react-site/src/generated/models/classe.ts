@@ -67,12 +67,6 @@ export interface Classe {
     cours?: any;
     /**
      * 
-     * @type {Professeur}
-     * @memberof Classe
-     */
-    professeurs?: any;
-    /**
-     * 
      * @type {BaseModelpropertiescreatedAt}
      * @memberof Classe
      */

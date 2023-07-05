@@ -162,7 +162,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll', [ReglementInterieurController::class, 'index']);
         Route::get('findOne/{reglementId}', [ReglementInterieurController::class, 'view']);
         Route::middleware('permission:creer_reglement_interieure')->post('create', [ReglementInterieurController::class, 'store']);
-        Route::middleware('permission:modifier_reglement_interieure')->put('update/{reglementId}', [ReglementInterieurController::class, 'update']);
+        Route::middleware('permission:modifier_reglement_interieure')->post('update/{reglementId}', [ReglementInterieurController::class, 'update']);
         Route::middleware('permission:supprimer_reglement_interieure')->delete('delete/{reglementId}', [ReglementInterieurController::class, 'delete']);
     });
 
@@ -171,7 +171,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll', [RegleController::class, 'index']);
         Route::get('findOne/{regleId}', [RegleController::class, 'view']);
         Route::middleware('permission:creer_regle')->post('create', [RegleController::class, 'store']);
-        Route::middleware('permission:modifier_regle')->put('update/{regleId}', [RegleController::class, 'update']);
+        Route::middleware('permission:modifier_regle')->post('update/{regleId}', [RegleController::class, 'update']);
         Route::middleware('permission:supprimer_regle')->delete('delete/{regleId}', [RegleController::class, 'delete']);
     });
 
@@ -199,7 +199,7 @@ Route::middleware('jwt.verify')->group(function () {
     //professeurs
     Route::prefix('professeurs')->group(function () {
         Route::middleware('permission:creer_professeur')->post('create', [ProfesseurController::class, 'store']);
-        Route::middleware('permission:modifier_professeur')->put('update/{professeurId}', [ProfesseurController::class, 'update']);
+        Route::middleware('permission:modifier_professeur')->post('update/{professeurId}', [ProfesseurController::class, 'update']);
         Route::middleware('permission:supprimer_professeur')->delete('delete/{professeurId}', [ProfesseurController::class, 'delete']);
         Route::get('findOne/{professeurId}', [ProfesseurController::class, 'view']);
         Route::get('findAll', [ProfesseurController::class, 'index']);
@@ -234,6 +234,8 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findOne/{fauteId}', [FauteController::class, 'view']);
         Route::get('findAll', [FauteController::class, 'index']);
         Route::get('findAll/eleve/{eleveId}', [FauteController::class, 'viewFautesEleve']);
+        Route::get('findAll/eleveAndKeyword/{eleveId}/{keyword}', [FauteController::class, 'viewFautesEleveAndKeyword']); //
+
     });
 
     //convocation

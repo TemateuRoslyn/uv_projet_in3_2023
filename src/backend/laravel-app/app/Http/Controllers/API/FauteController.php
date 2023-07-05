@@ -213,6 +213,99 @@ class FauteController extends Controller
         }
     }
 
+
+
+        /**
+     * @OA\Get(
+     *     path="/api/fautes/findAll/eleveAndKeyword/{eleveId}/{keyword}",
+     *     summary="Get mistake information for a student",
+     *     description="Get information about all specific mistake to a student",
+     *     operationId="viewFauteEleveAndKeyword",
+     *     tags={"Fautes"},
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of Eleve to get information for",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *      @OA\Parameter(
+     *         name="keyword",
+     *         in="path",
+     *         description="Keyword to get information for",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Error - Not found",
+     *         @OA\JsonContent(
+     *               @OA\Property(property="message", type="string", example="fautes de l\'eleve non trouvé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="false"),
+     *
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="fautes de l\'eleve trouvé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="content", type="array", @OA\Items(type="string", example="libelle :5")),
+     *             @OA\Property(property="data", type="object", ref="#/components/schemas/Faute")
+     *         )
+     *     )
+     * )
+     */
+    public function viewFautesEleveAndKeyword($eleveId, $keyword)
+    {
+        //dd($request);
+
+        $fautes = Faute::where('libelle', 'like', "%{$keyword}%")->with(['eleve', 'regle.reglementInterieur'])->get();
+        //dd($keyword);
+        $formattedFaute= $fautes->map(function ($faute) {
+            $name = $faute->libelle;
+            $id = $faute->id;
+                return "{$name} :{$id}";
+        });
+        //sdd($formattedFaute, $fautes);
+
+            return response()->json([
+                'message' => 'fautes de l\'eleve trouvé(e)',
+                'success' => true,
+                'content' => $formattedFaute,
+                'data' => $fautes
+            ], 200);
+        /* } else {
+            return response()->json([
+                'message' => 'fautes de l\'eleve non trouvée',
+                'success' => false,
+            ], 404);
+         }*/
+    }
+
     /**
      * @OA\Post(
      *     path="/api/fautes/create",

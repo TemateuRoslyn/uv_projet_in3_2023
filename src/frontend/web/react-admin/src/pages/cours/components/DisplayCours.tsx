@@ -4,7 +4,7 @@ import * as XLSX from 'xlsx';
 import { connect, useSelector } from 'react-redux';
 
 import { COURS_COLUMNS_DEFS } from '../../../configs/ag-grid-column-def/cours';
-import { Cours } from '../../../generated/models';
+import { Cour } from '../../../generated/models';
 import { ReduxProps } from '../../../redux/configureStore';
 import { Link } from 'react-router-dom';
 import CreateOrUpdateCoursModal from './CreateOrUpdateCoursModal';
@@ -26,7 +26,7 @@ import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
 import { DeleteItemModal } from '../../../components/DeleteItemModal';
 
 interface DisplayCoursProps {
-    cours: Cours[],
+    cours: Cour[],
     isLoading: boolean,
 
     setShowSuccessNotif: (value: boolean) => void,

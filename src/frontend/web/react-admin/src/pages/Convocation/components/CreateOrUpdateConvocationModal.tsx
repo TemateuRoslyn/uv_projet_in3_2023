@@ -1,9 +1,9 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { MODAL_MODE } from '../../../constants/ENUM';
 import { EditIcon, NewIcon } from '../../../components/Icone';
-import { Convocation, ConvocationsCreateBody } from '../../../generated/models';
+import { Convocation, ConvocationCreateBody } from '../../../generated/models';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
-import { ElevesApi, ConvocationsApi } from '../../../generated';
+import { ElevesApi, ConvocationApi } from '../../../generated';
 import { useSelector } from 'react-redux';
 import { ReduxProps } from '../../../redux/configureStore';
 import Indicator from '../../Authentication/components/Indicator';
@@ -38,11 +38,11 @@ const CreateOrUpdateConvocationModal: React.FC<ModalProps> = (props) => {
 
   const [formValues, setFormValues] = useState({
     libelle: props.item ? props.item.libelle : '',
-    dateConvocation: props.item ? props.item.date_convocation : '',
-    dateRdv: props.item ? props.item.date_rdv : '',
-    status: props.item ? props.item.status : '',
+    dateConvocation: props.item ? props.item.dateConvocation : '',
+    dateRdv: props.item ? props.item.dateRdv : '',
+    status: props.item ? props.item.statut : '',
     eleveId: props.item ? props.item.eleve?.id : '',
-    });
+  });
 
   const [matchList, setMatchList] = useState<string[]>([]);
 
@@ -123,14 +123,14 @@ const CreateOrUpdateConvocationModal: React.FC<ModalProps> = (props) => {
     _event.preventDefault(); // stopper la soumissoin par defaut du formulaire...
 
     const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    const convocationsApi = new ConvocationsApi({
+    const convocationApi = new ConvocationApi({
       ...state.environment,
       accessToken: token,
     });
 
     setIsLoading(true);
 
-    convocationsApi
+    convocationApi
       .createConvocation(
         formValues.libelle,
         formValues.dateConvocation,
@@ -172,7 +172,7 @@ const CreateOrUpdateConvocationModal: React.FC<ModalProps> = (props) => {
     _event.preventDefault(); // stopper la soumissoin par defaut du formulaire...
 
     const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    const convocationsApi = new ConvocationsApi({
+    const convocationApi = new ConvocationApi({
       ...state.environment,
       accessToken: token,
     });
@@ -181,7 +181,7 @@ const CreateOrUpdateConvocationModal: React.FC<ModalProps> = (props) => {
 
     console.log(formValues);
 
-    convocationsApi
+    convocationApi
       .updateConvocation(
         formValues.libelle,
         formValues.dateConvocation,
@@ -262,7 +262,7 @@ const CreateOrUpdateConvocationModal: React.FC<ModalProps> = (props) => {
                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
                   <div className="w-full xl:w-1/3">
                     <label className="mb-2.5 block text-black dark:text-white">
-                    Libelle<span className="text-meta-1">*</span>
+                      Libelle<span className="text-meta-1">*</span>
                     </label>
                     <input
                       name="libelle"
@@ -304,26 +304,27 @@ const CreateOrUpdateConvocationModal: React.FC<ModalProps> = (props) => {
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                   </div>
-
-                {/* row 2 class, serie, photo*/}
-                <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                  <CustomSelectInput
-                    required={true}
-                    inputLabel="Eleve"
-                    inputPlaceholder="Saisir le nom d'une eleve"
-                    wrapperStyle="w-full xl:w-1/3"
-                    labelStyle="mb-2.5 block text-black dark:text-white"
-                    inputStyle="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    maxHeightList={300}
-                    matchList={matchList}
-                    selectOptionEvent={handleOptionSelect}
-                    typingInputEvent={handleTypingInput}
-                  />
                 </div>
+                <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
+                  {/* row 2 class, serie, photo*/}
+                  <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
+                    <CustomSelectInput
+                      required={true}
+                      inputLabel="Eleve"
+                      inputPlaceholder="Saisir le nom d'une eleve"
+                      wrapperStyle="w-full xl:w-1/3"
+                      labelStyle="mb-2.5 block text-black dark:text-white"
+                      inputStyle="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      maxHeightList={300}
+                      matchList={matchList}
+                      selectOptionEvent={handleOptionSelect}
+                      typingInputEvent={handleTypingInput}
+                    />
+                  </div>
 
-                <div className="w-full xl:w-1/3">
+                  <div className="w-full xl:w-1/3">
                     <label className="mb-2.5 block text-black dark:text-white">
-                     Status<span className="text-meta-1">*</span>
+                      Status<span className="text-meta-1">*</span>
                     </label>
                     <input
                       name="status"
@@ -335,8 +336,7 @@ const CreateOrUpdateConvocationModal: React.FC<ModalProps> = (props) => {
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                   </div>
-                 
-              </div>
+                </div>
               </div>
             </form>
           </div>

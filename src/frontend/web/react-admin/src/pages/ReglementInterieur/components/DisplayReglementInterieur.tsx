@@ -71,11 +71,11 @@ const DisplayReglementInterieur: React.FC<DisplayReglementInterieurProps> = (
     setShowIndicator(true);
 
     reglementInterieurApi
-      .findAllreglementInterieurs('Bearer ' + token)
+      .reglementInterieursIndex('Bearer ' + token)
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {
-            setReglementInterieur(response.data.data);
+            setReglementInterieur(response.data.content);
           }
         }
       })

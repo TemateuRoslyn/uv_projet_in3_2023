@@ -1,4 +1,5 @@
 import { ColDef } from "ag-grid-community";
+import ListCellRenderer from "../../components/AgGridCells/ListCellRenderer";
 
 export const COURS_COLUMNS_DEFS: ColDef[] = [
   {
@@ -18,6 +19,24 @@ export const COURS_COLUMNS_DEFS: ColDef[] = [
     showDisabledCheckboxes: true,
     width: 300,
   },
+  {
+    headerName: 'Professeur',
+    field: 'professeur.firstName',
+    filter: 'agTextColumnFilter',
+    checkboxSelection: false,
+    showDisabledCheckboxes: true,
+    width: 300,
+  },
+  {
+    headerName: 'Classes',
+    field: 'classes',
+    filter: 'agTextColumnFilter',
+    checkboxSelection: false,
+    showDisabledCheckboxes: true,
+    width: 300,
+    cellRendererFramework: ListCellRenderer,
+  },  
+
   {
     headerName: 'Date du Cours',
     field: 'date_cour',

@@ -49,7 +49,7 @@ class ConvocationController extends Controller
      */
     public function index()
     {
-        $convocations = Convocation::with( 'personnel', 'eleve')->get();
+        $convocations = Convocation::with('personnel', 'eleve')->get();
 
         return response()->json([
             'message' => 'Liste des convocations',
@@ -58,7 +58,7 @@ class ConvocationController extends Controller
         ]);
     }
 
-     /**
+    /**
      * @OA\Get(
      *     path="/api/convocation/findOne/{id}",
      *     summary="Get convocation information",
@@ -115,8 +115,8 @@ class ConvocationController extends Controller
     {
 
         $convocation = Convocation::with('personnel')
-                                    ->has('eleve')->with('eleve')
-                                    ->find($convocationId);
+            ->has('eleve')->with('eleve')
+            ->find($convocationId);
 
 
         if ($convocation) {
@@ -142,7 +142,7 @@ class ConvocationController extends Controller
      *     path="/api/convocation/findAll/eleve/{eleveId}",
      *     summary="Get convocation information for a student",
      *     description="Get information about all specific convocation to a student",
-     *     operationId="viewFonvocationEleve",
+     *     operationId="viewConvocationEleve",
      *     tags={"convocation"},
      *     @OA\Parameter(
      *         name="Authorization",
@@ -429,7 +429,7 @@ class ConvocationController extends Controller
             'content' => $convocationFound
         ]);
     }
-   /**
+    /**
      * @OA\Delete (
      *     path="/api/convocation/delete/{id}",
      *     summary="Delete an convocation",
@@ -499,7 +499,4 @@ class ConvocationController extends Controller
             'success' => false
         ], 404);
     }
-
-
-
 }

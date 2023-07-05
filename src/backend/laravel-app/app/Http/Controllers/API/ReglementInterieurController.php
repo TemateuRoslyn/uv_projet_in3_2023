@@ -203,7 +203,7 @@ class ReglementInterieurController extends Controller
 
 
     /**
-     * @OA\put(
+     * @OA\post(
      *     path="/api/reglement/update/{reglementId}",
      *     summary="Update a reglementInterieur's information",
      *     description="Update a reglementInterieur's information",
@@ -224,6 +224,15 @@ class ReglementInterieurController extends Controller
      *         @OA\JsonContent(
      *              required={"libelle"},
      *             @OA\Property(property="libelle", type="string", format="text", example="Etre assidue"),
+     *         )
+     *     ),
+     * @OA\Parameter(
+     *         name="reglementId",
+     *         in="path",
+     *         description="ID of eleve to update in this request",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
      *         )
      *     ),
      *     @OA\Response(
