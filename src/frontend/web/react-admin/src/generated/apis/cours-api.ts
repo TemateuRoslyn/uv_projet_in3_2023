@@ -17,7 +17,6 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { CoursCreateBody } from '../models';
-import { InlineResponse20011 } from '../models';
 import { InlineResponse20023 } from '../models';
 import { InlineResponse20024 } from '../models';
 import { InlineResponse20025 } from '../models';
@@ -25,7 +24,6 @@ import { InlineResponse20026 } from '../models';
 import { InlineResponse20027 } from '../models';
 import { InlineResponse40010 } from '../models';
 import { InlineResponse40011 } from '../models';
-import { InlineResponse4005 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse40410 } from '../models';
 import { UpdateCoursIdBody } from '../models';
@@ -35,55 +33,6 @@ import { UpdateCoursIdBody } from '../models';
  */
 export const CoursApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
-        /**
-         * Get the filtered list of cours.
-         * @summary Get filtered list of cours
-         * @param {string} keyword Keyword to filter cours
-         * @param {string} authorization JWT token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        coursRecords: async (keyword: string, authorization: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'keyword' is not null or undefined
-            if (keyword === null || keyword === undefined) {
-                throw new RequiredError('keyword','Required parameter keyword was null or undefined when calling coursRecords.');
-            }
-            // verify required parameter 'authorization' is not null or undefined
-            if (authorization === null || authorization === undefined) {
-                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling coursRecords.');
-            }
-            const localVarPath = `/api/cours/records/{keyword}`
-                .replace(`{${"keyword"}}`, encodeURIComponent(String(keyword)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (authorization !== undefined && authorization !== null) {
-                localVarHeaderParameter['Authorization'] = String(authorization);
-            }
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * Create a new course resource
          * @summary Create a new course
@@ -339,21 +288,6 @@ export const CoursApiAxiosParamCreator = function (configuration?: Configuration
 export const CoursApiFp = function(configuration?: Configuration) {
     return {
         /**
-         * Get the filtered list of cours.
-         * @summary Get filtered list of cours
-         * @param {string} keyword Keyword to filter cours
-         * @param {string} authorization JWT token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async coursRecords(keyword: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20011>> {
-            const localVarAxiosArgs = await CoursApiAxiosParamCreator(configuration).coursRecords(keyword, authorization, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
          * Create a new course resource
          * @summary Create a new course
          * @param {CoursCreateBody} body 
@@ -437,17 +371,6 @@ export const CoursApiFp = function(configuration?: Configuration) {
 export const CoursApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
-         * Get the filtered list of cours.
-         * @summary Get filtered list of cours
-         * @param {string} keyword Keyword to filter cours
-         * @param {string} authorization JWT token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        coursRecords(keyword: string, authorization: string, options?: any): AxiosPromise<InlineResponse20011> {
-            return CoursApiFp(configuration).coursRecords(keyword, authorization, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Create a new course resource
          * @summary Create a new course
          * @param {CoursCreateBody} body 
@@ -511,18 +434,6 @@ export const CoursApiFactory = function (configuration?: Configuration, basePath
  * @extends {BaseAPI}
  */
 export class CoursApi extends BaseAPI {
-    /**
-     * Get the filtered list of cours.
-     * @summary Get filtered list of cours
-     * @param {string} keyword Keyword to filter cours
-     * @param {string} authorization JWT token
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof CoursApi
-     */
-    public coursRecords(keyword: string, authorization: string, options?: any) {
-        return CoursApiFp(this.configuration).coursRecords(keyword, authorization, options).then((request) => request(this.axios, this.basePath));
-    }
     /**
      * Create a new course resource
      * @summary Create a new course

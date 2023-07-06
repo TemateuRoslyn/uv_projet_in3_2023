@@ -372,8 +372,8 @@ class FauteController extends Controller
             $validator = Validator::make($request->all(), [
                 'libelle' => 'required|string|max:255',
                 'gravite' => 'required|string',
-                'eleveId' => 'required|integer',
-                'regleId' => 'required|integer',
+                'eleveId' => 'required|integer|exists:eleves,id',
+                'regleId' => 'required|integer|exists:regles,id',
             ]);
         } else {
             return response()->json([

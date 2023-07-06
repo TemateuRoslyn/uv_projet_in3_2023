@@ -110,6 +110,7 @@ Route::middleware('jwt.verify')->group(function () {
     Route::prefix('eleves')->group(function () {
         Route::get('findOne/{eleveId}', [EleveController::class, 'view']);
         Route::get('findAll', [EleveController::class, 'index']);
+        Route::get('records/{keyword}', [EleveController::class, 'records']);
 
         Route::middleware('permission:modifier_eleve')->put('update/{eleveId}', [EleveController::class, 'update']);
         Route::middleware('permission:supprimer_eleve')->delete('delete/{eleveId}', [EleveController::class, 'delete']);

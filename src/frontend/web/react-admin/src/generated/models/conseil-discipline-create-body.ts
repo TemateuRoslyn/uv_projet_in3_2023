@@ -41,10 +41,4 @@ export interface ConseilDisciplineCreateBody {
      * @memberof ConseilDisciplineCreateBody
      */
     eleveId: any;
-    /**
-     * 
-     * @type {number}
-     * @memberof ConseilDisciplineCreateBody
-     */
-    fauteId: any;
 }

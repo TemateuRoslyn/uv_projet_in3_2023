@@ -84,12 +84,11 @@ export const ConseilDisciplinesApiAxiosParamCreator = function (configuration?: 
          * @param {string} heureDebutCd 
          * @param {string} heureFinCd 
          * @param {number} eleveId 
-         * @param {number} fauteId 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createConseilDiscipline: async (dateCd: string, heureDebutCd: string, heureFinCd: string, eleveId: number, fauteId: number, authorization: string, options: any = {}): Promise<RequestArgs> => {
+        createConseilDiscipline: async (dateCd: string, heureDebutCd: string, heureFinCd: string, eleveId: number, authorization: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'dateCd' is not null or undefined
             if (dateCd === null || dateCd === undefined) {
                 throw new RequiredError('dateCd','Required parameter dateCd was null or undefined when calling createConseilDiscipline.');
@@ -105,10 +104,6 @@ export const ConseilDisciplinesApiAxiosParamCreator = function (configuration?: 
             // verify required parameter 'eleveId' is not null or undefined
             if (eleveId === null || eleveId === undefined) {
                 throw new RequiredError('eleveId','Required parameter eleveId was null or undefined when calling createConseilDiscipline.');
-            }
-            // verify required parameter 'fauteId' is not null or undefined
-            if (fauteId === null || fauteId === undefined) {
-                throw new RequiredError('fauteId','Required parameter fauteId was null or undefined when calling createConseilDiscipline.');
             }
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
@@ -145,10 +140,6 @@ export const ConseilDisciplinesApiAxiosParamCreator = function (configuration?: 
 
             if (eleveId !== undefined) { 
                 localVarFormParams.append('eleveId', eleveId as any);
-            }
-
-            if (fauteId !== undefined) { 
-                localVarFormParams.append('fauteId', fauteId as any);
             }
 
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
@@ -398,13 +389,12 @@ export const ConseilDisciplinesApiFp = function(configuration?: Configuration) {
          * @param {string} heureDebutCd 
          * @param {string} heureFinCd 
          * @param {number} eleveId 
-         * @param {number} fauteId 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createConseilDiscipline(dateCd: string, heureDebutCd: string, heureFinCd: string, eleveId: number, fauteId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20015>> {
-            const localVarAxiosArgs = await ConseilDisciplinesApiAxiosParamCreator(configuration).createConseilDiscipline(dateCd, heureDebutCd, heureFinCd, eleveId, fauteId, authorization, options);
+        async createConseilDiscipline(dateCd: string, heureDebutCd: string, heureFinCd: string, eleveId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20015>> {
+            const localVarAxiosArgs = await ConseilDisciplinesApiAxiosParamCreator(configuration).createConseilDiscipline(dateCd, heureDebutCd, heureFinCd, eleveId, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -496,13 +486,12 @@ export const ConseilDisciplinesApiFactory = function (configuration?: Configurat
          * @param {string} heureDebutCd 
          * @param {string} heureFinCd 
          * @param {number} eleveId 
-         * @param {number} fauteId 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createConseilDiscipline(dateCd: string, heureDebutCd: string, heureFinCd: string, eleveId: number, fauteId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20015> {
-            return ConseilDisciplinesApiFp(configuration).createConseilDiscipline(dateCd, heureDebutCd, heureFinCd, eleveId, fauteId, authorization, options).then((request) => request(axios, basePath));
+        createConseilDiscipline(dateCd: string, heureDebutCd: string, heureFinCd: string, eleveId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20015> {
+            return ConseilDisciplinesApiFp(configuration).createConseilDiscipline(dateCd, heureDebutCd, heureFinCd, eleveId, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete a disciplinary council resource
@@ -576,14 +565,13 @@ export class ConseilDisciplinesApi extends BaseAPI {
      * @param {string} heureDebutCd 
      * @param {string} heureFinCd 
      * @param {number} eleveId 
-     * @param {number} fauteId 
      * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ConseilDisciplinesApi
      */
-    public createConseilDiscipline(dateCd: string, heureDebutCd: string, heureFinCd: string, eleveId: number, fauteId: number, authorization: string, options?: any) {
-        return ConseilDisciplinesApiFp(this.configuration).createConseilDiscipline(dateCd, heureDebutCd, heureFinCd, eleveId, fauteId, authorization, options).then((request) => request(this.axios, this.basePath));
+    public createConseilDiscipline(dateCd: string, heureDebutCd: string, heureFinCd: string, eleveId: number, authorization: string, options?: any) {
+        return ConseilDisciplinesApiFp(this.configuration).createConseilDiscipline(dateCd, heureDebutCd, heureFinCd, eleveId, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Delete a disciplinary council resource

@@ -14,25 +14,19 @@
 /**
  * 
  * @export
- * @interface InlineResponse40015Error
+ * @interface InlineResponse40037Error
  */
-export interface InlineResponse40015Error {
+export interface InlineResponse40037Error {
     /**
      * 
      * @type {Array&lt;string&gt;}
-     * @memberof InlineResponse40015Error
+     * @memberof InlineResponse40037Error
      */
     email?: any;
     /**
      * 
      * @type {Array&lt;string&gt;}
-     * @memberof InlineResponse40015Error
+     * @memberof InlineResponse40037Error
      */
     username?: any;
-    /**
-     * 
-     * @type {Array&lt;string&gt;}
-     * @memberof InlineResponse40015Error
-     */
-    password?: any;
 }
