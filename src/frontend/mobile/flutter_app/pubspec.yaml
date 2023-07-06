@@ -46,6 +46,9 @@ dependencies:
   dropdown_textfield: ^1.0.8
   connectivity: ^3.0.6
   intl: ^0.18.1
+  flutter_tts: ^3.7.0
+  flutter_local_notifications: ^15.0.1
+  socket_io_client: ^2.0.2
 
 dev_dependencies:
   flutter_test:

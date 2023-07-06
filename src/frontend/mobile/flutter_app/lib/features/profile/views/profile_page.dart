@@ -129,7 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   context: context,
                   color: appColors.onBoardingTwo!)
               : state.status == ApiStatus.failed
-                  ? CommonWidgets.loadingStatusFailedWidget(
+                  ? CommonWidgets.failedStatusWidget(
                       positionFromTop: (screenSize.height / 2),
                       context: context,
                       statusMessage: state.statusMessage,
@@ -221,20 +221,26 @@ class _ProfilePageState extends State<ProfilePage> {
                                       SizedBox(
                                         height: getHeight(20, context),
                                       ),
-                                      ...state.currentUser!.eleves!
-                                          .map((e) => CourseComponent(
-                                              currentUserType: currentUserType,
-                                              onPressAction: () => Navigator.of(
-                                                      context)
-                                                  .push(MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ParentConsultationPage(
-                                                            childId: e.id,
-                                                          ))),
-                                              courseTitle:
-                                                  '${e.firstName} ${e.lastName}',
-                                              teacherName: 'classe ici'))
-                                          .toList(),
+                                      ...state
+                                          .currentUser!.childrenAndThierClasses!
+                                          .map((childData) {
+                                        final child =
+                                            childData['child'] as User;
+                                        final hisClass = childData['hisClass'];
+                                        return CourseComponent(
+                                            currentUserType: currentUserType,
+                                            onPressAction: () => Navigator.of(
+                                                    context)
+                                                .push(MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ParentConsultationPage(
+                                                          child: child,
+                                                          hisClass: hisClass,
+                                                        ))),
+                                            courseTitle:
+                                                '${child.firstName} ${child.lastName}',
+                                            teacherName: hisClass['name']);
+                                      }).toList(),
                                     ],
                                   ),
                                 )
@@ -427,5 +433,3 @@ class ProfileOption extends StatelessWidget {
     );
   }
 }
-
-// 

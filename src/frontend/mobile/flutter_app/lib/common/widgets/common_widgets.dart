@@ -92,7 +92,7 @@ class CommonWidgets {
     );
   }
 
-  static Widget loadingStatusFailedWidget({
+  static Widget failedStatusWidget({
     required double positionFromTop,
     required BuildContext context,
     required String statusMessage,
@@ -128,6 +128,28 @@ class CommonWidgets {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  static Widget noDataWidget({
+    required double positionFromTop,
+    required BuildContext context,
+    required Color color,
+  }) {
+    return Padding(
+      padding: EdgeInsets.only(
+          top: getHeight(positionFromTop, context),
+          left: getWidth(50, context),
+          right: getWidth(50, context)),
+      child: Text(
+        'Aucunes données trouvées pour le moment, veuillez réessayer plus tard...',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: getHeight(12, context),
+          height: getHeight(1.5, context),
+          color: color,
+        ),
       ),
     );
   }

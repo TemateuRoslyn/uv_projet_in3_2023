@@ -25,7 +25,7 @@ class _ReglementsInterieursState extends State<ReglementsInterieurs> {
     super.initState();
 
     _homeCubit = context.read<HomeCubit>();
-    _homeCubit.getDataByType('ri');
+    _homeCubit.getDataByType(dataType: 'ri');
   }
 
   @override
@@ -49,24 +49,30 @@ class _ReglementsInterieursState extends State<ReglementsInterieurs> {
                     context: context,
                     color: appColors.primary!)
                 : state.riStatus == ApiStatus.failed
-                    ? CommonWidgets.loadingStatusFailedWidget(
+                    ? CommonWidgets.failedStatusWidget(
                         positionFromTop: (screenSize.height / 2),
                         context: context,
                         statusMessage: state.riStatusMessage,
                         color: appColors.primary!,
-                        reloadFunction: () => _homeCubit.getDataByType('ri'))
-                    : Expanded(
-                        child: ListView(
-                        padding: EdgeInsets.only(
-                          top: getHeight(20, context),
-                          bottom: getHeight(10, context),
-                          left: getWidth(10, context),
-                          right: getWidth(10, context),
-                        ),
-                        children: state.ri
-                            .map((e) => RIcomponents(text: e.libelle))
-                            .toList(),
-                      )),
+                        reloadFunction: () =>
+                            _homeCubit.getDataByType(dataType: 'ri'))
+                    : state.ri.isEmpty
+                        ? CommonWidgets.noDataWidget(
+                            positionFromTop: (screenSize.height / 2),
+                            context: context,
+                            color: appColors.primary!)
+                        : Expanded(
+                            child: ListView(
+                            padding: EdgeInsets.only(
+                              top: getHeight(20, context),
+                              bottom: getHeight(10, context),
+                              left: getWidth(10, context),
+                              right: getWidth(10, context),
+                            ),
+                            children: state.ri
+                                .map((e) => RIcomponents(text: e.libelle))
+                                .toList(),
+                          )),
           );
         },
       ),

@@ -9,7 +9,6 @@ import 'package:fltter_app/common/utils/enums.dart';
 import 'package:fltter_app/repositories/home_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import '../../../common/configurations/api_configuration.dart';
 import '../../../common/models/conseil_discipline.dart';
 import '../../../common/models/convocation.dart';
@@ -29,7 +28,10 @@ class HomeCubit extends Cubit<HomeState> {
   final InternetCubit internetCubit;
   final TextEditingController suggestion = TextEditingController();
 
-  void getDataByType(String dataType) async {
+  void getDataByType({
+    required String dataType,
+    int? childId,
+  }) async {
     // ri = reglements interierieurs
     // cd = conseil discipline
     final isOnline = await internetCubit.checkInternetConnection();
@@ -105,9 +107,11 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void proceedTogetAllUserFautes() async {
+  void proceedTogetAllUserFautes({int? childId}) async {
     try {
-      final fautes = await homeRepository.getAllUserFautes();
+      final fautes = childId == null
+          ? await homeRepository.getAllUserFautes()
+          : await homeRepository.getAllUserFautes(userId: childId);
       emit(state.copyWith(fauteStatus: ApiStatus.success, fautes: fautes));
     } on DioException catch (e) {
       final errorMessage = ApiConfiguration.getErrorMessage(e);
@@ -118,9 +122,11 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void proceedTogetAllUserCD() async {
+  void proceedTogetAllUserCD({int? childId}) async {
     try {
-      final cds = await homeRepository.getAllUserCD();
+      final cds = childId == null
+          ? await homeRepository.getAllUserCD()
+          : await homeRepository.getAllUserCD(userId: childId);
       emit(state.copyWith(cdStatus: ApiStatus.success, cds: cds));
     } on DioException catch (e) {
       final errorMessage = ApiConfiguration.getErrorMessage(e);
@@ -129,9 +135,11 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void proceedTogetAllUserConvocation() async {
+  void proceedTogetAllUserConvocation({int? childId}) async {
     try {
-      final convocations = await homeRepository.getAllUserConvocations();
+      final convocations = childId == null
+          ? await homeRepository.getAllUserConvocations()
+          : await homeRepository.getAllUserConvocations(userId: childId);
       emit(state.copyWith(
           convocationStatus: ApiStatus.success, convocations: convocations));
     } on DioException catch (e) {
@@ -149,5 +157,41 @@ class HomeCubit extends Cubit<HomeState> {
       await homeRepository.insertSuggestion(suggestion.text);
       emit(state.copyWith(suggestionInsertStatus: 'success'));
     } catch (e) {}
+  }
+
+  void getChildInfosForParentConsultation(int userId) async {
+    try {
+      final isOnline = await internetCubit.checkInternetConnection();
+
+      if (isOnline) {
+        emit(state.copyWith(parentConsultationStatus: ApiStatus.isLoading));
+        final fautes = await homeRepository.getAllUserFautes(userId: userId);
+        final cds = await homeRepository.getAllUserCD(userId: userId);
+        final convocations =
+            await homeRepository.getAllUserConvocations(userId: userId);
+        emit(state.copyWith(
+          fautes: fautes,
+          cds: cds,
+          convocations: convocations,
+          parentConsultationStatus: ApiStatus.success,
+        ));
+      } else {
+        emit(state.copyWith(
+            fautes: [],
+            cds: [],
+            convocations: [],
+            parentConsultationStatus: ApiStatus.failed,
+            parentConsultationStatusMessage:
+                'Veuillez consulter votre connexion internet. Cliquez pour recharger une fois la connection retablie.'));
+      }
+    } on DioException catch (e) {
+      final errorMessage = ApiConfiguration.getErrorMessage(e);
+      emit(state.copyWith(
+          fautes: [],
+          cds: [],
+          convocations: [],
+          parentConsultationStatus: ApiStatus.failed,
+          parentConsultationStatusMessage: errorMessage));
+    }
   }
 }

@@ -8,10 +8,16 @@ import 'package:fltter_app/features/home/widgets/convocation_component.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../../../common/models/user.dart';
 import '../../../common/utils/helper.dart';
 
 class ConseilDisciplinePage extends StatefulWidget {
-  const ConseilDisciplinePage({super.key});
+  const ConseilDisciplinePage({
+    super.key,
+    this.childInfos,
+  });
+
+  final User? childInfos;
 
   @override
   State<ConseilDisciplinePage> createState() => _ConseilDisciplinePageState();
@@ -25,7 +31,11 @@ class _ConseilDisciplinePageState extends State<ConseilDisciplinePage> {
     super.initState();
 
     _homeCubit = context.read<HomeCubit>();
-    _homeCubit.getDataByType('cd');
+    if (widget.childInfos == null) {
+      _homeCubit.getDataByType(dataType: 'cd');
+    } else {
+      _homeCubit.getDataByType(dataType: 'cd', childId: widget.childInfos!.id);
+    }
   }
 
   @override
@@ -49,27 +59,33 @@ class _ConseilDisciplinePageState extends State<ConseilDisciplinePage> {
                       context: context,
                       color: appColors.primary!)
                   : state.cdStatus == ApiStatus.failed
-                      ? CommonWidgets.loadingStatusFailedWidget(
+                      ? CommonWidgets.failedStatusWidget(
                           positionFromTop: (screenSize.height / 2),
                           context: context,
                           statusMessage: state.cdStatusMessage,
                           color: appColors.primary!,
-                          reloadFunction: () => _homeCubit.getDataByType('cd'))
-                      : Expanded(
-                          child: ListView(
-                          padding: EdgeInsets.only(
-                              top: getHeight(20, context),
-                              left: getWidth(10, context),
-                              right: getWidth(10, context)),
-                          children: state.cds
-                              .map((cd) => ConvocationComponent(
-                                  libelle: 'Motif: ${cd.faute.libelle}',
-                                  subtitle1: 'Date: ${cd.dateCd}',
-                                  subtitle2:
-                                      'Heure: ${cd.heureDebutCd} - ${cd.heureFinCd}',
-                                  isFrom: 'convocations'))
-                              .toList(),
-                        )));
+                          reloadFunction: () =>
+                              _homeCubit.getDataByType(dataType: 'cd'))
+                      : state.cds.isEmpty
+                          ? CommonWidgets.noDataWidget(
+                              positionFromTop: (screenSize.height / 2),
+                              context: context,
+                              color: appColors.primary!)
+                          : Expanded(
+                              child: ListView(
+                              padding: EdgeInsets.only(
+                                  top: getHeight(20, context),
+                                  left: getWidth(10, context),
+                                  right: getWidth(10, context)),
+                              children: state.cds
+                                  .map((cd) => ConvocationComponent(
+                                      libelle: 'Motif: ${cd.faute.libelle}',
+                                      subtitle1: 'Date: ${cd.dateCd}',
+                                      subtitle2:
+                                          'Heure: ${cd.heureDebutCd} - ${cd.heureFinCd}',
+                                      isFrom: 'convocations'))
+                                  .toList(),
+                            )));
         },
       ),
     );

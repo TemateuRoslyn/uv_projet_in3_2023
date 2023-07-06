@@ -4,7 +4,6 @@ import 'package:fltter_app/common/utils/helper.dart';
 import 'package:fltter_app/common/views/page_skeleton.dart';
 import 'package:fltter_app/common/widgets/common_widgets.dart';
 import 'package:fltter_app/common/widgets/fields.dart';
-import 'package:fltter_app/features/home/views/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +12,7 @@ import '../../../common/widgets/modals_and_animated_dialogs.dart';
 import '../logic/login/login_cubit.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();

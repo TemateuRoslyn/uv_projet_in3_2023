@@ -25,5 +25,8 @@ class HomeState with _$HomeState {
 
     //Box suggession variables
     @Default('') String suggestionInsertStatus,
+    // parent consultation variables
+    @Default(ApiStatus.init) ApiStatus parentConsultationStatus,
+    @Default('') String parentConsultationStatusMessage,
   }) = _Initial;
 }
