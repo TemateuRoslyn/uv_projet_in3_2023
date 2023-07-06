@@ -280,8 +280,8 @@ class ConseilDisciplineController extends Controller
             'dateCd' => 'required|date',
             'heureDebutCd' => 'required|date_format:H:i:s',
             'heureFinCd' => 'required|date_format:H:i:s|after:heure_debut_cd',
-            'eleveId' => 'required|integer',
-            'fauteId' => 'required|integer',
+            'eleveId' => 'required|integer|exists:eleves,id',
+            'fauteId' => 'required|integer|exists:fautes,id',
         ]);
 
         if ($validator->fails()) {
@@ -393,8 +393,8 @@ class ConseilDisciplineController extends Controller
                 'dateCd' => 'required|date',
                 'heureDebutCd' => 'required|date_format:H:i:s',
                 'heureFinCd' => 'required|date_format:H:i:s|after:heure_debut_cd',
-                'eleveId' => 'required|integer',
-                'fauteId' => 'required|integer',
+                'eleveId' => 'required|integer|exists:eleves,id',
+                'fauteId' => 'required|integer:exists:fautes,id',
             ]);
         }else{
             return response()->json([

@@ -237,9 +237,9 @@ class ProfesseurController extends Controller
             'sexe' => 'required',
             'telephone' => 'required',
             'statut' => 'required',
-            'courId' => 'required',
-
-
+            'courId' => 'required|integer|exists:cours,id',
+            'classesId' => 'required|array',
+            'classeId.*' => 'required|integer|exists:classes,id',
         ]);
 
         if ($validator->fails()) {
@@ -415,7 +415,8 @@ class ProfesseurController extends Controller
                 'sexe' => 'required',
                 'telephone' => 'required',
                 'statut' => 'required',
-                'courId' => 'required',
+                'courId' => 'required|exists:cours,id',
+               'classesId' => 'required|array'
             ]);
         } else {
             return response()->json([

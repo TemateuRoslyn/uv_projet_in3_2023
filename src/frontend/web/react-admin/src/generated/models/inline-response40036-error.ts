@@ -14,31 +14,25 @@
 /**
  * 
  * @export
- * @interface CoursUpdateBody
+ * @interface InlineResponse40036Error
  */
-export interface CoursUpdateBody {
+export interface InlineResponse40036Error {
     /**
      * 
-     * @type {string}
-     * @memberof CoursUpdateBody
+     * @type {Array&lt;string&gt;}
+     * @memberof InlineResponse40036Error
      */
-    libelle: any;
+    email?: any;
     /**
      * 
-     * @type {string}
-     * @memberof CoursUpdateBody
+     * @type {Array&lt;string&gt;}
+     * @memberof InlineResponse40036Error
      */
-    dateCour: any;
+    username?: any;
     /**
      * 
-     * @type {string}
-     * @memberof CoursUpdateBody
+     * @type {Array&lt;string&gt;}
+     * @memberof InlineResponse40036Error
      */
-    heureDebut: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof CoursUpdateBody
-     */
-    heureFin: any;
+    password?: any;
 }

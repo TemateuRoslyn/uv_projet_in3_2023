@@ -197,7 +197,7 @@ class ReparationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'demarcheMediation' => 'required',
-            'fauteId' => 'required'
+            'fauteId' => 'required|exists:fautes,id'
         ]);
 
         if ($validator->fails()) {

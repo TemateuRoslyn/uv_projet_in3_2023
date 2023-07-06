@@ -30,6 +30,5 @@ export * from './apis/regles-api';
 export * from './apis/reparations-api';
 export * from './apis/roles-api';
 export * from './apis/sanctionprevus-api';
-export * from './apis/suggestions-api';
 export * from './apis/users-api';
 

@@ -14,13 +14,13 @@
 /**
  * 
  * @export
- * @interface ReglementUpdateBody
+ * @interface InlineResponse4227
  */
-export interface ReglementUpdateBody {
+export interface InlineResponse4227 {
     /**
      * 
-     * @type {string}
-     * @memberof ReglementUpdateBody
+     * @type {any}
+     * @memberof InlineResponse4227
      */
-    libelle: any;
+    error?: any;
 }

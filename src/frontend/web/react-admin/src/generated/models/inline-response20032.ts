@@ -31,7 +31,7 @@ export interface InlineResponse20032 {
     message?: any;
     /**
      * 
-     * @type {Array&lt;Faute&gt;}
+     * @type {Array&lt;string&gt;}
      * @memberof InlineResponse20032
      */
     content?: any;

@@ -3,7 +3,7 @@ import { MODAL_MODE } from '../../../constants/ENUM';
 import { EditIcon, NewIcon } from '../../../components/Icone';
 import { Parents, ParentsCreateBody } from '../../../generated/models';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
-import { ClassesApi, ParentsApi } from '../../../generated';
+import { ElevesApi, ParentsApi } from '../../../generated';
 import { useSelector } from 'react-redux';
 import { ReduxProps } from '../../../redux/configureStore';
 import {
@@ -11,6 +11,7 @@ import {
 } from '../../../constants/ITEMS';
 import Indicator from '../../Authentication/components/Indicator';
 import CustomSelectInput from '../../../components/CustomSelects/CustomSelectInput';
+import Eleves from '../../Eleve/Eleves.page';
 
 interface ModalProps {
   mode: MODAL_MODE;
@@ -42,7 +43,7 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
     photo: props.item ? props.item.photo : null,
     sexe: props.item ? props.item.sexe : '',
     profession: props.item ? props.item.profession : '',
-    eleveIds: props.item ? props.item.eleves?.id : '',
+    eleveIds: props.item ? props.item.eleves : [],
     username: props.item ? props.item.user?.username : '',
     option: props.item ? props.item.user?.role : '',
     parentId: props.item ? props.item.id : '',
@@ -53,13 +54,13 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
   const handleTypingInput = (keyword: string) => {
     if (keyword.length > 0) {
       const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-      const classesApi = new ClassesApi({
+      const elevesApi = new ElevesApi({
         ...state.environment,
         accessToken: token,
       });
 
-      classesApi
-        .classesRecords(keyword, 'Bearer ' + token)
+      elevesApi
+        .elevesRecords(keyword, 'Bearer ' + token)
         .then((response) => {
           if (response && response.data) {
             if (response.data.success === true) {
@@ -76,9 +77,10 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
 
   const handleOptionSelect = (option: string) => {
     setFormValues((prevValues) => ({
-      ...prevValues,
-      classeId: extractIdFromString(option),
-    }));
+        ...prevValues,
+        eleveIds: [...formValues.eleveIds, ...extractIdFromString(option)],
+      }));
+    console.log(typeof formValues.eleveIds + ' Ids of Students ' + formValues.eleveIds);
   };
 
   const handleInputChange = (
@@ -112,15 +114,15 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
     };
   }, [props]);
 
-  const extractIdFromString = (str: string): number | null => {
+  const extractIdFromString = (str: string): number[] => {
     const matches = str.match(/:(\d+)$/);
     if (matches && matches[1]) {
       const id = parseInt(matches[1], 10);
       if (!isNaN(id)) {
-        return id;
+        return [id];
       }
     }
-    return null;
+    return [];
   };
 
   const handleCreate = (_event: React.FormEvent) => {
@@ -179,7 +181,7 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
   };
 
   const handleUpdate = (_event: any) => {
-    // _event.preventDefault(); // stopper la soumissoin par defaut du formulaire...
+    _event.preventDefault(); // stopper la soumissoin par defaut du formulaire...
 
     const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
     const parentsApi = new ParentsApi({
@@ -205,8 +207,8 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
         formValues.profession,
         formValues.eleveIds,
         'Bearer ' + token,
-        formValues.parentId,
-        formValues.option
+        // formValues.option,
+        props.item?.id,
       )
       .then((response) => {
         if (response && response.data) {
@@ -307,39 +309,53 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
                     />
                   </div>
                   <div className="w-full xl:w-1/3">
-                      <label className="mb-2.5 block text-black dark:text-white">
-                        Tel <span className="text-meta-1">*</span>
-                      </label>
-                      <input
-                        name="tel"
-                        value={formValues.tel}
-                        onChange={handleInputChange}
-                        required
-                        type="text"
-                        placeholder="Le numero du parent"
-                        className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                      />
-                    </div>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                      Username <span className="text-meta-1">*</span>
+                    </label>
+                    <input
+                      name="username"
+                      value={formValues.username}
+                      onChange={handleInputChange}
+                      required
+                      type="text"
+                      placeholder="Enter your username"
+                      className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    />
+                  </div>
                 </div>
-
                 {/* row 2 class, serie, photo*/}
                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                  {/* <CustomSelectInput
-                    required={true}
-                    inputLabel="Salle de classe"
-                    inputPlaceholder="Saisir le nom d'une classe"
-                    wrapperStyle="w-full xl:w-1/3"
-                    labelStyle="mb-2.5 block text-black dark:text-white"
-                    inputStyle="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    maxHeightList={300}
-                    matchList={matchList}
-                    selectOptionEvent={handleOptionSelect}
-                    typingInputEvent={handleTypingInput}
-                  /> */}
-
+                  <div className="w-full xl:w-1/2">
+                    <label className="mb-2.5 block text-black dark:text-white">
+                      Email <span className="text-meta-1">*</span>
+                    </label>
+                    <input
+                      name="email"
+                      value={formValues.email}
+                      onChange={handleInputChange}
+                      required
+                      type="email"
+                      placeholder="Enter your Email Address"
+                      className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    />
+                  </div>
+                  <div className="w-full xl:w-1/3">
+                    <label className="mb-2.5 block text-black dark:text-white">
+                      Tel <span className="text-meta-1">*</span>
+                    </label>
+                    <input
+                      name="tel"
+                      value={formValues.tel}
+                      onChange={handleInputChange}
+                      required
+                      type="text"
+                      placeholder="Le numero du parent"
+                      className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    />
+                  </div>
                   <div className="w-full xl:w-5/6">
                     <label className="mb-3 block text-black dark:text-white">
-                      Ajouter un photo de profile
+                      Ajouter un photo de profil
                     </label>
                     <input
                       type="file"
@@ -376,21 +392,21 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
 
                   <div className="w-full xl:w-1/2">
                     <label className="mb-2.5 block text-black dark:text-white">
-                      Email <span className="text-meta-1">*</span>
+                      Profession <span className="text-meta-1">*</span>
                     </label>
                     <input
-                      name="email"
-                      value={formValues.email}
+                      name="profession"
+                      value={formValues.profession}
                       onChange={handleInputChange}
                       required
-                      type="email"
-                      placeholder="Enter your Email Address"
+                      type="string"
+                      placeholder="Enter your profession"
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                   </div>
                 </div>
 
-                {/* row 3 solvable, dateNaiss, lieuNaiss*/}
+                {/* row 3 solvable, dateDeNaissance, lieuDeNaissance*/}
 
                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
                   <div className="w-full xl:w-1/3 ">
@@ -422,6 +438,34 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                   </div>
+                  <CustomSelectInput
+                    required={true}
+                    inputLabel="Enfants"
+                    inputPlaceholder="Selectionner les differents enfants du parent"
+                    wrapperStyle="w-full xl:w-1/3"
+                    labelStyle="mb-2.5 block text-black dark:text-white"
+                    inputStyle="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    maxHeightList={300}
+                    matchList={matchList}
+                    selectOptionEvent={handleOptionSelect}
+                    typingInputEvent={handleTypingInput}
+                  />
+                  {/* <div className="w-full xl:w-1/2">
+                    <label className="mb-2.5 block text-black dark:text-white">
+                      Selectionner les enfants du parent <span className="text-meta-1">*</span>
+                    </label>
+                    <select
+                      name="eleveIds"
+                      value={formValues.eleveIds}
+                      onChange={handleInputChange}
+                      required
+                      type="text" 
+                      placeholder="Enter your Place of Birth"
+                      className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    multiple>
+                      
+                    </select>
+                  </div> */}
                 </div>
 
                 {/* row 5 create | update, annuler */}
@@ -467,7 +511,7 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
                     </button>
                   ) : null}
                   {props.mode !== MODAL_MODE.view &&
-                  props.mode === MODAL_MODE.update ? (
+                  props.mode === MODAL_MODE.update ?(
                     <button
                       onClick={handleUpdate}
                       disabled={isLoading}
