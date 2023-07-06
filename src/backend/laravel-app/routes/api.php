@@ -170,6 +170,7 @@ Route::middleware('jwt.verify')->group(function () {
     // Regle
     Route::prefix('regle')->group(function () {
         Route::get('findAll', [RegleController::class, 'index']);
+        Route::get('records/{keyword}', [RegleController::class, 'records']);
         Route::get('findOne/{regleId}', [RegleController::class, 'view']);
         Route::middleware('permission:creer_regle')->post('create', [RegleController::class, 'store']);
         Route::middleware('permission:modifier_regle')->post('update/{regleId}', [RegleController::class, 'update']);
@@ -230,7 +231,7 @@ Route::middleware('jwt.verify')->group(function () {
     //fautes
     Route::prefix('fautes')->group(function () {
         Route::middleware('permission:creer_faute')->post('create', [FauteController::class, 'store']);
-        Route::middleware('permission:modifier_faute')->put('update/{fauteId}', [FauteController::class, 'update']);
+        Route::middleware('permission:modifier_faute')->post('update/{fauteId}', [FauteController::class, 'update']);
         Route::middleware('permission:supprimer_faute')->delete('delete/{fauteId}', [FauteController::class, 'delete']);
         Route::get('findOne/{fauteId}', [FauteController::class, 'view']);
         Route::get('findAll', [FauteController::class, 'index']);

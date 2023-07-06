@@ -14,14 +14,12 @@
 /**
  * 
  * @export
+<<<<<<<< HEAD:src/frontend/web/react-admin/src/generated/models/inline-response20095.ts
  * @interface InlineResponse20095
  */
 export interface InlineResponse20095 {
     /**
      * 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
      * @type {string}
      * @memberof InlineResponse20095
 ========
@@ -38,22 +36,15 @@ export interface FauteUpdateBody {
     /**
      * 
 <<<<<<<< HEAD:src/frontend/web/react-admin/src/generated/models/inline-response20095.ts
->>>>>>> e67ecd3 (test)
-=======
->>>>>>> 5404348 (test)
      * @type {boolean}
      * @memberof InlineResponse20095
      */
     success?: any;
     /**
      * 
-     * @type {string}
+     * @type {User}
      * @memberof InlineResponse20095
      */
-<<<<<<< HEAD
-<<<<<<< HEAD
-    message?: any;
-=======
     data?: any;
 ========
      * @type {string}
@@ -73,8 +64,4 @@ export interface FauteUpdateBody {
      */
     regleId: any;
 >>>>>>>> 30fb157 (test):src/frontend/web/react-site/src/generated/models/faute-update-body.ts
->>>>>>> e67ecd3 (test)
-=======
-    message?: any;
->>>>>>> 5404348 (test)
 }

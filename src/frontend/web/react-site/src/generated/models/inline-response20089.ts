@@ -19,20 +19,33 @@
 export interface InlineResponse20089 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20089
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20089
      */
     success?: any;
     /**
      * 
-     * @type {Array&lt;Suggestion&gt;}
+     * @type {string}
      * @memberof InlineResponse20089
      */
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    message?: any;
+    /**
+     * 
+     * @type {Suggestion}
+     * @memberof InlineResponse20089
+     */
+<<<<<<< HEAD
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+=======
+>>>>>>> 33bab93 (test)
+>>>>>>> e67ecd3 (test)
     content?: any;
+=======
+    message?: any;
+>>>>>>> 5404348 (test)
 }

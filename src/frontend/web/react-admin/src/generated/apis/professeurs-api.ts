@@ -20,6 +20,32 @@ import { InlineResponse20062 } from '../models';
 import { InlineResponse20063 } from '../models';
 import { InlineResponse20064 } from '../models';
 import { InlineResponse20065 } from '../models';
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 3c60453 (Closes #311 -Ajusting home page)
+=======
+import { InlineResponse20061 } from '../models';
+import { InlineResponse20062 } from '../models';
+<<<<<<< HEAD
+import { InlineResponse20063 } from '../models';
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import { InlineResponse20064 } from '../models';
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
+=======
+import { InlineResponse20064 } from '../models';
+import { InlineResponse20091 } from '../models';
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+import { InlineResponse20090 } from '../models';
+>>>>>>> 33bab93 (test)
+>>>>>>> e67ecd3 (test)
+=======
+>>>>>>> 5404348 (test)
 import { InlineResponse2019 } from '../models';
 import { InlineResponse40024 } from '../models';
 import { InlineResponse40025 } from '../models';
@@ -504,6 +530,31 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+         * Delete an suggestion resource
+         * @summary Delete an suggestion
+         * @param {string} authorization JWT token
+         * @param {number} id ID of suggestion to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+<<<<<<< HEAD
+        async deleteSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
+=======
+        async deleteSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20090>> {
+>>>>>>> 33bab93 (test)
+            const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).deleteSuggestion(authorization, id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+>>>>>>> e67ecd3 (test)
+=======
+>>>>>>> 5404348 (test)
          * Retrieve a list of all professeurs
          * @summary Get all professeurs
          * @param {string} authorization JWT token
@@ -598,6 +649,27 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
             return ProfesseursApiFp(configuration).deleteProfesseur(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+         * Delete an suggestion resource
+         * @summary Delete an suggestion
+         * @param {string} authorization JWT token
+         * @param {number} id ID of suggestion to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+<<<<<<< HEAD
+        deleteSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20091> {
+=======
+        deleteSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20090> {
+>>>>>>> 33bab93 (test)
+            return ProfesseursApiFp(configuration).deleteSuggestion(authorization, id, options).then((request) => request(axios, basePath));
+        },
+        /**
+>>>>>>> e67ecd3 (test)
+=======
+>>>>>>> 5404348 (test)
          * Retrieve a list of all professeurs
          * @summary Get all professeurs
          * @param {string} authorization JWT token

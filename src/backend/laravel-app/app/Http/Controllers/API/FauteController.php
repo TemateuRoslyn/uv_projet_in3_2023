@@ -218,7 +218,7 @@ class FauteController extends Controller
 
 
 
-        /**
+    /**
      * @OA\Get(
      *     path="/api/fautes/findAll/eleveAndKeyword/{eleveId}/{keyword}",
      *     summary="Get mistake information for a student",
@@ -288,19 +288,19 @@ class FauteController extends Controller
 
         $fautes = Faute::where('libelle', 'like', "%{$keyword}%")->with(['eleve', 'regle.reglementInterieur'])->get();
         //dd($keyword);
-        $formattedFaute= $fautes->map(function ($faute) {
+        $formattedFaute = $fautes->map(function ($faute) {
             $name = $faute->libelle;
             $id = $faute->id;
-                return "{$name} :{$id}";
+            return "{$name} :{$id}";
         });
         //sdd($formattedFaute, $fautes);
 
-            return response()->json([
-                'message' => 'fautes de l\'eleve trouvé(e)',
-                'success' => true,
-                'content' => $formattedFaute,
-                'data' => $fautes
-            ], 200);
+        return response()->json([
+            'message' => 'fautes de l\'eleve trouvé(e)',
+            'success' => true,
+            'content' => $formattedFaute,
+            'data' => $fautes
+        ], 200);
         /* } else {
             return response()->json([
                 'message' => 'fautes de l\'eleve non trouvée',
@@ -441,12 +441,12 @@ class FauteController extends Controller
         ], 200);
     }
     /**
-     * @OA\put(
+     * @OA\post(
      *     path="/api/fautes/update/{fauteId}",
      *     summary="Update a mistake's information",
      *     description="Update a mistake's information",
-     *     operationId="updatemistake",
-     *     tags={"Faute"},
+     *     operationId="updateMistake",
+     *     tags={"Fautes"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -456,6 +456,15 @@ class FauteController extends Controller
      *             default="Bearer {your_token}"
      *         ),
      *         description="JWT token"
+     *     ),
+     *      @OA\Parameter(
+     *         name="fauteId",
+     *         in="path",
+     *         description="ID of mistake to update",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
      *     ),
      *      @OA\RequestBody(
      *         required=true,
@@ -505,10 +514,10 @@ class FauteController extends Controller
      * )
      */
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $fauteId)
     {
         // on récupère la faute associé
-        $fauteFound = Faute::find($id);
+        $fauteFound = Faute::find($fauteId);
         if ($fauteFound) {
 
             $validator = Validator::make($request->all(), [
@@ -655,9 +664,7 @@ class FauteController extends Controller
                 'message' => 'Mistake not found',
                 'success' => false
             ], 404);
-        }
-        else
-        {
+        } else {
 
             $faute->delete();
 
@@ -718,7 +725,7 @@ class FauteController extends Controller
     public function records($keyword)
     {
         $fautes = Faute::where('libelle', 'like', "%{$keyword}%")
-        ->get();
+            ->get();
 
         // dd($fautes);
 

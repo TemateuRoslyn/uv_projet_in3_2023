@@ -29,10 +29,13 @@ export interface InlineResponse40033Error {
      * @memberof InlineResponse40033Error
      */
     username?: any;
+<<<<<<< HEAD
     /**
      * 
      * @type {Array&lt;string&gt;}
      * @memberof InlineResponse40033Error
      */
     password?: any;
+=======
+>>>>>>> 7f9883a (test)
 }
