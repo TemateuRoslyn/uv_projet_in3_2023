@@ -14,7 +14,7 @@ import {
   STATUS,
   getClasseByName,
 } from '../../../constants/ITEMS';
-import CustomSelectInput from '../../../components/CustomSelects/CustomSelectInput';
+import CustomSelectInput from '../../../components/CustomSelects/CustomMultiSelectInput';
 
 interface ModalProps {
   mode: MODAL_MODE;

@@ -1,5 +1,4 @@
 import { ColDef, ValueGetterParams } from "ag-grid-community";
-import { Professeur } from "../../generated/models";
 import { ImageCellRender } from "../../components/AgGridCells/ImageCelleRender";
 import environment from "../../environments/environment";
 
