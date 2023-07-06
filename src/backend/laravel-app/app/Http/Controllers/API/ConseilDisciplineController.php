@@ -185,7 +185,7 @@ class ConseilDisciplineController extends Controller
     public function viewConseilDisciplineEleve($eleveId)
     {
 
-        $conseildiscipline = ConseilDiscipline::where('eleveId', $eleveId)->with(['eleve','faute.regle.reglementInterieur'])->get();
+        $conseildiscipline = ConseilDiscipline::where('eleveId', $eleveId)->with(['eleve', 'faute.regle.reglementInterieur'])->get();
 
 
         if ($conseildiscipline) {
@@ -309,7 +309,7 @@ class ConseilDisciplineController extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\put(
      *     path="/api/conseil_discipline/update/{conseilDisciplineId}",
      *     summary="Update a disciplinary council's information",
      *     description="Update a disciplinary council's information",
@@ -388,7 +388,7 @@ class ConseilDisciplineController extends Controller
     public function update(Request $request, $id)
     {
         $conseil_discipline = ConseilDiscipline::find($id);
-        if ($conseil_discipline){
+        if ($conseil_discipline) {
             $validator = Validator::make($request->all(), [
                 'dateCd' => 'required|date',
                 'heureDebutCd' => 'required|date_format:H:i:s',
@@ -396,7 +396,7 @@ class ConseilDisciplineController extends Controller
                 'eleveId' => 'required|integer|exists:eleves,id',
                 'fauteId' => 'required|integer:exists:fautes,id',
             ]);
-        }else{
+        } else {
             return response()->json([
                 'error' => 'Disciplinary council not found',
                 'success' => false
@@ -420,7 +420,7 @@ class ConseilDisciplineController extends Controller
         $conseil_discipline->save();
 
         //Information sur l'eleve qui assiste au conseil de discipline
-        $conseil_discipline->load('eleve','faute.regle.reglementInterieur');
+        $conseil_discipline->load('eleve', 'faute.regle.reglementInterieur');
 
         return response()->json([
             'success' => true,

@@ -112,7 +112,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll', [EleveController::class, 'index']);
         Route::get('records/{keyword}', [EleveController::class, 'records']);
 
-        Route::middleware('permission:modifier_eleve')->post('update/{eleveId}', [EleveController::class, 'update']);
+        Route::middleware('permission:modifier_eleve')->put('update/{eleveId}', [EleveController::class, 'update']);
         Route::middleware('permission:supprimer_eleve')->delete('delete/{eleveId}', [EleveController::class, 'delete']);
         Route::middleware('permission:creer_eleve')->post('create', [EleveController::class, 'store']);
     });
@@ -122,7 +122,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findOne/{sanctionprevuId}', [SanctionPrevuController::class, 'view']);
         Route::get('findAll', [SanctionPrevuController::class, 'index']);
 
-        Route::middleware('permission:modifier_sanction')->post('update/{sanctionprevuId}', [SanctionPrevuController::class, 'update']);
+        Route::middleware('permission:modifier_sanction')->put('update/{sanctionprevuId}', [SanctionPrevuController::class, 'update']);
         Route::middleware('permission:supprimer_sanction')->delete('delete/{sanctionprevuId}', [SanctionPrevuController::class, 'delete']);
         Route::middleware('permission:creer_sanction')->post('create', [SanctionPrevuController::class, 'store']);
     });
@@ -142,7 +142,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findOne/{notificationId}', [NotificationController::class, 'view']);
         Route::get('findAll/', [NotificationController::class, 'index']);
 
-        Route::middleware('permission:modifier_notification')->post('update/{notificationId}', [NotificationController::class, 'update']);
+        Route::middleware('permission:modifier_notification')->put('update/{notificationId}', [NotificationController::class, 'update']);
         Route::middleware('permission:supprimer_notification')->delete('delete/{notificationId}', [NotificationController::class, 'delete']);
         Route::middleware('permission:creer_notification')->post('create/', [NotificationController::class, 'store']);
     });
@@ -152,7 +152,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll', [ParentsController::class, 'index']);
         Route::get('findOne/{parentId}', [ParentsController::class, 'view']);
 
-        Route::middleware('permission:modifier_parent')->post('update/{parentId}', [ParentsController::class, 'update']);
+        Route::middleware('permission:modifier_parent')->put('update/{parentId}', [ParentsController::class, 'update']);
         Route::middleware('permission:creer_parent')->post('create', [ParentsController::class, 'store']);
         Route::middleware('permission:supprimer_parent')->delete('delete/{parentId}', [ParentsController::class, 'delete']);
     });
@@ -162,7 +162,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll', [ReglementInterieurController::class, 'index']);
         Route::get('findOne/{reglementId}', [ReglementInterieurController::class, 'view']);
         Route::middleware('permission:creer_reglement_interieure')->post('create', [ReglementInterieurController::class, 'store']);
-        Route::middleware('permission:modifier_reglement_interieure')->post('update/{reglementId}', [ReglementInterieurController::class, 'update']);
+        Route::middleware('permission:modifier_reglement_interieure')->put('update/{reglementId}', [ReglementInterieurController::class, 'update']);
         Route::middleware('permission:supprimer_reglement_interieure')->delete('delete/{reglementId}', [ReglementInterieurController::class, 'delete']);
     });
 
@@ -171,14 +171,14 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll', [RegleController::class, 'index']);
         Route::get('findOne/{regleId}', [RegleController::class, 'view']);
         Route::middleware('permission:creer_regle')->post('create', [RegleController::class, 'store']);
-        Route::middleware('permission:modifier_regle')->post('update/{regleId}', [RegleController::class, 'update']);
+        Route::middleware('permission:modifier_regle')->put('update/{regleId}', [RegleController::class, 'update']);
         Route::middleware('permission:supprimer_regle')->delete('delete/{regleId}', [RegleController::class, 'delete']);
     });
 
     // cours
     Route::prefix('cours')->group(function () {
         Route::middleware('permission:creer_cours')->post('create', [CourController::class, 'store']);
-        Route::middleware('permission:modifier_cours')->post('update/{coursId}', [CourController::class, 'update']);
+        Route::middleware('permission:modifier_cours')->put('update/{coursId}', [CourController::class, 'update']);
         Route::middleware('permission:supprimer_cours')->delete('delete/{coursId}', [CourController::class, 'delete']);
         Route::get('findOne/{coursId}', [CourController::class, 'show']);
         Route::get('findAll', [CourController::class, 'index']);
@@ -192,14 +192,14 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findOne/{personnelId}', [PersonnelController::class, 'view']);
 
         Route::middleware('permission:creer_personnel')->post('create', [PersonnelController::class, 'store']);
-        Route::middleware('permission:modifier_personnel')->post('update/{personnelId}', [PersonnelController::class, 'update']);
+        Route::middleware('permission:modifier_personnel')->put('update/{personnelId}', [PersonnelController::class, 'update']);
         Route::middleware('permission:supprimer_personnel')->delete('delete/{personnelId}', [PersonnelController::class, 'delete']);
     });
 
     //professeurs
     Route::prefix('professeurs')->group(function () {
         Route::middleware('permission:creer_professeur')->post('create', [ProfesseurController::class, 'store']);
-        Route::middleware('permission:modifier_professeur')->post('update/{professeurId}', [ProfesseurController::class, 'update']);
+        Route::middleware('permission:modifier_professeur')->put('update/{professeurId}', [ProfesseurController::class, 'update']);
         Route::middleware('permission:supprimer_professeur')->delete('delete/{professeurId}', [ProfesseurController::class, 'delete']);
         Route::get('findOne/{professeurId}', [ProfesseurController::class, 'view']);
         Route::get('findAll', [ProfesseurController::class, 'index']);
@@ -208,7 +208,7 @@ Route::middleware('jwt.verify')->group(function () {
     // conseil_disciplines
     Route::prefix('conseil_discipline')->group(function () {
         Route::middleware('permission:creer_conseil')->post('create', [ConseilDisciplineController::class, 'store']);
-        Route::middleware('permission:modifier_conseil')->post('update/{conseil_disciplineId}', [ConseilDisciplineController::class, 'update']);
+        Route::middleware('permission:modifier_conseil')->put('update/{conseil_disciplineId}', [ConseilDisciplineController::class, 'update']);
         Route::middleware('permission:supprimer_conseil')->delete('delete/{conseil_disciplineId}', [ConseilDisciplineController::class, 'delete']);
 
         Route::get('findOne/{conseil_disciplineId}', [ConseilDisciplineController::class, 'view']);
@@ -229,7 +229,7 @@ Route::middleware('jwt.verify')->group(function () {
     //fautes
     Route::prefix('fautes')->group(function () {
         Route::middleware('permission:creer_faute')->post('create', [FauteController::class, 'store']);
-        Route::middleware('permission:modifier_faute')->post('update/{fauteId}', [FauteController::class, 'update']);
+        Route::middleware('permission:modifier_faute')->put('update/{fauteId}', [FauteController::class, 'update']);
         Route::middleware('permission:supprimer_faute')->delete('delete/{fauteId}', [FauteController::class, 'delete']);
         Route::get('findOne/{fauteId}', [FauteController::class, 'view']);
         Route::get('findAll', [FauteController::class, 'index']);
@@ -239,7 +239,7 @@ Route::middleware('jwt.verify')->group(function () {
     //convocation
     Route::prefix('convocation')->group(function () {
         Route::middleware('permission:creer_convocation')->post('create', [ConvocationController::class, 'store']);
-        Route::middleware('permission:modifier_convocation')->post('update/{convocationId}', [ConvocationController::class, 'update']);
+        Route::middleware('permission:modifier_convocation')->put('update/{convocationId}', [ConvocationController::class, 'update']);
         Route::middleware('permission:supprimer_convocation')->delete('delete/{convocationId}', [ConvocationController::class, 'delete']);
         Route::get('findOne/{convocationId}', [ConvocationController::class, 'view']);
         Route::get('findAll', [ConvocationController::class, 'index']);
@@ -250,7 +250,7 @@ Route::middleware('jwt.verify')->group(function () {
     // suggestion
     Route::prefix('suggestion')->group(function () {
         Route::post('create', [SuggestionsController::class, 'store']);
-        Route::post('update/{suggestionId}', [SuggestionsController::class, 'update']);
+        Route::put('update/{suggestionId}', [SuggestionsController::class, 'update']);
         Route::delete('delete/{suggestionId}', [SuggestionsController::class, 'delete']);
         Route::get('findOne/{suggestionId}', [SuggestionsController::class, 'view']);
         Route::get('findAll', [SuggestionsController::class, 'index']);
@@ -261,7 +261,7 @@ Route::middleware('jwt.verify')->group(function () {
     //Reparations
     Route::prefix('reparations')->group(function () {
         Route::middleware('permission:creer_reparation')->post('create', [ReparationController::class, 'store']);
-        Route::middleware('permission:modifier_reparation')->post('update/{reparationId}', [ReparationController::class, 'update']);
+        Route::middleware('permission:modifier_reparation')->put('update/{reparationId}', [ReparationController::class, 'update']);
         Route::middleware('permission:supprimer_reparation')->delete('delete/{reparationId}', [ReparationController::class, 'delete']);
         Route::get('findOne/{reparationId}', [ReparationController::class, 'view']);
         Route::get('findAll', [ReparationController::class, 'index']);

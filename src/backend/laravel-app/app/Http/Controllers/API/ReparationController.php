@@ -230,7 +230,7 @@ class ReparationController extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\put(
      *     path="/api/reparations/update/{reparationId}",
      *     summary="Update a reparation's information",
      *     description="Update a reparation's information",
