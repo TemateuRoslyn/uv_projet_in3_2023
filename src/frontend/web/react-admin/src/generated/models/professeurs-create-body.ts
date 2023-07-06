@@ -77,4 +77,10 @@ export interface ProfesseursCreateBody {
      * @memberof ProfesseursCreateBody
      */
     courId: any;
+    /**
+     * 
+     * @type {Array&lt;number&gt;}
+     * @memberof ProfesseursCreateBody
+     */
+    classesId: any;
 }

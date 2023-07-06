@@ -237,9 +237,9 @@ class ProfesseurController extends Controller
             'sexe' => 'required',
             'telephone' => 'required',
             'statut' => 'required',
-            'courId' => 'required',
-
-
+            'courId' => 'required|integer|exists:cours,id',
+            'classesId' => 'required|array',
+            'classeId.*' => 'required|integer|exists:classes,id',
         ]);
 
         if ($validator->fails()) {
@@ -309,7 +309,7 @@ class ProfesseurController extends Controller
 
 
     /**
-     * @OA\Post(
+     * @OA\put(
      *     path="/api/professeurs/update/{professeurId}",
      *     summary="Update a professeur's information",
      *     description="Update a professeur's information",
@@ -415,7 +415,8 @@ class ProfesseurController extends Controller
                 'sexe' => 'required',
                 'telephone' => 'required',
                 'statut' => 'required',
-                'courId' => 'required',
+                'courId' => 'required|exists:cours,id',
+               'classesId' => 'required|array'
             ]);
         } else {
             return response()->json([

@@ -57,7 +57,7 @@ class SuggestionsController extends Controller
     }
 
 
-        /**
+    /**
      * @OA\Get(
      *     path="/api/suggestion/findOne/{id}",
      *     summary="Get suggestion information",
@@ -128,7 +128,7 @@ class SuggestionsController extends Controller
         ], 200);
     }
 
-   /**
+    /**
      * @OA\Post(
      *     path="/api/suggestion/create",
      *     summary="Create a new suggestion",
@@ -205,7 +205,7 @@ class SuggestionsController extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\put(
      *     path="/api/suggestion/update/{coursId}",
      *     summary="Update a suggestion's information",
      *     description="Update a suggestion's information",

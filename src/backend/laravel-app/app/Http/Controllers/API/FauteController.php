@@ -299,7 +299,7 @@ class FauteController extends Controller
         ], 200);
     }
     /**
-     * @OA\Post(
+     * @OA\put(
      *     path="/api/fautes/update/{fauteId}",
      *     summary="Update a mistake's information",
      *     description="Update a mistake's information",
@@ -372,8 +372,8 @@ class FauteController extends Controller
             $validator = Validator::make($request->all(), [
                 'libelle' => 'required|string|max:255',
                 'gravite' => 'required|string',
-                'eleveId' => 'required|integer',
-                'regleId' => 'required|integer',
+                'eleveId' => 'required|integer|exists:eleves,id',
+                'regleId' => 'required|integer|exists:regles,id',
             ]);
         } else {
             return response()->json([

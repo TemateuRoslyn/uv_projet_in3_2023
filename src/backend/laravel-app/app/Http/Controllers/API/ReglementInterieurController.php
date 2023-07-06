@@ -203,7 +203,7 @@ class ReglementInterieurController extends Controller
 
 
     /**
-     * @OA\Post(
+     * @OA\put(
      *     path="/api/reglement/update/{reglementId}",
      *     summary="Update a reglementInterieur's information",
      *     description="Update a reglementInterieur's information",

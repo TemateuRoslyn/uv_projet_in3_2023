@@ -271,8 +271,7 @@ class ConvocationController extends Controller
             'dateConvocation' => 'required|date',
             'dateRdv' => 'required|date',
             'statut' => 'required',
-            'personnelId' => 'required',
-            'eleveId' => 'required',
+            'personnelId' => 'required|exists:personnels,id',
 
         ]);
 
@@ -392,8 +391,7 @@ class ConvocationController extends Controller
                 'dateConvocation' => 'required|date',
                 'dateRdv' => 'required|date',
                 'statut' => 'required',
-                'personnelId' => 'required|integer',
-                'eleveId' => 'required|integer',
+                'personnelId' => 'required|integer|exists:personnels,id',
 
             ]);
         } else {

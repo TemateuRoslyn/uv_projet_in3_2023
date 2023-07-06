@@ -197,7 +197,7 @@ class ReparationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'demarcheMediation' => 'required',
-            'fauteId' => 'required'
+            'fauteId' => 'required|exists:fautes,id'
         ]);
 
         if ($validator->fails()) {
@@ -230,7 +230,7 @@ class ReparationController extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\put(
      *     path="/api/reparations/update/{reparationId}",
      *     summary="Update a reparation's information",
      *     description="Update a reparation's information",

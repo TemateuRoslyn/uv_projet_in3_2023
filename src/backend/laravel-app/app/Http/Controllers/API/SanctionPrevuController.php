@@ -124,10 +124,10 @@ class SanctionPrevuController extends Controller
     public function view($sanctionprevuId)
     {
         $sanctionprevu = SanctionPrevu::with('eleve')
-                        ->has('convocation')->with('convocation')
-                        ->has('regle')->with('regle')
-                        ->has('faute')->with('faute')
-                        ->find($sanctionprevuId);
+            ->has('convocation')->with('convocation')
+            ->has('regle')->with('regle')
+            ->has('faute')->with('faute')
+            ->find($sanctionprevuId);
 
         if ($sanctionprevu) {
             $sanctionprevuData = $sanctionprevu->toArray();
@@ -283,7 +283,7 @@ class SanctionPrevuController extends Controller
 
 
     /**
-     * @OA\Post(
+     * @OA\put(
      *     path="/api/sanctionprevus/update/{sanctionprevuId}",
      *     summary="Update a sanctionprevu's information",
      *     description="Update a sanctionprevu's information",

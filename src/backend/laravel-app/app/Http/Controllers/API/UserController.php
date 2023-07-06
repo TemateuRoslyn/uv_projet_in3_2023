@@ -27,7 +27,7 @@ class UserController extends Controller
      *             example="Bearer {your_token}"
      *         ),
      *         description="JWT token"
-     *     ),     
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
@@ -77,7 +77,7 @@ class UserController extends Controller
      *             example="Bearer {your_token}"
      *         ),
      *         description="JWT token"
-     *     ),     
+     *     ),
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -221,7 +221,7 @@ class UserController extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\put(
      *     path="/api/users/update/{id}",
      *     summary="Update a  user",
      *     tags={"Users"},
@@ -244,7 +244,7 @@ class UserController extends Controller
      *         @OA\Schema(
      *             type="integer"
      *         )
-     *     ),         
+     *     ),
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -332,7 +332,7 @@ class UserController extends Controller
      *             example="Bearer {your_token}"
      *         ),
      *         description="JWT token"
-     *     ),     
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="User deleted successfully",
