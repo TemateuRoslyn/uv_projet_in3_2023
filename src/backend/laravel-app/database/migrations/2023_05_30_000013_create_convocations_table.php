@@ -19,9 +19,9 @@ return new class extends Migration
             $table->date('dateRdv');
             $table->string('statut');
             $table->unsignedBigInteger('personnelId');
-            $table->foreign('personnelId')->references('id')->on('personnels');
+            $table->foreign('personnelId')->references('id')->on('personnels')->onDelete('cascade');
             $table->unsignedBigInteger('eleveId');
-            $table->foreign('eleveId')->references('id')->on('eleves');
+            $table->foreign('eleveId')->references('id')->on('eleves')->onDelete('cascade');
         });
     }
 

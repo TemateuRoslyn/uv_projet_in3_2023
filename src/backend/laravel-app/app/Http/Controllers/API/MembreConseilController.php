@@ -229,9 +229,9 @@ class MembreConseilController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'idChef' => 'required|integer|unique:personnels',
-            'idSurveillantG' => 'required|integer|unique:personnels',
-            'idRepresentantE' => 'required|integer|unique:parents'
+            'idChef' => 'required|integer',
+            'idSurveillantG' => 'required|integer',
+            'idRepresentantE' => 'required|integer'
         ]);
 
         if ($validator->fails()) {

@@ -11,12 +11,11 @@ use Illuminate\Support\Facades\Notification;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\SendEmailJob;
+use Illuminate\Validation\Rule;
 
 use App\Models\SanctionPrevu;
 use App\Models\Eleve;
 use App\Models\Faute;
-use App\Models\Convocation;
-use App\Models\Regle;
 
 class SanctionPrevuController extends Controller
 {
@@ -45,7 +44,7 @@ class SanctionPrevuController extends Controller
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
+     *             @OA\Property(property="message", type="string", example="Liste des sanctions prevus"),
      *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/SanctionPrevu"))
      *         )
      *     ),
@@ -60,7 +59,7 @@ class SanctionPrevuController extends Controller
      */
     public function index()
     {
-        $sanctionprevus = SanctionPrevu::with('eleve', 'convocation', 'regle', 'faute')->get();
+        $sanctionprevus = SanctionPrevu::with('eleve.user','faute.regle.reglementInterieur')->get();
 
         return response()->json([
             'message' => 'Liste des sanctions prevus',
@@ -123,10 +122,7 @@ class SanctionPrevuController extends Controller
      */
     public function view($sanctionprevuId)
     {
-        $sanctionprevu = SanctionPrevu::with('eleve')
-            ->has('convocation')->with('convocation')
-            ->has('regle')->with('regle')
-            ->has('faute')->with('faute')
+        $sanctionprevu = SanctionPrevu::with('eleve.user','faute.regle.reglementInterieur')
             ->find($sanctionprevuId);
 
         if ($sanctionprevu) {
@@ -146,6 +142,78 @@ class SanctionPrevuController extends Controller
     }
 
 
+    /**
+     * @OA\Get(
+     *     path="/api/sanctionprevus/findAll/eleve/{eleveId}",
+     *     summary="Get sanctionprevus information for a student",
+     *     description="Get information about all specific sanctionprevus to a student",
+     *     operationId="viewSanctionPrevusEleve",
+     *     tags={"sanctionprevus"},
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of Eleve to get information for",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Error - Not found",
+     *         @OA\JsonContent(
+     *               @OA\Property(property="message", type="string", example="sanctionprevus de l\'eleve non trouvé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="false"),
+     *
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="sanctionprevus de l\'eleve trouvé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/SanctionPrevu")
+     *         )
+     *     )
+     * )
+     */
+    public function viewSanctionPrevusEleve($eleveId)
+    {
+
+        $eleve = SanctionPrevu::where('eleveId', $eleveId)->with(['eleve.user', 'faute.regle.reglementInterieur'])->get();
+
+
+        if ($eleve) {
+            return response()->json([
+                'message' => 'sanctionprevus de l\'eleve trouvé(e)',
+                'success' => true,
+                'content' => $eleve
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'sanctionprevus de l\'eleve non trouvée',
+                'success' => false,
+            ], 404);
+        }
+    }
 
 
     /**
@@ -170,14 +238,10 @@ class SanctionPrevuController extends Controller
      *         @OA\MediaType(
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
-     *                 required={"libelle", "niveauGravite", "motif","dureeValidite","eleveId","convocationId","regleId","fauteId"},
+     *                 required={"libelle","dureeValidite","eleveId","fauteId"},
      *                 @OA\Property(property="libelle", type="string", example="libelle de la sanction"),
-     *                 @OA\Property(property="niveauGravite", type="string", example="niveau de la Gravite"),
-     *                 @OA\Property(property="motif", type="string", example="motif de la sanction"),
      *                 @OA\Property(property="dureeValidite", type="date", example="duree de la Validite de la sanction"),
      *                 @OA\Property(property="eleveId", type="integer", example=1),
-     *                 @OA\Property(property="convocationId", type="integer", example=1),
-     *                 @OA\Property(property="regleId", type="integer", example=1),
      *                 @OA\Property(property="fauteId", type="integer", example=1),
      *             )
      *         )
@@ -190,9 +254,6 @@ class SanctionPrevuController extends Controller
      *                 "libelle": {
      *                     "The libelle field is required."
      *                 },
-     *                 "regleId": {
-     *                     "The regleId field is required."
-     *                 }
      *             })
      *         )
      *     ),
@@ -208,9 +269,6 @@ class SanctionPrevuController extends Controller
      *         description="Error - Validation failed",
      *         @OA\JsonContent(
      *             @OA\Property(property="error", type="object", example={
-     *                 "regleId": {
-     *                     "The regleId must be a positive number."
-     *                 },
      *                 "libelle": {
      *                     "The libelle must be at least 8 characters."
      *                 },
@@ -236,13 +294,21 @@ class SanctionPrevuController extends Controller
 
         $validator = Validator::make($request->all(), [
             'libelle' => 'required|string',
-            'niveauGravite' => 'required|string',
-            'motif' => 'required|string',
             'dureeValidite' => 'required|date',
-            'eleveId' => 'required|integer|unique:eleve',
-            'convocationId' => 'required|integer|unique:convocation',
-            'regleId' => 'required|integer|unique:regle',
-            'fauteId' => 'required|integer|unique:faute',
+            'eleveId' => [
+                'required',
+                'integer',
+                Rule::exists('eleves', 'id')->where(function ($query) use ($request) {
+                    $query->where('id', $request->eleveId);
+                })
+            ],
+            'fauteId' => [
+                'required',
+                'integer',
+                Rule::exists('fautes', 'id')->where(function ($query) use ($request) {
+                    $query->where('id', $request->fauteId);
+                })
+            ],
         ]);
 
         if ($validator->fails()) {
@@ -255,24 +321,49 @@ class SanctionPrevuController extends Controller
 
         $sanctionprevu = SanctionPrevu::create([
             'eleveId' => $request->input('eleveId'),
-            'convocationId' => $request->input('convocationId'),
-            'regleId' => $request->input('regleId'),
             'fauteId' => $request->input('fauteId'),
             'libelle' => $request->input('libelle'),
-            'niveauGravite' => $request->input('niveauGravite'),
-            'motif' => $request->input('motif'),
             'dureeValidite' => $request->input('dureeValidite'),
         ]);
 
         $eleve = Eleve::find($request->eleveId);
-        $convocation = Convocation::find($request->convocationId);
-        $regle = Regle::find($request->regleId);
-        $faute = Faute::find($request->fauteId);
+        $parents = $eleve->parents;
+
+        $faute = Faute::with('regle.reglementInterieur')->find($request->fauteId);
 
         $sanctionprevu->eleve = $eleve;
-        $sanctionprevu->convocation = $convocation;
-        $sanctionprevu->regle = $regle;
         $sanctionprevu->faute = $faute;
+
+        //envoie du mail a l'eleve
+        $details = array();
+
+        $details['greeting'] = "Hi " . $eleve->firstName;
+        $details['body'] = "Vous avez recu une sanction ( $sanctionprevu->libelle ) car vous avez enfrein une une des regles de l'etablissement .
+                            \n
+                            \n  Cet etablissement est un lieu d'apprentissage, ou doit reigner le travail et la discipline. Pour nous aider a faire de vous des Hommes de demain, vous devez connaitre et respecter les regles et reglements interieurs de l'etablissement renseignes sur la plateforme .";
+        $details['actiontext'] = "Details de la Sanction";
+        $details['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
+        $details['endtext'] = "Merci de rester fidele à cet etablissement";
+
+        // envoi du mail
+        Queue::push(new SendEmailJob($eleve->user, $details));
+
+        //envoie du mail aux parents
+        foreach ($parents as $parent) {
+            $detailsP = array();
+
+            $detailsP['greeting'] = "Hi " . $parent->firstName;
+            $detailsP['body'] = "Votre enfant " . $eleve->firstName . $eleve->lastName . " a recu une sanction ( $sanctionprevu->libelle ) car il/elle a enfrein une une des regles de l'etablissement .
+                                \n
+                                \n  Cet etablissement est un lieu d'apprentissage, ou doit reigner le travail et la discipline. Pour nous aider a faire de votre enfant un Homme ( une Femme ) de demain, vous devez veiller a la bonne education de votre enfant et de lui faire connaitre et respecter les regles et reglements interieurs de l'etablissement renseignes sur la plateforme .";
+            $detailsP['actiontext'] = "Details de la Sanction";
+            $detailsP['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
+            $detailsP['endtext'] = "Merci de rester fidele à cet etablissement";
+
+            // envoi du mail
+            Queue::push(new SendEmailJob($parent->user, $detailsP));
+            $detailsP = array();
+        }
 
         return response()->json([
             'message' => 'SanctionPrevu created successfully',
@@ -313,14 +404,10 @@ class SanctionPrevuController extends Controller
      *         @OA\MediaType(
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
-     *                 required={"libelle", "niveauGravite", "motif","dureeValidite","eleveId","convocationId","regleId","fauteId"},
+     *                 required={"libelle","dureeValidite","eleveId","fauteId"},
      *                 @OA\Property(property="libelle", type="string", example="libelle de la sanction"),
-     *                 @OA\Property(property="niveauGravite", type="string", example="niveau de la Gravite"),
-     *                 @OA\Property(property="motif", type="string", example="motif de la sanction"),
      *                 @OA\Property(property="dureeValidite", type="date", example="duree de la Validite de la sanction"),
      *                 @OA\Property(property="eleveId", type="integer", example=1),
-     *                 @OA\Property(property="convocationId", type="integer", example=1),
-     *                 @OA\Property(property="regleId", type="integer", example=1),
      *                 @OA\Property(property="fauteId", type="integer", example=1),
      *             )
      *         )
@@ -335,9 +422,6 @@ class SanctionPrevuController extends Controller
      *                 "eleveId": {
      *                     "The eleveId field is required."
      *                 },
-     *                 "convocationId": {
-     *                     "The convocationId field is required."
-     *                 }
      *             })
      *         )
      *     ),
@@ -375,13 +459,21 @@ class SanctionPrevuController extends Controller
         if ($sanctionprevuFound) {
             $validator = Validator::make($request->all(), [
                 'libelle' => 'required|string',
-                'niveauGravite' => 'required|string',
-                'motif' => 'required|string',
                 'dureeValidite' => 'required|date',
-                'eleveId' => 'required|integer|unique:eleve',
-                'convocationId' => 'required|integer|unique:convocation',
-                'regleId' => 'required|integer|unique:regle',
-                'fauteId' => 'required|integer|unique:faute',
+                'eleveId' => [
+                    'required',
+                    'integer',
+                    Rule::exists('eleves', 'id')->where(function ($query) use ($request) {
+                        $query->where('id', $request->eleveId);
+                    })
+                ],
+                'fauteId' => [
+                    'required',
+                    'integer',
+                    Rule::exists('fautes', 'id')->where(function ($query) use ($request) {
+                        $query->where('id', $request->fauteId);
+                    })
+                ],
             ]);
         } else {
             return response()->json([
@@ -400,25 +492,50 @@ class SanctionPrevuController extends Controller
 
         // Mise à jour des champs de l'objet SanctionPrevu
         $sanctionprevuFound->libelle = $request->input('libelle');
-        $sanctionprevuFound->niveauGravite = $request->input('niveauGravite');
-        $sanctionprevuFound->motif = $request->input('motif');
         $sanctionprevuFound->dureeValidite = $request->input('dureeValidite');
         $sanctionprevuFound->eleveId = $request->input('eleveId');
-        $sanctionprevuFound->convocationId = $request->input('convocationId');
-        $sanctionprevuFound->regleId = $request->input('regleId');
         $sanctionprevuFound->fauteId = $request->input('fauteId');
 
         $sanctionprevuFound->save();
 
         $eleve = Eleve::find($request->eleveId);
-        $convocation = Convocation::find($request->convocationId);
-        $regle = Regle::find($request->regleId);
-        $faute = Faute::find($request->fauteId);
+        $parents = $eleve->parents;
+        $faute = Faute::with('regle.reglementInterieur')->find($request->fauteId);
 
         $sanctionprevuFound->eleve = $eleve;
-        $sanctionprevuFound->convocation = $convocation;
-        $sanctionprevuFound->regle = $regle;
         $sanctionprevuFound->faute = $faute;
+
+        //envoie du mail a l'eleve
+        $details = array();
+
+        $details['greeting'] = "Hi " . $eleve->firstName;
+        $details['body'] = "Vous avez recu une sanction ( $sanctionprevuFound->libelle ) car vous avez enfrein une une des regles de l'etablissement .
+                            \n
+                            \n  Cet etablissement est un lieu d'apprentissage, ou doit reigner le travail et la discipline. Pour nous aider a faire de vous des Hommes de demain, vous devez connaitre et respecter les regles et reglements interieurs de l'etablissement renseignes sur la plateforme .";
+        $details['actiontext'] = "Details de la Sanction";
+        $details['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
+        $details['endtext'] = "Merci de rester fidele à cet etablissement";
+
+        // envoi du mail
+        Queue::push(new SendEmailJob($eleve->user, $details));
+
+        //envoie du mail aux parents
+        foreach ($parents as $parent) {
+            $detailsP = array();
+
+            $detailsP['greeting'] = "Hi " . $parent->firstName;
+            $detailsP['body'] = "Votre enfant " . $eleve->firstName . $eleve->lastName . " a recu une sanction ( $sanctionprevuFound->libelle ) car il/elle a enfrein une une des regles de l'etablissement .
+                                \n
+                                \n  Cet etablissement est un lieu d'apprentissage, ou doit reigner le travail et la discipline. Pour nous aider a faire de votre enfant un Homme ( une Femme ) de demain, vous devez veiller a la bonne education de votre enfant et de lui faire connaitre et respecter les regles et reglements interieurs de l'etablissement renseignes sur la plateforme .";
+            $detailsP['actiontext'] = "Details de la Sanction";
+            $detailsP['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
+            $detailsP['endtext'] = "Merci de rester fidele à cet etablissement";
+
+            // envoi du mail
+            Queue::push(new SendEmailJob($parent->user, $detailsP));
+            $detailsP = array();
+        }
+
 
         return response()->json([
             'message' => 'SanctionPrevu updated successfully',

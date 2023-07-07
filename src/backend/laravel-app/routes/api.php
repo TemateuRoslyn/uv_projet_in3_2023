@@ -121,6 +121,7 @@ Route::middleware('jwt.verify')->group(function () {
     Route::prefix('sanctionprevus')->group(function () {
         Route::get('findOne/{sanctionprevuId}', [SanctionPrevuController::class, 'view']);
         Route::get('findAll', [SanctionPrevuController::class, 'index']);
+        Route::get('findAll/eleve/{eleveId}', [SanctionPrevuController::class, 'viewSanctionPrevusEleve']);
 
         Route::middleware('permission:modifier_sanction')->put('update/{sanctionprevuId}', [SanctionPrevuController::class, 'update']);
         Route::middleware('permission:supprimer_sanction')->delete('delete/{sanctionprevuId}', [SanctionPrevuController::class, 'delete']);

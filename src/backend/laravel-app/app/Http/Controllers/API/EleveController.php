@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Notification;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\SendEmailJob;
+use App\Notifications\SendEmailNotification;
 
 use App\Models\Eleve;
 use App\Models\Classe;
@@ -326,19 +327,19 @@ class EleveController extends Controller
         }
 
         //envoie du mail a l'utilisateur
-        // $details = array();
+        $details = array();
 
-        // $details['greeting'] = "Hi " . $eleve->firstName;
-        // $details['body'] = "Veuillez Modifier votre mot de passe pour assurer la confidentialite de vos donnees et de vos actions au sein de la plateforme .
-        //                     \n Mot de passe actuel: $user->email
-        //                     \n Login actuel: $user->email
-        //                     Pour cela, veuillez cliquer sur le ce lien pour proceder la la mise a jour de votre mot de passe .";
-        // $details['actiontext'] = "Modifier mon mot de passe";
-        // $details['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
-        // $details['endtext'] = "Merci de rester fidele à cet etablissement";
+        $details['greeting'] = "Hi " . $eleve->firstName;
+        $details['body'] = "Veuillez Modifier votre mot de passe pour assurer la confidentialite de vos donnees et de vos actions au sein de la plateforme .
+                            \n Mot de passe actuel: $user->email
+                            \n Login actuel: $user->email
+                            Pour cela, veuillez cliquer sur le ce lien pour proceder la la mise a jour de votre mot de passe .";
+        $details['actiontext'] = "Modifier mon mot de passe";
+        $details['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
+        $details['endtext'] = "Merci de rester fidele à cet etablissement";
 
-        // // envoi du mail
-        // Queue::push(new SendEmailJob($user, $details));
+        // envoi du mail
+        Queue::push(new SendEmailJob($user, $details));
 
         return response()->json([
             'message' => 'Eleve created successfully',
@@ -599,8 +600,16 @@ class EleveController extends Controller
                 Storage::delete($eleveFound->photo);
             }
 
+            //recherche le parent associe a l'eleve
+            $parent = $eleveFound->parent;
+
             //suppression de l'eleve
             $eleveFound->delete();
+
+            //Verifie si l'eleve etait le dernier en fant du parent si oui supprime le parent
+            if ($parent && $parent->eleves->isEmpty()) {
+                $parent->delete();
+            }
 
             // update de classe de l'eleve...
             $classe = Classe::find($eleveFound->classeId);
