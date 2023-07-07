@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('libelle');
             $table->string('gravite');
             $table->unsignedBigInteger('eleveId');
-            $table->foreign('eleveId')->references('id')->on('eleves');
+            $table->foreign('eleveId')->references('id')->on('eleves')->onDelete('cascade');
             $table->unsignedBigInteger('regleId');
             $table->foreign('regleId')->references('id')->on('regles')->onDelete('cascade');
         });

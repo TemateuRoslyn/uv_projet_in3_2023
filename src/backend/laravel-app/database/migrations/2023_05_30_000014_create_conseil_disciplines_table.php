@@ -17,9 +17,9 @@ return new class extends Migration
             $table->time('heureDebutCd');
             $table->time('heureFinCd');
             $table->unsignedBigInteger('eleveId');
-            $table->foreign('eleveId')->references('id')->on('eleves');
+            $table->foreign('eleveId')->references('id')->on('eleves')->onDelete('cascade');
             $table->unsignedBigInteger('fauteId');
-            $table->foreign('fauteId')->references('id')->on('fautes');
+            $table->foreign('fauteId')->references('id')->on('fautes')->onDelete('cascade');
             $table->timestamps();
         });
     }
