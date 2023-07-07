@@ -31,7 +31,7 @@ export interface InlineResponse20088 {
     success?: any;
     /**
      * 
-     * @type {Suggestion}
+     * @type {Array&lt;Suggestion&gt;}
      * @memberof InlineResponse20088
      */
     content?: any;

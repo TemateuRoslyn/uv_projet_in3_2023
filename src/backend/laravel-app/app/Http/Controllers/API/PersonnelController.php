@@ -321,7 +321,7 @@ class PersonnelController extends Controller
     }
 
     /**
-     * @OA\Put(
+     * @OA\Post(
      *     path="/api/personnel/update/{personnelId}",
      *     summary="Update a personel's information",
      *     description="Update a personel's information",

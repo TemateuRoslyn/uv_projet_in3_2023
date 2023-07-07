@@ -20,7 +20,7 @@ import { InlineResponse20061 } from '../models';
 import { InlineResponse20062 } from '../models';
 import { InlineResponse20063 } from '../models';
 import { InlineResponse20064 } from '../models';
-import { InlineResponse20091 } from '../models';
+import { InlineResponse20092 } from '../models';
 import { InlineResponse2019 } from '../models';
 import { InlineResponse40024 } from '../models';
 import { InlineResponse40025 } from '../models';
@@ -28,7 +28,7 @@ import { InlineResponse401 } from '../models';
 import { InlineResponse40430 } from '../models';
 import { InlineResponse40431 } from '../models';
 import { InlineResponse40432 } from '../models';
-import { InlineResponse40445 } from '../models';
+import { InlineResponse40446 } from '../models';
 import { InlineResponse4225 } from '../models';
 /**
  * ProfesseursApi - axios parameter creator
@@ -562,7 +562,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
+        async deleteSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20092>> {
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).deleteSuggestion(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -671,7 +671,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20091> {
+        deleteSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20092> {
             return ProfesseursApiFp(configuration).deleteSuggestion(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**

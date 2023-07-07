@@ -193,7 +193,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findOne/{personnelId}', [PersonnelController::class, 'view']);
 
         Route::middleware('permission:creer_personnel')->post('create', [PersonnelController::class, 'store']);
-        Route::middleware('permission:modifier_personnel')->put('update/{personnelId}', [PersonnelController::class, 'update']);
+        Route::middleware('permission:modifier_personnel')->post('update/{personnelId}', [PersonnelController::class, 'update']);
         Route::middleware('permission:supprimer_personnel')->delete('delete/{personnelId}', [PersonnelController::class, 'delete']);
     });
 
