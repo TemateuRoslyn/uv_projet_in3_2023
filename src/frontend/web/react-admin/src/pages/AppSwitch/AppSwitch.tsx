@@ -23,7 +23,7 @@ import AdminPermissionForm from '../Admin/AdminPermissionForm';
 import UserGrid from '../Admin/AdminUser';
 import AddFaults from '../Admin/Faults/AddFaults';
 import FaultsGrid from '../Admin/Faults/FaultsGrid';
-//import Convocations from '../Convocation/Convocation.page';
+import Convocations from '../Convocation/Convocation.page';
 
 import { connect, useSelector } from 'react-redux';
 import { ReduxProps } from '../../redux/configureStore';
@@ -34,7 +34,7 @@ import Classes from '../Classe/Classes.page';
 import Eleves from '../Eleve/Eleves.page';
 import ReglementInterieurPage from '../ReglementInterieur/ReglementInterieur.page';
 import ReglePage from '../Regle/Regle.page';
-
+import ConseilDisciplines from '../ConseilDiscipline/ConseilDiscipline.page';
 interface AppSwitchProps {
   isLoggedIn: boolean;
 }
@@ -77,8 +77,8 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
         <Route path="/faults/faults" element={<FaultsGrid />} />
         <Route path="/reglements" element={<ReglementInterieurPage />} />
         <Route path="/regles" element={<ReglePage />} />
-        {/* <Route path="/convocations" element={<Convocations/>} />
-         */}
+        <Route path="/convocations" element={<Convocations />} />
+        <Route path="/conseilDiscipline" element={<ConseilDisciplines />} />
       </Routes>
     );
   } else {

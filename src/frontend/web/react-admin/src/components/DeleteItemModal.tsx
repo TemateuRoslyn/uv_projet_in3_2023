@@ -72,6 +72,7 @@ export const DeleteItemModal: React.FC<NotificationModalProps> = (props) => {
               No, annuler
             </button>
           </div>
+          DisplayConvocations
         </div>
       </div>
     </div>

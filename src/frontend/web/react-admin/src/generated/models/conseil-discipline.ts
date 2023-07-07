@@ -55,6 +55,18 @@ export interface ConseilDiscipline {
     eleve?: any;
     /**
      * 
+     * @type {number}
+     * @memberof ConseilDiscipline
+     */
+    fauteId?: any;
+    /**
+     * 
+     * @type {Faute}
+     * @memberof ConseilDiscipline
+     */
+    faute?: any;
+    /**
+     * 
      * @type {BaseModelpropertiescreatedAt}
      * @memberof ConseilDiscipline
      */

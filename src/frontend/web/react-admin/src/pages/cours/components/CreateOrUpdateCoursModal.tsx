@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { MODAL_MODE } from '../../../constants/ENUM';
 import { EditIcon, NewIcon } from '../../../components/Icone';
 import {
-  Cours,
+  Classe,
+  Cour,
   CoursCreateBody,
+  Professeur,
   UpdateCoursIdBody,
 } from '../../../generated/models';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
@@ -11,13 +13,14 @@ import { CoursApi } from '../../../generated';
 import { useSelector } from 'react-redux';
 import { ReduxProps } from '../../../redux/configureStore';
 import Indicator from '../../Authentication/components/Indicator';
+import CustomMultiSelectInput from '../../../components/CustomSelects/CustomMultiSelectInput';
 
 interface ModalProps {
   mode: MODAL_MODE;
   title: string;
   onClose: () => void;
   refresh?: () => void;
-  item?: Cours | null;
+  item?: Cour | null;
 
   setShowSuccessNotif: (value: boolean) => void;
   setSuccessNotifMessage: (value: string) => void;
@@ -36,20 +39,24 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
     props.item ? props.item.libelle : ''
   );
   const [dateCour, setDateCour] = useState<string>(
-    props.item ? props.item.date_cour : ''
+    props.item ? props.item.dateCour : ''
   );
   const [heureDebut, setHeureDebut] = useState<string>(
-    props.item ? props.item.heure_debut : ''
+    props.item ? props.item.heureDebut : ''
   );
   const [heureFin, setHeureFin] = useState<string>(
-    props.item ? props.item.heure_fin : ''
+    props.item ? props.item.heureFin : ''
   );
+    const [selectedClasses, setSelectedClasses]  = useState<Classe[]>( props.item? props.item.classes: []);
+
+    const [professeur, setProfesseur] = useState<Professeur>(props.item? props.item.professeur : '');
 
   const handleLibelleChange = (event: any) => setLibelle(event.target.value);
   const handleDateCourChange = (event: any) => setDateCour(event.target.value);
   const handleHeureDebutChange = (event: any) =>
     setHeureDebut(event.target.value);
   const handleHeureFinChange = (event: any) => setHeureFin(event.target.value);
+
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -63,6 +70,8 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
     };
   }, [props]);
 
+  console.log(props.item);
+
   const handleCreate = (_event: any) => {
     _event.preventDefault();
 
@@ -73,9 +82,10 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
 
     const apiParams: CoursCreateBody = {
       libelle: libelle,
-      date_cour: dateCour,
-      heure_debut: heureDebut,
-      heure_fin: heureFin,
+      dateCour: dateCour,
+      heureDebut: heureDebut,
+      heureFin: heureFin,
+      classesId: selectedClasses,
     };
     console.log(apiParams);
     coursApi
@@ -115,11 +125,10 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
     setIsLoading(true);
 
     const apiParams: UpdateCoursIdBody = {
-      id: props.item?.id,
       libelle: libelle,
-      date_cour: dateCour,
-      heure_debut: heureDebut,
-      heure_fin: heureFin,
+      dateCour: dateCour,
+      heureDebut: heureDebut,
+      heureFin: heureFin,
     };
 
     coursApi
@@ -201,6 +210,11 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
                   className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black ${
                     props.mode === MODAL_MODE.view ? 'disabled-input' : ''
                   }`}
+                />
+              </div>
+              <div className='form-group'>
+                <CustomMultiSelectInput 
+                
                 />
               </div>
               <div className="form-group">

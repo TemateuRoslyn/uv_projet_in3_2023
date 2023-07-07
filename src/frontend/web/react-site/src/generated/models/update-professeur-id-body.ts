@@ -77,10 +77,4 @@ export interface UpdateProfesseurIdBody {
      * @memberof UpdateProfesseurIdBody
      */
     courId: any;
-    /**
-     * 
-     * @type {Array&lt;number&gt;}
-     * @memberof UpdateProfesseurIdBody
-     */
-    classesId: any;
 }

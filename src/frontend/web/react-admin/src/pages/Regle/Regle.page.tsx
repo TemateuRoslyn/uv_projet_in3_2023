@@ -55,11 +55,11 @@ const ReglePage = () => {
     setIsLoading(true);
 
     regleApi
-      .findAllRegles('Bearer ' + apiParams)
+      .reglesIndex('Bearer ' + apiParams)
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {
-            setRegle(response.data.data);
+            setRegle(response.data.content);
           }
         }
       })
