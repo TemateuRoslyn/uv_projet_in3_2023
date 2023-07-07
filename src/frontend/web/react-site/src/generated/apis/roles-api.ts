@@ -16,10 +16,10 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { InlineResponse20078 } from '../models';
 import { InlineResponse20079 } from '../models';
 import { InlineResponse20080 } from '../models';
 import { InlineResponse20081 } from '../models';
-import { InlineResponse20082 } from '../models';
 import { InlineResponse20111 } from '../models';
 import { InlineResponse40032 } from '../models';
 import { InlineResponse40033 } from '../models';
@@ -379,7 +379,7 @@ export const RolesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteRole(authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20082>> {
+        async deleteRole(authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20081>> {
             const localVarAxiosArgs = await RolesApiAxiosParamCreator(configuration).deleteRole(authorization, roleId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -395,7 +395,7 @@ export const RolesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20081>> {
+        async roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20080>> {
             const localVarAxiosArgs = await RolesApiAxiosParamCreator(configuration).roleUpdateStatus(body, authorization, roleId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -409,7 +409,7 @@ export const RolesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rolesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20079>> {
+        async rolesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20078>> {
             const localVarAxiosArgs = await RolesApiAxiosParamCreator(configuration).rolesIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -425,7 +425,7 @@ export const RolesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20080>> {
+        async updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20079>> {
             const localVarAxiosArgs = await RolesApiAxiosParamCreator(configuration).updateRole(body, authorization, roleId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -475,7 +475,7 @@ export const RolesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteRole(authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20082> {
+        deleteRole(authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20081> {
             return RolesApiFp(configuration).deleteRole(authorization, roleId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -487,7 +487,7 @@ export const RolesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20081> {
+        roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20080> {
             return RolesApiFp(configuration).roleUpdateStatus(body, authorization, roleId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -497,7 +497,7 @@ export const RolesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rolesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20079> {
+        rolesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20078> {
             return RolesApiFp(configuration).rolesIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -509,7 +509,7 @@ export const RolesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20080> {
+        updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20079> {
             return RolesApiFp(configuration).updateRole(body, authorization, roleId, options).then((request) => request(axios, basePath));
         },
         /**

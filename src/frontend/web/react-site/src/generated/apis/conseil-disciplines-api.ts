@@ -223,11 +223,10 @@ export const ConseilDisciplinesApiAxiosParamCreator = function (configuration?: 
          * @summary Update a disciplinary council's information
          * @param {UpdateConseilDisciplineIdBody} body 
          * @param {string} authorization JWT token
-         * @param {number} conseilDisciplineId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateConseilDiscipline: async (body: UpdateConseilDisciplineIdBody, authorization: string, conseilDisciplineId: number, options: any = {}): Promise<RequestArgs> => {
+        updateConseilDiscipline: async (body: UpdateConseilDisciplineIdBody, authorization: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling updateConseilDiscipline.');
@@ -236,12 +235,7 @@ export const ConseilDisciplinesApiAxiosParamCreator = function (configuration?: 
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling updateConseilDiscipline.');
             }
-            // verify required parameter 'conseilDisciplineId' is not null or undefined
-            if (conseilDisciplineId === null || conseilDisciplineId === undefined) {
-                throw new RequiredError('conseilDisciplineId','Required parameter conseilDisciplineId was null or undefined when calling updateConseilDiscipline.');
-            }
-            const localVarPath = `/api/conseil_discipline/update/{conseilDisciplineId}`
-                .replace(`{${"conseilDisciplineId"}}`, encodeURIComponent(String(conseilDisciplineId)));
+            const localVarPath = `/api/conseil_discipline/update/{conseilDisciplineId}`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -436,12 +430,11 @@ export const ConseilDisciplinesApiFp = function(configuration?: Configuration) {
          * @summary Update a disciplinary council's information
          * @param {UpdateConseilDisciplineIdBody} body 
          * @param {string} authorization JWT token
-         * @param {number} conseilDisciplineId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateConseilDiscipline(body: UpdateConseilDisciplineIdBody, authorization: string, conseilDisciplineId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20016>> {
-            const localVarAxiosArgs = await ConseilDisciplinesApiAxiosParamCreator(configuration).updateConseilDiscipline(body, authorization, conseilDisciplineId, options);
+        async updateConseilDiscipline(body: UpdateConseilDisciplineIdBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20016>> {
+            const localVarAxiosArgs = await ConseilDisciplinesApiAxiosParamCreator(configuration).updateConseilDiscipline(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -527,12 +520,11 @@ export const ConseilDisciplinesApiFactory = function (configuration?: Configurat
          * @summary Update a disciplinary council's information
          * @param {UpdateConseilDisciplineIdBody} body 
          * @param {string} authorization JWT token
-         * @param {number} conseilDisciplineId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateConseilDiscipline(body: UpdateConseilDisciplineIdBody, authorization: string, conseilDisciplineId: number, options?: any): AxiosPromise<InlineResponse20016> {
-            return ConseilDisciplinesApiFp(configuration).updateConseilDiscipline(body, authorization, conseilDisciplineId, options).then((request) => request(axios, basePath));
+        updateConseilDiscipline(body: UpdateConseilDisciplineIdBody, authorization: string, options?: any): AxiosPromise<InlineResponse20016> {
+            return ConseilDisciplinesApiFp(configuration).updateConseilDiscipline(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Get information about a specific disciplinary council
@@ -610,13 +602,12 @@ export class ConseilDisciplinesApi extends BaseAPI {
      * @summary Update a disciplinary council's information
      * @param {UpdateConseilDisciplineIdBody} body 
      * @param {string} authorization JWT token
-     * @param {number} conseilDisciplineId ID of eleve to update in this request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ConseilDisciplinesApi
      */
-    public updateConseilDiscipline(body: UpdateConseilDisciplineIdBody, authorization: string, conseilDisciplineId: number, options?: any) {
-        return ConseilDisciplinesApiFp(this.configuration).updateConseilDiscipline(body, authorization, conseilDisciplineId, options).then((request) => request(this.axios, this.basePath));
+    public updateConseilDiscipline(body: UpdateConseilDisciplineIdBody, authorization: string, options?: any) {
+        return ConseilDisciplinesApiFp(this.configuration).updateConseilDiscipline(body, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get information about a specific disciplinary council

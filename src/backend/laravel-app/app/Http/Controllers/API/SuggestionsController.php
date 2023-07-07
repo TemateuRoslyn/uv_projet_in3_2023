@@ -14,7 +14,7 @@ class SuggestionsController extends Controller
      *     path="/api/suggestion/findAll",
      *     summary="Get all suggestions",
      *     description="Retrieve a list of all suggestions",
-     *     operationId="findAllSuggestion",
+     *     operationId="SuggestionsIndex",
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -26,7 +26,7 @@ class SuggestionsController extends Controller
      *         description="JWT token"
      *     ),
      *     security={{"bearerAuth":{}}},
-     *     tags={"suggestions"},
+     *     tags={"Suggestions"},
      *     @OA\Response(
      *         response=200,
      *         description="Success",
@@ -62,8 +62,8 @@ class SuggestionsController extends Controller
      *     path="/api/suggestion/findOne/{id}",
      *     summary="Get suggestion information",
      *     description="Get information about a specific suggestion",
-     *     operationId="findOneSuggestion",
-     *     tags={"suggestions"},
+     *     operationId="viewSuggestion",
+     *     tags={"Suggestions"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -134,7 +134,7 @@ class SuggestionsController extends Controller
      *     summary="Create a new suggestion",
      *     description="Create a new suggestion resource",
      *     operationId="createSuggestion",
-     *     tags={"suggestions"},
+     *     tags={"Suggestions"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -206,11 +206,20 @@ class SuggestionsController extends Controller
 
     /**
      * @OA\put(
-     *     path="/api/suggestion/update/{coursId}",
+     *     path="/api/suggestion/update/{suggestionId}",
      *     summary="Update a suggestion's information",
      *     description="Update a suggestion's information",
      *     operationId="updateSuggestion",
-     *     tags={"suggestions"},
+     *     tags={"Suggestions"},
+     *      @OA\Parameter(
+     *         name="suggestionId",
+     *         in="path",
+     *         description="ID of suggestion to update in this request",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -225,7 +234,7 @@ class SuggestionsController extends Controller
      *         required=true,
      *         @OA\JsonContent(
      *              required={"description"},
-     *             @OA\Property(property="description", type="string", format="text", example="prendre en compte l'ouveryure de cantine"),
+     *             @OA\Property(property="description", type="string", format="text", example="prendre en compte l'ouverture de cantine"),
      *
      *         )
      *     ),
@@ -233,6 +242,8 @@ class SuggestionsController extends Controller
      *         response=400,
      *         description="Error - Invalid request data",
      *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="The given data are invalid"),
+     *             @OA\Property(property="success", type="boolean", example=false),
      *             @OA\Property(property="error", type="object", example={
      *                "description": {
      *                     "The description field is required."
@@ -251,7 +262,8 @@ class SuggestionsController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="suggestion not found")
+     *             @OA\Property(property="message", type="string", example="suggestion not found"),
+     *             @OA\Property(property="success", type="boolean", example=false),
      *         )
      *     ),
      *     @OA\Response(
@@ -305,9 +317,9 @@ class SuggestionsController extends Controller
      * @OA\Delete (
      *     path="/api/suggestion/delete/{id}",
      *     summary="Delete an suggestion",
-     *     description="Delete an suggestion resource",
+     *     description="Delete a suggestion resource",
      *     operationId="deleteSuggestion",
-     *     tags={"professeurs"},
+     *     tags={"Suggestions"},
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -339,7 +351,8 @@ class SuggestionsController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="suggestion not found")
+     *             @OA\Property(property="message", type="string", example="suggestion not found"),
+     *             @OA\Property(property="success", type="boolean", example=false),
      *         )
      *     ),
      *    @OA\Response(

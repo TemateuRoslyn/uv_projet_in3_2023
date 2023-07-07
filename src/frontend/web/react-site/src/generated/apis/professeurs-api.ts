@@ -16,11 +16,10 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { InlineResponse20060 } from '../models';
 import { InlineResponse20061 } from '../models';
 import { InlineResponse20062 } from '../models';
 import { InlineResponse20063 } from '../models';
-import { InlineResponse20064 } from '../models';
-import { InlineResponse20091 } from '../models';
 import { InlineResponse2019 } from '../models';
 import { InlineResponse40024 } from '../models';
 import { InlineResponse40025 } from '../models';
@@ -28,7 +27,6 @@ import { InlineResponse401 } from '../models';
 import { InlineResponse40430 } from '../models';
 import { InlineResponse40431 } from '../models';
 import { InlineResponse40432 } from '../models';
-import { InlineResponse40445 } from '../models';
 import { InlineResponse4225 } from '../models';
 /**
  * ProfesseursApi - axios parameter creator
@@ -223,55 +221,6 @@ export const ProfesseursApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Delete an suggestion resource
-         * @summary Delete an suggestion
-         * @param {string} authorization JWT token
-         * @param {number} id ID of suggestion to delete
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteSuggestion: async (authorization: string, id: number, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authorization' is not null or undefined
-            if (authorization === null || authorization === undefined) {
-                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling deleteSuggestion.');
-            }
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling deleteSuggestion.');
-            }
-            const localVarPath = `/api/suggestion/delete/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (authorization !== undefined && authorization !== null) {
-                localVarHeaderParameter['Authorization'] = String(authorization);
-            }
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Retrieve a list of all professeurs
          * @summary Get all professeurs
          * @param {string} authorization JWT token
@@ -389,7 +338,7 @@ export const ProfesseursApiAxiosParamCreator = function (configuration?: Configu
             if (configuration) {
                 baseOptions = configuration.baseOptions;
             }
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new FormData();
@@ -547,23 +496,8 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20064>> {
+        async deleteProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).deleteProfesseur(authorization, id, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * Delete an suggestion resource
-         * @summary Delete an suggestion
-         * @param {string} authorization JWT token
-         * @param {number} id ID of suggestion to delete
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async deleteSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
-            const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).deleteSuggestion(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -576,7 +510,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async professeursIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20061>> {
+        async professeursIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20060>> {
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).professeursIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -601,7 +535,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
+        async updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20062>> {
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).updateProfesseur(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, statut, courId, authorization, professeurId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -616,7 +550,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20062>> {
+        async viewProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20061>> {
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).viewProfesseur(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -660,19 +594,8 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20064> {
+        deleteProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20063> {
             return ProfesseursApiFp(configuration).deleteProfesseur(authorization, id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Delete an suggestion resource
-         * @summary Delete an suggestion
-         * @param {string} authorization JWT token
-         * @param {number} id ID of suggestion to delete
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20091> {
-            return ProfesseursApiFp(configuration).deleteSuggestion(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieve a list of all professeurs
@@ -681,7 +604,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        professeursIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20061> {
+        professeursIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20060> {
             return ProfesseursApiFp(configuration).professeursIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -702,7 +625,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): AxiosPromise<InlineResponse20063> {
+        updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): AxiosPromise<InlineResponse20062> {
             return ProfesseursApiFp(configuration).updateProfesseur(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, statut, courId, authorization, professeurId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -713,7 +636,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20062> {
+        viewProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20061> {
             return ProfesseursApiFp(configuration).viewProfesseur(authorization, id, options).then((request) => request(axios, basePath));
         },
     };
@@ -758,18 +681,6 @@ export class ProfesseursApi extends BaseAPI {
      */
     public deleteProfesseur(authorization: string, id: number, options?: any) {
         return ProfesseursApiFp(this.configuration).deleteProfesseur(authorization, id, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     * Delete an suggestion resource
-     * @summary Delete an suggestion
-     * @param {string} authorization JWT token
-     * @param {number} id ID of suggestion to delete
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProfesseursApi
-     */
-    public deleteSuggestion(authorization: string, id: number, options?: any) {
-        return ProfesseursApiFp(this.configuration).deleteSuggestion(authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Retrieve a list of all professeurs
