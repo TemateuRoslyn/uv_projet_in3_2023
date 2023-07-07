@@ -7,16 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @OA\Schema(
- *     required={"libelle", "niveauGravite","motif", "dureeValidite"},
+ *     required={"libelle","eleveId","fauteId","dureeValidite"},
  *     @OA\Xml(name="Eleve"),
  *     @OA\Property(property="id", type="integer", readOnly=true, example="1"),
  *     @OA\Property(property="libelle", type="string", example="sanction"),
- *     @OA\Property(property="niveau_gravite", type="string", example="niveau 1"),
- *     @OA\Property(property="motif", type="string", example="motif sanction"),
  *     @OA\Property(property="dureeValidite", type="string", format="date", example="1990-01-01"),
+ *     @OA\Property(property="eleveId", type="integer", example="1"),
+ *     @OA\Property(property="fauteId", type="integer", example="1"),
  *     @OA\Property(property="eleve", type="object", ref="#/components/schemas/Eleve"),
- *     @OA\Property(property="convocation", type="object", ref="#/components/schemas/Convocation"),
- *     @OA\Property(property="regle", type="object", ref="#/components/schemas/Regle"),
  *     @OA\Property(property="faute", type="object", ref="#/components/schemas/Faute"),
  *     @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),
  *     @OA\Property(property="updated_at", ref="#/components/schemas/BaseModel/properties/updated_at"),
@@ -38,37 +36,20 @@ class SanctionPrevu extends Model
 
     protected $fillable = [
         'libelle',
-        'niveauGravite',
-        'motif',
         'dureeValidite',
         'eleveId',
-        'convocationId',
-        'regleId',
         'fauteId',
         'eleve',
-        'convocation',
-        'regle',
         'faute',
     ];
 
-
-    public function regle()
-    {
-        return $this->hasOne(Regle::class, 'regleId');
-    }
-
     public function faute()
     {
-        return $this->hasOne(Faute::class, 'fauteId');
+        return $this->belongsTo(Faute::class, 'fauteId');
     }
 
     public function eleve()
     {
-        return $this->hasOne(Eleve::class, 'eleveId');
-    }
-
-    public function convocation()
-    {
-        return $this->hasOne(Convocation::class, 'convocationId');
+        return $this->belongsTo(Eleve::class, 'eleveId');
     }
 }
