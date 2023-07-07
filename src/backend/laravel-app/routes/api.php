@@ -236,6 +236,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findOne/{fauteId}', [FauteController::class, 'view']);
         Route::get('findAll', [FauteController::class, 'index']);
         Route::get('findAll/eleve/{eleveId}', [FauteController::class, 'viewFautesEleve']);
+        Route::get('findAll/eleve/voice/{eleveId}', [FauteController::class, 'viewFautesVoiceEleve']);
         Route::get('findAll/eleveAndKeyword/{eleveId}/{keyword}', [FauteController::class, 'viewFautesEleveAndKeyword']); //
         Route::get('records/{keywords}', [FauteController::class, 'records']);
     });
