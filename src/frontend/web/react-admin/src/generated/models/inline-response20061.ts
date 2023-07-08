@@ -29,10 +29,4 @@ export interface InlineResponse20061 {
      * @memberof InlineResponse20061
      */
     message?: any;
-    /**
-     * 
-     * @type {Array&lt;Professeur&gt;}
-     * @memberof InlineResponse20061
-     */
-    content?: any;
 }

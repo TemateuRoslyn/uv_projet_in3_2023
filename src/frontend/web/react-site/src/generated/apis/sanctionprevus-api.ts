@@ -16,11 +16,11 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20083 } from '../models';
 import { InlineResponse20084 } from '../models';
 import { InlineResponse20085 } from '../models';
 import { InlineResponse20086 } from '../models';
 import { InlineResponse20087 } from '../models';
+import { InlineResponse20088 } from '../models';
 import { InlineResponse20112 } from '../models';
 import { InlineResponse40014 } from '../models';
 import { InlineResponse40034 } from '../models';
@@ -433,7 +433,7 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20087>> {
+        async deleteSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20088>> {
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).deleteSanctionPrevu(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -447,7 +447,7 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async sanctionprevusIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20083>> {
+        async sanctionprevusIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20084>> {
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).sanctionprevusIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -466,7 +466,7 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20086>> {
+        async updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20087>> {
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).updateSanctionPrevu(libelle, dureeValidite, eleveId, fauteId, authorization, sanctionprevuId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -481,7 +481,7 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20084>> {
+        async viewSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20085>> {
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).viewSanctionPrevu(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -496,7 +496,7 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewSanctionPrevusEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20085>> {
+        async viewSanctionPrevusEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20086>> {
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).viewSanctionPrevusEleve(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -534,7 +534,7 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20087> {
+        deleteSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20088> {
             return SanctionprevusApiFp(configuration).deleteSanctionPrevu(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -544,7 +544,7 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        sanctionprevusIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20083> {
+        sanctionprevusIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20084> {
             return SanctionprevusApiFp(configuration).sanctionprevusIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -559,7 +559,7 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): AxiosPromise<InlineResponse20086> {
+        updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): AxiosPromise<InlineResponse20087> {
             return SanctionprevusApiFp(configuration).updateSanctionPrevu(libelle, dureeValidite, eleveId, fauteId, authorization, sanctionprevuId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -570,7 +570,7 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20084> {
+        viewSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20085> {
             return SanctionprevusApiFp(configuration).viewSanctionPrevu(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -581,7 +581,7 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewSanctionPrevusEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20085> {
+        viewSanctionPrevusEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20086> {
             return SanctionprevusApiFp(configuration).viewSanctionPrevusEleve(authorization, id, options).then((request) => request(axios, basePath));
         },
     };

@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 
 import SignIn from '../Authentication/SignIn/SignIn';
-import SignUp from '../Authentication/SignUp/SignUp';
 import Calendar from '../Calendar';
 import Chart from '../Chart';
 import DashBoard from '../Dashboard/DashBoard';
@@ -34,6 +33,7 @@ import Classes from '../Classe/Classes.page';
 import Eleves from '../Eleve/Eleves.page';
 import ReglementInterieurPage from '../ReglementInterieur/ReglementInterieur.page';
 import ReglePage from '../Regle/Regle.page';
+import ReparationPage from '../Reparation/Reparation.page';
 
 import ConseilDisciplines from '../ConseilDiscipline/ConseilDiscipline.page';
 
@@ -86,6 +86,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
         <Route path="/conseilDiscipline" element={<ConseilDisciplines />} />
         <Route path="/suggestions" element={<SuggestionPage />} />
         <Route path="/personnels" element={<Personnels/>} />
+        <Route path="/reparations" element={<ReparationPage />} />
       </Routes>
     );
   } else {

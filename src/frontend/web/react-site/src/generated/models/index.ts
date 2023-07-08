@@ -111,6 +111,7 @@ export * from './inline-response20092';
 export * from './inline-response20093';
 export * from './inline-response20094';
 export * from './inline-response20095';
+export * from './inline-response20096';
 export * from './inline-response200-content';
 export * from './inline-response201';
 export * from './inline-response2011';

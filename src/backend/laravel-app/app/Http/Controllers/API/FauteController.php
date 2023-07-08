@@ -667,4 +667,73 @@ class FauteController extends Controller
             ], 200);
         }
     }
+    /**
+     * Get the filtered list of Faults.
+     *
+     * @OA\Get(
+     *     path="/api/fautes/records/{keyword}",
+     *     summary="Get filtered list of faults",
+     *     tags={"Fautes"},
+     *     operationId="fautesRecords",
+     *     @OA\Parameter(
+     *         name="keyword",
+     *         in="path",
+     *         description="Keyword to filter faults",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Faults records successfully"),
+     *             @OA\Property(property="content", type="array", @OA\Items(type="string", example="Bavardage"))
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid request",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Invalid request"),
+     *             @OA\Property(property="success", type="boolean", example=false)
+     *         )
+     *     )
+     * )
+     */
+    public function records($keyword)
+    {
+        $fautes = Faute::where('libelle', 'like', "%{$keyword}%")
+        ->get();
+
+        // dd($fautes);
+
+        $formattedFaute = $fautes->map(function ($faute) {
+            $libelle = $faute->libelle;
+            $gravite = $faute->gravite;
+            $id = $faute->id;
+
+            return "{$libelle} {$gravite}:{$id}";
+        });
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Faute records successfully',
+            'content' => $formattedFaute,
+        ], 200);
+    }
 }
