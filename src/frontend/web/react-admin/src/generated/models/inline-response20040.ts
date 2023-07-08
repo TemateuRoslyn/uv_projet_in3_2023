@@ -31,7 +31,11 @@ export interface InlineResponse20040 {
     message?: any;
     /**
      * 
+<<<<<<< HEAD
      * @type {Array&lt;string&gt;}
+=======
+     * @type {Array&lt;MembreConseil&gt;}
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
      * @memberof InlineResponse20040
      */
     content?: any;

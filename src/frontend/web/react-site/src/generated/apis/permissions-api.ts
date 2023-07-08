@@ -16,10 +16,17 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+<<<<<<< HEAD
 import { InlineResponse20054 } from '../models';
 import { InlineResponse20055 } from '../models';
 import { InlineResponse20056 } from '../models';
 import { InlineResponse20057 } from '../models';
+=======
+import { InlineResponse20053 } from '../models';
+import { InlineResponse20054 } from '../models';
+import { InlineResponse20055 } from '../models';
+import { InlineResponse20056 } from '../models';
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
 import { InlineResponse2017 } from '../models';
 import { InlineResponse40021 } from '../models';
 import { InlineResponse4004 } from '../models';
@@ -375,7 +382,11 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         async permissionDelete(permissionId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20057>> {
+=======
+        async permissionDelete(permissionId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20056>> {
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionDelete(permissionId, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -390,7 +401,11 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         async permissionShow(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20055>> {
+=======
+        async permissionShow(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20054>> {
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionShow(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -406,7 +421,11 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         async permissionUpdate(body: UpdatePermissionIdBody, authorization: string, permissionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20056>> {
+=======
+        async permissionUpdate(body: UpdatePermissionIdBody, authorization: string, permissionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20055>> {
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionUpdate(body, authorization, permissionId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -422,7 +441,11 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         async permissionUpdateStatus(body: StatusPermissionIdBody, authorization: string, permissionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20056>> {
+=======
+        async permissionUpdateStatus(body: StatusPermissionIdBody, authorization: string, permissionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20055>> {
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionUpdateStatus(body, authorization, permissionId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -436,7 +459,11 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         async permissionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20054>> {
+=======
+        async permissionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20053>> {
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionsIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -471,7 +498,11 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         permissionDelete(permissionId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20057> {
+=======
+        permissionDelete(permissionId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20056> {
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return PermissionsApiFp(configuration).permissionDelete(permissionId, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -482,7 +513,11 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         permissionShow(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20055> {
+=======
+        permissionShow(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20054> {
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return PermissionsApiFp(configuration).permissionShow(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -494,7 +529,11 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         permissionUpdate(body: UpdatePermissionIdBody, authorization: string, permissionId: number, options?: any): AxiosPromise<InlineResponse20056> {
+=======
+        permissionUpdate(body: UpdatePermissionIdBody, authorization: string, permissionId: number, options?: any): AxiosPromise<InlineResponse20055> {
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return PermissionsApiFp(configuration).permissionUpdate(body, authorization, permissionId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -506,7 +545,11 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         permissionUpdateStatus(body: StatusPermissionIdBody, authorization: string, permissionId: number, options?: any): AxiosPromise<InlineResponse20056> {
+=======
+        permissionUpdateStatus(body: StatusPermissionIdBody, authorization: string, permissionId: number, options?: any): AxiosPromise<InlineResponse20055> {
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return PermissionsApiFp(configuration).permissionUpdateStatus(body, authorization, permissionId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -516,7 +559,11 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         permissionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20054> {
+=======
+        permissionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20053> {
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return PermissionsApiFp(configuration).permissionsIndex(authorization, options).then((request) => request(axios, basePath));
         },
     };

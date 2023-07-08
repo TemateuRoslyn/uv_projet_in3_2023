@@ -16,11 +16,29 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+<<<<<<< HEAD
 import { InlineResponse20084 } from '../models';
 import { InlineResponse20085 } from '../models';
 import { InlineResponse20086 } from '../models';
 import { InlineResponse20087 } from '../models';
+<<<<<<< HEAD
 import { InlineResponse20088 } from '../models';
+=======
+>>>>>>> 3c60453 (Closes #311 -Ajusting home page)
+=======
+import { InlineResponse20083 } from '../models';
+import { InlineResponse20084 } from '../models';
+import { InlineResponse20085 } from '../models';
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import { InlineResponse20086 } from '../models';
+import { InlineResponse20087 } from '../models';
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
+=======
+import { InlineResponse20086 } from '../models';
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
 import { InlineResponse20112 } from '../models';
 import { InlineResponse40014 } from '../models';
 import { InlineResponse40034 } from '../models';
@@ -28,7 +46,10 @@ import { InlineResponse401 } from '../models';
 import { InlineResponse40441 } from '../models';
 import { InlineResponse40442 } from '../models';
 import { InlineResponse40443 } from '../models';
+<<<<<<< HEAD
 import { InlineResponse40444 } from '../models';
+=======
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
 import { InlineResponse4227 } from '../models';
 /**
  * SanctionprevusApi - axios parameter creator
@@ -433,7 +454,22 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
+<<<<<<< HEAD
         async deleteSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20088>> {
+=======
+        async deleteSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20087>> {
+>>>>>>> 3c60453 (Closes #311 -Ajusting home page)
+=======
+<<<<<<< HEAD
+        async deleteSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20085>> {
+=======
+        async deleteSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20087>> {
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
+=======
+        async deleteSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20086>> {
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).deleteSanctionPrevu(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -447,7 +483,11 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         async sanctionprevusIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20084>> {
+=======
+        async sanctionprevusIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20083>> {
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).sanctionprevusIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -466,7 +506,20 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
+<<<<<<< HEAD
         async updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20087>> {
+=======
+<<<<<<< HEAD
+        async updateSanctionPrevu(libelle: string, niveauGravite: string, motif: string, dureeValidite: string, eleveId: number, convocationId: number, regleId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20084>> {
+=======
+        async updateSanctionPrevu(libelle: string, niveauGravite: string, motif: string, dureeValidite: string, eleveId: number, convocationId: number, regleId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20085>> {
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+            const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).updateSanctionPrevu(libelle, niveauGravite, motif, dureeValidite, eleveId, convocationId, regleId, fauteId, authorization, sanctionprevuId, options);
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+        async updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20086>> {
+>>>>>>> 3c60453 (Closes #311 -Ajusting home page)
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).updateSanctionPrevu(libelle, dureeValidite, eleveId, fauteId, authorization, sanctionprevuId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -481,7 +534,11 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         async viewSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20085>> {
+=======
+        async viewSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20084>> {
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).viewSanctionPrevu(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -534,7 +591,22 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
+<<<<<<< HEAD
         deleteSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20088> {
+=======
+        deleteSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20087> {
+>>>>>>> 3c60453 (Closes #311 -Ajusting home page)
+=======
+<<<<<<< HEAD
+        deleteSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20085> {
+=======
+        deleteSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20087> {
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
+=======
+        deleteSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20086> {
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return SanctionprevusApiFp(configuration).deleteSanctionPrevu(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -544,7 +616,11 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         sanctionprevusIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20084> {
+=======
+        sanctionprevusIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20083> {
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return SanctionprevusApiFp(configuration).sanctionprevusIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -559,7 +635,20 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
+<<<<<<< HEAD
         updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): AxiosPromise<InlineResponse20087> {
+=======
+<<<<<<< HEAD
+        updateSanctionPrevu(libelle: string, niveauGravite: string, motif: string, dureeValidite: string, eleveId: number, convocationId: number, regleId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): AxiosPromise<InlineResponse20084> {
+=======
+        updateSanctionPrevu(libelle: string, niveauGravite: string, motif: string, dureeValidite: string, eleveId: number, convocationId: number, regleId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): AxiosPromise<InlineResponse20085> {
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+            return SanctionprevusApiFp(configuration).updateSanctionPrevu(libelle, niveauGravite, motif, dureeValidite, eleveId, convocationId, regleId, fauteId, authorization, sanctionprevuId, options).then((request) => request(axios, basePath));
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+        updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): AxiosPromise<InlineResponse20086> {
+>>>>>>> 3c60453 (Closes #311 -Ajusting home page)
             return SanctionprevusApiFp(configuration).updateSanctionPrevu(libelle, dureeValidite, eleveId, fauteId, authorization, sanctionprevuId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -570,7 +659,11 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         viewSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20085> {
+=======
+        viewSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20084> {
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return SanctionprevusApiFp(configuration).viewSanctionPrevu(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**

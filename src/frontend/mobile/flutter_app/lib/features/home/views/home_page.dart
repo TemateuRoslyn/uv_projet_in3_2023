@@ -3,12 +3,14 @@ import 'package:fltter_app/common/views/check_internet_page.dart';
 import 'package:fltter_app/common/widgets/common_widgets.dart';
 import 'package:fltter_app/features/home/views/conseil_discipline_page.dart';
 import 'package:fltter_app/features/home/views/convocation_page.dart';
+import 'package:fltter_app/features/home/views/courses_page.dart';
 import 'package:fltter_app/features/home/views/fautes_page.dart';
 import 'package:fltter_app/features/home/views/reglements_interieurs_page.dart';
 import 'package:fltter_app/features/home/views/suggestion_page.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../common/logics/navigation/navigation_cubit.dart';
 import '../../../common/models/suggestion.dart';
 import '../../../common/styles/colors.dart';
@@ -42,41 +44,57 @@ class _HomePageState extends State<HomePage> {
     final screenSize = MediaQuery.of(context).size;
 
     final List<Map<String, dynamic>> homeComponents = [
+      // Fautes
       {
-        'image': '',
+        'image': '../../../../assets/images/fault.png',
         'subtitle': 'Mes fautes',
         'onPressAction': () => Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const FautesPage()))
       },
+      // Convocation
       {
-        'image': '',
+        'image': '../../../../assets/images/convocation.png',
         'subtitle': 'Mes convocations',
         'onPressAction': () => Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => const ConvocationPage()))
       },
+      // Conseil de discipline
       {
-        'image': '',
+        'image': '../../../../assets/images/conseil_de_dicipline.png',
         'subtitle': 'Mes conseils de discipline',
         'onPressAction': () => Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => const ConseilDisciplinePage()))
       },
-      {'image': '', 'subtitle': 'Mes sanctions', 'onPressAction': () {}},
+      // Sanctions
       {
-        'image': '',
+        'image': '../../../../assets/images/sanction.png',
+        'subtitle': 'Mes sanctions',
+        'onPressAction': () {}
+      },
+      // Reglements interieurs
+      {
+        'image': '../../../../assets/images/rule_and_regulation.png',
         'subtitle': 'Reglements interieurs',
         'onPressAction': () => Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => const ReglementsInterieurs()))
       },
-      {'image': '', 'subtitle': 'Mes cours', 'onPressAction': () {}},
+      // Cours
       {
-        'image': '',
+        'image': '../../../../assets/images/course.png',
+        'subtitle': 'Mes cours',
+        'onPressAction': () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => Courses()))
+      },
+      // Boite a suggestion
+      {
+        'image': '../../../../assets/images/suggestion_box_vote.png',
         'subtitle': 'Boîte à suggestions',
         'onPressAction': () => Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const Suggestions()))
       },
-      // {'image': '', 'subtitle': 'Rapport de notes', 'onPressAction': () {}},
+      // Profile
       {
-        'image': '',
+        'image': '../../../../assets/images/unknown_contact_img.png',
         'subtitle': 'Mon profile',
         'onPressAction': () =>
             _navigationCubit.changeNavigationType(NavigationType.profile)

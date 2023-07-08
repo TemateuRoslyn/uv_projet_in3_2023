@@ -29,4 +29,13 @@ export interface InlineResponse20070 {
      * @memberof InlineResponse20070
      */
     message?: any;
+<<<<<<< HEAD
+=======
+    /**
+     * 
+     * @type {Array&lt;ReglementInterieur&gt;}
+     * @memberof InlineResponse20070
+     */
+    content?: any;
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
 }

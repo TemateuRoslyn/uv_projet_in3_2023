@@ -109,9 +109,24 @@ export * from './inline-response20090';
 export * from './inline-response20091';
 export * from './inline-response20092';
 export * from './inline-response20093';
+<<<<<<< HEAD
 export * from './inline-response20094';
 export * from './inline-response20095';
+<<<<<<< HEAD
 export * from './inline-response20096';
+=======
+>>>>>>> 3c60453 (Closes #311 -Ajusting home page)
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+export * from './inline-response20094';
+export * from './inline-response20095';
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
+=======
+export * from './inline-response20094';
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
 export * from './inline-response200-content';
 export * from './inline-response201';
 export * from './inline-response2011';
@@ -160,9 +175,16 @@ export * from './inline-response40034';
 export * from './inline-response40035';
 export * from './inline-response40036';
 export * from './inline-response40037';
+<<<<<<< HEAD
 export * from './inline-response40037-error';
 export * from './inline-response40038';
 export * from './inline-response40038-error';
+=======
+export * from './inline-response40038';
+export * from './inline-response40038-error';
+export * from './inline-response40039';
+export * from './inline-response40039-error';
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
 export * from './inline-response4003-error';
 export * from './inline-response4004';
 export * from './inline-response4005';
@@ -216,7 +238,10 @@ export * from './inline-response40445';
 export * from './inline-response40446';
 export * from './inline-response40447';
 export * from './inline-response40448';
+<<<<<<< HEAD
 export * from './inline-response40449';
+=======
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
 export * from './inline-response4045';
 export * from './inline-response4046';
 export * from './inline-response4047';
@@ -261,6 +286,7 @@ export * from './update-classe-id-body';
 export * from './update-conseil-discipline-id-body';
 export * from './update-convocation-id-body';
 export * from './update-cours-id-body';
+export * from './update-cours-id-body1';
 export * from './update-eleve-id-body';
 export * from './update-faute-id-body';
 export * from './update-id-body';

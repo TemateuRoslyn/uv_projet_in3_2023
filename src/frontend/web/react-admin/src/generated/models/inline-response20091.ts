@@ -26,6 +26,7 @@ export interface InlineResponse20091 {
     /**
      * 
      * @type {string}
+<<<<<<< HEAD
      * @memberof InlineResponse20091
      */
     message?: any;
@@ -35,4 +36,13 @@ export interface InlineResponse20091 {
      * @memberof InlineResponse20091
      */
     content?: any;
+<<<<<<< HEAD
+=======
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
+=======
+     * @memberof InlineResponse20091
+     */
+    message?: any;
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
 }

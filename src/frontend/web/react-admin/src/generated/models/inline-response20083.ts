@@ -26,6 +26,15 @@ export interface InlineResponse20083 {
     /**
      * 
      * @type {string}
+<<<<<<< HEAD
+=======
+     * @memberof InlineResponse20083
+     */
+    message?: any;
+    /**
+     * 
+     * @type {Array&lt;SanctionPrevu&gt;}
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
      * @memberof InlineResponse20083
      */
     message?: any;
