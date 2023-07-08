@@ -55,12 +55,6 @@ export interface Cour {
     professeur?: any;
     /**
      * 
-     * @type {Classe}
-     * @memberof Cour
-     */
-    classes?: any;
-    /**
-     * 
      * @type {BaseModelpropertiescreatedAt}
      * @memberof Cour
      */
