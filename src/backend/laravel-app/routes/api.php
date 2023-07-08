@@ -237,7 +237,6 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll/eleve/{eleveId}', [FauteController::class, 'viewFautesEleve']);
         Route::get('findAll/eleveAndKeyword/{eleveId}/{keyword}', [FauteController::class, 'viewFautesEleveAndKeyword']); //
         Route::get('records/{keywords}', [FauteController::class, 'records']);
-
     });
 
     //convocation
@@ -254,10 +253,13 @@ Route::middleware('jwt.verify')->group(function () {
     // suggestion
     Route::prefix('suggestion')->group(function () {
         Route::post('create', [SuggestionsController::class, 'store']);
-        Route::put('update/{suggestionId}', [SuggestionsController::class, 'update']);
+        Route::post('update/{suggestionId}', [SuggestionsController::class, 'update']);
+        Route::post('read/{suggestionId}', [SuggestionsController::class, 'read']);
+        Route::post('readAll', [SuggestionsController::class, 'readAll']);
         Route::delete('delete/{suggestionId}', [SuggestionsController::class, 'delete']);
         Route::get('findOne/{suggestionId}', [SuggestionsController::class, 'view']);
         Route::get('findAll', [SuggestionsController::class, 'index']);
+        Route::get('notRead', [SuggestionsController::class, 'notRead']);
     });
 
 

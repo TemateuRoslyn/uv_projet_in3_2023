@@ -30,6 +30,6 @@ class Suggestion extends Model
 
     protected $fillable = [
         'description',
-
+        'view',
     ];
 }
