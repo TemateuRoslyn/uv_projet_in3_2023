@@ -26,11 +26,10 @@ export interface InlineResponse20061 {
     /**
      * 
      * @type {string}
-<<<<<<< HEAD
-=======
      * @memberof InlineResponse20061
      */
     message?: any;
+<<<<<<< HEAD
     /**
      * 
      * @type {Array&lt;Professeur&gt;}
@@ -38,4 +37,15 @@ export interface InlineResponse20061 {
      * @memberof InlineResponse20061
      */
     message?: any;
+<<<<<<< HEAD
+=======
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+    /**
+     * 
+     * @type {Array&lt;Professeur&gt;}
+     * @memberof InlineResponse20061
+     */
+    content?: any;
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 }

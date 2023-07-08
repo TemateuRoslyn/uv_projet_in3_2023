@@ -17,16 +17,33 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 import { InlineResponse20041 } from '../models';
 import { InlineResponse20042 } from '../models';
 import { InlineResponse20043 } from '../models';
 import { InlineResponse20044 } from '../models';
+<<<<<<< HEAD
 =======
 import { InlineResponse20040 } from '../models';
 import { InlineResponse20041 } from '../models';
 import { InlineResponse20042 } from '../models';
 import { InlineResponse20043 } from '../models';
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+import { InlineResponse20040 } from '../models';
+import { InlineResponse20041 } from '../models';
+import { InlineResponse20042 } from '../models';
+import { InlineResponse20043 } from '../models';
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 import { InlineResponse2015 } from '../models';
 import { InlineResponse40015 } from '../models';
 import { InlineResponse40016 } from '../models';
@@ -371,10 +388,19 @@ export const MembreconseilsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async deleteMembreConseil(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20044>> {
 =======
         async deleteMembreConseil(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20043>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async deleteMembreConseil(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20044>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async deleteMembreConseil(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20043>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await MembreconseilsApiAxiosParamCreator(configuration).deleteMembreConseil(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -389,10 +415,19 @@ export const MembreconseilsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async membreconseilsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20041>> {
 =======
         async membreconseilsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20040>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async membreconseilsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20041>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async membreconseilsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20040>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await MembreconseilsApiAxiosParamCreator(configuration).membreconseilsIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -411,10 +446,19 @@ export const MembreconseilsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async updateMembreConseil(idChef: number, idSurveillantG: number, idRepresentantE: number, authorization: string, membreconseilId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20043>> {
 =======
         async updateMembreConseil(idChef: number, idSurveillantG: number, idRepresentantE: number, authorization: string, membreconseilId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20042>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async updateMembreConseil(idChef: number, idSurveillantG: number, idRepresentantE: number, authorization: string, membreconseilId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20043>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async updateMembreConseil(idChef: number, idSurveillantG: number, idRepresentantE: number, authorization: string, membreconseilId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20042>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await MembreconseilsApiAxiosParamCreator(configuration).updateMembreConseil(idChef, idSurveillantG, idRepresentantE, authorization, membreconseilId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -430,10 +474,19 @@ export const MembreconseilsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async viewMembreConseil(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20042>> {
 =======
         async viewMembreConseil(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20041>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async viewMembreConseil(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20042>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async viewMembreConseil(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20041>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await MembreconseilsApiAxiosParamCreator(configuration).viewMembreConseil(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -471,10 +524,19 @@ export const MembreconseilsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         deleteMembreConseil(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20044> {
 =======
         deleteMembreConseil(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20043> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        deleteMembreConseil(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20044> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        deleteMembreConseil(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20043> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return MembreconseilsApiFp(configuration).deleteMembreConseil(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -485,10 +547,19 @@ export const MembreconseilsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         membreconseilsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20041> {
 =======
         membreconseilsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20040> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        membreconseilsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20041> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        membreconseilsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20040> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return MembreconseilsApiFp(configuration).membreconseilsIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -503,10 +574,19 @@ export const MembreconseilsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         updateMembreConseil(idChef: number, idSurveillantG: number, idRepresentantE: number, authorization: string, membreconseilId: number, options?: any): AxiosPromise<InlineResponse20043> {
 =======
         updateMembreConseil(idChef: number, idSurveillantG: number, idRepresentantE: number, authorization: string, membreconseilId: number, options?: any): AxiosPromise<InlineResponse20042> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        updateMembreConseil(idChef: number, idSurveillantG: number, idRepresentantE: number, authorization: string, membreconseilId: number, options?: any): AxiosPromise<InlineResponse20043> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        updateMembreConseil(idChef: number, idSurveillantG: number, idRepresentantE: number, authorization: string, membreconseilId: number, options?: any): AxiosPromise<InlineResponse20042> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return MembreconseilsApiFp(configuration).updateMembreConseil(idChef, idSurveillantG, idRepresentantE, authorization, membreconseilId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -518,10 +598,19 @@ export const MembreconseilsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         viewMembreConseil(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20042> {
 =======
         viewMembreConseil(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20041> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        viewMembreConseil(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20042> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        viewMembreConseil(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20041> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return MembreconseilsApiFp(configuration).viewMembreConseil(authorization, id, options).then((request) => request(axios, basePath));
         },
     };

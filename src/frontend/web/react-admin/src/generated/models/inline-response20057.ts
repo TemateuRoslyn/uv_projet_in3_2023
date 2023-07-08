@@ -26,11 +26,10 @@ export interface InlineResponse20057 {
     /**
      * 
      * @type {string}
-<<<<<<< HEAD
-=======
      * @memberof InlineResponse20057
      */
     message?: any;
+<<<<<<< HEAD
     /**
      * 
      * @type {Array&lt;Personnel&gt;}
@@ -38,4 +37,15 @@ export interface InlineResponse20057 {
      * @memberof InlineResponse20057
      */
     message?: any;
+<<<<<<< HEAD
+=======
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+    /**
+     * 
+     * @type {Array&lt;Personnel&gt;}
+     * @memberof InlineResponse20057
+     */
+    content?: any;
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 }

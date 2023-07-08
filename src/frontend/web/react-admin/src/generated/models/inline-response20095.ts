@@ -19,20 +19,24 @@
 export interface InlineResponse20095 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20095
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20095
      */
     success?: any;
+<<<<<<< HEAD
     /**
      * 
+<<<<<<< HEAD
      * @type {User}
      * @memberof InlineResponse20095
      */
     data?: any;
+=======
+     * @type {string}
+     * @memberof InlineResponse20095
+     */
+    message?: any;
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 }

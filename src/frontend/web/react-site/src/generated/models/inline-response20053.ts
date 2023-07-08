@@ -30,12 +30,22 @@ export interface InlineResponse20053 {
      */
     message?: any;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 605364c (mainmaim)
     /**
      * 
      * @type {Array&lt;Permission&gt;}
      * @memberof InlineResponse20053
      */
     content?: any;
+<<<<<<< HEAD
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 }

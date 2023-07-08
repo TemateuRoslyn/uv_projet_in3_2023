@@ -19,19 +19,24 @@
 export interface InlineResponse20093 {
     /**
      * 
-<<<<<<< HEAD
      * @type {boolean}
      * @memberof InlineResponse20093
      */
     success?: any;
     /**
      * 
-=======
->>>>>>> e2d508d (Closes #299 - admin api integrated)
      * @type {string}
      * @memberof InlineResponse20093
      */
     message?: any;
+    /**
+     * 
+     * @type {Array&lt;User&gt;}
+     * @memberof InlineResponse20093
+     */
+<<<<<<< HEAD
+    message?: any;
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     /**
@@ -58,4 +63,11 @@ export interface InlineResponse20093 {
     data?: any;
 >>>>>>> e2d508d (Closes #299 - admin api integrated)
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+    data?: any;
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 }

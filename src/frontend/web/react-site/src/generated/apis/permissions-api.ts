@@ -17,16 +17,33 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 import { InlineResponse20054 } from '../models';
 import { InlineResponse20055 } from '../models';
 import { InlineResponse20056 } from '../models';
 import { InlineResponse20057 } from '../models';
+<<<<<<< HEAD
 =======
 import { InlineResponse20053 } from '../models';
 import { InlineResponse20054 } from '../models';
 import { InlineResponse20055 } from '../models';
 import { InlineResponse20056 } from '../models';
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+import { InlineResponse20053 } from '../models';
+import { InlineResponse20054 } from '../models';
+import { InlineResponse20055 } from '../models';
+import { InlineResponse20056 } from '../models';
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 import { InlineResponse2017 } from '../models';
 import { InlineResponse40021 } from '../models';
 import { InlineResponse4004 } from '../models';
@@ -383,10 +400,19 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async permissionDelete(permissionId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20057>> {
 =======
         async permissionDelete(permissionId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20056>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async permissionDelete(permissionId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20057>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async permissionDelete(permissionId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20056>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionDelete(permissionId, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -402,10 +428,19 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async permissionShow(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20055>> {
 =======
         async permissionShow(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20054>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async permissionShow(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20055>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async permissionShow(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20054>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionShow(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -422,10 +457,19 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async permissionUpdate(body: UpdatePermissionIdBody, authorization: string, permissionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20056>> {
 =======
         async permissionUpdate(body: UpdatePermissionIdBody, authorization: string, permissionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20055>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async permissionUpdate(body: UpdatePermissionIdBody, authorization: string, permissionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20056>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async permissionUpdate(body: UpdatePermissionIdBody, authorization: string, permissionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20055>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionUpdate(body, authorization, permissionId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -442,10 +486,19 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async permissionUpdateStatus(body: StatusPermissionIdBody, authorization: string, permissionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20056>> {
 =======
         async permissionUpdateStatus(body: StatusPermissionIdBody, authorization: string, permissionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20055>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async permissionUpdateStatus(body: StatusPermissionIdBody, authorization: string, permissionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20056>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async permissionUpdateStatus(body: StatusPermissionIdBody, authorization: string, permissionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20055>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionUpdateStatus(body, authorization, permissionId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -460,10 +513,19 @@ export const PermissionsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async permissionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20054>> {
 =======
         async permissionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20053>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async permissionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20054>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async permissionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20053>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await PermissionsApiAxiosParamCreator(configuration).permissionsIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -499,10 +561,19 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         permissionDelete(permissionId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20057> {
 =======
         permissionDelete(permissionId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20056> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        permissionDelete(permissionId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20057> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        permissionDelete(permissionId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20056> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return PermissionsApiFp(configuration).permissionDelete(permissionId, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -514,10 +585,19 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         permissionShow(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20055> {
 =======
         permissionShow(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20054> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        permissionShow(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20055> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        permissionShow(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20054> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return PermissionsApiFp(configuration).permissionShow(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -530,10 +610,19 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         permissionUpdate(body: UpdatePermissionIdBody, authorization: string, permissionId: number, options?: any): AxiosPromise<InlineResponse20056> {
 =======
         permissionUpdate(body: UpdatePermissionIdBody, authorization: string, permissionId: number, options?: any): AxiosPromise<InlineResponse20055> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        permissionUpdate(body: UpdatePermissionIdBody, authorization: string, permissionId: number, options?: any): AxiosPromise<InlineResponse20056> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        permissionUpdate(body: UpdatePermissionIdBody, authorization: string, permissionId: number, options?: any): AxiosPromise<InlineResponse20055> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return PermissionsApiFp(configuration).permissionUpdate(body, authorization, permissionId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -546,10 +635,19 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         permissionUpdateStatus(body: StatusPermissionIdBody, authorization: string, permissionId: number, options?: any): AxiosPromise<InlineResponse20056> {
 =======
         permissionUpdateStatus(body: StatusPermissionIdBody, authorization: string, permissionId: number, options?: any): AxiosPromise<InlineResponse20055> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        permissionUpdateStatus(body: StatusPermissionIdBody, authorization: string, permissionId: number, options?: any): AxiosPromise<InlineResponse20056> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        permissionUpdateStatus(body: StatusPermissionIdBody, authorization: string, permissionId: number, options?: any): AxiosPromise<InlineResponse20055> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return PermissionsApiFp(configuration).permissionUpdateStatus(body, authorization, permissionId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -560,10 +658,19 @@ export const PermissionsApiFactory = function (configuration?: Configuration, ba
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         permissionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20054> {
 =======
         permissionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20053> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        permissionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20054> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        permissionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20053> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return PermissionsApiFp(configuration).permissionsIndex(authorization, options).then((request) => request(axios, basePath));
         },
     };

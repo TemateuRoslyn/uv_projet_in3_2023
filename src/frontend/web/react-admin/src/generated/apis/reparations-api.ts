@@ -17,16 +17,33 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 import { InlineResponse20076 } from '../models';
 import { InlineResponse20077 } from '../models';
 import { InlineResponse20078 } from '../models';
 import { InlineResponse20079 } from '../models';
+<<<<<<< HEAD
 =======
 import { InlineResponse20075 } from '../models';
 import { InlineResponse20076 } from '../models';
 import { InlineResponse20077 } from '../models';
 import { InlineResponse20078 } from '../models';
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+import { InlineResponse20075 } from '../models';
+import { InlineResponse20076 } from '../models';
+import { InlineResponse20077 } from '../models';
+import { InlineResponse20078 } from '../models';
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 import { InlineResponse20110 } from '../models';
 import { InlineResponse40030 } from '../models';
 import { InlineResponse40031 } from '../models';
@@ -207,22 +224,22 @@ export const ReparationsApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateReparation: async (demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options: any = {}): Promise<RequestArgs> => {
+        updatReparation: async (demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'demarcheMediation' is not null or undefined
             if (demarcheMediation === null || demarcheMediation === undefined) {
-                throw new RequiredError('demarcheMediation','Required parameter demarcheMediation was null or undefined when calling updateReparation.');
+                throw new RequiredError('demarcheMediation','Required parameter demarcheMediation was null or undefined when calling updatReparation.');
             }
             // verify required parameter 'fauteId' is not null or undefined
             if (fauteId === null || fauteId === undefined) {
-                throw new RequiredError('fauteId','Required parameter fauteId was null or undefined when calling updateReparation.');
+                throw new RequiredError('fauteId','Required parameter fauteId was null or undefined when calling updatReparation.');
             }
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
-                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling updateReparation.');
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling updatReparation.');
             }
             // verify required parameter 'reparationId' is not null or undefined
             if (reparationId === null || reparationId === undefined) {
-                throw new RequiredError('reparationId','Required parameter reparationId was null or undefined when calling updateReparation.');
+                throw new RequiredError('reparationId','Required parameter reparationId was null or undefined when calling updatReparation.');
             }
             const localVarPath = `/api/reparations/update/{reparationId}`
                 .replace(`{${"reparationId"}}`, encodeURIComponent(String(reparationId)));
@@ -232,7 +249,7 @@ export const ReparationsApiAxiosParamCreator = function (configuration?: Configu
             if (configuration) {
                 baseOptions = configuration.baseOptions;
             }
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new FormData();
@@ -351,10 +368,19 @@ export const ReparationsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async deleteReparation(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20079>> {
 =======
         async deleteReparation(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20078>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async deleteReparation(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20079>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async deleteReparation(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20078>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await ReparationsApiAxiosParamCreator(configuration).deleteReparation(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -369,10 +395,19 @@ export const ReparationsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async reparationsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20076>> {
 =======
         async reparationsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20075>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async reparationsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20076>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async reparationsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20075>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await ReparationsApiAxiosParamCreator(configuration).reparationsIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -390,12 +425,23 @@ export const ReparationsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async updateReparation(demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20078>> {
             const localVarAxiosArgs = await ReparationsApiAxiosParamCreator(configuration).updateReparation(demarcheMediation, fauteId, authorization, reparationId, options);
 =======
         async updatReparation(demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20077>> {
             const localVarAxiosArgs = await ReparationsApiAxiosParamCreator(configuration).updatReparation(demarcheMediation, fauteId, authorization, reparationId, options);
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async updateReparation(demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20078>> {
+            const localVarAxiosArgs = await ReparationsApiAxiosParamCreator(configuration).updateReparation(demarcheMediation, fauteId, authorization, reparationId, options);
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async updatReparation(demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20077>> {
+            const localVarAxiosArgs = await ReparationsApiAxiosParamCreator(configuration).updatReparation(demarcheMediation, fauteId, authorization, reparationId, options);
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -410,10 +456,19 @@ export const ReparationsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async viewReparation(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20077>> {
 =======
         async viewReparation(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20076>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async viewReparation(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20077>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async viewReparation(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20076>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await ReparationsApiAxiosParamCreator(configuration).viewReparation(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -450,10 +505,19 @@ export const ReparationsApiFactory = function (configuration?: Configuration, ba
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         deleteReparation(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20079> {
 =======
         deleteReparation(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20078> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        deleteReparation(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20079> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        deleteReparation(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20078> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return ReparationsApiFp(configuration).deleteReparation(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -464,10 +528,19 @@ export const ReparationsApiFactory = function (configuration?: Configuration, ba
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         reparationsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20076> {
 =======
         reparationsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20075> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        reparationsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20076> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        reparationsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20075> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return ReparationsApiFp(configuration).reparationsIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -481,12 +554,23 @@ export const ReparationsApiFactory = function (configuration?: Configuration, ba
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         updateReparation(demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options?: any): AxiosPromise<InlineResponse20078> {
             return ReparationsApiFp(configuration).updateReparation(demarcheMediation, fauteId, authorization, reparationId, options).then((request) => request(axios, basePath));
 =======
         updatReparation(demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options?: any): AxiosPromise<InlineResponse20077> {
             return ReparationsApiFp(configuration).updatReparation(demarcheMediation, fauteId, authorization, reparationId, options).then((request) => request(axios, basePath));
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        updateReparation(demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options?: any): AxiosPromise<InlineResponse20078> {
+            return ReparationsApiFp(configuration).updateReparation(demarcheMediation, fauteId, authorization, reparationId, options).then((request) => request(axios, basePath));
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        updatReparation(demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options?: any): AxiosPromise<InlineResponse20077> {
+            return ReparationsApiFp(configuration).updatReparation(demarcheMediation, fauteId, authorization, reparationId, options).then((request) => request(axios, basePath));
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
         },
         /**
          * Get information about a specific reparation
@@ -497,10 +581,19 @@ export const ReparationsApiFactory = function (configuration?: Configuration, ba
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         viewReparation(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20077> {
 =======
         viewReparation(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20076> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        viewReparation(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20077> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        viewReparation(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20076> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return ReparationsApiFp(configuration).viewReparation(authorization, id, options).then((request) => request(axios, basePath));
         },
     };
@@ -560,8 +653,8 @@ export class ReparationsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReparationsApi
      */
-    public updateReparation(demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options?: any) {
-        return ReparationsApiFp(this.configuration).updateReparation(demarcheMediation, fauteId, authorization, reparationId, options).then((request) => request(this.axios, this.basePath));
+    public updatReparation(demarcheMediation: string, fauteId: number, authorization: string, reparationId: number, options?: any) {
+        return ReparationsApiFp(this.configuration).updatReparation(demarcheMediation, fauteId, authorization, reparationId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get information about a specific reparation

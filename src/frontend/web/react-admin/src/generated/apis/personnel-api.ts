@@ -17,16 +17,33 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 import { InlineResponse20058 } from '../models';
 import { InlineResponse20059 } from '../models';
 import { InlineResponse20060 } from '../models';
 import { InlineResponse20061 } from '../models';
+<<<<<<< HEAD
 =======
 import { InlineResponse20057 } from '../models';
 import { InlineResponse20058 } from '../models';
 import { InlineResponse20059 } from '../models';
 import { InlineResponse20060 } from '../models';
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+import { InlineResponse20057 } from '../models';
+import { InlineResponse20058 } from '../models';
+import { InlineResponse20059 } from '../models';
+import { InlineResponse20060 } from '../models';
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 import { InlineResponse2018 } from '../models';
 import { InlineResponse40022 } from '../models';
 import { InlineResponse40023 } from '../models';
@@ -485,10 +502,19 @@ export const PersonnelApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async deletePersonnel(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20061>> {
 =======
         async deletePersonnel(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20060>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async deletePersonnel(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20061>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async deletePersonnel(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20060>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await PersonnelApiAxiosParamCreator(configuration).deletePersonnel(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -503,10 +529,19 @@ export const PersonnelApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async personelIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20058>> {
 =======
         async personelIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20057>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async personelIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20058>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async personelIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20057>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await PersonnelApiAxiosParamCreator(configuration).personelIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -531,10 +566,19 @@ export const PersonnelApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async updatePersonnel(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, fonction: string, authorization: string, personnelId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20060>> {
 =======
         async updatePersonnel(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, fonction: string, authorization: string, personnelId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20059>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async updatePersonnel(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, fonction: string, authorization: string, personnelId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20060>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async updatePersonnel(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, fonction: string, authorization: string, personnelId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20059>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await PersonnelApiAxiosParamCreator(configuration).updatePersonnel(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, fonction, authorization, personnelId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -550,10 +594,19 @@ export const PersonnelApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async viewPersonnel(authorization: string, personnelId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20059>> {
 =======
         async viewPersonnel(authorization: string, personnelId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20058>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async viewPersonnel(authorization: string, personnelId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20059>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async viewPersonnel(authorization: string, personnelId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20058>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await PersonnelApiAxiosParamCreator(configuration).viewPersonnel(authorization, personnelId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -597,10 +650,19 @@ export const PersonnelApiFactory = function (configuration?: Configuration, base
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         deletePersonnel(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20061> {
 =======
         deletePersonnel(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20060> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        deletePersonnel(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20061> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        deletePersonnel(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20060> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return PersonnelApiFp(configuration).deletePersonnel(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -611,10 +673,19 @@ export const PersonnelApiFactory = function (configuration?: Configuration, base
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         personelIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20058> {
 =======
         personelIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20057> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        personelIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20058> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        personelIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20057> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return PersonnelApiFp(configuration).personelIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -635,10 +706,19 @@ export const PersonnelApiFactory = function (configuration?: Configuration, base
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         updatePersonnel(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, fonction: string, authorization: string, personnelId: number, options?: any): AxiosPromise<InlineResponse20060> {
 =======
         updatePersonnel(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, fonction: string, authorization: string, personnelId: number, options?: any): AxiosPromise<InlineResponse20059> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        updatePersonnel(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, fonction: string, authorization: string, personnelId: number, options?: any): AxiosPromise<InlineResponse20060> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        updatePersonnel(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, fonction: string, authorization: string, personnelId: number, options?: any): AxiosPromise<InlineResponse20059> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return PersonnelApiFp(configuration).updatePersonnel(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, fonction, authorization, personnelId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -650,10 +730,19 @@ export const PersonnelApiFactory = function (configuration?: Configuration, base
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         viewPersonnel(authorization: string, personnelId: number, options?: any): AxiosPromise<InlineResponse20059> {
 =======
         viewPersonnel(authorization: string, personnelId: number, options?: any): AxiosPromise<InlineResponse20058> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        viewPersonnel(authorization: string, personnelId: number, options?: any): AxiosPromise<InlineResponse20059> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        viewPersonnel(authorization: string, personnelId: number, options?: any): AxiosPromise<InlineResponse20058> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return PersonnelApiFp(configuration).viewPersonnel(authorization, personnelId, options).then((request) => request(axios, basePath));
         },
     };

@@ -19,12 +19,6 @@
 export interface InlineResponse20087 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20087
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20087
      */
@@ -33,9 +27,21 @@ export interface InlineResponse20087 {
      * 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
      * @type {SanctionPrevu}
+=======
+=======
+>>>>>>> 605364c (mainmaim)
+     * @type {string}
      * @memberof InlineResponse20087
      */
+<<<<<<< HEAD
     content?: any;
 =======
 <<<<<<< HEAD
@@ -56,4 +62,15 @@ export interface InlineResponse20087 {
     content?: any;
 >>>>>>> e2d508d (Closes #299 - admin api integrated)
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+     * @type {SanctionPrevu}
+     * @memberof InlineResponse20087
+     */
+    content?: any;
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+    message?: any;
+>>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 }

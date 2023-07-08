@@ -19,12 +19,6 @@
 export interface InlineResponse20090 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20090
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20090
      */
@@ -32,11 +26,15 @@ export interface InlineResponse20090 {
     /**
      * 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 605364c (mainmaim)
      * @type {string}
      * @memberof InlineResponse20090
      */
     message?: any;
+<<<<<<< HEAD
 <<<<<<< HEAD
     /**
      * 
@@ -47,12 +45,16 @@ export interface InlineResponse20090 {
     /**
      * 
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+    /**
+     * 
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
      * @type {Suggestion}
      * @memberof InlineResponse20090
      */
     content?: any;
-<<<<<<< HEAD
-=======
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
 }

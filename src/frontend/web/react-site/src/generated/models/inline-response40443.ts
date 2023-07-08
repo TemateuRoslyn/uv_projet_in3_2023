@@ -22,7 +22,6 @@ export interface InlineResponse40443 {
      * @type {string}
      * @memberof InlineResponse40443
      */
-<<<<<<< HEAD
     message?: any;
     /**
      * 
@@ -30,7 +29,4 @@ export interface InlineResponse40443 {
      * @memberof InlineResponse40443
      */
     success?: any;
-=======
-    error?: any;
->>>>>>> e2d508d (Closes #299 - admin api integrated)
 }

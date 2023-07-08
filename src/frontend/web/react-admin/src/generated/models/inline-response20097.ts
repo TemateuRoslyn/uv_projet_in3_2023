@@ -14,25 +14,25 @@
 /**
  * 
  * @export
- * @interface InlineResponse20062
+ * @interface InlineResponse20097
  */
-export interface InlineResponse20062 {
+export interface InlineResponse20097 {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20062
+     * @memberof InlineResponse20097
      */
     message?: any;
     /**
      * 
      * @type {boolean}
-     * @memberof InlineResponse20062
+     * @memberof InlineResponse20097
      */
     success?: any;
     /**
      * 
-     * @type {Professeur}
-     * @memberof InlineResponse20062
+     * @type {User}
+     * @memberof InlineResponse20097
      */
-    content?: any;
+    data?: any;
 }

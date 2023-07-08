@@ -17,13 +17,23 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+import { InlineResponse20083 } from '../models';
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 import { InlineResponse20084 } from '../models';
 import { InlineResponse20085 } from '../models';
 import { InlineResponse20086 } from '../models';
 import { InlineResponse20087 } from '../models';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { InlineResponse20088 } from '../models';
 =======
+<<<<<<< HEAD
 >>>>>>> 3c60453 (Closes #311 -Ajusting home page)
 =======
 import { InlineResponse20083 } from '../models';
@@ -39,6 +49,16 @@ import { InlineResponse20087 } from '../models';
 import { InlineResponse20086 } from '../models';
 >>>>>>> e2d508d (Closes #299 - admin api integrated)
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+import { InlineResponse20088 } from '../models';
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+>>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
+>>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
+=======
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 import { InlineResponse20112 } from '../models';
 import { InlineResponse40014 } from '../models';
 import { InlineResponse40034 } from '../models';
@@ -46,10 +66,7 @@ import { InlineResponse401 } from '../models';
 import { InlineResponse40441 } from '../models';
 import { InlineResponse40442 } from '../models';
 import { InlineResponse40443 } from '../models';
-<<<<<<< HEAD
 import { InlineResponse40444 } from '../models';
-=======
->>>>>>> e2d508d (Closes #299 - admin api integrated)
 import { InlineResponse4227 } from '../models';
 /**
  * SanctionprevusApi - axios parameter creator
@@ -456,6 +473,11 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
         async deleteSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20088>> {
 =======
         async deleteSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20087>> {
@@ -470,6 +492,19 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
         async deleteSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20086>> {
 >>>>>>> e2d508d (Closes #299 - admin api integrated)
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+        async deleteSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20088>> {
+<<<<<<< HEAD
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+=======
+        async deleteSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20087>> {
+>>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
+>>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
+=======
+        async deleteSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20087>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).deleteSanctionPrevu(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -484,10 +519,19 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async sanctionprevusIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20084>> {
 =======
         async sanctionprevusIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20083>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async sanctionprevusIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20084>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async sanctionprevusIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20083>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).sanctionprevusIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -508,6 +552,11 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
         async updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20087>> {
 =======
 <<<<<<< HEAD
@@ -520,6 +569,19 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
 =======
         async updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20086>> {
 >>>>>>> 3c60453 (Closes #311 -Ajusting home page)
+=======
+        async updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20087>> {
+<<<<<<< HEAD
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+=======
+        async updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20086>> {
+>>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
+>>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
+=======
+        async updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20086>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).updateSanctionPrevu(libelle, dureeValidite, eleveId, fauteId, authorization, sanctionprevuId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -535,10 +597,19 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         async viewSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20085>> {
 =======
         async viewSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20084>> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        async viewSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20085>> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        async viewSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20084>> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).viewSanctionPrevu(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -553,7 +624,7 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewSanctionPrevusEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20086>> {
+        async viewSanctionPrevusEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20085>> {
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).viewSanctionPrevusEleve(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -593,6 +664,11 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
         deleteSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20088> {
 =======
         deleteSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20087> {
@@ -607,6 +683,19 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
         deleteSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20086> {
 >>>>>>> e2d508d (Closes #299 - admin api integrated)
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+        deleteSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20088> {
+<<<<<<< HEAD
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+=======
+        deleteSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20087> {
+>>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
+>>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
+=======
+        deleteSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20087> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return SanctionprevusApiFp(configuration).deleteSanctionPrevu(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -617,10 +706,19 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         sanctionprevusIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20084> {
 =======
         sanctionprevusIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20083> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        sanctionprevusIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20084> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        sanctionprevusIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20083> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return SanctionprevusApiFp(configuration).sanctionprevusIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -637,6 +735,11 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
         updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): AxiosPromise<InlineResponse20087> {
 =======
 <<<<<<< HEAD
@@ -649,6 +752,19 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
 =======
         updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): AxiosPromise<InlineResponse20086> {
 >>>>>>> 3c60453 (Closes #311 -Ajusting home page)
+=======
+        updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): AxiosPromise<InlineResponse20087> {
+<<<<<<< HEAD
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+=======
+        updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): AxiosPromise<InlineResponse20086> {
+>>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
+>>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
+=======
+        updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): AxiosPromise<InlineResponse20086> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return SanctionprevusApiFp(configuration).updateSanctionPrevu(libelle, dureeValidite, eleveId, fauteId, authorization, sanctionprevuId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -660,10 +776,19 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
         viewSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20085> {
 =======
         viewSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20084> {
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+        viewSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20085> {
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+        viewSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20084> {
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return SanctionprevusApiFp(configuration).viewSanctionPrevu(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -674,7 +799,7 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewSanctionPrevusEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20086> {
+        viewSanctionPrevusEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20085> {
             return SanctionprevusApiFp(configuration).viewSanctionPrevusEleve(authorization, id, options).then((request) => request(axios, basePath));
         },
     };

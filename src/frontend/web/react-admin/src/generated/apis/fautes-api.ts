@@ -24,10 +24,19 @@ import { InlineResponse20036 } from '../models';
 import { InlineResponse20037 } from '../models';
 import { InlineResponse20039 } from '../models';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { InlineResponse20040 } from '../models';
 import { InlineResponse4005 } from '../models';
 =======
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+import { InlineResponse20040 } from '../models';
+import { InlineResponse4005 } from '../models';
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 import { InlineResponse4008 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse40414 } from '../models';
@@ -117,55 +126,6 @@ export const FautesApiAxiosParamCreator = function (configuration?: Configuratio
                 baseOptions = configuration.baseOptions;
             }
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (authorization !== undefined && authorization !== null) {
-                localVarHeaderParameter['Authorization'] = String(authorization);
-            }
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Get the filtered list of Faults.
-         * @summary Get filtered list of faults
-         * @param {string} keyword Keyword to filter faults
-         * @param {string} authorization JWT token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        fautesRecords: async (keyword: string, authorization: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'keyword' is not null or undefined
-            if (keyword === null || keyword === undefined) {
-                throw new RequiredError('keyword','Required parameter keyword was null or undefined when calling fautesRecords.');
-            }
-            // verify required parameter 'authorization' is not null or undefined
-            if (authorization === null || authorization === undefined) {
-                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling fautesRecords.');
-            }
-            const localVarPath = `/api/fautes/records/{keyword}`
-                .replace(`{${"keyword"}}`, encodeURIComponent(String(keyword)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -425,21 +385,6 @@ export const FautesApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Get the filtered list of Faults.
-         * @summary Get filtered list of faults
-         * @param {string} keyword Keyword to filter faults
-         * @param {string} authorization JWT token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async fautesRecords(keyword: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20040>> {
-            const localVarAxiosArgs = await FautesApiAxiosParamCreator(configuration).fautesRecords(keyword, authorization, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
          * Retrieve a list of all mistakes with associated eleves and regles
          * @summary Find all mistakes
          * @param {string} authorization JWT token
@@ -531,17 +476,6 @@ export const FautesApiFactory = function (configuration?: Configuration, basePat
             return FautesApiFp(configuration).deleteMistake(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get the filtered list of Faults.
-         * @summary Get filtered list of faults
-         * @param {string} keyword Keyword to filter faults
-         * @param {string} authorization JWT token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        fautesRecords(keyword: string, authorization: string, options?: any): AxiosPromise<InlineResponse20040> {
-            return FautesApiFp(configuration).fautesRecords(keyword, authorization, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Retrieve a list of all mistakes with associated eleves and regles
          * @summary Find all mistakes
          * @param {string} authorization JWT token
@@ -618,18 +552,6 @@ export class FautesApi extends BaseAPI {
      */
     public deleteMistake(authorization: string, id: number, options?: any) {
         return FautesApiFp(this.configuration).deleteMistake(authorization, id, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     * Get the filtered list of Faults.
-     * @summary Get filtered list of faults
-     * @param {string} keyword Keyword to filter faults
-     * @param {string} authorization JWT token
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FautesApi
-     */
-    public fautesRecords(keyword: string, authorization: string, options?: any) {
-        return FautesApiFp(this.configuration).fautesRecords(keyword, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Retrieve a list of all mistakes with associated eleves and regles

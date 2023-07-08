@@ -19,18 +19,14 @@
 export interface InlineResponse20094 {
     /**
      * 
-     * @type {boolean}
-     * @memberof InlineResponse20094
-     */
-    success?: any;
-    /**
-     * 
      * @type {string}
      * @memberof InlineResponse20094
      */
     message?: any;
+<<<<<<< HEAD
     /**
      * 
+<<<<<<< HEAD
 <<<<<<< HEAD
      * @type {Array&lt;User&gt;}
 =======
@@ -43,9 +39,20 @@ export interface InlineResponse20094 {
      * 
      * @type {User}
 >>>>>>> 3c60453 (Closes #311 -Ajusting home page)
+=======
+     * @type {boolean}
+>>>>>>> 605364c (mainmaim)
+     * @memberof InlineResponse20094
+     */
+    success?: any;
+    /**
+     * 
+     * @type {User}
      * @memberof InlineResponse20094
      */
     data?: any;
 =======
 >>>>>>> e2d508d (Closes #299 - admin api integrated)
+=======
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
 }

@@ -19,6 +19,12 @@
 export interface InlineResponse20064 {
     /**
      * 
+     * @type {string}
+     * @memberof InlineResponse20064
+     */
+    message?: any;
+    /**
+     * 
      * @type {boolean}
      * @memberof InlineResponse20064
      */
@@ -26,11 +32,20 @@ export interface InlineResponse20064 {
     /**
      * 
 <<<<<<< HEAD
+<<<<<<< HEAD
      * @type {Professeur}
 =======
      * @type {string}
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+     * @type {Professeur}
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+     * @type {string}
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
      * @memberof InlineResponse20064
      */
-    message?: any;
+    content?: any;
 }

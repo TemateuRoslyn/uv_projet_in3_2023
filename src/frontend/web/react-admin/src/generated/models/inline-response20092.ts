@@ -30,14 +30,21 @@ export interface InlineResponse20092 {
      */
     message?: any;
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
     /**
      * 
-<<<<<<< HEAD
      * @type {Suggestion}
      * @memberof InlineResponse20092
      */
     content?: any;
+<<<<<<< HEAD
 =======
+<<<<<<< HEAD
 >>>>>>> 3c60453 (Closes #311 -Ajusting home page)
 =======
      * @type {Array&lt;User&gt;}
@@ -57,4 +64,13 @@ export interface InlineResponse20092 {
     data?: any;
 >>>>>>> e2d508d (Closes #299 - admin api integrated)
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+>>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
+>>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
+=======
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 }

@@ -32,10 +32,19 @@ export interface InlineResponse20040 {
     /**
      * 
 <<<<<<< HEAD
+<<<<<<< HEAD
      * @type {Array&lt;string&gt;}
 =======
      * @type {Array&lt;MembreConseil&gt;}
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+     * @type {Array&lt;string&gt;}
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+     * @type {Array&lt;MembreConseil&gt;}
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
      * @memberof InlineResponse20040
      */
     content?: any;

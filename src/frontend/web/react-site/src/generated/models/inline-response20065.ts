@@ -19,23 +19,38 @@
 export interface InlineResponse20065 {
     /**
      * 
+<<<<<<< HEAD
      * @type {string}
      * @memberof InlineResponse20065
      */
     message?: any;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 605364c (mainmaim)
     /**
      * 
+=======
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
      * @type {boolean}
      * @memberof InlineResponse20065
      */
     success?: any;
     /**
      * 
-     * @type {Array&lt;Regle&gt;}
+     * @type {string}
      * @memberof InlineResponse20065
      */
+<<<<<<< HEAD
     content?: any;
+<<<<<<< HEAD
 >>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+<<<<<<< HEAD
+    message?: any;
+>>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
+=======
+>>>>>>> 605364c (mainmaim)
+>>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 }
