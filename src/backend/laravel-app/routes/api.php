@@ -236,6 +236,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll', [FauteController::class, 'index']);
         Route::get('findAll/eleve/{eleveId}', [FauteController::class, 'viewFautesEleve']);
         Route::get('findAll/eleveAndKeyword/{eleveId}/{keyword}', [FauteController::class, 'viewFautesEleveAndKeyword']); //
+        Route::get('records/{keywords}', [FauteController::class, 'records']);
 
     });
 
@@ -264,7 +265,7 @@ Route::middleware('jwt.verify')->group(function () {
     //Reparations
     Route::prefix('reparations')->group(function () {
         Route::middleware('permission:creer_reparation')->post('create', [ReparationController::class, 'store']);
-        Route::middleware('permission:modifier_reparation')->put('update/{reparationId}', [ReparationController::class, 'update']);
+        Route::middleware('permission:modifier_reparation')->post('update/{reparationId}', [ReparationController::class, 'update']);
         Route::middleware('permission:supprimer_reparation')->delete('delete/{reparationId}', [ReparationController::class, 'delete']);
         Route::get('findOne/{reparationId}', [ReparationController::class, 'view']);
         Route::get('findAll', [ReparationController::class, 'index']);

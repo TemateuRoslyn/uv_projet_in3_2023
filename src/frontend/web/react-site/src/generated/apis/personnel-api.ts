@@ -16,10 +16,10 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20057 } from '../models';
 import { InlineResponse20058 } from '../models';
 import { InlineResponse20059 } from '../models';
 import { InlineResponse20060 } from '../models';
+import { InlineResponse20061 } from '../models';
 import { InlineResponse2018 } from '../models';
 import { InlineResponse40022 } from '../models';
 import { InlineResponse40023 } from '../models';
@@ -477,7 +477,7 @@ export const PersonnelApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deletePersonnel(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20060>> {
+        async deletePersonnel(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20061>> {
             const localVarAxiosArgs = await PersonnelApiAxiosParamCreator(configuration).deletePersonnel(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -491,7 +491,7 @@ export const PersonnelApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async personelIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20057>> {
+        async personelIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20058>> {
             const localVarAxiosArgs = await PersonnelApiAxiosParamCreator(configuration).personelIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -515,7 +515,7 @@ export const PersonnelApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updatePersonnel(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, fonction: string, authorization: string, personnelId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20059>> {
+        async updatePersonnel(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, fonction: string, authorization: string, personnelId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20060>> {
             const localVarAxiosArgs = await PersonnelApiAxiosParamCreator(configuration).updatePersonnel(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, fonction, authorization, personnelId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -530,7 +530,7 @@ export const PersonnelApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewPersonnel(authorization: string, personnelId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20058>> {
+        async viewPersonnel(authorization: string, personnelId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20059>> {
             const localVarAxiosArgs = await PersonnelApiAxiosParamCreator(configuration).viewPersonnel(authorization, personnelId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -573,7 +573,7 @@ export const PersonnelApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deletePersonnel(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20060> {
+        deletePersonnel(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20061> {
             return PersonnelApiFp(configuration).deletePersonnel(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -583,7 +583,7 @@ export const PersonnelApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        personelIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20057> {
+        personelIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20058> {
             return PersonnelApiFp(configuration).personelIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -603,7 +603,7 @@ export const PersonnelApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatePersonnel(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, fonction: string, authorization: string, personnelId: number, options?: any): AxiosPromise<InlineResponse20059> {
+        updatePersonnel(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, fonction: string, authorization: string, personnelId: number, options?: any): AxiosPromise<InlineResponse20060> {
             return PersonnelApiFp(configuration).updatePersonnel(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, fonction, authorization, personnelId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -614,7 +614,7 @@ export const PersonnelApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewPersonnel(authorization: string, personnelId: number, options?: any): AxiosPromise<InlineResponse20058> {
+        viewPersonnel(authorization: string, personnelId: number, options?: any): AxiosPromise<InlineResponse20059> {
             return PersonnelApiFp(configuration).viewPersonnel(authorization, personnelId, options).then((request) => request(axios, basePath));
         },
     };

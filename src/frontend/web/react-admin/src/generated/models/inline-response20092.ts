@@ -29,4 +29,10 @@ export interface InlineResponse20092 {
      * @memberof InlineResponse20092
      */
     message?: any;
+    /**
+     * 
+     * @type {Suggestion}
+     * @memberof InlineResponse20092
+     */
+    content?: any;
 }

@@ -52,7 +52,7 @@ class ReparationController extends Controller
 
     public function index()
     {
-        $reparations = Reparation::has('faute')->with('faute')->get();
+        $reparations = Reparation::has('faute')->with('faute.eleve')->get();
 
         return response()->json([
             'message' => 'Liste des reparations',
@@ -230,11 +230,11 @@ class ReparationController extends Controller
     }
 
     /**
-     * @OA\put(
+     * @OA\post(
      *     path="/api/reparations/update/{reparationId}",
      *     summary="Update a reparation's information",
      *     description="Update a reparation's information",
-     *     operationId="updatReparation",
+     *     operationId="updateReparation",
      *     tags={"Reparations"},
      *      @OA\Parameter(
      *         name="reparationId",

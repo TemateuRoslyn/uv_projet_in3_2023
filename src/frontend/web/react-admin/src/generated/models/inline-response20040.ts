@@ -31,7 +31,7 @@ export interface InlineResponse20040 {
     message?: any;
     /**
      * 
-     * @type {Array&lt;MembreConseil&gt;}
+     * @type {Array&lt;string&gt;}
      * @memberof InlineResponse20040
      */
     content?: any;
