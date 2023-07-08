@@ -4,8 +4,8 @@ import '../../../common/styles/colors.dart';
 import '../../../common/utils/constants.dart';
 import '../../../common/utils/helper.dart';
 
-class CourseComponent extends StatelessWidget {
-  const CourseComponent({
+class CoursComponent extends StatelessWidget {
+  const CoursComponent({
     super.key,
     this.onPressAction,
     required this.courseTitle,
@@ -72,7 +72,7 @@ class CourseComponent extends StatelessWidget {
                         style: TextStyle(
                           fontSize: getHeight(15, context),
                           height: getHeight(1.5, context),
-                          color: Colors.white.withOpacity(0.7),
+                          color: Colors.white,
                         ),
                       ),
                     ],

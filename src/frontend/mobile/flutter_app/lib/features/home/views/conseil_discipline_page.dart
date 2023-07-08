@@ -64,8 +64,15 @@ class _ConseilDisciplinePageState extends State<ConseilDisciplinePage> {
                           context: context,
                           statusMessage: state.cdStatusMessage,
                           color: appColors.primary!,
-                          reloadFunction: () =>
-                              _homeCubit.getDataByType(dataType: 'cd'))
+                          reloadFunction: () {
+                            if (widget.childInfos == null) {
+                              _homeCubit.getDataByType(dataType: 'cd');
+                            } else {
+                              _homeCubit.getDataByType(
+                                  dataType: 'cd',
+                                  childId: widget.childInfos!.id);
+                            }
+                          })
                       : state.cds.isEmpty
                           ? CommonWidgets.noDataWidget(
                               positionFromTop: (screenSize.height / 2),

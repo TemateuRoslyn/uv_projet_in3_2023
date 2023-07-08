@@ -7,10 +7,12 @@ class HomeComponent extends StatelessWidget {
   const HomeComponent({
     super.key,
     required this.subtitle,
+    required this.image,
     required this.onPressAction,
   });
 
   final String subtitle;
+  final String image;
   final void Function()? onPressAction;
 
   @override
@@ -25,8 +27,10 @@ class HomeComponent extends StatelessWidget {
               backgroundColor: Colors.white,
               radius: 30,
               child: Image.asset(
-                AppImages.logo,
-                color: Colors.grey,
+                image,
+                width: getWidth(40, context),
+                height: getHeight(40, context),
+                // color: Colors.grey,
               ),
             ),
             SizedBox(

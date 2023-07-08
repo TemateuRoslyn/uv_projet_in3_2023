@@ -2,7 +2,6 @@ import 'package:fltter_app/common/styles/colors.dart';
 import 'package:fltter_app/common/views/check_internet_page.dart';
 import 'package:fltter_app/common/views/page_skeleton_two.dart';
 import 'package:fltter_app/features/home/logic/home_cubit.dart';
-import 'package:fltter_app/features/home/widgets/convocation_component.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -10,9 +9,10 @@ import '../../../common/models/user.dart';
 import '../../../common/utils/enums.dart';
 import '../../../common/utils/helper.dart';
 import '../../../common/widgets/common_widgets.dart';
+import '../widgets/convocation_component.dart';
 
-class ConvocationPage extends StatefulWidget {
-  const ConvocationPage({
+class SanctionsPage extends StatefulWidget {
+  const SanctionsPage({
     super.key,
     this.childInfos,
   });
@@ -20,10 +20,10 @@ class ConvocationPage extends StatefulWidget {
   final User? childInfos;
 
   @override
-  State<ConvocationPage> createState() => _ConvocationPageState();
+  State<SanctionsPage> createState() => _SanctionsPageState();
 }
 
-class _ConvocationPageState extends State<ConvocationPage> {
+class _SanctionsPageState extends State<SanctionsPage> {
   late HomeCubit _homeCubit;
 
   @override
@@ -32,10 +32,10 @@ class _ConvocationPageState extends State<ConvocationPage> {
 
     _homeCubit = context.read<HomeCubit>();
     if (widget.childInfos == null) {
-      _homeCubit.getDataByType(dataType: 'convocations');
+      _homeCubit.getDataByType(dataType: 'sanctions');
     } else {
       _homeCubit.getDataByType(
-          dataType: 'convocations', childId: widget.childInfos!.id);
+          dataType: 'sanctions', childId: widget.childInfos!.id);
     }
   }
 
@@ -44,36 +44,36 @@ class _ConvocationPageState extends State<ConvocationPage> {
     final screenSize = MediaQuery.of(context).size;
 
     return PageSkeletonTwo(
-      headerText: 'Mes convocations',
+      headerText: 'Mes sanctions',
       body: BlocBuilder<HomeCubit, HomeState>(
         buildWhen: (previous, current) =>
-            (previous.convocationStatus != current.convocationStatus ||
-                previous.convocations != current.convocations),
+            (previous.sanctionStatus != current.sanctionStatus ||
+                previous.sanctions != current.sanctions),
         builder: (context, state) {
           return CheckInternetConnectionPage(
             positionFromTop: (screenSize.height / 2),
             errorTextColor: appColors.primary!,
-            body: state.convocationStatus == ApiStatus.isLoading
+            body: state.sanctionStatus == ApiStatus.isLoading
                 ? CommonWidgets.circularProgressIndicatorWidget(
                     positionFromTop: (screenSize.height / 2),
                     context: context,
                     color: appColors.primary!)
-                : state.convocationStatus == ApiStatus.failed
+                : state.sanctionStatus == ApiStatus.failed
                     ? CommonWidgets.failedStatusWidget(
                         positionFromTop: (screenSize.height / 2),
                         context: context,
-                        statusMessage: state.convocationStatusMessage,
+                        statusMessage: state.sanctionStatusMessage,
                         color: appColors.primary!,
                         reloadFunction: () {
                           if (widget.childInfos == null) {
-                            _homeCubit.getDataByType(dataType: 'convocations');
+                            _homeCubit.getDataByType(dataType: 'sanctions');
                           } else {
                             _homeCubit.getDataByType(
-                                dataType: 'convocations',
+                                dataType: 'sanctions',
                                 childId: widget.childInfos!.id);
                           }
                         })
-                    : state.convocations.isEmpty
+                    : state.sanctions.isEmpty
                         ? CommonWidgets.noDataWidget(
                             positionFromTop: (screenSize.height / 2),
                             context: context,
@@ -84,15 +84,13 @@ class _ConvocationPageState extends State<ConvocationPage> {
                                 top: getHeight(20, context),
                                 left: getWidth(10, context),
                                 right: getWidth(10, context)),
-                            children: state.convocations
-                                .map((convocation) => ConvocationComponent(
-                                      libelle: 'Faute: ${convocation.libelle}',
+                            children: state.sanctions
+                                .map((sanction) => ConvocationComponent(
+                                      libelle: 'Sanction: ${sanction.libelle}',
                                       subtitle1:
-                                          'Date de convocation: ${convocation.dateConvocation}',
-                                      subtitle2:
-                                          'Date de RDV: ${convocation.dateRdv}',
-                                      statut: convocation.statut,
-                                      isFrom: 'convocations',
+                                          'Durée: ${sanction.dureeValidite}',
+                                      statut: 'Gravité: Grave',
+                                      isFrom: 'sanctions',
                                       // onPressAction: () {},
                                     ))
                                 .toList(),

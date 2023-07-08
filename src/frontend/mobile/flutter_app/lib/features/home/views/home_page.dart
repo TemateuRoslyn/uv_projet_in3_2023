@@ -3,16 +3,14 @@ import 'package:fltter_app/common/views/check_internet_page.dart';
 import 'package:fltter_app/common/widgets/common_widgets.dart';
 import 'package:fltter_app/features/home/views/conseil_discipline_page.dart';
 import 'package:fltter_app/features/home/views/convocation_page.dart';
-import 'package:fltter_app/features/home/views/courses_page.dart';
+import 'package:fltter_app/features/home/views/cours_page.dart';
 import 'package:fltter_app/features/home/views/fautes_page.dart';
 import 'package:fltter_app/features/home/views/reglements_interieurs_page.dart';
 import 'package:fltter_app/features/home/views/suggestion_page.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../common/logics/navigation/navigation_cubit.dart';
-import '../../../common/models/suggestion.dart';
 import '../../../common/styles/colors.dart';
 import '../../../common/utils/constants.dart';
 import '../../../common/utils/helper.dart';
@@ -46,59 +44,55 @@ class _HomePageState extends State<HomePage> {
     final List<Map<String, dynamic>> homeComponents = [
       // Fautes
       {
-        'image': '../../../../assets/images/fault.png',
+        'image': AppImages.fault,
         'subtitle': 'Mes fautes',
         'onPressAction': () => Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const FautesPage()))
       },
       // Convocation
       {
-        'image': '../../../../assets/images/convocation.png',
+        'image': AppImages.convocation,
         'subtitle': 'Mes convocations',
         'onPressAction': () => Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => const ConvocationPage()))
       },
       // Conseil de discipline
       {
-        'image': '../../../../assets/images/conseil_de_dicipline.png',
+        'image': AppImages.disciplinaryCouncil,
         'subtitle': 'Mes conseils de discipline',
         'onPressAction': () => Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => const ConseilDisciplinePage()))
       },
       // Sanctions
       {
-        'image': '../../../../assets/images/sanction.png',
+        'image': AppImages.sanction,
         'subtitle': 'Mes sanctions',
         'onPressAction': () {}
       },
       // Reglements interieurs
       {
-        'image': '../../../../assets/images/rule_and_regulation.png',
+        'image': AppImages.ruleAndRegulation,
         'subtitle': 'Reglements interieurs',
         'onPressAction': () => Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => const ReglementsInterieurs()))
       },
       // Cours
       {
-        'image': '../../../../assets/images/course.png',
+        'image': AppImages.course,
         'subtitle': 'Mes cours',
-        'onPressAction': () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => Courses()))
+        'onPressAction': () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => CoursPage(
+                  user: _profileCubit.state.currentUser!,
+                )))
       },
       // Boite a suggestion
       {
-        'image': '../../../../assets/images/suggestion_box_vote.png',
+        'image': AppImages.suggestion,
         'subtitle': 'Boîte à suggestions',
         'onPressAction': () => Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const Suggestions()))
       },
-      // Profile
-      {
-        'image': '../../../../assets/images/unknown_contact_img.png',
-        'subtitle': 'Mon profile',
-        'onPressAction': () =>
-            _navigationCubit.changeNavigationType(NavigationType.profile)
-      },
+      // {'image': '', 'subtitle': 'Rapport de notes', 'onPressAction': () {}},
     ];
 
     return BlocBuilder<ProfileCubit, ProfileState>(
@@ -137,16 +131,9 @@ class _HomePageState extends State<HomePage> {
                                   SizedBox(
                                     child: Row(
                                       children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          child: Image.asset(
-                                            AppImages.unknownPersonImg,
-                                            height: getHeight(40, context),
-                                            width: getWidth(40, context),
-                                            // color: Colors.white,
-                                          ),
-                                        ),
+                                        CommonWidgets.renderImage(
+                                            imagePath: currentUser!.photo!,
+                                            context: context),
                                         Colonne(
                                             text1:
                                                 '${currentUser!.firstName} ${currentUser.lastName}',
@@ -174,6 +161,7 @@ class _HomePageState extends State<HomePage> {
                                   children: homeComponents
                                       .map((homeComponent) => HomeComponent(
                                             subtitle: homeComponent['subtitle'],
+                                            image: homeComponent['image'],
                                             onPressAction:
                                                 homeComponent['onPressAction'],
                                           ))
@@ -226,3 +214,4 @@ class Colonne extends StatelessWidget {
     );
   }
 }
+// 

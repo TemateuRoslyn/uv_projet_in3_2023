@@ -1,10 +1,11 @@
+import 'package:fltter_app/common/logics/speech/speech_cubit.dart';
 import 'package:fltter_app/common/styles/colors.dart';
 import 'package:fltter_app/common/utils/constants.dart';
 import 'package:fltter_app/common/utils/helper.dart';
 import 'package:fltter_app/common/views/check_internet_page.dart';
 import 'package:fltter_app/common/widgets/common_widgets.dart';
 import 'package:fltter_app/features/home/logic/home_cubit.dart';
-import 'package:fltter_app/features/home/widgets/course_component.dart';
+import 'package:fltter_app/features/home/widgets/cours_component.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
 import 'package:fltter_app/features/profile/views/parent_consultation_page.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
@@ -22,11 +23,12 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool profileIsSelected = true;
-  bool modifyProfileIsSelected = false;
+  // bool profileIsSelected = true;
+  // bool modifyProfileIsSelected = false;
   User? _currentUser;
   late ProfileCubit _profileCubit;
   late HomeCubit _homeCubit;
+  late SpeechCubit _speechCubit;
   late String currentUserType;
 
   @override
@@ -34,6 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
 
     _profileCubit = context.read<ProfileCubit>();
+    _speechCubit = context.read<SpeechCubit>();
     _homeCubit = context.read<HomeCubit>();
     currentUserType = AuthRepository.getUserType;
     if (_profileCubit.state.currentUser != null) {
@@ -50,14 +53,16 @@ class _ProfilePageState extends State<ProfilePage> {
     final List<ProfileOption> profileOptions = [
       ProfileOption(
         icon: Icons.person,
-        backgroundColor: profileIsSelected ? appColors.primary! : Colors.white,
-        iconColor: profileIsSelected ? Colors.white : Colors.grey,
+        // backgroundColor: profileIsSelected ? appColors.primary! : Colors.white,
+        // iconColor: profileIsSelected ? Colors.white : Colors.grey,
+        backgroundColor: Colors.white,
+        iconColor: Colors.grey,
         text: 'Profile',
         action: () {
-          setState(() {
-            profileIsSelected = !profileIsSelected;
-            modifyProfileIsSelected = !modifyProfileIsSelected;
-          });
+          // setState(() {
+          //   profileIsSelected = !profileIsSelected;
+          //   modifyProfileIsSelected = !modifyProfileIsSelected;
+          // });
         },
       ),
       ProfileOption(
@@ -67,30 +72,30 @@ class _ProfilePageState extends State<ProfilePage> {
         text: 'Deconnexion',
         action: () {},
       ),
-      ProfileOption(
-        icon: Icons.edit,
-        backgroundColor:
-            modifyProfileIsSelected ? appColors.primary! : Colors.white,
-        iconColor: modifyProfileIsSelected ? Colors.white : Colors.grey,
-        text: 'M.Profile',
-        action: () {
-          setState(() {
-            modifyProfileIsSelected = !modifyProfileIsSelected;
-            profileIsSelected = !profileIsSelected;
-          });
-        },
-      ),
+      // ProfileOption(
+      //   icon: Icons.edit,
+      //   backgroundColor:
+      //       modifyProfileIsSelected ? appColors.primary! : Colors.white,
+      //   iconColor: modifyProfileIsSelected ? Colors.white : Colors.grey,
+      //   text: 'M.Profile',
+      //   action: () {
+      //     setState(() {
+      //       modifyProfileIsSelected = !modifyProfileIsSelected;
+      //       profileIsSelected = !profileIsSelected;
+      //     });
+      //   },
+      // ),
     ];
 
     final List profileTiles = [
-      {
-        'text': 'Mes Fautes',
-        'icon': Icons.arrow_forward_ios_rounded,
-      },
-      {
-        'text': 'Mes Sanctions',
-        'icon': Icons.arrow_forward_ios_rounded,
-      },
+      // {
+      //   'text': 'Mes Fautes',
+      //   'icon': Icons.arrow_forward_ios_rounded,
+      // },
+      // {
+      //   'text': 'Mes Sanctions',
+      //   'icon': Icons.arrow_forward_ios_rounded,
+      // },
       {
         'text': 'Changer mon mot de passe',
         'icon': Icons.arrow_forward_ios_rounded,
@@ -112,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
       },
       {
         'text1': 'Sanction(s)',
-        'text2': _homeCubit.state.convocations.length.toString(),
+        'text2': _homeCubit.state.sanctions.length.toString(),
         'isFirst': false,
       }
     ];
@@ -138,67 +143,102 @@ class _ProfilePageState extends State<ProfilePage> {
                   : Expanded(
                       child: ListView(
                         children: [
-                          Container(
-                            padding: EdgeInsets.only(
-                                top: getHeight(
-                                  20,
-                                  context,
-                                ),
-                                left: getWidth(10, context)),
-                            // height: getHeight(50, context),
-                            width: double.infinity,
-                            // color: Colors.amber,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                if (currentUserType != 'parents')
-                                  Text(
-                                    'Paramètres',
-                                    style: TextStyle(
-                                        fontSize: getHeight(20, context),
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
+                          Stack(children: [
+                            Container(
+                              padding: EdgeInsets.only(
+                                  top: getHeight(
+                                    20,
+                                    context,
                                   ),
-                                SizedBox(
-                                  height: getHeight(30, context),
-                                ),
-                                Row(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(100),
-                                      child: Image.asset(
-                                        AppImages.unknownPersonImg,
-                                        height: getHeight(60, context),
-                                        width: getWidth(60, context),
-                                        // color: Colors.white,
-                                      ),
+                                  left: getWidth(10, context)),
+                              // height: getHeight(50, context),
+                              width: double.infinity,
+                              // color: Colors.amber,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (currentUserType != 'parents')
+                                    Text(
+                                      'Paramètres',
+                                      style: TextStyle(
+                                          fontSize: getHeight(20, context),
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
                                     ),
-                                    if (currentUserType == 'parents') ...[
-                                      Colonne(
-                                          currentUserType: currentUserType,
-                                          isFirst: true,
-                                          text1: 'Hello...',
-                                          text2:
-                                              '${state.currentUser!.firstName} ${state.currentUser!.lastName}'),
-                                      Colonne(
-                                        currentUserType: currentUserType,
-                                        isFirst: false,
-                                        text1: 'Profession',
-                                        text2: state.currentUser!.profession!,
+                                  SizedBox(
+                                    height: getHeight(30, context),
+                                  ),
+                                  Row(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: Image.asset(
+                                          AppImages.unknownPersonImg,
+                                          height: getHeight(60, context),
+                                          width: getWidth(60, context),
+                                          // color: Colors.white,
+                                        ),
                                       ),
-                                    ],
-                                    if (currentUserType == 'eleves') ...[
-                                      ...colonnes.map((colonne) => Colonne(
+                                      if (currentUserType == 'parents') ...[
+                                        Colonne(
+                                            currentUserType: currentUserType,
+                                            isFirst: true,
+                                            text1: 'Hello...',
+                                            text2:
+                                                '${state.currentUser!.firstName} ${state.currentUser!.lastName}'),
+                                        Colonne(
                                           currentUserType: currentUserType,
-                                          isFirst: colonne['isFirst'],
-                                          text1: colonne['text1'],
-                                          text2: colonne['text2'])),
+                                          isFirst: false,
+                                          text1: 'Profession',
+                                          text2: state.currentUser!.profession!,
+                                        ),
+                                      ],
+                                      if (currentUserType == 'eleves') ...[
+                                        ...colonnes.map((colonne) => Colonne(
+                                            currentUserType: currentUserType,
+                                            isFirst: colonne['isFirst'],
+                                            text1: colonne['text1'],
+                                            text2: colonne['text2'])),
+                                      ],
                                     ],
-                                  ],
-                                )
-                              ],
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
+                            if (currentUserType == 'parents') ...[
+                              BlocBuilder<SpeechCubit, SpeechState>(
+                                buildWhen: (previous, current) =>
+                                    previous.speechType != current.speechType,
+                                builder: (context, state) {
+                                  print('object one is ${state.speechType}');
+                                  return state.speechType ==
+                                          SpeechType.isSpeeching
+                                      ? Positioned(
+                                          bottom: getHeight(0, context),
+                                          right: getWidth(10, context),
+                                          child: Container(
+                                            height: getHeight(40, context),
+                                            width: getWidth(40, context),
+                                            decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Colors.white),
+                                            // alignment: Alignment.center,
+                                            child: IconButton(
+                                              color: appColors.secondary,
+                                              onPressed: () =>
+                                                  _speechCubit.stopSpeeching(),
+                                              icon: Icon(
+                                                Icons.stop,
+                                                size: getHeight(20, context),
+                                              ),
+                                            ),
+                                          ))
+                                      : const SizedBox();
+                                },
+                              ),
+                            ]
+                          ]),
                           currentUserType == 'parents'
                               ? Padding(
                                   padding: EdgeInsets.only(
@@ -227,7 +267,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         final child =
                                             childData['child'] as User;
                                         final hisClass = childData['hisClass'];
-                                        return CourseComponent(
+                                        return CoursComponent(
                                             currentUserType: currentUserType,
                                             onPressAction: () => Navigator.of(
                                                     context)
@@ -262,6 +302,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                       padding: EdgeInsets.symmetric(
                                           horizontal: getWidth(65, context)),
                                       child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
                                           children: profileOptions
                                               .map((profileOption) =>
                                                   profileOption)
