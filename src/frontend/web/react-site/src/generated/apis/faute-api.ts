@@ -16,7 +16,7 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20037 } from '../models';
+import { InlineResponse20038 } from '../models';
 import { InlineResponse40014 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse40416 } from '../models';
@@ -96,7 +96,7 @@ export const FauteApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updatemistake(body: UpdateFauteIdBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20037>> {
+        async updatemistake(body: UpdateFauteIdBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20038>> {
             const localVarAxiosArgs = await FauteApiAxiosParamCreator(configuration).updatemistake(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -120,7 +120,7 @@ export const FauteApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatemistake(body: UpdateFauteIdBody, authorization: string, options?: any): AxiosPromise<InlineResponse20037> {
+        updatemistake(body: UpdateFauteIdBody, authorization: string, options?: any): AxiosPromise<InlineResponse20038> {
             return FauteApiFp(configuration).updatemistake(body, authorization, options).then((request) => request(axios, basePath));
         },
     };

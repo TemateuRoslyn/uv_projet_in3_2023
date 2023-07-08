@@ -296,14 +296,14 @@ export const ConvocationApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewFonvocationEleve: async (authorization: string, id: number, options: any = {}): Promise<RequestArgs> => {
+        viewConvocationEleve: async (authorization: string, id: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
-                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling viewFonvocationEleve.');
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling viewConvocationEleve.');
             }
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling viewFonvocationEleve.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling viewConvocationEleve.');
             }
             const localVarPath = `/api/convocation/findAll/eleve/{eleveId}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -429,8 +429,8 @@ export const ConvocationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewFonvocationEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20020>> {
-            const localVarAxiosArgs = await ConvocationApiAxiosParamCreator(configuration).viewFonvocationEleve(authorization, id, options);
+        async viewConvocationEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20020>> {
+            const localVarAxiosArgs = await ConvocationApiAxiosParamCreator(configuration).viewConvocationEleve(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -508,8 +508,8 @@ export const ConvocationApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewFonvocationEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20020> {
-            return ConvocationApiFp(configuration).viewFonvocationEleve(authorization, id, options).then((request) => request(axios, basePath));
+        viewConvocationEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20020> {
+            return ConvocationApiFp(configuration).viewConvocationEleve(authorization, id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -590,7 +590,7 @@ export class ConvocationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ConvocationApi
      */
-    public viewFonvocationEleve(authorization: string, id: number, options?: any) {
-        return ConvocationApiFp(this.configuration).viewFonvocationEleve(authorization, id, options).then((request) => request(this.axios, this.basePath));
+    public viewConvocationEleve(authorization: string, id: number, options?: any) {
+        return ConvocationApiFp(this.configuration).viewConvocationEleve(authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
 }
