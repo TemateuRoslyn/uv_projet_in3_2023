@@ -19,23 +19,14 @@
 export interface InlineResponse20060 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20060
-     */
-    message?: any;
-<<<<<<< HEAD
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20060
      */
     success?: any;
     /**
      * 
-     * @type {Personnel}
+     * @type {string}
      * @memberof InlineResponse20060
      */
-    content?: any;
-=======
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+    message?: any;
 }

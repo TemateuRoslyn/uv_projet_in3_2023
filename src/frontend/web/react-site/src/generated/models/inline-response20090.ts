@@ -19,40 +19,20 @@
 export interface InlineResponse20090 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20090
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20090
      */
     success?: any;
     /**
      * 
-<<<<<<< HEAD
-=======
      * @type {string}
      * @memberof InlineResponse20090
      */
     message?: any;
-<<<<<<< HEAD
     /**
      * 
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-<<<<<<< HEAD
-=======
-    /**
-     * 
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
      * @type {Suggestion}
      * @memberof InlineResponse20090
      */
     content?: any;
-<<<<<<< HEAD
-=======
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
 }

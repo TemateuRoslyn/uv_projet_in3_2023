@@ -19,8 +19,14 @@
 export interface InlineResponse40433 {
     /**
      * 
+     * @type {boolean}
+     * @memberof InlineResponse40433
+     */
+    success?: any;
+    /**
+     * 
      * @type {string}
      * @memberof InlineResponse40433
      */
-    error?: any;
+    message?: any;
 }

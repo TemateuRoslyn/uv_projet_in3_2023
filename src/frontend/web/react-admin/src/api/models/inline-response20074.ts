@@ -19,20 +19,14 @@
 export interface InlineResponse20074 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20074
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20074
      */
     success?: any;
     /**
      * 
-     * @type {SanctionPrevu}
+     * @type {string}
      * @memberof InlineResponse20074
      */
-    content?: any;
+    message?: any;
 }

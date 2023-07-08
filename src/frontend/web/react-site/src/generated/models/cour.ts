@@ -55,21 +55,12 @@ export interface Cour {
     professeur?: any;
     /**
      * 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
      * @type {Classe}
      * @memberof Cour
      */
     classes?: any;
     /**
      * 
-<<<<<<< HEAD
-=======
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
      * @type {BaseModelpropertiescreatedAt}
      * @memberof Cour
      */

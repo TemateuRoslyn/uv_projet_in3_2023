@@ -1,11 +1,149 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { TOKEN_LOCAL_STORAGE_KEY } from '../constants/LOCAL_STORAGE';
+import { SuggestionsApi } from '../generated';
+import { Suggestion } from '../generated/models';
+import { ReduxProps } from '../redux/configureStore';
+import { useSelector } from 'react-redux';
+import { MODAL_MODE } from '../constants/ENUM';
+
+import "./css/DisplaySuggestion.css"
 
 const DropdownNotification = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
+
+  const token : string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
+  const state = useSelector((state: ReduxProps) => state);
+  const [suggestion, setSuggestion] = useState<
+    Suggestion[]
+  >([]);
+
+  const [showCreateOrUpdateModal, setShowCreateOrUpdateModal] = useState(false);
+  const [suggestionItem, setSuggestionItem] =
+  useState<Suggestion>();
+
+const [modalMode, setModalMode] = useState<MODAL_MODE>(MODAL_MODE.create);
+const [modalTitle, setModalTitle] = useState<string>('');
+
+
+  useEffect(()=>{
+    const suggestionApi = new SuggestionsApi({
+      ...state.environment,
+      accessToken: token,
+    });
+
+    suggestionApi.suggestionsNotRead('Bearer '+ token)
+    .then((response) => {
+      if (response && response.data) {
+        if (response.data.success === true) {
+          setSuggestion(response.data.content);
+          console.log(response.data);
+        }
+      }
+    })
+    .catch((error) => {
+      alert(error?.response?.data?.message);
+    })
+    .finally(() => {
+      //setIsLoading(false);
+    });
+  },[]);
+
+  function formatDate(date) {
+    const dateOptions = {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric"
+    };
+    const timeOptions = {
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric"
+    };
+    const datePart = date.toLocaleDateString(undefined, dateOptions);
+    const timePart = date.toLocaleTimeString(undefined, timeOptions);
+    return `${datePart} ${timePart}`;
+  }
+
+
+  const readAll = (event)=>{
+    console.log("i am here");
+    const suggestionApi = new SuggestionsApi({
+      ...state.environment,
+      accessToken: token,
+    });
+
+    suggestionApi.readAllSuggestion('Bearer '+ token)
+    .then((response) => {
+      if (response && response.data) {
+        if (response.data.success === true) {
+          setSuggestion([]);
+          console.log(response.data);
+        }
+      }
+    })
+    .catch((error) => {
+      alert(error?.response?.data?.message);
+    })
+    .finally(() => {
+      //setIsLoading(false);
+    });
+  }
+  const refresh = ()=>{
+    const suggestionApi = new SuggestionsApi({
+      ...state.environment,
+      accessToken: token,
+    });
+
+    suggestionApi.suggestionsNotRead('Bearer '+ token)
+    .then((response) => {
+      if (response && response.data) {
+        if (response.data.success === true) {
+          setSuggestion(response.data.content);
+          console.log(response.data);
+        }
+      }
+    })
+    .catch((error) => {
+      alert(error?.response?.data?.message);
+    })
+    .finally(() => {
+      //setIsLoading(false);
+    });
+  }
+
+  const handleItemSelected = (item: Suggestion) => {
+      setSuggestionItem(item);
+      setShowCreateOrUpdateModal(true);
+      setModalMode(MODAL_MODE.view);
+      setModalTitle("Détail d'une suggestion");
+      const suggestionApi = new SuggestionsApi({
+        ...state.environment,
+        accessToken: token,
+      });
+  
+      suggestionApi.readSuggestion(item.id,'Bearer '+ token)
+      .then((response) => {
+        if (response && response.data) {
+          if (response.data.success === true) {
+            refresh()
+            console.log(response.data);
+          }
+        }
+      })
+      .catch((error) => {
+        alert(error?.response?.data?.message);
+      })
+      .finally(() => {
+        //setIsLoading(false);
+      });
+    }
+
+
+
 
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
@@ -20,7 +158,7 @@ const DropdownNotification = () => {
     };
     document.addEventListener('click', clickHandler);
     return () => document.removeEventListener('click', clickHandler);
-  });
+  },[]);
 
   // close if the esc key is pressed
   useEffect(() => {
@@ -30,19 +168,25 @@ const DropdownNotification = () => {
     };
     document.addEventListener('keydown', keyHandler);
     return () => document.removeEventListener('keydown', keyHandler);
-  });
+  },[]);
 
   return (
+    <div className='justify-content-center items-center justify-center w-full'>
+ 
     <li className="relative">
       <Link
         ref={trigger}
         onClick={() => setDropdownOpen(!dropdownOpen)}
         to="#"
-        className="relative flex h-8.5 w-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
+        className="relative flex h-8.5 w-20.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
       >
-        <span className="absolute -top-0.5 right-0 z-1 h-2 w-2 rounded-full bg-meta-1">
-          <span className="absolute -z-1 inline-flex h-full w-full animate-ping rounded-full bg-meta-1 opacity-75"></span>
-        </span>
+        {suggestion.length > 0 ? <span className="absolute -top-0.5 right-0 z-1 h-2 w-2 rounded-full bg-meta-1 text-danger text-bold">{suggestion.length}
+          <span className="absolute -z-1 inline-flex h-full w-full animate-ping rounded-full bg-meta-1 opacity-75">
+            {suggestion.length}
+          </span>
+        </span>:<span className="absolute -top-0.5 right-0 z-1 h-2 w-2 rounded-full bg-meta-1 text-danger text-bold">{suggestion.length}
+          
+        </span>}
 
         <svg
           className="fill-current duration-300 ease-in-out"
@@ -63,63 +207,42 @@ const DropdownNotification = () => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute -right-27 mt-2.5 flex h-90 w-75 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark sm:right-0 sm:w-80 ${
+        className={`absolute -right-27 mt-2.5 flex h-70 w-75 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark sm:right-0 sm:w-80 ${
           dropdownOpen === true ? 'block' : 'hidden'
         }`}
       >
-        <div className="px-4.5 py-3">
-          <h5 className="text-sm font-medium text-bodydark2">Notification</h5>
+        <div className="px-4.5 py-3 flex gap-30">
+          <h5 className="text-sm font-medium text-bodydark2">Suggestion</h5>
+          <button
+          onClick={()=>readAll(event)}
+          className='items-center justify-center text-sm sm:items-center'
+           >Marquer tout comme lu</button>
         </div>
 
         <ul className="flex h-auto flex-col overflow-y-auto">
-          <li>
+          {suggestion.length>0 ? suggestion.map((item, key)=>(
+            <li key={key}>
             <Link
               className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-              to="#"
+              onClick={()=>handleItemSelected(item)}
             >
               <p className="text-sm">
                 <span className="text-black dark:text-white">
-                  Edit your information in a swipe
-                </span>{' '}
-                Sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim.
+                  {item.description}
+                </span>
               </p>
 
-              <p className="text-xs">12 May, 2025</p>
+              <p className="text-xs">{
+                formatDate(new Date(item.created_at))
+              }</p>
             </Link>
           </li>
-          <li>
-            <Link
-              className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-              to="#"
-            >
-              <p className="text-sm">
-                <span className="text-black dark:text-white">
-                  It is a long established fact
-                </span>{' '}
-                that a reader will be distracted by the readable.
-              </p>
-
-              <p className="text-xs">24 Feb, 2025</p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-              to="#"
-            >
-              <p className="text-sm">
-                <span className="text-black dark:text-white">
-                  There are many variations
-                </span>{' '}
-                of passages of Lorem Ipsum available, but the majority have
-                suffered
-              </p>
-
-              <p className="text-xs">04 Jan, 2025</p>
-            </Link>
-          </li>
-          <li>
+          )) :  <p className="text-sm text-center">
+          <span className="text-black dark:text-white">
+            Aucune nouvelle suggestion.
+          </span>
+        </p>}
+          {/* <li>
             <Link
               className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
               to="#"
@@ -134,11 +257,114 @@ const DropdownNotification = () => {
 
               <p className="text-xs">01 Dec, 2024</p>
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </li>
+  
+    {showCreateOrUpdateModal && (
+        <ShowSuggestionModal
+          mode={modalMode}
+          title={modalTitle}
+          onClose={() => setShowCreateOrUpdateModal(false)}
+          
+          item={modalMode !== MODAL_MODE.create ? suggestionItem : null}
+                 />
+      )}
+   
+    
+    </div>
   );
 };
+
+interface ModalProps {
+  mode: MODAL_MODE;
+  title: string;
+  onClose: () => void;
+  item?: Suggestion | null;
+
+  
+}
+
+const ShowSuggestionModal: React.FC<ModalProps> = (props) => {
+  const [description, setDescription] = useState<string>(props.item ? props.item.description : "");
+
+ 
+  /* useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        props.onClose();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [props]);
+
+ */
+  
+  return (
+    <div
+      id="authentication-modal"
+      className="authentication-modal"
+      style={{ position:'relative', }}
+      onClick={props.onClose}
+    >
+     <div className="modal-container relative items-center justify-center mx-auto  top-modal-animation" onClick={(event) => event.stopPropagation()}>
+                <div className="modal-content bg-white bg-white rounded-sm border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
+               <button onClick={props.onClose} className="close-button">
+            <svg
+              aria-hidden="true"
+              className="close-icon"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <span className="sr-only">Close modal</span>
+          </button>
+          <div className="modal-body">
+          <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+                        <h2 className="modal-title font-medium text-black dark:text-white">
+                        {props.title}
+                        </h2>
+                    </div>
+            <form className="modal-form">
+              <div className="form-group">
+                <label htmlFor="description" className="form-label form-class mb-2.5 block text-black dark:text-white">
+                  Description
+                </label>
+                <p
+                  id="description"
+              className={` w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary dark:disabled:bg-black dark:text-white ${props.mode === MODAL_MODE.view ? 'disabled-input' : ''}`}
+                >
+                  {description}
+                </p>
+              </div>
+              
+            </form>
+            {props.mode === MODAL_MODE.view ? null : (
+              <div className="form-actions bg-green-600">
+                <button onClick={props.onClose} className="cancel-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="button-icon">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                            Annuler
+                        </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 
 export default DropdownNotification;

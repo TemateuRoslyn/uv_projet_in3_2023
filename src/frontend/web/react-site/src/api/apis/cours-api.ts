@@ -17,22 +17,73 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { CoursCreateBody } from '../models';
-import { CoursUpdateBody } from '../models';
-import { InlineResponse20017 } from '../models';
-import { InlineResponse20018 } from '../models';
-import { InlineResponse20019 } from '../models';
-import { InlineResponse20020 } from '../models';
-import { InlineResponse20021 } from '../models';
-import { InlineResponse4008 } from '../models';
-import { InlineResponse4009 } from '../models';
+import { InlineResponse20011 } from '../models';
+import { InlineResponse20023 } from '../models';
+import { InlineResponse20024 } from '../models';
+import { InlineResponse20025 } from '../models';
+import { InlineResponse20026 } from '../models';
+import { InlineResponse20027 } from '../models';
+import { InlineResponse40010 } from '../models';
+import { InlineResponse40011 } from '../models';
+import { InlineResponse4005 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse4045 } from '../models';
+import { InlineResponse40410 } from '../models';
+import { UpdateCoursIdBody } from '../models';
 /**
  * CoursApi - axios parameter creator
  * @export
  */
 export const CoursApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Get the filtered list of cours.
+         * @summary Get filtered list of cours
+         * @param {string} keyword Keyword to filter cours
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        coursRecords: async (keyword: string, authorization: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'keyword' is not null or undefined
+            if (keyword === null || keyword === undefined) {
+                throw new RequiredError('keyword','Required parameter keyword was null or undefined when calling coursRecords.');
+            }
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling coursRecords.');
+            }
+            const localVarPath = `/api/cours/records/{keyword}`
+                .replace(`{${"keyword"}}`, encodeURIComponent(String(keyword)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Create a new course resource
          * @summary Create a new course
@@ -229,12 +280,12 @@ export const CoursApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Update a cour's information
          * @summary Update a cour's information
-         * @param {CoursUpdateBody} body 
+         * @param {UpdateCoursIdBody} body 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCours: async (body: CoursUpdateBody, authorization: string, options: any = {}): Promise<RequestArgs> => {
+        updateCours: async (body: UpdateCoursIdBody, authorization: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling updateCours.');
@@ -243,14 +294,14 @@ export const CoursApiAxiosParamCreator = function (configuration?: Configuration
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling updateCours.');
             }
-            const localVarPath = `/api/cours/update`;
+            const localVarPath = `/api/cours/update/{coursId}`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
             if (configuration) {
                 baseOptions = configuration.baseOptions;
             }
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -288,6 +339,21 @@ export const CoursApiAxiosParamCreator = function (configuration?: Configuration
 export const CoursApiFp = function(configuration?: Configuration) {
     return {
         /**
+         * Get the filtered list of cours.
+         * @summary Get filtered list of cours
+         * @param {string} keyword Keyword to filter cours
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async coursRecords(keyword: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20011>> {
+            const localVarAxiosArgs = await CoursApiAxiosParamCreator(configuration).coursRecords(keyword, authorization, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Create a new course resource
          * @summary Create a new course
          * @param {CoursCreateBody} body 
@@ -295,7 +361,7 @@ export const CoursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createCours(body: CoursCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20019>> {
+        async createCours(body: CoursCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20025>> {
             const localVarAxiosArgs = await CoursApiAxiosParamCreator(configuration).createCours(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -310,7 +376,7 @@ export const CoursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteCours(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20021>> {
+        async deleteCours(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20027>> {
             const localVarAxiosArgs = await CoursApiAxiosParamCreator(configuration).deleteCours(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -324,7 +390,7 @@ export const CoursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllcours(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20017>> {
+        async findAllcours(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20023>> {
             const localVarAxiosArgs = await CoursApiAxiosParamCreator(configuration).findAllcours(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -339,7 +405,7 @@ export const CoursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findOneCours(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20018>> {
+        async findOneCours(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20024>> {
             const localVarAxiosArgs = await CoursApiAxiosParamCreator(configuration).findOneCours(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -349,12 +415,12 @@ export const CoursApiFp = function(configuration?: Configuration) {
         /**
          * Update a cour's information
          * @summary Update a cour's information
-         * @param {CoursUpdateBody} body 
+         * @param {UpdateCoursIdBody} body 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateCours(body: CoursUpdateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20020>> {
+        async updateCours(body: UpdateCoursIdBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20026>> {
             const localVarAxiosArgs = await CoursApiAxiosParamCreator(configuration).updateCours(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -371,6 +437,17 @@ export const CoursApiFp = function(configuration?: Configuration) {
 export const CoursApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
+         * Get the filtered list of cours.
+         * @summary Get filtered list of cours
+         * @param {string} keyword Keyword to filter cours
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        coursRecords(keyword: string, authorization: string, options?: any): AxiosPromise<InlineResponse20011> {
+            return CoursApiFp(configuration).coursRecords(keyword, authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Create a new course resource
          * @summary Create a new course
          * @param {CoursCreateBody} body 
@@ -378,7 +455,7 @@ export const CoursApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createCours(body: CoursCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20019> {
+        createCours(body: CoursCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20025> {
             return CoursApiFp(configuration).createCours(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -389,7 +466,7 @@ export const CoursApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteCours(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20021> {
+        deleteCours(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20027> {
             return CoursApiFp(configuration).deleteCours(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -399,7 +476,7 @@ export const CoursApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllcours(authorization: string, options?: any): AxiosPromise<InlineResponse20017> {
+        findAllcours(authorization: string, options?: any): AxiosPromise<InlineResponse20023> {
             return CoursApiFp(configuration).findAllcours(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -410,18 +487,18 @@ export const CoursApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findOneCours(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20018> {
+        findOneCours(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20024> {
             return CoursApiFp(configuration).findOneCours(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
          * Update a cour's information
          * @summary Update a cour's information
-         * @param {CoursUpdateBody} body 
+         * @param {UpdateCoursIdBody} body 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCours(body: CoursUpdateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20020> {
+        updateCours(body: UpdateCoursIdBody, authorization: string, options?: any): AxiosPromise<InlineResponse20026> {
             return CoursApiFp(configuration).updateCours(body, authorization, options).then((request) => request(axios, basePath));
         },
     };
@@ -434,6 +511,18 @@ export const CoursApiFactory = function (configuration?: Configuration, basePath
  * @extends {BaseAPI}
  */
 export class CoursApi extends BaseAPI {
+    /**
+     * Get the filtered list of cours.
+     * @summary Get filtered list of cours
+     * @param {string} keyword Keyword to filter cours
+     * @param {string} authorization JWT token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursApi
+     */
+    public coursRecords(keyword: string, authorization: string, options?: any) {
+        return CoursApiFp(this.configuration).coursRecords(keyword, authorization, options).then((request) => request(this.axios, this.basePath));
+    }
     /**
      * Create a new course resource
      * @summary Create a new course
@@ -484,13 +573,13 @@ export class CoursApi extends BaseAPI {
     /**
      * Update a cour's information
      * @summary Update a cour's information
-     * @param {CoursUpdateBody} body 
+     * @param {UpdateCoursIdBody} body 
      * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CoursApi
      */
-    public updateCours(body: CoursUpdateBody, authorization: string, options?: any) {
+    public updateCours(body: UpdateCoursIdBody, authorization: string, options?: any) {
         return CoursApiFp(this.configuration).updateCours(body, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 }

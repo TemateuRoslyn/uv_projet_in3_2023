@@ -29,13 +29,10 @@ export interface InlineResponse20079 {
      * @memberof InlineResponse20079
      */
     message?: any;
-<<<<<<< HEAD
-=======
     /**
      * 
      * @type {Array&lt;Role&gt;}
      * @memberof InlineResponse20079
      */
     content?: any;
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
 }

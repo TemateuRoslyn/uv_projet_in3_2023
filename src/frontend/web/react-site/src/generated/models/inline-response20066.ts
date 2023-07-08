@@ -25,9 +25,6 @@ export interface InlineResponse20066 {
     success?: any;
     /**
      * 
-<<<<<<< HEAD
-     * @type {Array&lt;Regle&gt;}
-=======
      * @type {string}
      * @memberof InlineResponse20066
      */
@@ -35,7 +32,6 @@ export interface InlineResponse20066 {
     /**
      * 
      * @type {Regle}
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
      * @memberof InlineResponse20066
      */
     content?: any;

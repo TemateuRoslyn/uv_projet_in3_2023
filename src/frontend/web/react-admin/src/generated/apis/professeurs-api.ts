@@ -16,28 +16,11 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-<<<<<<< HEAD
-import { InlineResponse20062 } from '../models';
-import { InlineResponse20063 } from '../models';
-import { InlineResponse20064 } from '../models';
-<<<<<<< HEAD
-import { InlineResponse20065 } from '../models';
-=======
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
 import { InlineResponse20061 } from '../models';
 import { InlineResponse20062 } from '../models';
 import { InlineResponse20063 } from '../models';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import { InlineResponse20064 } from '../models';
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-=======
-import { InlineResponse20064 } from '../models';
-import { InlineResponse20091 } from '../models';
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+import { InlineResponse20092 } from '../models';
 import { InlineResponse2019 } from '../models';
 import { InlineResponse40024 } from '../models';
 import { InlineResponse40025 } from '../models';
@@ -45,10 +28,7 @@ import { InlineResponse401 } from '../models';
 import { InlineResponse40430 } from '../models';
 import { InlineResponse40431 } from '../models';
 import { InlineResponse40432 } from '../models';
-<<<<<<< HEAD
-=======
-import { InlineResponse40445 } from '../models';
->>>>>>> e2d508d (Closes #299 - admin api integrated)
+import { InlineResponse40446 } from '../models';
 import { InlineResponse4225 } from '../models';
 /**
  * ProfesseursApi - axios parameter creator
@@ -567,11 +547,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        async deleteProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20065>> {
-=======
         async deleteProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20064>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).deleteProfesseur(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -586,7 +562,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
+        async deleteSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20092>> {
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).deleteSuggestion(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -600,11 +576,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        async professeursIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20062>> {
-=======
         async professeursIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20061>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).professeursIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -629,18 +601,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        async updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20064>> {
-=======
         async updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-        async updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20062>> {
-=======
-        async updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).updateProfesseur(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, statut, courId, authorization, professeurId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -655,11 +616,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        async viewProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
-=======
         async viewProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20062>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).viewProfesseur(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -703,11 +660,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        deleteProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20065> {
-=======
         deleteProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20064> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return ProfesseursApiFp(configuration).deleteProfesseur(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -718,7 +671,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20091> {
+        deleteSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20092> {
             return ProfesseursApiFp(configuration).deleteSuggestion(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -728,11 +681,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        professeursIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20062> {
-=======
         professeursIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20061> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return ProfesseursApiFp(configuration).professeursIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -753,18 +702,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): AxiosPromise<InlineResponse20064> {
-=======
         updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): AxiosPromise<InlineResponse20063> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-        updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): AxiosPromise<InlineResponse20062> {
-=======
-        updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): AxiosPromise<InlineResponse20063> {
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return ProfesseursApiFp(configuration).updateProfesseur(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, statut, courId, authorization, professeurId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -775,11 +713,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        viewProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20063> {
-=======
         viewProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20062> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return ProfesseursApiFp(configuration).viewProfesseur(authorization, id, options).then((request) => request(axios, basePath));
         },
     };

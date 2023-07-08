@@ -29,32 +29,4 @@ export interface InlineResponse20092 {
      * @memberof InlineResponse20092
      */
     message?: any;
-<<<<<<< HEAD
-    /**
-     * 
-<<<<<<< HEAD
-     * @type {Suggestion}
-     * @memberof InlineResponse20092
-     */
-    content?: any;
-=======
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-     * @type {Array&lt;User&gt;}
-     * @memberof InlineResponse20092
-     */
-<<<<<<< HEAD
-    success?: any;
-    /**
-     * 
-     * @type {User}
-     * @memberof InlineResponse20092
-     */
-    data?: any;
-=======
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-=======
-    data?: any;
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
 }

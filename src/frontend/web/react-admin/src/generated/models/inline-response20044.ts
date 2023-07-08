@@ -26,16 +26,13 @@ export interface InlineResponse20044 {
     /**
      * 
      * @type {string}
-<<<<<<< HEAD
-=======
      * @memberof InlineResponse20044
      */
     message?: any;
     /**
      * 
      * @type {Array&lt;Notification&gt;}
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
      * @memberof InlineResponse20044
      */
-    message?: any;
+    content?: any;
 }

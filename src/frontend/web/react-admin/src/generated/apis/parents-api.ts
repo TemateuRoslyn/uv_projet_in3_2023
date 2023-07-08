@@ -16,18 +16,11 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-<<<<<<< HEAD
-=======
 import { InlineResponse20048 } from '../models';
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
 import { InlineResponse20049 } from '../models';
 import { InlineResponse20050 } from '../models';
 import { InlineResponse20051 } from '../models';
 import { InlineResponse20052 } from '../models';
-<<<<<<< HEAD
-import { InlineResponse20053 } from '../models';
-=======
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
 import { InlineResponse40019 } from '../models';
 import { InlineResponse40020 } from '../models';
 import { InlineResponse401 } from '../models';
@@ -508,11 +501,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        async createParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20051>> {
-=======
         async createParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20050>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).createParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -527,11 +516,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        async deleteParent(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20053>> {
-=======
         async deleteParent(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20052>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).deleteParent(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -545,11 +530,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        async parentsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20049>> {
-=======
         async parentsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20048>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).parentsIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -575,11 +556,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        async updateParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20052>> {
-=======
         async updateParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20051>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).updateParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, parentId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -594,11 +571,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        async viewparent(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20050>> {
-=======
         async viewparent(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20049>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).viewparent(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -632,11 +605,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        createParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any): AxiosPromise<InlineResponse20051> {
-=======
         createParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any): AxiosPromise<InlineResponse20050> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return ParentsApiFp(configuration).createParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -647,11 +616,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        deleteParent(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20053> {
-=======
         deleteParent(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20052> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return ParentsApiFp(configuration).deleteParent(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -661,11 +626,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        parentsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20049> {
-=======
         parentsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20048> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return ParentsApiFp(configuration).parentsIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -687,11 +648,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        updateParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any): AxiosPromise<InlineResponse20052> {
-=======
         updateParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any): AxiosPromise<InlineResponse20051> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return ParentsApiFp(configuration).updateParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, parentId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -702,11 +659,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        viewparent(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20050> {
-=======
         viewparent(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20049> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return ParentsApiFp(configuration).viewparent(authorization, id, options).then((request) => request(axios, basePath));
         },
     };
