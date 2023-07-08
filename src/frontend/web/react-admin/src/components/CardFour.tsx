@@ -1,4 +1,64 @@
+import { useSelector } from "react-redux";
+import { TOKEN_LOCAL_STORAGE_KEY } from "../constants/LOCAL_STORAGE";
+import { SanctionprevusApi, FautesApi } from "../generated";
+import { ReduxProps } from "../redux/configureStore";
+import { useEffect, useState } from "react";
+import { ConseilDiscipline, Eleve } from "../generated/models";
+
 const CardFour = () => {
+
+
+  const state = useSelector((state: ReduxProps) => state);
+  const [sanctionprevus, setSanctionprevus] = useState<ConseilDiscipline[]>(
+    []
+  );
+  const [fautes, setFautes] = useState<Eleve[]>([]);
+  
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    const apiParams: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
+    const sanctionprevusApi = new SanctionprevusApi({
+      ...state.environment,
+      accessToken: apiParams,
+    });
+
+    setIsLoading(true);
+
+    sanctionprevusApi
+      .sanctionprevusIndex('Bearer ' + apiParams)
+      .then((response) => {
+        if (response && response.data) {
+          if (response.data.success === true) {
+            setSanctionprevus(response.data.content);
+          }
+        }
+      })
+      .catch((error) => {
+        alert(error?.response?.data?.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+
+      const fautesApi = new FautesApi({...state.environment, accessToken: apiParams});
+
+    setIsLoading(true)
+    
+    fautesApi.indexFautes('Bearer ' + apiParams)
+    .then((response) => {  
+      if(response && response.data){        
+        if(response.data.success === true){ setFautes(response.data.content) }
+      }
+    })
+    .catch((error) => {
+      alert(error?.response?.data?.message)
+    })
+    .finally(() => {
+      setIsLoading(false)
+    });  
+  }, []);
+
   return (
     <div className="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
@@ -24,17 +84,27 @@ const CardFour = () => {
           />
         </svg>
       </div>
+      <div className="flex">
+          Discipline
+      </div>
 
       <div className="mt-4 flex items-end justify-between">
         <div>
           <h4 className="text-title-md font-bold text-black dark:text-white">
-            3.456
+            {sanctionprevus.length}
           </h4>
-          <span className="text-sm font-medium">Total Users</span>
+          <span className="text-sm font-medium">Nombre de Sanctions</span>
+        </div>
+
+        <div>
+          <h4 className="text-title-md font-bold text-black dark:text-white">
+            {fautes.length}
+          </h4>
+          <span className="text-sm font-medium">Nombre de Fautes</span>
         </div>
 
         <span className="flex items-center gap-1 text-sm font-medium text-meta-5">
-          0.95%
+          {(sanctionprevus.length/fautes.length)*100}%
           <svg
             className="fill-meta-5"
             width="10"

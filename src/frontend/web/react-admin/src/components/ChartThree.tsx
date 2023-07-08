@@ -1,17 +1,51 @@
 import { ApexOptions } from 'apexcharts';
-import React, { useState } from 'react';
+import React from 'react';
 import ReactApexChart from 'react-apexcharts';
+
+
+import { useSelector } from "react-redux";
+import { TOKEN_LOCAL_STORAGE_KEY } from "../constants/LOCAL_STORAGE";
+import { SanctionprevusApi, FautesApi, ConseilDisciplinesApi, ElevesApi, ParentsApi } from "../generated";
+import { ReduxProps } from "../redux/configureStore";
+import { useEffect, useState } from "react";
+import { ConseilDiscipline, Eleve, Parents } from "../generated/models";
 
 interface ChartThreeState {
   series: number[];
 }
-
+export const options : ApexOptions = {
+  chart: {
+    type: 'bar'
+  },
+  plotOptions: {
+    bar: {
+      horizontal: false
+    }
+  },
+  series:[{data:[{
+    x: 'Eleves',
+    y: 10
+  }, {
+    x: 'Parents',
+    y: 18
+  }, {
+    x: 'Conseil Discipline',
+    y: 13
+  },{
+    x: 'Sanctions',
+    y: 13
+  },{
+    x: 'Fautes',
+    y: 13
+  }]}],
+}
+/* 
 const options: ApexOptions = {
   chart: {
     type: 'donut',
   },
   colors: ['#10B981', '#375E83', '#259AE6', '#FFA70B'],
-  labels: ['Remote', 'Hybrid', 'Onsite', 'Leave'],
+  labels: ['ConseilDiscipline', 'Fautes', 'Sanction', 'Convocations'],
   legend: {
     show: true,
     position: 'bottom',
@@ -47,30 +81,181 @@ const options: ApexOptions = {
     },
   ],
 };
-
+ */
 const ChartThree: React.FC = () => {
-  const [state, setState] = useState<ChartThreeState>({
-    series: [65, 34, 12, 56],
-  });
+
+  const state = useSelector((state: ReduxProps) => state);
+  const [conseilDisciplines, setConseilDisciplines] = useState<ConseilDiscipline[]>(
+    []
+  );
+  const [sanctionprevus, setSanctionprevus] = useState<ConseilDiscipline[]>(
+    []
+  );
+  const [fautes, setFautes] = useState<Eleve[]>([]);
+  
+  const [eleves, setEleves] = useState<Eleve[]>([]);
+  
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [series, setSeries] = useState<ApexOptions>()
+  const [parents, setParents] = useState<Parents[]>([]);
+  
+ useEffect(() => {
+    const apiParams: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
+    
+    const parentsApi = new ParentsApi({...state.environment, accessToken: apiParams});
+
+    setIsLoading(true)
+    
+    parentsApi.parentsIndex('Bearer ' + apiParams)
+    .then((response) => {   
+      if(response && response.data){        
+        if(response.data.success === true){ setParents(response.data.content) }
+      }
+    })
+    .catch((error) => {
+      alert(error?.response?.data?.message)
+    })
+    .finally(() => {
+      setIsLoading(false)
+    });   
+    
+    const conseilDisciplinesApi = new ConseilDisciplinesApi({
+      ...state.environment,
+      accessToken: apiParams,
+    });
+
+    setIsLoading(true);
+
+
+    conseilDisciplinesApi
+      .conseilDisciplinesIndex('Bearer ' + apiParams)
+      .then((response) => {
+        if (response && response.data) {
+          if (response.data.success === true) {
+            setConseilDisciplines(response.data.content);
+          }
+        }
+      })
+      .catch((error) => {
+        alert(error?.response?.data?.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+
+      const elevesApi = new ElevesApi({...state.environment, accessToken: apiParams});
+
+    setIsLoading(true)
+    
+    elevesApi.elevesIndex('Bearer ' + apiParams)
+    .then((response) => {  
+      if(response && response.data){        
+        if(response.data.success === true){ setEleves(response.data.content) }
+      }
+    })
+    .catch((error) => {
+      alert(error?.response?.data?.message)
+    })
+    .finally(() => {
+      setIsLoading(false)
+    });  
+
+    const sanctionprevusApi = new SanctionprevusApi({
+      ...state.environment,
+      accessToken: apiParams,
+    });
+
+    setIsLoading(true);
+
+    sanctionprevusApi
+      .sanctionprevusIndex('Bearer ' + apiParams)
+      .then((response) => {
+        if (response && response.data) {
+          if (response.data.success === true) {
+            setSanctionprevus(response.data.content);
+          }
+        }
+      })
+      .catch((error) => {
+        alert(error?.response?.data?.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+
+      const fautesApi = new FautesApi({...state.environment, accessToken: apiParams});
+
+    setIsLoading(true)
+    
+    fautesApi.indexFautes('Bearer ' + apiParams)
+    .then((response) => {  
+      if(response && response.data){        
+        if(response.data.success === true){ setFautes(response.data.content) }
+      }
+    })
+    .catch((error) => {
+      alert(error?.response?.data?.message)
+    })
+    .finally(() => {
+      setIsLoading(false)
+    });  
+  }, []);
+ 
+const  options : ApexOptions = {
+    chart: {
+    type: 'bar'
+   },
+   legend: {
+    show: true,
+    position: 'left',
+  },
+   plotOptions: {
+    bar: {
+      horizontal: false
+    }
+    },
+      series: [{data:[{
+        x: 'Eleves',
+        y: eleves.length,
+        fillColor: '#10B981',
+      }, {
+        x: 'Parents',
+        y: parents.length,
+        fillColor: '#EB8C87',
+      }, {
+        x: 'Conseil Discipline',
+        y: conseilDisciplines.length,
+        fillColor: '#375E83',
+      },{
+        x: 'Sanctions',
+        y: sanctionprevus.length,
+        fillColor: '#259AE6',
+      },{
+        x: 'Fautes',
+        y: fautes.length,
+        fillColor: '#FFA70B',
+      }]}]
+    }
+      //setSeries(options);
 
   return (
-    <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-5">
+    <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-12">
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white">
-            Visitors Analytics
+            Statistiques
           </h5>
         </div>
         <div>
           <div className="relative z-20 inline-block">
-            <select
+           {/*  <select
               name=""
               id=""
               className="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
             >
               <option value="">Monthly</option>
               <option value="">Yearly</option>
-            </select>
+            </select> 
             <span className="absolute top-1/2 right-3 z-10 -translate-y-1/2">
               <svg
                 width="10"
@@ -91,21 +276,25 @@ const ChartThree: React.FC = () => {
                 />
               </svg>
             </span>
+            */}
           </div>
         </div>
       </div>
 
       <div className="mb-2">
-        <div id="chartThree" className="mx-auto flex justify-center">
+        <div id="chartThree" className="mx-auto flex justify-center w-full h-full xl:h-[400px] xl:w-full">
           <ReactApexChart
+          
             options={options}
-            series={state.series}
-            type="donut"
+            series={options?.series}
+            type="bar"
+            height={400}
+            width={600}
           />
         </div>
       </div>
 
-      <div className="-mx-8 flex flex-wrap items-center justify-center gap-y-3">
+      {/* <div className="-mx-8 flex flex-wrap items-center justify-center gap-y-3">
         <div className="w-full px-8 sm:w-1/2">
           <div className="flex w-full items-center">
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary"></span>
@@ -142,7 +331,7 @@ const ChartThree: React.FC = () => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

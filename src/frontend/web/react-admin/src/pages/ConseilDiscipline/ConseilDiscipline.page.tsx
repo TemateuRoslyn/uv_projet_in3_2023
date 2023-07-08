@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import DefaultLayout from '../../layout/DefaultLayout';
 import Breadcrumb from '../../components/Breadcrumb';
-import { Convocation } from '../../generated/models';
+import { ConseilDiscipline } from '../../generated/models';
 import { ReduxProps } from '../../redux/configureStore';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../constants/LOCAL_STORAGE';
 import { ConseilDisciplinesApi } from '../../generated';
@@ -17,7 +17,7 @@ import DisplayConseilDisciplines from './components/DisplayConseilDisciplines';
 
 const ConseilDisciplines = () => {
   const state = useSelector((state: ReduxProps) => state);
-  const [conseilDisciplines, setConseilDisciplines] = useState<Convocation[]>(
+  const [conseilDisciplines, setConseilDisciplines] = useState<ConseilDiscipline[]>(
     []
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);

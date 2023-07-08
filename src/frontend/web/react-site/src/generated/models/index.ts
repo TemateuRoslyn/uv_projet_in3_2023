@@ -109,6 +109,11 @@ export * from './inline-response20090';
 export * from './inline-response20091';
 export * from './inline-response20092';
 export * from './inline-response20093';
+<<<<<<< HEAD
+=======
+export * from './inline-response20094';
+export * from './inline-response20095';
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
 export * from './inline-response200-content';
 export * from './inline-response201';
 export * from './inline-response2011';
@@ -157,10 +162,9 @@ export * from './inline-response40034';
 export * from './inline-response40035';
 export * from './inline-response40036';
 export * from './inline-response40037';
+export * from './inline-response40037-error';
 export * from './inline-response40038';
 export * from './inline-response40038-error';
-export * from './inline-response40039';
-export * from './inline-response40039-error';
 export * from './inline-response4003-error';
 export * from './inline-response4004';
 export * from './inline-response4005';
@@ -214,6 +218,7 @@ export * from './inline-response40445';
 export * from './inline-response40446';
 export * from './inline-response40447';
 export * from './inline-response40448';
+export * from './inline-response40449';
 export * from './inline-response4045';
 export * from './inline-response4046';
 export * from './inline-response4047';

@@ -14,29 +14,19 @@
 /**
  * 
  * @export
- * @interface InlineResponse20086
+ * @interface InlineResponse20095
  */
-export interface InlineResponse20086 {
+export interface InlineResponse20095 {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20086
+     * @memberof InlineResponse20095
      */
     message?: any;
     /**
      * 
      * @type {boolean}
-     * @memberof InlineResponse20086
+     * @memberof InlineResponse20095
      */
     success?: any;
-    /**
-     * 
-<<<<<<< HEAD
-     * @type {Array&lt;Suggestion&gt;}
-=======
-     * @type {SanctionPrevu}
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-     * @memberof InlineResponse20086
-     */
-    content?: any;
 }

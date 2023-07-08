@@ -20,13 +20,19 @@ import { InlineResponse20082 } from '../models';
 import { InlineResponse20083 } from '../models';
 import { InlineResponse20084 } from '../models';
 import { InlineResponse20085 } from '../models';
+<<<<<<< HEAD
+=======
+import { InlineResponse20086 } from '../models';
+import { InlineResponse20087 } from '../models';
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
 import { InlineResponse20112 } from '../models';
+import { InlineResponse40014 } from '../models';
 import { InlineResponse40034 } from '../models';
-import { InlineResponse40035 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse40441 } from '../models';
 import { InlineResponse40442 } from '../models';
 import { InlineResponse40443 } from '../models';
+import { InlineResponse40444 } from '../models';
 import { InlineResponse4227 } from '../models';
 /**
  * SanctionprevusApi - axios parameter creator
@@ -38,29 +44,17 @@ export const SanctionprevusApiAxiosParamCreator = function (configuration?: Conf
          * Create a new sanctionprevu resource
          * @summary Create a new sanctionprevu
          * @param {string} libelle 
-         * @param {string} niveauGravite 
-         * @param {string} motif 
          * @param {string} dureeValidite 
          * @param {number} eleveId 
-         * @param {number} convocationId 
-         * @param {number} regleId 
          * @param {number} fauteId 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createSanctionPrevu: async (libelle: string, niveauGravite: string, motif: string, dureeValidite: string, eleveId: number, convocationId: number, regleId: number, fauteId: number, authorization: string, options: any = {}): Promise<RequestArgs> => {
+        createSanctionPrevu: async (libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'libelle' is not null or undefined
             if (libelle === null || libelle === undefined) {
                 throw new RequiredError('libelle','Required parameter libelle was null or undefined when calling createSanctionPrevu.');
-            }
-            // verify required parameter 'niveauGravite' is not null or undefined
-            if (niveauGravite === null || niveauGravite === undefined) {
-                throw new RequiredError('niveauGravite','Required parameter niveauGravite was null or undefined when calling createSanctionPrevu.');
-            }
-            // verify required parameter 'motif' is not null or undefined
-            if (motif === null || motif === undefined) {
-                throw new RequiredError('motif','Required parameter motif was null or undefined when calling createSanctionPrevu.');
             }
             // verify required parameter 'dureeValidite' is not null or undefined
             if (dureeValidite === null || dureeValidite === undefined) {
@@ -69,14 +63,6 @@ export const SanctionprevusApiAxiosParamCreator = function (configuration?: Conf
             // verify required parameter 'eleveId' is not null or undefined
             if (eleveId === null || eleveId === undefined) {
                 throw new RequiredError('eleveId','Required parameter eleveId was null or undefined when calling createSanctionPrevu.');
-            }
-            // verify required parameter 'convocationId' is not null or undefined
-            if (convocationId === null || convocationId === undefined) {
-                throw new RequiredError('convocationId','Required parameter convocationId was null or undefined when calling createSanctionPrevu.');
-            }
-            // verify required parameter 'regleId' is not null or undefined
-            if (regleId === null || regleId === undefined) {
-                throw new RequiredError('regleId','Required parameter regleId was null or undefined when calling createSanctionPrevu.');
             }
             // verify required parameter 'fauteId' is not null or undefined
             if (fauteId === null || fauteId === undefined) {
@@ -107,28 +93,12 @@ export const SanctionprevusApiAxiosParamCreator = function (configuration?: Conf
                 localVarFormParams.append('libelle', libelle as any);
             }
 
-            if (niveauGravite !== undefined) { 
-                localVarFormParams.append('niveauGravite', niveauGravite as any);
-            }
-
-            if (motif !== undefined) { 
-                localVarFormParams.append('motif', motif as any);
-            }
-
             if (dureeValidite !== undefined) { 
                 localVarFormParams.append('dureeValidite', dureeValidite as any);
             }
 
             if (eleveId !== undefined) { 
                 localVarFormParams.append('eleveId', eleveId as any);
-            }
-
-            if (convocationId !== undefined) { 
-                localVarFormParams.append('convocationId', convocationId as any);
-            }
-
-            if (regleId !== undefined) { 
-                localVarFormParams.append('regleId', regleId as any);
             }
 
             if (fauteId !== undefined) { 
@@ -249,30 +219,18 @@ export const SanctionprevusApiAxiosParamCreator = function (configuration?: Conf
          * Update a sanctionprevu's information
          * @summary Update a sanctionprevu's information
          * @param {string} libelle 
-         * @param {string} niveauGravite 
-         * @param {string} motif 
          * @param {string} dureeValidite 
          * @param {number} eleveId 
-         * @param {number} convocationId 
-         * @param {number} regleId 
          * @param {number} fauteId 
          * @param {string} authorization JWT token
          * @param {number} sanctionprevuId ID of sanctionprevu to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateSanctionPrevu: async (libelle: string, niveauGravite: string, motif: string, dureeValidite: string, eleveId: number, convocationId: number, regleId: number, fauteId: number, authorization: string, sanctionprevuId: number, options: any = {}): Promise<RequestArgs> => {
+        updateSanctionPrevu: async (libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'libelle' is not null or undefined
             if (libelle === null || libelle === undefined) {
                 throw new RequiredError('libelle','Required parameter libelle was null or undefined when calling updateSanctionPrevu.');
-            }
-            // verify required parameter 'niveauGravite' is not null or undefined
-            if (niveauGravite === null || niveauGravite === undefined) {
-                throw new RequiredError('niveauGravite','Required parameter niveauGravite was null or undefined when calling updateSanctionPrevu.');
-            }
-            // verify required parameter 'motif' is not null or undefined
-            if (motif === null || motif === undefined) {
-                throw new RequiredError('motif','Required parameter motif was null or undefined when calling updateSanctionPrevu.');
             }
             // verify required parameter 'dureeValidite' is not null or undefined
             if (dureeValidite === null || dureeValidite === undefined) {
@@ -281,14 +239,6 @@ export const SanctionprevusApiAxiosParamCreator = function (configuration?: Conf
             // verify required parameter 'eleveId' is not null or undefined
             if (eleveId === null || eleveId === undefined) {
                 throw new RequiredError('eleveId','Required parameter eleveId was null or undefined when calling updateSanctionPrevu.');
-            }
-            // verify required parameter 'convocationId' is not null or undefined
-            if (convocationId === null || convocationId === undefined) {
-                throw new RequiredError('convocationId','Required parameter convocationId was null or undefined when calling updateSanctionPrevu.');
-            }
-            // verify required parameter 'regleId' is not null or undefined
-            if (regleId === null || regleId === undefined) {
-                throw new RequiredError('regleId','Required parameter regleId was null or undefined when calling updateSanctionPrevu.');
             }
             // verify required parameter 'fauteId' is not null or undefined
             if (fauteId === null || fauteId === undefined) {
@@ -324,28 +274,12 @@ export const SanctionprevusApiAxiosParamCreator = function (configuration?: Conf
                 localVarFormParams.append('libelle', libelle as any);
             }
 
-            if (niveauGravite !== undefined) { 
-                localVarFormParams.append('niveauGravite', niveauGravite as any);
-            }
-
-            if (motif !== undefined) { 
-                localVarFormParams.append('motif', motif as any);
-            }
-
             if (dureeValidite !== undefined) { 
                 localVarFormParams.append('dureeValidite', dureeValidite as any);
             }
 
             if (eleveId !== undefined) { 
                 localVarFormParams.append('eleveId', eleveId as any);
-            }
-
-            if (convocationId !== undefined) { 
-                localVarFormParams.append('convocationId', convocationId as any);
-            }
-
-            if (regleId !== undefined) { 
-                localVarFormParams.append('regleId', regleId as any);
             }
 
             if (fauteId !== undefined) { 
@@ -419,6 +353,55 @@ export const SanctionprevusApiAxiosParamCreator = function (configuration?: Conf
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Get information about all specific sanctionprevus to a student
+         * @summary Get sanctionprevus information for a student
+         * @param {string} authorization JWT token
+         * @param {number} id ID of Eleve to get information for
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        viewSanctionPrevusEleve: async (authorization: string, id: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling viewSanctionPrevusEleve.');
+            }
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling viewSanctionPrevusEleve.');
+            }
+            const localVarPath = `/api/sanctionprevus/findAll/eleve/{eleveId}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -432,19 +415,15 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * Create a new sanctionprevu resource
          * @summary Create a new sanctionprevu
          * @param {string} libelle 
-         * @param {string} niveauGravite 
-         * @param {string} motif 
          * @param {string} dureeValidite 
          * @param {number} eleveId 
-         * @param {number} convocationId 
-         * @param {number} regleId 
          * @param {number} fauteId 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createSanctionPrevu(libelle: string, niveauGravite: string, motif: string, dureeValidite: string, eleveId: number, convocationId: number, regleId: number, fauteId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20112>> {
-            const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).createSanctionPrevu(libelle, niveauGravite, motif, dureeValidite, eleveId, convocationId, regleId, fauteId, authorization, options);
+        async createSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20112>> {
+            const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).createSanctionPrevu(libelle, dureeValidite, eleveId, fauteId, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -458,7 +437,11 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         async deleteSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20085>> {
+=======
+        async deleteSanctionPrevu(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20087>> {
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).deleteSanctionPrevu(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -483,20 +466,21 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * Update a sanctionprevu's information
          * @summary Update a sanctionprevu's information
          * @param {string} libelle 
-         * @param {string} niveauGravite 
-         * @param {string} motif 
          * @param {string} dureeValidite 
          * @param {number} eleveId 
-         * @param {number} convocationId 
-         * @param {number} regleId 
          * @param {number} fauteId 
          * @param {string} authorization JWT token
          * @param {number} sanctionprevuId ID of sanctionprevu to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         async updateSanctionPrevu(libelle: string, niveauGravite: string, motif: string, dureeValidite: string, eleveId: number, convocationId: number, regleId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20084>> {
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).updateSanctionPrevu(libelle, niveauGravite, motif, dureeValidite, eleveId, convocationId, regleId, fauteId, authorization, sanctionprevuId, options);
+=======
+        async updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20086>> {
+            const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).updateSanctionPrevu(libelle, dureeValidite, eleveId, fauteId, authorization, sanctionprevuId, options);
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -517,6 +501,21 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
                 return axios.request(axiosRequestArgs);
             };
         },
+        /**
+         * Get information about all specific sanctionprevus to a student
+         * @summary Get sanctionprevus information for a student
+         * @param {string} authorization JWT token
+         * @param {number} id ID of Eleve to get information for
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async viewSanctionPrevusEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20085>> {
+            const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).viewSanctionPrevusEleve(authorization, id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
     }
 };
 
@@ -530,19 +529,15 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * Create a new sanctionprevu resource
          * @summary Create a new sanctionprevu
          * @param {string} libelle 
-         * @param {string} niveauGravite 
-         * @param {string} motif 
          * @param {string} dureeValidite 
          * @param {number} eleveId 
-         * @param {number} convocationId 
-         * @param {number} regleId 
          * @param {number} fauteId 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createSanctionPrevu(libelle: string, niveauGravite: string, motif: string, dureeValidite: string, eleveId: number, convocationId: number, regleId: number, fauteId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20112> {
-            return SanctionprevusApiFp(configuration).createSanctionPrevu(libelle, niveauGravite, motif, dureeValidite, eleveId, convocationId, regleId, fauteId, authorization, options).then((request) => request(axios, basePath));
+        createSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20112> {
+            return SanctionprevusApiFp(configuration).createSanctionPrevu(libelle, dureeValidite, eleveId, fauteId, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete an sanctionprevu resource
@@ -552,7 +547,11 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         deleteSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20085> {
+=======
+        deleteSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20087> {
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
             return SanctionprevusApiFp(configuration).deleteSanctionPrevu(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -569,20 +568,21 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * Update a sanctionprevu's information
          * @summary Update a sanctionprevu's information
          * @param {string} libelle 
-         * @param {string} niveauGravite 
-         * @param {string} motif 
          * @param {string} dureeValidite 
          * @param {number} eleveId 
-         * @param {number} convocationId 
-         * @param {number} regleId 
          * @param {number} fauteId 
          * @param {string} authorization JWT token
          * @param {number} sanctionprevuId ID of sanctionprevu to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
         updateSanctionPrevu(libelle: string, niveauGravite: string, motif: string, dureeValidite: string, eleveId: number, convocationId: number, regleId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): AxiosPromise<InlineResponse20084> {
             return SanctionprevusApiFp(configuration).updateSanctionPrevu(libelle, niveauGravite, motif, dureeValidite, eleveId, convocationId, regleId, fauteId, authorization, sanctionprevuId, options).then((request) => request(axios, basePath));
+=======
+        updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any): AxiosPromise<InlineResponse20086> {
+            return SanctionprevusApiFp(configuration).updateSanctionPrevu(libelle, dureeValidite, eleveId, fauteId, authorization, sanctionprevuId, options).then((request) => request(axios, basePath));
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
         },
         /**
          * Get information about a specific sanctionprevu
@@ -594,6 +594,17 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          */
         viewSanctionPrevu(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20083> {
             return SanctionprevusApiFp(configuration).viewSanctionPrevu(authorization, id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get information about all specific sanctionprevus to a student
+         * @summary Get sanctionprevus information for a student
+         * @param {string} authorization JWT token
+         * @param {number} id ID of Eleve to get information for
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        viewSanctionPrevusEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20085> {
+            return SanctionprevusApiFp(configuration).viewSanctionPrevusEleve(authorization, id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -609,20 +620,16 @@ export class SanctionprevusApi extends BaseAPI {
      * Create a new sanctionprevu resource
      * @summary Create a new sanctionprevu
      * @param {string} libelle 
-     * @param {string} niveauGravite 
-     * @param {string} motif 
      * @param {string} dureeValidite 
      * @param {number} eleveId 
-     * @param {number} convocationId 
-     * @param {number} regleId 
      * @param {number} fauteId 
      * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SanctionprevusApi
      */
-    public createSanctionPrevu(libelle: string, niveauGravite: string, motif: string, dureeValidite: string, eleveId: number, convocationId: number, regleId: number, fauteId: number, authorization: string, options?: any) {
-        return SanctionprevusApiFp(this.configuration).createSanctionPrevu(libelle, niveauGravite, motif, dureeValidite, eleveId, convocationId, regleId, fauteId, authorization, options).then((request) => request(this.axios, this.basePath));
+    public createSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, options?: any) {
+        return SanctionprevusApiFp(this.configuration).createSanctionPrevu(libelle, dureeValidite, eleveId, fauteId, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Delete an sanctionprevu resource
@@ -651,12 +658,8 @@ export class SanctionprevusApi extends BaseAPI {
      * Update a sanctionprevu's information
      * @summary Update a sanctionprevu's information
      * @param {string} libelle 
-     * @param {string} niveauGravite 
-     * @param {string} motif 
      * @param {string} dureeValidite 
      * @param {number} eleveId 
-     * @param {number} convocationId 
-     * @param {number} regleId 
      * @param {number} fauteId 
      * @param {string} authorization JWT token
      * @param {number} sanctionprevuId ID of sanctionprevu to update in this request
@@ -664,8 +667,8 @@ export class SanctionprevusApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SanctionprevusApi
      */
-    public updateSanctionPrevu(libelle: string, niveauGravite: string, motif: string, dureeValidite: string, eleveId: number, convocationId: number, regleId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any) {
-        return SanctionprevusApiFp(this.configuration).updateSanctionPrevu(libelle, niveauGravite, motif, dureeValidite, eleveId, convocationId, regleId, fauteId, authorization, sanctionprevuId, options).then((request) => request(this.axios, this.basePath));
+    public updateSanctionPrevu(libelle: string, dureeValidite: string, eleveId: number, fauteId: number, authorization: string, sanctionprevuId: number, options?: any) {
+        return SanctionprevusApiFp(this.configuration).updateSanctionPrevu(libelle, dureeValidite, eleveId, fauteId, authorization, sanctionprevuId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get information about a specific sanctionprevu
@@ -678,5 +681,17 @@ export class SanctionprevusApi extends BaseAPI {
      */
     public viewSanctionPrevu(authorization: string, id: number, options?: any) {
         return SanctionprevusApiFp(this.configuration).viewSanctionPrevu(authorization, id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get information about all specific sanctionprevus to a student
+     * @summary Get sanctionprevus information for a student
+     * @param {string} authorization JWT token
+     * @param {number} id ID of Eleve to get information for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SanctionprevusApi
+     */
+    public viewSanctionPrevusEleve(authorization: string, id: number, options?: any) {
+        return SanctionprevusApiFp(this.configuration).viewSanctionPrevusEleve(authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
 }

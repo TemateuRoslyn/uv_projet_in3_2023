@@ -23,6 +23,7 @@ export interface InlineResponse20092 {
      * @memberof InlineResponse20092
      */
     message?: any;
+<<<<<<< HEAD
     /**
      * 
      * @type {boolean}
@@ -35,4 +36,6 @@ export interface InlineResponse20092 {
      * @memberof InlineResponse20092
      */
     data?: any;
+=======
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
 }
