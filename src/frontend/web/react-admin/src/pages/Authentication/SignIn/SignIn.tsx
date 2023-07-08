@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import LogoDark from '../../../images/logo/logo-dark.svg';
-import Logo from '../../../images/logo/logo.svg';
+import LogoDark from '../../../images/logo/logo.png';
+import Logo from '../../../images/logo/logo.png';
 
 import PhoneSVG from './components/PhoneSVG';
 import EmailSVG from './components/EmailSVG';
@@ -108,40 +108,41 @@ const SignIn: React.FC<SignInProps> = (props) => {
   };
 
   return (
-    <div className='w-full h-full no-scrollbar'>
+    <div className='w-full h-full no-scrollbar align-items-center justify-center justify-content-center'>
       <div className="no-scrollbar rounded-sm mx-[15%] my-[5.5%] align-items-center justify-center justify-content-center border border-stroke bg-white shadow-xl shadow-graydark dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center h-full">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="py-17.5 px-26 text-center">
-              <Link className="mb-5.5 inline-block" to="/">
-                <img className="hidden dark:block" src={Logo} alt="Logo" />
+            <h1 className=''>School Discipline </h1>
+              <Link className="mb-5.5 inline-block flex" to="/">
+                <img className="hidden dark:block w-70 h-70" src={Logo} alt="Logo" width={70} height={70} /> 
+       
                 <img className="dark:hidden" src={LogoDark} alt="Logo" />
               </Link>
 
-              <p className="2xl:px-20">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                suspendisse.
-              </p>
+              <h3 className="2xl:px-20">
+               Bienvenue Mr/Mrs l'Administrateur
+              </h3>
               <PhoneSVG />
             </div>
           </div>
           <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
-              <span className="mb-1.5 block font-medium">Welcome back</span>
+              <span className="mb-1.5 block font-medium">Heureux de vous revoir</span>
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Sign In to SchoolAdmin
+                Connectez vous sur School Discipline
               </h2>
               <form>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
-                    Username
+                    Nom d'utilisateur
                   </label>
                   <div className="relative">
                     <input
                       type="text"
                       value={username}
                       onChange={handleUsernameChange}
-                      placeholder="Enter your username"
+                      placeholder="Entrer votre nom d'utilisateur"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                     <EmailSVG/>
@@ -157,7 +158,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
                       type="password"
                       value={password}
                       onChange={handlePasswordChange}
-                      placeholder="6+ Characters, 1 Capital letter"
+                      placeholder="Entrer votre mot de passe"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                     <PasswordSVG/>
@@ -175,7 +176,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
                   />
                 </div>
 
-                <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
+                {/* <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
                   <SubmitBtnSVG/>
                   Sign in with Google
                 </button>
@@ -187,7 +188,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
                       Sign Up
                     </Link>
                   </p>
-                </div>
+                </div> */}
               </form>
             </div>
           </div>

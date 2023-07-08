@@ -31,8 +31,15 @@ export interface InlineResponse20091 {
     message?: any;
     /**
      * 
+<<<<<<< HEAD
      * @type {Array&lt;User&gt;}
      * @memberof InlineResponse20091
      */
     data?: any;
+=======
+     * @type {Suggestion}
+     * @memberof InlineResponse20091
+     */
+    content?: any;
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
 }

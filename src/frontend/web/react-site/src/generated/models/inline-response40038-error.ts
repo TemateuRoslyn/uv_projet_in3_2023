@@ -29,10 +29,4 @@ export interface InlineResponse40038Error {
      * @memberof InlineResponse40038Error
      */
     username?: any;
-    /**
-     * 
-     * @type {Array&lt;string&gt;}
-     * @memberof InlineResponse40038Error
-     */
-    password?: any;
 }

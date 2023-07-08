@@ -6,9 +6,10 @@ import "../js/cmr.js"
 import "../js/africa.js"
 
 const MapOne = () => {
-  useEffect(() => {
-    const mapOne = new jsVectorMap({
-      selector: '#mapOne',
+    useEffect(() => {
+//setTimeout(() => {
+const mapOne = new jsVectorMap({
+      selector: '#mapone',
       map: 'africa_merc',
       zoomButtons: true,
 
@@ -47,7 +48,7 @@ const MapOne = () => {
       <h4 className="mb-2 text-xl font-semibold text-black dark:text-white">
         Africa Countries
       </h4>
-      <div id="mapOne" className="mapOne map-btn h-90"></div>
+      <div id="mapone" className=" map-btn h-90"></div>
     </div>
   );
 };

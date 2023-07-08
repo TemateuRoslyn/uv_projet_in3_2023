@@ -39,6 +39,7 @@ import ConseilDisciplines from '../ConseilDiscipline/ConseilDiscipline.page';
 
 import SuggestionPage from '../Suggestion/Suggestion.page';
 
+import Personnels from '../Personnel/Personnel.page';
 interface AppSwitchProps {
   isLoggedIn: boolean;
 }
@@ -84,8 +85,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
         <Route path="/convocations" element={<Convocations />} />
         <Route path="/conseilDiscipline" element={<ConseilDisciplines />} />
         <Route path="/suggestions" element={<SuggestionPage />} />
-        {/* <Route path="/convocations" element={<Convocations/>} />
-         */}
+        <Route path="/personnels" element={<Personnels/>} />
       </Routes>
     );
   } else {

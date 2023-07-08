@@ -25,6 +25,7 @@ export interface InlineResponse20088 {
     success?: any;
     /**
      * 
+<<<<<<< HEAD
      * @type {string}
      * @memberof InlineResponse20088
      */
@@ -32,6 +33,9 @@ export interface InlineResponse20088 {
     /**
      * 
      * @type {Suggestion}
+=======
+     * @type {Array&lt;Suggestion&gt;}
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
      * @memberof InlineResponse20088
      */
     content?: any;

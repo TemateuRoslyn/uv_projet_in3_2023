@@ -249,7 +249,7 @@ jsVectorMap.addMap('africa_merc', {
       name: 'Mozambique',
     },
   },
-  height: 1098.1844132357712,
+  height: 900.1844132357712,
   projection: { type: 'merc', centralMeridian: 0.0 },
   width: 900.0,
 });

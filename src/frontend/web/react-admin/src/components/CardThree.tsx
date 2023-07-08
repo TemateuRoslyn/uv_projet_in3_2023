@@ -1,4 +1,62 @@
+import { useSelector } from "react-redux";
+import { TOKEN_LOCAL_STORAGE_KEY } from "../constants/LOCAL_STORAGE";
+import { ConseilDisciplinesApi, ElevesApi } from "../generated";
+import { ReduxProps } from "../redux/configureStore";
+import { useEffect, useState } from "react";
+import { ConseilDiscipline, Eleve } from "../generated/models";
+
 const CardThree = () => {
+
+  const state = useSelector((state: ReduxProps) => state);
+  const [conseilDisciplines, setConseilDisciplines] = useState<ConseilDiscipline[]>(
+    []
+  );
+  const [eleves, setEleves] = useState<Eleve[]>([]);
+  
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    const apiParams: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
+    const conseilDisciplinesApi = new ConseilDisciplinesApi({
+      ...state.environment,
+      accessToken: apiParams,
+    });
+
+    setIsLoading(true);
+
+    conseilDisciplinesApi
+      .conseilDisciplinesIndex('Bearer ' + apiParams)
+      .then((response) => {
+        if (response && response.data) {
+          if (response.data.success === true) {
+            setConseilDisciplines(response.data.content);
+          }
+        }
+      })
+      .catch((error) => {
+        alert(error?.response?.data?.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+
+      const elevesApi = new ElevesApi({...state.environment, accessToken: apiParams});
+
+    setIsLoading(true)
+    
+    elevesApi.elevesIndex('Bearer ' + apiParams)
+    .then((response) => {  
+      if(response && response.data){        
+        if(response.data.success === true){ setEleves(response.data.content) }
+      }
+    })
+    .catch((error) => {
+      alert(error?.response?.data?.message)
+    })
+    .finally(() => {
+      setIsLoading(false)
+    });  
+  }, []);
   return (
     <div className="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
@@ -24,13 +82,13 @@ const CardThree = () => {
       <div className="mt-4 flex items-end justify-between">
         <div>
           <h4 className="text-title-md font-bold text-black dark:text-white">
-            2.450
+            {conseilDisciplines.length}
           </h4>
-          <span className="text-sm font-medium">Total Product</span>
+          <span className="text-sm font-medium">Nombre de Conseil de discipline organiser</span>
         </div>
 
         <span className="flex items-center gap-1 text-sm font-medium text-meta-3">
-          2.59%
+          {(conseilDisciplines.length/eleves.length)*100}%
           <svg
             className="fill-meta-3"
             width="10"
