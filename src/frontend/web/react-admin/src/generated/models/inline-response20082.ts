@@ -29,10 +29,13 @@ export interface InlineResponse20082 {
      * @memberof InlineResponse20082
      */
     message?: any;
+<<<<<<< HEAD
     /**
      * 
      * @type {Role}
      * @memberof InlineResponse20082
      */
     content?: any;
+=======
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
 }
