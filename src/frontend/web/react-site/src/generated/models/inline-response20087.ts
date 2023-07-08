@@ -31,29 +31,8 @@ export interface InlineResponse20087 {
     success?: any;
     /**
      * 
-<<<<<<< HEAD
-<<<<<<< HEAD
      * @type {SanctionPrevu}
      * @memberof InlineResponse20087
      */
     content?: any;
-=======
-<<<<<<< HEAD
-     * @type {Suggestion}
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-     * @type {string}
-     * @memberof InlineResponse20087
-     */
-    message?: any;
-<<<<<<< HEAD
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-=======
-     * @type {Array&lt;Suggestion&gt;}
-     * @memberof InlineResponse20087
-     */
-    content?: any;
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
 }

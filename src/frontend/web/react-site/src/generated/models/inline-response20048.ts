@@ -26,15 +26,6 @@ export interface InlineResponse20048 {
     /**
      * 
      * @type {string}
-<<<<<<< HEAD
-=======
-     * @memberof InlineResponse20048
-     */
-    message?: any;
-    /**
-     * 
-     * @type {Array&lt;Parents&gt;}
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
      * @memberof InlineResponse20048
      */
     message?: any;

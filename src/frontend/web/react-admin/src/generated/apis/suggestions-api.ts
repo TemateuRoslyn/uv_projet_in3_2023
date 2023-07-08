@@ -16,27 +16,14 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-import { InlineResponse20086 } from '../models';
-=======
->>>>>>> e2d508d (Closes #299 - admin api integrated)
-import { InlineResponse20087 } from '../models';
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-import { InlineResponse20088 } from '../models';
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
 import { InlineResponse20089 } from '../models';
 import { InlineResponse20090 } from '../models';
-<<<<<<< HEAD
 import { InlineResponse20091 } from '../models';
 import { InlineResponse20092 } from '../models';
 import { InlineResponse20093 } from '../models';
+import { InlineResponse20094 } from '../models';
+import { InlineResponse20095 } from '../models';
 import { InlineResponse40035 } from '../models';
-=======
->>>>>>> e2d508d (Closes #299 - admin api integrated)
 import { InlineResponse40036 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse40445 } from '../models';
@@ -151,6 +138,98 @@ export const SuggestionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
+         * Mark all suggestions as read
+         * @summary Read all suggestions
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readAllSuggestion: async (authorization: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling readAllSuggestion.');
+            }
+            const localVarPath = `/api/suggestion/readAll`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Mark a suggestion as read
+         * @summary Read a suggestion
+         * @param {number} suggestionId ID of suggestion to mark as read
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readSuggestion: async (suggestionId: number, authorization: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'suggestionId' is not null or undefined
+            if (suggestionId === null || suggestionId === undefined) {
+                throw new RequiredError('suggestionId','Required parameter suggestionId was null or undefined when calling readSuggestion.');
+            }
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling readSuggestion.');
+            }
+            const localVarPath = `/api/suggestion/read/{suggestionId}`
+                .replace(`{${"suggestionId"}}`, encodeURIComponent(String(suggestionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Retrieve a list of all suggestions
          * @summary Get all suggestions
          * @param {string} authorization JWT token
@@ -163,6 +242,49 @@ export const SuggestionsApiAxiosParamCreator = function (configuration?: Configu
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling suggestionsIndex.');
             }
             const localVarPath = `/api/suggestion/findAll`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve a list of all suggestions
+         * @summary Get all suggestions those are not already read
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        suggestionsNotRead: async (authorization: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling suggestionsNotRead.');
+            }
+            const localVarPath = `/api/suggestion/notRead`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -223,7 +345,7 @@ export const SuggestionsApiAxiosParamCreator = function (configuration?: Configu
             if (configuration) {
                 baseOptions = configuration.baseOptions;
             }
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -300,61 +422,6 @@ export const SuggestionsApiAxiosParamCreator = function (configuration?: Configu
                 options: localVarRequestOptions,
             };
         },
-<<<<<<< HEAD
-=======
-        /**
-         * Update a suggestion's information
-         * @summary Update a suggestion's information
-         * @param {UpdateCoursIdBody1} body 
-         * @param {string} authorization JWT token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateSuggestion: async (body: UpdateCoursIdBody1, authorization: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            if (body === null || body === undefined) {
-                throw new RequiredError('body','Required parameter body was null or undefined when calling updateSuggestion.');
-            }
-            // verify required parameter 'authorization' is not null or undefined
-            if (authorization === null || authorization === undefined) {
-                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling updateSuggestion.');
-            }
-            const localVarPath = `/api/suggestion/update/{coursId}`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (authorization !== undefined && authorization !== null) {
-                localVarHeaderParameter['Authorization'] = String(authorization);
-            }
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
->>>>>>> e2d508d (Closes #299 - admin api integrated)
     }
 };
 
@@ -372,22 +439,7 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
         async createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
-=======
-        async createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20090>> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-<<<<<<< HEAD
-        async createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20088>> {
-=======
-        async createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20090>> {
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-=======
-        async createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20089>> {
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).createSuggestion(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -402,12 +454,37 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
         async deleteSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20093>> {
-=======
-        async deleteSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20092>> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).deleteSuggestion(authorization, id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Mark all suggestions as read
+         * @summary Read all suggestions
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async readAllSuggestion(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20095>> {
+            const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).readAllSuggestion(authorization, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Mark a suggestion as read
+         * @summary Read a suggestion
+         * @param {number} suggestionId ID of suggestion to mark as read
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async readSuggestion(suggestionId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20094>> {
+            const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).readSuggestion(suggestionId, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -420,17 +497,22 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
         async suggestionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20089>> {
-=======
-<<<<<<< HEAD
-        async suggestionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20086>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-        async suggestionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20088>> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).suggestionsIndex(authorization, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Retrieve a list of all suggestions
+         * @summary Get all suggestions those are not already read
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async suggestionsNotRead(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20089>> {
+            const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).suggestionsNotRead(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -445,16 +527,8 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
         async updateSuggestion(body: UpdateSuggestionIdBody, authorization: string, suggestionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20092>> {
-=======
-        async updateSuggestion(body: UpdateSuggestionIdBody, authorization: string, suggestionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).updateSuggestion(body, authorization, suggestionId, options);
-=======
-        async findAllSuggestion(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20087>> {
-            const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).findAllSuggestion(authorization, options);
->>>>>>> e2d508d (Closes #299 - admin api integrated)
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -468,36 +542,8 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
         async viewSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20090>> {
-=======
-<<<<<<< HEAD
-        async viewSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20087>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-        async viewSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20089>> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).viewSuggestion(authorization, id, options);
-=======
-        async findOneSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20088>> {
-            const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).findOneSuggestion(authorization, id, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * Update a suggestion's information
-         * @summary Update a suggestion's information
-         * @param {UpdateCoursIdBody1} body 
-         * @param {string} authorization JWT token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async updateSuggestion(body: UpdateCoursIdBody1, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20090>> {
-            const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).updateSuggestion(body, authorization, options);
->>>>>>> e2d508d (Closes #299 - admin api integrated)
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -520,22 +566,7 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
         createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20091> {
-=======
-        createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20090> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-<<<<<<< HEAD
-        createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20088> {
-=======
-        createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20090> {
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-=======
-        createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20089> {
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
             return SuggestionsApiFp(configuration).createSuggestion(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -546,12 +577,29 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
         deleteSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20093> {
-=======
-        deleteSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20092> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
             return SuggestionsApiFp(configuration).deleteSuggestion(authorization, id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Mark all suggestions as read
+         * @summary Read all suggestions
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readAllSuggestion(authorization: string, options?: any): AxiosPromise<InlineResponse20095> {
+            return SuggestionsApiFp(configuration).readAllSuggestion(authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Mark a suggestion as read
+         * @summary Read a suggestion
+         * @param {number} suggestionId ID of suggestion to mark as read
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        readSuggestion(suggestionId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20094> {
+            return SuggestionsApiFp(configuration).readSuggestion(suggestionId, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieve a list of all suggestions
@@ -560,17 +608,18 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
         suggestionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20089> {
-=======
-<<<<<<< HEAD
-        suggestionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20086> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-        suggestionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20088> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
             return SuggestionsApiFp(configuration).suggestionsIndex(authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve a list of all suggestions
+         * @summary Get all suggestions those are not already read
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        suggestionsNotRead(authorization: string, options?: any): AxiosPromise<InlineResponse20089> {
+            return SuggestionsApiFp(configuration).suggestionsNotRead(authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Update a suggestion's information
@@ -581,16 +630,8 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
         updateSuggestion(body: UpdateSuggestionIdBody, authorization: string, suggestionId: number, options?: any): AxiosPromise<InlineResponse20092> {
-=======
-        updateSuggestion(body: UpdateSuggestionIdBody, authorization: string, suggestionId: number, options?: any): AxiosPromise<InlineResponse20091> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
             return SuggestionsApiFp(configuration).updateSuggestion(body, authorization, suggestionId, options).then((request) => request(axios, basePath));
-=======
-        findAllSuggestion(authorization: string, options?: any): AxiosPromise<InlineResponse20087> {
-            return SuggestionsApiFp(configuration).findAllSuggestion(authorization, options).then((request) => request(axios, basePath));
->>>>>>> e2d508d (Closes #299 - admin api integrated)
         },
         /**
          * Get information about a specific suggestion
@@ -600,32 +641,8 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
         viewSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20090> {
-=======
-<<<<<<< HEAD
-        viewSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20087> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-        viewSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20089> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
             return SuggestionsApiFp(configuration).viewSuggestion(authorization, id, options).then((request) => request(axios, basePath));
-=======
-        findOneSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20088> {
-            return SuggestionsApiFp(configuration).findOneSuggestion(authorization, id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Update a suggestion's information
-         * @summary Update a suggestion's information
-         * @param {UpdateCoursIdBody1} body 
-         * @param {string} authorization JWT token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateSuggestion(body: UpdateCoursIdBody1, authorization: string, options?: any): AxiosPromise<InlineResponse20090> {
-            return SuggestionsApiFp(configuration).updateSuggestion(body, authorization, options).then((request) => request(axios, basePath));
->>>>>>> e2d508d (Closes #299 - admin api integrated)
         },
     };
 };
@@ -662,6 +679,29 @@ export class SuggestionsApi extends BaseAPI {
         return SuggestionsApiFp(this.configuration).deleteSuggestion(authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
+     * Mark all suggestions as read
+     * @summary Read all suggestions
+     * @param {string} authorization JWT token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SuggestionsApi
+     */
+    public readAllSuggestion(authorization: string, options?: any) {
+        return SuggestionsApiFp(this.configuration).readAllSuggestion(authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Mark a suggestion as read
+     * @summary Read a suggestion
+     * @param {number} suggestionId ID of suggestion to mark as read
+     * @param {string} authorization JWT token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SuggestionsApi
+     */
+    public readSuggestion(suggestionId: number, authorization: string, options?: any) {
+        return SuggestionsApiFp(this.configuration).readSuggestion(suggestionId, authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
      * Retrieve a list of all suggestions
      * @summary Get all suggestions
      * @param {string} authorization JWT token
@@ -671,6 +711,17 @@ export class SuggestionsApi extends BaseAPI {
      */
     public suggestionsIndex(authorization: string, options?: any) {
         return SuggestionsApiFp(this.configuration).suggestionsIndex(authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Retrieve a list of all suggestions
+     * @summary Get all suggestions those are not already read
+     * @param {string} authorization JWT token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SuggestionsApi
+     */
+    public suggestionsNotRead(authorization: string, options?: any) {
+        return SuggestionsApiFp(this.configuration).suggestionsNotRead(authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update a suggestion's information

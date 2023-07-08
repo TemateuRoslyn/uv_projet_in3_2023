@@ -23,7 +23,6 @@ export interface InlineResponse20078 {
      * @memberof InlineResponse20078
      */
     message?: any;
-<<<<<<< HEAD
     /**
      * 
      * @type {boolean}
@@ -36,6 +35,4 @@ export interface InlineResponse20078 {
      * @memberof InlineResponse20078
      */
     content?: any;
-=======
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
 }
