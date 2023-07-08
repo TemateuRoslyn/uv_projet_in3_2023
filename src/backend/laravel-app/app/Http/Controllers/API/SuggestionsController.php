@@ -56,6 +56,52 @@ class SuggestionsController extends Controller
         ], 200);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/suggestion/notRead",
+     *     summary="Get all suggestions those are not already read",
+     *     description="Retrieve a list of all suggestions",
+     *     operationId="SuggestionsNotRead",
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *     security={{"bearerAuth":{}}},
+     *     tags={"Suggestions"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Suggestion retrieved successfully"),
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Suggestion")),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     )
+     * )
+     */
+    public function notRead()
+    {
+        $suggestions = Suggestion::where('view', false)->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Suggestion retrieved successfully',
+            'content' => $suggestions
+        ], 200);
+    }
 
     /**
      * @OA\Get(
@@ -182,7 +228,6 @@ class SuggestionsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'description' => 'required',
-
         ]);
 
         if ($validator->fails()) {
@@ -194,7 +239,7 @@ class SuggestionsController extends Controller
         }
         $suggestion = Suggestion::create([
             'description' => $request->description,
-
+            'view' => false,
         ]);
 
         return response()->json([
@@ -205,7 +250,7 @@ class SuggestionsController extends Controller
     }
 
     /**
-     * @OA\put(
+     * @OA\post(
      *     path="/api/suggestion/update/{suggestionId}",
      *     summary="Update a suggestion's information",
      *     description="Update a suggestion's information",
@@ -304,6 +349,7 @@ class SuggestionsController extends Controller
 
         // Mise à jour des champs de l'objet suggestion
         $suggestionFound->description = $request->input('description');
+        $suggestionFound->view = false;
         $suggestionFound->save();
 
         return response()->json([
@@ -382,6 +428,130 @@ class SuggestionsController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Suggestion deleted successfully'
+        ], 200);
+    }
+
+    /**
+     * @OA\post(
+     *     path="/api/suggestion/read/{suggestionId}",
+     *     summary="Read a suggestion",
+     *     description="Mark a suggestion as read",
+     *     operationId="readSuggestion",
+     *     tags={"Suggestions"},
+     *      @OA\Parameter(
+     *         name="suggestionId",
+     *         in="path",
+     *         description="ID of suggestion to mark as read",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Error - Not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="suggestion not found"),
+     *             @OA\Property(property="success", type="boolean", example=false),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="suggestion updated successfully"),
+     *         )
+     *     )
+     * )
+     */
+    public function read($suggestionId)
+    {
+        // on récupère la suggestion associé
+        $suggestionFound = Suggestion::find($suggestionId);
+        if (!$suggestionFound) {
+
+            return response()->json([
+                'message' => 'Suggestion not found',
+                'success' => false,
+            ], 404);
+        }
+
+        // Mise à jour des champs de l'objet suggestion
+        $suggestionFound->view = true;
+        $suggestionFound->save();
+
+        return response()->json([
+            'message' => 'Suggestion marked as read',
+            'success' => true,
+            // 'content' => $suggestionFound
+        ], 200);
+    }
+
+    /**
+     * @OA\post(
+     *     path="/api/suggestion/readAll",
+     *     summary="Read all suggestions",
+     *     description="Mark all suggestions as read",
+     *     operationId="readAllSuggestion",
+     *     tags={"Suggestions"},
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="All suggestions are marked as read"),
+     *         )
+     *     )
+     * )
+     */
+
+    public function readAll()
+    {
+        // on récupère la suggestion associé
+        $suggestions = Suggestion::where('view', false)->get();
+        foreach ($suggestions as $suggestion) {
+            $this->read($suggestion->id);
+        }
+
+        return response()->json([
+            'message' => 'All suggestions are marked as read',
+            'success' => true,
+            // 'content' => $suggestions
         ], 200);
     }
 }
