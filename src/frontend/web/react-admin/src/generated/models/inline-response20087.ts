@@ -25,11 +25,7 @@ export interface InlineResponse20087 {
     success?: any;
     /**
      * 
-<<<<<<< HEAD
-     * @type {Suggestion}
-=======
      * @type {string}
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
      * @memberof InlineResponse20087
      */
     message?: any;

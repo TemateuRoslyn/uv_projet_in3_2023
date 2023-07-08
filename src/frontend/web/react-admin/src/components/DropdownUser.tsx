@@ -56,15 +56,15 @@ const DropdownUser = () => {
     const authApi = new AuthApi(state.environment);
     const token : string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
     authApi.authLogout('Bearer '+ token)
-    .then((response) => {navigate("/");})
+    .then((response) => {})
     .catch((error) => {})
     .finally(() => {
       localStorage.removeItem(TOKEN_LOCAL_STORAGE_KEY);
       localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
       localStorage.removeItem(IS_LOGGED_LOCAL_STORAGE_KEY);
       dispatch(setIsLOggedAction(false));
-      
-      navigate("/");
+      setTimeout(() => { navigate("/");},2000)
+     
      
 
     });
@@ -86,7 +86,7 @@ const DropdownUser = () => {
         </span>
 
         <span className="h-12 w-12 rounded-full">
-          <img src={UserOne} alt="User" />
+          <img src={adminUser.photo? adminUser.photo:UserOne} alt="User" />
         </span>
 
         <svg

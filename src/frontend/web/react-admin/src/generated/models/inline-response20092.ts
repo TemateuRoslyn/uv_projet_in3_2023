@@ -19,23 +19,14 @@
 export interface InlineResponse20092 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20092
-     */
-    message?: any;
-<<<<<<< HEAD
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20092
      */
     success?: any;
     /**
      * 
-     * @type {User}
+     * @type {string}
      * @memberof InlineResponse20092
      */
-    data?: any;
-=======
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
+    message?: any;
 }

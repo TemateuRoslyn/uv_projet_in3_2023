@@ -109,11 +109,8 @@ export * from './inline-response20090';
 export * from './inline-response20091';
 export * from './inline-response20092';
 export * from './inline-response20093';
-<<<<<<< HEAD
-=======
 export * from './inline-response20094';
 export * from './inline-response20095';
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
 export * from './inline-response200-content';
 export * from './inline-response201';
 export * from './inline-response2011';
@@ -272,7 +269,7 @@ export * from './update-parent-id-body';
 export * from './update-permission-id-body';
 export * from './update-personnel-id-body';
 export * from './update-professeur-id-body';
-export * from './update-regleid-body';
+export * from './update-regle-id-body';
 export * from './update-reglement-id-body';
 export * from './update-reparation-id-body';
 export * from './update-role-id-body';

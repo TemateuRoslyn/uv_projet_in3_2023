@@ -1,14 +1,83 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../images/logo/logo.png';
 import DarkModeSwitcher from './DarkModeSwitcher';
 import DropdownMessage from './DropdownMessage';
 import DropdownNotification from './DropdownNotification';
 import DropdownUser from './DropdownUser';
+import CustomSelectInput from './CustomSelects/CustomSelectInput';
+import { useState } from 'react';
+import Indicator from '../pages/Authentication/components/Indicator';
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
+
+  const [matchList, setMatchList] = useState<[]>([]);
+  const data = [
+    { name: "Dashboard", path: "/" },
+    { name: "Professeur", path: "/professeurs" },
+    { name: "Personnels", path: "/personnels" },
+    { name: "Cours", path: "/cours" },
+    { name: "Convocations", path: "/convocations" },
+    { name: "ConseilDisciplines", path: "/conseilDiscipline" },
+    { name: "Classes", path: "/classes" },
+    { name: "Eleves", path: "/eleves" },
+    { name: "Parents", path: "/parents" },
+    { name: "Calendar", path: "/calendar" },
+    { name: "Role", path: "/roles" },
+    { name: "Permission", path: "/permissions" },
+    { name: "Fautes", path: "/fautes" },
+    { name: "Reglement Interieur", path: "/reglements" },
+    { name: "Regles", path: "/regles" },
+    { name: "Suggestions", path: "/suggestions" }
+  ];
+  
+
+  const handleTypingInput = (keyword: string) => {
+    if (keyword.length > 0) {
+      
+      setMatchList(data.filter(item => item.name.toLowerCase().includes(inputValue.toLowerCase())));
+    }
+  };
+
+  const [inputValue, setInputValue] = useState<string>('');
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const [showIndicator, setShowIndicator] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const handleOptionSelect = (selectedValue: string) => {
+   
+    setInputValue(selectedValue.name);
+    setIsDropdownOpen(false);
+    selectOptionEvent(selectedValue);
+    setShowIndicator(false)
+  };
+  
+  const selectOptionEvent = (option: string) => {
+    setIsDropdownOpen(false);
+    navigate(option.path)
+    setInputValue('')
+
+  };
+
+  const isEmpty = () => matchList.length === 0;
+  
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setInputValue(value);
+    setShowIndicator(value !== '');
+    setIsDropdownOpen(true);
+    handleTypingInput(value);
+  };
+
+  const maxItemsToShow = 3; // Nombre maximal d'éléments à afficher sans scroller
+  const totalItems = matchList.length;
+
+  // Calcul du pourcentage en fonction du nombre d'éléments
+  const topPercentage = Math.min((totalItems - maxItemsToShow) * 100, 440)*(-1);
+  
+
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className="flex flex-grow items-center justify-between py-4 px-4 shadow-2 md:px-6 2xl:px-11">
@@ -62,8 +131,8 @@ const Header = (props: {
         </div>
 
         <div className="hidden sm:block">
-          <form action="https://formbold.com/s/unique_form_id" method="POST">
-            <div className="relative">
+          <form method="POST" >
+            <div className="relative w-full">
               <button className="absolute top-1/2 left-0 -translate-y-1/2">
                 <svg
                   className="fill-body hover:fill-primary dark:fill-bodydark dark:hover:fill-primary"
@@ -88,12 +157,48 @@ const Header = (props: {
                 </svg>
               </button>
 
-              <input
-                type="text"
-                placeholder="Type to search..."
-                className="w-full bg-transparent pr-4 pl-9 focus:outline-none"
-              />
+            <input
+              type="text"
+              className="w-full bg-transparent pr-4 pl-9 focus:outline-none"
+              value={inputValue}
+              placeholder={"Rechercher..."}
+              id="input-label"
+              autoComplete="off"
+              required
+              onChange={handleInputChange}
+            />
+            {showIndicator && 
+              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 mt-4">
+                <Indicator widtf={5} height={5} border="blue"/>
+              </div>}
+            <div 
+              className="custom-input-dropdown w-full" 
+              style={{ display: isEmpty() ? 'none' : 'block', maxHeight: '200px', overflowY: 'auto' }}>
+              <ul>
+              {matchList.length > 0 && isDropdownOpen && inputValue !=='' && (
+              <div 
+                className={`custom-input-dropdown w-full`}
+                style={{ display: isEmpty() ? 'none' : 'block' }}
+              >
+                <ul 
+                  style={{ maxHeight: '300px' ,overflowY: 'auto' }}
+                  className={`absolute top-${topPercentage}% w-full border border-gray-300 rounded-md bg-white shadow-md custom-select-ul`}>
+                  {matchList.map((option, index) => (
+                    <li 
+                      className="dark:border-form-strokedark bg-red dark:bg-form-input px-4 py-1 hover:bg-red-600 cursor-pointer w-full custom-select-li"
+                      key={index} 
+                      onClick={() => handleOptionSelect(option)}
+                    >
+                      {option.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+              </ul>
             </div>
+          </div>
+              
           </form>
         </div>
 

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import LogoDark from '../../../images/logo/logo.png';
-import Logo from '../../../images/logo/logo.png';
+import LogoDark from './components/logo.png';
+import Logo from './components/logo.png';
 
 import PhoneSVG from './components/PhoneSVG';
 import EmailSVG from './components/EmailSVG';
@@ -98,7 +98,12 @@ const SignIn: React.FC<SignInProps> = (props) => {
       
     })
     .catch((error) => {
-      alert('Error')
+      alert(error.response.data.message)
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+      usernameInput.style.borderColor = 'red';
+      passwordInput.style.borderColor = 'red';
+      console.log(error)
           })
     .finally(() => {
       setIsLoading(false)
@@ -121,7 +126,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
               </Link>
 
               <h3 className="2xl:px-20">
-               Bienvenue Mr/Mrs l'Administrateur
+               Bienvenue M./Mme. l'Administrateur
               </h3>
               <PhoneSVG />
             </div>
@@ -139,6 +144,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
                   </label>
                   <div className="relative">
                     <input
+                    id='username'
                       type="text"
                       value={username}
                       onChange={handleUsernameChange}
@@ -151,10 +157,11 @@ const SignIn: React.FC<SignInProps> = (props) => {
 
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
-                  Password
+                  Mot de passe
                   </label>
                   <div className="relative">
                     <input
+                    id='password'
                       type="password"
                       value={password}
                       onChange={handlePasswordChange}

@@ -23,8 +23,6 @@ export interface InlineResponse20093 {
      * @memberof InlineResponse20093
      */
     success?: any;
-<<<<<<< HEAD
-=======
     /**
      * 
      * @type {string}
@@ -37,5 +35,4 @@ export interface InlineResponse20093 {
      * @memberof InlineResponse20093
      */
     data?: any;
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
 }
