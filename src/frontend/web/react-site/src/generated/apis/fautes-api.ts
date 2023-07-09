@@ -23,11 +23,8 @@ import { InlineResponse20035 } from '../models';
 import { InlineResponse20036 } from '../models';
 import { InlineResponse20037 } from '../models';
 import { InlineResponse20039 } from '../models';
-<<<<<<< HEAD
 import { InlineResponse20040 } from '../models';
 import { InlineResponse4005 } from '../models';
-=======
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
 import { InlineResponse4008 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse40414 } from '../models';

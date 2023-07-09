@@ -29,23 +29,4 @@ export interface InlineResponse20094 {
      * @memberof InlineResponse20094
      */
     message?: any;
-    /**
-     * 
-<<<<<<< HEAD
-     * @type {Array&lt;User&gt;}
-=======
-     * @type {boolean}
-     * @memberof InlineResponse20094
-     */
-    success?: any;
-<<<<<<< HEAD
-    /**
-     * 
-     * @type {User}
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-     * @memberof InlineResponse20094
-     */
-    data?: any;
-=======
->>>>>>> e2d508d (Closes #299 - admin api integrated)
 }

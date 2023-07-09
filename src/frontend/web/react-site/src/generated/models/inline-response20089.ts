@@ -34,14 +34,5 @@ export interface InlineResponse20089 {
      * @type {Array&lt;Suggestion&gt;}
      * @memberof InlineResponse20089
      */
-<<<<<<< HEAD
-=======
-    message?: any;
-    /**
-     * 
-     * @type {Suggestion}
-     * @memberof InlineResponse20089
-     */
->>>>>>> e2d508d (Closes #299 - admin api integrated)
     content?: any;
 }

@@ -4,7 +4,6 @@ import DarkModeSwitcher from './DarkModeSwitcher';
 import DropdownMessage from './DropdownMessage';
 import DropdownNotification from './DropdownNotification';
 import DropdownUser from './DropdownUser';
-import CustomSelectInput from './CustomSelects/CustomSelectInput';
 import { useState } from 'react';
 import Indicator from '../pages/Authentication/components/Indicator';
 

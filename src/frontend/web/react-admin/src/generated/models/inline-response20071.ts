@@ -31,11 +31,7 @@ export interface InlineResponse20071 {
     message?: any;
     /**
      * 
-<<<<<<< HEAD
      * @type {Array&lt;ReglementInterieur&gt;}
-=======
-     * @type {ReglementInterieur}
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
      * @memberof InlineResponse20071
      */
     content?: any;

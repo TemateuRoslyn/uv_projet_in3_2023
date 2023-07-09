@@ -19,41 +19,14 @@
 export interface InlineResponse20088 {
     /**
      * 
-<<<<<<< HEAD
      * @type {boolean}
      * @memberof InlineResponse20088
      */
     success?: any;
     /**
      * 
-=======
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
      * @type {string}
      * @memberof InlineResponse20088
      */
     message?: any;
-<<<<<<< HEAD
-=======
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse20088
-     */
-    success?: any;
-    /**
-     * 
-     * @type {Array&lt;Suggestion&gt;}
-     * @memberof InlineResponse20088
-     */
-<<<<<<< HEAD
-=======
-    success?: any;
-    /**
-     * 
-     * @type {Suggestion}
-     * @memberof InlineResponse20088
-     */
->>>>>>> e2d508d (Closes #299 - admin api integrated)
-    content?: any;
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
 }
