@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Http\Controllers\API\ConseilDisciplineController;
 use App\Models\ConseilDiscipline;
 use App\Models\Eleve;
 use App\Models\Faute;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,30 +21,33 @@ class ConseilDisciplineSeeder extends Seeder
         $eleve = Eleve::find(1);
         $faute = Faute::find(2);
 
-        ConseilDiscipline::create([
-            'dateCd' => '2023-01-04',
-            'heureDebutCd' => '10:00:00',
-            'heureFinCd' => '12:00:00',
-            'eleveId' => $eleve->id,
-            'fauteId' => $faute->id,
-        ]);
+        $conseil = new ConseilDiscipline;
+        $conseil->dateCd = '2023-01-04';
+        $conseil->heureDebutCd = '10:00:00';
+        $conseil->heureFinCd = '12:00:00';
+        $conseil->eleveId = $eleve->id;
+        $conseil->fauteId = $faute->id;
+        $conseil->status = $conseil->getStatusAttribute();
+        $conseil->save();
 
-        ConseilDiscipline::create([
-            'dateCd' => '2023-01-04',
-            'heureDebutCd' => '10:00:00',
-            'heureFinCd' => '12:00:00',
-            'eleveId' => $eleve->id,
-            'fauteId' => $faute->id,
-        ]);
+        $conseil = new ConseilDiscipline;
+        $conseil->dateCd = '2023-07-09';
+        $conseil->heureDebutCd = '06:00:00';
+        $conseil->heureFinCd = '19:00:00';
+        $conseil->eleveId = $eleve->id;
+        $conseil->fauteId = $faute->id;
+        $conseil->status = $conseil->getStatusAttribute();
+        $conseil->save();
 
         $eleve = Eleve::find(2);
         $faute = Faute::find(3);
-        ConseilDiscipline::create([
-            'dateCd' => '2023-01-04',
-            'heureDebutCd' => '10:00:00',
-            'heureFinCd' => '12:00:00',
-            'eleveId' => $eleve->id,
-            'fauteId' => $faute->id,
-        ]);
+        $conseil = new ConseilDiscipline;
+        $conseil->dateCd = '2023-07-10';
+        $conseil->heureDebutCd = '09:00:00';
+        $conseil->heureFinCd = '12:00:00';
+        $conseil->eleveId = $eleve->id;
+        $conseil->fauteId = $faute->id;
+        $conseil->status = $conseil->getStatusAttribute();
+        $conseil->save();
     }
 }

@@ -19,7 +19,7 @@ export const CONSEILDISCIPLINE_COLUMNS_DEFS: ColDef[] = [
     width: 300,
   },
   {
-    headerName: 'Date Convocation',
+    headerName: 'Date Du Conseil',
     field: 'dateCd',
     filter: 'agDateColumnFilter',
     checkboxSelection: false,
@@ -28,8 +28,32 @@ export const CONSEILDISCIPLINE_COLUMNS_DEFS: ColDef[] = [
   },
   {
     headerName: 'Eleve',
-    field: 'eleve.firstName',
+    field: 'eleve',
+    valueGetter: function(params) {
+        var eleve = params.data.eleve;
+        return eleve.firstName + ' ' + eleve.lastName;
+    },
     filter: 'agNumberColumnFilter',
+    checkboxSelection: false,
+    showDisabledCheckboxes: true,
+    width: 300,
+  },
+  {
+    headerName: 'Classe',
+    field: 'eleve.classe',
+    valueGetter: function (params) {
+    var classe = params.data.eleve.classe;
+    var classeName = classe.name;
+    
+    if (classe.speciality) {
+      classeName += ' ' + classe.speciality;
+    }
+    
+    classeName += ' ' + classe.no;
+    
+    return classeName;
+  },
+    filter: 'agTextColumnFilter',
     checkboxSelection: false,
     showDisabledCheckboxes: true,
     width: 300,
@@ -59,16 +83,8 @@ export const CONSEILDISCIPLINE_COLUMNS_DEFS: ColDef[] = [
     width: 300,
   },
   {
-    headerName: 'Eleve Id',
-    field: 'eleveId',
-    filter: 'agTextColumnFilter',
-    checkboxSelection: false,
-    showDisabledCheckboxes: true,
-    width: 300,
-  },
-  {
-    headerName: 'classeId',
-    field: 'eleve.classeId',
+    headerName: 'Status',
+    field: 'status',
     filter: 'agTextColumnFilter',
     checkboxSelection: false,
     showDisabledCheckboxes: true,
