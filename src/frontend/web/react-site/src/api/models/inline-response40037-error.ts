@@ -15,6 +15,7 @@
  * 
  * @export
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @interface InlineResponse40037Error
 =======
 <<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response40037-error.ts
@@ -24,11 +25,15 @@
  * @interface InlineResponse40033Error
 >>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40033-error.ts
 >>>>>>> 0b7e9d7 (Testing)
+=======
+ * @interface InlineResponse40037Error
+>>>>>>> 707866f4 (Closes #318 -présentation du website)
  */
 export interface InlineResponse40037Error {
     /**
      * 
      * @type {Array&lt;string&gt;}
+<<<<<<< HEAD
 <<<<<<< HEAD
      * @memberof InlineResponse40037Error
 =======
@@ -47,29 +52,15 @@ export interface InlineResponse40030Error {
 >>>>>>>> 7faa1c6 (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40030-error.ts
 >>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40033-error.ts
 >>>>>>> 0b7e9d7 (Testing)
+=======
+     * @memberof InlineResponse40037Error
+>>>>>>> 707866f4 (Closes #318 -présentation du website)
      */
     email?: any;
     /**
      * 
      * @type {Array&lt;string&gt;}
 <<<<<<< HEAD
-     * @memberof InlineResponse40037Error
-=======
-<<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response40037-error.ts
-     * @memberof InlineResponse40037Error
-=======
-<<<<<<<< HEAD:src/frontend/web/react-admin/src/generated/models/inline-response40033-error.ts
-     * @memberof InlineResponse40033Error
-========
-     * @memberof InlineResponse40030Error
->>>>>>>> 7faa1c6 (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40030-error.ts
->>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40033-error.ts
->>>>>>> 0b7e9d7 (Testing)
-     */
-    username?: any;
-    /**
-     * 
-     * @type {Array&lt;string&gt;}
 <<<<<<< HEAD
      * @memberof InlineResponse40037Error
 =======
@@ -83,6 +74,31 @@ export interface InlineResponse40030Error {
 >>>>>>>> 7faa1c6 (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40030-error.ts
 >>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40033-error.ts
 >>>>>>> 0b7e9d7 (Testing)
+=======
+     * @memberof InlineResponse40037Error
+>>>>>>> 707866f4 (Closes #318 -présentation du website)
+     */
+    username?: any;
+    /**
+     * 
+     * @type {Array&lt;string&gt;}
+<<<<<<< HEAD
+<<<<<<< HEAD
+     * @memberof InlineResponse40037Error
+=======
+<<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response40037-error.ts
+     * @memberof InlineResponse40037Error
+=======
+<<<<<<<< HEAD:src/frontend/web/react-admin/src/generated/models/inline-response40033-error.ts
+     * @memberof InlineResponse40033Error
+========
+     * @memberof InlineResponse40030Error
+>>>>>>>> 7faa1c6 (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40030-error.ts
+>>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40033-error.ts
+>>>>>>> 0b7e9d7 (Testing)
+=======
+     * @memberof InlineResponse40037Error
+>>>>>>> 707866f4 (Closes #318 -présentation du website)
      */
     password?: any;
 }

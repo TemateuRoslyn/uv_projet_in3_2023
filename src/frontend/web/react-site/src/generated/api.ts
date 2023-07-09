@@ -17,6 +17,7 @@ export * from './apis/conseil-disciplines-api';
 export * from './apis/convocation-api';
 export * from './apis/cours-api';
 export * from './apis/eleves-api';
+export * from './apis/faute-api';
 export * from './apis/fautes-api';
 export * from './apis/membreconseils-api';
 export * from './apis/notification-api';

@@ -8,11 +8,11 @@ const HAbout = () => {
   return (
     <>
       <section className='homeAbout'>
-        <div className='container'>
+        {/* <div className='container'>
           <Heading subtitle='our courses' title='explore our popular online courses' />
 
           <div className='coursesCard'>
-            {/* copy code form  coursesCard */}
+            copy code form  coursesCard
             <div className='grid2'>
               {coursesCard.slice(0, 3).map((val, key) => (
                 <div className='items' key={key}>
@@ -60,7 +60,7 @@ const HAbout = () => {
             </div>
           </div>
         </div>
-        <OnlineCourses />
+        <OnlineCourses /> */}
       </section>
     </>
   )

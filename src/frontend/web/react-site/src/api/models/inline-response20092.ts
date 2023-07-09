@@ -24,14 +24,18 @@ export interface InlineResponse20092 {
      */
     success?: any;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 0b7e9d7 (Testing)
+=======
+>>>>>>> 707866f4 (Closes #318 -présentation du website)
     /**
      * 
      * @type {string}
      * @memberof InlineResponse20092
      */
+<<<<<<< HEAD
 <<<<<<< HEAD
     message?: any;
 =======
@@ -43,4 +47,7 @@ export interface InlineResponse20092 {
 >>>>>>> 7faa1c6 (maj reglement interieur)
 >>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/models/inline-response20092.ts
 >>>>>>> 0b7e9d7 (Testing)
+=======
+    message?: any;
+>>>>>>> 707866f4 (Closes #318 -présentation du website)
 }

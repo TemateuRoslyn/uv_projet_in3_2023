@@ -20,6 +20,7 @@ export interface InlineResponse20087 {
     /**
      * 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response20087.ts
 =======
@@ -34,12 +35,15 @@ export interface InlineResponse20087 {
 >>>>>>> 7faa1c6 (maj reglement interieur)
 >>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/models/inline-response20087.ts
 >>>>>>> 0b7e9d7 (Testing)
+=======
+>>>>>>> 707866f4 (Closes #318 -présentation du website)
      * @type {boolean}
      * @memberof InlineResponse20087
      */
     success?: any;
     /**
      * 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response20087.ts
@@ -63,4 +67,10 @@ export interface InlineResponse20087 {
      */
     message?: any;
 >>>>>>> 0b7e9d7 (Testing)
+=======
+     * @type {string}
+     * @memberof InlineResponse20087
+     */
+    message?: any;
+>>>>>>> 707866f4 (Closes #318 -présentation du website)
 }
