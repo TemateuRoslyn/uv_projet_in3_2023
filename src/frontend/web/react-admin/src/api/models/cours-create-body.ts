@@ -41,4 +41,10 @@ export interface CoursCreateBody {
      * @memberof CoursCreateBody
      */
     heureFin: any;
+    /**
+     * 
+     * @type {Array&lt;number&gt;}
+     * @memberof CoursCreateBody
+     */
+    classesId?: any;
 }

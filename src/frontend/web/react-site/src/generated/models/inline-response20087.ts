@@ -25,52 +25,8 @@ export interface InlineResponse20087 {
     success?: any;
     /**
      * 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
-     * @type {SanctionPrevu}
-=======
-=======
->>>>>>> 605364c (mainmaim)
-     * @type {string}
-     * @memberof InlineResponse20087
-     */
-<<<<<<< HEAD
-    content?: any;
-=======
-<<<<<<< HEAD
-     * @type {Suggestion}
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
      * @type {string}
      * @memberof InlineResponse20087
      */
     message?: any;
-<<<<<<< HEAD
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-=======
-     * @type {Array&lt;Suggestion&gt;}
-     * @memberof InlineResponse20087
-     */
-    content?: any;
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-     * @type {SanctionPrevu}
-     * @memberof InlineResponse20087
-     */
-    content?: any;
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-    message?: any;
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 }

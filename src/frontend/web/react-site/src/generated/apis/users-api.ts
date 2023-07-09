@@ -16,48 +16,9 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
-import { InlineResponse20094 } from '../models';
-import { InlineResponse20095 } from '../models';
-import { InlineResponse20096 } from '../models';
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { InlineResponse20091 } from '../models';
-import { InlineResponse20092 } from '../models';
-import { InlineResponse20093 } from '../models';
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
 import { InlineResponse20093 } from '../models';
 import { InlineResponse20094 } from '../models';
 import { InlineResponse20095 } from '../models';
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-<<<<<<< HEAD
-import { InlineResponse20096 } from '../models';
-import { InlineResponse20097 } from '../models';
-import { InlineResponse20098 } from '../models';
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-import { InlineResponse20093 } from '../models';
-import { InlineResponse20094 } from '../models';
-import { InlineResponse20095 } from '../models';
->>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
-=======
-import { InlineResponse20093 } from '../models';
-import { InlineResponse20094 } from '../models';
-import { InlineResponse20095 } from '../models';
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 import { InlineResponse20113 } from '../models';
 import { InlineResponse40037 } from '../models';
 import { InlineResponse40038 } from '../models';
@@ -372,41 +333,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
-        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20096>> {
-=======
         async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20095>> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-<<<<<<< HEAD
-        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20093>> {
-=======
-        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20095>> {
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-=======
-        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20094>> {
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20098>> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20096>> {
-=======
-        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20095>> {
->>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
-=======
-        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20095>> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).deleteUser(userId, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -449,41 +376,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
-        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20095>> {
-=======
         async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20094>> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-<<<<<<< HEAD
-        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20092>> {
-=======
-        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20094>> {
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-=======
-        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20093>> {
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20097>> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20095>> {
-=======
-        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20094>> {
->>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
-=======
-        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20094>> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).userShow(userId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -513,41 +406,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
-        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20094>> {
-=======
         async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20093>> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-<<<<<<< HEAD
-        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
-=======
-        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20093>> {
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-=======
-        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20092>> {
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20096>> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20094>> {
-=======
-        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20093>> {
->>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
-=======
-        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20093>> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).usersIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -571,41 +430,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
-        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20096> {
-=======
         deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20095> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-<<<<<<< HEAD
-        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20093> {
-=======
-        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20095> {
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-=======
-        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20094> {
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20098> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20096> {
-=======
-        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20095> {
->>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
-=======
-        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20095> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return UsersApiFp(configuration).deleteUser(userId, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -636,41 +461,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
-        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20095> {
-=======
         userShow(userId: string, options?: any): AxiosPromise<InlineResponse20094> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-<<<<<<< HEAD
-        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20092> {
-=======
-        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20094> {
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-=======
-        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20093> {
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20097> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20095> {
-=======
-        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20094> {
->>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
-=======
-        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20094> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return UsersApiFp(configuration).userShow(userId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -692,41 +483,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
-        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20094> {
-=======
         usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20093> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-<<<<<<< HEAD
-        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20091> {
-=======
-        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20093> {
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-=======
-        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20092> {
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20096> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20094> {
-=======
-        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20093> {
->>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
-=======
-        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20093> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return UsersApiFp(configuration).usersIndex(authorization, options).then((request) => request(axios, basePath));
         },
     };

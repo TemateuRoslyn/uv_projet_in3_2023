@@ -19,15 +19,6 @@
 export interface InlineResponse20052 {
     /**
      * 
-<<<<<<< HEAD
-     * @type {string}
-     * @memberof InlineResponse20052
-     */
-    message?: any;
-    /**
-     * 
-=======
->>>>>>> 605364c (mainmaim)
      * @type {boolean}
      * @memberof InlineResponse20052
      */
@@ -37,16 +28,5 @@ export interface InlineResponse20052 {
      * @type {string}
      * @memberof InlineResponse20052
      */
-<<<<<<< HEAD
-    content?: any;
-<<<<<<< HEAD
-=======
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
     message?: any;
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 }

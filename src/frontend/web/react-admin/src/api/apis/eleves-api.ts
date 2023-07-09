@@ -16,18 +16,20 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20022 } from '../models';
-import { InlineResponse20023 } from '../models';
-import { InlineResponse20024 } from '../models';
-import { InlineResponse20025 } from '../models';
-import { InlineResponse2013 } from '../models';
-import { InlineResponse40010 } from '../models';
-import { InlineResponse40011 } from '../models';
+import { InlineResponse20028 } from '../models';
+import { InlineResponse20029 } from '../models';
+import { InlineResponse20030 } from '../models';
+import { InlineResponse20031 } from '../models';
+import { InlineResponse20032 } from '../models';
+import { InlineResponse2014 } from '../models';
+import { InlineResponse40012 } from '../models';
+import { InlineResponse40013 } from '../models';
+import { InlineResponse4005 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse4046 } from '../models';
-import { InlineResponse4047 } from '../models';
-import { InlineResponse4048 } from '../models';
-import { InlineResponse4221 } from '../models';
+import { InlineResponse40411 } from '../models';
+import { InlineResponse40412 } from '../models';
+import { InlineResponse40413 } from '../models';
+import { InlineResponse4222 } from '../models';
 /**
  * ElevesApi - axios parameter creator
  * @export
@@ -273,6 +275,55 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
+         * Get the filtered list of Students.
+         * @summary Get filtered list of eleves
+         * @param {string} keyword Keyword to filter eleves
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        elevesRecords: async (keyword: string, authorization: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'keyword' is not null or undefined
+            if (keyword === null || keyword === undefined) {
+                throw new RequiredError('keyword','Required parameter keyword was null or undefined when calling elevesRecords.');
+            }
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling elevesRecords.');
+            }
+            const localVarPath = `/api/eleves/records/{keyword}`
+                .replace(`{${"keyword"}}`, encodeURIComponent(String(keyword)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Update a eleve's information
          * @summary Update a eleve's information
          * @param {string} email 
@@ -352,7 +403,7 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
             if (configuration) {
                 baseOptions = configuration.baseOptions;
             }
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new FormData();
@@ -500,7 +551,7 @@ export const ElevesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createEleve(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2013>> {
+        async createEleve(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2014>> {
             const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).createEleve(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, solvable, redoublant, classeId, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -515,7 +566,7 @@ export const ElevesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20025>> {
+        async deleteEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20031>> {
             const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).deleteEleve(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -529,8 +580,23 @@ export const ElevesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async elevesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20022>> {
+        async elevesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20028>> {
             const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).elevesIndex(authorization, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Get the filtered list of Students.
+         * @summary Get filtered list of eleves
+         * @param {string} keyword Keyword to filter eleves
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async elevesRecords(keyword: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20032>> {
+            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).elevesRecords(keyword, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -555,7 +621,7 @@ export const ElevesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateEleve(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, eleveId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20024>> {
+        async updateEleve(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, eleveId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20030>> {
             const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).updateEleve(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, solvable, redoublant, classeId, authorization, eleveId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -570,7 +636,7 @@ export const ElevesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20023>> {
+        async viewEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20029>> {
             const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).viewEleve(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -604,7 +670,7 @@ export const ElevesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createEleve(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, options?: any): AxiosPromise<InlineResponse2013> {
+        createEleve(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, options?: any): AxiosPromise<InlineResponse2014> {
             return ElevesApiFp(configuration).createEleve(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, solvable, redoublant, classeId, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -615,7 +681,7 @@ export const ElevesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20025> {
+        deleteEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20031> {
             return ElevesApiFp(configuration).deleteEleve(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -625,8 +691,19 @@ export const ElevesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        elevesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20022> {
+        elevesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20028> {
             return ElevesApiFp(configuration).elevesIndex(authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get the filtered list of Students.
+         * @summary Get filtered list of eleves
+         * @param {string} keyword Keyword to filter eleves
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        elevesRecords(keyword: string, authorization: string, options?: any): AxiosPromise<InlineResponse20032> {
+            return ElevesApiFp(configuration).elevesRecords(keyword, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Update a eleve's information
@@ -647,7 +724,7 @@ export const ElevesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateEleve(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, eleveId: number, options?: any): AxiosPromise<InlineResponse20024> {
+        updateEleve(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, solvable: boolean, redoublant: boolean, classeId: number, authorization: string, eleveId: number, options?: any): AxiosPromise<InlineResponse20030> {
             return ElevesApiFp(configuration).updateEleve(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, solvable, redoublant, classeId, authorization, eleveId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -658,7 +735,7 @@ export const ElevesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20023> {
+        viewEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20029> {
             return ElevesApiFp(configuration).viewEleve(authorization, id, options).then((request) => request(axios, basePath));
         },
     };
@@ -715,6 +792,18 @@ export class ElevesApi extends BaseAPI {
      */
     public elevesIndex(authorization: string, options?: any) {
         return ElevesApiFp(this.configuration).elevesIndex(authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get the filtered list of Students.
+     * @summary Get filtered list of eleves
+     * @param {string} keyword Keyword to filter eleves
+     * @param {string} authorization JWT token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ElevesApi
+     */
+    public elevesRecords(keyword: string, authorization: string, options?: any) {
+        return ElevesApiFp(this.configuration).elevesRecords(keyword, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update a eleve's information

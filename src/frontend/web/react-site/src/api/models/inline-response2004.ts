@@ -19,19 +19,19 @@
 export interface InlineResponse2004 {
     /**
      * 
-     * @type {boolean}
-     * @memberof InlineResponse2004
-     */
-    success?: any;
-    /**
-     * 
      * @type {string}
      * @memberof InlineResponse2004
      */
     message?: any;
     /**
      * 
-     * @type {Classe}
+     * @type {boolean}
+     * @memberof InlineResponse2004
+     */
+    success?: any;
+    /**
+     * 
+     * @type {AvoirMembreConseilDiscipline}
      * @memberof InlineResponse2004
      */
     content?: any;

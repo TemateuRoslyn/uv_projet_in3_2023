@@ -29,23 +29,10 @@ export interface InlineResponse20048 {
      * @memberof InlineResponse20048
      */
     message?: any;
-<<<<<<< HEAD
-    /**
-     * 
-     * @type {Array&lt;Parents&gt;}
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-     * @memberof InlineResponse20048
-     */
-    message?: any;
-<<<<<<< HEAD
-=======
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
     /**
      * 
      * @type {Array&lt;Parents&gt;}
      * @memberof InlineResponse20048
      */
     content?: any;
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 }

@@ -31,20 +31,7 @@ export interface InlineResponse20071 {
     message?: any;
     /**
      * 
-<<<<<<< HEAD
-<<<<<<< HEAD
-     * @type {Array&lt;ReglementInterieur&gt;}
-=======
      * @type {ReglementInterieur}
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-     * @type {Array&lt;ReglementInterieur&gt;}
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-     * @type {ReglementInterieur}
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
      * @memberof InlineResponse20071
      */
     content?: any;

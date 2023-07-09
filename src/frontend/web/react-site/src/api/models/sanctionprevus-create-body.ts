@@ -28,18 +28,6 @@ export interface SanctionprevusCreateBody {
      * @type {string}
      * @memberof SanctionprevusCreateBody
      */
-    niveauGravite: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof SanctionprevusCreateBody
-     */
-    motif: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof SanctionprevusCreateBody
-     */
     dureeValidite: any;
     /**
      * 
@@ -47,18 +35,6 @@ export interface SanctionprevusCreateBody {
      * @memberof SanctionprevusCreateBody
      */
     eleveId: any;
-    /**
-     * 
-     * @type {number}
-     * @memberof SanctionprevusCreateBody
-     */
-    convocationId: any;
-    /**
-     * 
-     * @type {number}
-     * @memberof SanctionprevusCreateBody
-     */
-    regleId: any;
     /**
      * 
      * @type {number}

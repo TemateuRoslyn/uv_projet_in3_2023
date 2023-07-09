@@ -28,18 +28,6 @@ export interface UpdateSanctionprevuIdBody {
      * @type {string}
      * @memberof UpdateSanctionprevuIdBody
      */
-    niveauGravite: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSanctionprevuIdBody
-     */
-    motif: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSanctionprevuIdBody
-     */
     dureeValidite: any;
     /**
      * 
@@ -47,18 +35,6 @@ export interface UpdateSanctionprevuIdBody {
      * @memberof UpdateSanctionprevuIdBody
      */
     eleveId: any;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateSanctionprevuIdBody
-     */
-    convocationId: any;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateSanctionprevuIdBody
-     */
-    regleId: any;
     /**
      * 
      * @type {number}

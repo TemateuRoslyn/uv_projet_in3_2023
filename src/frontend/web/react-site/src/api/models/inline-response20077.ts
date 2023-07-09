@@ -31,8 +31,8 @@ export interface InlineResponse20077 {
     success?: any;
     /**
      * 
-     * @type {User}
+     * @type {Reparation}
      * @memberof InlineResponse20077
      */
-    data?: any;
+    content?: any;
 }

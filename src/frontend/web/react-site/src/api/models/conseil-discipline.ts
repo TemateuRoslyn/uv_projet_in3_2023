@@ -43,6 +43,30 @@ export interface ConseilDiscipline {
     heureFinCd: any;
     /**
      * 
+     * @type {number}
+     * @memberof ConseilDiscipline
+     */
+    eleveId: any;
+    /**
+     * 
+     * @type {Eleve}
+     * @memberof ConseilDiscipline
+     */
+    eleve?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConseilDiscipline
+     */
+    fauteId?: any;
+    /**
+     * 
+     * @type {Faute}
+     * @memberof ConseilDiscipline
+     */
+    faute?: any;
+    /**
+     * 
      * @type {BaseModelpropertiescreatedAt}
      * @memberof ConseilDiscipline
      */

@@ -31,7 +31,7 @@ export interface InlineResponse2007 {
     message?: any;
     /**
      * 
-     * @type {Array&lt;string&gt;}
+     * @type {Array&lt;Classe&gt;}
      * @memberof InlineResponse2007
      */
     content?: any;

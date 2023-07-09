@@ -29,4 +29,10 @@ export interface InlineResponse20025 {
      * @memberof InlineResponse20025
      */
     message?: any;
+    /**
+     * 
+     * @type {Cour}
+     * @memberof InlineResponse20025
+     */
+    content?: any;
 }

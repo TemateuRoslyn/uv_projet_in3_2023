@@ -34,40 +34,5 @@ export interface InlineResponse20093 {
      * @type {Array&lt;User&gt;}
      * @memberof InlineResponse20093
      */
-<<<<<<< HEAD
-    message?: any;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    /**
-     * 
-<<<<<<< HEAD
-     * @type {Array&lt;User&gt;}
-     * @memberof InlineResponse20093
-     */
     data?: any;
-<<<<<<< HEAD
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-=======
-     * @type {boolean}
-     * @memberof InlineResponse20093
-     */
-    success?: any;
-    /**
-     * 
-     * @type {User}
-     * @memberof InlineResponse20093
-     */
-    data?: any;
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-    data?: any;
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 }

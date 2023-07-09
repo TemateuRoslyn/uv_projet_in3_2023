@@ -25,34 +25,12 @@ export interface InlineResponse20090 {
     success?: any;
     /**
      * 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 605364c (mainmaim)
      * @type {string}
      * @memberof InlineResponse20090
      */
     message?: any;
-<<<<<<< HEAD
-<<<<<<< HEAD
     /**
      * 
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-<<<<<<< HEAD
-=======
-    /**
-     * 
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-    /**
-     * 
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
      * @type {Suggestion}
      * @memberof InlineResponse20090
      */

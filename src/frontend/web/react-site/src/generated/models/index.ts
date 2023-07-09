@@ -111,35 +111,6 @@ export * from './inline-response20092';
 export * from './inline-response20093';
 export * from './inline-response20094';
 export * from './inline-response20095';
-<<<<<<< HEAD
-<<<<<<< HEAD
-export * from './inline-response20096';
-=======
-<<<<<<< HEAD
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-export * from './inline-response20094';
-export * from './inline-response20095';
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-=======
-export * from './inline-response20094';
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-export * from './inline-response20096';
-export * from './inline-response20097';
-export * from './inline-response20098';
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
->>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
-=======
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 export * from './inline-response200-content';
 export * from './inline-response201';
 export * from './inline-response2011';
@@ -289,6 +260,7 @@ export * from './update-classe-id-body';
 export * from './update-conseil-discipline-id-body';
 export * from './update-convocation-id-body';
 export * from './update-cours-id-body';
+export * from './update-cours-id-body1';
 export * from './update-eleve-id-body';
 export * from './update-faute-id-body';
 export * from './update-id-body';
@@ -303,6 +275,5 @@ export * from './update-reglement-id-body';
 export * from './update-reparation-id-body';
 export * from './update-role-id-body';
 export * from './update-sanctionprevu-id-body';
-export * from './update-suggestion-id-body';
 export * from './user';
 export * from './users-create-body';

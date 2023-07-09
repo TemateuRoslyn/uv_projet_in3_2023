@@ -19,8 +19,20 @@
 export interface InlineResponse20058 {
     /**
      * 
-     * @type {Regle}
+     * @type {string}
      * @memberof InlineResponse20058
      */
-    regle?: any;
+    message?: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse20058
+     */
+    success?: any;
+    /**
+     * 
+     * @type {Personnel}
+     * @memberof InlineResponse20058
+     */
+    content?: any;
 }

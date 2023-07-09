@@ -29,23 +29,10 @@ export interface InlineResponse20083 {
      * @memberof InlineResponse20083
      */
     message?: any;
-<<<<<<< HEAD
-    /**
-     * 
-     * @type {Array&lt;SanctionPrevu&gt;}
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-     * @memberof InlineResponse20083
-     */
-    message?: any;
-<<<<<<< HEAD
-=======
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
     /**
      * 
      * @type {Array&lt;SanctionPrevu&gt;}
      * @memberof InlineResponse20083
      */
     content?: any;
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 }

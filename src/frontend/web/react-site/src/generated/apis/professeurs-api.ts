@@ -16,49 +16,11 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
-import { InlineResponse20062 } from '../models';
-import { InlineResponse20063 } from '../models';
-import { InlineResponse20064 } from '../models';
-import { InlineResponse20065 } from '../models';
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
 import { InlineResponse20061 } from '../models';
 import { InlineResponse20062 } from '../models';
 import { InlineResponse20063 } from '../models';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import { InlineResponse20064 } from '../models';
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-=======
-import { InlineResponse20064 } from '../models';
-import { InlineResponse20091 } from '../models';
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
 import { InlineResponse20092 } from '../models';
->>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
-=======
-import { InlineResponse20061 } from '../models';
-import { InlineResponse20062 } from '../models';
-import { InlineResponse20063 } from '../models';
-import { InlineResponse20064 } from '../models';
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 import { InlineResponse2019 } from '../models';
 import { InlineResponse40024 } from '../models';
 import { InlineResponse40025 } from '../models';
@@ -66,22 +28,7 @@ import { InlineResponse401 } from '../models';
 import { InlineResponse40430 } from '../models';
 import { InlineResponse40431 } from '../models';
 import { InlineResponse40432 } from '../models';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-import { InlineResponse40445 } from '../models';
->>>>>>> e2d508d (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
 import { InlineResponse40446 } from '../models';
->>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
-=======
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 import { InlineResponse4225 } from '../models';
 /**
  * ProfesseursApi - axios parameter creator
@@ -244,6 +191,55 @@ export const ProfesseursApiAxiosParamCreator = function (configuration?: Configu
                 throw new RequiredError('id','Required parameter id was null or undefined when calling deleteProfesseur.');
             }
             const localVarPath = `/api/professeurs/delete/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Delete an suggestion resource
+         * @summary Delete an suggestion
+         * @param {string} authorization JWT token
+         * @param {number} id ID of suggestion to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSuggestion: async (authorization: string, id: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling deleteSuggestion.');
+            }
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling deleteSuggestion.');
+            }
+            const localVarPath = `/api/suggestion/delete/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -551,20 +547,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        async deleteProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20065>> {
-=======
         async deleteProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20064>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        async deleteProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20065>> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        async deleteProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20064>> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).deleteProfesseur(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -572,15 +555,6 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
          * Delete an suggestion resource
          * @summary Delete an suggestion
          * @param {string} authorization JWT token
@@ -588,11 +562,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        async deleteSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
-=======
         async deleteSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20092>> {
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).deleteSuggestion(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -600,37 +570,13 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-<<<<<<< HEAD
-=======
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
-=======
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
          * Retrieve a list of all professeurs
          * @summary Get all professeurs
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        async professeursIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20062>> {
-=======
         async professeursIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20061>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        async professeursIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20062>> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        async professeursIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20061>> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).professeursIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -655,27 +601,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        async updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20064>> {
-=======
         async updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-        async updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20062>> {
-=======
-        async updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        async updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20064>> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        async updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).updateProfesseur(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, statut, courId, authorization, professeurId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -690,20 +616,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        async viewProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
-=======
         async viewProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20062>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        async viewProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        async viewProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20062>> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).viewProfesseur(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -747,26 +660,10 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        deleteProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20065> {
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
-=======
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-        deleteProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20065> {
+        deleteProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20064> {
             return ProfesseursApiFp(configuration).deleteProfesseur(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
          * Delete an suggestion resource
          * @summary Delete an suggestion
          * @param {string} authorization JWT token
@@ -774,48 +671,17 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        deleteSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20091> {
-            return ProfesseursApiFp(configuration).deleteSuggestion(authorization, id, options).then((request) => request(axios, basePath));
-        },
-        /**
-=======
-<<<<<<< HEAD
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
         deleteSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20092> {
             return ProfesseursApiFp(configuration).deleteSuggestion(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
->>>>>>> 9edccb6 (Closes #303 - Personnel Api integrated)
->>>>>>> 7cda091 (Closes #303 - Personnel Api integrated)
-=======
-        deleteProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20064> {
-            return ProfesseursApiFp(configuration).deleteProfesseur(authorization, id, options).then((request) => request(axios, basePath));
-        },
-        /**
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
          * Retrieve a list of all professeurs
          * @summary Get all professeurs
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        professeursIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20062> {
-=======
         professeursIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20061> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        professeursIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20062> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        professeursIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20061> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return ProfesseursApiFp(configuration).professeursIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -836,27 +702,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): AxiosPromise<InlineResponse20064> {
-=======
         updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): AxiosPromise<InlineResponse20063> {
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-        updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): AxiosPromise<InlineResponse20062> {
-=======
-        updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): AxiosPromise<InlineResponse20063> {
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): AxiosPromise<InlineResponse20064> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): AxiosPromise<InlineResponse20063> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return ProfesseursApiFp(configuration).updateProfesseur(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, statut, courId, authorization, professeurId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -867,20 +713,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        viewProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20063> {
-=======
         viewProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20062> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        viewProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20063> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        viewProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20062> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return ProfesseursApiFp(configuration).viewProfesseur(authorization, id, options).then((request) => request(axios, basePath));
         },
     };
@@ -925,6 +758,18 @@ export class ProfesseursApi extends BaseAPI {
      */
     public deleteProfesseur(authorization: string, id: number, options?: any) {
         return ProfesseursApiFp(this.configuration).deleteProfesseur(authorization, id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Delete an suggestion resource
+     * @summary Delete an suggestion
+     * @param {string} authorization JWT token
+     * @param {number} id ID of suggestion to delete
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProfesseursApi
+     */
+    public deleteSuggestion(authorization: string, id: number, options?: any) {
+        return ProfesseursApiFp(this.configuration).deleteSuggestion(authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Retrieve a list of all professeurs

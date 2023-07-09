@@ -34,37 +34,25 @@ export interface SanctionPrevu {
      * @type {string}
      * @memberof SanctionPrevu
      */
-    niveauGravite?: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof SanctionPrevu
-     */
-    motif: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof SanctionPrevu
-     */
     dureeValidite: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof SanctionPrevu
+     */
+    eleveId: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof SanctionPrevu
+     */
+    fauteId: any;
     /**
      * 
      * @type {Eleve}
      * @memberof SanctionPrevu
      */
     eleve?: any;
-    /**
-     * 
-     * @type {Convocation}
-     * @memberof SanctionPrevu
-     */
-    convocation?: any;
-    /**
-     * 
-     * @type {Regle}
-     * @memberof SanctionPrevu
-     */
-    regle?: any;
     /**
      * 
      * @type {Faute}

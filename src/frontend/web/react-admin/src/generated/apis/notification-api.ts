@@ -16,34 +16,10 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
-import { InlineResponse20045 } from '../models';
-import { InlineResponse20046 } from '../models';
-import { InlineResponse20047 } from '../models';
-import { InlineResponse20048 } from '../models';
-<<<<<<< HEAD
-=======
 import { InlineResponse20044 } from '../models';
 import { InlineResponse20045 } from '../models';
 import { InlineResponse20046 } from '../models';
 import { InlineResponse20047 } from '../models';
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-import { InlineResponse20044 } from '../models';
-import { InlineResponse20045 } from '../models';
-import { InlineResponse20046 } from '../models';
-import { InlineResponse20047 } from '../models';
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
 import { InlineResponse2016 } from '../models';
 import { InlineResponse40017 } from '../models';
 import { InlineResponse40018 } from '../models';
@@ -387,20 +363,7 @@ export const NotificationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        async deleteNotification(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20048>> {
-=======
         async deleteNotification(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20047>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        async deleteNotification(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20048>> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        async deleteNotification(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20047>> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await NotificationApiAxiosParamCreator(configuration).deleteNotification(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -414,20 +377,7 @@ export const NotificationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        async notificationIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20045>> {
-=======
         async notificationIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20044>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        async notificationIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20045>> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        async notificationIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20044>> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await NotificationApiAxiosParamCreator(configuration).notificationIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -445,20 +395,7 @@ export const NotificationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        async updateNotification(libelle: string, view: number, email: string, authorization: string, notificationId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20047>> {
-=======
         async updateNotification(libelle: string, view: number, email: string, authorization: string, notificationId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20046>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        async updateNotification(libelle: string, view: number, email: string, authorization: string, notificationId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20047>> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        async updateNotification(libelle: string, view: number, email: string, authorization: string, notificationId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20046>> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await NotificationApiAxiosParamCreator(configuration).updateNotification(libelle, view, email, authorization, notificationId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -473,20 +410,7 @@ export const NotificationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        async viewNotification(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20046>> {
-=======
         async viewNotification(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20045>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        async viewNotification(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20046>> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        async viewNotification(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20045>> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             const localVarAxiosArgs = await NotificationApiAxiosParamCreator(configuration).viewNotification(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -523,20 +447,7 @@ export const NotificationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        deleteNotification(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20048> {
-=======
         deleteNotification(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20047> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        deleteNotification(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20048> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        deleteNotification(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20047> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return NotificationApiFp(configuration).deleteNotification(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -546,20 +457,7 @@ export const NotificationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        notificationIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20045> {
-=======
         notificationIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20044> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        notificationIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20045> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        notificationIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20044> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return NotificationApiFp(configuration).notificationIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -573,20 +471,7 @@ export const NotificationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        updateNotification(libelle: string, view: number, email: string, authorization: string, notificationId: number, options?: any): AxiosPromise<InlineResponse20047> {
-=======
         updateNotification(libelle: string, view: number, email: string, authorization: string, notificationId: number, options?: any): AxiosPromise<InlineResponse20046> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        updateNotification(libelle: string, view: number, email: string, authorization: string, notificationId: number, options?: any): AxiosPromise<InlineResponse20047> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        updateNotification(libelle: string, view: number, email: string, authorization: string, notificationId: number, options?: any): AxiosPromise<InlineResponse20046> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return NotificationApiFp(configuration).updateNotification(libelle, view, email, authorization, notificationId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -597,20 +482,7 @@ export const NotificationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        viewNotification(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20046> {
-=======
         viewNotification(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20045> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-<<<<<<< HEAD
-        viewNotification(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20046> {
->>>>>>> c89ec69 (Closes #315 - Suggestion notification added succesfully)
-=======
-        viewNotification(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20045> {
->>>>>>> 605364c (mainmaim)
->>>>>>> 9608888 (Closes #303 - Personnel Api integrated)
             return NotificationApiFp(configuration).viewNotification(authorization, id, options).then((request) => request(axios, basePath));
         },
     };
