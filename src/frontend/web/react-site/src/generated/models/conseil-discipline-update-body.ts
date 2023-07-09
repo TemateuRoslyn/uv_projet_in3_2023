@@ -14,32 +14,31 @@
 /**
  * 
  * @export
- * @interface InlineResponse20079
+ * @interface ConseilDisciplineUpdateBody
  */
-export interface InlineResponse20079 {
+export interface ConseilDisciplineUpdateBody {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse20079
+     * @memberof ConseilDisciplineUpdateBody
      */
-    message?: any;
+    dateCd: any;
     /**
      * 
-     * @type {boolean}
-     * @memberof InlineResponse20079
-     */
-    success?: any;
-    /**
-     * 
-<<<<<<< HEAD
      * @type {string}
-     * @memberof InlineResponse20079
+     * @memberof ConseilDisciplineUpdateBody
      */
-    message?: any;
-=======
-     * @type {Reparation}
-     * @memberof InlineResponse20079
+    heureDebutCd: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConseilDisciplineUpdateBody
      */
-    content?: any;
->>>>>>> 5404348 (test)
+    heureFinCd: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConseilDisciplineUpdateBody
+     */
+    eleveId: any;
 }

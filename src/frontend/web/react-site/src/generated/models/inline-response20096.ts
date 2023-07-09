@@ -20,6 +20,7 @@ export interface InlineResponse20096 {
     /**
      * 
      * @type {boolean}
+<<<<<<< HEAD
      * @memberof InlineResponse20096
      */
     success?: any;
@@ -35,4 +36,15 @@ export interface InlineResponse20096 {
      * @memberof InlineResponse20096
      */
     data?: any;
+=======
+     * @memberof InlineResponse20096
+     */
+    success?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20096
+     */
+    message?: any;
+>>>>>>> 5404348 (test)
 }

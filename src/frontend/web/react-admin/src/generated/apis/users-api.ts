@@ -16,9 +16,23 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+import { InlineResponse20094 } from '../models';
+import { InlineResponse20095 } from '../models';
+>>>>>>> e67ecd3 (test)
 import { InlineResponse20096 } from '../models';
 import { InlineResponse20097 } from '../models';
 import { InlineResponse20098 } from '../models';
+=======
+import { InlineResponse20097 } from '../models';
+import { InlineResponse20098 } from '../models';
+import { InlineResponse20099 } from '../models';
+>>>>>>> 5404348 (test)
 import { InlineResponse20113 } from '../models';
 import { InlineResponse40037 } from '../models';
 import { InlineResponse40038 } from '../models';
@@ -26,6 +40,29 @@ import { InlineResponse401 } from '../models';
 import { InlineResponse40447 } from '../models';
 import { InlineResponse40448 } from '../models';
 import { InlineResponse40449 } from '../models';
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+import { InlineResponse20092 } from '../models';
+import { InlineResponse20093 } from '../models';
+import { InlineResponse20094 } from '../models';
+=======
+import { InlineResponse20091 } from '../models';
+import { InlineResponse20092 } from '../models';
+import { InlineResponse20093 } from '../models';
+>>>>>>> 33bab93 (test)
+import { InlineResponse20113 } from '../models';
+import { InlineResponse40038 } from '../models';
+import { InlineResponse40039 } from '../models';
+import { InlineResponse401 } from '../models';
+import { InlineResponse40446 } from '../models';
+import { InlineResponse40447 } from '../models';
+import { InlineResponse40448 } from '../models';
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+>>>>>>> e67ecd3 (test)
+=======
+>>>>>>> 5404348 (test)
 import { UpdateIdBody } from '../models';
 import { UsersCreateBody } from '../models';
 /**
@@ -333,7 +370,34 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
+<<<<<<< HEAD
         async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20098>> {
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20096>> {
+=======
+        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20095>> {
+>>>>>>> 3c60453 (Closes #311 -Ajusting home page)
+=======
+<<<<<<< HEAD
+        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20093>> {
+=======
+        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20095>> {
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
+=======
+        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20094>> {
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20093>> {
+>>>>>>> 33bab93 (test)
+>>>>>>> e67ecd3 (test)
+=======
+        async deleteUser(userId: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20099>> {
+>>>>>>> 5404348 (test)
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).deleteUser(userId, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -376,7 +440,34 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
+<<<<<<< HEAD
         async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20097>> {
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20095>> {
+=======
+        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20094>> {
+>>>>>>> 3c60453 (Closes #311 -Ajusting home page)
+=======
+<<<<<<< HEAD
+        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20092>> {
+=======
+        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20094>> {
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
+=======
+        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20093>> {
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20092>> {
+>>>>>>> 33bab93 (test)
+>>>>>>> e67ecd3 (test)
+=======
+        async userShow(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20098>> {
+>>>>>>> 5404348 (test)
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).userShow(userId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -406,7 +497,34 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
+<<<<<<< HEAD
         async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20096>> {
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20094>> {
+=======
+        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20093>> {
+>>>>>>> 3c60453 (Closes #311 -Ajusting home page)
+=======
+<<<<<<< HEAD
+        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
+=======
+        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20093>> {
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
+=======
+        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20092>> {
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
+>>>>>>> 33bab93 (test)
+>>>>>>> e67ecd3 (test)
+=======
+        async usersIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20097>> {
+>>>>>>> 5404348 (test)
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).usersIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -430,7 +548,34 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
+<<<<<<< HEAD
         deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20098> {
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20096> {
+=======
+        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20095> {
+>>>>>>> 3c60453 (Closes #311 -Ajusting home page)
+=======
+<<<<<<< HEAD
+        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20093> {
+=======
+        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20095> {
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
+=======
+        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20094> {
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20093> {
+>>>>>>> 33bab93 (test)
+>>>>>>> e67ecd3 (test)
+=======
+        deleteUser(userId: string, authorization: string, options?: any): AxiosPromise<InlineResponse20099> {
+>>>>>>> 5404348 (test)
             return UsersApiFp(configuration).deleteUser(userId, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -461,7 +606,34 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
+<<<<<<< HEAD
         userShow(userId: string, options?: any): AxiosPromise<InlineResponse20097> {
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20095> {
+=======
+        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20094> {
+>>>>>>> 3c60453 (Closes #311 -Ajusting home page)
+=======
+<<<<<<< HEAD
+        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20092> {
+=======
+        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20094> {
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
+=======
+        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20093> {
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20092> {
+>>>>>>> 33bab93 (test)
+>>>>>>> e67ecd3 (test)
+=======
+        userShow(userId: string, options?: any): AxiosPromise<InlineResponse20098> {
+>>>>>>> 5404348 (test)
             return UsersApiFp(configuration).userShow(userId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -483,7 +655,34 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+<<<<<<< HEAD
+<<<<<<< HEAD
         usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20096> {
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20094> {
+=======
+        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20093> {
+>>>>>>> 3c60453 (Closes #311 -Ajusting home page)
+=======
+<<<<<<< HEAD
+        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20091> {
+=======
+        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20093> {
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
+=======
+        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20092> {
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20091> {
+>>>>>>> 33bab93 (test)
+>>>>>>> e67ecd3 (test)
+=======
+        usersIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20097> {
+>>>>>>> 5404348 (test)
             return UsersApiFp(configuration).usersIndex(authorization, options).then((request) => request(axios, basePath));
         },
     };

@@ -1,27 +1,25 @@
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { MODAL_MODE } from '../../../constants/ENUM';
 import { EditIcon, NewIcon } from '../../../components/Icone';
 import {
-  Classe,
-  Cour,
-  CoursCreateBody,
-  Professeur,
-  UpdateCoursIdBody,
+  Faute,
+  FautesCreateBody,
+  UpdateFauteIdBody,
 } from '../../../generated/models';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
-import { CoursApi, ClassesApi } from '../../../generated';
+import { ElevesApi, ReglesApi, FautesApi} from '../../../generated';
 import { useSelector } from 'react-redux';
 import { ReduxProps } from '../../../redux/configureStore';
 import Indicator from '../../Authentication/components/Indicator';
-import CustomMultiSelectInput from '../../../components/CustomSelects/CustomMultiSelectInput';
 import CustomSelectInput from '../../../components/CustomSelects/CustomSelectInput';
+
 
 interface ModalProps {
   mode: MODAL_MODE;
   title: string;
   onClose: () => void;
   refresh?: () => void;
-  item?: Cour | null;
+  item?: Faute | null;
 
   setShowSuccessNotif: (value: boolean) => void;
   setSuccessNotifMessage: (value: string) => void;
@@ -32,7 +30,7 @@ interface ModalProps {
   setWarningNotifDescription: (value: string | null) => void;
 }
 
-const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
+const CreateOrUpdateFauteModal: React.FC<ModalProps> = (props) => {
   const state = useSelector((state: ReduxProps) => state);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [matchList, setMatchList] = useState<string[]>([]);
@@ -40,28 +38,19 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
   const [libelle, setLibelle] = useState<string>(
     props.item ? props.item.libelle : ''
   );
-  const [dateCour, setDateCour] = useState<string>(
-    props.item ? props.item.dateCour : ''
+  const [gravite, setGravite] = useState<number>(
+    props.item ? props.item.gravite : ''
   );
-  const [heureDebut, setHeureDebut] = useState<string>(
-    props.item ? props.item.heureDebut : ''
+  const [eleveId,setElevesId ] = useState<number>(
+    props.item ? props.item.eleveId : ''
   );
-  const [heureFin, setHeureFin] = useState<string>(
-    props.item ? props.item.heureFin : ''
+  const [regleId, setReglesId] = useState<number>(
+    props.item ? props.item.regleId : ''
   );
-    const [selectedClasses, setSelectedClasses]  = useState<Classe[]>( props.item? props.item.classes: []);
-
-    const [professeur, setProfesseur] = useState<Professeur>(props.item? props.item.professeur : '');
-
-  const [classesId, setClassesId]=useState<string>(
-    props.item? props.item.classeId:''
-  );
+  
   const handleLibelleChange = (event: any) => setLibelle(event.target.value);
-  const handleDateCourChange = (event: any) => setDateCour(event.target.value);
-  const handleHeureDebutChange = (event: any) =>
-    setHeureDebut(event.target.value);
-  const handleHeureFinChange = (event: any) => setHeureFin(event.target.value);
-
+  const handleGraviteChange = (event: any) => setGravite(event.target.value);
+  
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -75,16 +64,16 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
     };
   }, [props]);
 
-  const handleTypingInput = (keyword: string) => {
+  const handleTypingInputEleve = (keyword: string) => {
     if (keyword.length > 0) {
       const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-      const classesApi = new ClassesApi({
+      const elevesApi = new ElevesApi({
         ...state.environment,
         accessToken: token,
       });
 
-      classesApi
-        .classesRecords(keyword, 'Bearer ' + token)
+      elevesApi
+      .elevesRecords(keyword, 'Bearer ' + token)
         .then((response) => {
           if (response && response.data) {
             if (response.data.success === true) {
@@ -92,12 +81,39 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
             }
           }
         })
-        .catch((error) => {
+        .catch((error: any) => {
           console.log(error);
         })
         .finally(() => {});
     }
   };
+ 
+  
+   const handleTypingInputRegle = (keyword: string) => {
+     if (keyword.length > 0) {
+       const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
+       const reglesApi = new ReglesApi({
+         ...state.environment,
+         accessToken: token,
+       });
+
+      reglesApi
+        .reglesRecords(keyword, 'Bearer ' + token)
+        .then((response) => {
+          if (response && response.data) {
+            if (response.data.success === true) {
+              setMatchList(response.data.content);
+            }
+          }
+        })
+        .catch((error: any) => {
+          console.log(error);
+        })
+        .finally(() => {});
+     }
+    }
+    
+  
   const extractIdFromString = (str: string): number | null => {
     const matches = str.match(/:(\d+)$/);
     if (matches && matches[1]) {
@@ -109,29 +125,30 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
     return null;
   };
 
-
-  const handleOptionSelect = (option: string) => {
-    setClassesId(extractIdFromString(option));
+   const handleOptionSelectEleve = (option: string) => {
+     setElevesId(extractIdFromString(option));
+   };
+  const handleOptionSelectRegle = (option: string) => {
+    setReglesId(extractIdFromString(option));
   };
-
+  
   const handleCreate = (_event: any) => {
     _event.preventDefault();
 
     const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    const coursApi = new CoursApi({ ...state.environment, accessToken: token });
+    const fautesApi = new FautesApi({ ...state.environment, accessToken: token });
 
     setIsLoading(true);
 
-    const apiParams: CoursCreateBody = {
+    const apiParams: FautesCreateBody = {
       libelle: libelle,
-      dateCour: dateCour,
-      heureDebut: heureDebut,
-      heureFin: heureFin,
-      classesId:classesId,
+      gravite: gravite,
+      eleveId:eleveId,
+      regleId:regleId,
     };
     console.log(apiParams);
-    coursApi
-      .createCours(apiParams, 'Bearer ' + token)
+    fautesApi
+    .createMistake(apiParams, 'Bearer ' + token)
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {
@@ -140,7 +157,7 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
 
             props.setSuccessNotifMessage(response.data.message);
             props.setSuccessNotifDescription(
-              'A new course has been successfully created!'
+              'A new mistake has been successfully created!'
             );
             props.setShowSuccessNotif(true);
           }
@@ -162,21 +179,20 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
     _event.preventDefault();
 
     const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    const coursApi = new CoursApi({ ...state.environment, accessToken: token });
+    const fautesApi = new FautesApi({ ...state.environment, accessToken: token });
 
     setIsLoading(true);
 
-    const apiParams: UpdateCoursIdBody = {
+    const apiParams: UpdateFauteIdBody = {
       libelle: libelle,
-      dateCour: dateCour,
-      heureDebut: heureDebut,
-      heureFin: heureFin,
-      classesId:classesId,
+      gravite: gravite,
+      eleveId: eleveId,
+      regleId: regleId,
     };
     console.log(apiParams);
 
-    coursApi
-      .updateCours(apiParams, 'Bearer ' + token, props.item?.id)
+    fautesApi
+      .updateMistake(apiParams, 'Bearer ' + token, props.item?.id)
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {
@@ -185,13 +201,13 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
 
             props.setSuccessNotifMessage(response.data.message);
             props.setSuccessNotifDescription(
-              'This course has been successfully updated!'
+              'This mistake has been successfully updated!'
             );
             props.setShowSuccessNotif(true);
           }
         }
       })
-      .catch((error) => {
+      .catch((error: { response: { data: { message: any; }; }; }) => {
         alert(error?.response?.data?.message);
         console.log(error);
       })
@@ -251,85 +267,58 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
                   value={libelle}
                   disabled={props.mode === MODAL_MODE.view}
                   onChange={handleLibelleChange}
-                  placeholder="Enter a course libelle"
-                  className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black ${
+                  placeholder="Enter a fautes libelle"
+                  className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:
+                  cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black ${
                     props.mode === MODAL_MODE.view ? 'disabled-input' : ''
                   }`}
                 />
-              </div>
-              <div className='form-group'>
-                <CustomMultiSelectInput 
-                
-                />
-              </div>
-              <div className="form-group">
+                <div className="form-group">
                 <label
-                  htmlFor="dateCour"
+                  htmlFor="gravite"
                   className="form-label form-class mb-2.5 block text-black dark:text-white"
                 >
-                  Date
+                  Gravite
                 </label>
                 <input
-                  type="date"
-                  id="date_cour"
-                  value={dateCour}
+                  type="text"
+                  id="gravite"
+                  value={gravite}
                   disabled={props.mode === MODAL_MODE.view}
-                  onChange={handleDateCourChange}
+                  onChange={handleGraviteChange}
+                  placeholder="Enter a fautes "
                   className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black ${
                     props.mode === MODAL_MODE.view ? 'disabled-input' : ''
                   }`}
                 />
-              </div>
-              <div className="form-group">
-                <label
-                  htmlFor="heureDebut"
-                  className="form-label form-class mb-2.5 block text-black dark:text-white"
-                >
-                  Heure de début
-                </label>
-                <input
-                  type="date"
-                  id="heure_debut"
-                  value={heureDebut}
-                  disabled={props.mode === MODAL_MODE.view}
-                  onChange={handleHeureDebutChange}
-                  className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black ${
-                    props.mode === MODAL_MODE.view ? 'disabled-input' : ''
-                  }`}
-                />
-              </div>
-              <div className="form-group">
-                <label
-                  htmlFor="heureFin"
-                  className="form-label form-class mb-2.5 block text-black dark:text-white"
-                >
-                  Heure de fin
-                </label>
-                <input
-                  type="date"
-                  id="heure_fin"
-                  value={heureFin}
-                  disabled={props.mode === MODAL_MODE.view}
-                  onChange={handleHeureFinChange}
-                  className={`form-input form-class w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary dark:disabled:bg-black ${
-                    props.mode === MODAL_MODE.view ? 'disabled-input' : ''
-                  }`}
-                />
-                 <CustomSelectInput
+              <CustomSelectInput
                     required={true}
-                    inputLabel="Salle de classe"
-                    inputPlaceholder="Saisir le nom d'une classe"
+                    inputLabel=" eleve"
+                    inputPlaceholder="Saisir le nom d'un eleve"
                     wrapperStyle="w-full"
                     labelStyle="mb-2.5 block text-black dark:text-white"
                     inputStyle="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     maxHeightList={100}
                     matchList={matchList}
-                    selectOptionEvent={handleOptionSelect}
-                    typingInputEvent={handleTypingInput}
+                    selectOptionEvent={handleOptionSelectEleve}
+                    typingInputEvent={handleTypingInputEleve}
                   />
-
+                  <CustomSelectInput
+                    required={true}
+                    inputLabel=" regle"
+                    inputPlaceholder="Saisir la regle"
+                    wrapperStyle="w-full"
+                    labelStyle="mb-2.5 block text-black dark:text-white"
+                    inputStyle="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    maxHeightList={100}
+                    matchList={matchList}
+                    selectOptionEvent={handleOptionSelectRegle}
+                    typingInputEvent={handleTypingInputRegle}
+                  />
+              </div>
               </div>
             </form>
+            </div>
             {props.mode === MODAL_MODE.view ? null : (
               <div className="form-actions bg-green-600">
                 <button onClick={props.onClose} className="cancel-button">
@@ -373,8 +362,8 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
           </div>
         </div>
       </div>
-    </div>
+  
   );
-};
 
-export default CreateOrUpdateCoursModal;
+}
+export default CreateOrUpdateFauteModal;

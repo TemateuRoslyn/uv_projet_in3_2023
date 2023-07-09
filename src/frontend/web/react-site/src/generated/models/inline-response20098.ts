@@ -29,4 +29,13 @@ export interface InlineResponse20098 {
      * @memberof InlineResponse20098
      */
     success?: any;
+<<<<<<< HEAD
+=======
+    /**
+     * 
+     * @type {User}
+     * @memberof InlineResponse20098
+     */
+    data?: any;
+>>>>>>> 5404348 (test)
 }

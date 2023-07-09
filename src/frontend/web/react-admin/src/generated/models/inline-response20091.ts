@@ -19,18 +19,40 @@
 export interface InlineResponse20091 {
     /**
      * 
-     * @type {boolean}
-     * @memberof InlineResponse20091
-     */
-    success?: any;
-    /**
-     * 
      * @type {string}
      * @memberof InlineResponse20091
      */
     message?: any;
     /**
      * 
+     * @type {boolean}
+     * @memberof InlineResponse20091
+     */
+    success?: any;
+    /**
+     * 
+<<<<<<< HEAD
+     * @type {string}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+     * @memberof InlineResponse20091
+     */
+    message?: any;
+    /**
+     * 
+     * @type {Array&lt;User&gt;}
+>>>>>>> 33bab93 (test)
+>>>>>>> e67ecd3 (test)
+     * @memberof InlineResponse20091
+     */
+    message?: any;
+    /**
+     * 
+=======
+>>>>>>> 5404348 (test)
      * @type {Suggestion}
      * @memberof InlineResponse20091
      */

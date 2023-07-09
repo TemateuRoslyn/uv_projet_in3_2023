@@ -397,4 +397,72 @@ class RegleController extends Controller
             'message' => 'Regle deleted successfully'
         ], 200);
     }
+
+    /**
+     * Get the filtered list of regles.
+     *
+     * @OA\Get(
+     *     path="/api/regle/records/{keyword}",
+     *     summary="Get filtered list of regles",
+     *     tags={"Regles"},
+     *     operationId="reglesRecords",
+     *     @OA\Parameter(
+     *         name="keyword",
+     *         in="path",
+     *         description="Keyword to filter regles",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Regle records successfully"),
+     *             @OA\Property(property="content", type="array", @OA\Items(type="string", example="Ne pas sortir sans avoir eu la permission"))
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid request",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Invalid request"),
+     *             @OA\Property(property="success", type="boolean", example=false)
+     *         )
+     *     )
+     * )
+     */
+    public function records($keyword)
+    {
+        $regles = Regle::where('libelle', 'like', "%{$keyword}%")
+            ->get();
+
+        $formattedRegles = $regles->map(function ($regle) {
+            $libelle = $regle->libelle;
+            $reglementId = $regle->reglement;
+            $id = $regle->id;
+
+            return "{$libelle} {$reglementId}:{$id}";
+        });
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Regle records successfully',
+            'content' => $formattedRegles
+        ], 200);
+    }
 }

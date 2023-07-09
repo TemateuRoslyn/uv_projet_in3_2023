@@ -29,6 +29,14 @@ export interface InlineResponse20082 {
      * @memberof InlineResponse20082
      */
     message?: any;
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> e67ecd3 (test)
+=======
+>>>>>>> 5404348 (test)
     /**
      * 
      * @type {Role}

@@ -19,10 +19,29 @@
 export interface InlineResponse20073 {
     /**
      * 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+     * @type {string}
+     * @memberof InlineResponse20073
+     */
+    message?: any;
+<<<<<<< HEAD
+    /**
+     * 
+>>>>>>> e67ecd3 (test)
+=======
+>>>>>>> 5404348 (test)
      * @type {boolean}
      * @memberof InlineResponse20073
      */
     success?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20073
+     */
+    message?: any;
     /**
      * 
      * @type {ReglementInterieur}

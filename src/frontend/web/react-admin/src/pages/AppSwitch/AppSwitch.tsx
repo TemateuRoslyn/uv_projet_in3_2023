@@ -38,7 +38,7 @@ import ReparationPage from '../Reparation/Reparation.page';
 import ConseilDisciplines from '../ConseilDiscipline/ConseilDiscipline.page';
 
 import SuggestionPage from '../Suggestion/Suggestion.page';
-
+import Fautes from '../faute/Fautes.page';
 import Personnels from '../Personnel/Personnel.page';
 interface AppSwitchProps {
   isLoggedIn: boolean;
@@ -82,6 +82,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
         <Route path="/faults/faults" element={<FaultsGrid />} />
         <Route path="/reglements" element={<ReglementInterieurPage />} />
         <Route path="/regles" element={<ReglePage />} />
+        <Route path="/fautes" element={<Fautes />} />
         <Route path="/convocations" element={<Convocations />} />
         <Route path="/conseilDiscipline" element={<ConseilDisciplines />} />
         <Route path="/suggestions" element={<SuggestionPage />} />

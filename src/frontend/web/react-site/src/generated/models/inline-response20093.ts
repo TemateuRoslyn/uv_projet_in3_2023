@@ -19,14 +19,75 @@
 export interface InlineResponse20093 {
     /**
      * 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> e67ecd3 (test)
+=======
+>>>>>>> 5404348 (test)
      * @type {boolean}
      * @memberof InlineResponse20093
      */
     success?: any;
     /**
      * 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+=======
+>>>>>>> 33bab93 (test)
+>>>>>>> e67ecd3 (test)
+=======
+>>>>>>> 5404348 (test)
      * @type {string}
      * @memberof InlineResponse20093
      */
     message?: any;
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 5404348 (test)
+    /**
+     * 
+     * @type {Suggestion}
+     * @memberof InlineResponse20093
+     */
+<<<<<<< HEAD
+    data?: any;
+<<<<<<< HEAD
+>>>>>>> 3c60453 (Closes #311 -Ajusting home page)
+=======
+>>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
+=======
+=======
+    /**
+     * 
+>>>>>>> 33bab93 (test)
+     * @type {boolean}
+     * @memberof InlineResponse20093
+     */
+    success?: any;
+<<<<<<< HEAD
+    /**
+     * 
+     * @type {User}
+     * @memberof InlineResponse20093
+     */
+    data?: any;
+>>>>>>> e2d508d (Closes #299 - admin api integrated)
+>>>>>>> 65dfea4 (Closes #299 - admin api integrated)
+=======
+>>>>>>> 33bab93 (test)
+>>>>>>> e67ecd3 (test)
+=======
+    content?: any;
+>>>>>>> 5404348 (test)
 }
