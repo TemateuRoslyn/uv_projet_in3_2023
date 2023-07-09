@@ -61,8 +61,15 @@ class _FautesPageState extends State<FautesPage> {
                           context: context,
                           statusMessage: state.fauteStatusMessage,
                           color: appColors.primary!,
-                          reloadFunction: () =>
-                              _homeCubit.getDataByType(dataType: 'fautes'))
+                          reloadFunction: () {
+                            if (widget.childInfos == null) {
+                              _homeCubit.getDataByType(dataType: 'fautes');
+                            } else {
+                              _homeCubit.getDataByType(
+                                  dataType: 'fautes',
+                                  childId: widget.childInfos!.id);
+                            }
+                          })
                       : state.fautes.isEmpty
                           ? CommonWidgets.noDataWidget(
                               positionFromTop: (screenSize.height / 2),

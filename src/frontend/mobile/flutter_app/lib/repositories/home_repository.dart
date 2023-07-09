@@ -2,7 +2,9 @@
 
 import 'package:fltter_app/common/configurations/api_configuration.dart';
 import 'package:fltter_app/common/models/convocation.dart';
+import 'package:fltter_app/common/models/cours.dart';
 import 'package:fltter_app/common/models/reglement_interieur.dart';
+import 'package:fltter_app/common/models/sanction.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
 
 import '../common/models/conseil_discipline.dart';
@@ -117,6 +119,54 @@ class HomeRepository {
       }
 
       return convocations;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<Cours>> getAllUserCours(int classId) async {
+    try {
+      final response = await dio.get(
+        'classes/findOne/$classId',
+        options: ApiConfiguration.getAuthorizationOptions(
+            AuthRepository.getUserToken),
+      );
+      final List<Cours> cours = [];
+
+      final coursData = response.data!['content']['cours'] as List;
+      for (var oneCours in coursData) {
+        cours.add(Cours.fromJson(oneCours));
+      }
+
+      return cours;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<Sanction>> getAllUserSanctions({int? userId}) async {
+    late int userIdToSend;
+
+    if (userId == null) {
+      userIdToSend = AuthRepository.getUserId;
+    } else {
+      userIdToSend = userId;
+    }
+
+    try {
+      final response = await dio.get(
+        'sanctionprevus/findAll/eleve/$userIdToSend',
+        options: ApiConfiguration.getAuthorizationOptions(
+            AuthRepository.getUserToken),
+      );
+      final List<Sanction> sanctions = [];
+
+      final sanctionsData = response.data!['content'] as List;
+      for (var sanction in sanctionsData) {
+        sanctions.add(Sanction.fromJson(sanction));
+      }
+
+      return sanctions;
     } catch (e) {
       rethrow;
     }

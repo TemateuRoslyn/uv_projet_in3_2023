@@ -7,6 +7,7 @@ import 'package:fltter_app/common/widgets/common_widgets.dart';
 import 'package:fltter_app/features/home/logic/home_cubit.dart';
 import 'package:fltter_app/features/home/views/conseil_discipline_page.dart';
 import 'package:fltter_app/features/home/views/convocation_page.dart';
+import 'package:fltter_app/features/home/views/sanctions_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -159,7 +160,7 @@ class _ParentConsultationPageState extends State<ParentConsultationPage> {
                                                     childInfos: widget.child,
                                                   )
                                                 : index == 1
-                                                    ? FautesPage(
+                                                    ? SanctionsPage(
                                                         childInfos:
                                                             widget.child,
                                                       )
@@ -183,7 +184,7 @@ class _ParentConsultationPageState extends State<ParentConsultationPage> {
                                   number: index == 0
                                       ? state.fautes.length.toString()
                                       : index == 1
-                                          ? state.convocations.length.toString()
+                                          ? state.sanctions.length.toString()
                                           : index == 2
                                               ? state.convocations.length
                                                   .toString()

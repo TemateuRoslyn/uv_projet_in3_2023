@@ -16,3 +16,10 @@ enum NavigationType {
   stats,
   profile,
 }
+
+enum SpeechType {
+  init,
+  isSpeeching,
+  speechPaused,
+  speechClosed,
+}

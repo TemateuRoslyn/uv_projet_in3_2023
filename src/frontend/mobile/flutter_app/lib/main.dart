@@ -1,6 +1,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:fltter_app/app/app_bloc_observer.dart';
 import 'package:fltter_app/common/logics/internet/internet_cubit.dart';
+import 'package:fltter_app/common/logics/speech/speech_cubit.dart';
 import 'package:fltter_app/common/views/onBoarding_one.dart';
 import 'package:fltter_app/common/views/page_skeleton.dart';
 import 'package:fltter_app/common/views/splash_page.dart';
@@ -71,14 +72,19 @@ class _MyAppState extends State<MyApp> {
           ),
           BlocProvider<ProfileCubit>(
               create: (context) => ProfileCubit(
-                  authRepository: widget.authRepository,
-                  internetCubit: widget.internetCubit)),
+                    authRepository: widget.authRepository,
+                    internetCubit: widget.internetCubit,
+                    speechCubit: SpeechCubit(),
+                  )),
           BlocProvider<HomeCubit>(
             create: (context) => HomeCubit(
                 homeRepository:
                     // HomeRepository(authRepository: widget.authRepository),
                     HomeRepository(),
                 internetCubit: widget.internetCubit),
+          ),
+          BlocProvider<SpeechCubit>(
+            create: (context) => SpeechCubit(),
           ),
         ],
         child: MaterialApp(

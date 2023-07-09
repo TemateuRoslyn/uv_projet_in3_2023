@@ -49,6 +49,7 @@ dependencies:
   flutter_tts: ^3.7.0
   flutter_local_notifications: ^15.0.1
   socket_io_client: ^2.0.2
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:

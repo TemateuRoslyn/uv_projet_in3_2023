@@ -23,8 +23,23 @@ class HomeState with _$HomeState {
     @Default([]) List<Convocation> convocations,
     @Default('') String convocationStatusMessage,
 
+    // cours variables
+    @Default(ApiStatus.init) ApiStatus coursStatus,
+    @Default([]) List<Cours> courss,
+    @Default('') String coursStatusMessage,
+
+    // cours variables
+    @Default(ApiStatus.init) ApiStatus sanctionStatus,
+    @Default([]) List<Sanction> sanctions,
+    @Default('') String sanctionStatusMessage,
+
+    // all student datas variables
+    @Default(ApiStatus.init) ApiStatus allStudentDataStatus,
+    @Default('') String allStudentDataStatusMessage,
+
     //Box suggession variables
     @Default('') String suggestionInsertStatus,
+
     // parent consultation variables
     @Default(ApiStatus.init) ApiStatus parentConsultationStatus,
     @Default('') String parentConsultationStatusMessage,

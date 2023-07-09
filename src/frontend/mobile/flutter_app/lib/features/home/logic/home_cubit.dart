@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:fltter_app/common/logics/internet/internet_cubit.dart';
 import 'package:fltter_app/common/models/reglement_interieur.dart';
-import 'package:fltter_app/common/models/suggestion.dart';
 import 'package:fltter_app/common/utils/enums.dart';
 import 'package:fltter_app/repositories/home_repository.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,7 +11,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../common/configurations/api_configuration.dart';
 import '../../../common/models/conseil_discipline.dart';
 import '../../../common/models/convocation.dart';
+import '../../../common/models/cours.dart';
 import '../../../common/models/faute.dart';
+import '../../../common/models/sanction.dart';
 
 part 'home_state.dart';
 part 'home_cubit.freezed.dart';
@@ -31,6 +32,7 @@ class HomeCubit extends Cubit<HomeState> {
   void getDataByType({
     required String dataType,
     int? childId,
+    int? classId,
   }) async {
     // ri = reglements interierieurs
     // cd = conseil discipline
@@ -54,7 +56,7 @@ class HomeCubit extends Cubit<HomeState> {
         {
           emit(state.copyWith(fauteStatus: ApiStatus.isLoading));
           if (isOnline) {
-            proceedTogetAllUserFautes();
+            proceedTogetAllUserFautes(childId: childId);
           } else {
             emit(state.copyWith(
                 fautes: [],
@@ -68,7 +70,7 @@ class HomeCubit extends Cubit<HomeState> {
         {
           emit(state.copyWith(cdStatus: ApiStatus.isLoading));
           if (isOnline) {
-            proceedTogetAllUserCD();
+            proceedTogetAllUserCD(childId: childId);
           } else {
             emit(state.copyWith(
                 cds: [],
@@ -82,12 +84,53 @@ class HomeCubit extends Cubit<HomeState> {
         {
           emit(state.copyWith(convocationStatus: ApiStatus.isLoading));
           if (isOnline) {
-            proceedTogetAllUserConvocation();
+            proceedTogetAllUserConvocation(childId: childId);
           } else {
             emit(state.copyWith(
                 convocations: [],
                 convocationStatus: ApiStatus.failed,
                 convocationStatusMessage:
+                    'Veuillez consulter votre connexion internet. Cliquez pour recharger une fois la connection retablie.'));
+          }
+        }
+        break;
+      case 'cours':
+        {
+          emit(state.copyWith(coursStatus: ApiStatus.isLoading));
+          if (isOnline) {
+            proceedToGetAllUserCours(classId!);
+          } else {
+            emit(state.copyWith(
+                courss: [],
+                coursStatus: ApiStatus.failed,
+                coursStatusMessage:
+                    'Veuillez consulter votre connexion internet. Cliquez pour recharger une fois la connection retablie.'));
+          }
+        }
+        break;
+      case 'sanctions':
+        {
+          emit(state.copyWith(sanctionStatus: ApiStatus.isLoading));
+          if (isOnline) {
+            proceedTogetAllUserSanctions(childId: childId);
+          } else {
+            emit(state.copyWith(
+                sanctions: [],
+                sanctionStatus: ApiStatus.failed,
+                sanctionStatusMessage:
+                    'Veuillez consulter votre connexion internet. Cliquez pour recharger une fois la connection retablie.'));
+          }
+        }
+        break;
+      case 'allStudentData':
+        {
+          emit(state.copyWith(allStudentDataStatus: ApiStatus.isLoading));
+          if (isOnline) {
+            proceedToGetAllStudentData();
+          } else {
+            emit(state.copyWith(
+                allStudentDataStatus: ApiStatus.failed,
+                allStudentDataStatusMessage:
                     'Veuillez consulter votre connexion internet. Cliquez pour recharger une fois la connection retablie.'));
           }
         }
@@ -151,6 +194,35 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+  void proceedToGetAllUserCours(int classId) async {
+    try {
+      final cours = await homeRepository.getAllUserCours(classId);
+      emit(state.copyWith(coursStatus: ApiStatus.success, courss: cours));
+    } on DioException catch (e) {
+      final errorMessage = ApiConfiguration.getErrorMessage(e);
+      emit(state.copyWith(
+          courss: [],
+          coursStatus: ApiStatus.failed,
+          coursStatusMessage: errorMessage));
+    }
+  }
+
+  void proceedTogetAllUserSanctions({int? childId}) async {
+    try {
+      final sanctions = childId == null
+          ? await homeRepository.getAllUserSanctions()
+          : await homeRepository.getAllUserSanctions(userId: childId);
+      emit(state.copyWith(
+          sanctionStatus: ApiStatus.success, sanctions: sanctions));
+    } on DioException catch (e) {
+      final errorMessage = ApiConfiguration.getErrorMessage(e);
+      emit(state.copyWith(
+          sanctions: [],
+          sanctionStatus: ApiStatus.failed,
+          sanctionStatusMessage: errorMessage));
+    }
+  }
+
   void insertSuggestion() async {
     // final suggestion = Suggestion(description: suggestion.);
     try {
@@ -169,10 +241,13 @@ class HomeCubit extends Cubit<HomeState> {
         final cds = await homeRepository.getAllUserCD(userId: userId);
         final convocations =
             await homeRepository.getAllUserConvocations(userId: userId);
+        final sanctions =
+            await homeRepository.getAllUserSanctions(userId: userId);
         emit(state.copyWith(
           fautes: fautes,
           cds: cds,
           convocations: convocations,
+          sanctions: sanctions,
           parentConsultationStatus: ApiStatus.success,
         ));
       } else {
@@ -180,6 +255,7 @@ class HomeCubit extends Cubit<HomeState> {
             fautes: [],
             cds: [],
             convocations: [],
+            sanctions: [],
             parentConsultationStatus: ApiStatus.failed,
             parentConsultationStatusMessage:
                 'Veuillez consulter votre connexion internet. Cliquez pour recharger une fois la connection retablie.'));
@@ -190,8 +266,30 @@ class HomeCubit extends Cubit<HomeState> {
           fautes: [],
           cds: [],
           convocations: [],
+          sanctions: [],
           parentConsultationStatus: ApiStatus.failed,
           parentConsultationStatusMessage: errorMessage));
+    }
+  }
+
+  void proceedToGetAllStudentData() async {
+    try {
+      final fautes = await homeRepository.getAllUserFautes();
+      final cds = await homeRepository.getAllUserCD();
+      final convocations = await homeRepository.getAllUserConvocations();
+      final sanctions = await homeRepository.getAllUserSanctions();
+      emit(state.copyWith(
+        fautes: fautes,
+        cds: cds,
+        convocations: convocations,
+        sanctions: sanctions,
+        allStudentDataStatus: ApiStatus.success,
+      ));
+    } on DioException catch (e) {
+      final errorMessage = ApiConfiguration.getErrorMessage(e);
+      emit(state.copyWith(
+          allStudentDataStatus: ApiStatus.failed,
+          allStudentDataStatusMessage: errorMessage));
     }
   }
 }

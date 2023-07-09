@@ -1,6 +1,7 @@
 import 'package:fltter_app/common/utils/enums.dart';
 import 'package:fltter_app/common/utils/helper.dart';
 import 'package:fltter_app/features/home/views/home_page.dart';
+import 'package:fltter_app/features/home/views/student_statistics_page.dart';
 import 'package:fltter_app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,10 +42,7 @@ class _PageSkeletonState extends State<PageSkeleton> {
       builder: (context, state) {
         final navigationType = state.navigationType;
         return Scaffold(
-          backgroundColor: (navigationType == NavigationType.profile ||
-                  navigationType == NavigationType.home)
-              ? appColors.primary
-              : Colors.white,
+          backgroundColor: appColors.primary,
           body: SafeArea(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,7 +50,8 @@ class _PageSkeletonState extends State<PageSkeleton> {
                 // skeleton body here
                 if (_currentUserType != 'parents') ...[
                   if (navigationType == NavigationType.home) const HomePage(),
-                  if (navigationType == NavigationType.stats) const SizedBox(),
+                  if (navigationType == NavigationType.stats)
+                    const StudentStatisticPage(),
                   if (navigationType == NavigationType.profile)
                     const ProfilePage(),
                 ],
@@ -64,7 +63,8 @@ class _PageSkeletonState extends State<PageSkeleton> {
                   Container(
                     height: getHeight(80, context),
                     width: double.infinity,
-                    color: navigationType == NavigationType.home
+                    color: (navigationType == NavigationType.home ||
+                            navigationType == NavigationType.stats)
                         ? appColors.primary
                         : const Color(0xfffafafa),
                     child: Row(

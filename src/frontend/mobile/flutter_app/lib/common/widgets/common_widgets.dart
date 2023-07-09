@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fltter_app/common/configurations/api_configuration.dart';
 import 'package:flutter/material.dart';
 import '../styles/colors.dart';
 import '../utils/helper.dart';
@@ -149,6 +151,31 @@ class CommonWidgets {
           fontSize: getHeight(12, context),
           height: getHeight(1.5, context),
           color: color,
+        ),
+      ),
+    );
+  }
+
+  static Widget renderImage(
+      {required String imagePath, required BuildContext context}) {
+    return CachedNetworkImage(
+      imageUrl: ApiConfiguration.appDomainUrl + imagePath,
+      placeholder: (_, __) => Container(
+        color: Colors.grey[100],
+      ),
+      imageBuilder: (_, imageProvider) => Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: imageProvider,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      errorWidget: (_, __, ___) => Center(
+        child: Icon(
+          Icons.image_not_supported_outlined,
+          size: getHeight(25, context),
+          color: appColors.secondary,
         ),
       ),
     );
