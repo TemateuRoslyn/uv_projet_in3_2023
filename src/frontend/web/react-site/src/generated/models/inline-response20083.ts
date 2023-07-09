@@ -26,16 +26,7 @@ export interface InlineResponse20083 {
     /**
      * 
      * @type {string}
-<<<<<<< HEAD
-=======
      * @memberof InlineResponse20083
      */
     message?: any;
-    /**
-     * 
-     * @type {Role}
->>>>>>> 5404348 (test)
-     * @memberof InlineResponse20083
-     */
-    content?: any;
 }

@@ -31,7 +31,7 @@ export interface InlineResponse20011 {
     message?: any;
     /**
      * 
-     * @type {ConseilDiscipline}
+     * @type {Array&lt;string&gt;}
      * @memberof InlineResponse20011
      */
     content?: any;

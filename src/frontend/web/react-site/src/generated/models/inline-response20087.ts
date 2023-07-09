@@ -31,15 +31,6 @@ export interface InlineResponse20087 {
     success?: any;
     /**
      * 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> e67ecd3 (test)
-=======
->>>>>>> 5404348 (test)
      * @type {SanctionPrevu}
      * @memberof InlineResponse20087
      */

@@ -35,14 +35,14 @@ export const FauteApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateMistake: async (body: UpdateFauteIdBody, authorization: string, options: any = {}): Promise<RequestArgs> => {
+        updatemistake: async (body: UpdateFauteIdBody, authorization: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
-                throw new RequiredError('body','Required parameter body was null or undefined when calling updateMistake.');
+                throw new RequiredError('body','Required parameter body was null or undefined when calling updatemistake.');
             }
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
-                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling updateMistake.');
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling updatemistake.');
             }
             const localVarPath = `/api/fautes/update/{fauteId}`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -96,8 +96,8 @@ export const FauteApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateMistake(body: UpdateFauteIdBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20038>> {
-            const localVarAxiosArgs = await FauteApiAxiosParamCreator(configuration).updateMistake(body, authorization, options);
+        async updatemistake(body: UpdateFauteIdBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20038>> {
+            const localVarAxiosArgs = await FauteApiAxiosParamCreator(configuration).updatemistake(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -120,8 +120,8 @@ export const FauteApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateMistake(body: UpdateFauteIdBody, authorization: string, options?: any): AxiosPromise<InlineResponse20038> {
-            return FauteApiFp(configuration).updateMistake(body, authorization, options).then((request) => request(axios, basePath));
+        updatemistake(body: UpdateFauteIdBody, authorization: string, options?: any): AxiosPromise<InlineResponse20038> {
+            return FauteApiFp(configuration).updatemistake(body, authorization, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -142,7 +142,7 @@ export class FauteApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FauteApi
      */
-    public updateMistake(body: UpdateFauteIdBody, authorization: string, options?: any) {
-        return FauteApiFp(this.configuration).updateMistake(body, authorization, options).then((request) => request(this.axios, this.basePath));
+    public updatemistake(body: UpdateFauteIdBody, authorization: string, options?: any) {
+        return FauteApiFp(this.configuration).updatemistake(body, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 }

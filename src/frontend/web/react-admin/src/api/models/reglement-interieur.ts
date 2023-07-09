@@ -28,7 +28,7 @@ export interface ReglementInterieur {
      * @type {string}
      * @memberof ReglementInterieur
      */
-    role?: any;
+    libelle: any;
     /**
      * 
      * @type {BaseModelpropertiescreatedAt}

@@ -16,11 +16,11 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { FauteUpdateBody } from '../models';
-import { InlineResponse20029 } from '../models';
-import { InlineResponse40012 } from '../models';
+import { InlineResponse20038 } from '../models';
+import { InlineResponse40014 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse40410 } from '../models';
+import { InlineResponse40416 } from '../models';
+import { UpdateFauteIdBody } from '../models';
 /**
  * FauteApi - axios parameter creator
  * @export
@@ -30,12 +30,12 @@ export const FauteApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Update a mistake's information
          * @summary Update a mistake's information
-         * @param {FauteUpdateBody} body 
+         * @param {UpdateFauteIdBody} body 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatemistake: async (body: FauteUpdateBody, authorization: string, options: any = {}): Promise<RequestArgs> => {
+        updatemistake: async (body: UpdateFauteIdBody, authorization: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling updatemistake.');
@@ -44,7 +44,7 @@ export const FauteApiAxiosParamCreator = function (configuration?: Configuration
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling updatemistake.');
             }
-            const localVarPath = `/api/faute/update`;
+            const localVarPath = `/api/fautes/update/{fauteId}`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -91,12 +91,12 @@ export const FauteApiFp = function(configuration?: Configuration) {
         /**
          * Update a mistake's information
          * @summary Update a mistake's information
-         * @param {FauteUpdateBody} body 
+         * @param {UpdateFauteIdBody} body 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updatemistake(body: FauteUpdateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20029>> {
+        async updatemistake(body: UpdateFauteIdBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20038>> {
             const localVarAxiosArgs = await FauteApiAxiosParamCreator(configuration).updatemistake(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -115,12 +115,12 @@ export const FauteApiFactory = function (configuration?: Configuration, basePath
         /**
          * Update a mistake's information
          * @summary Update a mistake's information
-         * @param {FauteUpdateBody} body 
+         * @param {UpdateFauteIdBody} body 
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatemistake(body: FauteUpdateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20029> {
+        updatemistake(body: UpdateFauteIdBody, authorization: string, options?: any): AxiosPromise<InlineResponse20038> {
             return FauteApiFp(configuration).updatemistake(body, authorization, options).then((request) => request(axios, basePath));
         },
     };
@@ -136,13 +136,13 @@ export class FauteApi extends BaseAPI {
     /**
      * Update a mistake's information
      * @summary Update a mistake's information
-     * @param {FauteUpdateBody} body 
+     * @param {UpdateFauteIdBody} body 
      * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FauteApi
      */
-    public updatemistake(body: FauteUpdateBody, authorization: string, options?: any) {
+    public updatemistake(body: UpdateFauteIdBody, authorization: string, options?: any) {
         return FauteApiFp(this.configuration).updatemistake(body, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 }

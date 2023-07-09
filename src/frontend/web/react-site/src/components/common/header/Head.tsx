@@ -6,8 +6,13 @@ const Head = () => {
       <section className='head'>
         <div className='container flexSB'>
           <div className='logo'>
-            <h1>ACADEMIA</h1>
-            <span>ONLINE EDUCATION & LEARNING</span>
+            <div className='gauche'>
+              <img src='./images/logo.png' alt='' />
+            </div>
+            <div className='droite'>
+              <h1>SchoolDiscipline</h1>
+              <span>Consultez votre état disciplinaire</span>
+            </div>
           </div>
 
           <div className='social'>

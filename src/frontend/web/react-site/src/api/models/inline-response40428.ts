@@ -19,6 +19,12 @@
 export interface InlineResponse40428 {
     /**
      * 
+     * @type {string}
+     * @memberof InlineResponse40428
+     */
+    message?: any;
+    /**
+     * 
      * @type {boolean}
      * @memberof InlineResponse40428
      */
@@ -28,5 +34,5 @@ export interface InlineResponse40428 {
      * @type {string}
      * @memberof InlineResponse40428
      */
-    message?: any;
+    error?: any;
 }
