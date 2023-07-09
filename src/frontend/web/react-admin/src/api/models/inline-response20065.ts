@@ -31,7 +31,7 @@ export interface InlineResponse20065 {
     success?: any;
     /**
      * 
-     * @type {Reparation}
+     * @type {Array&lt;Regle&gt;}
      * @memberof InlineResponse20065
      */
     content?: any;

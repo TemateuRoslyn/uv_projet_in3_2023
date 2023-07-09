@@ -19,28 +19,6 @@
 export interface InlineResponse20095 {
     /**
      * 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-     * @type {string}
-     * @memberof InlineResponse20095
-========
- * @interface FauteUpdateBody
- */
-export interface FauteUpdateBody {
-    /**
-     * 
-     * @type {string}
-     * @memberof FauteUpdateBody
->>>>>>>> 30fb157 (test):src/frontend/web/react-site/src/generated/models/faute-update-body.ts
-     */
-    message?: any;
-    /**
-     * 
-<<<<<<<< HEAD:src/frontend/web/react-admin/src/generated/models/inline-response20095.ts
->>>>>>> e67ecd3 (test)
-=======
->>>>>>> 5404348 (test)
      * @type {boolean}
      * @memberof InlineResponse20095
      */
@@ -50,31 +28,5 @@ export interface FauteUpdateBody {
      * @type {string}
      * @memberof InlineResponse20095
      */
-<<<<<<< HEAD
-<<<<<<< HEAD
     message?: any;
-=======
-    data?: any;
-========
-     * @type {string}
-     * @memberof FauteUpdateBody
-     */
-    gravite: any;
-    /**
-     * 
-     * @type {number}
-     * @memberof FauteUpdateBody
-     */
-    eleveId: any;
-    /**
-     * 
-     * @type {number}
-     * @memberof FauteUpdateBody
-     */
-    regleId: any;
->>>>>>>> 30fb157 (test):src/frontend/web/react-site/src/generated/models/faute-update-body.ts
->>>>>>> e67ecd3 (test)
-=======
-    message?: any;
->>>>>>> 5404348 (test)
 }

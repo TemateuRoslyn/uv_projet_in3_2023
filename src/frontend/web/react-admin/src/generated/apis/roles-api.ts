@@ -16,37 +16,10 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> e67ecd3 (test)
 import { InlineResponse20080 } from '../models';
 import { InlineResponse20081 } from '../models';
 import { InlineResponse20082 } from '../models';
 import { InlineResponse20083 } from '../models';
-<<<<<<< HEAD
-=======
-=======
-import { InlineResponse20079 } from '../models';
-import { InlineResponse20080 } from '../models';
-import { InlineResponse20081 } from '../models';
-import { InlineResponse20082 } from '../models';
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-import { InlineResponse20078 } from '../models';
-import { InlineResponse20079 } from '../models';
-import { InlineResponse20080 } from '../models';
-import { InlineResponse20081 } from '../models';
->>>>>>> 33bab93 (test)
->>>>>>> e67ecd3 (test)
-=======
-import { InlineResponse20081 } from '../models';
-import { InlineResponse20082 } from '../models';
-import { InlineResponse20083 } from '../models';
-import { InlineResponse20084 } from '../models';
->>>>>>> 5404348 (test)
 import { InlineResponse20111 } from '../models';
 import { InlineResponse40032 } from '../models';
 import { InlineResponse40033 } from '../models';
@@ -406,23 +379,7 @@ export const RolesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
         async deleteRole(authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20083>> {
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        async deleteRole(authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20083>> {
-=======
-        async deleteRole(authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20082>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-        async deleteRole(authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20081>> {
->>>>>>> 33bab93 (test)
->>>>>>> e67ecd3 (test)
-=======
-        async deleteRole(authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20084>> {
->>>>>>> 5404348 (test)
             const localVarAxiosArgs = await RolesApiAxiosParamCreator(configuration).deleteRole(authorization, roleId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -438,23 +395,7 @@ export const RolesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
         async roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20082>> {
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        async roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20082>> {
-=======
-        async roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20081>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-        async roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20080>> {
->>>>>>> 33bab93 (test)
->>>>>>> e67ecd3 (test)
-=======
-        async roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20083>> {
->>>>>>> 5404348 (test)
             const localVarAxiosArgs = await RolesApiAxiosParamCreator(configuration).roleUpdateStatus(body, authorization, roleId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -468,23 +409,7 @@ export const RolesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
         async rolesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20080>> {
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        async rolesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20080>> {
-=======
-        async rolesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20079>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-        async rolesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20078>> {
->>>>>>> 33bab93 (test)
->>>>>>> e67ecd3 (test)
-=======
-        async rolesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20081>> {
->>>>>>> 5404348 (test)
             const localVarAxiosArgs = await RolesApiAxiosParamCreator(configuration).rolesIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -500,23 +425,7 @@ export const RolesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
         async updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20081>> {
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        async updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20081>> {
-=======
-        async updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20080>> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-        async updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20079>> {
->>>>>>> 33bab93 (test)
->>>>>>> e67ecd3 (test)
-=======
-        async updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20082>> {
->>>>>>> 5404348 (test)
             const localVarAxiosArgs = await RolesApiAxiosParamCreator(configuration).updateRole(body, authorization, roleId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -566,23 +475,7 @@ export const RolesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
         deleteRole(authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20083> {
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        deleteRole(authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20083> {
-=======
-        deleteRole(authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20082> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-        deleteRole(authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20081> {
->>>>>>> 33bab93 (test)
->>>>>>> e67ecd3 (test)
-=======
-        deleteRole(authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20084> {
->>>>>>> 5404348 (test)
             return RolesApiFp(configuration).deleteRole(authorization, roleId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -594,23 +487,7 @@ export const RolesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
         roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20082> {
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20082> {
-=======
-        roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20081> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-        roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20080> {
->>>>>>> 33bab93 (test)
->>>>>>> e67ecd3 (test)
-=======
-        roleUpdateStatus(body: StatusRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20083> {
->>>>>>> 5404348 (test)
             return RolesApiFp(configuration).roleUpdateStatus(body, authorization, roleId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -620,23 +497,7 @@ export const RolesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
         rolesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20080> {
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        rolesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20080> {
-=======
-        rolesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20079> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-        rolesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20078> {
->>>>>>> 33bab93 (test)
->>>>>>> e67ecd3 (test)
-=======
-        rolesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20081> {
->>>>>>> 5404348 (test)
             return RolesApiFp(configuration).rolesIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -648,23 +509,7 @@ export const RolesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
         updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20081> {
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20081> {
-=======
-        updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20080> {
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
-        updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20079> {
->>>>>>> 33bab93 (test)
->>>>>>> e67ecd3 (test)
-=======
-        updateRole(body: UpdateRoleIdBody, authorization: string, roleId: number, options?: any): AxiosPromise<InlineResponse20082> {
->>>>>>> 5404348 (test)
             return RolesApiFp(configuration).updateRole(body, authorization, roleId, options).then((request) => request(axios, basePath));
         },
         /**

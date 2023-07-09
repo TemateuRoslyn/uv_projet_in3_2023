@@ -19,18 +19,12 @@
 export interface InlineResponse20074 {
     /**
      * 
-<<<<<<< HEAD
-<<<<<<< HEAD
      * @type {string}
      * @memberof InlineResponse20074
      */
     message?: any;
     /**
      * 
-=======
->>>>>>> 33bab93 (test)
-=======
->>>>>>> 5404348 (test)
      * @type {boolean}
      * @memberof InlineResponse20074
      */

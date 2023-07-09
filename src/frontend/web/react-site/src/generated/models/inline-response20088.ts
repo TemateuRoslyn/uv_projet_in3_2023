@@ -19,32 +19,14 @@
 export interface InlineResponse20088 {
     /**
      * 
-<<<<<<< HEAD
      * @type {boolean}
      * @memberof InlineResponse20088
      */
     success?: any;
     /**
      * 
-=======
->>>>>>> 5404348 (test)
      * @type {string}
      * @memberof InlineResponse20088
      */
     message?: any;
-<<<<<<< HEAD
-=======
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineResponse20088
-     */
-    success?: any;
-    /**
-     * 
-     * @type {SanctionPrevu}
-     * @memberof InlineResponse20088
-     */
-    content?: any;
->>>>>>> 5404348 (test)
 }

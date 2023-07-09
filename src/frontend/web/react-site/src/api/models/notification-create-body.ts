@@ -22,6 +22,12 @@ export interface NotificationCreateBody {
      * @type {string}
      * @memberof NotificationCreateBody
      */
+    email: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof NotificationCreateBody
+     */
     libelle?: any;
     /**
      * 

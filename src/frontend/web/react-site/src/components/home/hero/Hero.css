@@ -14,11 +14,15 @@
 }
 .hero #heading h3 {
   color: #fff;
+  font-weight: 300;
 }
 .hero #heading {
   text-align: left;
   margin: 0;
   padding: 0;
+}
+.wel{
+  padding: 0 1%;
 }
 @media screen and (max-width: 768px) {
   .margin {

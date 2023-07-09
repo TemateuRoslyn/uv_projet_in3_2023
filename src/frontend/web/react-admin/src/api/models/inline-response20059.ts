@@ -19,19 +19,19 @@
 export interface InlineResponse20059 {
     /**
      * 
-     * @type {boolean}
-     * @memberof InlineResponse20059
-     */
-    success?: any;
-    /**
-     * 
      * @type {string}
      * @memberof InlineResponse20059
      */
     message?: any;
     /**
      * 
-     * @type {Array&lt;ReglementInterieur&gt;}
+     * @type {boolean}
+     * @memberof InlineResponse20059
+     */
+    success?: any;
+    /**
+     * 
+     * @type {Personnel}
      * @memberof InlineResponse20059
      */
     content?: any;

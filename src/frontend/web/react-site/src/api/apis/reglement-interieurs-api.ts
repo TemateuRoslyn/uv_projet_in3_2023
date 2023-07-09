@@ -16,18 +16,18 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20059 } from '../models';
-import { InlineResponse20060 } from '../models';
-import { InlineResponse20061 } from '../models';
-import { InlineResponse20062 } from '../models';
-import { InlineResponse20063 } from '../models';
-import { InlineResponse40022 } from '../models';
-import { InlineResponse40023 } from '../models';
+import { InlineResponse20070 } from '../models';
+import { InlineResponse20071 } from '../models';
+import { InlineResponse20072 } from '../models';
+import { InlineResponse20073 } from '../models';
+import { InlineResponse20074 } from '../models';
+import { InlineResponse40028 } from '../models';
+import { InlineResponse40029 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse40427 } from '../models';
-import { InlineResponse40428 } from '../models';
+import { InlineResponse40434 } from '../models';
+import { InlineResponse40435 } from '../models';
 import { ReglementCreateBody } from '../models';
-import { ReglementUpdateBody } from '../models';
+import { UpdateReglementIdBody } from '../models';
 /**
  * ReglementInterieursApi - axios parameter creator
  * @export
@@ -137,7 +137,7 @@ export const ReglementInterieursApiAxiosParamCreator = function (configuration?:
         },
         /**
          * Retrieve a list of all disciplinary councils with associated eleve
-         * @summary Get all disciplinary councils
+         * @summary Get all Reglement Interieurs
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -181,12 +181,14 @@ export const ReglementInterieursApiAxiosParamCreator = function (configuration?:
         /**
          * Update a reglementInterieur's information
          * @summary Update a reglementInterieur's information
-         * @param {ReglementUpdateBody} body 
+         * @param {UpdateReglementIdBody} body 
          * @param {string} authorization JWT token
+         * @param {number} reglementId2 ID of reglement to update in this request
+         * @param {number} reglementId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateReglementInterieur: async (body: ReglementUpdateBody, authorization: string, options: any = {}): Promise<RequestArgs> => {
+        updateReglementInterieur: async (body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling updateReglementInterieur.');
@@ -195,7 +197,17 @@ export const ReglementInterieursApiAxiosParamCreator = function (configuration?:
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling updateReglementInterieur.');
             }
-            const localVarPath = `/api/reglement/update`;
+            // verify required parameter 'reglementId2' is not null or undefined
+            if (reglementId2 === null || reglementId2 === undefined) {
+                throw new RequiredError('reglementId2','Required parameter reglementId2 was null or undefined when calling updateReglementInterieur.');
+            }
+            // verify required parameter 'reglementId' is not null or undefined
+            if (reglementId === null || reglementId === undefined) {
+                throw new RequiredError('reglementId','Required parameter reglementId was null or undefined when calling updateReglementInterieur.');
+            }
+            const localVarPath = `/api/reglement/update/{reglementId}`
+                .replace(`{${"reglementId"}}`, encodeURIComponent(String(reglementId)))
+                .replace(`{${"reglementId"}}`, encodeURIComponent(String(reglementId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -296,7 +308,7 @@ export const ReglementInterieursApiFp = function(configuration?: Configuration) 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createReglementInterieur(body: ReglementCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20060>> {
+        async createReglementInterieur(body: ReglementCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20071>> {
             const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).createReglementInterieur(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -311,7 +323,7 @@ export const ReglementInterieursApiFp = function(configuration?: Configuration) 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteReglementInterieur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
+        async deleteReglementInterieur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20074>> {
             const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).deleteReglementInterieur(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -320,12 +332,12 @@ export const ReglementInterieursApiFp = function(configuration?: Configuration) 
         },
         /**
          * Retrieve a list of all disciplinary councils with associated eleve
-         * @summary Get all disciplinary councils
+         * @summary Get all Reglement Interieurs
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reglementInterieursIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20059>> {
+        async reglementInterieursIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20070>> {
             const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).reglementInterieursIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -335,13 +347,15 @@ export const ReglementInterieursApiFp = function(configuration?: Configuration) 
         /**
          * Update a reglementInterieur's information
          * @summary Update a reglementInterieur's information
-         * @param {ReglementUpdateBody} body 
+         * @param {UpdateReglementIdBody} body 
          * @param {string} authorization JWT token
+         * @param {number} reglementId2 ID of reglement to update in this request
+         * @param {number} reglementId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateReglementInterieur(body: ReglementUpdateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20062>> {
-            const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).updateReglementInterieur(body, authorization, options);
+        async updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20073>> {
+            const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).updateReglementInterieur(body, authorization, reglementId2, reglementId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -355,7 +369,7 @@ export const ReglementInterieursApiFp = function(configuration?: Configuration) 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewReglementInterieur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20061>> {
+        async viewReglementInterieur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20072>> {
             const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).viewReglementInterieur(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -379,7 +393,7 @@ export const ReglementInterieursApiFactory = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createReglementInterieur(body: ReglementCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20060> {
+        createReglementInterieur(body: ReglementCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20071> {
             return ReglementInterieursApiFp(configuration).createReglementInterieur(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -390,29 +404,31 @@ export const ReglementInterieursApiFactory = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteReglementInterieur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20063> {
+        deleteReglementInterieur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20074> {
             return ReglementInterieursApiFp(configuration).deleteReglementInterieur(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieve a list of all disciplinary councils with associated eleve
-         * @summary Get all disciplinary councils
+         * @summary Get all Reglement Interieurs
          * @param {string} authorization JWT token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reglementInterieursIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20059> {
+        reglementInterieursIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20070> {
             return ReglementInterieursApiFp(configuration).reglementInterieursIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Update a reglementInterieur's information
          * @summary Update a reglementInterieur's information
-         * @param {ReglementUpdateBody} body 
+         * @param {UpdateReglementIdBody} body 
          * @param {string} authorization JWT token
+         * @param {number} reglementId2 ID of reglement to update in this request
+         * @param {number} reglementId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateReglementInterieur(body: ReglementUpdateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20062> {
-            return ReglementInterieursApiFp(configuration).updateReglementInterieur(body, authorization, options).then((request) => request(axios, basePath));
+        updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options?: any): AxiosPromise<InlineResponse20073> {
+            return ReglementInterieursApiFp(configuration).updateReglementInterieur(body, authorization, reglementId2, reglementId, options).then((request) => request(axios, basePath));
         },
         /**
          * Get information about a specific reglementInterieur
@@ -422,7 +438,7 @@ export const ReglementInterieursApiFactory = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewReglementInterieur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20061> {
+        viewReglementInterieur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20072> {
             return ReglementInterieursApiFp(configuration).viewReglementInterieur(authorization, id, options).then((request) => request(axios, basePath));
         },
     };
@@ -461,7 +477,7 @@ export class ReglementInterieursApi extends BaseAPI {
     }
     /**
      * Retrieve a list of all disciplinary councils with associated eleve
-     * @summary Get all disciplinary councils
+     * @summary Get all Reglement Interieurs
      * @param {string} authorization JWT token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -473,14 +489,16 @@ export class ReglementInterieursApi extends BaseAPI {
     /**
      * Update a reglementInterieur's information
      * @summary Update a reglementInterieur's information
-     * @param {ReglementUpdateBody} body 
+     * @param {UpdateReglementIdBody} body 
      * @param {string} authorization JWT token
+     * @param {number} reglementId2 ID of reglement to update in this request
+     * @param {number} reglementId ID of eleve to update in this request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReglementInterieursApi
      */
-    public updateReglementInterieur(body: ReglementUpdateBody, authorization: string, options?: any) {
-        return ReglementInterieursApiFp(this.configuration).updateReglementInterieur(body, authorization, options).then((request) => request(this.axios, this.basePath));
+    public updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options?: any) {
+        return ReglementInterieursApiFp(this.configuration).updateReglementInterieur(body, authorization, reglementId2, reglementId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get information about a specific reglementInterieur

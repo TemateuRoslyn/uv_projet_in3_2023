@@ -31,7 +31,7 @@ export interface InlineResponse2012 {
     message?: any;
     /**
      * 
-     * @type {Convocation}
+     * @type {Classe}
      * @memberof InlineResponse2012
      */
     content?: any;

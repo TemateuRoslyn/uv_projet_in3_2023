@@ -11,6 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */export * from './apis/auth-api';
+export * from './apis/avoirmembreconseildisciplines-api';
 export * from './apis/classes-api';
 export * from './apis/conseil-disciplines-api';
 export * from './apis/convocation-api';
@@ -29,5 +30,6 @@ export * from './apis/regles-api';
 export * from './apis/reparations-api';
 export * from './apis/roles-api';
 export * from './apis/sanctionprevus-api';
+export * from './apis/suggestions-api';
 export * from './apis/users-api';
 

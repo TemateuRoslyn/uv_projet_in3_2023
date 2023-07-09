@@ -29,4 +29,10 @@ export interface UpdateNotificationIdBody {
      * @memberof UpdateNotificationIdBody
      */
     view: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateNotificationIdBody
+     */
+    email: any;
 }

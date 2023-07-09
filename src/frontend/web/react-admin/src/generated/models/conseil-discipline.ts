@@ -43,12 +43,6 @@ export interface ConseilDiscipline {
     heureFinCd: any;
     /**
      * 
-     * @type {string}
-     * @memberof ConseilDiscipline
-     */
-    statut?: any;
-    /**
-     * 
      * @type {number}
      * @memberof ConseilDiscipline
      */

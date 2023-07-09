@@ -58,7 +58,7 @@ export interface Parents {
      * @type {string}
      * @memberof Parents
      */
-    photo: any;
+    photo?: any;
     /**
      * 
      * @type {string}

@@ -10,10 +10,10 @@ const Hero = () => {
     <>
         <section className='hero'>
           <div className='container'>
-            <div className='row'>
-              <Heading subtitle='WELCOME TO ACADEMIA' title='Best Online Education Expertise' />
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-              <div className='flex'>
+            <div className='wel'>
+              <Heading subtitle='Consultez votre état disciplinaire' title='Bienvenue sur SchoolDiscipline' />
+              {/* <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p> */}
+              {/* <div className='flex'>
                 <Link to='/login'> 
                   <button className=' rounded bg-[#1eb2a6] p-4 m-1'>
                   Sign in  <FontAwesomeIcon icon={faLongArrowAltRight} />
@@ -22,7 +22,7 @@ const Hero = () => {
                 <p className=' rounded bg-[#fff] p-4 m-1 text-[#1eb2a6] '>
                   VIEW COURSE <FontAwesomeIcon icon={faLongArrowAltRight} />
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
       </section>
