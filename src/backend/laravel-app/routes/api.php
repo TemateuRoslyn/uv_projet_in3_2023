@@ -209,7 +209,7 @@ Route::middleware('jwt.verify')->group(function () {
     // conseil_disciplines
     Route::prefix('conseil_discipline')->group(function () {
         Route::middleware('permission:creer_conseil')->post('create', [ConseilDisciplineController::class, 'store']);
-        Route::middleware('permission:modifier_conseil')->put('update/{conseil_disciplineId}', [ConseilDisciplineController::class, 'update']);
+        Route::middleware('permission:modifier_conseil')->post('update/{conseil_disciplineId}', [ConseilDisciplineController::class, 'update']);
         Route::middleware('permission:supprimer_conseil')->delete('delete/{conseil_disciplineId}', [ConseilDisciplineController::class, 'delete']);
 
         Route::get('findOne/{conseil_disciplineId}', [ConseilDisciplineController::class, 'view']);

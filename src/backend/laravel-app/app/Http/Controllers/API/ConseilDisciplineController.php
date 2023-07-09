@@ -4,11 +4,15 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\ConseilDiscipline;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class ConseilDisciplineController extends Controller
 {
+
     /**
      * @OA\Get(
      *     path="/api/conseil_discipline/findAll",
@@ -48,7 +52,7 @@ class ConseilDisciplineController extends Controller
 
     public function index()
     {
-        $conseil_discipline = ConseilDiscipline::with('eleve', 'faute.regle.reglementInterieur')->has('eleve')->get();
+        $conseil_discipline = ConseilDiscipline::with('eleve.classe', 'faute.regle.reglementInterieur')->has('eleve')->get();
 
         return response()->json([
             'success' => true,
@@ -112,7 +116,7 @@ class ConseilDisciplineController extends Controller
 
     public function view($conseil_disciplineId)
     {
-        $conseil_discipline = ConseilDiscipline::with('eleve', 'faute.regle.reglementInterieur')->find($conseil_disciplineId);
+        $conseil_discipline = ConseilDiscipline::with('eleve.classe', 'faute.regle.reglementInterieur')->find($conseil_disciplineId);
 
         if (!$conseil_discipline) {
             return response()->json([
@@ -277,9 +281,9 @@ class ConseilDisciplineController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'dateCd' => 'required|date',
+            'dateCd' => 'required|date|after:' . Carbon::now(),
             'heureDebutCd' => 'required|date_format:H:i',
-            'heureFinCd' => 'required|date_format:H:i|after:heure_debut_cd',
+            'heureFinCd' => 'required|date_format:H:i|after:heureDebutCd',
             'eleveId' => 'required|integer|exists:eleves,id',
             'fauteId' => 'required|integer|exists:fautes,id',
         ]);
@@ -291,13 +295,18 @@ class ConseilDisciplineController extends Controller
                 'error' => $validator->errors()
             ], 400);
         }
-        $conseil_discipline = ConseilDiscipline::create([
-            'dateCd' => $request->input('dateCd'),
-            'heureDebutCd' => $request->input('heureDebutCd'),
-            'heureFinCd' => $request->input('heureFinCd'),
-            'eleveId' => $request->input('eleveId'),
-            'fauteId' => $request->input('fauteId'),
-        ]);
+
+        $debut = Carbon::parse($request->input('dateCd') . ' ' . $request->input('heureDebutCd'));
+        $fin = Carbon::parse($request->input('dateCd') . ' ' . $request->input('heureFinCd'));
+
+        $conseil_discipline = new ConseilDiscipline();
+        $conseil_discipline->dateCd = $request->input('dateCd');
+        $conseil_discipline->heureDebutCd = $request->input('heureDebutCd');
+        $conseil_discipline->heureFinCd = $request->input('heureFinCd');
+        $conseil_discipline->eleveId = $request->input('eleveId');
+        $conseil_discipline->fauteId = $request->input('fauteId');
+        $conseil_discipline->status = $conseil_discipline->getStatusAttribute();
+        $conseil_discipline->save();
         //Information sur l'eleve qui assiste au conseil de discipline
         $conseil_discipline->load('eleve', 'faute.regle.reglementInterieur');
 
@@ -309,7 +318,7 @@ class ConseilDisciplineController extends Controller
     }
 
     /**
-     * @OA\put(
+     * @OA\post(
      *     path="/api/conseil_discipline/update/{conseilDisciplineId}",
      *     summary="Update a disciplinary council's information",
      *     description="Update a disciplinary council's information",
@@ -401,7 +410,7 @@ class ConseilDisciplineController extends Controller
             $validator = Validator::make($request->all(), [
                 'dateCd' => 'required|date',
                 'heureDebutCd' => 'required|date_format:H:i:s',
-                'heureFinCd' => 'required|date_format:H:i:s|after:heure_debut_cd',
+                'heureFinCd' => 'required|date_format:H:i:s|after:heureDebutCd',
                 'eleveId' => 'required|integer|exists:eleves,id',
                 'fauteId' => 'required|integer:exists:fautes,id',
             ]);
@@ -420,12 +429,17 @@ class ConseilDisciplineController extends Controller
             ], 400);
         }
 
+
+        $debut = Carbon::parse($request->input('dateCd') . ' ' . $request->input('heureDebutCd'));
+        $fin = Carbon::parse($request->input('dateCd') . ' ' . $request->input('heureFinCd'));
+
         //mise a jour des informations du conseil de discipline
         $conseil_discipline->dateCd = $request->input('dateCd');
         $conseil_discipline->heureDebutCd = $request->input('heureDebutCd');
         $conseil_discipline->heureFinCd = $request->input('heureFinCd');
         $conseil_discipline->eleveId = $request->input('eleveId');
         $conseil_discipline->fauteId = $request->input('fauteId');
+        $conseil_discipline->status = $conseil_discipline->getStatusAttribute();
         $conseil_discipline->save();
 
         //Information sur l'eleve qui assiste au conseil de discipline
