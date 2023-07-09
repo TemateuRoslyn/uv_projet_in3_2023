@@ -16,6 +16,7 @@ return new class extends Migration
             $table->date('dateCd');
             $table->time('heureDebutCd');
             $table->time('heureFinCd');
+            $table->string('status');
             $table->unsignedBigInteger('eleveId');
             $table->foreign('eleveId')->references('id')->on('eleves')->onDelete('cascade');
             $table->unsignedBigInteger('fauteId');
