@@ -28,31 +28,43 @@ export interface Classe {
      * @type {string}
      * @memberof Classe
      */
-    name?: any;
+    name: any;
     /**
      * Tle
      * @type {string}
      * @memberof Classe
      */
-    shortName?: any;
+    shortName: any;
     /**
      * C
      * @type {string}
      * @memberof Classe
      */
-    speciality?: any;
+    speciality: any;
     /**
      * 1
      * @type {number}
      * @memberof Classe
      */
-    no?: any;
+    no: any;
     /**
      * 100
      * @type {number}
      * @memberof Classe
      */
-    effectif?: any;
+    effectif: any;
+    /**
+     * 
+     * @type {Eleve}
+     * @memberof Classe
+     */
+    eleves?: any;
+    /**
+     * 
+     * @type {Cour}
+     * @memberof Classe
+     */
+    cours?: any;
     /**
      * 
      * @type {BaseModelpropertiescreatedAt}

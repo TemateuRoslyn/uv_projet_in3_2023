@@ -19,20 +19,20 @@
 export interface InlineResponse2019 {
     /**
      * 
-     * @type {boolean}
-     * @memberof InlineResponse2019
-     */
-    success?: any;
-    /**
-     * 
      * @type {string}
      * @memberof InlineResponse2019
      */
     message?: any;
     /**
      * 
-     * @type {Regle}
+     * @type {boolean}
      * @memberof InlineResponse2019
      */
-    data?: any;
+    success?: any;
+    /**
+     * 
+     * @type {Professeur}
+     * @memberof InlineResponse2019
+     */
+    content?: any;
 }

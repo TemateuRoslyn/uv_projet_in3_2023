@@ -7,11 +7,24 @@
 
 .logo h1 {
   font-size: 35px;
-  font-weight: 900;
+  font-weight: 500;
 }
 
 .head .icon {
   margin-left: 10px;
+}
+
+.logo img{
+  width: 100%;
+}
+.droite{
+  width: 87%;
+  float: right;
+  margin-top: 1%;
+}
+.gauche{
+  width: 13%;
+  float: left;
 }
 
 /*--------head------------*/
@@ -37,7 +50,6 @@ header ul {
 
 header ul li a {
   color: #fff;
-  font-weight: 500;
   transition: 0.5s;
 }
 

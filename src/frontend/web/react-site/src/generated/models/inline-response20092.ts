@@ -35,35 +35,4 @@ export interface InlineResponse20092 {
      * @memberof InlineResponse20092
      */
     content?: any;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-     * @type {Array&lt;User&gt;}
-     * @memberof InlineResponse20092
-     */
-<<<<<<< HEAD
-    success?: any;
-    /**
-     * 
-=======
->>>>>>> 33bab93 (test)
-     * @type {User}
-     * @memberof InlineResponse20092
-     */
-    data?: any;
-<<<<<<< HEAD
-=======
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-=======
-    data?: any;
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
->>>>>>> 33bab93 (test)
->>>>>>> e67ecd3 (test)
-=======
->>>>>>> 5404348 (test)
 }

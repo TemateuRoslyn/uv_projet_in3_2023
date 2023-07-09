@@ -61,6 +61,18 @@ export interface Convocation {
     personnel?: any;
     /**
      * 
+     * @type {number}
+     * @memberof Convocation
+     */
+    eleveId: any;
+    /**
+     * 
+     * @type {Eleve}
+     * @memberof Convocation
+     */
+    eleve?: any;
+    /**
+     * 
      * @type {BaseModelpropertiescreatedAt}
      * @memberof Convocation
      */

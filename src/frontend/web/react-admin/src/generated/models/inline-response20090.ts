@@ -31,24 +31,8 @@ export interface InlineResponse20090 {
     success?: any;
     /**
      * 
-<<<<<<< HEAD
      * @type {Suggestion}
      * @memberof InlineResponse20090
      */
     content?: any;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
->>>>>>> 33bab93 (test)
->>>>>>> e67ecd3 (test)
-=======
-     * @type {Array&lt;Suggestion&gt;}
-     * @memberof InlineResponse20090
-     */
-    content?: any;
->>>>>>> 5404348 (test)
 }

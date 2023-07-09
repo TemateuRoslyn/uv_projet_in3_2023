@@ -6,8 +6,8 @@ const CoursesCard = () => {
   return (
     <>
       <section className='coursesCard'>
-      <div className='text programme'>
-        <ul className="section">
+      <div className='programme'>
+        <ul className="text">
           <h1>Nous disposons de trois sections</h1>
           <li>Section Anglophone</li>
           <li>Section Francophone</li>

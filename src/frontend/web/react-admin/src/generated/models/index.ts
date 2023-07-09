@@ -109,43 +109,11 @@ export * from './inline-response20090';
 export * from './inline-response20091';
 export * from './inline-response20092';
 export * from './inline-response20093';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> e67ecd3 (test)
-export * from './inline-response20094';
-export * from './inline-response20095';
-export * from './inline-response20096';
-<<<<<<< HEAD
-export * from './inline-response20097';
-export * from './inline-response20098';
-=======
-=======
->>>>>>> 3c60453 (Closes #311 -Ajusting home page)
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-export * from './inline-response20094';
-export * from './inline-response20095';
->>>>>>> 474c0a6 (Closes #303 - Personnel integrated and admin site change to match the context)
-=======
-export * from './inline-response20094';
->>>>>>> e2d508d (Closes #299 - admin api integrated)
->>>>>>> 65dfea4 (Closes #299 - admin api integrated)
-=======
->>>>>>> 33bab93 (test)
->>>>>>> e67ecd3 (test)
-=======
 export * from './inline-response20094';
 export * from './inline-response20095';
 export * from './inline-response20096';
 export * from './inline-response20097';
 export * from './inline-response20098';
-export * from './inline-response20099';
->>>>>>> 5404348 (test)
 export * from './inline-response200-content';
 export * from './inline-response201';
 export * from './inline-response2011';

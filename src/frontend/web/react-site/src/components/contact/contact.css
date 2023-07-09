@@ -33,7 +33,7 @@ form .flexSB input:nth-child(1) {
 }
 .contacts h3 {
   margin-top: 20px;
-  font-weight: 500;
+  /* font-weight: 500; */
   margin-bottom: 10px;
 }
 .contacts span {

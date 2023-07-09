@@ -8,14 +8,19 @@
   margin: 20px 0;
   line-height: 45px;
 }
-.section li {
-  font-size: 30px;
+.text h1 {
   font-weight: 500;
+  font-size: 45px;
+  margin: 20px 0;
+  line-height: 45px;
+}
+.text li {
+  font-size: 30px;
   line-height: 45px;
 }
 .programme {
   background-color: #fff;
-  padding: 30px 0;
+  padding: 10px 20%;
 }
 
 .coursesCard {
@@ -76,7 +81,7 @@
   padding: 10px;
 }
 .coursesCard h3 {
-  font-weight: 500;
+  /* font-weight: 500; */
   color: #1eb2a6;
 }
 /*-------------online---------*/
