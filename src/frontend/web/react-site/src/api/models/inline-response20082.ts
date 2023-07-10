@@ -20,9 +20,12 @@ export interface InlineResponse20082 {
     /**
      * 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 0b7e9d7 (Testing)
+=======
+>>>>>>> 707866f4 (Closes #318 -présentation du website)
      * @type {boolean}
      * @memberof InlineResponse20082
      */
@@ -30,14 +33,18 @@ export interface InlineResponse20082 {
     /**
      * 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 7faa1c6 (maj reglement interieur)
 >>>>>>> 0b7e9d7 (Testing)
+=======
+>>>>>>> 707866f4 (Closes #318 -présentation du website)
      * @type {string}
      * @memberof InlineResponse20082
      */
     message?: any;
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response20082.ts
@@ -60,4 +67,6 @@ export interface InlineResponse20082 {
     content?: any;
 >>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/models/inline-response20082.ts
 >>>>>>> 0b7e9d7 (Testing)
+=======
+>>>>>>> 707866f4 (Closes #318 -présentation du website)
 }

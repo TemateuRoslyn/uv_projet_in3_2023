@@ -18,6 +18,12 @@
   justify-content: space-between;
   align-items: center;
 }
+.newlette input{
+    padding: 20px;
+    border: none;
+    outline: none;
+    height: 30px
+}
 .newletter input {
   width: 100%;
   padding: 20px;
@@ -35,8 +41,16 @@ footer {
 }
 footer .container {
   display: grid;
-  grid-template-columns: 3fr 2fr 2fr 4fr 3fr;
+  grid-template-columns: 5fr 6fr 2fr 4fr;
   grid-gap: 30px;
+}
+.droit{
+  width: 50%;
+  float: right;
+  margin-top:0 ;
+}
+.flexS{
+  display: block;
 }
 @media screen and (max-width: 768px) {
   footer .container {

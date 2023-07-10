@@ -30,15 +30,19 @@ export interface InlineResponse20090 {
      */
     message?: any;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response20090.ts
 >>>>>>> 0b7e9d7 (Testing)
+=======
+>>>>>>> 707866f4 (Closes #318 -présentation du website)
     /**
      * 
      * @type {Suggestion}
      * @memberof InlineResponse20090
      */
     content?: any;
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -53,4 +57,6 @@ export interface InlineResponse20090 {
 >>>>>>> 7faa1c6 (maj reglement interieur)
 >>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/models/inline-response20090.ts
 >>>>>>> 0b7e9d7 (Testing)
+=======
+>>>>>>> 707866f4 (Closes #318 -présentation du website)
 }
