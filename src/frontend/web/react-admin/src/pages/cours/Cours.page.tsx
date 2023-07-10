@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DefaultLayout from '../../layout/DefaultLayout';
 import Breadcrumb from '../../components/Breadcrumb';
 import DisplayCours from './components/DisplayCours';
-import { Cours } from '../../generated/models';
+import { Cour } from '../../generated/models';
 import { ReduxProps } from '../../redux/configureStore';
 import { IS_LOGGED_LOCAL_STORAGE_KEY, TOKEN_LOCAL_STORAGE_KEY, USER_LOCAL_STORAGE_KEY } from '../../constants/LOCAL_STORAGE';
 import { AuthApi, CoursApi } from '../../generated';
@@ -24,7 +24,7 @@ const CoursPage = () => {
 
 
   const state = useSelector((state: ReduxProps) => state);
-  const [cours, setCours] = useState<Cours[]>([]);
+  const [cours, setCours] = useState<Cour[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [showSuccessNotif, setShowSuccessNotif] = useState<boolean>(false);

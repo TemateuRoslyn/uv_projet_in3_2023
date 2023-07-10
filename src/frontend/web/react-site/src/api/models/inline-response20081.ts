@@ -29,10 +29,28 @@ export interface InlineResponse20081 {
      * @memberof InlineResponse20081
      */
     message?: any;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response20081.ts
+>>>>>>> 0b7e9d7 (Testing)
     /**
      * 
      * @type {Role}
      * @memberof InlineResponse20081
      */
     content?: any;
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+=======
+    /**
+     * 
+     * @type {Array&lt;SanctionPrevu&gt;}
+     * @memberof InlineResponse20081
+     */
+    content?: any;
+>>>>>>> 7faa1c6 (maj reglement interieur)
+>>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/models/inline-response20081.ts
+>>>>>>> 0b7e9d7 (Testing)
 }

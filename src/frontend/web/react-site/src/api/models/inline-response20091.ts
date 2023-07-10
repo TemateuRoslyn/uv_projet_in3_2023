@@ -19,19 +19,46 @@
 export interface InlineResponse20091 {
     /**
      * 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 0b7e9d7 (Testing)
      * @type {boolean}
      * @memberof InlineResponse20091
      */
     success?: any;
     /**
      * 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 7faa1c6 (maj reglement interieur)
+>>>>>>> 0b7e9d7 (Testing)
      * @type {string}
      * @memberof InlineResponse20091
      */
     message?: any;
     /**
      * 
+<<<<<<< HEAD
      * @type {Suggestion}
+=======
+<<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response20091.ts
+     * @type {Suggestion}
+=======
+<<<<<<< HEAD
+     * @type {Array&lt;User&gt;}
+=======
+     * @type {boolean}
+     * @memberof InlineResponse20091
+     */
+    success?: any;
+    /**
+     * 
+     * @type {User}
+>>>>>>> 7faa1c6 (maj reglement interieur)
+>>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/models/inline-response20091.ts
+>>>>>>> 0b7e9d7 (Testing)
      * @memberof InlineResponse20091
      */
     content?: any;

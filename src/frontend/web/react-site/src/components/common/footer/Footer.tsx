@@ -23,8 +23,8 @@ const Footer = () => {
       <footer>
         <div className='container padding'>
           <div className='box logo'>
-            <h1>ACADEMIA</h1>
-            <span>ONLINE EDUCATION & LEARNING</span>
+            <h1>SchoolDiscipline</h1>
+            <span>Contrôlez votre état disciplinaire</span>
             <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
 
             <i className='fab fa-facebook-f icon'></i>
