@@ -37,7 +37,7 @@ class FauteController extends Controller
      *         description="JWT token"
      *     ),
      *  security={{"bearerAuth":{}}},
-     *     tags={"fautes"},
+     *     tags={"Fautes"},
      *     @OA\Response(
      *         response=200,
      *         description="Success",
@@ -180,7 +180,7 @@ class FauteController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *               @OA\Property(property="message", type="string", example="fautes de l\'eleve non trouvé(e)"),
+     *               @OA\Property(property="message", type="string", example="eleve non trouvé(e)"),
      *             @OA\Property(property="success", type="boolean", example="false"),
      *
      *         )
@@ -210,7 +210,104 @@ class FauteController extends Controller
             ], 200);
         } else {
             return response()->json([
-                'message' => 'fautes de l\'eleve non trouvée',
+                'message' => 'eleve non trouvée',
+                'success' => false,
+            ], 404);
+        }
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/fautes/findAll/eleve/voice/{eleveId}",
+     *     summary="Get mistake information for a student to voice",
+     *     description="Get information about all specific mistake to a student to voice",
+     *     operationId="viewFauteVoiceEleve",
+     *     tags={"Fautes"},
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of Eleve to get information for",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Error - Not found",
+     *         @OA\JsonContent(
+     *               @OA\Property(property="message", type="string", example="eleve non trouvé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="false"),
+     *
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="fautes de l\'eleve trouvé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="content", type="object")
+     *         )
+     *     )
+     * )
+     */
+    public function viewFautesVoiceEleve($eleveId)
+    {
+
+        $eleve = Eleve::find($eleveId);
+
+
+        if ($eleve) {
+            // Récupérer les fautes de l'élève
+            $fautes = Faute::where('eleveId', $eleve->id)->get();
+
+            // Compter le nombre de fautes
+            $nombreFautes = $fautes->count();
+
+            $nbFautes = count($fautes);
+            if($nombreFautes == 0)
+            {
+                $message = "L'élève " . $eleve->firstName . $eleve->lastName . " n'a commis aucune faute";
+            }else{
+                $message = "L'élève " . $eleve->firstName . $eleve->lastName . " a commis " . $nombreFautes ." fautes qui sont les suivantes : ";
+
+                foreach ($fautes as $faute) {
+                    $message .= $faute->libelle . ", ";
+                }
+
+                $message = rtrim($message, ', '); // Supprimer la virgule finale
+            }
+            // Créer l'objet avec le message et le nombre de fautes
+            $voiceFautes = [
+                'message' => $message,
+                'nombreFautes' => $nombreFautes,
+            ];
+            return response()->json([
+                'message' => 'fautes de l\'eleve trouvé(e)',
+                'success' => true,
+                'content' => $voiceFautes
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'eleve non trouvée',
                 'success' => false,
             ], 404);
         }
