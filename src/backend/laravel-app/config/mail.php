@@ -50,7 +50,7 @@ return [
             'port' => 587,
             'encryption' => 'tls',
             'username' => env('destructeurkratos@gmail.com'),
-            'password' => env('uiypasfjkeeobvxs'),
+            'password' => env('lycptxurzomszzob'),
             'timeout' => null,
             'auth_mode' => null,
         ],
