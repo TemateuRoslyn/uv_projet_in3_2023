@@ -16,9 +16,21 @@ use Illuminate\Validation\Rule;
 use App\Models\SanctionPrevu;
 use App\Models\Eleve;
 use App\Models\Faute;
+use Twilio\Rest\Client;
+use Twilio\Exceptions\TwilioException;
 
 class SanctionPrevuController extends Controller
 {
+
+    private $twilioInfo;
+
+    public function __construct()
+    {
+        $this->twilioInfo = [
+            "+237654770063" => ["ACfaf8a483f11bbd6983f6e567732a36c1", "cacd62d64ab0c916c8a63752cab16538", "+18145244457"],
+            "+237651779272" => ["ACb3959badcd79d88b411fd167596988ce", "7867db4dfd97896e23032f1ed8eb004b", "+15418593377"],
+        ];
+    }
 
     /**
      * @OA\Get(
@@ -362,6 +374,38 @@ class SanctionPrevuController extends Controller
 
             // envoi du mail
             Queue::push(new SendEmailJob($parent->user, $detailsP));
+
+            //Envoie du sms
+            if (array_key_exists($parent->telephone, $this->twilioInfo)) {
+                $valeurs = $this->twilioInfo[$parent->telephone];
+
+                $twilioSid = $valeurs[0];
+                $twilioToken = $valeurs[1];
+                $twilioPhoneNumber = $valeurs[2];
+
+                $phoneNumber = $parent->telephone;
+
+                try {
+                    $twilio = new Client($twilioSid, $twilioToken);
+
+                    // Vérifier si le numéro de téléphone est valide
+                    $twilio->lookups->v1->phoneNumbers($phoneNumber)->fetch();
+
+                    // Si aucune exception n'est levée, le numéro est valide, envoyer le message
+                    $message = $twilio->messages->create(
+                        $phoneNumber,
+                        [
+                            'from' => $twilioPhoneNumber,
+                            'body' => $detailsP['body']
+                        ]
+                    );
+
+
+                } catch (TwilioException $e) {
+                    // return redirect()->back()->with('error', 'Une erreur s\'est produite lors de l\'envoi du message : ' . $e->getMessage());
+                }
+            }
+
             $detailsP = array();
         }
 
