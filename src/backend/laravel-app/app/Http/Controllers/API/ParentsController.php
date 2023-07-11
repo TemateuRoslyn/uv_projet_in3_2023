@@ -14,6 +14,8 @@ use App\Models\User;
 use App\Models\Role;
 use PhpParser\Node\Expr\Cast\Object_;
 use Ramsey\Uuid\Type\Integer;
+use Illuminate\Support\Facades\Queue;
+use App\Jobs\SendEmailJob;
 
 class ParentsController extends Controller
 {
@@ -327,6 +329,21 @@ class ParentsController extends Controller
         }
 
         $parent = Parents::whereHas('eleves.classe')->whereHas('user')->with('user', 'eleves.classe')->find($parent->id);
+
+        //envoie du mail a l'utilisateur
+        $details = array();
+
+        $details['greeting'] = "Hi " . $parent->firstName;
+        $details['body'] = "Veuillez Modifier votre mot de passe pour assurer la confidentialite de vos donnees et de vos actions au sein de la plateforme .
+                            \n Mot de passe actuel: $password
+                            \n Login actuel: $user->username
+                            Pour cela, veuillez cliquer sur le ce lien pour proceder la la mise a jour de votre mot de passe .";
+        $details['actiontext'] = "Modifier mon mot de passe";
+        $details['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
+        $details['endtext'] = "Merci de rester fidele à cet etablissement";
+
+        // envoi du mail
+        Queue::push(new SendEmailJob($user, $details));
 
         return response()->json([
             'message' => 'Parent created successfully',
