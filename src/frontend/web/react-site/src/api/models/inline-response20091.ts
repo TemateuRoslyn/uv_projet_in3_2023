@@ -21,11 +21,17 @@ export interface InlineResponse20091 {
      * 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 0b7e9d7 (Testing)
 =======
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 0b7e9d7 (Testing)
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
      * @type {boolean}
      * @memberof InlineResponse20091
      */
@@ -34,12 +40,18 @@ export interface InlineResponse20091 {
      * 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
 =======
 =======
 >>>>>>> 7faa1c6 (maj reglement interieur)
 >>>>>>> 0b7e9d7 (Testing)
+<<<<<<< HEAD
 =======
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
      * @type {string}
      * @memberof InlineResponse20091
      */
@@ -48,6 +60,9 @@ export interface InlineResponse20091 {
      * 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
      * @type {Suggestion}
 =======
 <<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response20091.ts
@@ -66,9 +81,12 @@ export interface InlineResponse20091 {
 >>>>>>> 7faa1c6 (maj reglement interieur)
 >>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/models/inline-response20091.ts
 >>>>>>> 0b7e9d7 (Testing)
+<<<<<<< HEAD
 =======
      * @type {Suggestion}
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
      * @memberof InlineResponse20091
      */
     content?: any;
