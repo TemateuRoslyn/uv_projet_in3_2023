@@ -80,6 +80,7 @@ const DisplayCours: React.FC<DisplayCoursProps> = (props) => {
             });  
     }, []);
 
+    console.log(cours);
     const onQuickFilterChanged = useCallback(() => {
         const quickFilterValue = document.getElementById('quickFilter')?.value;
         if (gridRef.current && quickFilterValue) {

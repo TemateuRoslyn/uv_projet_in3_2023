@@ -21,6 +21,9 @@ export interface InlineResponse20087 {
      * 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
 =======
 <<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response20087.ts
 =======
@@ -35,8 +38,11 @@ export interface InlineResponse20087 {
 >>>>>>> 7faa1c6 (maj reglement interieur)
 >>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/models/inline-response20087.ts
 >>>>>>> 0b7e9d7 (Testing)
+<<<<<<< HEAD
 =======
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
      * @type {boolean}
      * @memberof InlineResponse20087
      */
@@ -45,6 +51,9 @@ export interface InlineResponse20087 {
      * 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
 =======
 <<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response20087.ts
      * @type {string}
@@ -67,10 +76,13 @@ export interface InlineResponse20087 {
      */
     message?: any;
 >>>>>>> 0b7e9d7 (Testing)
+<<<<<<< HEAD
 =======
      * @type {string}
      * @memberof InlineResponse20087
      */
     message?: any;
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
 }

@@ -18,6 +18,7 @@ import Enseignants from "../team/Team"
 import Home from "../home/Home"
 import Header from '../common/header/Header';
 import Footer from '../common/footer/Footer';
+import NotFound from "./NotFound";
 
 
 interface AppSwitchProps {
@@ -48,9 +49,10 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
           <Route exact path='/convocation' element={<Convocation />} />
 
           <Route exact path='/faute_sanction' element={<FauteSanction />} />
-          <Route path='/notification' element={<Notification />} />
+          <Route exact path='/notification' element={<Notification />} />
  
-          <Route path='/proviseur' element={<Proviseur />} />
+          <Route exact path='/proviseur' element={<Proviseur />} />
+          <Route exact path="*" element={<NotFound />}/>
 
         </Routes>
         <Footer />
@@ -72,9 +74,10 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
           <Route exact path='/pricing' element={<Pricing />} />
           <Route exact path='/journal' element={<Blog />} />
           <Route exact path='/contact' element={<Contact />} />
-          <Route path='/proviseur' element={<Proviseur />} />
+          <Route exact path='/proviseur' element={<Proviseur />} />
        
-          <Route path='/login' element={<Login isLoggedIn={props.isLoggedIn} />} />
+          <Route exact path='/login' element={<Login isLoggedIn={props.isLoggedIn} />} />
+          <Route path="*" element={<NotFound />}/>
           
         </Routes>
         <Footer />

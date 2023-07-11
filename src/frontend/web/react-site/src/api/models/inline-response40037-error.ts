@@ -16,6 +16,9 @@
  * @export
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
  * @interface InlineResponse40037Error
 =======
 <<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response40037-error.ts
@@ -25,9 +28,12 @@
  * @interface InlineResponse40033Error
 >>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40033-error.ts
 >>>>>>> 0b7e9d7 (Testing)
+<<<<<<< HEAD
 =======
  * @interface InlineResponse40037Error
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
  */
 export interface InlineResponse40037Error {
     /**
@@ -35,6 +41,9 @@ export interface InlineResponse40037Error {
      * @type {Array&lt;string&gt;}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
      * @memberof InlineResponse40037Error
 =======
 <<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response40037-error.ts
@@ -52,9 +61,12 @@ export interface InlineResponse40030Error {
 >>>>>>>> 7faa1c6 (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40030-error.ts
 >>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40033-error.ts
 >>>>>>> 0b7e9d7 (Testing)
+<<<<<<< HEAD
 =======
      * @memberof InlineResponse40037Error
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
      */
     email?: any;
     /**
@@ -62,6 +74,9 @@ export interface InlineResponse40030Error {
      * @type {Array&lt;string&gt;}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
      * @memberof InlineResponse40037Error
 =======
 <<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response40037-error.ts
@@ -74,9 +89,12 @@ export interface InlineResponse40030Error {
 >>>>>>>> 7faa1c6 (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40030-error.ts
 >>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40033-error.ts
 >>>>>>> 0b7e9d7 (Testing)
+<<<<<<< HEAD
 =======
      * @memberof InlineResponse40037Error
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
      */
     username?: any;
     /**
@@ -84,6 +102,9 @@ export interface InlineResponse40030Error {
      * @type {Array&lt;string&gt;}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
      * @memberof InlineResponse40037Error
 =======
 <<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response40037-error.ts
@@ -96,9 +117,12 @@ export interface InlineResponse40030Error {
 >>>>>>>> 7faa1c6 (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40030-error.ts
 >>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-admin/src/generated/models/inline-response40033-error.ts
 >>>>>>> 0b7e9d7 (Testing)
+<<<<<<< HEAD
 =======
      * @memberof InlineResponse40037Error
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
      */
     password?: any;
 }

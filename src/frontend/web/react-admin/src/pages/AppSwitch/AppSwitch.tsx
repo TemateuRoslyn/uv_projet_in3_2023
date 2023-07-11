@@ -14,6 +14,7 @@ import Settings from '../Settings';
 import Tables from '../Tables';
 import Alerts from '../UiElements/Alerts';
 import Buttons from '../UiElements/Buttons';
+import NotFound from "./NotFound"
 
 //ADMIN
 //import AdminUser from './Admin/AdminUser';
@@ -57,48 +58,52 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
   ) {
     return (
       <Routes>
-        <Route path="/admin/permissions" element={<Permissions />} />
-        <Route path="/admin/roles" element={<Roles />} />
-        <Route path="/admin/users" element={<UserGrid />} />
+        <Route exact path="/admin/permissions" element={<Permissions />} />
+        <Route exact path="/admin/roles" element={<Roles />} />
+        <Route exact path="/admin/users" element={<UserGrid />} />
 
-        <Route path="/eleves" element={<Eleves />} />
-        <Route path="/classes" element={<Classes />} />
-        <Route path="/" element={<DashBoard />} />
-        <Route path="/ui/buttons" element={<Buttons />} />
-        <Route path="/calendar" element={<Calendar />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/parents" element={<Parents />} />
-        <Route path="/cours" element={<CoursPage />} />
-        <Route path="/professeurs" element={<Professeurs />} />
+        <Route exact path="/eleves" element={<Eleves />} />
+        <Route exact path="/classes" element={<Classes />} />
+        <Route exact path="/" element={<DashBoard />} />
+        <Route exact path="/ui/buttons" element={<Buttons />} />
+        <Route exact path="/calendar" element={<Calendar />} />
+        <Route exact path="/profile" element={<Profile />} />
+        <Route exact path="/parents" element={<Parents />} />
+        <Route exact path="/cours" element={<CoursPage />} />
+        <Route exact path="/professeurs" element={<Professeurs />} />
 
-        <Route path="/forms/form-elements" element={<FormElements />} />
-        <Route path="/forms/form-layout" element={<FormLayout />} />
-        <Route path="/tables" element={<Tables />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/chart" element={<Chart />} />
-        <Route path="/ui/alerts" element={<Alerts />} />
-        <Route path="/ui/buttons" element={<Buttons />} />
-        <Route path="/admin/newrole" element={<AdminRoleForm />} />
-        <Route path="/admin/newpermission" element={<AdminPermissionForm />} />
-        <Route path="/faults/addfaults" element={<AddFaults />} />
-        <Route path="/faults/faults" element={<FaultsGrid />} />
-        <Route path="/reglements" element={<ReglementInterieurPage />} />
-        <Route path="/regles" element={<ReglePage />} />
-        <Route path="/fautes" element={<Fautes />} />
-        <Route path="/convocations" element={<Convocations />} />
-        <Route path="/conseilDiscipline" element={<ConseilDisciplines />} />
-        <Route path="/suggestions" element={<SuggestionPage />} />
-        <Route path="/personnels" element={<Personnels/>} />
-        <Route path="/reparations" element={<ReparationPage />} />
-        <Route path="/sanctionPrevus" element={<SanctionPrevu/>} />
+        <Route exact path="/forms/form-elements" element={<FormElements />} />
+        <Route exact path="/forms/form-layout" element={<FormLayout />} />
+        <Route exact path="/tables" element={<Tables />} />
+        <Route exact path="/settings" element={<Settings />} />
+        <Route exact path="/chart" element={<Chart />} />
+        <Route exact path="/ui/alerts" element={<Alerts />} />
+        <Route exact path="/ui/buttons" element={<Buttons />} />
+        <Route exact path="/admin/newrole" element={<AdminRoleForm />} />
+        <Route exact path="/admin/newpermission" element={<AdminPermissionForm />} />
+        <Route exact path="/faults/addfaults" element={<AddFaults />} />
+        <Route exact path="/faults/faults" element={<FaultsGrid />} />
+        <Route exact path="/reglements" element={<ReglementInterieurPage />} />
+        <Route exact path="/regles" element={<ReglePage />} />
+        <Route exact path="/fautes" element={<Fautes />} />
+        <Route exact path="/convocations" element={<Convocations />} />
+        <Route exact path="/conseilDiscipline" element={<ConseilDisciplines />} />
+        <Route exact path="/suggestions" element={<SuggestionPage />} />
+        <Route exact path="/personnels" element={<Personnels/>} />
+        <Route exact path="/reparations" element={<ReparationPage />} />
+        <Route exact path="/sanctionPrevus" element={<SanctionPrevu/>} />
+        <Route path="*" element={<NotFound />}/>
+     
       </Routes>
     );
   } else {
     return (
       <Routes>
-        <Route path="/auth/signin" element={<SignIn />} />
-        {/* <Route path="/auth/signup" element={<SignUp/>} /> */}
-        <Route path="*" element={<SignIn />} />
+        <Route exact path="/auth/signin" element={<SignIn />} />
+        {/* <Route exact path="/auth/signup" element={<SignUp/>} /> */}
+        <Route exact path="*" element={<SignIn />} />
+        <Route path="*" element={<NotFound />}/>
+     
       </Routes>
     );
   }
@@ -113,3 +118,5 @@ function mapStateToProps(state: ReduxProps): ReduxProps {
 }
 
 export default connect(mapStateToProps)(AppSwitch);
+
+

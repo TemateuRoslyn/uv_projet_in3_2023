@@ -53,8 +53,8 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
 
     const [professeur, setProfesseur] = useState<Professeur>(props.item? props.item.professeur : '');
 
-  const [classesId, setClassesId]=useState<string>(
-    props.item? props.item.classeId:''
+  const [classesId, setClassesId]=useState<number[]>(
+    props.item? props.item.classesId:[]
   );
   const handleLibelleChange = (event: any) => setLibelle(event.target.value);
   const handleDateCourChange = (event: any) => setDateCour(event.target.value);
@@ -103,16 +103,28 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
     if (matches && matches[1]) {
       const id = parseInt(matches[1], 10);
       if (!isNaN(id)) {
+        if(classesId.includes(id)) return null ;
         return id;
       }
     }
+    console.log("nothing")
     return null;
   };
 
 
-  const handleOptionSelect = (option: string) => {
-    setClassesId(extractIdFromString(option));
+  const handleOptionSelect = (option: string[]) => {
+    option.forEach(item => {
+      const id = extractIdFromString(item);
+      console.log(id);
+      if(id == null) return ; 
+      console.log("not empty")
+      setClassesId(classesId => [...classesId, id]);
+    });
   };
+  
+  useEffect(() => {
+    console.log(classesId);
+  }, [classesId]);
 
   const handleCreate = (_event: any) => {
     _event.preventDefault();
@@ -148,6 +160,7 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
       })
       .catch((error) => {
         alert(error?.response?.data?.message);
+        console.log(error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -259,8 +272,16 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
               </div>
               <div className='form-group'>
                 <CustomMultiSelectInput 
-                
-                />
+                  inputLabel={'Classes'}
+                  inputPlaceholder={'Selection les classe ou sont dispensé le cours'}
+                  required={true}
+                  wrapperStyle="w-full"
+                  labelStyle="mb-2.5 block text-black dark:text-white"
+                  inputStyle="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  maxHeightList={100}
+                  selectOptionEvent={handleOptionSelect}
+                  typingInputEvent={handleTypingInput} 
+                  matchList={matchList}                />
               </div>
               <div className="form-group">
                 <label
@@ -272,6 +293,7 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
                 <input
                   type="date"
                   id="date_cour"
+                  name='dateCour'
                   value={dateCour}
                   disabled={props.mode === MODAL_MODE.view}
                   onChange={handleDateCourChange}
@@ -290,6 +312,7 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
                 <input
                   type="date"
                   id="heure_debut"
+                  name='heureDebut'
                   value={heureDebut}
                   disabled={props.mode === MODAL_MODE.view}
                   onChange={handleHeureDebutChange}
@@ -308,6 +331,7 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
                 <input
                   type="date"
                   id="heure_fin"
+                  name='heureFin'
                   value={heureFin}
                   disabled={props.mode === MODAL_MODE.view}
                   onChange={handleHeureFinChange}
