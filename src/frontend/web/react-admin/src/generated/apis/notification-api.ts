@@ -16,17 +16,17 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20045 } from '../models';
 import { InlineResponse20046 } from '../models';
 import { InlineResponse20047 } from '../models';
 import { InlineResponse20048 } from '../models';
+import { InlineResponse20049 } from '../models';
 import { InlineResponse2016 } from '../models';
 import { InlineResponse40017 } from '../models';
 import { InlineResponse40018 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse40421 } from '../models';
 import { InlineResponse40422 } from '../models';
 import { InlineResponse40423 } from '../models';
+import { InlineResponse40424 } from '../models';
 import { InlineResponse4222 } from '../models';
 /**
  * NotificationApi - axios parameter creator
@@ -363,7 +363,7 @@ export const NotificationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteNotification(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20048>> {
+        async deleteNotification(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20049>> {
             const localVarAxiosArgs = await NotificationApiAxiosParamCreator(configuration).deleteNotification(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -377,7 +377,7 @@ export const NotificationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async notificationIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20045>> {
+        async notificationIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20046>> {
             const localVarAxiosArgs = await NotificationApiAxiosParamCreator(configuration).notificationIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -395,7 +395,7 @@ export const NotificationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateNotification(libelle: string, view: number, email: string, authorization: string, notificationId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20047>> {
+        async updateNotification(libelle: string, view: number, email: string, authorization: string, notificationId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20048>> {
             const localVarAxiosArgs = await NotificationApiAxiosParamCreator(configuration).updateNotification(libelle, view, email, authorization, notificationId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -410,7 +410,7 @@ export const NotificationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewNotification(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20046>> {
+        async viewNotification(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20047>> {
             const localVarAxiosArgs = await NotificationApiAxiosParamCreator(configuration).viewNotification(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -447,7 +447,7 @@ export const NotificationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteNotification(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20048> {
+        deleteNotification(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20049> {
             return NotificationApiFp(configuration).deleteNotification(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -457,7 +457,7 @@ export const NotificationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        notificationIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20045> {
+        notificationIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20046> {
             return NotificationApiFp(configuration).notificationIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -471,7 +471,7 @@ export const NotificationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateNotification(libelle: string, view: number, email: string, authorization: string, notificationId: number, options?: any): AxiosPromise<InlineResponse20047> {
+        updateNotification(libelle: string, view: number, email: string, authorization: string, notificationId: number, options?: any): AxiosPromise<InlineResponse20048> {
             return NotificationApiFp(configuration).updateNotification(libelle, view, email, authorization, notificationId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -482,7 +482,7 @@ export const NotificationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewNotification(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20046> {
+        viewNotification(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20047> {
             return NotificationApiFp(configuration).viewNotification(authorization, id, options).then((request) => request(axios, basePath));
         },
     };

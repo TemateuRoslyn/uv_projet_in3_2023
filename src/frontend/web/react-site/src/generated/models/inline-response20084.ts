@@ -29,4 +29,16 @@ export interface InlineResponse20084 {
      * @memberof InlineResponse20084
      */
     message?: any;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    /**
+     * 
+     * @type {Role}
+     * @memberof InlineResponse20084
+     */
+    content?: any;
+>>>>>>> beca218 (Task 333 (#334))
+>>>>>>> 28546ee (Task #339)
 }

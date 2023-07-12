@@ -153,7 +153,7 @@ const CreateOrUpdateSuggestionModal: React.FC<ModalProps> = (props) => {
           </button>
           <div className="modal-body">
           <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
-                        <h2 className="modal-title font-medium text-black dark:text-white">
+                        <h2 className="  mb-[1rem] text-size-[1.25rem] font-medium text-black dark:text-white">
                         {props.title}
                         </h2>
                     </div>

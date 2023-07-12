@@ -86,7 +86,6 @@
     margin-bottom: 1rem;
     font-size: 1.25rem;
     font-weight: bold;
-    color: #FFFFFF;
   }
   
   .modal-form {
@@ -210,3 +209,26 @@
 .top-modal-animation {
   animation: modal-appear 0.3s ease;
 }
+
+.profile-view {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.profile-image {
+  flex: 0 0 200px;
+  /* Additional styling for the profile image */
+}
+
+.profile-info {
+  flex: 1;
+  /* Additional styling for the profile information */
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Additional styling for other profile information classes */

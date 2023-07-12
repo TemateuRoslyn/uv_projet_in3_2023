@@ -16,15 +16,17 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20066 } from '../models';
 import { InlineResponse20067 } from '../models';
 import { InlineResponse20068 } from '../models';
 import { InlineResponse20069 } from '../models';
 import { InlineResponse20070 } from '../models';
+import { InlineResponse20071 } from '../models';
+import { InlineResponse20072 } from '../models';
 import { InlineResponse40026 } from '../models';
 import { InlineResponse40027 } from '../models';
+import { InlineResponse4005 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse40433 } from '../models';
+import { InlineResponse40434 } from '../models';
 import { RegleCreateBody } from '../models';
 import { UpdateRegleIdBody } from '../models';
 /**
@@ -147,6 +149,55 @@ export const ReglesApiAxiosParamCreator = function (configuration?: Configuratio
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling reglesIndex.');
             }
             const localVarPath = `/api/regle/findAll`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get the filtered list of regles.
+         * @summary Get filtered list of regles
+         * @param {string} keyword Keyword to filter regles
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reglesRecords: async (keyword: string, authorization: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'keyword' is not null or undefined
+            if (keyword === null || keyword === undefined) {
+                throw new RequiredError('keyword','Required parameter keyword was null or undefined when calling reglesRecords.');
+            }
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling reglesRecords.');
+            }
+            const localVarPath = `/api/regle/records/{keyword}`
+                .replace(`{${"keyword"}}`, encodeURIComponent(String(keyword)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -301,7 +352,7 @@ export const ReglesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createRegle(body: RegleCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20067>> {
+        async createRegle(body: RegleCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20068>> {
             const localVarAxiosArgs = await ReglesApiAxiosParamCreator(configuration).createRegle(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -316,7 +367,7 @@ export const ReglesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteRegle(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20070>> {
+        async deleteRegle(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20071>> {
             const localVarAxiosArgs = await ReglesApiAxiosParamCreator(configuration).deleteRegle(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -330,8 +381,23 @@ export const ReglesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reglesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20066>> {
+        async reglesIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20067>> {
             const localVarAxiosArgs = await ReglesApiAxiosParamCreator(configuration).reglesIndex(authorization, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Get the filtered list of regles.
+         * @summary Get filtered list of regles
+         * @param {string} keyword Keyword to filter regles
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async reglesRecords(keyword: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20072>> {
+            const localVarAxiosArgs = await ReglesApiAxiosParamCreator(configuration).reglesRecords(keyword, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -346,7 +412,7 @@ export const ReglesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateRegle(body: UpdateRegleIdBody, authorization: string, regleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20069>> {
+        async updateRegle(body: UpdateRegleIdBody, authorization: string, regleId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20070>> {
             const localVarAxiosArgs = await ReglesApiAxiosParamCreator(configuration).updateRegle(body, authorization, regleId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -361,7 +427,7 @@ export const ReglesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewRegle(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20068>> {
+        async viewRegle(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20069>> {
             const localVarAxiosArgs = await ReglesApiAxiosParamCreator(configuration).viewRegle(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -385,7 +451,7 @@ export const ReglesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createRegle(body: RegleCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20067> {
+        createRegle(body: RegleCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20068> {
             return ReglesApiFp(configuration).createRegle(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -396,7 +462,7 @@ export const ReglesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteRegle(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20070> {
+        deleteRegle(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20071> {
             return ReglesApiFp(configuration).deleteRegle(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -406,8 +472,19 @@ export const ReglesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reglesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20066> {
+        reglesIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20067> {
             return ReglesApiFp(configuration).reglesIndex(authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get the filtered list of regles.
+         * @summary Get filtered list of regles
+         * @param {string} keyword Keyword to filter regles
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reglesRecords(keyword: string, authorization: string, options?: any): AxiosPromise<InlineResponse20072> {
+            return ReglesApiFp(configuration).reglesRecords(keyword, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Update a regle's information
@@ -418,7 +495,7 @@ export const ReglesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateRegle(body: UpdateRegleIdBody, authorization: string, regleId: number, options?: any): AxiosPromise<InlineResponse20069> {
+        updateRegle(body: UpdateRegleIdBody, authorization: string, regleId: number, options?: any): AxiosPromise<InlineResponse20070> {
             return ReglesApiFp(configuration).updateRegle(body, authorization, regleId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -429,7 +506,7 @@ export const ReglesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewRegle(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20068> {
+        viewRegle(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20069> {
             return ReglesApiFp(configuration).viewRegle(authorization, id, options).then((request) => request(axios, basePath));
         },
     };
@@ -476,6 +553,18 @@ export class ReglesApi extends BaseAPI {
      */
     public reglesIndex(authorization: string, options?: any) {
         return ReglesApiFp(this.configuration).reglesIndex(authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get the filtered list of regles.
+     * @summary Get filtered list of regles
+     * @param {string} keyword Keyword to filter regles
+     * @param {string} authorization JWT token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReglesApi
+     */
+    public reglesRecords(keyword: string, authorization: string, options?: any) {
+        return ReglesApiFp(this.configuration).reglesRecords(keyword, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update a regle's information

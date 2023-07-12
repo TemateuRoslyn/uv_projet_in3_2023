@@ -19,20 +19,32 @@
 export interface InlineResponse20098 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20098
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20098
      */
     success?: any;
     /**
      * 
+     * @type {string}
+     * @memberof InlineResponse20098
+     */
+    message?: any;
+    /**
+     * 
+     * @type {Array&lt;User&gt;}
+     * @memberof InlineResponse20098
+     */
+<<<<<<< HEAD
+    success?: any;
+    /**
+     * 
      * @type {User}
      * @memberof InlineResponse20098
      */
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> beca218 (Task 333 (#334))
+>>>>>>> 28546ee (Task #339)
     data?: any;
 }

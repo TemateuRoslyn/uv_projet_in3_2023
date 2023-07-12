@@ -19,14 +19,30 @@
 export interface InlineResponse20076 {
     /**
      * 
+     * @type {string}
+     * @memberof InlineResponse20076
+     */
+    message?: any;
+<<<<<<< HEAD
+=======
+    /**
+     * 
      * @type {boolean}
      * @memberof InlineResponse20076
      */
     success?: any;
     /**
      * 
+<<<<<<< HEAD
      * @type {string}
      * @memberof InlineResponse20076
      */
     message?: any;
+=======
+     * @type {ReglementInterieur}
+     * @memberof InlineResponse20076
+     */
+    content?: any;
+>>>>>>> beca218 (Task 333 (#334))
+>>>>>>> 28546ee (Task #339)
 }

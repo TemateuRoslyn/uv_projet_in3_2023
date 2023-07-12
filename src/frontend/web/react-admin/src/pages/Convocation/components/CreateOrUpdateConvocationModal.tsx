@@ -55,7 +55,7 @@ const CreateOrUpdateConvocationModal: React.FC<ModalProps> = (props) => {
       });
 
       elevesApi
-        .elevesIndex(keyword, 'Bearer ' + token)
+        .elevesRecords(keyword, 'Bearer ' + token)
         .then((response) => {
           if (response && response.data) {
             if (response.data.success === true) {
@@ -129,12 +129,20 @@ const CreateOrUpdateConvocationModal: React.FC<ModalProps> = (props) => {
     });
 
     setIsLoading(true);
+    const apiParams : ConvocationCreateBody={
+      libelle: formValues.libelle,
+      dateConvocation:  formValues.dateConvocation,
+      dateRdv: formValues.dateRdv,
+      statut: undefined,
+      personnelId: undefined,
+      eleveId: undefined
+    }
 
     convocationApi
       .createConvocation(
-        formValues.libelle,
-        formValues.dateConvocation,
-        formValues.dateRdv,
+        
+       
+        
         formValues.status,
         formValues.eleveId,
         'Bearer ' + token
@@ -248,7 +256,7 @@ const CreateOrUpdateConvocationModal: React.FC<ModalProps> = (props) => {
           </button>
           <div className="modal-body">
             <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
-              <h3 className=" modal-title font-medium text-black dark:text-white">
+              <h3 className="   mb-[1rem] text-size-[1.25rem] font-medium text-black dark:text-white">
                 {props.title}
               </h3>
             </div>
@@ -339,6 +347,46 @@ const CreateOrUpdateConvocationModal: React.FC<ModalProps> = (props) => {
                 </div>
               </div>
             </form>
+            {props.mode === MODAL_MODE.view ? null : (
+              <div className="form-actions bg-green-600">
+                <button onClick={props.onClose} className="cancel-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    className="button-icon"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                  Annuler
+                </button>
+
+                {props.mode !== MODAL_MODE.view &&
+                props.mode === MODAL_MODE.create ? (
+                  <button onClick={handleCreate} className="create-button">
+                    {isLoading ? (
+                      <Indicator height={5} border="white" widtf={5} />
+                    ) : (
+                      <NewIcon size={2} color="#fff" />
+                    )}
+                    <span className="ml-2">Créer </span>
+                  </button>
+                ) : null}
+                {props.mode !== MODAL_MODE.view &&
+                props.mode === MODAL_MODE.update ? (
+                  <button onClick={handleUpdate} className="create-button">
+                    <EditIcon color="#fff" size={18} />
+                    Enregistrer
+                  </button>
+                ) : null}
+              </div>
+            )}
           </div>
         </div>
       </div>

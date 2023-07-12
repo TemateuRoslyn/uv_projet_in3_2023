@@ -31,7 +31,14 @@ export interface InlineResponse20073 {
     message?: any;
     /**
      * 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 28546ee (Task #339)
      * @type {ReglementInterieur}
+=======
+     * @type {Array&lt;ReglementInterieur&gt;}
+>>>>>>> beca218 (Task 333 (#334))
      * @memberof InlineResponse20073
      */
     content?: any;
