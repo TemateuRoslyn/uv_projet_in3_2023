@@ -133,7 +133,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findOne/{membreconseilId}', [MembreConseilController::class, 'view']);
         Route::get('findAll/', [MembreConseilController::class, 'index']);
 
-        Route::middleware('permission:modifier_conseil')->put('update/{eleveId}', [MembreConseilController::class, 'update']);
+        Route::middleware('permission:modifier_conseil')->post('update/{eleveId}', [MembreConseilController::class, 'update']);
         Route::middleware('permission:supprimer_conseil')->delete('delete/{eleveId}', [MembreConseilController::class, 'delete']);
         Route::middleware('permission:creer_conseil')->post('create/', [MembreConseilController::class, 'store']);
     });
@@ -270,8 +270,11 @@ Route::middleware('jwt.verify')->group(function () {
     Route::prefix('reparations')->group(function () {
         Route::middleware('permission:creer_reparation')->post('create', [ReparationController::class, 'store']);
         Route::middleware('permission:modifier_reparation')->post('update/{reparationId}', [ReparationController::class, 'update']);
+        Route::post('validate/{reparationId}', [ReparationController::class, 'valider']);
         Route::middleware('permission:supprimer_reparation')->delete('delete/{reparationId}', [ReparationController::class, 'delete']);
         Route::get('findOne/{reparationId}', [ReparationController::class, 'view']);
         Route::get('findAll', [ReparationController::class, 'index']);
+        Route::get('findValidated', [ReparationController::class, 'indexValidate']);
+        Route::get('findNotValidated', [ReparationController::class, 'indexNotValidate']);
     });
 });

@@ -10,8 +10,6 @@ use Illuminate\Http\Request;
 
 class ReparationController extends Controller
 {
-    private $avatar_path = "assets/avatars/reparations";
-
     /**
      * @OA\Get(
      *     path="/api/reparations/findAll",
@@ -36,7 +34,7 @@ class ReparationController extends Controller
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
+     *             @OA\Property(property="message", type="string", example="Reparations retrieved successfully"),
      *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Reparation"))
      *         )
      *     ),
@@ -60,6 +58,105 @@ class ReparationController extends Controller
             'content' => $reparations
         ]);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/api/reparations/findValidated",
+     *     summary="Get all reparations",
+     *     description="Retrieve a list of all reparations where are validated",
+     *     operationId="reparationsValidated",
+     *     security={{"bearerAuth":{}}},
+     *     tags={"Reparations"},
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Validated Reparation retrieved successfully"),
+     *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Reparation"))
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     )
+     * )
+     */
+
+    public function indexValidate()
+    {
+        $reparations = Reparation::has('faute')->with('faute.eleve.classe')->where('status', 'valide')->orWhere('status', 'rejete')->get();
+
+        return response()->json([
+            'message' => 'Liste des reparations',
+            'success' => true,
+            'content' => $reparations
+        ]);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/reparations/findNotValidated",
+     *     summary="Get all reparations",
+     *     description="Retrieve a list of all reparations which are not validated",
+     *     operationId="reparationsNotValidated",
+     *     security={{"bearerAuth":{}}},
+     *     tags={"Reparations"},
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Validated Reparation retrieved successfully"),
+     *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Reparation"))
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     )
+     * )
+     */
+
+    public function indexNotValidate()
+    {
+        $reparations = Reparation::has('faute')->with('faute.eleve.classe')->where('status', 'en attente')->get();
+
+        return response()->json([
+            'message' => 'Liste des reparations',
+            'success' => true,
+            'content' => $reparations
+        ]);
+    }
+
 
     /**
      * @OA\Get(
@@ -210,6 +307,7 @@ class ReparationController extends Controller
         $reparation = Reparation::create([
             'fauteId' => $request->input('fauteId'),
             'demarcheMediation' => $request->input('demarcheMediation'),
+            'status' => 'En attente'
         ]);
 
         // update de faute de la reparation...
@@ -293,7 +391,7 @@ class ReparationController extends Controller
      *         response=404,
      *         description="Error - Not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Eleve not found"),
+     *             @OA\Property(property="message", type="string", example="Reparation not found"),
      *             @OA\Property(property="success", type="boolean", example=false),
      *         )
      *     ),
@@ -336,6 +434,7 @@ class ReparationController extends Controller
 
         // Mise à jour des champs de l'objet Reparation
         $reparationFound->demarcheMediation = $request->input('demarcheMediation');
+        $reparationFound->status = 'En attente';
 
         // update de la faute de reparation...
 
@@ -457,5 +556,113 @@ class ReparationController extends Controller
                 'success' => false,
             ], 404);
         }
+    }
+    /**
+     * @OA\post(
+     *     path="/api/reparations/validate/{reparationId}",
+     *     summary="Validate a reparation",
+     *     description="Mark a reparation's status as valide",
+     *     operationId="validateReparation",
+     *     tags={"Reparations"},
+     *      @OA\Parameter(
+     *         name="reparationId",
+     *         in="path",
+     *         description="ID of reparation to validate in this request",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 required={"status"},
+     *                 @OA\Property(property="status", type="string", example="valide"),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Error - Invalid request data",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Could not update this Eleve"),
+     *             @OA\Property(property="success", type="boolean", example=false),
+     *             @OA\Property(property="error", type="object", example={
+     *                 "status": {
+     *                     "The status field is required."
+     *                 },
+     *             })
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Error - Not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Reparation not found"),
+     *             @OA\Property(property="success", type="boolean", example=false),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Reparation validé avec succèss"),
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Reparation"),
+     *          )
+     *     )
+     * )
+     */
+
+    public function valider(Request $request, $id)
+    {
+        // on récupère la reparation associé
+        $reparationFound = Reparation::find($id);
+        if ($reparationFound) {
+            $validator = Validator::make($request->all(), [
+                'status' => 'required|string|in:Valide,Rejete',
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Reparation not exists',
+                'success' => false,
+            ], 404);
+        }
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Could not update this reparation',
+                'success' => false,
+                'error' => $validator->errors()
+            ], 400);
+        }
+        // Mise à jour du champ status de l'objet Reparation
+        $reparationFound->status = $request->input('status');
+        $reparationFound->save();
+
+        return response()->json([
+            'message' => 'Reparation validated successfully',
+            'success' => true,
+            'content' => $reparationFound
+        ], 200);
     }
 }

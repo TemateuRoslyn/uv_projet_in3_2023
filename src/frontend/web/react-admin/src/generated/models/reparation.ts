@@ -31,6 +31,12 @@ export interface Reparation {
     demarcheMediation: any;
     /**
      * 
+     * @type {string}
+     * @memberof Reparation
+     */
+    status?: any;
+    /**
+     * 
      * @type {Faute}
      * @memberof Reparation
      */
