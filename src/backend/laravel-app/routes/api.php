@@ -153,7 +153,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll', [ParentsController::class, 'index']);
         Route::get('findOne/{parentId}', [ParentsController::class, 'view']);
 
-        Route::middleware('permission:modifier_parent')->put('update/{parentId}', [ParentsController::class, 'update']);
+        Route::middleware('permission:modifier_parent')->post('update/{parentId}', [ParentsController::class, 'update']);
         Route::middleware('permission:creer_parent')->post('create', [ParentsController::class, 'store']);
         Route::middleware('permission:supprimer_parent')->delete('delete/{parentId}', [ParentsController::class, 'delete']);
     });
@@ -180,7 +180,7 @@ Route::middleware('jwt.verify')->group(function () {
     // cours
     Route::prefix('cours')->group(function () {
         Route::middleware('permission:creer_cours')->post('create', [CourController::class, 'store']);
-        Route::middleware('permission:modifier_cours')->put('update/{coursId}', [CourController::class, 'update']);
+        Route::middleware('permission:modifier_cours')->post('update/{coursId}', [CourController::class, 'update']);
         Route::middleware('permission:supprimer_cours')->delete('delete/{coursId}', [CourController::class, 'delete']);
         Route::get('findOne/{coursId}', [CourController::class, 'show']);
         Route::get('findAll', [CourController::class, 'index']);

@@ -257,6 +257,15 @@ class CourController extends Controller
      *         ),
      *         description="JWT token"
      *     ),
+     *       @OA\Parameter(
+     *         name="coursId",
+     *         in="path",
+     *         description="cours ID",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -316,10 +325,11 @@ class CourController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'libelle' => 'required',
-                'date_cour' => 'required|date',
-                'heure_debut' => 'required|date',
-                'heure_fin' => 'required|date',
-                'classesId' => 'required|array'
+                'dateCour' => 'required|date',
+            'heureDebut' => 'required|date',
+            'heureFin' => 'required|date',
+            'classesId' => 'required',
+            'classesId.*' => 'required|integer|exists:classes,id',
             ]);
         } else {
             return response()->json([
@@ -339,16 +349,23 @@ class CourController extends Controller
 
         // Mise à jour des champs de l'objet Cour
         $courFound->libelle = $request->input('libelle');
-        $courFound->date_cour = $request->input('date_cour');
-        $courFound->heure_debut = $request->input('heure_debut');
-        $courFound->heure_fin = $request->input('heure_fin');
+        $courFound->date_cour = $request->input('dateCour');
+        $courFound->heure_debut = $request->input('heureDebut');
+        $courFound->heure_fin = $request->input('heureFin');
         //   $courFound->professeur_id = $request->input('professeur_id');
 
         $courFound->save();
+        $tmp = $request->input('classesId');
+        if (is_string($tmp)) {
+            $classeIds = array_unique(array_map('intval', explode(',', $tmp)));
+        } else {
+            $classeIds = array_unique($tmp);
+        }
+
 
         CoursClasse::where('courId', $courFound->id)->delete();
 
-        foreach ($request->classesId as $classeId) {
+        foreach ($classeIds as $classeId) {
             CoursClasse::create([
                 'courId' => $courFound->id,
                 'classeId' => $classeId

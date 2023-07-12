@@ -41,20 +41,16 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
     props.item ? props.item.libelle : ''
   );
   const [dateCour, setDateCour] = useState<string>(
-    props.item ? props.item.dateCour : ''
+    props.item ? props.item.date_cour : ''
   );
   const [heureDebut, setHeureDebut] = useState<string>(
-    props.item ? props.item.heureDebut : ''
+    props.item ? props.item.heure_debut : ''
   );
   const [heureFin, setHeureFin] = useState<string>(
-    props.item ? props.item.heureFin : ''
+    props.item ? props.item.heure_fin : ''
   );
-    const [selectedClasses, setSelectedClasses]  = useState<Classe[]>( props.item? props.item.classes: []);
-
-    const [professeur, setProfesseur] = useState<Professeur>(props.item? props.item.professeur : '');
-
   const [classesId, setClassesId]=useState<number[]>(
-    props.item? props.item.classesId:[]
+    props.item? props.item.classes.map((classItem: Classe) => classItem.id):[]
   );
   const handleLibelleChange = (event: any) => setLibelle(event.target.value);
   const handleDateCourChange = (event: any) => setDateCour(event.target.value);
@@ -98,6 +94,15 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
         .finally(() => {});
     }
   };
+
+  const addId = (id: number): void => {
+    setClassesId((prevIds) => [...prevIds, id]);
+  };
+  
+  const removeId = (id: number): void => {
+    setClassesId((prevIds) => prevIds.filter((prevId) => prevId === id));
+  };
+  
   const extractIdFromString = (str: string): number | null => {
     const matches = str.match(/:(\d+)$/);
     if (matches && matches[1]) {
@@ -111,8 +116,34 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
     return null;
   };
 
-
   const handleOptionSelect = (option: string[]) => {
+    if (option.length < classesId.length) {
+      // Removing IDs
+      console.log(option,classesId)
+      const selectedIds :(number | null)[]= option.map((item) => extractIdFromString(item));
+   
+      setClassesId(selectedIds)
+      console.log("removing ")
+    } else {
+      // Adding IDs
+      console.log(option,classesId)
+      console.log("adding ")
+      option.forEach((item) => {
+        const id = extractIdFromString(item);
+        if (id !== null && !classesId.includes(id)) {
+          addId(id);
+          console.log("adding " + id)
+        }
+      });
+    }
+    console.log(classesId);
+  };
+  
+  
+
+ /*  const handleOptionSelect = (option: string[]) => {
+    if(option.length < classesId.length)
+    
     option.forEach(item => {
       const id = extractIdFromString(item);
       console.log(id);
@@ -120,10 +151,11 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
       console.log("not empty")
       setClassesId(classesId => [...classesId, id]);
     });
-  };
+  }; */
   
   useEffect(() => {
     console.log(classesId);
+    //setClassesId(classesId)
   }, [classesId]);
 
   const handleCreate = (_event: any) => {
@@ -246,7 +278,7 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
           </button>
           <div className="modal-body">
             <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
-              <h2 className=" modal-title font-medium text-black dark:text-white">
+              <h2 className="   mb-[1rem] text-size-[1.25rem] font-medium text-black dark:text-white">
                 {props.title}
               </h2>
             </div>
@@ -292,7 +324,7 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
                 </label>
                 <input
                   type="date"
-                  id="date_cour"
+                  id="dateCour"
                   name='dateCour'
                   value={dateCour}
                   disabled={props.mode === MODAL_MODE.view}
@@ -311,7 +343,7 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
                 </label>
                 <input
                   type="date"
-                  id="heure_debut"
+                  id="heureDebut"
                   name='heureDebut'
                   value={heureDebut}
                   disabled={props.mode === MODAL_MODE.view}
@@ -330,7 +362,7 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
                 </label>
                 <input
                   type="date"
-                  id="heure_fin"
+                  id="heureFin"
                   name='heureFin'
                   value={heureFin}
                   disabled={props.mode === MODAL_MODE.view}
@@ -339,19 +371,6 @@ const CreateOrUpdateCoursModal: React.FC<ModalProps> = (props) => {
                     props.mode === MODAL_MODE.view ? 'disabled-input' : ''
                   }`}
                 />
-                 <CustomSelectInput
-                    required={true}
-                    inputLabel="Salle de classe"
-                    inputPlaceholder="Saisir le nom d'une classe"
-                    wrapperStyle="w-full"
-                    labelStyle="mb-2.5 block text-black dark:text-white"
-                    inputStyle="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    maxHeightList={100}
-                    matchList={matchList}
-                    selectOptionEvent={handleOptionSelect}
-                    typingInputEvent={handleTypingInput}
-                  />
-
               </div>
             </form>
             {props.mode === MODAL_MODE.view ? null : (

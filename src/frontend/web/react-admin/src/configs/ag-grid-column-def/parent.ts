@@ -2,6 +2,7 @@ import { ColDef, ValueGetterParams } from "ag-grid-community";
 import { Parents } from "../../generated/models";
 import { ImageCellRender } from "../../components/AgGridCells/ImageCelleRender";
 import environment from "../../environments/environment";
+import ListCellRendererParent from "../../components/AgGridCells/ListCellRendererParent";
 
 
 export const PARENT_COLUMNS_DEFS: ColDef[] = [
@@ -62,6 +63,15 @@ export const PARENT_COLUMNS_DEFS: ColDef[] = [
     // }
     
   },
+  {
+    headerName: 'Eleves',
+    field: 'eleves',
+    filter: 'agTextColumnFilter',
+    checkboxSelection: false,
+    showDisabledCheckboxes: true,
+    width: 300,
+    cellRendererFramework: ListCellRendererParent,
+  }, 
   { 
     headerName: 'Téléphone', 
     field: 'telephone',

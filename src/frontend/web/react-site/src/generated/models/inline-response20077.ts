@@ -26,13 +26,25 @@ export interface InlineResponse20077 {
     /**
      * 
      * @type {string}
+<<<<<<< HEAD
      * @memberof InlineResponse20077
      */
     message?: any;
     /**
      * 
      * @type {Array&lt;Reparation&gt;}
+=======
+<<<<<<< HEAD
+>>>>>>> 28546ee (Task #339)
      * @memberof InlineResponse20077
      */
-    content?: any;
+    message?: any;
+    /**
+     * 
+     * @type {Array&lt;Reparation&gt;}
+=======
+>>>>>>> beca218 (Task 333 (#334))
+     * @memberof InlineResponse20077
+     */
+    message?: any;
 }

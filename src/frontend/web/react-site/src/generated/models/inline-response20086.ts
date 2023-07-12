@@ -19,19 +19,19 @@
 export interface InlineResponse20086 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20086
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20086
      */
     success?: any;
     /**
      * 
-     * @type {SanctionPrevu}
+     * @type {string}
+     * @memberof InlineResponse20086
+     */
+    message?: any;
+    /**
+     * 
+     * @type {Array&lt;SanctionPrevu&gt;}
      * @memberof InlineResponse20086
      */
     content?: any;
