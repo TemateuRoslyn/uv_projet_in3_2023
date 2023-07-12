@@ -66,7 +66,7 @@ const Login: React.FC<LoginProps> = (props) => {
 
     setIsLoading(true);
     console.log("Here2");
-    await authApi
+     authApi
       .authLogin(apiParams)
       .then((response) => {
         console.log("Hereauth");

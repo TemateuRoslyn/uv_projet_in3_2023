@@ -21,13 +21,7 @@ import { InlineResponse20068 } from '../models';
 import { InlineResponse20069 } from '../models';
 import { InlineResponse20070 } from '../models';
 import { InlineResponse20071 } from '../models';
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 import { InlineResponse20072 } from '../models';
->>>>>>> beca218 (Task 333 (#334))
->>>>>>> 28546ee (Task #339)
 import { InlineResponse40026 } from '../models';
 import { InlineResponse40027 } from '../models';
 import { InlineResponse4005 } from '../models';
@@ -402,15 +396,7 @@ export const ReglesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        async reglesRecords(keyword: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20071>> {
-=======
-<<<<<<< HEAD
-        async reglesRecords(keyword: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20071>> {
-=======
         async reglesRecords(keyword: string, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20072>> {
->>>>>>> beca218 (Task 333 (#334))
->>>>>>> 28546ee (Task #339)
             const localVarAxiosArgs = await ReglesApiAxiosParamCreator(configuration).reglesRecords(keyword, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -497,15 +483,7 @@ export const ReglesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-        reglesRecords(keyword: string, authorization: string, options?: any): AxiosPromise<InlineResponse20071> {
-=======
-<<<<<<< HEAD
-        reglesRecords(keyword: string, authorization: string, options?: any): AxiosPromise<InlineResponse20071> {
-=======
         reglesRecords(keyword: string, authorization: string, options?: any): AxiosPromise<InlineResponse20072> {
->>>>>>> beca218 (Task 333 (#334))
->>>>>>> 28546ee (Task #339)
             return ReglesApiFp(configuration).reglesRecords(keyword, authorization, options).then((request) => request(axios, basePath));
         },
         /**

@@ -106,9 +106,10 @@ p {
 }
 
 .back {
-    background-image: url("../public/images/back.webp");
+background-image: url("../public/images/bg.webp");
     background-size: cover;
     background-attachment: fixed;
+    
     position: absolute;
     top: 0;
     left: 0;

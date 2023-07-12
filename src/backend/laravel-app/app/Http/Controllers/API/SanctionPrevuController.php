@@ -172,7 +172,7 @@ class SanctionPrevuController extends Controller
      *         description="JWT token"
      *     ),
      *      @OA\Parameter(
-     *         name="id",
+     *         name="eleveId",
      *         in="path",
      *         description="ID of Eleve to get information for",
      *         required=true,
