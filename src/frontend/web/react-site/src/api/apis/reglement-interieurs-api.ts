@@ -185,25 +185,37 @@ export const ReglementInterieursApiAxiosParamCreator = function (configuration?:
          * @param {string} authorization JWT token
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
          * @param {number} reglementId2 ID of reglement to update in this request
 =======
 >>>>>>> 0b7e9d7 (Testing)
 =======
          * @param {number} reglementId2 ID of reglement to update in this request
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+         * @param {number} reglementId2 ID of reglement to update in this request
+=======
+>>>>>>> 0b7e9d7 (Testing)
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
          * @param {number} reglementId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
         updateReglementInterieur: async (body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options: any = {}): Promise<RequestArgs> => {
 =======
         updateReglementInterieur: async (body: UpdateReglementIdBody, authorization: string, reglementId: number, options: any = {}): Promise<RequestArgs> => {
 >>>>>>> 0b7e9d7 (Testing)
+<<<<<<< HEAD
 =======
         updateReglementInterieur: async (body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options: any = {}): Promise<RequestArgs> => {
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling updateReglementInterieur.');
@@ -214,17 +226,25 @@ export const ReglementInterieursApiAxiosParamCreator = function (configuration?:
             }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
             // verify required parameter 'reglementId2' is not null or undefined
             if (reglementId2 === null || reglementId2 === undefined) {
                 throw new RequiredError('reglementId2','Required parameter reglementId2 was null or undefined when calling updateReglementInterieur.');
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 0b7e9d7 (Testing)
 =======
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+=======
+>>>>>>> 0b7e9d7 (Testing)
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
             // verify required parameter 'reglementId' is not null or undefined
             if (reglementId === null || reglementId === undefined) {
                 throw new RequiredError('reglementId','Required parameter reglementId was null or undefined when calling updateReglementInterieur.');
@@ -232,12 +252,18 @@ export const ReglementInterieursApiAxiosParamCreator = function (configuration?:
             const localVarPath = `/api/reglement/update/{reglementId}`
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .replace(`{${"reglementId"}}`, encodeURIComponent(String(reglementId)))
 =======
 >>>>>>> 0b7e9d7 (Testing)
 =======
                 .replace(`{${"reglementId"}}`, encodeURIComponent(String(reglementId)))
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+                .replace(`{${"reglementId"}}`, encodeURIComponent(String(reglementId)))
+=======
+>>>>>>> 0b7e9d7 (Testing)
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
                 .replace(`{${"reglementId"}}`, encodeURIComponent(String(reglementId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -382,28 +408,40 @@ export const ReglementInterieursApiFp = function(configuration?: Configuration) 
          * @param {string} authorization JWT token
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
          * @param {number} reglementId2 ID of reglement to update in this request
 =======
 >>>>>>> 0b7e9d7 (Testing)
 =======
          * @param {number} reglementId2 ID of reglement to update in this request
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+         * @param {number} reglementId2 ID of reglement to update in this request
+=======
+>>>>>>> 0b7e9d7 (Testing)
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
          * @param {number} reglementId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
         async updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20073>> {
             const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).updateReglementInterieur(body, authorization, reglementId2, reglementId, options);
 =======
         async updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20073>> {
             const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).updateReglementInterieur(body, authorization, reglementId, options);
 >>>>>>> 0b7e9d7 (Testing)
+<<<<<<< HEAD
 =======
         async updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20073>> {
             const localVarAxiosArgs = await ReglementInterieursApiAxiosParamCreator(configuration).updateReglementInterieur(body, authorization, reglementId2, reglementId, options);
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -472,28 +510,40 @@ export const ReglementInterieursApiFactory = function (configuration?: Configura
          * @param {string} authorization JWT token
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
          * @param {number} reglementId2 ID of reglement to update in this request
 =======
 >>>>>>> 0b7e9d7 (Testing)
 =======
          * @param {number} reglementId2 ID of reglement to update in this request
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+         * @param {number} reglementId2 ID of reglement to update in this request
+=======
+>>>>>>> 0b7e9d7 (Testing)
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
          * @param {number} reglementId ID of eleve to update in this request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
         updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options?: any): AxiosPromise<InlineResponse20073> {
             return ReglementInterieursApiFp(configuration).updateReglementInterieur(body, authorization, reglementId2, reglementId, options).then((request) => request(axios, basePath));
 =======
         updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId: number, options?: any): AxiosPromise<InlineResponse20073> {
             return ReglementInterieursApiFp(configuration).updateReglementInterieur(body, authorization, reglementId, options).then((request) => request(axios, basePath));
 >>>>>>> 0b7e9d7 (Testing)
+<<<<<<< HEAD
 =======
         updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options?: any): AxiosPromise<InlineResponse20073> {
             return ReglementInterieursApiFp(configuration).updateReglementInterieur(body, authorization, reglementId2, reglementId, options).then((request) => request(axios, basePath));
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
         },
         /**
          * Get information about a specific reglementInterieur
@@ -558,12 +608,18 @@ export class ReglementInterieursApi extends BaseAPI {
      * @param {string} authorization JWT token
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
      * @param {number} reglementId2 ID of reglement to update in this request
 =======
 >>>>>>> 0b7e9d7 (Testing)
 =======
      * @param {number} reglementId2 ID of reglement to update in this request
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+     * @param {number} reglementId2 ID of reglement to update in this request
+=======
+>>>>>>> 0b7e9d7 (Testing)
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
      * @param {number} reglementId ID of eleve to update in this request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -571,16 +627,22 @@ export class ReglementInterieursApi extends BaseAPI {
      */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
     public updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options?: any) {
         return ReglementInterieursApiFp(this.configuration).updateReglementInterieur(body, authorization, reglementId2, reglementId, options).then((request) => request(this.axios, this.basePath));
 =======
     public updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId: number, options?: any) {
         return ReglementInterieursApiFp(this.configuration).updateReglementInterieur(body, authorization, reglementId, options).then((request) => request(this.axios, this.basePath));
 >>>>>>> 0b7e9d7 (Testing)
+<<<<<<< HEAD
 =======
     public updateReglementInterieur(body: UpdateReglementIdBody, authorization: string, reglementId2: number, reglementId: number, options?: any) {
         return ReglementInterieursApiFp(this.configuration).updateReglementInterieur(body, authorization, reglementId2, reglementId, options).then((request) => request(this.axios, this.basePath));
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
     }
     /**
      * Get information about a specific reglementInterieur

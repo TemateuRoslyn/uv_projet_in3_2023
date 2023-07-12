@@ -118,11 +118,18 @@ const SignIn: React.FC<SignInProps> = (props) => {
         <div className="flex flex-wrap items-center h-full">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="py-17.5 px-26 text-center">
-            <h1 className=''>School Discipline </h1>
-              <Link className="mb-5.5 inline-block flex" to="/">
-                <img className="hidden dark:block w-70 h-70" src={Logo} alt="Logo" width={70} height={70} /> 
+         
+              <Link className="mb-5.5 inline-block flex justify-center" to="/">
+              <span>
+                
+                <img className="hidden dark:block w-70 h-70" src={Logo} alt="Logo" width={100} height={70} /> 
        
-                <img className="dark:hidden" src={LogoDark} alt="Logo" />
+                <img className="dark:hidden" src={LogoDark} alt="Logo" width={70} height={70} />
+               
+              </span>
+              <span className="text-bolder pt-5 text-2xl justify-content-center align-items-center ">
+              School Discipline 
+              </span>
               </Link>
 
               <h3 className="2xl:px-20">

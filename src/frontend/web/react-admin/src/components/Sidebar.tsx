@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import Logo from '../images/logo/logo.png';
+//import Logo from '../images/logo/logo.png';
+import Logo from "../pages/Authentication/SignIn/components/logo.png"
 import SidebarLinkGroup from './SidebarLinkGroup';
 
 interface SidebarProps {
@@ -65,7 +66,21 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-2.5">
         <NavLink to="/" className="flex justify-center align-item-center text-center">
-          <img src={Logo} alt="Logo" className='justify-center flex item-center'/>
+         {/*  <img src={Logo} alt="Logo" className='justify-center flex item-center'/> */}
+         <div className='flex text-center justify-content-center justify-center'>
+            <div className="mb-2.5 inline-block flex">
+              <span>
+                
+                <img className="hidden dark:block" src={Logo} alt="Logo" width={70} height={70} /> 
+       
+                <img className="dark:hidden" src={Logo} alt="Logo" width={70} height={70} />
+               
+              </span>
+              <span className="text-bolder pt-5 justify-content-center align-items-center ">
+              School Discipline 
+              </span>
+              </div> 
+              </div>
         </NavLink>
 
         <button

@@ -191,10 +191,11 @@ class CourController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'libelle' => 'required',
-            'date_cour' => 'required|date',
-            'heure_debut' => 'required|date',
-            'heure_fin' => 'required|date',
-            'classesId' => 'required|array'
+            'dateCour' => 'required|date',
+            'heureDebut' => 'required|date',
+            'heureFin' => 'required|date',
+            'classesId' => 'required',
+            'classesId.*' => 'required|integer|exists:classes,id',
         ]);
 
         if ($validator->fails()) {
@@ -206,13 +207,21 @@ class CourController extends Controller
         }
         $cour = Cour::create([
             'libelle' => $request->libelle,
-            'date_cour' => $request->date_cour,
-            'heure_debut' => $request->heure_debut,
-            'heure_fin' => $request->heure_fin,
+            'date_cour' => $request->dateCour,
+            'heure_debut' => $request->heureDebut,
+            'heure_fin' => $request->heureFin,
             //  'professeur_id' => $request->professeur_id,
         ]);
+            /*Recupere le tableau contenant les ids des eleves puis verifie si ce
+        n'etait pas une chaine de caractere si oui converti en tableau*/
+        $tmp = $request->input('classesId');
+        if (is_string($tmp)) {
+            $classeIds = array_unique(array_map('intval', explode(',', $tmp)));
+        } else {
+            $classeIds = array_unique($tmp);
+        }
 
-        foreach ($request->classesId as $classeId) {
+        foreach ($classeIds as $classeId){//($request->classesId as $classeId) {
             CoursClasse::create([
                 'courId' => $cour->id,
                 'classeId' => $classeId
@@ -232,7 +241,7 @@ class CourController extends Controller
 
 
     /**
-     * @OA\put(
+     * @OA\post(
      *     path="/api/cours/update/{coursId}",
      *     summary="Update a cour's information",
      *     description="Update a cour's information",
@@ -247,6 +256,15 @@ class CourController extends Controller
      *             default="Bearer {your_token}"
      *         ),
      *         description="JWT token"
+     *     ),
+     *       @OA\Parameter(
+     *         name="coursId",
+     *         in="path",
+     *         description="cours ID",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
      *     ),
      *      @OA\RequestBody(
      *         required=true,
@@ -307,10 +325,11 @@ class CourController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'libelle' => 'required',
-                'date_cour' => 'required|date',
-                'heure_debut' => 'required|date',
-                'heure_fin' => 'required|date',
-                'classesId' => 'required|array'
+                'dateCour' => 'required|date',
+            'heureDebut' => 'required|date',
+            'heureFin' => 'required|date',
+            'classesId' => 'required',
+            'classesId.*' => 'required|integer|exists:classes,id',
             ]);
         } else {
             return response()->json([
@@ -330,16 +349,23 @@ class CourController extends Controller
 
         // Mise à jour des champs de l'objet Cour
         $courFound->libelle = $request->input('libelle');
-        $courFound->date_cour = $request->input('date_cour');
-        $courFound->heure_debut = $request->input('heure_debut');
-        $courFound->heure_fin = $request->input('heure_fin');
+        $courFound->date_cour = $request->input('dateCour');
+        $courFound->heure_debut = $request->input('heureDebut');
+        $courFound->heure_fin = $request->input('heureFin');
         //   $courFound->professeur_id = $request->input('professeur_id');
 
         $courFound->save();
+        $tmp = $request->input('classesId');
+        if (is_string($tmp)) {
+            $classeIds = array_unique(array_map('intval', explode(',', $tmp)));
+        } else {
+            $classeIds = array_unique($tmp);
+        }
+
 
         CoursClasse::where('courId', $courFound->id)->delete();
 
-        foreach ($request->classesId as $classeId) {
+        foreach ($classeIds as $classeId) {
             CoursClasse::create([
                 'courId' => $courFound->id,
                 'classeId' => $classeId

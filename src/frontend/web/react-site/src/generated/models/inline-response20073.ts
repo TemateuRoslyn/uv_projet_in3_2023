@@ -25,7 +25,17 @@ export interface InlineResponse20073 {
     success?: any;
     /**
      * 
+     * @type {string}
+     * @memberof InlineResponse20073
+     */
+    message?: any;
+    /**
+     * 
+<<<<<<< HEAD
      * @type {ReglementInterieur}
+=======
+     * @type {Array&lt;ReglementInterieur&gt;}
+>>>>>>> beca218 (Task 333 (#334))
      * @memberof InlineResponse20073
      */
     content?: any;

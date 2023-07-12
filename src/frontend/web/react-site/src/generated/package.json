@@ -11,8 +11,8 @@
     ""
   ],
   "license": "Unlicense",
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
+  "main": "./index.js",
+  "typings": "./index.d.ts",
   "scripts": {
     "build": "tsc --outDir dist/",
     "prepublishOnly": "npm run build"

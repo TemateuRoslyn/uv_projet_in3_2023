@@ -30,6 +30,9 @@ export interface InlineResponse20089 {
      */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
     success?: any;
 =======
 <<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response20089.ts
@@ -39,9 +42,12 @@ export interface InlineResponse20089 {
 <<<<<<< HEAD
 >>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/models/inline-response20089.ts
 >>>>>>> 0b7e9d7 (Testing)
+<<<<<<< HEAD
 =======
     success?: any;
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
     /**
      * 
      * @type {Suggestion}
@@ -50,10 +56,16 @@ export interface InlineResponse20089 {
     content?: any;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
 =======
 =======
 >>>>>>> 7faa1c6 (maj reglement interieur)
 >>>>>>> 0b7e9d7 (Testing)
+<<<<<<< HEAD
 =======
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
 }

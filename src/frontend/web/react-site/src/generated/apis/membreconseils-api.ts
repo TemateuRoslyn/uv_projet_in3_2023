@@ -16,17 +16,17 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20041 } from '../models';
 import { InlineResponse20042 } from '../models';
 import { InlineResponse20043 } from '../models';
 import { InlineResponse20044 } from '../models';
+import { InlineResponse20045 } from '../models';
 import { InlineResponse2015 } from '../models';
 import { InlineResponse40015 } from '../models';
 import { InlineResponse40016 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse40418 } from '../models';
 import { InlineResponse40419 } from '../models';
 import { InlineResponse40420 } from '../models';
+import { InlineResponse40421 } from '../models';
 import { InlineResponse4223 } from '../models';
 /**
  * MembreconseilsApi - axios parameter creator
@@ -363,7 +363,7 @@ export const MembreconseilsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteMembreConseil(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20044>> {
+        async deleteMembreConseil(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20045>> {
             const localVarAxiosArgs = await MembreconseilsApiAxiosParamCreator(configuration).deleteMembreConseil(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -377,7 +377,7 @@ export const MembreconseilsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async membreconseilsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20041>> {
+        async membreconseilsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20042>> {
             const localVarAxiosArgs = await MembreconseilsApiAxiosParamCreator(configuration).membreconseilsIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -395,7 +395,7 @@ export const MembreconseilsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateMembreConseil(idChef: number, idSurveillantG: number, idRepresentantE: number, authorization: string, membreconseilId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20043>> {
+        async updateMembreConseil(idChef: number, idSurveillantG: number, idRepresentantE: number, authorization: string, membreconseilId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20044>> {
             const localVarAxiosArgs = await MembreconseilsApiAxiosParamCreator(configuration).updateMembreConseil(idChef, idSurveillantG, idRepresentantE, authorization, membreconseilId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -410,7 +410,7 @@ export const MembreconseilsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewMembreConseil(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20042>> {
+        async viewMembreConseil(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20043>> {
             const localVarAxiosArgs = await MembreconseilsApiAxiosParamCreator(configuration).viewMembreConseil(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -447,7 +447,7 @@ export const MembreconseilsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteMembreConseil(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20044> {
+        deleteMembreConseil(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20045> {
             return MembreconseilsApiFp(configuration).deleteMembreConseil(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -457,7 +457,7 @@ export const MembreconseilsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        membreconseilsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20041> {
+        membreconseilsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20042> {
             return MembreconseilsApiFp(configuration).membreconseilsIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -471,7 +471,7 @@ export const MembreconseilsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateMembreConseil(idChef: number, idSurveillantG: number, idRepresentantE: number, authorization: string, membreconseilId: number, options?: any): AxiosPromise<InlineResponse20043> {
+        updateMembreConseil(idChef: number, idSurveillantG: number, idRepresentantE: number, authorization: string, membreconseilId: number, options?: any): AxiosPromise<InlineResponse20044> {
             return MembreconseilsApiFp(configuration).updateMembreConseil(idChef, idSurveillantG, idRepresentantE, authorization, membreconseilId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -482,7 +482,7 @@ export const MembreconseilsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewMembreConseil(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20042> {
+        viewMembreConseil(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20043> {
             return MembreconseilsApiFp(configuration).viewMembreConseil(authorization, id, options).then((request) => request(axios, basePath));
         },
     };

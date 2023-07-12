@@ -19,20 +19,23 @@
 export interface InlineResponse20080 {
     /**
      * 
+     * @type {string}
+     * @memberof InlineResponse20080
+     */
+    message?: any;
+<<<<<<< HEAD
+=======
+    /**
+     * 
      * @type {boolean}
      * @memberof InlineResponse20080
      */
     success?: any;
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20080
-     */
-    message?: any;
-    /**
-     * 
-     * @type {Array&lt;Role&gt;}
+     * @type {Reparation}
      * @memberof InlineResponse20080
      */
     content?: any;
+>>>>>>> beca218 (Task 333 (#334))
 }

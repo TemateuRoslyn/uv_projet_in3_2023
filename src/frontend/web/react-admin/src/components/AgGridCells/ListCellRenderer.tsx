@@ -3,12 +3,15 @@ import React from 'react';
 const ListCellRenderer = ({ data }) => {
   const { classes } = data;
   
+  const classesitems = classes.map((classItem, index) => {
+    if(classItem.speciality === null ) 
+    return classItem.shortName + classItem.no;
+    return classItem.shortName + classItem.speciality + classItem.no;
+});
   return (
-    <ul>
-      {classes.map((classItem, index) => (
-        <li key={index}>{classItem.name}</li>
-      ))}
-    </ul>
+    <span>
+      {classesitems.join(',').split()}
+    </span>
   );
 };
 

@@ -16,18 +16,25 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20089 } from '../models';
+<<<<<<< HEAD
 import { InlineResponse20090 } from '../models';
+=======
+>>>>>>> beca218 (Task 333 (#334))
 import { InlineResponse20091 } from '../models';
 import { InlineResponse20092 } from '../models';
 import { InlineResponse20093 } from '../models';
 import { InlineResponse20094 } from '../models';
 import { InlineResponse20095 } from '../models';
+import { InlineResponse20096 } from '../models';
+<<<<<<< HEAD
+=======
+import { InlineResponse20097 } from '../models';
+>>>>>>> beca218 (Task 333 (#334))
 import { InlineResponse40035 } from '../models';
 import { InlineResponse40036 } from '../models';
 import { InlineResponse401 } from '../models';
-import { InlineResponse40445 } from '../models';
 import { InlineResponse40446 } from '../models';
+import { InlineResponse40447 } from '../models';
 import { SuggestionCreateBody } from '../models';
 import { UpdateSuggestionIdBody } from '../models';
 /**
@@ -439,7 +446,11 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
+<<<<<<< HEAD
+        async createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20092>> {
+=======
+        async createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20093>> {
+>>>>>>> beca218 (Task 333 (#334))
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).createSuggestion(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -454,7 +465,11 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20093>> {
+<<<<<<< HEAD
+        async deleteSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20094>> {
+=======
+        async deleteSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20095>> {
+>>>>>>> beca218 (Task 333 (#334))
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).deleteSuggestion(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -468,7 +483,11 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readAllSuggestion(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20095>> {
+<<<<<<< HEAD
+        async readAllSuggestion(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20096>> {
+=======
+        async readAllSuggestion(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20097>> {
+>>>>>>> beca218 (Task 333 (#334))
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).readAllSuggestion(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -483,7 +502,11 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async readSuggestion(suggestionId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20094>> {
+<<<<<<< HEAD
+        async readSuggestion(suggestionId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20095>> {
+=======
+        async readSuggestion(suggestionId: number, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20096>> {
+>>>>>>> beca218 (Task 333 (#334))
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).readSuggestion(suggestionId, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -497,7 +520,11 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async suggestionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20089>> {
+<<<<<<< HEAD
+        async suggestionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20090>> {
+=======
+        async suggestionsIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
+>>>>>>> beca218 (Task 333 (#334))
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).suggestionsIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -511,7 +538,11 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async suggestionsNotRead(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20089>> {
+<<<<<<< HEAD
+        async suggestionsNotRead(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20090>> {
+=======
+        async suggestionsNotRead(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
+>>>>>>> beca218 (Task 333 (#334))
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).suggestionsNotRead(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -527,7 +558,11 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateSuggestion(body: UpdateSuggestionIdBody, authorization: string, suggestionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20092>> {
+<<<<<<< HEAD
+        async updateSuggestion(body: UpdateSuggestionIdBody, authorization: string, suggestionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20093>> {
+=======
+        async updateSuggestion(body: UpdateSuggestionIdBody, authorization: string, suggestionId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20094>> {
+>>>>>>> beca218 (Task 333 (#334))
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).updateSuggestion(body, authorization, suggestionId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -542,7 +577,11 @@ export const SuggestionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20090>> {
+<<<<<<< HEAD
+        async viewSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20091>> {
+=======
+        async viewSuggestion(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20092>> {
+>>>>>>> beca218 (Task 333 (#334))
             const localVarAxiosArgs = await SuggestionsApiAxiosParamCreator(configuration).viewSuggestion(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -566,7 +605,11 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20091> {
+<<<<<<< HEAD
+        createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20092> {
+=======
+        createSuggestion(body: SuggestionCreateBody, authorization: string, options?: any): AxiosPromise<InlineResponse20093> {
+>>>>>>> beca218 (Task 333 (#334))
             return SuggestionsApiFp(configuration).createSuggestion(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -577,7 +620,11 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20093> {
+<<<<<<< HEAD
+        deleteSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20094> {
+=======
+        deleteSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20095> {
+>>>>>>> beca218 (Task 333 (#334))
             return SuggestionsApiFp(configuration).deleteSuggestion(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -587,7 +634,11 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readAllSuggestion(authorization: string, options?: any): AxiosPromise<InlineResponse20095> {
+<<<<<<< HEAD
+        readAllSuggestion(authorization: string, options?: any): AxiosPromise<InlineResponse20096> {
+=======
+        readAllSuggestion(authorization: string, options?: any): AxiosPromise<InlineResponse20097> {
+>>>>>>> beca218 (Task 333 (#334))
             return SuggestionsApiFp(configuration).readAllSuggestion(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -598,7 +649,11 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        readSuggestion(suggestionId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20094> {
+<<<<<<< HEAD
+        readSuggestion(suggestionId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20095> {
+=======
+        readSuggestion(suggestionId: number, authorization: string, options?: any): AxiosPromise<InlineResponse20096> {
+>>>>>>> beca218 (Task 333 (#334))
             return SuggestionsApiFp(configuration).readSuggestion(suggestionId, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -608,7 +663,11 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        suggestionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20089> {
+<<<<<<< HEAD
+        suggestionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20090> {
+=======
+        suggestionsIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20091> {
+>>>>>>> beca218 (Task 333 (#334))
             return SuggestionsApiFp(configuration).suggestionsIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -618,7 +677,11 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        suggestionsNotRead(authorization: string, options?: any): AxiosPromise<InlineResponse20089> {
+<<<<<<< HEAD
+        suggestionsNotRead(authorization: string, options?: any): AxiosPromise<InlineResponse20090> {
+=======
+        suggestionsNotRead(authorization: string, options?: any): AxiosPromise<InlineResponse20091> {
+>>>>>>> beca218 (Task 333 (#334))
             return SuggestionsApiFp(configuration).suggestionsNotRead(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -630,7 +693,11 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateSuggestion(body: UpdateSuggestionIdBody, authorization: string, suggestionId: number, options?: any): AxiosPromise<InlineResponse20092> {
+<<<<<<< HEAD
+        updateSuggestion(body: UpdateSuggestionIdBody, authorization: string, suggestionId: number, options?: any): AxiosPromise<InlineResponse20093> {
+=======
+        updateSuggestion(body: UpdateSuggestionIdBody, authorization: string, suggestionId: number, options?: any): AxiosPromise<InlineResponse20094> {
+>>>>>>> beca218 (Task 333 (#334))
             return SuggestionsApiFp(configuration).updateSuggestion(body, authorization, suggestionId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -641,7 +708,11 @@ export const SuggestionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20090> {
+<<<<<<< HEAD
+        viewSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20091> {
+=======
+        viewSuggestion(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20092> {
+>>>>>>> beca218 (Task 333 (#334))
             return SuggestionsApiFp(configuration).viewSuggestion(authorization, id, options).then((request) => request(axios, basePath));
         },
     };

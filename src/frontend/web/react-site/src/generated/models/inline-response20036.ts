@@ -31,14 +31,8 @@ export interface InlineResponse20036 {
     success?: any;
     /**
      * 
-     * @type {Array&lt;string&gt;}
+     * @type {any}
      * @memberof InlineResponse20036
      */
     content?: any;
-    /**
-     * 
-     * @type {Faute}
-     * @memberof InlineResponse20036
-     */
-    data?: any;
 }

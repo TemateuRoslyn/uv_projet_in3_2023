@@ -29,10 +29,13 @@ export interface InlineResponse20084 {
      * @memberof InlineResponse20084
      */
     message?: any;
+<<<<<<< HEAD
+=======
     /**
      * 
-     * @type {Array&lt;SanctionPrevu&gt;}
+     * @type {Role}
      * @memberof InlineResponse20084
      */
     content?: any;
+>>>>>>> beca218 (Task 333 (#334))
 }

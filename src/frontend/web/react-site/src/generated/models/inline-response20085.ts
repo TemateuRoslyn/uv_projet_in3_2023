@@ -19,20 +19,23 @@
 export interface InlineResponse20085 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20085
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20085
      */
     success?: any;
     /**
      * 
-     * @type {SanctionPrevu}
+     * @type {string}
+<<<<<<< HEAD
      * @memberof InlineResponse20085
      */
-    content?: any;
+    message?: any;
+    /**
+     * 
+     * @type {Array&lt;SanctionPrevu&gt;}
+=======
+>>>>>>> beca218 (Task 333 (#334))
+     * @memberof InlineResponse20085
+     */
+    message?: any;
 }

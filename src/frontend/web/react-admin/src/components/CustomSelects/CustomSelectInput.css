@@ -23,7 +23,7 @@
 
 .selected-options-wrapper {
   display: flex;
-  flex-direction: row; /* Modifier de column à row */
+  flex-direction: column; /* Modifier de column à row */
   overflow-x: auto; /* Ajouter la propriété overflow-x */
   max-height: 100px;
   overflow-y: hidden; /* Masquer le défilement vertical */
@@ -31,7 +31,7 @@
 
 .selected-options-wrapper-custom {
   display: flex;
-  flex-direction: column; /* Modifier de column à row */
+  flex-direction: row; /* Modifier de column à row */
   overflow-x: auto; /* Ajouter la propriété overflow-x */
   max-height: 40px;
   overflow-y: auto;

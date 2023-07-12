@@ -25,11 +25,17 @@ export interface InlineResponse20092 {
     success?: any;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 0b7e9d7 (Testing)
 =======
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 0b7e9d7 (Testing)
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
     /**
      * 
      * @type {string}
@@ -37,6 +43,9 @@ export interface InlineResponse20092 {
      */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
     message?: any;
 =======
 <<<<<<< HEAD:src/frontend/web/react-site/src/api/models/inline-response20092.ts
@@ -47,7 +56,10 @@ export interface InlineResponse20092 {
 >>>>>>> 7faa1c6 (maj reglement interieur)
 >>>>>>> fa5994b (maj reglement interieur):src/frontend/web/react-site/src/generated/models/inline-response20092.ts
 >>>>>>> 0b7e9d7 (Testing)
+<<<<<<< HEAD
 =======
     message?: any;
 >>>>>>> 707866f4 (Closes #318 -présentation du website)
+=======
+>>>>>>> da80021 (Closes #327 - Sanction prevu integrated)
 }
