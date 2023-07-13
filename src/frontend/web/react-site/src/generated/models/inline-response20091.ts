@@ -31,14 +31,7 @@ export interface InlineResponse20091 {
     success?: any;
     /**
      * 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 28546ee (Task #339)
-     * @type {Suggestion}
-=======
      * @type {Array&lt;Suggestion&gt;}
->>>>>>> beca218 (Task 333 (#334))
      * @memberof InlineResponse20091
      */
     content?: any;

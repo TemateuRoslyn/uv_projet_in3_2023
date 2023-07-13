@@ -25,6 +25,7 @@ const Header: React.FC<HeaderProps> = (props) => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch()
+  const authUser = JSON.parse(localStorage.getItem(USER_LOCAL_STORAGE_KEY)!);
  
   const state = useSelector((state: ReduxProps) => state);
   console.log('isLoggedIn :' + props.isLoggedIn);
@@ -53,54 +54,103 @@ const Header: React.FC<HeaderProps> = (props) => {
 
   if((props.isLoggedIn && props.isLoggedIn ===true) || (state.loggedIn && state.loggedIn === true)){
     console.log("Logged in");
-    return (
-      <>
-        <Head />
-        <header>
-          <nav className='flexSB'>
-            <ul className={click ? "mobile-nav" : "flexSB "} onClick={() => setClick(false)}>
-            <li>
-              <Link to='/'>Acceuil</Link>
-            </li>
-            <li>
-              <Link to='/courses'>Cours</Link>
-            </li>
-            <li>
-              <Link to='/about'>A propos</Link>
-            </li>
-            <li>
-              <Link to='/enseignant'>Enseignants</Link>
-            </li>
-            <li>
-              <Link to='/proviseur'>Proviseur</Link>
-            </li>
-            <li>
-              <Link to='/contact'>Contacts</Link>
-            </li>
-            <li>
-              <Link to='/convocation'>Convocation</Link>
-            </li>
-            <li>
-              <Link to='/faute_sanction'>Mes fautes et sanctions</Link>
-            </li>
-            <li>
-              <Link to='/notification'>Notification</Link>
-            </li>
+    if(authUser.roles[0].description=="PARENT"){
+      return (
+        <>
+          <Head />
+          <header>
+            <nav className='flexSB'>
+              <ul className={click ? "mobile-nav" : "flexSB "} onClick={() => setClick(false)}>
+              <li>
+                <Link to='/'>Acceuil</Link>
+              </li>
+              <li>
+                <Link to='/courses'>Cours</Link>
+              </li>
+              <li>
+                <Link to='/about'>A propos</Link>
+              </li>
+              <li>
+                <Link to='/enseignant'>Enseignants</Link>
+              </li>
+              <li>
+                <Link to='/proviseur'>Proviseur</Link>
+              </li>
+              <li>
+                <Link to='/contact'>Contacts</Link>
+              </li>
             
-          </ul>
-            <div className='start'>
-              <div className='button'>
-               
-                <DropdownUser/> 
+              <li>
+                <Link to='/notification'>Notification</Link>
+              </li>
+              <li>
+                <Link to='/MesEnfants'>MesEnfants</Link>
+              </li>
+            </ul>
+              <div className='start'>
+                <div className='button'>
+                 
+                  <DropdownUser/> 
+                </div>
               </div>
-            </div>
-            <button className='togglle' onClick={() => setClick(!click)}>
-              {click ?  <FontAwesomeIcon icon={faTimes} />:<FontAwesomeIcon icon={faBars} />}
-            </button>
-          </nav>
-        </header>
-      </>
-    )
+              <button className='togglle' onClick={() => setClick(!click)}>
+                {click ?  <FontAwesomeIcon icon={faTimes} />:<FontAwesomeIcon icon={faBars} />}
+              </button>
+            </nav>
+          </header>
+        </>
+      )
+
+    }else{
+      return (
+        <>
+          <Head />
+          <header>
+            <nav className='flexSB'>
+              <ul className={click ? "mobile-nav" : "flexSB "} onClick={() => setClick(false)}>
+              <li>
+                <Link to='/'>Acceuil</Link>
+              </li>
+              <li>
+                <Link to='/courses'>Cours</Link>
+              </li>
+              <li>
+                <Link to='/about'>A propos</Link>
+              </li>
+              <li>
+                <Link to='/enseignant'>Enseignants</Link>
+              </li>
+              <li>
+                <Link to='/proviseur'>Proviseur</Link>
+              </li>
+              <li>
+                <Link to='/contact'>Contacts</Link>
+              </li>
+              <li>
+                <Link to='/convocation'>Convocation</Link>
+              </li>
+              <li>
+                <Link to='/faute_sanction'>Mes fautes et sanctions</Link>
+              </li>
+              <li>
+                <Link to='/notification'>Notification</Link>
+              </li>
+              
+            </ul>
+              <div className='start'>
+                <div className='button'>
+                 
+                  <DropdownUser/> 
+                </div>
+              </div>
+              <button className='togglle' onClick={() => setClick(!click)}>
+                {click ?  <FontAwesomeIcon icon={faTimes} />:<FontAwesomeIcon icon={faBars} />}
+              </button>
+            </nav>
+          </header>
+        </>
+      )
+    }
   }else{
     console.log("Logged in No");
     

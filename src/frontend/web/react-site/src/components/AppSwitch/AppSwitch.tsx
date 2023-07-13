@@ -19,6 +19,9 @@ import Home from "../home/Home"
 import Header from '../common/header/Header';
 import Footer from '../common/footer/Footer';
 import NotFound from "./NotFound";
+import { USER_LOCAL_STORAGE_KEY } from '../../constants/LOCAL_STORAGE';
+import MesEnfants from '../MesEnfants/MesEnfants';
+import PageEleve from '../pageEleve/PageEleve';
 
 
 interface AppSwitchProps {
@@ -31,34 +34,67 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
     const state = useSelector((state: ReduxProps) => state);
     console.log('isLoggedIn :' + props.isLoggedIn);
     console.log('state loggedIn :' + state.loggedIn);
+
+    const authUser=JSON.parse(localStorage.getItem(USER_LOCAL_STORAGE_KEY));
     
 
     if((props.isLoggedIn && props.isLoggedIn ===true) || (state.loggedIn && state.loggedIn === true)){
         console.log("Logged in");
-        return(
-            <>
-            <Header isLoggedIn={props.isLoggedIn} />
-            <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route exact path='/about' element={<About />} />
-          <Route exact path='/courses' element={<CourseHome />} />
-          <Route exact path='/enseignant' element={<Enseignants />} />
-          <Route exact path='/pricing' element={<Pricing />} />
-          <Route exact path='/journal' element={<Blog />} />
-          <Route exact path='/contact' element={<Contact />} />
-          <Route exact path='/convocation' element={<Convocation />} />
+        if(authUser.roles[0].description=="PARENT")
+        {
+            return(
+                <>
+                <Header isLoggedIn={props.isLoggedIn} />
+                <Routes>
+              <Route exact path='/' element={<Home />} />
+              <Route exact path='/about' element={<About />} />
+              <Route exact path='/courses' element={<CourseHome />} />
+              <Route exact path='/enseignant' element={<Enseignants />} />
+              <Route exact path='/pricing' element={<Pricing />} />
+              <Route exact path='/journal' element={<Blog />} />
+              <Route exact path='/contact' element={<Contact />} />
+               <Route exact path='/proviseur' element={<Proviseur />} />
+               <Route exact path='/convocation' element={<Convocation />} />
+               <Route exact path='/mesEnfants' element={<MesEnfants />} /> 
+              <Route exact path='/faute_sanction' element={<FauteSanction />} />
+              <Route exact path='/notification' element={<Notification />} />
+              <Route exact path='/pageEleve' element={<PageEleve />} />
+             
+              <Route exact path="*" element={<NotFound />}/>
+    
+            </Routes>
+            <Footer />
+                </>
+            
+            ) 
+        }else{
 
-          <Route exact path='/faute_sanction' element={<FauteSanction />} />
-          <Route exact path='/notification' element={<Notification />} />
- 
-          <Route exact path='/proviseur' element={<Proviseur />} />
-          <Route exact path="*" element={<NotFound />}/>
-
-        </Routes>
-        <Footer />
-            </>
-        
-        )
+            return(
+                <>
+                <Header isLoggedIn={props.isLoggedIn} />
+                <Routes>
+              <Route exact path='/' element={<Home />} />
+              <Route exact path='/about' element={<About />} />
+              <Route exact path='/courses' element={<CourseHome />} />
+              <Route exact path='/enseignant' element={<Enseignants />} />
+              <Route exact path='/pricing' element={<Pricing />} />
+              <Route exact path='/journal' element={<Blog />} />
+              <Route exact path='/contact' element={<Contact />} />
+               <Route exact path='/proviseur' element={<Proviseur />} />
+               <Route exact path='/convocation' element={<Convocation />} />
+    
+              <Route exact path='/faute_sanction' element={<FauteSanction />} />
+              <Route exact path='/notification' element={<Notification />} />
+     
+             
+              <Route exact path="*" element={<NotFound />}/>
+    
+            </Routes>
+            <Footer />
+                </>
+            
+            )   
+        }
     } else {
         console.log("Logged in No");
         return(

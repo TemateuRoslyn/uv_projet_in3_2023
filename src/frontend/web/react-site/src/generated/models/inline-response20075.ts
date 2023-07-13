@@ -19,12 +19,6 @@
 export interface InlineResponse20075 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse20075
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse20075
      */

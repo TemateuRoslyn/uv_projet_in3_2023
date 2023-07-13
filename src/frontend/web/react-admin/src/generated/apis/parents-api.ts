@@ -411,21 +411,21 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
          * Get information about a specific parent
          * @summary Get parent information
          * @param {string} authorization JWT token
-         * @param {number} id ID of parent to get information for
+         * @param {number} parentId ID of parent to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewparent: async (authorization: string, id: number, options: any = {}): Promise<RequestArgs> => {
+        viewparent: async (authorization: string, parentId: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling viewparent.');
             }
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling viewparent.');
+            // verify required parameter 'parentId' is not null or undefined
+            if (parentId === null || parentId === undefined) {
+                throw new RequiredError('parentId','Required parameter parentId was null or undefined when calling viewparent.');
             }
             const localVarPath = `/api/parents/findOne/{parentId}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace(`{${"parentId"}}`, encodeURIComponent(String(parentId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -547,12 +547,12 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * Get information about a specific parent
          * @summary Get parent information
          * @param {string} authorization JWT token
-         * @param {number} id ID of parent to get information for
+         * @param {number} parentId ID of parent to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewparent(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20051>> {
-            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).viewparent(authorization, id, options);
+        async viewparent(authorization: string, parentId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20051>> {
+            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).viewparent(authorization, parentId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -633,12 +633,12 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * Get information about a specific parent
          * @summary Get parent information
          * @param {string} authorization JWT token
-         * @param {number} id ID of parent to get information for
+         * @param {number} parentId ID of parent to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewparent(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20051> {
-            return ParentsApiFp(configuration).viewparent(authorization, id, options).then((request) => request(axios, basePath));
+        viewparent(authorization: string, parentId: number, options?: any): AxiosPromise<InlineResponse20051> {
+            return ParentsApiFp(configuration).viewparent(authorization, parentId, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -720,12 +720,12 @@ export class ParentsApi extends BaseAPI {
      * Get information about a specific parent
      * @summary Get parent information
      * @param {string} authorization JWT token
-     * @param {number} id ID of parent to get information for
+     * @param {number} parentId ID of parent to get information for
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ParentsApi
      */
-    public viewparent(authorization: string, id: number, options?: any) {
-        return ParentsApiFp(this.configuration).viewparent(authorization, id, options).then((request) => request(this.axios, this.basePath));
+    public viewparent(authorization: string, parentId: number, options?: any) {
+        return ParentsApiFp(this.configuration).viewparent(authorization, parentId, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -26,24 +26,6 @@ export interface InlineResponse20097 {
     /**
      * 
      * @type {string}
-<<<<<<< HEAD
-     * @memberof InlineResponse20097
-     */
-    message?: any;
-    /**
-     * 
-     * @type {Array&lt;User&gt;}
-=======
-<<<<<<< HEAD
->>>>>>> 28546ee (Task #339)
-     * @memberof InlineResponse20097
-     */
-    message?: any;
-    /**
-     * 
-     * @type {Array&lt;User&gt;}
-=======
->>>>>>> beca218 (Task 333 (#334))
      * @memberof InlineResponse20097
      */
     message?: any;

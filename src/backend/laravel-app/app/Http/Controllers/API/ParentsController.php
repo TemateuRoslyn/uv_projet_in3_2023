@@ -90,7 +90,7 @@ class ParentsController extends Controller
      *         description="JWT token"
      *     ),
      *      @OA\Parameter(
-     *         name="id",
+     *         name="parentId",
      *         in="path",
      *         description="ID of parent to get information for",
      *         required=true,
