@@ -16,6 +16,9 @@ use App\Models\Faute;
 use Twilio\Rest\Client;
 use Twilio\Exceptions\TwilioException;
 
+//evenements
+use App\Events\ConseilDisciplineCreatedEvent;
+
 class ConseilDisciplineController extends Controller
 {
 
@@ -26,6 +29,7 @@ class ConseilDisciplineController extends Controller
         $this->twilioInfo = [
             "+237654770063" => ["ACfaf8a483f11bbd6983f6e567732a36c1", "cacd62d64ab0c916c8a63752cab16538", "+18145244457"],
             "+237651779272" => ["ACb3959badcd79d88b411fd167596988ce", "7867db4dfd97896e23032f1ed8eb004b", "+15418593377"],
+            "+237672324141" => ["ACcaa8940df3a10841cdedb68aa4083dab", "322e18f99a5b4e7f35ba50df09942498", "+12342901968"],
         ];
     }
 
@@ -393,6 +397,15 @@ class ConseilDisciplineController extends Controller
             $detailsP = array();
         }
 
+        //envoie de l'evenement
+        try{
+
+            event(new ConseilDisciplineCreatedEvent("conseil discipline creer",$conseil_discipline));
+
+        }catch(\Exception $e){
+
+        }
+
         return response()->json([
             'success' => true,
             'message' => 'Disciplinary council created successfully',
@@ -593,6 +606,15 @@ class ConseilDisciplineController extends Controller
             }
 
             $detailsP = array();
+        }
+
+        //envoie de l'evenement
+        try{
+
+            event(new ConseilDisciplineCreatedEvent("conseil discipline modifier",$conseil_discipline));
+
+        }catch(\Exception $e){
+
         }
 
         return response()->json([
