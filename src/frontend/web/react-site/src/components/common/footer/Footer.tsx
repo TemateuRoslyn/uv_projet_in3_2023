@@ -66,7 +66,7 @@ const Footer = () => {
               <div className='newlette'>
                 <h1>Newsletter - Restez à lécoute et recevez la dernière mise à jour</h1>
                 <br/>
-                <input className=" rounded-md" type='text' placeholder='Enter email address' /> 
+                <input className=" rounded-md" type='text' placeholder='Entrez votre adresse mail' /> 
                 {/* <FontAwesomeIcon icon={faPaperPlane} className=" w-10 h-6"/> */}
               </div>
             </div>
