@@ -35,6 +35,13 @@ export const REPARATION_COLUMNS_DEFS: ColDef[] = [
     checkboxSelection: false,
     showDisabledCheckboxes: true,
     width: 300,
+    }, {
+    headerName: 'Status',
+    field: 'status',
+    filter: 'agTextColumnFilter',
+    checkboxSelection: false,
+    showDisabledCheckboxes: true,
+    width: 300,
   },
  
 ];

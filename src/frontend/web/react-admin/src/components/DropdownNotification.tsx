@@ -52,6 +52,32 @@ const [modalTitle, setModalTitle] = useState<string>('');
     });
   },[]);
 
+  // close on click outside
+  useEffect(() => {
+    const clickHandler = ({ target }: MouseEvent) => {
+      if (!dropdown.current) return;
+      if (
+        !dropdownOpen ||
+        dropdown.current.contains(target) ||
+        trigger.current.contains(target)
+      )
+        return;
+      setDropdownOpen(false);
+    };
+    document.addEventListener('click', clickHandler);
+    return () => document.removeEventListener('click', clickHandler);
+  });
+
+  // close if the esc key is pressed
+  useEffect(() => {
+    const keyHandler = ({ keyCode }: KeyboardEvent) => {
+      if (!dropdownOpen || keyCode !== 27) return;
+      setDropdownOpen(false);
+    };
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
+  });
+
   function formatDate(date) {
     const dateOptions = {
       year: "numeric",
@@ -141,9 +167,6 @@ const [modalTitle, setModalTitle] = useState<string>('');
         //setIsLoading(false);
       });
     }
-
-
-
 
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
@@ -237,11 +260,11 @@ const [modalTitle, setModalTitle] = useState<string>('');
               }</p>
             </Link>
           </li>
-          )) :  <p className="text-sm text-center">
+          )) : <p className="text-sm text-center">
           <span className="text-black dark:text-white">
             Aucune nouvelle suggestion.
           </span>
-        </p>}
+          </p>}
           {/* <li>
             <Link
               className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
@@ -289,8 +312,7 @@ interface ModalProps {
 const ShowSuggestionModal: React.FC<ModalProps> = (props) => {
   const [description, setDescription] = useState<string>(props.item ? props.item.description : "");
 
- 
-  /* useEffect(() => {
+  useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         props.onClose();
@@ -301,8 +323,6 @@ const ShowSuggestionModal: React.FC<ModalProps> = (props) => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [props]);
-
- */
   
   return (
     <div

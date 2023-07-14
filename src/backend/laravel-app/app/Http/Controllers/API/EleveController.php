@@ -687,9 +687,9 @@ class EleveController extends Controller
         $eleves = Eleve::whereHas('user', function ($query) use ($keyword) {
             $query->where('email', 'like', "%{$keyword}%");
         })->orWhere('telephone', 'like', "%{$keyword}%")
-        ->orWhere('firstName', 'like', "%{$keyword}%")
-        ->orWhere('lastName', 'like', "%{$keyword}%")
-        ->get();
+            ->orWhere('firstName', 'like', "%{$keyword}%")
+            ->orWhere('lastName', 'like', "%{$keyword}%")
+            ->get();
 
         // dd($eleves);
 
@@ -698,7 +698,7 @@ class EleveController extends Controller
             $email = $eleve->user->email;
             $firstName = $eleve->firstName;
             $lastName = $eleve->lastName;
-            $classe = $eleve->classe->name.' '.$eleve->classe->speciality;
+            $classe = $eleve->classe->name . ' ' . $eleve->classe->speciality;
             $id = $eleve->id;
 
             return "{$email} {$firstName} {$lastName} {$tel} {$classe}:{$id}";

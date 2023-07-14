@@ -73,7 +73,7 @@ const DisplayReparation: React.FC<DisplayReparationProps> = (props) => {
     setShowIndicator(true);
 
     reparationApi
-      .reparationsIndex('Bearer ' + token)
+      .reparationsValidated('Bearer ' + token)
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {

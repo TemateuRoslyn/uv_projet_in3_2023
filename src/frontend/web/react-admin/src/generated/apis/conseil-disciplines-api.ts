@@ -329,21 +329,21 @@ export const ConseilDisciplinesApiAxiosParamCreator = function (configuration?: 
          * Get information about all specific conseil_discipline to a student
          * @summary Get conseil_discipline information for a student
          * @param {string} authorization JWT token
-         * @param {number} eleveId ID of Eleve to get information for
+         * @param {number} id ID of Eleve to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewConseilDisciplineEleve: async (authorization: string, eleveId: number, options: any = {}): Promise<RequestArgs> => {
+        viewConseilDisciplineEleve: async (authorization: string, id: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling viewConseilDisciplineEleve.');
             }
-            // verify required parameter 'eleveId' is not null or undefined
-            if (eleveId === null || eleveId === undefined) {
-                throw new RequiredError('eleveId','Required parameter eleveId was null or undefined when calling viewConseilDisciplineEleve.');
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling viewConseilDisciplineEleve.');
             }
             const localVarPath = `/api/conseil_discipline/findAll/eleve/{eleveId}`
-                .replace(`{${"eleveId"}}`, encodeURIComponent(String(eleveId)));
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -466,12 +466,12 @@ export const ConseilDisciplinesApiFp = function(configuration?: Configuration) {
          * Get information about all specific conseil_discipline to a student
          * @summary Get conseil_discipline information for a student
          * @param {string} authorization JWT token
-         * @param {number} eleveId ID of Eleve to get information for
+         * @param {number} id ID of Eleve to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewConseilDisciplineEleve(authorization: string, eleveId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20014>> {
-            const localVarAxiosArgs = await ConseilDisciplinesApiAxiosParamCreator(configuration).viewConseilDisciplineEleve(authorization, eleveId, options);
+        async viewConseilDisciplineEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20014>> {
+            const localVarAxiosArgs = await ConseilDisciplinesApiAxiosParamCreator(configuration).viewConseilDisciplineEleve(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -549,12 +549,12 @@ export const ConseilDisciplinesApiFactory = function (configuration?: Configurat
          * Get information about all specific conseil_discipline to a student
          * @summary Get conseil_discipline information for a student
          * @param {string} authorization JWT token
-         * @param {number} eleveId ID of Eleve to get information for
+         * @param {number} id ID of Eleve to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewConseilDisciplineEleve(authorization: string, eleveId: number, options?: any): AxiosPromise<InlineResponse20014> {
-            return ConseilDisciplinesApiFp(configuration).viewConseilDisciplineEleve(authorization, eleveId, options).then((request) => request(axios, basePath));
+        viewConseilDisciplineEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20014> {
+            return ConseilDisciplinesApiFp(configuration).viewConseilDisciplineEleve(authorization, id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -634,12 +634,12 @@ export class ConseilDisciplinesApi extends BaseAPI {
      * Get information about all specific conseil_discipline to a student
      * @summary Get conseil_discipline information for a student
      * @param {string} authorization JWT token
-     * @param {number} eleveId ID of Eleve to get information for
+     * @param {number} id ID of Eleve to get information for
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ConseilDisciplinesApi
      */
-    public viewConseilDisciplineEleve(authorization: string, eleveId: number, options?: any) {
-        return ConseilDisciplinesApiFp(this.configuration).viewConseilDisciplineEleve(authorization, eleveId, options).then((request) => request(this.axios, this.basePath));
+    public viewConseilDisciplineEleve(authorization: string, id: number, options?: any) {
+        return ConseilDisciplinesApiFp(this.configuration).viewConseilDisciplineEleve(authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
 }

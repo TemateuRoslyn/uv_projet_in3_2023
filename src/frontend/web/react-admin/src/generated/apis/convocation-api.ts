@@ -292,21 +292,21 @@ export const ConvocationApiAxiosParamCreator = function (configuration?: Configu
          * Get information about all specific convocation to a student
          * @summary Get convocation information for a student
          * @param {string} authorization JWT token
-         * @param {number} eleveId ID of Eleve to get information for
+         * @param {number} id ID of Eleve to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewConvocationEleve: async (authorization: string, eleveId: number, options: any = {}): Promise<RequestArgs> => {
+        viewConvocationEleve: async (authorization: string, id: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling viewConvocationEleve.');
             }
-            // verify required parameter 'eleveId' is not null or undefined
-            if (eleveId === null || eleveId === undefined) {
-                throw new RequiredError('eleveId','Required parameter eleveId was null or undefined when calling viewConvocationEleve.');
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling viewConvocationEleve.');
             }
             const localVarPath = `/api/convocation/findAll/eleve/{eleveId}`
-                .replace(`{${"eleveId"}}`, encodeURIComponent(String(eleveId)));
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -425,12 +425,12 @@ export const ConvocationApiFp = function(configuration?: Configuration) {
          * Get information about all specific convocation to a student
          * @summary Get convocation information for a student
          * @param {string} authorization JWT token
-         * @param {number} eleveId ID of Eleve to get information for
+         * @param {number} id ID of Eleve to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewConvocationEleve(authorization: string, eleveId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20020>> {
-            const localVarAxiosArgs = await ConvocationApiAxiosParamCreator(configuration).viewConvocationEleve(authorization, eleveId, options);
+        async viewConvocationEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20020>> {
+            const localVarAxiosArgs = await ConvocationApiAxiosParamCreator(configuration).viewConvocationEleve(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -504,12 +504,12 @@ export const ConvocationApiFactory = function (configuration?: Configuration, ba
          * Get information about all specific convocation to a student
          * @summary Get convocation information for a student
          * @param {string} authorization JWT token
-         * @param {number} eleveId ID of Eleve to get information for
+         * @param {number} id ID of Eleve to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewConvocationEleve(authorization: string, eleveId: number, options?: any): AxiosPromise<InlineResponse20020> {
-            return ConvocationApiFp(configuration).viewConvocationEleve(authorization, eleveId, options).then((request) => request(axios, basePath));
+        viewConvocationEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20020> {
+            return ConvocationApiFp(configuration).viewConvocationEleve(authorization, id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -585,12 +585,12 @@ export class ConvocationApi extends BaseAPI {
      * Get information about all specific convocation to a student
      * @summary Get convocation information for a student
      * @param {string} authorization JWT token
-     * @param {number} eleveId ID of Eleve to get information for
+     * @param {number} id ID of Eleve to get information for
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ConvocationApi
      */
-    public viewConvocationEleve(authorization: string, eleveId: number, options?: any) {
-        return ConvocationApiFp(this.configuration).viewConvocationEleve(authorization, eleveId, options).then((request) => request(this.axios, this.basePath));
+    public viewConvocationEleve(authorization: string, id: number, options?: any) {
+        return ConvocationApiFp(this.configuration).viewConvocationEleve(authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
 }

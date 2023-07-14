@@ -346,21 +346,21 @@ export const FautesApiAxiosParamCreator = function (configuration?: Configuratio
          * Get information about all specific mistake to a student
          * @summary Get mistake information for a student
          * @param {string} authorization JWT token
-         * @param {number} eleveId ID of Eleve to get information for
+         * @param {number} id ID of Eleve to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewFauteEleve: async (authorization: string, eleveId: number, options: any = {}): Promise<RequestArgs> => {
+        viewFauteEleve: async (authorization: string, id: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling viewFauteEleve.');
             }
-            // verify required parameter 'eleveId' is not null or undefined
-            if (eleveId === null || eleveId === undefined) {
-                throw new RequiredError('eleveId','Required parameter eleveId was null or undefined when calling viewFauteEleve.');
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling viewFauteEleve.');
             }
             const localVarPath = `/api/fautes/findAll/eleve/{eleveId}`
-                .replace(`{${"eleveId"}}`, encodeURIComponent(String(eleveId)));
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -598,12 +598,12 @@ export const FautesApiFp = function(configuration?: Configuration) {
          * Get information about all specific mistake to a student
          * @summary Get mistake information for a student
          * @param {string} authorization JWT token
-         * @param {number} eleveId ID of Eleve to get information for
+         * @param {number} id ID of Eleve to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewFauteEleve(authorization: string, eleveId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20035>> {
-            const localVarAxiosArgs = await FautesApiAxiosParamCreator(configuration).viewFauteEleve(authorization, eleveId, options);
+        async viewFauteEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20035>> {
+            const localVarAxiosArgs = await FautesApiAxiosParamCreator(configuration).viewFauteEleve(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -719,12 +719,12 @@ export const FautesApiFactory = function (configuration?: Configuration, basePat
          * Get information about all specific mistake to a student
          * @summary Get mistake information for a student
          * @param {string} authorization JWT token
-         * @param {number} eleveId ID of Eleve to get information for
+         * @param {number} id ID of Eleve to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewFauteEleve(authorization: string, eleveId: number, options?: any): AxiosPromise<InlineResponse20035> {
-            return FautesApiFp(configuration).viewFauteEleve(authorization, eleveId, options).then((request) => request(axios, basePath));
+        viewFauteEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20035> {
+            return FautesApiFp(configuration).viewFauteEleve(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
          * Get information about all specific mistake to a student
@@ -835,13 +835,13 @@ export class FautesApi extends BaseAPI {
      * Get information about all specific mistake to a student
      * @summary Get mistake information for a student
      * @param {string} authorization JWT token
-     * @param {number} eleveId ID of Eleve to get information for
+     * @param {number} id ID of Eleve to get information for
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FautesApi
      */
-    public viewFauteEleve(authorization: string, eleveId: number, options?: any) {
-        return FautesApiFp(this.configuration).viewFauteEleve(authorization, eleveId, options).then((request) => request(this.axios, this.basePath));
+    public viewFauteEleve(authorization: string, id: number, options?: any) {
+        return FautesApiFp(this.configuration).viewFauteEleve(authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get information about all specific mistake to a student

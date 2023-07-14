@@ -31,7 +31,7 @@ export interface InlineResponse20086 {
     message?: any;
     /**
      * 
-     * @type {Array&lt;SanctionPrevu&gt;}
+     * @type {Role}
      * @memberof InlineResponse20086
      */
     content?: any;

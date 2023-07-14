@@ -15,6 +15,17 @@ class ReparationSeeder extends Seeder
     {
         Reparation::create([
             'demarcheMediation' => 'Redige la lette d\'excuse',
+            'status' => 'Valide',
+            'fauteId' => '1',
+        ]);
+        Reparation::create([
+            'demarcheMediation' => 'Redige la lette d\'excuse',
+            'status' => 'En attente',
+            'fauteId' => '1',
+        ]);
+        Reparation::create([
+            'demarcheMediation' => 'Redige la lette d\'excuse',
+            'status' => 'Rejete',
             'fauteId' => '1',
         ]);
     }
