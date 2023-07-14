@@ -111,6 +111,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findOne/{eleveId}', [EleveController::class, 'view']);
         Route::get('findAll', [EleveController::class, 'index']);
         Route::get('records/{keyword}', [EleveController::class, 'records']);
+        Route::get('mostDisciplines/', [EleveController::class, 'mostDisciplines']);
 
         Route::middleware('permission:modifier_eleve')->post('update/{eleveId}', [EleveController::class, 'update']);
         Route::middleware('permission:supprimer_eleve')->delete('delete/{eleveId}', [EleveController::class, 'delete']);
@@ -239,7 +240,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findAll', [FauteController::class, 'index']);
         Route::get('findAll/eleve/{eleveId}', [FauteController::class, 'viewFautesEleve']);
         Route::get('findAll/eleve/voice/{eleveId}', [FauteController::class, 'viewFautesVoiceEleve']);
-        Route::get('findAll/eleveAndKeyword/{eleveId}/{keyword}', [FauteController::class, 'viewFautesEleveAndKeyword']); //
+        Route::get('recordsFautesEleve/{eleveId}/{keyword}', [FauteController::class, 'recordsFautesEleve']); //
         Route::get('records/{keywords}', [FauteController::class, 'records']);
     });
 

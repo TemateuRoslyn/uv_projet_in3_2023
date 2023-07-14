@@ -210,9 +210,7 @@ class FauteController extends Controller
      */
     public function viewFautesEleve($eleveId)
     {
-
-        $eleve = Faute::where('eleveId', $eleveId)->with(['eleve.user', 'regle.reglementInterieur'])->get();
-
+        $eleve = Faute::where('eleveId', '=', $eleveId)->with('regle.reglementInterieur')->get();
 
         if ($eleve) {
             return response()->json([
@@ -329,7 +327,7 @@ class FauteController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/fautes/findAll/eleveAndKeyword/{eleveId}/{keyword}",
+     *     path="/api/fautes/recordsFautesEleve/{eleveId}/{keyword}",
      *     summary="Get mistake information for a student",
      *     description="Get information about all specific mistake to a student",
      *     operationId="viewFauteEleveAndKeyword",
@@ -391,11 +389,13 @@ class FauteController extends Controller
      *     )
      * )
      */
-    public function viewFautesEleveAndKeyword($eleveId, $keyword)
+    public function recordsFautesEleve($eleveId, $keyword)
     {
         //dd($request);
 
-        $fautes = Faute::where('libelle', 'like', "%{$keyword}%")->with(['eleve', 'regle.reglementInterieur'])->get();
+        $fautes = Faute::where('eleveId', '=', $eleveId)
+        ->where('libelle', 'like', "%{$keyword}%")
+        ->with(['eleve', 'regle.reglementInterieur'])->get();
         //dd($keyword);
         $formattedFaute = $fautes->map(function ($faute) {
             $name = $faute->libelle;
