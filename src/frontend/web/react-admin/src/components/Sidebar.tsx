@@ -395,7 +395,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       fill="none"
                     />
                   </svg>
-                  Sanction Prevu
+                  Sanctions Prévues
                 </NavLink>
               </li>
               {/* <!-- Menu Item SanctionPrevu --> */}

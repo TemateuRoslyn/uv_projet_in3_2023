@@ -71,7 +71,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
     const apiParams: AuthLoginBody = {
       username: username,
       password: password,
-      persistent: false,
+      persistent: "admin",
     }
 
     setIsLoading(true)

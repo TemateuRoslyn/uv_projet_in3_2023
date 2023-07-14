@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
+use App\Models\Convocation;
+use App\Models\ConseilDiscipline;
+use App\Models\Faute;
+use App\Models\SanctionPrevu;
+
 use App\Models\Parents;
 use App\Models\Permission;
 use App\Models\User;
@@ -16,6 +21,8 @@ use PhpParser\Node\Expr\Cast\Object_;
 use Ramsey\Uuid\Type\Integer;
 use Illuminate\Support\Facades\Queue;
 use App\Jobs\SendEmailJob;
+
+use Carbon\Carbon;
 
 class ParentsController extends Controller
 {
@@ -597,6 +604,45 @@ class ParentsController extends Controller
             return response()->json([
                 'message' => 'parent to delete was not found',
                 'success' => false,
+            ], 404);
+        }
+    }
+
+    public function parentNotification($eleveId){
+        $currentDate = Carbon::now();
+
+        $convo = Convocation::where('eleveId', $eleveId)
+        ->orWhere('dateConvocation', '>', $currentDate)
+            ->with(['eleve', 'personnel'])
+            ->get();
+        $conseil = ConseilDiscipline::where('eleveId', $eleveId)
+            ->orWhere('dateCd', '>', $currentDate)
+            ->with(['eleve']) 
+            ->get();
+        /* $conseil = Faute::where('eleveId', $eleveId)
+            ->where('dateCd', '>', $currentDate)
+            ->with(['eleve', 'personnel']) 
+            ->get();
+        $conseil = ConseilDiscipline::where('eleveId', $eleveId)
+            ->where('dateCd', '>', $currentDate)
+            ->with(['eleve', 'personnel']) 
+            ->get(); */
+            $data = User::where('id',0);
+        $data->convo = $convo;
+        $data->conseil = $conseil; 
+
+        
+        if ($data->convo->count() > 0 || $data->conseil->count() > 0) {
+            return response()->json([
+                'message' => 'Convocations de l\'élève trouvées',
+                'success' => true,
+                'content' => $data
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Convocations de l\'élève non trouvées',
+                'success' => false,
+                'content' => $data
             ], 404);
         }
     }

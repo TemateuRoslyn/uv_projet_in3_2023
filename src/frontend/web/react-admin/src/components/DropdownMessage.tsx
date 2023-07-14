@@ -154,12 +154,21 @@ const DropdownMessage = () => {
         <Link
           ref={trigger}
           onClick={() => setDropdownOpen(!dropdownOpen)}
-          className="relative flex h-8.5 w-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
+          className="w-8.5 relative flex h-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
           to="#"
         >
-          <span className="absolute -top-0.5 -right-0.5 z-1 h-2 w-2 rounded-full bg-meta-1">
-            <span className="absolute -z-1 inline-flex h-full w-full animate-ping rounded-full bg-meta-1 opacity-75"></span>
-          </span>
+         {reparation.length > 0 ? (
+            <span className="text-bold text-xl absolute -top-0.5 right-0 z-1 h-2 w-2 rounded-full bg-meta-1 text-danger">
+              {reparation.length}
+              <span className="absolute text-bold z-1 inline-flex h-2 w-2 animate-ping rounded-full bg-meta-1 opacity-75">
+                {reparation.length}
+              </span>
+            </span>
+          ) : (
+            <span className="text-bold absolute -top-0.5 right-0 z-1 h-2 w-2 rounded-full bg-meta-1 text-danger">
+              {reparation.length}
+            </span>
+          )}
 
           <svg
             className="fill-current duration-300 ease-in-out"
@@ -335,12 +344,12 @@ const ShowReparationModal: React.FC<ModalProps> = (props) => {
   return (
     <div
       id="authentication-modal"
-      className="authentication-modal"
+      className="authentication-modal w-230"
       style={{ position:'relative', }}
       onClick={props.onClose}
     >
-     <div className="modal-container relative items-center justify-center mx-auto  top-modal-animation" onClick={(event) => event.stopPropagation()}>
-                <div className="modal-content bg-white bg-white rounded-sm border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
+     <div className="modal-container relative  w-230 items-center justify-center mx-auto  top-modal-animation" onClick={(event) => event.stopPropagation()}>
+                <div className="modal-content w-150 bg-white bg-white rounded-sm border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
                <button onClick={props.onClose} className="close-button">
             <svg
               aria-hidden="true"
@@ -359,7 +368,7 @@ const ShowReparationModal: React.FC<ModalProps> = (props) => {
           </button>
           <div className="modal-body">
           <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
-                        <h2 className="modal-title font-medium text-black dark:text-white">
+                        <h2 className=" mb-[1rem] text-size-[1.25rem] font-medium text-black dark:text-white">
                         {props.title}
                         </h2>
                     </div>
