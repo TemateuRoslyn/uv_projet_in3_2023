@@ -58,8 +58,13 @@ const FauteSanction = () => {
       <section className='contacts padding'>
         <div className='container shadow flexSB'>
           {fautes.map((item)=>(
-            <div>
-              {item}
+            <div className="contact flex flex-col justify-start p-6">
+              <h5 className="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
+              <b>Sujet :</b> {item.libelle}
+              </h5>
+              <p className="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50" >
+              <b>Gravité de la faute :</b> {item.gravite}
+              </p>
             </div>
           ))}
         </div>

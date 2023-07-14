@@ -53,23 +53,21 @@ const DropdownUser: React.FC<DropdownUserInterface> = () => {
 
   const logout = () => {
     const authApi = new AuthApi(state.environment);
-    const token: string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
-    authApi
-      .authLogout("Bearer " + token)
-      .then((response) => {
-        localStorage.removeItem(TOKEN_LOCAL_STORAGE_KEY);
-        localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
-        localStorage.removeItem(IS_LOGGED_LOCAL_STORAGE_KEY);
-        dispatch(setIsLOggedAction(false));
-        setTimeout(() => {
-          navigate("/");
-        }, 500);
-      })
-      .catch((error) => {})
-      .finally(() => {
-     
-      });
-  };
+    const token : string = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!;
+    authApi.authLogout('Bearer '+ token)
+    .then((response) => {
+      localStorage.removeItem(TOKEN_LOCAL_STORAGE_KEY);
+      localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
+      localStorage.removeItem(IS_LOGGED_LOCAL_STORAGE_KEY);
+      dispatch(setIsLOggedAction(false));
+      setTimeout(()=> {
+        navigate("/");
+      },500);   
+    })
+    .catch((error) => {})
+    .finally(() => {
+    });
+  }
 
   return (
     <div className="relative">
