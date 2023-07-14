@@ -25,6 +25,7 @@ import { DeleteItemModal } from '../../../components/DeleteItemModal';
 
 import { ELEVE_COLUMNS_DEFS } from '../../../configs/ag-grid-column-def/eleve';
 import CreateOrUpdateEleveModal from './CreateOrUpdateEleveModal';
+import DisplayOneModal from './DisplayOneModal';
 
 interface DisplayElevesProps {
   eleves: Eleve[];
@@ -50,7 +51,7 @@ const DisplayEleves: React.FC<DisplayElevesProps> = (props) => {
 
   const [showCreateOrUpdateModal, setShowCreateOrUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-
+  const [showDisplayOneModal,setShowDisplayOneModal]=useState(false);
   const [modalMode, setModalMode] = useState<MODAL_MODE>(MODAL_MODE.create);
   const [modalTitle, setModalTitle] = useState<string>('');
   const [showIndicator, setShowIndicator] = useState<boolean>(false);
@@ -140,7 +141,7 @@ const DisplayEleves: React.FC<DisplayElevesProps> = (props) => {
       const rowData = gridRef.current.api.getSelectedRows();
       if (rowData && rowData.length === 1) {
         setEleve(rowData[0]);
-        setShowCreateOrUpdateModal(true);
+        setShowDisplayOneModal(true);
         setModalMode(MODAL_MODE.view);
         setModalTitle("Detail d'une eleve");
       } else if (rowData && rowData.length > 1) {
@@ -268,6 +269,14 @@ const DisplayEleves: React.FC<DisplayElevesProps> = (props) => {
           Supprimer
         </Link>
       </div>
+
+      {showDisplayOneModal && <DisplayOneModal
+                                    mode={modalMode} 
+                                    title={modalTitle} 
+                                    onClose={() => setShowDisplayOneModal(false)} 
+                                    refresh={onGridReady}
+                                    item={modalMode !== MODAL_MODE.create ? eleve : null } 
+                                    />}
 
       {showCreateOrUpdateModal && (
         <CreateOrUpdateEleveModal
