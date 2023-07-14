@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 //import Logo from '../images/logo/logo.png';
-import Logo from "../pages/Authentication/SignIn/components/logo.png"
+import Logo from '../pages/Authentication/SignIn/components/logo.png';
 import DarkModeSwitcher from './DarkModeSwitcher';
 import DropdownMessage from './DropdownMessage';
 import DropdownNotification from './DropdownNotification';
@@ -13,33 +13,35 @@ const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
-
   const [matchList, setMatchList] = useState<[]>([]);
   const data = [
-    { name: "Dashboard", path: "/" },
-    { name: "Professeur", path: "/professeurs" },
-    { name: "Personnels", path: "/personnels" },
-    { name: "Cours", path: "/cours" },
-    { name: "Convocations", path: "/convocations" },
-    { name: "ConseilDisciplines", path: "/conseilDiscipline" },
-    { name: "Classes", path: "/classes" },
-    { name: "Eleves", path: "/eleves" },
-    { name: "Parents", path: "/parents" },
-    { name: "Calendar", path: "/calendar" },
-    { name: "Role", path: "/roles" },
-    { name: "Permission", path: "/permissions" },
-    { name: "Fautes", path: "/fautes" },
-    { name: "Reglement Interieur", path: "/reglements" },
-    { name: "Regles", path: "/regles" },
-    { name: "Suggestions", path: "/suggestions" },
-    { name: "Sanction Prevu", path: "/sanctionPrevus" }
+    { name: 'Dashboard', path: '/' },
+    { name: 'Professeur', path: '/professeurs' },
+    { name: 'Personnels', path: '/personnels' },
+    { name: 'Cours', path: '/cours' },
+    { name: 'Convocations', path: '/convocations' },
+    { name: 'ConseilDisciplines', path: '/conseilDiscipline' },
+    { name: 'Classes', path: '/classes' },
+    { name: 'Eleves', path: '/eleves' },
+    { name: 'Parents', path: '/parents' },
+    { name: 'Calendar', path: '/calendar' },
+    { name: 'Role', path: '/roles' },
+    { name: 'Permission', path: '/permissions' },
+    { name: 'Fautes', path: '/fautes' },
+    { name: 'Reglement Interieur', path: '/reglements' },
+    { name: 'Regles', path: '/regles' },
+    { name: 'Suggestions', path: '/suggestions' },
+    { name: 'Sanctions Prévues', path: '/sanctionPrevus' },
+    { name: 'Reparation', path: '/reparations' },
   ];
-  
 
   const handleTypingInput = (keyword: string) => {
     if (keyword.length > 0) {
-      
-      setMatchList(data.filter(item => item.name.toLowerCase().includes(inputValue.toLowerCase())));
+      setMatchList(
+        data.filter((item) =>
+          item.name.toLowerCase().includes(inputValue.toLowerCase())
+        )
+      );
     }
   };
 
@@ -49,22 +51,20 @@ const Header = (props: {
   const navigate = useNavigate();
 
   const handleOptionSelect = (selectedValue: string) => {
-   
     setInputValue(selectedValue.name);
     setIsDropdownOpen(false);
     selectOptionEvent(selectedValue);
-    setShowIndicator(false)
+    setShowIndicator(false);
   };
-  
+
   const selectOptionEvent = (option: string) => {
     setIsDropdownOpen(false);
-    navigate(option.path)
-    setInputValue('')
-
+    navigate(option.path);
+    setInputValue('');
   };
 
   const isEmpty = () => matchList.length === 0;
-  
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setInputValue(value);
@@ -77,8 +77,7 @@ const Header = (props: {
   const totalItems = matchList.length;
 
   // Calcul du pourcentage en fonction du nombre d'éléments
-  const topPercentage = Math.min((totalItems - maxItemsToShow) * 100, 440)*(-1);
-  
+  const topPercentage = Math.min((totalItems - maxItemsToShow) * 100, 440) * -1;
 
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
@@ -129,20 +128,30 @@ const Header = (props: {
 
           <Link className="block flex-shrink-0 lg:hidden" to="/">
             {/* <img src={Logo} alt="Logo" /> */}
-            <div className='flex text-center justify-content-center justify-center'>
-            <div className="mb-2.5 inline-block flex">
-              <span>
-                
-                <img className="hidden dark:block" src={Logo} alt="Logo" width={70} height={70} /> 
-       
-                <img className="dark:hidden" src={Logo} alt="Logo" width={70} height={70} />
-               
-              </span>
-              <span className="text-bolder pt-5 justify-content-center align-items-center ">
-              School Discipline 
-              </span>
-              </div> 
+            <div className="justify-content-center flex justify-center text-center">
+              <div className="mb-2.5 inline-block flex">
+                <span>
+                  <img
+                    className="hidden dark:block"
+                    src={Logo}
+                    alt="Logo"
+                    width={70}
+                    height={70}
+                  />
+
+                  <img
+                    className="dark:hidden"
+                    src={Logo}
+                    alt="Logo"
+                    width={70}
+                    height={70}
+                  />
+                </span>
+                <span className="text-bolder justify-content-center align-items-center pt-5 ">
+                  School Discipline
+                </span>
               </div>
+            </div>
           </Link>
         </div>
 
@@ -173,48 +182,56 @@ const Header = (props: {
                 </svg>
               </button>
 
-            <input
-              type="text"
-              className="w-full bg-transparent pr-4 pl-9 focus:outline-none"
-              value={inputValue}
-              placeholder={"Rechercher..."}
-              id="input-label"
-              autoComplete="off"
-              required
-              onChange={handleInputChange}
-            />
-            {showIndicator && 
-              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 mt-4">
-                <Indicator widtf={5} height={5} border="blue"/>
-              </div>}
-            <div 
-              className="custom-input-dropdown w-full" 
-              style={{ display: isEmpty() ? 'none' : 'block', maxHeight: '200px', overflowY: 'auto' }}>
-              <ul>
-              {matchList.length > 0 && isDropdownOpen && inputValue !=='' && (
-              <div 
-                className={`custom-input-dropdown w-full`}
-                style={{ display: isEmpty() ? 'none' : 'block' }}
+              <input
+                type="text"
+                className="w-full bg-transparent pr-4 pl-9 focus:outline-none"
+                value={inputValue}
+                placeholder={'Rechercher...'}
+                id="input-label"
+                autoComplete="off"
+                required
+                onChange={handleInputChange}
+              />
+              {showIndicator && (
+                <div className="absolute right-4 top-1/2 mt-4 -translate-y-1/2 transform">
+                  <Indicator widtf={5} height={5} border="blue" />
+                </div>
+              )}
+              <div
+                className="custom-input-dropdown w-full"
+                style={{
+                  display: isEmpty() ? 'none' : 'block',
+                  maxHeight: '200px',
+                  overflowY: 'auto',
+                }}
               >
-                <ul 
-                  style={{ maxHeight: '300px' ,overflowY: 'auto' }}
-                  className={`absolute top-${topPercentage}% w-full border border-gray-300 rounded-md bg-white shadow-md custom-select-ul`}>
-                  {matchList.map((option, index) => (
-                    <li 
-                      className="dark:border-form-strokedark bg-red dark:bg-form-input px-4 py-1 hover:bg-red-600 cursor-pointer w-full custom-select-li"
-                      key={index} 
-                      onClick={() => handleOptionSelect(option)}
-                    >
-                      {option.name}
-                    </li>
-                  ))}
+                <ul>
+                  {matchList.length > 0 &&
+                    isDropdownOpen &&
+                    inputValue !== '' && (
+                      <div
+                        className={`custom-input-dropdown w-full`}
+                        style={{ display: isEmpty() ? 'none' : 'block' }}
+                      >
+                        <ul
+                          style={{ maxHeight: '300px', overflowY: 'auto' }}
+                          className={`absolute top-${topPercentage}% border-gray-300 custom-select-ul w-full rounded-md border bg-white shadow-md`}
+                        >
+                          {matchList.map((option, index) => (
+                            <li
+                              className="bg-red hover:bg-red-600 custom-select-li w-full cursor-pointer px-4 py-1 dark:border-form-strokedark dark:bg-form-input"
+                              key={index}
+                              onClick={() => handleOptionSelect(option)}
+                            >
+                              {option.name}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                 </ul>
               </div>
-            )}
-              </ul>
             </div>
-          </div>
-              
           </form>
         </div>
 

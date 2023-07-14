@@ -61,7 +61,7 @@ const Login: React.FC<LoginProps> = (props) => {
     const apiParams: AuthLoginBody = {
       username: username,
       password: password,
-      persistent: false,
+      persistent: 'web',
     };
 
     setIsLoading(true);
@@ -101,7 +101,7 @@ const Login: React.FC<LoginProps> = (props) => {
 
   return (
     <>
-      <Back title="Sign in" />
+    {/*   <Back title="Sign in" /> */}
       <section className="login padding">
         <div className="container shadow">
           <div className="left row">

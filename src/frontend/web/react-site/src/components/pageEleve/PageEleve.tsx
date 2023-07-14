@@ -6,6 +6,7 @@ import { ReduxProps } from "../../redux/configureStore";
 import { useSelector } from "react-redux";
 import { ConseilDiscipline, Convocation, Faute, SanctionPrevu } from "../../generated/models";
 import FautesSection from "./components/FautesSection";
+import Back from "../common/back/Back";
 
 
 
@@ -111,12 +112,14 @@ const PageEleve = () => {
 
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Child Disciplinary State Details</h2>
+    <>
+    <Back title={"Etat "}/>
+    <div className="container mx-auto p-4 bg-[#6ec9da] shadow-lg">
+      <h2 className="text-4xl font-bold mb-4">Child Disciplinary State Details</h2>
 
       {/* Convocations */}
       <div className="mb-6">
-        <h3 className="text-xl font-semibold mb-2">Convocations</h3>
+        <h3 className="text-3xl font-semibold mb-2">Convocations</h3>
         {convocations.map((convocation,key) => (
           <div className="mb-6">
          
@@ -150,7 +153,7 @@ const PageEleve = () => {
 
       {/* Conseildiscipline */}
       <div className="mb-6">
-  <h3 className="text-xl font-semibold mb-2">Conseil de Discipline</h3>
+  <h3 className="text-3xl font-semibold mb-2">Conseil de Discipline</h3>
   {conseilDisciplinses.map(conseildiscipline => (
          
        
@@ -185,7 +188,7 @@ const PageEleve = () => {
   
 
       <div className="mb-6">
-        <h3 className="text-xl font-semibold mb-2">Sanctions</h3>
+        <h3 className="text-3xl font-semibold mb-2">Sanctions</h3>
         {sanctions.map(sanction => (
 
           
@@ -209,6 +212,7 @@ const PageEleve = () => {
         ))}
       </div>
     </div>
+  </>
   );
 };
 

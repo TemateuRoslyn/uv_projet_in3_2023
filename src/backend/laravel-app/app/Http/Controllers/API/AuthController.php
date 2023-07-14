@@ -170,7 +170,8 @@ class AuthController extends Controller
         // validation
         $request->validate([
             "username" => "required",
-            "password" => "required"
+            "password" => "required",
+          
         ]);
 
         // verify user + token
@@ -184,8 +185,75 @@ class AuthController extends Controller
         $user = User::find(auth()->user()->id);
         $user->roles;
         $user->permissions;
+        
+        if ($request->persistent === "admin")
+        {$user->persistent = $request->persistent;
+            if($user->roles->contains('name', ELEVE_ROLE['name'])){
+                return response()->json([
+                    "success" => false,
+                    "message" => "Invalid credentials"
+                ], 401);
+            } elseif ($user->roles->contains('name', PARENT_ROLE['name'])){
+                return response()->json([
+                    "success" => false,
+                    "message" => "Invalid credentials"
+                ], 401);
+            } elseif ($user->roles->contains('name', PROFESSEUR_ROLE['name'])){
+                return response()->json([
+                    "success" => false,
+                    "message" => "Invalid credentials"
+                ], 401);
+            } elseif ($user->roles->contains('name', PERSONNEL_ROLE['name'])){
+                return response()->json([
+                    "success" => false,
+                    "message" => "Invalid credentials"
+                ], 401);
+            }
 
-        // on recupere les donnees personnel du user qui se connecte:
+            return response()->json([
+                "success" => true,
+                "message" => "Logged in successfully",
+                "content" => [
+                    'token' => $token,
+                    'user' => $user,
+                    ]
+            ], 200);
+        }elseif($request->persistent === "web")
+        {$user->persistent = $request->persistent;
+            if ($user->roles->contains('name', PROFESSEUR_ROLE['name'])){
+                return response()->json([
+                    "success" => false,
+                    "message" => "Invalid credentials"
+                ], 401);
+            } elseif ($user->roles->contains('name', PERSONNEL_ROLE['name'])){
+                return response()->json([
+                    "success" => false,
+                    "message" => "Invalid credentials"
+                ], 401);
+            } elseif ($user->roles->contains('name', "Admin")){
+                return response()->json([
+                    "success" => false,
+                    "message" => "Invalid credentials"
+                ], 401);
+            }
+
+            if($user->roles->contains('name', ELEVE_ROLE['name'])){
+                $user->model = $user->eleve;
+            } elseif ($user->roles->contains('name', PARENT_ROLE['name'])){
+                $user->model = $user->parents;
+            }
+
+            return response()->json([
+                "success" => true,
+                "message" => "Logged in successfully",
+                "content" => [
+                    'token' => $token,
+                    'user' => $user,
+                    ]
+            ], 200);
+        }
+        
+       /*  // on recupere les donnees personnel du user qui se connecte:
         if($user->roles->contains('name', ELEVE_ROLE['name'])){
             $user->model = $user->eleve;
         } elseif ($user->roles->contains('name', PARENT_ROLE['name'])){
@@ -195,16 +263,21 @@ class AuthController extends Controller
         } elseif ($user->roles->contains('name', PERSONNEL_ROLE['name'])){
             $user->model = $user->personnel;
         }
-
+ */
         // send response
-        return response()->json([
+       /*  return response()->json([
             "success" => true,
             "message" => "Logged in successfully",
             "content" => [
                 'token' => $token,
                 'user' => $user,
                 ]
-        ], 200);
+        ], 200); */
+
+        return response()->json([
+            "success" => false,
+            "message" => "Invalid credentials"
+        ], 401);
 
     }
 
