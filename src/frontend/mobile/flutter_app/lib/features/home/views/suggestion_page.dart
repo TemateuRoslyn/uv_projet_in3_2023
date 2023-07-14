@@ -37,14 +37,16 @@ class Suggestions extends StatelessWidget {
             ),
             Container(
               margin: EdgeInsets.only(
-                  top: getHeight(20, context), bottom: getHeight(30, context)),
-              child: const Text(
+                top: getHeight(20, context),
+                bottom: getHeight(30, context),
+              ),
+              child: Text(
                 "Suggestion Box",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 50,
                   fontWeight: FontWeight.bold,
-                  color: Colors.orange,
+                  color: appColors.white!,
                 ),
               ),
             ),
@@ -72,7 +74,7 @@ class Suggestions extends StatelessWidget {
                 }
               },
               text: 'Envoyer',
-              color: appColors.ligthGreen!,
+              color: appColors.secondary!,
               roundedBorders: true,
               context: context,
             ),

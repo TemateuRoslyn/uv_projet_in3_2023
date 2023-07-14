@@ -65,8 +65,8 @@ class _PageSkeletonState extends State<PageSkeleton> {
                     width: double.infinity,
                     color: (navigationType == NavigationType.home ||
                             navigationType == NavigationType.stats)
-                        ? appColors.primary
-                        : const Color(0xfffafafa),
+                        ? appColors.white!.withOpacity(0.4)
+                        : appColors.white!.withOpacity(0.4),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -78,7 +78,7 @@ class _PageSkeletonState extends State<PageSkeleton> {
                             size: getHeight(30, context),
                             color: navigationType == NavigationType.home
                                 ? appColors.secondary
-                                : Colors.grey,
+                                : appColors.primary,
                           ),
                         ),
                         IconButton(
@@ -89,7 +89,7 @@ class _PageSkeletonState extends State<PageSkeleton> {
                             size: getHeight(30, context),
                             color: navigationType == NavigationType.stats
                                 ? appColors.secondary
-                                : Colors.grey,
+                                : appColors.primary,
                           ),
                         ),
                         IconButton(
@@ -100,7 +100,7 @@ class _PageSkeletonState extends State<PageSkeleton> {
                             size: getHeight(30, context),
                             color: navigationType == NavigationType.profile
                                 ? appColors.secondary
-                                : Colors.grey,
+                                : appColors.primary,
                           ),
                         ),
                       ],

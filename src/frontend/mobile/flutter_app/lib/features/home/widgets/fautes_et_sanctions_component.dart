@@ -72,7 +72,7 @@ class ComponentCard extends StatelessWidget {
       width: getWidth(100, context),
       margin: EdgeInsets.only(left: getWidth(8, context)),
       decoration: BoxDecoration(
-          color: middleCard ? appColors.secondary : appColors.primary,
+          color: middleCard ? appColors.black : appColors.black,
           borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -84,7 +84,7 @@ class ComponentCard extends StatelessWidget {
               fontSize: getHeight(12, context),
               height: getHeight(1.5, context),
               fontWeight: middleCard ? FontWeight.bold : null,
-              color: Colors.white,
+              color: appColors.black,
             ),
           ),
         ),

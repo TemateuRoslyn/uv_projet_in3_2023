@@ -75,14 +75,14 @@ class AppColors extends ThemeExtension<AppColors> {
 
 final appColors = AppColors(
   // primary: const Color(0xffa4cccc),
-  primary: const Color(0xff20192f),
-  secondary: const Color(0xfffd3667),
+  primary: const Color(0xffffffff),
+  secondary: const Color(0xff1eb2a6),
+  white: const Color(0xfff37721),
   tinary: const Color(0xff473f97),
   onBoardingOne: const Color(0xffffe8d4),
   onBoardingTwo: const Color(0xffd4f5ff),
   onBoardingThree: const Color(0xffffd4d4),
   yellow: const Color(0xffCCA424),
-  ligthGreen: const Color(0xffa4cccc),
-  white: const Color(0xffffffff),
-  black: const Color(0xFF000000),
+  ligthGreen: Color.fromARGB(255, 201, 53, 37),
+  black: const Color(0xFF3d3939),
 );

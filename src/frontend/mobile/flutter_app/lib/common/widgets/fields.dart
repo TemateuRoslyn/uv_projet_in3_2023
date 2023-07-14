@@ -75,25 +75,25 @@ class Fields extends StatelessWidget {
       case 'simpleInput':
         return TextFormField(
           onTap: onTapAction,
-          cursorColor: appColors.primary,
+          cursorColor: appColors.black,
           // initialValue: initialValue,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: appColors.black),
           decoration: InputDecoration(
             filled: emailTap! ? true : false,
-            fillColor: Colors.white.withOpacity(0.1),
+            fillColor: appColors.black!.withOpacity(0.1),
             prefixIcon: prefixIcon,
             labelText: labelText,
-            labelStyle: const TextStyle(
-              color: Colors.white,
+            labelStyle: TextStyle(
+              color: appColors.black,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
-              borderSide: BorderSide(width: 1, color: appColors.primary!),
+              borderSide: BorderSide(width: 1, color: appColors.black!),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: BorderSide(
-                  width: 1, color: appColors.primary!.withOpacity(0.5)),
+                  width: 1, color: appColors.black!.withOpacity(0.5)),
             ),
             errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
@@ -120,32 +120,32 @@ class Fields extends StatelessWidget {
           // minLines: 4,
           maxLines: 10,
           onTap: onTapAction,
-          cursorColor: appColors.white,
+          cursorColor: appColors.black,
           // initialValue: initialValue,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: appColors.black,
           ),
           decoration: InputDecoration(
             // filled: emailTap! ? true : false,
-            fillColor: Colors.white.withOpacity(0.1),
+            fillColor: appColors.black!.withOpacity(0.1),
             prefixIcon: prefixIcon,
             labelText: labelText,
             hintText: '',
-            labelStyle: const TextStyle(
-              color: Colors.white,
+            labelStyle: TextStyle(
+              color: appColors.black,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: BorderSide(
                 width: 1,
-                color: appColors.white!,
+                color: appColors.black!,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: BorderSide(
                 width: 1,
-                color: appColors.white!.withOpacity(0.5),
+                color: appColors.black!.withOpacity(0.5),
               ),
             ),
             errorBorder: OutlineInputBorder(
@@ -169,25 +169,25 @@ class Fields extends StatelessWidget {
           cursorColor: appColors.primary,
           keyboardType: TextInputType.visiblePassword,
           // initialValue: initialValue,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: appColors.black,
           ),
           decoration: InputDecoration(
             filled: passwordTap! ? true : false,
-            fillColor: Colors.white.withOpacity(0.1),
+            fillColor: appColors.black!.withOpacity(0.1),
             prefixIcon: prefixIcon,
             labelText: labelText,
-            labelStyle: const TextStyle(
-              color: Colors.white,
+            labelStyle: TextStyle(
+              color: appColors.black,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
-              borderSide: BorderSide(width: 1, color: appColors.primary!),
+              borderSide: BorderSide(width: 1, color: appColors.black!),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: BorderSide(
-                  width: 1, color: appColors.primary!.withOpacity(0.5)),
+                  width: 1, color: appColors.black!.withOpacity(0.5)),
             ),
             errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
