@@ -25,6 +25,7 @@ import { DeleteItemModal } from '../../../components/DeleteItemModal';
 
 import { PROFESSEUR_COLUMNS_DEFS } from '../../../configs/ag-grid-column-def/professeur';
 import CreateOrUpdateProfesseurModal from './CreateOrUpdateProfesseurModal';
+import DisplayOneModal from './DisplayOneModal';
 
 
 
@@ -53,7 +54,7 @@ const DisplayProfesseurs: React.FC<DisplayProfesseursProps> = (props) => {
 
     const [showCreateOrUpdateModal, setShowCreateOrUpdateModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-
+    const [showDisplayOneModal, setShowDisplayOneModal] = useState(false);
     const [modalMode, setModalMode] = useState<MODAL_MODE>(MODAL_MODE.create);
     const [modalTitle, setModalTitle] = useState<string>("");
     const [showIndicator, setShowIndicator] = useState<boolean>(false);
@@ -126,7 +127,7 @@ const DisplayProfesseurs: React.FC<DisplayProfesseursProps> = (props) => {
             const rowData =gridRef.current.api.getSelectedRows();
             if (rowData && rowData.length === 1) {
                 setProfesseur(rowData[0])
-                setShowCreateOrUpdateModal(true);
+                setShowDisplayOneModal(true);
                 setModalMode(MODAL_MODE.update)
                 setModalTitle("Modifier une professeur")
             } else if (rowData && rowData.length > 1) {
@@ -142,7 +143,7 @@ const DisplayProfesseurs: React.FC<DisplayProfesseursProps> = (props) => {
             const rowData =gridRef.current.api.getSelectedRows();
             if (rowData && rowData.length === 1) {
                 setProfesseur(rowData[0])
-                setShowCreateOrUpdateModal(true);
+                setShowDisplayOneModal(true);
                 setModalMode(MODAL_MODE.view)
                 setModalTitle("Detail d'un professeur")
             } else if (rowData && rowData.length > 1) {
@@ -241,6 +242,14 @@ const DisplayProfesseurs: React.FC<DisplayProfesseursProps> = (props) => {
 
 
         </div>
+
+      {showDisplayOneModal && <DisplayOneModal
+                                    mode={modalMode} 
+                                    title={modalTitle} 
+                                    onClose={() => setShowDisplayOneModal(false)} 
+                                    refresh={onGridReady}
+                                    item={modalMode !== MODAL_MODE.create ? professeur : null } 
+                                    />}
 
         {showCreateOrUpdateModal && <CreateOrUpdateProfesseurModal 
                                         mode={modalMode} 

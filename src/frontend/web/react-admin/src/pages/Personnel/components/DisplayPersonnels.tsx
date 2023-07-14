@@ -25,7 +25,7 @@ import { DeleteItemModal } from '../../../components/DeleteItemModal';
 
 import { PERSONNEL_COLUMNS_DEFS } from '../../../configs/ag-grid-column-def/personnel';
 import CreateOrUpdatePersonnelModal from './CreateOrUpdatePersonnelModal';
-
+import DisplayOneModal from './DisplayOneModal';
 
 
 interface DisplayPersonnelsProps {
@@ -53,7 +53,7 @@ const DisplayPersonnels: React.FC<DisplayPersonnelsProps> = (props) => {
 
     const [showCreateOrUpdateModal, setShowCreateOrUpdateModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-
+    const [showDisplayOneModal, setShowDisplayOneModal] = useState(false);
     const [modalMode, setModalMode] = useState<MODAL_MODE>(MODAL_MODE.create);
     const [modalTitle, setModalTitle] = useState<string>("");
     const [showIndicator, setShowIndicator] = useState<boolean>(false);
@@ -102,7 +102,7 @@ const DisplayPersonnels: React.FC<DisplayPersonnelsProps> = (props) => {
     }, []);
 
     const handleNewItem = () => {
-        setShowCreateOrUpdateModal(true);
+        setShowDisplayOneModal(true);
         setModalMode(MODAL_MODE.create)
         setModalTitle("Créer un nouveaux personnel")
     }
@@ -142,7 +142,7 @@ const DisplayPersonnels: React.FC<DisplayPersonnelsProps> = (props) => {
             const rowData =gridRef.current.api.getSelectedRows();
             if (rowData && rowData.length === 1) {
                 setPersonnel(rowData[0])
-                setShowCreateOrUpdateModal(true);
+                setShowDisplayOneModal(true);
                 setModalMode(MODAL_MODE.view)
                 setModalTitle("Detail d'une personnel")
             } else if (rowData && rowData.length > 1) {
@@ -241,6 +241,13 @@ const DisplayPersonnels: React.FC<DisplayPersonnelsProps> = (props) => {
 
 
         </div>
+        {showDisplayOneModal && <DisplayOneModal
+                                    mode={modalMode} 
+                                    title={modalTitle} 
+                                    onClose={() => setShowDisplayOneModal(false)} 
+                                    refresh={onGridReady}
+                                    item={modalMode !== MODAL_MODE.create ? personnel : null } 
+                                    />}
 
         {showCreateOrUpdateModal && <CreateOrUpdatePersonnelModal 
                                         mode={modalMode} 
