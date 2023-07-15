@@ -80,7 +80,7 @@ class Fields extends StatelessWidget {
           style: TextStyle(color: appColors.black),
           decoration: InputDecoration(
             filled: emailTap! ? true : false,
-            fillColor: appColors.black!.withOpacity(0.1),
+            fillColor: Colors.grey.withOpacity(0.1),
             prefixIcon: prefixIcon,
             labelText: labelText,
             labelStyle: TextStyle(
@@ -166,7 +166,7 @@ class Fields extends StatelessWidget {
       case 'passwordInput':
         return TextFormField(
           onTap: onTapAction,
-          cursorColor: appColors.primary,
+          cursorColor: appColors.black,
           keyboardType: TextInputType.visiblePassword,
           // initialValue: initialValue,
           style: TextStyle(
@@ -174,7 +174,7 @@ class Fields extends StatelessWidget {
           ),
           decoration: InputDecoration(
             filled: passwordTap! ? true : false,
-            fillColor: appColors.black!.withOpacity(0.1),
+            fillColor: Colors.grey.withOpacity(0.1),
             prefixIcon: prefixIcon,
             labelText: labelText,
             labelStyle: TextStyle(
@@ -227,7 +227,7 @@ class Fields extends StatelessWidget {
                 isoCode: initialIso,
                 dialCode: initialDial,
               )),
-              cursorColor: appColors.primary,
+              cursorColor: appColors.black,
               onInputChanged: phoneonInputChanged,
               // initialValue: initialNumber,
               onInputValidated: phoneonInputValidated,

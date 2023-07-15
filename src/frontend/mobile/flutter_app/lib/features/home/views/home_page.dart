@@ -6,6 +6,7 @@ import 'package:fltter_app/features/home/views/convocation_page.dart';
 import 'package:fltter_app/features/home/views/cours_page.dart';
 import 'package:fltter_app/features/home/views/fautes_page.dart';
 import 'package:fltter_app/features/home/views/reglements_interieurs_page.dart';
+import 'package:fltter_app/features/home/views/sanctions_page.dart';
 import 'package:fltter_app/features/home/views/suggestion_page.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,8 @@ class _HomePageState extends State<HomePage> {
       {
         'image': AppImages.sanction,
         'subtitle': 'Mes sanctions',
-        'onPressAction': () {}
+        'onPressAction': () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const SanctionsPage()))
       },
       // Reglements interieurs
       {
@@ -131,9 +133,9 @@ class _HomePageState extends State<HomePage> {
                                   SizedBox(
                                     child: Row(
                                       children: [
-                                        CommonWidgets.renderImage(
-                                            imagePath: currentUser!.photo!,
-                                            context: context),
+                                        // CommonWidgets.renderImage(
+                                        //     imagePath: currentUser!.photo!,
+                                        //     context: context),
                                         Colonne(
                                             text1:
                                                 '${currentUser!.firstName} ${currentUser.lastName}',
@@ -197,7 +199,7 @@ class Colonne extends StatelessWidget {
           Text(
             text1,
             style: TextStyle(
-              fontSize: getHeight(15, context),
+              fontSize: getHeight(13, context),
               fontWeight: FontWeight.bold,
               color: appColors.black,
             ),
@@ -208,9 +210,9 @@ class Colonne extends StatelessWidget {
           Text(
             text2,
             style: TextStyle(
-              fontSize: getHeight(18, context),
+              fontSize: getHeight(12, context),
               fontWeight: FontWeight.bold,
-              color: appColors.black!.withOpacity(0.7),
+              color: appColors.black,
             ),
           ),
         ],

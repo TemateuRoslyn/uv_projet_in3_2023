@@ -42,7 +42,7 @@ class _ReglementsInterieursState extends State<ReglementsInterieurs> {
           return CheckInternetConnectionPage(
             helper: state.ri.isEmpty ? 0 : 1,
             positionFromTop: (screenSize.height / 2),
-            errorTextColor: appColors.ligthGreen!,
+            errorTextColor: appColors.black!,
             body: state.riStatus == ApiStatus.isLoading
                 ? CommonWidgets.circularProgressIndicatorWidget(
                     positionFromTop: (screenSize.height / 2),
@@ -53,7 +53,7 @@ class _ReglementsInterieursState extends State<ReglementsInterieurs> {
                         positionFromTop: (screenSize.height / 2),
                         context: context,
                         statusMessage: state.riStatusMessage,
-                        color: appColors.ligthGreen!,
+                        color: appColors.black!,
                         reloadFunction: () =>
                             _homeCubit.getDataByType(dataType: 'ri'))
                     : state.ri.isEmpty

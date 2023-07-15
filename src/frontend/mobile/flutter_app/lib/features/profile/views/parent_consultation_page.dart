@@ -152,6 +152,13 @@ class _ParentConsultationPageState extends State<ParentConsultationPage> {
                               ),
                               ...List.generate(4, (index) {
                                 return CategorieIncidentComponent(
+                                  image: index == 0
+                                      ? AppImages.fault
+                                      : index == 1
+                                          ? AppImages.sanction
+                                          : index == 2
+                                              ? AppImages.convocation
+                                              : AppImages.disciplinaryCouncil,
                                   onPressAction: () {
                                     Navigator.of(context)
                                         .push(MaterialPageRoute(
@@ -229,11 +236,13 @@ class CategorieIncidentComponent extends StatelessWidget {
     super.key,
     required this.text,
     required this.number,
+    required this.image,
     required this.onPressAction,
   });
 
   final String text;
   final String number;
+  final String image;
   final void Function()? onPressAction;
 
   @override
@@ -252,13 +261,14 @@ class CategorieIncidentComponent extends StatelessWidget {
             SizedBox(
               child: Row(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 30,
                     child: Image.asset(
-                      AppImages.unknownPersonImg,
-                      height: getHeight(55, context),
-                      width: getWidth(55, context),
-                      // color: Colors.white,
+                      image,
+                      width: getWidth(40, context),
+                      height: getHeight(40, context),
+                      // color: Colors.grey,
                     ),
                   ),
                   SizedBox(

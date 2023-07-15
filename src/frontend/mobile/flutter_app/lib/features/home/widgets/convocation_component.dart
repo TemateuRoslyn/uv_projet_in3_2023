@@ -61,13 +61,16 @@ class ConvocationComponent extends StatelessWidget {
                 SizedBox(
                   width: getWidth(10, context),
                 ),
-                Text(
-                  // DateFormat('dd-MM-yyyy').format(DateTime.now()),
-                  subtitle1,
-                  style: TextStyle(
-                    fontSize: getHeight(20, context),
-                    fontWeight: FontWeight.bold,
-                    color: appColors.primary,
+                SizedBox(
+                  width: getWidth(270, context),
+                  child: Text(
+                    // DateFormat('dd-MM-yyyy').format(DateTime.now()),
+                    subtitle1,
+                    style: TextStyle(
+                      fontSize: getHeight(20, context),
+                      fontWeight: FontWeight.bold,
+                      color: appColors.primary,
+                    ),
                   ),
                 ),
               ],
@@ -85,13 +88,16 @@ class ConvocationComponent extends StatelessWidget {
                 SizedBox(
                   width: getWidth(10, context),
                 ),
-                Text(
-                  // DateFormat('dd-MM-yyyy').format(DateTime.now()),
-                  subtitle2!,
-                  style: TextStyle(
-                    fontSize: getHeight(20, context),
-                    fontWeight: FontWeight.bold,
-                    color: appColors.primary,
+                SizedBox(
+                  width: getWidth(270, context),
+                  child: Text(
+                    // DateFormat('dd-MM-yyyy').format(DateTime.now()),
+                    subtitle2!,
+                    style: TextStyle(
+                      fontSize: getHeight(20, context),
+                      fontWeight: FontWeight.bold,
+                      color: appColors.primary,
+                    ),
                   ),
                 ),
               ],
