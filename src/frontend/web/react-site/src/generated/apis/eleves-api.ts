@@ -324,6 +324,49 @@ export const ElevesApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
+         * Retrieve a list of the most disciplines eleves
+         * @summary Get the most disciplines eleves
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        mostDisciplinesEleves: async (authorization: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling mostDisciplinesEleves.');
+            }
+            const localVarPath = `/api/eleves/mostDisciplines`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Update a eleve's information
          * @summary Update a eleve's information
          * @param {string} email 
@@ -603,6 +646,20 @@ export const ElevesApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Retrieve a list of the most disciplines eleves
+         * @summary Get the most disciplines eleves
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async mostDisciplinesEleves(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20028>> {
+            const localVarAxiosArgs = await ElevesApiAxiosParamCreator(configuration).mostDisciplinesEleves(authorization, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Update a eleve's information
          * @summary Update a eleve's information
          * @param {string} email 
@@ -706,6 +763,16 @@ export const ElevesApiFactory = function (configuration?: Configuration, basePat
             return ElevesApiFp(configuration).elevesRecords(keyword, authorization, options).then((request) => request(axios, basePath));
         },
         /**
+         * Retrieve a list of the most disciplines eleves
+         * @summary Get the most disciplines eleves
+         * @param {string} authorization JWT token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        mostDisciplinesEleves(authorization: string, options?: any): AxiosPromise<InlineResponse20028> {
+            return ElevesApiFp(configuration).mostDisciplinesEleves(authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Update a eleve's information
          * @summary Update a eleve's information
          * @param {string} email 
@@ -804,6 +871,17 @@ export class ElevesApi extends BaseAPI {
      */
     public elevesRecords(keyword: string, authorization: string, options?: any) {
         return ElevesApiFp(this.configuration).elevesRecords(keyword, authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Retrieve a list of the most disciplines eleves
+     * @summary Get the most disciplines eleves
+     * @param {string} authorization JWT token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ElevesApi
+     */
+    public mostDisciplinesEleves(authorization: string, options?: any) {
+        return ElevesApiFp(this.configuration).mostDisciplinesEleves(authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update a eleve's information

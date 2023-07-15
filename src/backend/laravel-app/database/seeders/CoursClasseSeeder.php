@@ -5,6 +5,10 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\CoursClasse;
+use App\Models\Cour;
+use App\Models\Classe;
+
+
 
 class CoursClasseSeeder extends Seeder
 {
@@ -13,7 +17,19 @@ class CoursClasseSeeder extends Seeder
      */
     public function run(): void
     {
-        CoursClasse::create([
+        $courses = Cour::all();
+        $classes = Classe::all();
+        
+        foreach ($courses as $course) {
+            foreach ($classes as $class) {
+                CoursClasse::create([
+                    'courId' => $course->id,
+                    'classeId' => $class->id,
+                ]);
+            }
+        }
+        
+        /*  CoursClasse::create([
             'courId' => 1,
             'classeId' => 1,
         ]);
@@ -28,6 +44,6 @@ class CoursClasseSeeder extends Seeder
         CoursClasse::create([
             'courId' => 4,
             'classeId' => 2,
-        ]);
+        ]); */
     }
 }

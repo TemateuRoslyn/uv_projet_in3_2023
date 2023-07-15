@@ -233,7 +233,7 @@ class PersonnelController extends Controller
             'dateDeNaissance' => 'required|date',
             'lieuDeNaissance' => 'required',
             'email' => 'required|email|unique:users',
-            'photo' => 'nullable|image',
+            // 'photo' => 'nullable|image',
             'sexe' => 'required',
             'telephone' => 'required',
             'fonction' => 'required',
@@ -417,7 +417,7 @@ class PersonnelController extends Controller
                 'dateDeNaissance' => 'required|date',
                 'lieuDeNaissance' => 'required',
                 'sexe' => 'required',
-                'photo' => 'nullable|image',
+                // 'photo' => 'nullable|image',
                 'telephone' => 'required',
                 'fonction' => 'required',
             ]);

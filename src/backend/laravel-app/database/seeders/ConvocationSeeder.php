@@ -15,7 +15,27 @@ class ConvocationSeeder extends Seeder
      */
     public function run(): void
     {
-        $personnel = Personnel::find(1);
+        $eleves = Eleve::inRandomOrder()->limit(15)->get();
+$personnel = Personnel::inRandomOrder()->limit(2)->get();
+
+foreach ($eleves as $eleve) {
+    $personnelIndex = rand(0, $personnel->count() - 1);
+    $selectedPersonnel = $personnel[$personnelIndex];
+    
+    $dateConvocation = '2023-06-20';
+    $dateRdv = date('Y-m-d', strtotime($dateConvocation . '+4 days'));
+
+    Convocation::create([
+        'libelle' => $eleve->firstName . ' ' . $eleve->lastName . ', élève dans notre établissement, vous et vos parents êtes convoqués au conseil de discipline qui se tiendra le ' . $dateConvocation . '.',
+        'dateConvocation' => $dateConvocation,
+        'dateRdv' => $dateRdv,
+        'statut' => 'a venir',
+        'personnelId' => $selectedPersonnel->id,
+        'eleveId' => $eleve->id,
+    ]);
+}
+
+       /*  $personnel = Personnel::find(1);
         $eleve = Eleve::find(1);
 
 
@@ -28,6 +48,6 @@ class ConvocationSeeder extends Seeder
             'statut'  => 'a venir',
             'personnelId' => $personnel->id,
             'eleveId' => $eleve->id,
-        ]);
+        ]); */
     }
 }
