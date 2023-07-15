@@ -27,6 +27,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   final HomeRepository? homeRepository;
   final InternetCubit? internetCubit;
+
   final TextEditingController suggestion = TextEditingController();
 
   void getDataByType({
@@ -223,12 +224,27 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void insertSuggestion() async {
-    // final suggestion = Suggestion(description: suggestion.);
+  void sendSuggestion() async {
     try {
-      await homeRepository!.insertSuggestion(suggestion.text);
-      emit(state.copyWith(suggestionInsertStatus: 'success'));
-    } catch (e) {}
+      emit(state.copyWith(
+        suggestionText: suggestion.text.trim(),
+        suggestionStatus: ApiStatus.isLoading,
+        suggestionStatusMessage: 'Envoie de votre suggestion en cour...',
+      ));
+      await homeRepository!.sendSuggestion(state.suggestionText);
+      emit(state.copyWith(
+        suggestionStatus: ApiStatus.success,
+        suggestionStatusMessage: 'Suggestion envoyée avec success',
+      ));
+      suggestion.clear();
+    } catch (e) {
+      // final errorMessage = ApiConfiguration.getErrorMessage(e);
+      emit(state.copyWith(
+        suggestionStatus: ApiStatus.failed,
+        suggestionStatusMessage:
+            'Quelque chose s\'est mal passé, veuillez réessayer plus tard...',
+      ));
+    }
   }
 
   void getChildInfosForParentConsultation(int userId) async {
@@ -304,4 +320,43 @@ class HomeCubit extends Cubit<HomeState> {
 
   void addNewConvocation(Convocation newConvocation) => emit(state.copyWith(
       convocations: List.from(state.convocations)..add(newConvocation)));
+
+  void clearState() {
+    emit(state.copyWith(
+      // reglement interieur variables
+      riStatus: ApiStatus.init,
+      ri: [],
+      riStatusMessage: '',
+      // fautes variables
+      fauteStatus: ApiStatus.init,
+      fautes: [],
+      fauteStatusMessage: '',
+      // conseil discipline variables
+      cdStatus: ApiStatus.init,
+      cds: [],
+      cdStatusMessage: '',
+      // covocations variables
+      convocationStatus: ApiStatus.init,
+      convocations: [],
+      convocationStatusMessage: '',
+      // cours variables
+      coursStatus: ApiStatus.init,
+      courss: [],
+      coursStatusMessage: '',
+      // sanctions variables
+      sanctionStatus: ApiStatus.init,
+      sanctions: [],
+      sanctionStatusMessage: '',
+      // all student datas variables
+      allStudentDataStatus: ApiStatus.init,
+      allStudentDataStatusMessage: '',
+      //suggession variables
+      suggestionStatus: ApiStatus.init,
+      suggestionText: '',
+      suggestionStatusMessage: '',
+      // parent consultation variables
+      parentConsultationStatus: ApiStatus.init,
+      parentConsultationStatusMessage: '',
+    ));
+  }
 }

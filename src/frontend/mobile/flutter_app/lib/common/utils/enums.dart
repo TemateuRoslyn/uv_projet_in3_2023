@@ -12,6 +12,7 @@ enum ConnectionType {
 }
 
 enum NavigationType {
+  init,
   home,
   stats,
   profile,

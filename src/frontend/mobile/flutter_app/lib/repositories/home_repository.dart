@@ -172,7 +172,7 @@ class HomeRepository {
     }
   }
 
-  Future<void> insertSuggestion(String suggestion) async {
+  Future<void> sendSuggestion(String suggestion) async {
     try {
       final response = await dio.post(
         '/suggestion/create',

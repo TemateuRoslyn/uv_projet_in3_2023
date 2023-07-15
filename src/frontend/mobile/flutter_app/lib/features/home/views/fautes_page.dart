@@ -85,7 +85,7 @@ class _FautesPageState extends State<FautesPage> {
                                   .map((faute) => ConvocationComponent(
                                         libelle: 'Faute: ${faute.libelle}',
                                         subtitle1:
-                                            'Règle: ${faute.regle!.libelle}',
+                                            'Règle: ${faute.regle.libelle}',
                                         statut: 'Gravité: ${faute.gravite}',
                                         isFrom: 'fautes_santions',
                                         // onPressAction: () {},

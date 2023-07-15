@@ -35,6 +35,8 @@ class Fields extends StatelessWidget {
   final List<DropDownValueModel>? dropDownList;
   final Icon? dropDownPrefixIcon;
 
+  int? simpleInputMaxlines;
+
   bool? emailTap;
   bool? passwordTap;
   Fields(
@@ -65,6 +67,7 @@ class Fields extends StatelessWidget {
       this.passwordTap,
       required this.hintText,
       required this.fieldType,
+      this.simpleInputMaxlines,
       super.key});
 
   @override
@@ -76,15 +79,20 @@ class Fields extends StatelessWidget {
         return TextFormField(
           onTap: onTapAction,
           cursorColor: appColors.black,
+          maxLines: simpleInputMaxlines ?? simpleInputMaxlines,
           // initialValue: initialValue,
           style: TextStyle(color: appColors.black),
           decoration: InputDecoration(
-            filled: emailTap! ? true : false,
+            filled: (emailTap != null && emailTap!) ? true : false,
             fillColor: Colors.grey.withOpacity(0.1),
-            prefixIcon: prefixIcon,
-            labelText: labelText,
+            prefixIcon: simpleInputMaxlines == null ? prefixIcon : null,
+            labelText: simpleInputMaxlines == null ? labelText : null,
             labelStyle: TextStyle(
               color: appColors.black,
+            ),
+            hintText: simpleInputMaxlines != null ? hintText : null,
+            hintStyle: const TextStyle(
+              color: Colors.grey,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),

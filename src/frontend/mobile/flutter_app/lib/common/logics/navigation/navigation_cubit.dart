@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:fltter_app/common/utils/enums.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:meta/meta.dart';
 
 part 'navigation_state.dart';
 
@@ -13,4 +12,7 @@ class NavigationCubit extends Cubit<NavigationState> {
 
   void changeNavigationType(NavigationType newNavigationType) =>
       emit(state.copyWith(navigationType: newNavigationType));
+
+  void clearState() =>
+      emit(state.copyWith(navigationType: NavigationType.init));
 }
