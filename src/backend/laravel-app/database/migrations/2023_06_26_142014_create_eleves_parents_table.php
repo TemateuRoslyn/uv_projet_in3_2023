@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('eleves_parents', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('eleveId');
-            $table->foreign('eleveId')->references('id')->on('eleves')->onDelete('cascade');
             $table->unsignedBigInteger('parentId');
+
+            $table->foreign('eleveId')->references('id')->on('eleves')->onDelete('cascade');
             $table->foreign('parentId')->references('id')->on('parents')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }

@@ -12,13 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('eleve_parent', function (Blueprint $table) {
+            $table->id();
+
             $table->unsignedBigInteger('eleveId');
             $table->unsignedBigInteger('parentId');
 
             $table->foreign('eleveId')->references('id')->on('eleves')->onDelete('cascade');
             $table->foreign('parentId')->references('id')->on('parents')->onDelete('cascade');
 
-            $table->primary(['eleveId', 'parentId']);
+            $table->timestamps();
+            
         });
     }
 
