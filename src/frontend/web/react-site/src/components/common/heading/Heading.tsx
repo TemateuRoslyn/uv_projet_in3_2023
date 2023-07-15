@@ -5,7 +5,7 @@ const Heading = ({ subtitle, title }) => {
     <>
       <div id='heading'>
         <h1>{title} </h1>
-        <h3>{subtitle} </h3>
+        {/* <h3>{subtitle} </h3> */}
       </div>
     </>
   )

@@ -48,7 +48,7 @@ const FautesSection = ({ fautes  }) => {
             className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 mt-4 rounded"
             onClick={() => handleRepairFaute(faute)}
           >
-            Repair Faute
+            Reparer la faute
           </button>
         </div>
       ))}
@@ -56,11 +56,11 @@ const FautesSection = ({ fautes  }) => {
         <div className="fixed inset-0 flex items-center justify-center z-50">
         <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
         <div className="bg-white shadow-lg rounded-lg p-4 max-w-xl w-[600px] max-h-xl h-[500px]   z-50">
-            <h3 className="text-xl font-semibold mb-4">Repair Faute</h3>
+            <h3 className="text-xl font-semibold mb-4">Reparer la Faute</h3>
             <textarea
               className="w-full h-2/3 rounded border-gray-300 p-2 mb-4"
               rows={4}
-              placeholder="Enter reparation details..."
+              placeholder="Entrer la demarche a suivre pour reparer votre faute..."
               value={reparationText}
               onChange={(e) => setReparationText(e.target.value)}
             ></textarea>
