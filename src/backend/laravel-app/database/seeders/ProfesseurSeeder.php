@@ -19,7 +19,52 @@ class ProfesseurSeeder extends Seeder
     public function run(): void
     {
 
-        // Création de l'utilisateur
+        $users = [];
+$professors = [];
+
+// Create 10 professors
+for ($i = 1; $i <= 10; $i++) {
+    // Create the user
+    $user = User::create([
+        'email' => 'professor' . $i . '@example.com',
+        'username' => 'professor' . $i,
+        'password' => bcrypt('password'),
+    ]);
+
+    // Create the professor
+    $professor = Professeur::create([
+        'statut' => 'CENSEUR',
+        'firstName' => 'Professor' . $i,
+        'lastName' => 'LastName' . $i,
+        'dateDeNaissance' => '2000/05/2',
+        'lieuDeNaissance' => 'nkong',
+        'photo' => 'assets/avatars/parents/user.png',
+        'sexe' => 'm',
+        'telephone' => '+237666534899',
+        'userId' => $user->id,
+        'courId' => $i, // Assuming each professor is associated with a different course (courId = i)
+    ]);
+
+    // Store the user and professor in arrays for future use
+    $users[$i] = $user;
+    $professors[$i] = $professor;
+
+    // Assign role and permissions to the professor
+    $professorRole = Role::where('name', PROFESSEUR_ROLE['name'])->first();
+
+    if ($professorRole) {
+        $user->roles()->attach($professorRole);
+    }
+
+    foreach (PROFESSEUR_PERMISSIONS as $permission) {
+        $professorPermis = Permission::where('name', $permission['name'])->first();
+        if ($professorPermis) {
+            $user->permissions()->attach($professorPermis);
+        }
+    }
+}
+
+       /*  // Création de l'utilisateur
         $user = User::create([
             'email' => 'professeur@example.com',
             'username' => 'professeurname',
@@ -123,6 +168,6 @@ class ProfesseurSeeder extends Seeder
             if ($professeurPermis) {
                 $user->permissions()->attach($professeurPermis);
             }
-        }
+        } */
     }
 }

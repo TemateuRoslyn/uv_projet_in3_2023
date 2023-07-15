@@ -17,8 +17,24 @@ class ConseilDisciplineSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $eleves = Eleve::has('fautes')->with('fautes')->limit(20)->get();
+
+foreach ($eleves as $eleve) {
+    $faute = $eleve->fautes->first();
+
+    $conseil = new ConseilDiscipline;
+    $conseil->dateCd = '2023-01-04';
+    $conseil->heureDebutCd = '10:00:00';
+    $conseil->heureFinCd = '12:00:00';
+    $conseil->eleveId = $eleve->id;
+    $conseil->fauteId = $faute->id;
+    $conseil->status = $conseil->getStatusAttribute();
+    $conseil->save();
+}
+
         //Eleve qui a ete traduit au conseil de discipline
-        $eleve = Eleve::find(1);
+       /*  $eleve = Eleve::find(1);
         $faute = Faute::find(2);
 
         $conseil = new ConseilDiscipline;
@@ -48,6 +64,6 @@ class ConseilDisciplineSeeder extends Seeder
         $conseil->eleveId = $eleve->id;
         $conseil->fauteId = $faute->id;
         $conseil->status = $conseil->getStatusAttribute();
-        $conseil->save();
+        $conseil->save(); */
     }
 }

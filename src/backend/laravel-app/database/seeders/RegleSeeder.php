@@ -14,9 +14,9 @@ class RegleSeeder extends Seeder
      */
     public function run(): void
     {
-        Regle::create([
+        /* Regle::create([
             'libelle' => 'regle de l\'ecole',
             'reglementInterieurId' => '1'
-        ]);
+        ]); */
     }
 }

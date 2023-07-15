@@ -16,7 +16,52 @@ class PersonnelSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::create([
+
+        $names = [
+            'Tchakounte', 'Nguimfack', 'Kouam', 'Tchatchoua', 'Takam'
+        ];
+        
+        $fonctions = [
+            'Censeur', 'Proviseur', 'Surveillant général', 'Conseiller pédagogique', 'Intendant'
+        ];
+        
+        for ($i = 0; $i < 5; $i++) {
+            $user = User::create([
+                'email' => 'personnel' . ($i+1) . '@example.com',
+                'username' => 'personnel' . ($i+1),
+                'password' => bcrypt('personnel' . ($i+1)),
+            ]);
+        
+            $personnel = Personnel::create([
+                'firstName' => $names[$i],
+                'lastName' => 'Bamileke',
+                'dateDeNaissance' => '2000/05/2',
+                'lieuDeNaissance' => 'West Cameroon',
+                'photo' => 'assets/avatars/eleves/user.png',
+                'sexe' => 'Masculin',
+                'telephone' => '+237666534899',
+                'fonction' => $fonctions[$i],
+                'userId' => $user->id,
+            ]);
+        
+            // Recuperer le rôle du personnel
+            $personnelRole = Role::where('name', PERSONNEL_ROLE['name'])->first();
+        
+            // Assigner le rôle
+            if ($personnelRole) {
+                $user->roles()->attach($personnelRole);
+            }
+        
+            // Assigner les permissions des personnels
+            foreach (PERSONNEL_PERMISSIONS as $permission) {
+                $personnelPermis = Permission::where('name', $permission['name'])->first();
+                if ($personnelPermis) {
+                    $user->permissions()->attach($personnelPermis);
+                }
+            }
+        }
+        
+/*         $user = User::create([
             'email' => 'personnel1@example.com',
             'username' => 'personnel1',
             'password' => bcrypt('personnel1'),
@@ -69,6 +114,6 @@ class PersonnelSeeder extends Seeder
                 $user->permissions()->attach($personnelPermis);
                 $user2->permissions()->attach($personnelPermis);
             }
-        }
+        } */
     }
 }
