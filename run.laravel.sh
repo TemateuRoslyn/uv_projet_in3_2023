@@ -1,4 +1,4 @@
-#!/bin/bash
+# #!/bin/bash
 
 cd src/backend/laravel-app
 
@@ -15,3 +15,4 @@ else
     php artisan l5-swagger:generate
     php artisan serve
 fi
+

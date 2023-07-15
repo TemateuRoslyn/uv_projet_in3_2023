@@ -1,28 +1,57 @@
-name: 🚀 Deploy on push main
-
-on: 
+name: Laravel Backend Vercel Production Deployment
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_UV_PROJET_IN3_API_ID }}
+on:
   push:
-    branches:    
-      - mains 
-    
+    branches: [ main ]
 jobs:
-  web-deploy:
+  Admin-Deploy-Production:
     defaults:
         run:
           working-directory: ./src/backend/laravel-app
 
-    name: 🎉 Deploy
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['16']
+        os: ['ubuntu-latest']
 
+    runs-on: ${{ matrix.os }}
+    
     steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: 📂 Deploy to server via ssh
-        uses: appleboy/ssh-action@v0.1.7
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          script: "sh ./.scripts/deploy.sh"
+          node-version: ${{ matrix.node }}
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --prefer-dist --no-interaction
+
+      - name: Generate Laravel application key
+        run: php artisan key:generate
+
+      - name: Load optimized files
+        run: composer dumpautoload
+
+      - name: Swagger setup
+        run: php artisan l5-swagger:generate
+
+      - name: Run Laravel database migrations and seeding
+        run: php artisan migrate:fresh --seed
+
+      - name: Generate JWT token
+        run: php artisan jwt:secret
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}

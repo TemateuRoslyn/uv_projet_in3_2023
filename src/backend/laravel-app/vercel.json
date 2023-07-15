@@ -1,0 +1,47 @@
+{
+    "version": 2,
+    "functions": {
+        "api/index.php": { "runtime": "vercel-php@0.3.1" }
+    },
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/api/index.php"
+        }
+    ],
+    "env": {
+        "APP_NAME": "Paul Emane Eyghe Hight School",
+        "APP_ENV": "production",
+        "APP_DEBUG": "false",
+        "APP_URL": "https://uv-projet-in3-2023-backend.vercel.app",
+        "APP_KEY": "base64:Odt2kbXqJWgE/Fk3JJSiKDEUpFAm6XHkZzoLaCvJjTU=",
+
+        "MAIL_MAILER": "smtp",
+        "MAIL_HOST": "smtp.gmail.com",
+        "MAIL_PORT": "587",
+        "MAIL_USERNAME": "destructeurkratos@gmail.com",
+        "MAIL_PASSWORD": "uiypasfjkeeobvxs",
+        "MAIL_ENCRYPTION": "tls",
+        "MAIL_FROM_ADDRESS": "destructeurkratos@gmail.com",
+        "MAIL_FROM_NAME": "Paul Emane Eyghe Hight School",
+
+        "APP_CONFIG_CACHE": "/tmp/config.php",
+        "APP_EVENTS_CACHE": "/tmp/events.php",
+        "APP_PACKAGES_CACHE": "/tmp/packages.php",
+        "APP_ROUTES_CACHE": "/tmp/routes.php",
+        "APP_SERVICES_CACHE": "/tmp/services.php",
+
+        "DB_CONNECTION": "pgsql",
+        "DATABASE_URL": "postgres://dxoptwjg:7HE7eFOZa_lYSCrWAHN-b5Zb3bgodccl@stampy.db.elephantsql.com/dxoptwjg",
+
+        "VIEW_COMPILED_PATH": "/tmp",
+        "CACHE_DRIVER": "array",
+        "LOG_CHANNEL": "stderr",
+        "SESSION_DRIVER": "cookie",
+        "VIEW_COMPILED_PATH": "/tmp/views",
+        "SSR_TEMP_PATH": "/tmp/ssr",
+        "NODE_PATH": "node",
+
+        "JWT_SECRET": "NZeUw4Q7q35G1lJyoeJvLruM0m9ftpovz4BI7JOCs6FAWMVM3ZcvFxcN9cSQPGRQ"
+    }
+}
