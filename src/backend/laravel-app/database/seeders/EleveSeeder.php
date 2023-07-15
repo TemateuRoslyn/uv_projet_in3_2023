@@ -19,7 +19,87 @@ class EleveSeeder extends Seeder
     public function run(): void
     {
 
-        $classe = Classe::find(1);
+        $classe1 = Classe::find(1);
+$classe2 = Classe::find(2);
+$classe3 = Classe::find(3);
+$classe4 = Classe::find(4);
+
+$names = [
+    'Momo Eboa',
+    'Ada Mbella',
+    'Ngoa Atangana',
+    'Fotso Nguetsop',
+    'Eyoum Biyaga',
+    'Tchakounte Ngo',
+    'Ngoufack Djomga',
+    'Nkotto Nzoko',
+    'Kamdem Fotso',
+    'Bekolo Nlend',
+    'Mengue Menguem',
+    'Nkenyam Kuepi',
+    'Tchokote Nzie',
+    'Kangong Nkoulou',
+    'Nwambe Monono',
+    'Enoh Ebai',
+    'Fongod Ayuk',
+    'Atemnkeng Ngwa',
+    'Takam Tabe',
+    'Kuemo Nguembock',
+    'Mbeng Emmanuel',
+    'Nji Njung',
+    'Ngwa Fomusoh',
+    'Mambo Atanga',
+    'Orock Nsah',
+    'Tambong Ndip',
+];
+
+foreach ($names as $index => $name) {
+    $user = User::create([
+        'email' => 'eleve' . ($index + 1) . '@example.com',
+        'username' => 'eleve' . ($index + 1),
+        'password' => bcrypt('eleve' . ($index + 1)),
+    ]);
+
+    $classe = $index < 6 ? $classe1 : ($index < 12 ? $classe2 : ($index < 18 ? $classe3 : $classe4));
+
+    $eleve = Eleve::create([
+        'firstName' => $name,
+        'lastName' => 'Lastname',
+        'dateDeNaissance' => '2000/05/2',
+        'lieuDeNaissance' => 'Nkong',
+        'photo' => 'assets/avatars/eleves/donald.JPG',
+        'sexe' => 'Masculin',
+        'telephone' => '+237666534899',
+        'solvable' => true,
+        'redoublant' => false,
+        'userId' => $user->id,
+        'classeId' => $classe->id,
+    ]);
+
+    // Update the class
+    $classe->update([
+        'effectif' => ++$classe->effectif,
+    ]);
+
+    // Recuperer le rôle de l'eleve
+    $eleveRole = Role::where('name', ELEVE_ROLE['name'])->first();
+
+    // Assigner le rôle
+    if ($eleveRole) {
+        $user->roles()->attach($eleveRole);
+    }
+
+    // Assigner les permissions des profs
+    foreach (ELEVE_PERMISSIONS as $permission) {
+        $elevePermis = Permission::where('name', $permission['name'])->first();
+        if ($elevePermis) {
+            $user->permissions()->attach($elevePermis);
+        }
+    }
+}
+
+
+        /* $classe = Classe::find(1);
         $classe1 = Classe::find(30);
 
         $user = User::create([
@@ -89,12 +169,12 @@ class EleveSeeder extends Seeder
         }
         
         //assigner les permissions des profs
-        foreach (PROFESSEUR_PERMISSIONS as $permission) {
+        foreach (ELEVE_PERMISSIONS as $permission) {
             $elevePermis = Permission::where('name', $permission['name'])->first();
             if ($elevePermis) {
                 $user->permissions()->attach($elevePermis);
                 $user2->permissions()->attach($elevePermis);
             }
-        }
+        } */
     }
 }

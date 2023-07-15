@@ -313,10 +313,10 @@ const DisplaySuggestion: React.FC<DisplaySuggestionProps> = (
               suppressAggFuncInHeader={true}
               pagination={true}
               paginationAutoPageSize={true}
-              domLayout="autoHeight"
+              paginateChildRows={true}
+             
               onGridReady={onGridReady}
-              onFirstDataRendered={(params) => params.api?.sizeColumnsToFit()}
-            />
+             />
           </div>
         </div>
       </div>

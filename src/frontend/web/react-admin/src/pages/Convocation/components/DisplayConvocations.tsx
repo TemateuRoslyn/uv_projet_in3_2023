@@ -106,7 +106,7 @@ const DisplayConvocations: React.FC<DisplayConvocationsProps> = (props) => {
   const handleNewItem = () => {
     setShowCreateOrUpdateModal(true);
     setModalMode(MODAL_MODE.create);
-    setModalTitle('Créer un nouvelle convocation');
+    setModalTitle('Créer une nouvelle convocation');
   };
 
   const handleExportExcel = () => {
@@ -302,7 +302,7 @@ const DisplayConvocations: React.FC<DisplayConvocationsProps> = (props) => {
       <div className="relative col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
         <div style={{ position: 'relative' }}>
           {showIndicator && <AgGridIndicator />}
-          <div className="ag-theme-alpine" style={{ height: 400 }}>
+          <div className="ag-theme-alpine" style={{ height: 500 }}>
             <AgGridReact
               ref={gridRef}
               rowData={convocations}

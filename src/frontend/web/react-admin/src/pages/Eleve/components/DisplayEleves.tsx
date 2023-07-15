@@ -306,7 +306,7 @@ const DisplayEleves: React.FC<DisplayElevesProps> = (props) => {
       <div className="relative col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
         <div style={{ position: 'relative' }}>
           {showIndicator && <AgGridIndicator />}
-          <div className="ag-theme-alpine" style={{ height: 400 }}>
+          <div className="ag-theme-alpine" style={{ height: 500 }}>
             <AgGridReact
               ref={gridRef}
               rowData={eleves}

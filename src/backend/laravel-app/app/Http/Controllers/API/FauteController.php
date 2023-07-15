@@ -398,7 +398,7 @@ class FauteController extends Controller
         //dd($request);
 
         $fautes = Faute::where('eleveId', '=', $eleveId)
-        ->where('libelle', 'like', "%{$keyword}%")
+        ->orWhere('libelle', 'like', "%{$keyword}%")
         ->with(['eleve', 'regle.reglementInterieur'])->get();
         //dd($keyword);
         $formattedFaute = $fautes->map(function ($faute) {

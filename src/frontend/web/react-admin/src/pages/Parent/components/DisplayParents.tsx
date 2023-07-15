@@ -278,7 +278,7 @@ const DisplayParents: React.FC<DisplayParentsProps> = (props) => {
         <div className="col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4 relative">
             <div style={{ position: 'relative' }}>
                 {showIndicator && <AgGridIndicator />}
-                <div className="ag-theme-alpine" style={{height: 400}}>
+                <div className="ag-theme-alpine" style={{ height: 500 }}>
                     <AgGridReact 
                         ref={gridRef}
                         rowData={parents} 

@@ -266,17 +266,19 @@ const CreateOrUpdateSanctionPrevuModal: React.FC<ModalProps> = (props) => {
   };
   return (
     <div
-      id="authentication-modal"
-      className="authentication-modal pl-800 pt-20"
-      onClick={props.onClose}
+    id="authentication-modal"
+    className="authentication-modal fixed inset-0 z-50 flex items-center justify-center overflow-auto"
+    onClick={props.onClose}
+  >
+    <div
+      className="top-modal-animation  relative mx-auto w-full max-w-3xl items-center justify-center px-4 sm:top-0 sm:max-h-96 sm:px-6 md:top-[50vh] lg:px-8"
+      onClick={(event) => event.stopPropagation()}
     >
-      <div
-        className="top-modal-animation relative mx-auto items-center  justify-center px-1"
-        onClick={(event) => event.stopPropagation()}
-      >
-        {/* <!-- Contact Form --> */}
-        <div className="rounded-sm border border-stroke bg-white bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-          <button onClick={props.onClose} className="close-button">
+      {/* Contact Form */}
+      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+        
+          <div className="modal-body">
+          <button onClick={props.onClose} className="flex">
             <svg
               aria-hidden="true"
               className="close-icon"
@@ -292,7 +294,6 @@ const CreateOrUpdateSanctionPrevuModal: React.FC<ModalProps> = (props) => {
             </svg>
             <span className="sr-only">Close modal</span>
           </button>
-          <div className="modal-body">
             <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
               <h3 className="   mb-[1rem] text-size-[1.25rem] font-medium text-black dark:text-white">
                 {props.title}
@@ -355,7 +356,7 @@ const CreateOrUpdateSanctionPrevuModal: React.FC<ModalProps> = (props) => {
                   {/* row 2 class, serie, photo*/}
                   <div className="w-full">
                     <label className="mb-2.5 block text-black dark:text-white">
-                      Heure de debut<span className="text-meta-1">*</span>
+                     Libelle<span className="text-meta-1">*</span>
                     </label>
                     <input
                       name="libelle"

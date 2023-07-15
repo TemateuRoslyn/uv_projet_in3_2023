@@ -165,21 +165,25 @@ const CreateOrUpdateClasseModal: React.FC<ModalProps> = (props) => {
 
     }
     return (
-        <div
-            id="authentication-modal"
-            className="authentication-modal"
-            onClick={props.onClose}
-        >
-            <div className="modal-container relative items-center justify-center mx-auto   top-modal-animation" onClick={(event) => event.stopPropagation()}>
-                <div className="modal-content bg-white bg-white rounded-sm border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
-                    <button onClick={props.onClose} className="close-button">
+            <div
+      id="authentication-modal"
+      className="authentication-modal fixed inset-0 z-50 flex items-center justify-center overflow-auto"
+      onClick={props.onClose}
+    >
+      <div
+        className="top-modal-animation  relative mx-auto w-full max-w-3xl items-center justify-center px-4 sm:top-0 sm:max-h-96 sm:px-6 md:top-[50vh] lg:px-8"
+        onClick={(event) => event.stopPropagation()}
+      >
+        {/* Contact Form */}
+        <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+           
+                    <div className="modal-body">
+                    <button onClick={props.onClose} className="flex">
                         <svg aria-hidden="true" className="close-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                         </svg>
                         <span className="sr-only">Close modal</span>
                     </button>
-                    <div className="modal-body">
-
                     <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
                         <h2 className="  mb-[1rem] text-size-[1.25rem] font-medium text-black dark:text-white">
                         {props.title}

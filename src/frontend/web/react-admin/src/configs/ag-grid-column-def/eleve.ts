@@ -48,13 +48,13 @@ export const ELEVE_COLUMNS_DEFS: ColDef[] = [
     width: 120,
     cellRenderer: (params: ValueGetterParams<Eleve>) => {
       let redoublant: string = '';
-      if (params.data?.redoublant == 1) {
-        if (params.data?.sexe === 'M')
+      if (params.data?.redoublant === false) {
+        if (params.data?.sexe === 'Masculin')
           redoublant = "Redoublant"
         else
           redoublant = "Redoublante"
       } else {
-        if (params.data?.sexe == 'M')
+        if (params.data?.sexe == 'Masculin')
           redoublant = "Nouveau"
         else
           redoublant = "Nouvelle"
@@ -71,7 +71,7 @@ export const ELEVE_COLUMNS_DEFS: ColDef[] = [
     width: 150,
     cellRenderer: (params: ValueGetterParams<Eleve>) => {
       let solvalble: string = '';
-      if (params.data?.solvable == true) {
+      if (params.data?.solvable === true) {
         solvalble = "Payée"
       } else {
         solvalble = "Impayée"

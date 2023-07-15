@@ -27,9 +27,9 @@ class UserSeeder extends Seeder
         ]);
 
         $user1 = User::create([
-            'email' => 'daiki@gmail.com',
-            'username' => 'daiki',
-            'password' => bcrypt('daiki'),
+            'email' => 'donaldtchoumi4@gmail.com',
+            'username' => 'Donald',
+            'password' => bcrypt('password'),
         ]);
 
         // recupere le role admin

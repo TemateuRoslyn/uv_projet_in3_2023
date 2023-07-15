@@ -75,7 +75,7 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
         <Route exact path="/forms/form-elements" element={<FormElements />} />
         <Route exact path="/forms/form-layout" element={<FormLayout />} />
         <Route exact path="/tables" element={<Tables />} />
-        <Route exact path="/settings" element={<Settings />} />
+        {/* <Route exact path="/settings" element={<Settings />} /> */}
         <Route exact path="/chart" element={<Chart />} />
         <Route exact path="/ui/alerts" element={<Alerts />} />
         <Route exact path="/ui/buttons" element={<Buttons />} />
