@@ -1,3 +1,4 @@
+import 'package:fltter_app/common/styles/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../../common/utils/constants.dart';
@@ -24,7 +25,7 @@ class HomeComponent extends StatelessWidget {
         child: Column(
           children: [
             CircleAvatar(
-              backgroundColor: Colors.white,
+              backgroundColor: appColors.white!.withOpacity(0.4),
               radius: 30,
               child: Image.asset(
                 image,
@@ -42,9 +43,10 @@ class HomeComponent extends StatelessWidget {
                 subtitle,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: getHeight(12, context),
+                  fontSize: getHeight(15, context),
+                  fontWeight: FontWeight.bold,
                   height: getHeight(1.5, context),
-                  color: Colors.white.withOpacity(0.7),
+                  color: appColors.black!.withOpacity(0.7),
                 ),
               ),
             ),

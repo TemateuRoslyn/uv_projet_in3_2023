@@ -19,17 +19,18 @@ class RIcomponents extends StatelessWidget {
       // height: getHeight(80, context),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: appColors.primary,
+        color: appColors.secondary!.withOpacity(0.4),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
         text,
         // textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: getHeight(12, context),
+          fontSize: getHeight(15, context),
+          fontWeight: FontWeight.bold,
           height: getHeight(1.5, context),
           // fontWeight: middleCard ? FontWeight.bold : null,
-          color: Colors.white,
+          color: appColors.black,
         ),
       ),
     );

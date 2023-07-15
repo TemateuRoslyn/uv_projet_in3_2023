@@ -103,18 +103,18 @@ class _HomePageState extends State<HomePage> {
         return CheckInternetConnectionPage(
             helper: state.currentUser == null ? 0 : 1,
             positionFromTop: (screenSize.height / 2),
-            errorTextColor: Colors.white,
+            errorTextColor: appColors.ligthGreen!,
             body: state.status == ApiStatus.isLoading
                 ? CommonWidgets.circularProgressIndicatorWidget(
                     positionFromTop: (screenSize.height / 2),
                     context: context,
-                    color: appColors.onBoardingTwo!)
+                    color: appColors.white!)
                 : state.status == ApiStatus.failed
                     ? CommonWidgets.failedStatusWidget(
                         positionFromTop: (screenSize.height / 2),
                         context: context,
                         statusMessage: state.statusMessage,
-                        color: Colors.white,
+                        color: appColors.black!,
                         reloadFunction: () => _profileCubit.getCurrentUser())
                     : Expanded(
                         child: ListView(
@@ -197,7 +197,10 @@ class Colonne extends StatelessWidget {
           Text(
             text1,
             style: TextStyle(
-                fontSize: getHeight(13, context), color: Colors.white),
+              fontSize: getHeight(15, context),
+              fontWeight: FontWeight.bold,
+              color: appColors.black,
+            ),
           ),
           // SizedBox(
           //   height: getHeight(10, context),
@@ -205,8 +208,9 @@ class Colonne extends StatelessWidget {
           Text(
             text2,
             style: TextStyle(
-              fontSize: getHeight(12, context),
-              color: Colors.white.withOpacity(0.7),
+              fontSize: getHeight(18, context),
+              fontWeight: FontWeight.bold,
+              color: appColors.black!.withOpacity(0.7),
             ),
           ),
         ],

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class ApiConfiguration {
-  static String appDomainUrl = 'https://e604-41-202-207-148.ngrok-free.app/';
+  static String appDomainUrl = 'https://11e9-129-0-80-138.ngrok-free.app/';
 
   static Dio dioClient = Dio(
     BaseOptions(
