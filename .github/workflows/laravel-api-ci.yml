@@ -34,9 +34,9 @@ jobs:
 
       - name: Setup .env
         run: cp .env.prod .env
-        
+
       - name: Generate Laravel application key
-        run: php artisan key:generate
+        run: echo "yes" | php artisan key:generate
 
       - name: Load optimized files
         run: composer dumpautoload
@@ -45,10 +45,10 @@ jobs:
         run: php artisan l5-swagger:generate
 
       - name: Run Laravel database migrations and seeding
-        run: php artisan migrate:fresh --seed
+        run: echo "yes" | php artisan migrate:fresh --seed
 
       - name: Generate JWT token
-        run: php artisan jwt:secret
+        run: echo "yes" | php artisan jwt:secret
 
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
