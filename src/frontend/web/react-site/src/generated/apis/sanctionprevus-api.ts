@@ -353,21 +353,21 @@ export const SanctionprevusApiAxiosParamCreator = function (configuration?: Conf
          * Get information about all specific sanctionprevus to a student
          * @summary Get sanctionprevus information for a student
          * @param {string} authorization JWT token
-         * @param {number} id ID of Eleve to get information for
+         * @param {number} eleveId ID of Eleve to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewSanctionPrevusEleve: async (authorization: string, id: number, options: any = {}): Promise<RequestArgs> => {
+        viewSanctionPrevusEleve: async (authorization: string, eleveId: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling viewSanctionPrevusEleve.');
             }
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling viewSanctionPrevusEleve.');
+            // verify required parameter 'eleveId' is not null or undefined
+            if (eleveId === null || eleveId === undefined) {
+                throw new RequiredError('eleveId','Required parameter eleveId was null or undefined when calling viewSanctionPrevusEleve.');
             }
             const localVarPath = `/api/sanctionprevus/findAll/eleve/{eleveId}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace(`{${"eleveId"}}`, encodeURIComponent(String(eleveId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -492,27 +492,12 @@ export const SanctionprevusApiFp = function(configuration?: Configuration) {
          * Get information about all specific sanctionprevus to a student
          * @summary Get sanctionprevus information for a student
          * @param {string} authorization JWT token
-         * @param {number} id ID of Eleve to get information for
+         * @param {number} eleveId ID of Eleve to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        async viewSanctionPrevusEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20090>> {
-            const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).viewSanctionPrevusEleve(authorization, id, options);
-=======
-<<<<<<< HEAD
-        async viewSanctionPrevusEleve(authorization: string, eleveId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20088>> {
+        async viewSanctionPrevusEleve(authorization: string, eleveId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20090>> {
             const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).viewSanctionPrevusEleve(authorization, eleveId, options);
-=======
-        async viewSanctionPrevusEleve(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20088>> {
-            const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).viewSanctionPrevusEleve(authorization, id, options);
->>>>>>> b5c9937a (test)
->>>>>>> ca4ccbf4 (test)
-=======
-        async viewSanctionPrevusEleve(authorization: string, eleveId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20088>> {
-            const localVarAxiosArgs = await SanctionprevusApiAxiosParamCreator(configuration).viewSanctionPrevusEleve(authorization, eleveId, options);
->>>>>>> b6f03855 (test)
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -592,27 +577,12 @@ export const SanctionprevusApiFactory = function (configuration?: Configuration,
          * Get information about all specific sanctionprevus to a student
          * @summary Get sanctionprevus information for a student
          * @param {string} authorization JWT token
-         * @param {number} id ID of Eleve to get information for
+         * @param {number} eleveId ID of Eleve to get information for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
-        viewSanctionPrevusEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20090> {
-            return SanctionprevusApiFp(configuration).viewSanctionPrevusEleve(authorization, id, options).then((request) => request(axios, basePath));
-=======
-<<<<<<< HEAD
-        viewSanctionPrevusEleve(authorization: string, eleveId: number, options?: any): AxiosPromise<InlineResponse20088> {
+        viewSanctionPrevusEleve(authorization: string, eleveId: number, options?: any): AxiosPromise<InlineResponse20090> {
             return SanctionprevusApiFp(configuration).viewSanctionPrevusEleve(authorization, eleveId, options).then((request) => request(axios, basePath));
-=======
-        viewSanctionPrevusEleve(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20088> {
-            return SanctionprevusApiFp(configuration).viewSanctionPrevusEleve(authorization, id, options).then((request) => request(axios, basePath));
->>>>>>> b5c9937a (test)
->>>>>>> ca4ccbf4 (test)
-=======
-        viewSanctionPrevusEleve(authorization: string, eleveId: number, options?: any): AxiosPromise<InlineResponse20088> {
-            return SanctionprevusApiFp(configuration).viewSanctionPrevusEleve(authorization, eleveId, options).then((request) => request(axios, basePath));
->>>>>>> b6f03855 (test)
         },
     };
 };
@@ -694,12 +664,12 @@ export class SanctionprevusApi extends BaseAPI {
      * Get information about all specific sanctionprevus to a student
      * @summary Get sanctionprevus information for a student
      * @param {string} authorization JWT token
-     * @param {number} id ID of Eleve to get information for
+     * @param {number} eleveId ID of Eleve to get information for
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SanctionprevusApi
      */
-    public viewSanctionPrevusEleve(authorization: string, id: number, options?: any) {
-        return SanctionprevusApiFp(this.configuration).viewSanctionPrevusEleve(authorization, id, options).then((request) => request(this.axios, this.basePath));
+    public viewSanctionPrevusEleve(authorization: string, eleveId: number, options?: any) {
+        return SanctionprevusApiFp(this.configuration).viewSanctionPrevusEleve(authorization, eleveId, options).then((request) => request(this.axios, this.basePath));
     }
 }
