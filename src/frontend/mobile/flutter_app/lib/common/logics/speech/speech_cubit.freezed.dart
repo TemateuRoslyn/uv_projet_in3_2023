@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SpeechState {
   SpeechType get speechType => throw _privateConstructorUsedError;
+  String get textToSpeech => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SpeechStateCopyWith<SpeechState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $SpeechStateCopyWith<$Res> {
           SpeechState value, $Res Function(SpeechState) then) =
       _$SpeechStateCopyWithImpl<$Res, SpeechState>;
   @useResult
-  $Res call({SpeechType speechType});
+  $Res call({SpeechType speechType, String textToSpeech});
 }
 
 /// @nodoc
@@ -46,12 +47,17 @@ class _$SpeechStateCopyWithImpl<$Res, $Val extends SpeechState>
   @override
   $Res call({
     Object? speechType = null,
+    Object? textToSpeech = null,
   }) {
     return _then(_value.copyWith(
       speechType: null == speechType
           ? _value.speechType
           : speechType // ignore: cast_nullable_to_non_nullable
               as SpeechType,
+      textToSpeech: null == textToSpeech
+          ? _value.textToSpeech
+          : textToSpeech // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -63,7 +69,7 @@ abstract class _$$_InitialCopyWith<$Res> implements $SpeechStateCopyWith<$Res> {
       __$$_InitialCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({SpeechType speechType});
+  $Res call({SpeechType speechType, String textToSpeech});
 }
 
 /// @nodoc
@@ -77,12 +83,17 @@ class __$$_InitialCopyWithImpl<$Res>
   @override
   $Res call({
     Object? speechType = null,
+    Object? textToSpeech = null,
   }) {
     return _then(_$_Initial(
       speechType: null == speechType
           ? _value.speechType
           : speechType // ignore: cast_nullable_to_non_nullable
               as SpeechType,
+      textToSpeech: null == textToSpeech
+          ? _value.textToSpeech
+          : textToSpeech // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -90,15 +101,18 @@ class __$$_InitialCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Initial implements _Initial {
-  const _$_Initial({this.speechType = SpeechType.init});
+  const _$_Initial({this.speechType = SpeechType.init, this.textToSpeech = ''});
 
   @override
   @JsonKey()
   final SpeechType speechType;
+  @override
+  @JsonKey()
+  final String textToSpeech;
 
   @override
   String toString() {
-    return 'SpeechState(speechType: $speechType)';
+    return 'SpeechState(speechType: $speechType, textToSpeech: $textToSpeech)';
   }
 
   @override
@@ -107,11 +121,13 @@ class _$_Initial implements _Initial {
         (other.runtimeType == runtimeType &&
             other is _$_Initial &&
             (identical(other.speechType, speechType) ||
-                other.speechType == speechType));
+                other.speechType == speechType) &&
+            (identical(other.textToSpeech, textToSpeech) ||
+                other.textToSpeech == textToSpeech));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, speechType);
+  int get hashCode => Object.hash(runtimeType, speechType, textToSpeech);
 
   @JsonKey(ignore: true)
   @override
@@ -121,10 +137,13 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements SpeechState {
-  const factory _Initial({final SpeechType speechType}) = _$_Initial;
+  const factory _Initial(
+      {final SpeechType speechType, final String textToSpeech}) = _$_Initial;
 
   @override
   SpeechType get speechType;
+  @override
+  String get textToSpeech;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>

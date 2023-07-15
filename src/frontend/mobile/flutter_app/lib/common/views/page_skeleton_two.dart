@@ -45,7 +45,7 @@ class _PageSkeletonTwoState extends State<PageSkeletonTwo> {
                     Text(
                       widget.headerText,
                       style: TextStyle(
-                          fontSize: getHeight(25, context),
+                          fontSize: getHeight(15, context),
                           fontWeight: FontWeight.bold,
                           color: appColors.primary),
                     ),

@@ -43,7 +43,7 @@ class HomeComponent extends StatelessWidget {
                 subtitle,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: getHeight(15, context),
+                  fontSize: getHeight(12, context),
                   fontWeight: FontWeight.bold,
                   height: getHeight(1.5, context),
                   color: appColors.black!.withOpacity(0.7),

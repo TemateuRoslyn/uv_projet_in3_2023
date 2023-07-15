@@ -52,18 +52,18 @@ class _SanctionsPageState extends State<SanctionsPage> {
         builder: (context, state) {
           return CheckInternetConnectionPage(
             positionFromTop: (screenSize.height / 2),
-            errorTextColor: appColors.primary!,
+            errorTextColor: appColors.black!,
             body: state.sanctionStatus == ApiStatus.isLoading
                 ? CommonWidgets.circularProgressIndicatorWidget(
                     positionFromTop: (screenSize.height / 2),
                     context: context,
-                    color: appColors.primary!)
+                    color: appColors.white!)
                 : state.sanctionStatus == ApiStatus.failed
                     ? CommonWidgets.failedStatusWidget(
                         positionFromTop: (screenSize.height / 2),
                         context: context,
                         statusMessage: state.sanctionStatusMessage,
-                        color: appColors.primary!,
+                        color: appColors.black!,
                         reloadFunction: () {
                           if (widget.childInfos == null) {
                             _homeCubit.getDataByType(dataType: 'sanctions');
@@ -77,7 +77,7 @@ class _SanctionsPageState extends State<SanctionsPage> {
                         ? CommonWidgets.noDataWidget(
                             positionFromTop: (screenSize.height / 2),
                             context: context,
-                            color: appColors.primary!)
+                            color: appColors.black!)
                         : Expanded(
                             child: ListView(
                             padding: EdgeInsets.only(

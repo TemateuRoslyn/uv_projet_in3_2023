@@ -125,7 +125,7 @@ class CommonWidgets {
               textAlign: TextAlign.center,
               style: TextStyle(
                 decoration: TextDecoration.underline,
-                fontSize: getHeight(20, context),
+                fontSize: getHeight(15, context),
                 fontWeight: FontWeight.bold,
                 color: appColors.secondary,
               ),

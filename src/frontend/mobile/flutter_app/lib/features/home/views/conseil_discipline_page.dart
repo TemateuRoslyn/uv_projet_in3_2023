@@ -52,7 +52,7 @@ class _ConseilDisciplinePageState extends State<ConseilDisciplinePage> {
           return CheckInternetConnectionPage(
               helper: state.cds.isEmpty ? 0 : 1,
               positionFromTop: (screenSize.height / 2),
-              errorTextColor: appColors.ligthGreen!,
+              errorTextColor: appColors.black!,
               body: state.cdStatus == ApiStatus.isLoading
                   ? CommonWidgets.circularProgressIndicatorWidget(
                       positionFromTop: (screenSize.height / 2),
@@ -63,7 +63,7 @@ class _ConseilDisciplinePageState extends State<ConseilDisciplinePage> {
                           positionFromTop: (screenSize.height / 2),
                           context: context,
                           statusMessage: state.cdStatusMessage,
-                          color: appColors.ligthGreen!,
+                          color: appColors.black!,
                           reloadFunction: () {
                             if (widget.childInfos == null) {
                               _homeCubit.getDataByType(dataType: 'cd');

@@ -128,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                     Text(
                       'Connexion',
                       style: TextStyle(
-                          fontSize: getHeight(30, context),
+                          fontSize: getHeight(25, context),
                           fontWeight: FontWeight.bold,
                           color: appColors.black),
                     ),
@@ -138,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                     Text(
                       'Connectez-vous pour continuer.',
                       style: TextStyle(
-                          fontSize: getHeight(20, context),
+                          fontSize: getHeight(17, context),
                           color: appColors.black),
                     ),
                     SizedBox(
@@ -182,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                               state.loginStatus == ApiStatus.isLoading
                                   ? CircularProgressIndicator(
                                       strokeWidth: 2,
-                                      color: appColors.white,
+                                      color: appColors.secondary,
                                     )
                                   : const SizedBox()
                             ],

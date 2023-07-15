@@ -19,6 +19,7 @@ mixin _$ProfileState {
   User? get currentUser => throw _privateConstructorUsedError;
   ApiStatus get status => throw _privateConstructorUsedError;
   String get statusMessage => throw _privateConstructorUsedError;
+  String get textToSpeech => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProfileStateCopyWith<ProfileState> get copyWith =>
@@ -31,7 +32,11 @@ abstract class $ProfileStateCopyWith<$Res> {
           ProfileState value, $Res Function(ProfileState) then) =
       _$ProfileStateCopyWithImpl<$Res, ProfileState>;
   @useResult
-  $Res call({User? currentUser, ApiStatus status, String statusMessage});
+  $Res call(
+      {User? currentUser,
+      ApiStatus status,
+      String statusMessage,
+      String textToSpeech});
 }
 
 /// @nodoc
@@ -50,6 +55,7 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
     Object? currentUser = freezed,
     Object? status = null,
     Object? statusMessage = null,
+    Object? textToSpeech = null,
   }) {
     return _then(_value.copyWith(
       currentUser: freezed == currentUser
@@ -64,6 +70,10 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
           ? _value.statusMessage
           : statusMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      textToSpeech: null == textToSpeech
+          ? _value.textToSpeech
+          : textToSpeech // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -76,7 +86,11 @@ abstract class _$$_InitialCopyWith<$Res>
       __$$_InitialCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({User? currentUser, ApiStatus status, String statusMessage});
+  $Res call(
+      {User? currentUser,
+      ApiStatus status,
+      String statusMessage,
+      String textToSpeech});
 }
 
 /// @nodoc
@@ -92,6 +106,7 @@ class __$$_InitialCopyWithImpl<$Res>
     Object? currentUser = freezed,
     Object? status = null,
     Object? statusMessage = null,
+    Object? textToSpeech = null,
   }) {
     return _then(_$_Initial(
       currentUser: freezed == currentUser
@@ -106,6 +121,10 @@ class __$$_InitialCopyWithImpl<$Res>
           ? _value.statusMessage
           : statusMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      textToSpeech: null == textToSpeech
+          ? _value.textToSpeech
+          : textToSpeech // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -116,7 +135,8 @@ class _$_Initial implements _Initial {
   const _$_Initial(
       {this.currentUser = null,
       this.status = ApiStatus.init,
-      this.statusMessage = ''});
+      this.statusMessage = '',
+      this.textToSpeech = ''});
 
   @override
   @JsonKey()
@@ -127,10 +147,13 @@ class _$_Initial implements _Initial {
   @override
   @JsonKey()
   final String statusMessage;
+  @override
+  @JsonKey()
+  final String textToSpeech;
 
   @override
   String toString() {
-    return 'ProfileState(currentUser: $currentUser, status: $status, statusMessage: $statusMessage)';
+    return 'ProfileState(currentUser: $currentUser, status: $status, statusMessage: $statusMessage, textToSpeech: $textToSpeech)';
   }
 
   @override
@@ -142,12 +165,14 @@ class _$_Initial implements _Initial {
                 other.currentUser == currentUser) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.statusMessage, statusMessage) ||
-                other.statusMessage == statusMessage));
+                other.statusMessage == statusMessage) &&
+            (identical(other.textToSpeech, textToSpeech) ||
+                other.textToSpeech == textToSpeech));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, currentUser, status, statusMessage);
+  int get hashCode => Object.hash(
+      runtimeType, currentUser, status, statusMessage, textToSpeech);
 
   @JsonKey(ignore: true)
   @override
@@ -160,7 +185,8 @@ abstract class _Initial implements ProfileState {
   const factory _Initial(
       {final User? currentUser,
       final ApiStatus status,
-      final String statusMessage}) = _$_Initial;
+      final String statusMessage,
+      final String textToSpeech}) = _$_Initial;
 
   @override
   User? get currentUser;
@@ -168,6 +194,8 @@ abstract class _Initial implements ProfileState {
   ApiStatus get status;
   @override
   String get statusMessage;
+  @override
+  String get textToSpeech;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>

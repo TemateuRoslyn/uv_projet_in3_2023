@@ -49,7 +49,7 @@ class _FautesPageState extends State<FautesPage> {
             return CheckInternetConnectionPage(
               helper: state.fautes.isEmpty ? 0 : 1,
               positionFromTop: (screenSize.height / 2),
-              errorTextColor: appColors.ligthGreen!,
+              errorTextColor: appColors.black!,
               body: state.fauteStatus == ApiStatus.isLoading
                   ? CommonWidgets.circularProgressIndicatorWidget(
                       positionFromTop: (screenSize.height / 2),
@@ -60,7 +60,7 @@ class _FautesPageState extends State<FautesPage> {
                           positionFromTop: (screenSize.height / 2),
                           context: context,
                           statusMessage: state.fauteStatusMessage,
-                          color: appColors.ligthGreen!,
+                          color: appColors.black!,
                           reloadFunction: () {
                             if (widget.childInfos == null) {
                               _homeCubit.getDataByType(dataType: 'fautes');
@@ -85,7 +85,7 @@ class _FautesPageState extends State<FautesPage> {
                                   .map((faute) => ConvocationComponent(
                                         libelle: 'Faute: ${faute.libelle}',
                                         subtitle1:
-                                            'Règle: ${faute.regle.libelle}',
+                                            'Règle: ${faute.regle!.libelle}',
                                         statut: 'Gravité: ${faute.gravite}',
                                         isFrom: 'fautes_santions',
                                         // onPressAction: () {},

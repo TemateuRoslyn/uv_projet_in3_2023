@@ -52,18 +52,18 @@ class _ConvocationPageState extends State<ConvocationPage> {
         builder: (context, state) {
           return CheckInternetConnectionPage(
             positionFromTop: (screenSize.height / 2),
-            errorTextColor: appColors.primary!,
+            errorTextColor: appColors.black!,
             body: state.convocationStatus == ApiStatus.isLoading
                 ? CommonWidgets.circularProgressIndicatorWidget(
                     positionFromTop: (screenSize.height / 2),
                     context: context,
-                    color: appColors.primary!)
+                    color: appColors.white!)
                 : state.convocationStatus == ApiStatus.failed
                     ? CommonWidgets.failedStatusWidget(
                         positionFromTop: (screenSize.height / 2),
                         context: context,
                         statusMessage: state.convocationStatusMessage,
-                        color: appColors.primary!,
+                        color: appColors.black!,
                         reloadFunction: () {
                           if (widget.childInfos == null) {
                             _homeCubit.getDataByType(dataType: 'convocations');
@@ -77,7 +77,7 @@ class _ConvocationPageState extends State<ConvocationPage> {
                         ? CommonWidgets.noDataWidget(
                             positionFromTop: (screenSize.height / 2),
                             context: context,
-                            color: appColors.primary!)
+                            color: appColors.black!)
                         : Expanded(
                             child: ListView(
                             padding: EdgeInsets.only(

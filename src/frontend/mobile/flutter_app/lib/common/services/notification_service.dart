@@ -1,7 +1,8 @@
 import 'dart:io';
 
-import 'package:fltter_app/common/services/socket_io.dart';
+import 'package:fltter_app/common/services/pusher_service.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class NotificationService {
   static final FlutterLocalNotificationsPlugin notificationsPlugin =
@@ -29,9 +30,7 @@ class NotificationService {
     );
 
     await _requestPersmissions();
-
-    SocketIO.initSocketIO();
-    SocketIO.listenToEvents();
+    PusherService.initPusher();
   }
 
   static Future<void> _requestPersmissions() async {
@@ -44,6 +43,14 @@ class NotificationService {
             badge: true,
             sound: true,
           );
+    }
+
+    if (Platform.isAndroid) {
+      final isNotificationsPermissionGranted =
+          await Permission.notification.isGranted;
+      if (!isNotificationsPermissionGranted) {
+        await Permission.notification.request();
+      }
     }
   }
 
