@@ -139,13 +139,13 @@ class _ProfilePageState extends State<ProfilePage> {
               ? CommonWidgets.circularProgressIndicatorWidget(
                   positionFromTop: (screenSize.height / 2),
                   context: context,
-                  color: appColors.onBoardingTwo!)
+                  color: appColors.white!)
               : state.status == ApiStatus.failed
                   ? CommonWidgets.failedStatusWidget(
                       positionFromTop: (screenSize.height / 2),
                       context: context,
                       statusMessage: state.statusMessage,
-                      color: appColors.ligthGreen!,
+                      color: appColors.black!,
                       reloadFunction: () => _profileCubit.getCurrentUser())
                   : Expanded(
                       child: ListView(
@@ -224,12 +224,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                       child: Container(
                                         height: getHeight(40, context),
                                         width: getWidth(40, context),
-                                        decoration: const BoxDecoration(
+                                        decoration: BoxDecoration(
                                             shape: BoxShape.circle,
-                                            color: Colors.white),
+                                            color: appColors.secondary),
                                         // alignment: Alignment.center,
                                         child: IconButton(
-                                          color: appColors.secondary,
+                                          color: appColors.primary,
                                           onPressed: () {
                                             if (currentSpeechTYpe ==
                                                 SpeechType.isSpeeching) {
@@ -265,7 +265,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       width: getWidth(40, context),
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          color: appColors.secondary),
+                                          color: appColors.ligthGreen),
                                       child: Icon(
                                         Icons.exit_to_app_outlined,
                                         size: getHeight(20, context),
@@ -275,80 +275,62 @@ class _ProfilePageState extends State<ProfilePage> {
                                   )),
                             ],
                           ]),
-                          currentUserType == 'parents'
-                              ? Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom: getHeight(20, context),
-                                    top: getHeight(50, context),
-                                    right: getWidth(20, context),
-                                    left: getWidth(20, context),
+                          if (currentUserType == 'parents') ...[
+                            Padding(
+                              padding: EdgeInsets.only(
+                                bottom: getHeight(20, context),
+                                top: getHeight(50, context),
+                                right: getWidth(20, context),
+                                left: getWidth(20, context),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Mes Enfants...',
+                                    style: TextStyle(
+                                        fontSize: getHeight(20, context),
+                                        fontWeight: FontWeight.bold,
+                                        color: appColors.black),
                                   ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Mes Enfants...',
-                                        style: TextStyle(
-                                            fontSize: getHeight(20, context),
-                                            fontWeight: FontWeight.bold,
-                                            color: appColors.black),
-                                      ),
-                                      SizedBox(
-                                        height: getHeight(20, context),
-                                      ),
-                                      ...state
-                                          .currentUser!.childrenAndThierClasses!
-                                          .map((childData) {
-                                        final child =
-                                            childData['child'] as User;
-                                        final hisClass = childData['hisClass'];
-                                        return CoursComponent(
-                                            currentUserType: currentUserType,
-                                            onPressAction: () => Navigator.of(
-                                                    context)
-                                                .push(MaterialPageRoute(
+                                  SizedBox(
+                                    height: getHeight(20, context),
+                                  ),
+                                  ...state.currentUser!.childrenAndThierClasses!
+                                      .map((childData) {
+                                    final child = childData['child'] as User;
+                                    final hisClass = childData['hisClass'];
+                                    return CoursComponent(
+                                        currentUserType: currentUserType,
+                                        onPressAction: () =>
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
                                                     builder: (context) =>
                                                         ParentConsultationPage(
                                                           child: child,
                                                           hisClass: hisClass,
                                                         ))),
-                                            courseTitle:
-                                                '${child.firstName} ${child.lastName}',
-                                            teacherName: hisClass['name']);
-                                      }).toList(),
-                                    ],
-                                  ),
-                                )
-                              :
-                              // Column(children: [
-                              // profile options part
-                              // Padding(
-                              //     padding: EdgeInsets.symmetric(
-                              //         horizontal: getWidth(65, context)),
-                              //     child: Row(
-                              //         mainAxisAlignment:
-                              //             MainAxisAlignment.spaceEvenly,
-                              //         children: profileOptions
-                              //             .map((profileOption) => profileOption)
-                              //             .toList()),
-                              //   ),
-                              SizedBox(
-                                  height: getHeight(20, context),
-                                ),
-                          // const Divider(
-                          //   thickness: 5,
-                          // ),
-                          ...ListTile.divideTiles(
-                                  context: context,
-                                  color: Colors.grey,
-                                  tiles: profileTiles
-                                      .map((profileTile) => ProfileTile(
-                                          icon: profileTile['icon'],
-                                          text: profileTile['text']))
-                                      .toList())
-                              .toList(),
-                          // ]),
+                                        courseTitle:
+                                            '${child.firstName} ${child.lastName}',
+                                        teacherName: hisClass['name']);
+                                  }).toList(),
+                                ],
+                              ),
+                            ),
+                          ],
+                          if (currentUserType == 'eleves') ...[
+                            SizedBox(
+                              height: getHeight(20, context),
+                            ),
+                            ...ListTile.divideTiles(
+                                context: context,
+                                color: Colors.grey,
+                                tiles: profileTiles
+                                    .map((profileTile) => ProfileTile(
+                                        icon: profileTile['icon'],
+                                        text: profileTile['text']))
+                                    .toList()),
+                          ],
                         ],
                       ),
                     ),

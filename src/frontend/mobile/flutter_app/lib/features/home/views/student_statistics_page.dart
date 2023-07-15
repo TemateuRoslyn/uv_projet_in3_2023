@@ -122,11 +122,11 @@ class StatisticComponent extends StatelessWidget {
   Color componentColor(int number) {
     late Color color;
     if (number == 0) {
-      color = Colors.green;
+      color = appColors.secondary!;
     } else if (number >= 1 && number <= 5) {
       color = Colors.grey;
     } else if (number > 5) {
-      color = appColors.secondary!;
+      color = appColors.ligthGreen!;
     }
 
     return color;

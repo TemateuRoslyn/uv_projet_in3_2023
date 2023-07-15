@@ -164,6 +164,8 @@ class CommonWidgets {
       imageUrl: ApiConfiguration.appDomainUrl +
           '/api/files/download/filekey=' +
           imagePath,
+      // imageUrl:
+      //     'https://www.samanthaming.com/tidbits/38-html-download-attribute/',
       placeholder: (_, __) => Container(
         color: Colors.grey[100],
       ),

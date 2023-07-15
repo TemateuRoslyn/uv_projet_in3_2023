@@ -50,7 +50,8 @@ class ProfileCubit extends Cubit<ProfileState> {
         PusherService.subscribeToSpecificChannel('faute', 'faute-created'),
         PusherService.subscribeToSpecificChannel(
             'sanction', 'sanction-created'),
-        PusherService.subscribeToSpecificChannel('cd', 'cd-created'),
+        PusherService.subscribeToSpecificChannel(
+            'conseil-discipline', 'conseil-discipline-created'),
         PusherService.subscribeToSpecificChannel(
             'convocation', 'convocation-created'),
       ]);

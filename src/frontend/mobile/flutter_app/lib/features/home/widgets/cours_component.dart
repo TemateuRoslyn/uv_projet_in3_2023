@@ -44,9 +44,7 @@ class CoursComponent extends StatelessWidget {
                 width: getWidth(400, context),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: currentUserType == 'parents'
-                        ? appColors.tinary
-                        : appColors.secondary!.withOpacity(0.4)),
+                    color: appColors.secondary!.withOpacity(0.4)),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: getWidth(10, context), horizontal: 25),
