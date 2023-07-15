@@ -6,7 +6,7 @@ const Back = ({ title }) => {
 
   return (
     <>
-      <section className='back p-[22%]'>
+      <section className='back p-[22%] px-0'>
         <h2>Home  /  {location.pathname.split("/")[1]}</h2>
         <h1>{title.toUpperCase()}</h1>
       </section>
