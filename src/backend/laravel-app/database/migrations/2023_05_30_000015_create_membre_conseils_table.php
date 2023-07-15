@@ -19,8 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('idRepresentantE');
 
             $table->foreign('idChef')->references('id')->on('personnels');
-            $table->foreign('idSurveillantG')->references('id')->on('personnels');
-            $table->foreign('idRepresentantE')->references('id')->on('parents');
+            $table->foreign('idSurveillantG')->references('id')->on('personnels')->onDelete('cascade');
+            $table->foreign('idRepresentantE')->references('id')->on('parents')->onDelete('cascade');
 
             $table->timestamps();
         });

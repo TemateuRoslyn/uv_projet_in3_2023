@@ -19,6 +19,9 @@ use App\Models\Faute;
 use Twilio\Rest\Client;
 use Twilio\Exceptions\TwilioException;
 
+//evenements
+use App\Events\SanctionCreatedEvent;
+
 class SanctionPrevuController extends Controller
 {
 
@@ -29,6 +32,7 @@ class SanctionPrevuController extends Controller
         $this->twilioInfo = [
             "+237654770063" => ["ACfaf8a483f11bbd6983f6e567732a36c1", "cacd62d64ab0c916c8a63752cab16538", "+18145244457"],
             "+237651779272" => ["ACb3959badcd79d88b411fd167596988ce", "7867db4dfd97896e23032f1ed8eb004b", "+15418593377"],
+            "+237672324141" => ["ACcaa8940df3a10841cdedb68aa4083dab", "322e18f99a5b4e7f35ba50df09942498", "+12342901968"],
         ];
     }
 
@@ -338,6 +342,8 @@ class SanctionPrevuController extends Controller
             'dureeValidite' => $request->input('dureeValidite'),
         ]);
 
+        $sanctionprevu->load('eleve','faute.regle.reglementInterieur');
+
         $eleve = Eleve::find($request->eleveId);
         $parents = $eleve->parents;
 
@@ -407,6 +413,15 @@ class SanctionPrevuController extends Controller
             }
 
             $detailsP = array();
+        }
+
+        //envoie de l'evenement
+        try{
+
+            event(new SanctionCreatedEvent("sanction creer",$sanctionprevu));
+
+        }catch(\Exception $e){
+
         }
 
         return response()->json([
@@ -542,6 +557,8 @@ class SanctionPrevuController extends Controller
 
         $sanctionprevuFound->save();
 
+        $sanctionprevuFound->load('eleve','faute.regle.reglementInterieur');
+
         $eleve = Eleve::find($request->eleveId);
         $parents = $eleve->parents;
         $faute = Faute::with('regle.reglementInterieur')->find($request->fauteId);
@@ -577,7 +594,48 @@ class SanctionPrevuController extends Controller
 
             // envoi du mail
             Queue::push(new SendEmailJob($parent->user, $detailsP));
+
+            //Envoie du sms
+            if (array_key_exists($parent->telephone, $this->twilioInfo)) {
+                $valeurs = $this->twilioInfo[$parent->telephone];
+
+                $twilioSid = $valeurs[0];
+                $twilioToken = $valeurs[1];
+                $twilioPhoneNumber = $valeurs[2];
+
+                $phoneNumber = $parent->telephone;
+
+                try {
+                    $twilio = new Client($twilioSid, $twilioToken);
+
+                    // Vérifier si le numéro de téléphone est valide
+                    $twilio->lookups->v1->phoneNumbers($phoneNumber)->fetch();
+
+                    // Si aucune exception n'est levée, le numéro est valide, envoyer le message
+                    $message = $twilio->messages->create(
+                        $phoneNumber,
+                        [
+                            'from' => $twilioPhoneNumber,
+                            'body' => $detailsP['body']
+                        ]
+                    );
+
+
+                } catch (TwilioException $e) {
+                    // return redirect()->back()->with('error', 'Une erreur s\'est produite lors de l\'envoi du message : ' . $e->getMessage());
+                }
+            }
+
             $detailsP = array();
+        }
+
+        //envoie de l'evenement
+        try{
+
+            event(new SanctionCreatedEvent("sanction modifier",$sanctionprevuFound));
+
+        }catch(\Exception $e){
+
         }
 
 

@@ -7,9 +7,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Models\Personnel;
+use Illuminate\Support\Facades\Queue;
+use App\Jobs\SendEmailJob;
+use App\Models\Eleve;
+use Twilio\Rest\Client;
+use Twilio\Exceptions\TwilioException;
+
+//evenements
+use App\Events\ConvocationCreatedEvent;
 
 class ConvocationController extends Controller
 {
+
+    private $twilioInfo;
+
+    public function __construct()
+    {
+        $this->twilioInfo = [
+            "+237654770063" => ["ACfaf8a483f11bbd6983f6e567732a36c1", "cacd62d64ab0c916c8a63752cab16538", "+18145244457"],
+            "+237651779272" => ["ACb3959badcd79d88b411fd167596988ce", "7867db4dfd97896e23032f1ed8eb004b", "+15418593377"],
+            "+237672324141" => ["ACcaa8940df3a10841cdedb68aa4083dab", "322e18f99a5b4e7f35ba50df09942498", "+12342901968"],
+        ];
+    }
+
     /**
      * @OA\Get(
      *     path="/api/convocation/findAll",
@@ -295,6 +315,81 @@ class ConvocationController extends Controller
 
         $convocation->load('personnel', 'eleve');
 
+        $eleve = Eleve::find($request->eleveId);
+        $parents = $eleve->parents;
+
+        //envoie du mail a l'eleve
+        $details = array();
+
+        $details['greeting'] = "Hi " . $eleve->firstName;
+        $details['body'] = "Vous avez recu une convocation ( $convocation->libelle ) car vous avez enfrein une une des regles de l'etablissement .
+                            \n
+                            \n  Cet etablissement est un lieu d'apprentissage, ou doit reigner le travail et la discipline. Pour nous aider a faire de vous des Hommes de demain, vous devez connaitre et respecter les regles et reglements interieurs de l'etablissement renseignes sur la plateforme .";
+        $details['actiontext'] = "Details de la Sanction";
+        $details['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
+        $details['endtext'] = "Merci de rester fidele à cet etablissement";
+
+        // envoi du mail
+        Queue::push(new SendEmailJob($eleve->user, $details));
+
+        //envoie du mail aux parents
+        foreach ($parents as $parent) {
+            $detailsP = array();
+
+            $detailsP['greeting'] = "Hi " . $parent->firstName;
+            $detailsP['body'] = "Votre enfant " . $eleve->firstName . $eleve->lastName . " a recu une convocation ( $convocation->libelle ) car il/elle a enfrein une une des regles de l'etablissement .
+                                \n
+                                \n  Cet etablissement est un lieu d'apprentissage, ou doit reigner le travail et la discipline. Pour nous aider a faire de votre enfant un Homme ( une Femme ) de demain, vous devez veiller a la bonne education de votre enfant et de lui faire connaitre et respecter les regles et reglements interieurs de l'etablissement renseignes sur la plateforme .";
+            $detailsP['actiontext'] = "Details de la Sanction";
+            $detailsP['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
+            $detailsP['endtext'] = "Merci de rester fidele à cet etablissement";
+
+            // envoi du mail
+            Queue::push(new SendEmailJob($parent->user, $detailsP));
+
+            //Envoie du sms
+            if (array_key_exists($parent->telephone, $this->twilioInfo)) {
+                $valeurs = $this->twilioInfo[$parent->telephone];
+
+                $twilioSid = $valeurs[0];
+                $twilioToken = $valeurs[1];
+                $twilioPhoneNumber = $valeurs[2];
+
+                $phoneNumber = $parent->telephone;
+
+                try {
+                    $twilio = new Client($twilioSid, $twilioToken);
+
+                    // Vérifier si le numéro de téléphone est valide
+                    $twilio->lookups->v1->phoneNumbers($phoneNumber)->fetch();
+
+                    // Si aucune exception n'est levée, le numéro est valide, envoyer le message
+                    $message = $twilio->messages->create(
+                        $phoneNumber,
+                        [
+                            'from' => $twilioPhoneNumber,
+                            'body' => $detailsP['body']
+                        ]
+                    );
+
+
+                } catch (TwilioException $e) {
+                    // return redirect()->back()->with('error', 'Une erreur s\'est produite lors de l\'envoi du message : ' . $e->getMessage());
+                }
+            }
+
+            $detailsP = array();
+        }
+
+        //envoie de l'evenement
+        try{
+
+            event(new ConvocationCreatedEvent("convocation creer",$convocation));
+
+        }catch(\Exception $e){
+
+        }
+
         return response()->json([
             'message' => 'convocation created successfully',
             'success' => true,
@@ -422,6 +517,81 @@ class ConvocationController extends Controller
         $convocationFound->save();
 
         $convocationFound->load('personnel', 'eleve');
+
+        $eleve = Eleve::find($request->eleveId);
+        $parents = $eleve->parents;
+
+        //envoie du mail a l'eleve
+        $details = array();
+
+        $details['greeting'] = "Hi " . $eleve->firstName;
+        $details['body'] = "Vous avez recu une convocation ( $convocationFound->libelle ) car vous avez enfrein une une des regles de l'etablissement .
+                            \n
+                            \n  Cet etablissement est un lieu d'apprentissage, ou doit reigner le travail et la discipline. Pour nous aider a faire de vous des Hommes de demain, vous devez connaitre et respecter les regles et reglements interieurs de l'etablissement renseignes sur la plateforme .";
+        $details['actiontext'] = "Details de la Sanction";
+        $details['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
+        $details['endtext'] = "Merci de rester fidele à cet etablissement";
+
+        // envoi du mail
+        Queue::push(new SendEmailJob($eleve->user, $details));
+
+        //envoie du mail aux parents
+        foreach ($parents as $parent) {
+            $detailsP = array();
+
+            $detailsP['greeting'] = "Hi " . $parent->firstName;
+            $detailsP['body'] = "Votre enfant " . $eleve->firstName . $eleve->lastName . " a recu une convocation ( $convocationFound->libelle ) car il/elle a enfrein une une des regles de l'etablissement .
+                                \n
+                                \n  Cet etablissement est un lieu d'apprentissage, ou doit reigner le travail et la discipline. Pour nous aider a faire de votre enfant un Homme ( une Femme ) de demain, vous devez veiller a la bonne education de votre enfant et de lui faire connaitre et respecter les regles et reglements interieurs de l'etablissement renseignes sur la plateforme .";
+            $detailsP['actiontext'] = "Details de la Sanction";
+            $detailsP['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
+            $detailsP['endtext'] = "Merci de rester fidele à cet etablissement";
+
+            // envoi du mail
+            Queue::push(new SendEmailJob($parent->user, $detailsP));
+
+            //Envoie du sms
+            if (array_key_exists($parent->telephone, $this->twilioInfo)) {
+                $valeurs = $this->twilioInfo[$parent->telephone];
+
+                $twilioSid = $valeurs[0];
+                $twilioToken = $valeurs[1];
+                $twilioPhoneNumber = $valeurs[2];
+
+                $phoneNumber = $parent->telephone;
+
+                try {
+                    $twilio = new Client($twilioSid, $twilioToken);
+
+                    // Vérifier si le numéro de téléphone est valide
+                    $twilio->lookups->v1->phoneNumbers($phoneNumber)->fetch();
+
+                    // Si aucune exception n'est levée, le numéro est valide, envoyer le message
+                    $message = $twilio->messages->create(
+                        $phoneNumber,
+                        [
+                            'from' => $twilioPhoneNumber,
+                            'body' => $detailsP['body']
+                        ]
+                    );
+
+
+                } catch (TwilioException $e) {
+                    // return redirect()->back()->with('error', 'Une erreur s\'est produite lors de l\'envoi du message : ' . $e->getMessage());
+                }
+            }
+
+            $detailsP = array();
+        }
+
+        //envoie de l'evenement
+        try{
+
+            event(new ConvocationCreatedEvent("convocation modifier",$convocationFound));
+
+        }catch(\Exception $e){
+
+        }
 
         return response()->json([
             'message' => 'Convocation updated successfully',
