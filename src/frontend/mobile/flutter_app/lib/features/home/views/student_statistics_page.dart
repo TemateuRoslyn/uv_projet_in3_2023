@@ -59,18 +59,18 @@ class _StudentStatisticPageState extends State<StudentStatisticPage> {
                   ? 0
                   : 1,
               positionFromTop: (screenSize.height / 2),
-              errorTextColor: appColors.primary!,
+              errorTextColor: appColors.black!,
               body: state.allStudentDataStatus == ApiStatus.isLoading
                   ? CommonWidgets.circularProgressIndicatorWidget(
                       positionFromTop: (screenSize.height / 2),
                       context: context,
-                      color: appColors.onBoardingTwo!)
+                      color: appColors.white!)
                   : state.allStudentDataStatus == ApiStatus.failed
                       ? CommonWidgets.failedStatusWidget(
                           positionFromTop: (screenSize.height / 2),
                           context: context,
                           statusMessage: state.allStudentDataStatusMessage,
-                          color: Colors.white,
+                          color: appColors.black!,
                           reloadFunction: () => _homeCubit.getDataByType(
                               dataType: 'allStudentData'))
                       : Wrap(

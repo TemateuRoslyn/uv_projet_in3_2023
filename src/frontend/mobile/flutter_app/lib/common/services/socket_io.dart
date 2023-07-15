@@ -1,16 +1,24 @@
 import 'dart:developer';
-import 'package:fltter_app/common/configurations/api_configuration.dart';
-import 'package:fltter_app/common/services/notification.dart';
+import 'package:fltter_app/common/services/notification_service.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class SocketIO {
-  static final IO.Socket _socket = IO.io(ApiConfiguration.appDomainUrl,
-      IO.OptionBuilder().setTransports(['websocket']).build());
+  static final IO.Socket _socket = IO.io(
+      'https://9534-129-0-80-202.ngrok-free.app',
+      // 'https://11e9-129-0-80-138.ngrok-free.app',
+      IO.OptionBuilder()
+          .setTransports(['websocket']) // for Flutter or Dart VM
+          .disableAutoConnect() // disable auto-connection
+          .setExtraHeaders({'foo': 'bar'}) // optional
+          .build());
 
-  static void initSocketIO() {
-    _socket.onConnect((data) => log('Socket connection succesfull...'));
-    _socket.onConnectError((data) => log('Socket connection error...'));
+  static void initSocketIO() async {
+    _socket.connect();
+    // _socket.onConnect((data) => log('Socket connection established, $data'));
+    _socket.onConnectError((data) => log('Socket connection error, $data'));
     _socket.onDisconnect((data) => log('Socket disconnected...'));
+
+    _socket.on('test-message', (data) => print('event received'));
   }
 
   static void listenToEvents() {

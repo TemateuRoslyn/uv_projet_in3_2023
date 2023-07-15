@@ -107,7 +107,7 @@ class AuthRepository {
       final response = await dio.post('auth/login', data: {
         "username": userName,
         "password": password,
-        "persistent": "true"
+        "persistent": "web"
       });
 
       final userId = response.data['content']['user']['model']['id'];
@@ -139,7 +139,39 @@ class AuthRepository {
     }
   }
 
-  void logOut() async {
+  Future<String> getChildrenInfosForVoice(int childId) async {
+    try {
+      final response = await dio.get(
+        'fautes/findAll/eleve/voice/$childId',
+        options: ApiConfiguration.getAuthorizationOptions(_userToken),
+      );
+
+      final voiceText = response.data['content']['message'];
+      return voiceText;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<String> getUserImage(String imagePath) async {
+    try {
+      final response = await dio.get(
+        'files/download/$imagePath',
+        options: ApiConfiguration.getAuthorizationOptions(_userToken),
+      );
+
+      final voiceText = response.data['content']['message'];
+      return voiceText;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> logOut() async {
+    await flutterSecureStorage.delete(key: kUserId);
+    await flutterSecureStorage.delete(key: kUserToken);
+    await flutterSecureStorage.delete(key: kUserType);
+
     _authStatusController.add(AuthStatus.unAuthenticated);
   }
 

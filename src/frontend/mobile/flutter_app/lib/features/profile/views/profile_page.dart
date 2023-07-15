@@ -1,3 +1,4 @@
+import 'package:fltter_app/common/logics/internet/internet_cubit.dart';
 import 'package:fltter_app/common/logics/speech/speech_cubit.dart';
 import 'package:fltter_app/common/styles/colors.dart';
 import 'package:fltter_app/common/utils/constants.dart';
@@ -42,7 +43,9 @@ class _ProfilePageState extends State<ProfilePage> {
     if (_profileCubit.state.currentUser != null) {
       _currentUser = _profileCubit.state.currentUser!;
     } else {
-      _profileCubit.getCurrentUser();
+      _profileCubit.getCurrentUser(
+          callback: () =>
+              _speechCubit.startSpeeching(_profileCubit.state.textToSpeech));
     }
   }
 
@@ -55,8 +58,8 @@ class _ProfilePageState extends State<ProfilePage> {
         icon: Icons.person,
         // backgroundColor: profileIsSelected ? appColors.primary! : Colors.white,
         // iconColor: profileIsSelected ? Colors.white : Colors.grey,
-        backgroundColor: Colors.white,
-        iconColor: Colors.grey,
+        backgroundColor: appColors.secondary!,
+        iconColor: Colors.white,
         text: 'Profile',
         action: () {
           // setState(() {
@@ -70,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
         backgroundColor: appColors.secondary!,
         iconColor: Colors.white,
         text: 'Deconnexion',
-        action: () {},
+        action: () => _profileCubit.logOut(),
       ),
       // ProfileOption(
       //   icon: Icons.edit,
@@ -98,6 +101,10 @@ class _ProfilePageState extends State<ProfilePage> {
       // },
       {
         'text': 'Changer mon mot de passe',
+        'icon': Icons.arrow_forward_ios_rounded,
+      },
+      {
+        'text': 'Me deconnecter',
         'icon': Icons.arrow_forward_ios_rounded,
       }
     ];
@@ -127,7 +134,7 @@ class _ProfilePageState extends State<ProfilePage> {
         return CheckInternetConnectionPage(
           helper: state.currentUser == null ? 0 : 1,
           positionFromTop: (screenSize.height / 2),
-          errorTextColor: Colors.white,
+          errorTextColor: appColors.black!,
           body: state.status == ApiStatus.isLoading
               ? CommonWidgets.circularProgressIndicatorWidget(
                   positionFromTop: (screenSize.height / 2),
@@ -138,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       positionFromTop: (screenSize.height / 2),
                       context: context,
                       statusMessage: state.statusMessage,
-                      color: Colors.white,
+                      color: appColors.ligthGreen!,
                       reloadFunction: () => _profileCubit.getCurrentUser())
                   : Expanded(
                       child: ListView(
@@ -163,7 +170,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       style: TextStyle(
                                           fontSize: getHeight(20, context),
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white),
+                                          color: appColors.black),
                                     ),
                                   SizedBox(
                                     height: getHeight(30, context),
@@ -177,7 +184,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                           AppImages.unknownPersonImg,
                                           height: getHeight(60, context),
                                           width: getWidth(60, context),
-                                          // color: Colors.white,
                                         ),
                                       ),
                                       if (currentUserType == 'parents') ...[
@@ -211,33 +217,63 @@ class _ProfilePageState extends State<ProfilePage> {
                                 buildWhen: (previous, current) =>
                                     previous.speechType != current.speechType,
                                 builder: (context, state) {
-                                  print('object one is ${state.speechType}');
-                                  return state.speechType ==
-                                          SpeechType.isSpeeching
-                                      ? Positioned(
-                                          bottom: getHeight(0, context),
-                                          right: getWidth(10, context),
-                                          child: Container(
-                                            height: getHeight(40, context),
-                                            width: getWidth(40, context),
-                                            decoration: const BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Colors.white),
-                                            // alignment: Alignment.center,
-                                            child: IconButton(
-                                              color: appColors.secondary,
-                                              onPressed: () =>
-                                                  _speechCubit.stopSpeeching(),
-                                              icon: Icon(
-                                                Icons.stop,
-                                                size: getHeight(20, context),
-                                              ),
-                                            ),
-                                          ))
-                                      : const SizedBox();
+                                  final currentSpeechTYpe = state.speechType;
+                                  return Positioned(
+                                      bottom: getHeight(50, context),
+                                      right: getWidth(10, context),
+                                      child: Container(
+                                        height: getHeight(40, context),
+                                        width: getWidth(40, context),
+                                        decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Colors.white),
+                                        // alignment: Alignment.center,
+                                        child: IconButton(
+                                          color: appColors.secondary,
+                                          onPressed: () {
+                                            if (currentSpeechTYpe ==
+                                                SpeechType.isSpeeching) {
+                                              _speechCubit.stopSpeeching();
+                                            } else if (currentSpeechTYpe ==
+                                                SpeechType.speechClosed) {
+                                              _speechCubit.startSpeeching(
+                                                  _profileCubit
+                                                      .state.textToSpeech);
+                                            }
+                                          },
+                                          icon: Icon(
+                                            currentSpeechTYpe ==
+                                                    SpeechType.isSpeeching
+                                                ? Icons.stop
+                                                : currentSpeechTYpe ==
+                                                        SpeechType.speechClosed
+                                                    ? Icons.play_arrow_rounded
+                                                    : null,
+                                            size: getHeight(20, context),
+                                          ),
+                                        ),
+                                      ));
                                 },
                               ),
-                            ]
+                              Positioned(
+                                  bottom: getHeight(0, context),
+                                  right: getWidth(10, context),
+                                  child: InkWell(
+                                    onTap: () => _profileCubit.logOut(),
+                                    child: Container(
+                                      height: getHeight(40, context),
+                                      width: getWidth(40, context),
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: appColors.secondary),
+                                      child: Icon(
+                                        Icons.exit_to_app_outlined,
+                                        size: getHeight(20, context),
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  )),
+                            ],
                           ]),
                           currentUserType == 'parents'
                               ? Padding(
@@ -256,7 +292,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         style: TextStyle(
                                             fontSize: getHeight(20, context),
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.white),
+                                            color: appColors.black),
                                       ),
                                       SizedBox(
                                         height: getHeight(20, context),
@@ -284,51 +320,35 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ],
                                   ),
                                 )
-                              : Container(
-                                  margin: EdgeInsets.only(
-                                      top: getHeight(30, context)),
-                                  padding: EdgeInsets.only(
-                                      top: getHeight(30, context)),
-                                  height: getHeight(600, context),
-                                  width: double.infinity,
-                                  decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(40),
-                                          topRight: Radius.circular(40))),
-                                  child: Column(children: [
-                                    // profile options part
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: getWidth(65, context)),
-                                      child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: profileOptions
-                                              .map((profileOption) =>
-                                                  profileOption)
-                                              .toList()),
-                                    ),
-                                    SizedBox(
-                                      height: getHeight(20, context),
-                                    ),
-                                    const Divider(
-                                      thickness: 5,
-                                    ),
-                                    ...ListTile.divideTiles(
-                                            context: context,
-                                            color: Colors.grey,
-                                            tiles: profileTiles
-                                                .map((profileTile) =>
-                                                    ProfileTile(
-                                                        icon:
-                                                            profileTile['icon'],
-                                                        text: profileTile[
-                                                            'text']))
-                                                .toList())
-                                        .toList(),
-                                  ]),
+                              :
+                              // Column(children: [
+                              // profile options part
+                              // Padding(
+                              //     padding: EdgeInsets.symmetric(
+                              //         horizontal: getWidth(65, context)),
+                              //     child: Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceEvenly,
+                              //         children: profileOptions
+                              //             .map((profileOption) => profileOption)
+                              //             .toList()),
+                              //   ),
+                              SizedBox(
+                                  height: getHeight(20, context),
                                 ),
+                          // const Divider(
+                          //   thickness: 5,
+                          // ),
+                          ...ListTile.divideTiles(
+                                  context: context,
+                                  color: Colors.grey,
+                                  tiles: profileTiles
+                                      .map((profileTile) => ProfileTile(
+                                          icon: profileTile['icon'],
+                                          text: profileTile['text']))
+                                      .toList())
+                              .toList(),
+                          // ]),
                         ],
                       ),
                     ),
@@ -363,8 +383,9 @@ class Colonne extends StatelessWidget {
           Text(
             text1,
             style: TextStyle(
-                fontSize: getHeight(15, context),
-                color: Colors.white.withOpacity(0.7)),
+                fontSize: getHeight(14, context),
+                color: appColors.black,
+                fontWeight: FontWeight.bold),
           ),
           SizedBox(
             height: getHeight(10, context),
@@ -377,10 +398,11 @@ class Colonne extends StatelessWidget {
               text2,
               textAlign: isFirst ? null : TextAlign.center,
               style: TextStyle(
-                  overflow: TextOverflow.ellipsis,
-                  fontSize: getHeight(15, context),
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+                overflow: TextOverflow.ellipsis,
+                fontSize: getHeight(15, context),
+                color: appColors.black,
+                // fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],
@@ -405,15 +427,14 @@ class ProfileTile extends StatelessWidget {
       leading: Text(
         text,
         style: TextStyle(
-          fontSize: getHeight(11, context),
-          color: Colors.black,
-          // fontWeight: FontWeight.bold
-        ),
+            fontSize: getHeight(15, context),
+            color: appColors.black,
+            fontWeight: FontWeight.bold),
       ),
       trailing: Icon(
         icon,
         size: getHeight(13, context),
-        color: Colors.black,
+        color: appColors.black,
       ),
     );
   }

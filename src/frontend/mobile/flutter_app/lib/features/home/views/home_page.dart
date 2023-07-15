@@ -6,6 +6,7 @@ import 'package:fltter_app/features/home/views/convocation_page.dart';
 import 'package:fltter_app/features/home/views/cours_page.dart';
 import 'package:fltter_app/features/home/views/fautes_page.dart';
 import 'package:fltter_app/features/home/views/reglements_interieurs_page.dart';
+import 'package:fltter_app/features/home/views/sanctions_page.dart';
 import 'package:fltter_app/features/home/views/suggestion_page.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,8 @@ class _HomePageState extends State<HomePage> {
       {
         'image': AppImages.sanction,
         'subtitle': 'Mes sanctions',
-        'onPressAction': () {}
+        'onPressAction': () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const SanctionsPage()))
       },
       // Reglements interieurs
       {
@@ -103,18 +105,18 @@ class _HomePageState extends State<HomePage> {
         return CheckInternetConnectionPage(
             helper: state.currentUser == null ? 0 : 1,
             positionFromTop: (screenSize.height / 2),
-            errorTextColor: Colors.white,
+            errorTextColor: appColors.ligthGreen!,
             body: state.status == ApiStatus.isLoading
                 ? CommonWidgets.circularProgressIndicatorWidget(
                     positionFromTop: (screenSize.height / 2),
                     context: context,
-                    color: appColors.onBoardingTwo!)
+                    color: appColors.white!)
                 : state.status == ApiStatus.failed
                     ? CommonWidgets.failedStatusWidget(
                         positionFromTop: (screenSize.height / 2),
                         context: context,
                         statusMessage: state.statusMessage,
-                        color: Colors.white,
+                        color: appColors.black!,
                         reloadFunction: () => _profileCubit.getCurrentUser())
                     : Expanded(
                         child: ListView(
@@ -131,9 +133,9 @@ class _HomePageState extends State<HomePage> {
                                   SizedBox(
                                     child: Row(
                                       children: [
-                                        CommonWidgets.renderImage(
-                                            imagePath: currentUser!.photo!,
-                                            context: context),
+                                        // CommonWidgets.renderImage(
+                                        //     imagePath: currentUser!.photo!,
+                                        //     context: context),
                                         Colonne(
                                             text1:
                                                 '${currentUser!.firstName} ${currentUser.lastName}',
@@ -197,7 +199,10 @@ class Colonne extends StatelessWidget {
           Text(
             text1,
             style: TextStyle(
-                fontSize: getHeight(13, context), color: Colors.white),
+              fontSize: getHeight(13, context),
+              fontWeight: FontWeight.bold,
+              color: appColors.black,
+            ),
           ),
           // SizedBox(
           //   height: getHeight(10, context),
@@ -206,7 +211,8 @@ class Colonne extends StatelessWidget {
             text2,
             style: TextStyle(
               fontSize: getHeight(12, context),
-              color: Colors.white.withOpacity(0.7),
+              fontWeight: FontWeight.bold,
+              color: appColors.black,
             ),
           ),
         ],

@@ -112,7 +112,8 @@ class CommonWidgets {
             statusMessage,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: getHeight(12, context),
+              fontSize: getHeight(15, context),
+              fontWeight: FontWeight.bold,
               height: getHeight(1.5, context),
               color: color,
             ),
@@ -124,7 +125,8 @@ class CommonWidgets {
               textAlign: TextAlign.center,
               style: TextStyle(
                 decoration: TextDecoration.underline,
-                fontSize: getHeight(12, context),
+                fontSize: getHeight(15, context),
+                fontWeight: FontWeight.bold,
                 color: appColors.secondary,
               ),
             ),
@@ -148,7 +150,7 @@ class CommonWidgets {
         'Aucunes données trouvées pour le moment, veuillez réessayer plus tard...',
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: getHeight(12, context),
+          fontSize: getHeight(20, context),
           height: getHeight(1.5, context),
           color: color,
         ),
@@ -159,7 +161,9 @@ class CommonWidgets {
   static Widget renderImage(
       {required String imagePath, required BuildContext context}) {
     return CachedNetworkImage(
-      imageUrl: ApiConfiguration.appDomainUrl + imagePath,
+      imageUrl: ApiConfiguration.appDomainUrl +
+          '/api/files/download/filekey=' +
+          imagePath,
       placeholder: (_, __) => Container(
         color: Colors.grey[100],
       ),
@@ -174,8 +178,8 @@ class CommonWidgets {
       errorWidget: (_, __, ___) => Center(
         child: Icon(
           Icons.image_not_supported_outlined,
-          size: getHeight(25, context),
-          color: appColors.secondary,
+          size: getHeight(35, context),
+          color: appColors.ligthGreen,
         ),
       ),
     );

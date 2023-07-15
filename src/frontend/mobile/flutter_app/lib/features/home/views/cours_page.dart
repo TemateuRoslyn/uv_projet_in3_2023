@@ -48,18 +48,18 @@ class _CoursPageState extends State<CoursPage> {
             return CheckInternetConnectionPage(
               helper: state.courss.isEmpty ? 0 : 1,
               positionFromTop: (screenSize.height / 2),
-              errorTextColor: appColors.primary!,
+              errorTextColor: appColors.black!,
               body: state.coursStatus == ApiStatus.isLoading
                   ? CommonWidgets.circularProgressIndicatorWidget(
                       positionFromTop: (screenSize.height / 2),
                       context: context,
-                      color: appColors.primary!)
+                      color: appColors.white!)
                   : state.coursStatus == ApiStatus.failed
                       ? CommonWidgets.failedStatusWidget(
                           positionFromTop: (screenSize.height / 2),
                           context: context,
                           statusMessage: state.fauteStatusMessage,
-                          color: appColors.primary!,
+                          color: appColors.black!,
                           reloadFunction: () => _homeCubit.getDataByType(
                               dataType: 'cours',
                               classId: widget.user.classe!['id']))
@@ -67,7 +67,7 @@ class _CoursPageState extends State<CoursPage> {
                           ? CommonWidgets.noDataWidget(
                               positionFromTop: (screenSize.height / 2),
                               context: context,
-                              color: appColors.primary!)
+                              color: appColors.black!)
                           : Expanded(
                               child: ListView(
                                   padding: EdgeInsets.only(

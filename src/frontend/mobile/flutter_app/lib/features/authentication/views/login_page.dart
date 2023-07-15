@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
     final List<Fields> loginFields = [
       Fields(
         fieldType: 'simpleInput',
-        prefixIcon: const Icon(Icons.email_outlined, color: Colors.white),
+        prefixIcon: Icon(Icons.email_outlined, color: appColors.black!),
         labelText: 'Email',
         hintText: 'Entrez votre username ...',
         controller: _loginCubit.email,
@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
           }),
           icon: Icon(
             showPassword ? Icons.lock_open : Icons.lock_outline,
-            color: Colors.white,
+            color: appColors.black,
           ),
         ),
         labelText: 'Mot de passe',
@@ -128,23 +128,22 @@ class _LoginPageState extends State<LoginPage> {
                     Text(
                       'Connexion',
                       style: TextStyle(
-                          fontSize: getHeight(30, context),
+                          fontSize: getHeight(25, context),
                           fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                          color: appColors.black),
                     ),
                     SizedBox(
                       height: getHeight(10, context),
                     ),
                     Text(
-                      'Connectez vous pour continuer.',
+                      'Connectez-vous pour continuer.',
                       style: TextStyle(
-                          fontSize: getHeight(15, context),
-                          color: Colors.white),
+                          fontSize: getHeight(17, context),
+                          color: appColors.black),
                     ),
                     SizedBox(
                       height: getHeight(40, context),
                     ),
-
                     // login fields part
                     Form(
                       key: _loginCubit.loginForm,
@@ -173,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                                   _loginCubit.checkIfFieldsAreEmpty();
                                 },
                                 text: 'Connexion',
-                                color: appColors.ligthGreen!,
+                                color: appColors.secondary!,
                                 roundedBorders: true,
                                 context: context,
                               ),
@@ -183,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                               state.loginStatus == ApiStatus.isLoading
                                   ? CircularProgressIndicator(
                                       strokeWidth: 2,
-                                      color: appColors.onBoardingTwo,
+                                      color: appColors.secondary,
                                     )
                                   : const SizedBox()
                             ],
@@ -199,7 +198,7 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(
                               fontSize: getHeight(15, context),
                               fontWeight: FontWeight.bold,
-                              color: appColors.ligthGreen),
+                              color: appColors.secondary),
                         ),
                       ),
                     ),

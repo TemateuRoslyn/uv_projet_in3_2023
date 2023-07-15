@@ -46,7 +46,7 @@ class CoursComponent extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     color: currentUserType == 'parents'
                         ? appColors.tinary
-                        : appColors.primary),
+                        : appColors.secondary!.withOpacity(0.4)),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: getWidth(10, context), horizontal: 25),
@@ -60,7 +60,7 @@ class CoursComponent extends StatelessWidget {
                         style: TextStyle(
                             fontSize: getHeight(20, context),
                             height: getHeight(1.5, context),
-                            color: Colors.white,
+                            color: appColors.black,
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
@@ -70,9 +70,10 @@ class CoursComponent extends StatelessWidget {
                         teacherName,
                         // textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: getHeight(15, context),
+                          fontSize: getHeight(18, context),
+                          fontWeight: FontWeight.bold,
                           height: getHeight(1.5, context),
-                          color: Colors.white,
+                          color: appColors.black,
                         ),
                       ),
                     ],

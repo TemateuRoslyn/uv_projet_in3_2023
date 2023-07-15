@@ -75,6 +75,72 @@ class EleveController extends Controller
 
     /**
      * @OA\Get(
+     *     path="/api/eleves/mostDisciplines",
+     *     summary="Get the most disciplines eleves",
+     *     description="Retrieve a list of the most disciplines eleves",
+     *     operationId="mostDisciplinesEleves",
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *     security={{"bearerAuth":{}}},
+     *     tags={"eleves"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Permission updated successfully"),
+     *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Eleve"))
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     )
+     * )
+     */
+    public function mostDisciplines()
+    {
+        $eleves = Eleve::with(['fautes' => function ($query) {
+            $query->orderBy('created_at');
+        }])
+            ->withCount('fautes')
+            ->orderBy('fautes_count')
+            ->take(3)
+            ->get();
+
+            foreach ($eleves as $eleve) {
+                $total = count($eleve->fautes);
+                $eleve->totalFaute = $total;
+            }
+        // Récupérer le nombre total de fautes
+        // $totalFautes = Faute::count();
+
+        // Ajouter le nombre total de fautes à chaque élève
+        // $eleves->each(function ($eleve) use ($totalFautes) {
+        //     $eleve->totalFautes = $totalFautes;
+        // });
+
+        return response()->json([
+            'message' => 'Liste des élèves',
+            'success' => true,
+            'content' => $eleves
+        ]);
+    }
+
+    /**
+     * @OA\Get(
      *     path="/api/eleves/findOne/{id}",
      *     summary="Get eleve information",
      *     description="Get information about a specific eleve",

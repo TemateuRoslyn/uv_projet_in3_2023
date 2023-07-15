@@ -49,18 +49,18 @@ class _FautesPageState extends State<FautesPage> {
             return CheckInternetConnectionPage(
               helper: state.fautes.isEmpty ? 0 : 1,
               positionFromTop: (screenSize.height / 2),
-              errorTextColor: appColors.primary!,
+              errorTextColor: appColors.black!,
               body: state.fauteStatus == ApiStatus.isLoading
                   ? CommonWidgets.circularProgressIndicatorWidget(
                       positionFromTop: (screenSize.height / 2),
                       context: context,
-                      color: appColors.primary!)
+                      color: appColors.white!)
                   : state.fauteStatus == ApiStatus.failed
                       ? CommonWidgets.failedStatusWidget(
                           positionFromTop: (screenSize.height / 2),
                           context: context,
                           statusMessage: state.fauteStatusMessage,
-                          color: appColors.primary!,
+                          color: appColors.black!,
                           reloadFunction: () {
                             if (widget.childInfos == null) {
                               _homeCubit.getDataByType(dataType: 'fautes');
@@ -74,7 +74,7 @@ class _FautesPageState extends State<FautesPage> {
                           ? CommonWidgets.noDataWidget(
                               positionFromTop: (screenSize.height / 2),
                               context: context,
-                              color: appColors.primary!)
+                              color: appColors.black!)
                           : Expanded(
                               child: ListView(
                               padding: EdgeInsets.only(
@@ -85,7 +85,7 @@ class _FautesPageState extends State<FautesPage> {
                                   .map((faute) => ConvocationComponent(
                                         libelle: 'Faute: ${faute.libelle}',
                                         subtitle1:
-                                            'Règle: ${faute.regle.libelle}',
+                                            'Règle: ${faute.regle!.libelle}',
                                         statut: 'Gravité: ${faute.gravite}',
                                         isFrom: 'fautes_santions',
                                         // onPressAction: () {},

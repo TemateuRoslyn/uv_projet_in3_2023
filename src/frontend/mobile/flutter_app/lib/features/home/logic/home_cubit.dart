@@ -20,13 +20,13 @@ part 'home_cubit.freezed.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit({
-    required this.homeRepository,
-    required this.internetCubit,
+    this.homeRepository,
+    this.internetCubit,
     // ignore: prefer_const_constructors
   }) : super(HomeState());
 
-  final HomeRepository homeRepository;
-  final InternetCubit internetCubit;
+  final HomeRepository? homeRepository;
+  final InternetCubit? internetCubit;
   final TextEditingController suggestion = TextEditingController();
 
   void getDataByType({
@@ -36,7 +36,7 @@ class HomeCubit extends Cubit<HomeState> {
   }) async {
     // ri = reglements interierieurs
     // cd = conseil discipline
-    final isOnline = await internetCubit.checkInternetConnection();
+    final isOnline = await internetCubit!.checkInternetConnection();
     switch (dataType) {
       case 'ri':
         {
@@ -141,7 +141,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   void proceedTogetAllReglementInterieur() async {
     try {
-      final ri = await homeRepository.getAllReglementInterieur();
+      final ri = await homeRepository!.getAllReglementInterieur();
       emit(state.copyWith(riStatus: ApiStatus.success, ri: ri));
     } on DioException catch (e) {
       final errorMessage = ApiConfiguration.getErrorMessage(e);
@@ -153,8 +153,8 @@ class HomeCubit extends Cubit<HomeState> {
   void proceedTogetAllUserFautes({int? childId}) async {
     try {
       final fautes = childId == null
-          ? await homeRepository.getAllUserFautes()
-          : await homeRepository.getAllUserFautes(userId: childId);
+          ? await homeRepository!.getAllUserFautes()
+          : await homeRepository!.getAllUserFautes(userId: childId);
       emit(state.copyWith(fauteStatus: ApiStatus.success, fautes: fautes));
     } on DioException catch (e) {
       final errorMessage = ApiConfiguration.getErrorMessage(e);
@@ -168,8 +168,8 @@ class HomeCubit extends Cubit<HomeState> {
   void proceedTogetAllUserCD({int? childId}) async {
     try {
       final cds = childId == null
-          ? await homeRepository.getAllUserCD()
-          : await homeRepository.getAllUserCD(userId: childId);
+          ? await homeRepository!.getAllUserCD()
+          : await homeRepository!.getAllUserCD(userId: childId);
       emit(state.copyWith(cdStatus: ApiStatus.success, cds: cds));
     } on DioException catch (e) {
       final errorMessage = ApiConfiguration.getErrorMessage(e);
@@ -181,8 +181,8 @@ class HomeCubit extends Cubit<HomeState> {
   void proceedTogetAllUserConvocation({int? childId}) async {
     try {
       final convocations = childId == null
-          ? await homeRepository.getAllUserConvocations()
-          : await homeRepository.getAllUserConvocations(userId: childId);
+          ? await homeRepository!.getAllUserConvocations()
+          : await homeRepository!.getAllUserConvocations(userId: childId);
       emit(state.copyWith(
           convocationStatus: ApiStatus.success, convocations: convocations));
     } on DioException catch (e) {
@@ -196,7 +196,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   void proceedToGetAllUserCours(int classId) async {
     try {
-      final cours = await homeRepository.getAllUserCours(classId);
+      final cours = await homeRepository!.getAllUserCours(classId);
       emit(state.copyWith(coursStatus: ApiStatus.success, courss: cours));
     } on DioException catch (e) {
       final errorMessage = ApiConfiguration.getErrorMessage(e);
@@ -210,8 +210,8 @@ class HomeCubit extends Cubit<HomeState> {
   void proceedTogetAllUserSanctions({int? childId}) async {
     try {
       final sanctions = childId == null
-          ? await homeRepository.getAllUserSanctions()
-          : await homeRepository.getAllUserSanctions(userId: childId);
+          ? await homeRepository!.getAllUserSanctions()
+          : await homeRepository!.getAllUserSanctions(userId: childId);
       emit(state.copyWith(
           sanctionStatus: ApiStatus.success, sanctions: sanctions));
     } on DioException catch (e) {
@@ -226,23 +226,23 @@ class HomeCubit extends Cubit<HomeState> {
   void insertSuggestion() async {
     // final suggestion = Suggestion(description: suggestion.);
     try {
-      await homeRepository.insertSuggestion(suggestion.text);
+      await homeRepository!.insertSuggestion(suggestion.text);
       emit(state.copyWith(suggestionInsertStatus: 'success'));
     } catch (e) {}
   }
 
   void getChildInfosForParentConsultation(int userId) async {
     try {
-      final isOnline = await internetCubit.checkInternetConnection();
+      final isOnline = await internetCubit!.checkInternetConnection();
 
       if (isOnline) {
         emit(state.copyWith(parentConsultationStatus: ApiStatus.isLoading));
-        final fautes = await homeRepository.getAllUserFautes(userId: userId);
-        final cds = await homeRepository.getAllUserCD(userId: userId);
+        final fautes = await homeRepository!.getAllUserFautes(userId: userId);
+        final cds = await homeRepository!.getAllUserCD(userId: userId);
         final convocations =
-            await homeRepository.getAllUserConvocations(userId: userId);
+            await homeRepository!.getAllUserConvocations(userId: userId);
         final sanctions =
-            await homeRepository.getAllUserSanctions(userId: userId);
+            await homeRepository!.getAllUserSanctions(userId: userId);
         emit(state.copyWith(
           fautes: fautes,
           cds: cds,
@@ -274,10 +274,10 @@ class HomeCubit extends Cubit<HomeState> {
 
   void proceedToGetAllStudentData() async {
     try {
-      final fautes = await homeRepository.getAllUserFautes();
-      final cds = await homeRepository.getAllUserCD();
-      final convocations = await homeRepository.getAllUserConvocations();
-      final sanctions = await homeRepository.getAllUserSanctions();
+      final fautes = await homeRepository!.getAllUserFautes();
+      final cds = await homeRepository!.getAllUserCD();
+      final convocations = await homeRepository!.getAllUserConvocations();
+      final sanctions = await homeRepository!.getAllUserSanctions();
       emit(state.copyWith(
         fautes: fautes,
         cds: cds,
@@ -292,4 +292,16 @@ class HomeCubit extends Cubit<HomeState> {
           allStudentDataStatusMessage: errorMessage));
     }
   }
+
+  void addNewFaute(Faute newFaute) =>
+      emit(state.copyWith(fautes: List.from(state.fautes)..add(newFaute)));
+
+  void addNewSanction(Sanction newSanction) => emit(
+      state.copyWith(sanctions: List.from(state.sanctions)..add(newSanction)));
+
+  void addNewCD(ConseilDiscipline newCD) =>
+      emit(state.copyWith(cds: List.from(state.cds)..add(newCD)));
+
+  void addNewConvocation(Convocation newConvocation) => emit(state.copyWith(
+      convocations: List.from(state.convocations)..add(newConvocation)));
 }

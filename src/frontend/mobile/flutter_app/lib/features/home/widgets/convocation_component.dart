@@ -32,7 +32,7 @@ class ConvocationComponent extends StatelessWidget {
           horizontal: getWidth(20, context), vertical: getHeight(15, context)),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: appColors.primary,
+        color: appColors.secondary!.withOpacity(0.5),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +44,7 @@ class ConvocationComponent extends StatelessWidget {
               fontSize: getHeight(17, context),
               fontWeight: FontWeight.bold,
               color:
-                  isFrom == 'convocations' ? Colors.white : appColors.secondary,
+                  isFrom == 'convocations' ? appColors.black : appColors.black,
             ),
           ),
           SizedBox(
@@ -55,18 +55,22 @@ class ConvocationComponent extends StatelessWidget {
               children: [
                 Icon(
                   Icons.date_range_rounded,
-                  color: appColors.white,
+                  color: appColors.black!.withOpacity(0.8),
                   size: getHeight(20, context),
                 ),
                 SizedBox(
                   width: getWidth(10, context),
                 ),
-                Text(
-                  // DateFormat('dd-MM-yyyy').format(DateTime.now()),
-                  subtitle1,
-                  style: TextStyle(
-                    fontSize: getHeight(15, context),
-                    color: Colors.white,
+                SizedBox(
+                  width: getWidth(270, context),
+                  child: Text(
+                    // DateFormat('dd-MM-yyyy').format(DateTime.now()),
+                    subtitle1,
+                    style: TextStyle(
+                      fontSize: getHeight(20, context),
+                      fontWeight: FontWeight.bold,
+                      color: appColors.primary,
+                    ),
                   ),
                 ),
               ],
@@ -78,18 +82,22 @@ class ConvocationComponent extends StatelessWidget {
               children: [
                 Icon(
                   Icons.date_range_rounded,
-                  color: appColors.white,
+                  color: appColors.black!.withOpacity(0.8),
                   size: getHeight(20, context),
                 ),
                 SizedBox(
                   width: getWidth(10, context),
                 ),
-                Text(
-                  // DateFormat('dd-MM-yyyy').format(DateTime.now()),
-                  subtitle2!,
-                  style: TextStyle(
-                    fontSize: getHeight(15, context),
-                    color: Colors.white,
+                SizedBox(
+                  width: getWidth(270, context),
+                  child: Text(
+                    // DateFormat('dd-MM-yyyy').format(DateTime.now()),
+                    subtitle2!,
+                    style: TextStyle(
+                      fontSize: getHeight(20, context),
+                      fontWeight: FontWeight.bold,
+                      color: appColors.primary,
+                    ),
                   ),
                 ),
               ],
@@ -101,20 +109,10 @@ class ConvocationComponent extends StatelessWidget {
               subtitle1,
               style: TextStyle(
                 fontSize: getHeight(15, context),
-                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                color: appColors.black,
               ),
             ),
-            // SizedBox(
-            //   height: getHeight(10, context),
-            // ),
-            // Text(
-            //   // DateFormat('dd-MM-yyyy').format(DateTime.now()),
-            //   subtitle2,
-            //   style: TextStyle(
-            //     fontSize: getHeight(15, context),
-            //     color: Colors.white,
-            //   ),
-            // ),
           ],
           SizedBox(
             height: getHeight(10, context),
@@ -128,17 +126,18 @@ class ConvocationComponent extends StatelessWidget {
               // height: getHeight(20, context),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color:
-                    isFrom == 'convocations' ? Colors.green : appColors.tinary,
+                color: isFrom == 'convocations'
+                    ? appColors.secondary
+                    : appColors.secondary,
               ),
               alignment: Alignment.center,
               child: Text(
                 statut!,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: getHeight(15, context),
-                ),
+                    color: appColors.primary,
+                    fontSize: getHeight(15, context),
+                    fontWeight: FontWeight.bold),
               ),
             ),
         ],

@@ -6,8 +6,11 @@ import 'package:fltter_app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/home/logic/home_cubit.dart';
+import '../../features/profile/logic/profile_cubit.dart';
 import '../../features/profile/views/profile_page.dart';
 import '../logics/navigation/navigation_cubit.dart';
+import '../services/pusher_service.dart';
 import '../styles/colors.dart';
 
 class PageSkeleton extends StatefulWidget {
@@ -32,6 +35,11 @@ class _PageSkeletonState extends State<PageSkeleton> {
 
     _navigationCubit = context.read<NavigationCubit>();
     _currentUserType = AuthRepository.getUserType;
+
+    PusherService.initCubits(
+      profileCubit: context.read<ProfileCubit>(),
+      homeCubit: context.read<HomeCubit>(),
+    );
   }
 
   @override
@@ -65,8 +73,8 @@ class _PageSkeletonState extends State<PageSkeleton> {
                     width: double.infinity,
                     color: (navigationType == NavigationType.home ||
                             navigationType == NavigationType.stats)
-                        ? appColors.primary
-                        : const Color(0xfffafafa),
+                        ? appColors.white!.withOpacity(0.4)
+                        : appColors.white!.withOpacity(0.4),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -78,7 +86,7 @@ class _PageSkeletonState extends State<PageSkeleton> {
                             size: getHeight(30, context),
                             color: navigationType == NavigationType.home
                                 ? appColors.secondary
-                                : Colors.grey,
+                                : appColors.primary,
                           ),
                         ),
                         IconButton(
@@ -89,7 +97,7 @@ class _PageSkeletonState extends State<PageSkeleton> {
                             size: getHeight(30, context),
                             color: navigationType == NavigationType.stats
                                 ? appColors.secondary
-                                : Colors.grey,
+                                : appColors.primary,
                           ),
                         ),
                         IconButton(
@@ -100,7 +108,7 @@ class _PageSkeletonState extends State<PageSkeleton> {
                             size: getHeight(30, context),
                             color: navigationType == NavigationType.profile
                                 ? appColors.secondary
-                                : Colors.grey,
+                                : appColors.primary,
                           ),
                         ),
                       ],

@@ -27,7 +27,7 @@ class _PageSkeletonTwoState extends State<PageSkeletonTwo> {
             height: getHeight(100, context),
             width: double.infinity,
             decoration: BoxDecoration(
-              color: appColors.primary,
+              color: appColors.white,
               borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(20),
               ),
@@ -40,14 +40,14 @@ class _PageSkeletonTwoState extends State<PageSkeletonTwo> {
                     IconButton(
                       onPressed: () => Navigator.of(context).pop(),
                       icon: const Icon(Icons.arrow_back_rounded),
-                      color: Colors.white,
+                      color: appColors.primary,
                     ),
                     Text(
                       widget.headerText,
                       style: TextStyle(
                           fontSize: getHeight(15, context),
-                          // fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                          fontWeight: FontWeight.bold,
+                          color: appColors.primary),
                     ),
                   ],
                 )

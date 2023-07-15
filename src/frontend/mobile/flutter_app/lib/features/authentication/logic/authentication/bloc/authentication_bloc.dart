@@ -29,22 +29,22 @@ class AuthenticationBloc
 
   void _onAuthenticationStatusChange(
     AuthenticationStatusChange event,
-    emit,
+    Emitter<AuthenticationState> emit,
   ) {
     switch (event.status) {
       case AuthStatus.unAuthenticated:
-        emit(const IsUnAuthenticated(status: AuthStatus.unAuthenticated));
-        break;
+        // ignore: prefer_const_constructors
+        return emit(IsUnAuthenticated(status: AuthStatus.unAuthenticated));
       case AuthStatus.authenticated:
-        emit(const IsAuthenticated(status: AuthStatus.authenticated));
-        break;
+        // ignore: prefer_const_constructors
+        return emit(IsAuthenticated(status: AuthStatus.authenticated));
       default:
-        emit(const IsUnAuthenticated(status: AuthStatus.unAuthenticated));
-        break;
+        // ignore: prefer_const_constructors
+        return emit(IsUnAuthenticated(status: AuthStatus.unAuthenticated));
     }
   }
 
-  void _onAuthenticationLogOutrequest(_, __) {
+  void _onAuthenticationLogOutrequest(_, __) async {
     _authRepository.logOut();
   }
 
