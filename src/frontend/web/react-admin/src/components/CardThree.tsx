@@ -88,7 +88,7 @@ const CardThree = () => {
         </div>
 
         <span className="flex items-center gap-1 text-sm font-medium text-meta-3">
-          {(conseilDisciplines.length/eleves.length)*100}%
+          {parseFloat(((conseilDisciplines.length/eleves.length)*100).toFixed(3))}%
           <svg
             className="fill-meta-3"
             width="10"

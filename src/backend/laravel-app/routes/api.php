@@ -27,6 +27,7 @@ use App\Http\Controllers\API\ReparationController;
 use App\Http\Controllers\API\SanctionPrevuController;
 use App\Http\Controllers\API\SuggestionsController;
 use App\Http\Controllers\API\AvoirMembreConseilDisciplineController;
+use App\Http\Controllers\API\OtherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,7 +112,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findOne/{eleveId}', [EleveController::class, 'view']);
         Route::get('findAll', [EleveController::class, 'index']);
         Route::get('records/{keyword}', [EleveController::class, 'records']);
-        
+
         Route::middleware('permission:modifier_eleve')->post('update/{eleveId}', [EleveController::class, 'update']);
         Route::middleware('permission:supprimer_eleve')->delete('delete/{eleveId}', [EleveController::class, 'delete']);
         Route::middleware('permission:creer_eleve')->post('create', [EleveController::class, 'store']);
@@ -284,3 +285,5 @@ Route::middleware('jwt.verify')->group(function () {
 Route::get('eleves/mostDisciplines/', [EleveController::class, 'mostDisciplines']);
 
 Route::get('prof/findAll', [ProfesseurController::class, 'index']);
+
+Route::post('contact', [OtherController::class, 'contact']);

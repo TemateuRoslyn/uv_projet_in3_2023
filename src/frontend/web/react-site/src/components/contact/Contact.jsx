@@ -3,7 +3,9 @@ import Back from "../common/back/Back"
 import "./contact.css"
 
 const Contact = () => {
-  const map = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945089.628012213!2d12.929731998285743!3d5.594114711933558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x106cdd94bfebc8f1%3A0xdb295bdfec6cb26c!2sCameroon!5e0!3m2!1sen!2snp!4v1652612232960!5m2!1sen!2snp" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer"';
+  // <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7943.632944948618!2d10.065432710502062!3d5.444851168643367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x105fb06f92a735ef%3A0xf0cae082ecf4fb56!2sUniversite%20de%20Dschang%20Campus%20A%2C%20Dschang!5e0!3m2!1sfr!2scm!4v1689464806415!5m2!1sfr!2scm" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+  const map = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7943.632944948618!2d10.065432710502062!3d5.444851168643367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x105fb06f92a735ef%3A0xf0cae082ecf4fb56!2sUniversite%20de%20Dschang%20Campus%20A%2C%20Dschang!5e0!3m2!1sfr!2scm!4v1689464806415!5m2!1sfr!2scm" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer"';
 
   //const map = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3991688.143656266!2d17.683401905469745!3d8.121442401771064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104d3c7078dbe237%3A0xc26a9e424a9e2cc8!2sAfrica!5e0!3m2!1sen!2snp!4v1652611480455!5m2!1sen!2snp" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer"';
 
@@ -41,8 +43,7 @@ const Contact = () => {
                 <input type='email' placeholder='Email' />
               </div>
               <input type='text' placeholder='sujet' />
-              <textarea cols='30' rows='10'>
-                Creer un message ici...
+              <textarea cols='30' rows='10' placeholder="Inserer votre message ici...">
               </textarea>
               <button className='primary-btn'>ENVOYER</button>
             </form>

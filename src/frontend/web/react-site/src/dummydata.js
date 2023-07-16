@@ -20,25 +20,25 @@ export const homeAbout = [
 ]
 export const awrapper = [
   {
-    cover: "https://img.icons8.com/external-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto/80/ffffff/external-graduation-education-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto.png",
+    cover: "https://img.icons8.com/external-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto/80/86EFAC/external-graduation-education-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto.png",
     data: "3,000",
-    title: "SUCCESS STORIES",
+    title: "ELEVES",
   },
 
   {
-    cover: "https://img.icons8.com/ios/80/ffffff/athlete.png",
+    cover: "https://img.icons8.com/ios/80/86EFAC/athlete.png",
     data: "320",
-    title: "TRUSTED TUTORS",
+    title: "FAUTES",
   },
   {
-    cover: "https://img.icons8.com/external-outline-icons-maxicons/80/ffffff/external-calender-insurance-outline-outline-icons-maxicons.png",
+    cover: "https://img.icons8.com/external-outline-icons-maxicons/80/86EFAC/external-calender-insurance-outline-outline-icons-maxicons.png",
     data: "1,000",
-    title: "SCHEDULES",
+    title: "CONSEILS DISCIPLINES",
   },
   {
-    cover: "https://img.icons8.com/ios/80/ffffff/macbook-idea--v3.png",
+    cover: "https://img.icons8.com/ios/80/86EFAC/macbook-idea--v3.png",
     data: "587",
-    title: "COURSES",
+    title: "SANCTIONS",
   },
 ]
 export const coursesCard = [
@@ -574,7 +574,7 @@ export const francophone = [
   {
     cover: "./images/courses/online/o12.png",
     hoverCover: "./images/courses/online/o12.1.png",
-    courseName: "Phylosophie",
+    courseName: "Philosophie",
     cycle: "2nd cycle",
     serie: "série A,D,C", 
   },
