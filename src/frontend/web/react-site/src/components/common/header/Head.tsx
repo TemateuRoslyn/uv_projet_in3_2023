@@ -189,8 +189,8 @@ interface ModalProps {
 
 export const SuccessNotification: React.FC<ModalProps> = (props) => {
   return (
-      <div className="top-modal-animation mb-5 flex w-full border-l-6 border-[#34D399] bg-[#34D399] bg-opacity-[15%] px-7 py-5 shadow-md dark:bg-[#1B1B24] dark:bg-opacity-30 md:p-9">
-          <div className="mr-5 flex h-9 w-full max-w-[36px] items-center justify-center rounded-lg bg-[#34D399]">
+      <div className="top-modal-animation mb-5 flex w-full border-l-6 border-[#34D399] bg-[#05905d] bg-opacity-[15%] px-7 py-5 shadow-md dark:bg-[#1B1B24] dark:bg-opacity-30 md:p-9">
+          <div className="mr-5 flex h-9 w-full max-w-[36px] items-center justify-center rounded-lg bg-[#08a068]">
             <svg
               width="16"
               height="12"
@@ -209,8 +209,8 @@ export const SuccessNotification: React.FC<ModalProps> = (props) => {
             <h5 className="mb-3 text-lg font-semibold text-black dark:text-[#606a66] ">
               {props.message}
             </h5>
-            <p className="text-base leading-relaxed text-body">
-              {props.description ? props.description : null}
+            <p className="text-bold">
+              <strong>{props.description ? props.description : null}</strong>
             </p>
           </div>
         </div>

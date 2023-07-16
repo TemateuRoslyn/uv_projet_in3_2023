@@ -101,7 +101,7 @@ const Login: React.FC<LoginProps> = (props) => {
 
   return (
     <>
-    {/*   <Back title="Sign in" /> */}
+      <Back title="Sign in" />
       <section className="login padding">
         <div className="container shadow">
           <div className="left row">
@@ -184,14 +184,14 @@ const Login: React.FC<LoginProps> = (props) => {
                   className="border-primary bg-primary w-full cursor-pointer rounded-lg border p-4 text-white transition hover:bg-opacity-90"
                 />
               </div>
-
+{/* 
               <span>Forgot Password?</span>
               <div className="noaccout">
                 <p>
                   Don’t have an account?
                   <span>Sign Up</span>
                 </p>
-              </div>
+              </div> */}
             </form>
           </div>
         </div>

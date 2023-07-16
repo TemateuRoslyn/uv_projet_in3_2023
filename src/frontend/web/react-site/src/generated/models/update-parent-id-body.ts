@@ -40,6 +40,12 @@ export interface UpdateParentIdBody {
      * @type {string}
      * @memberof UpdateParentIdBody
      */
+    username: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateParentIdBody
+     */
     dateDeNaissance: any;
     /**
      * 

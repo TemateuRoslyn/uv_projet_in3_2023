@@ -264,6 +264,40 @@ export const ProfesseursApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
+         * Retrieve a list of all professeurs
+         * @summary Get all professeurs
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        professeursIndex2: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/prof/findAll`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Update a professeur's information
          * @summary Update a professeur's information
          * @param {string} email 
@@ -518,6 +552,19 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Retrieve a list of all professeurs
+         * @summary Get all professeurs
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async professeursIndex2(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
+            const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).professeursIndex2(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Update a professeur's information
          * @summary Update a professeur's information
          * @param {string} email 
@@ -608,6 +655,15 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
             return ProfesseursApiFp(configuration).professeursIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
+         * Retrieve a list of all professeurs
+         * @summary Get all professeurs
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        professeursIndex2(options?: any): AxiosPromise<InlineResponse20063> {
+            return ProfesseursApiFp(configuration).professeursIndex2(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Update a professeur's information
          * @summary Update a professeur's information
          * @param {string} email 
@@ -692,6 +748,16 @@ export class ProfesseursApi extends BaseAPI {
      */
     public professeursIndex(authorization: string, options?: any) {
         return ProfesseursApiFp(this.configuration).professeursIndex(authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Retrieve a list of all professeurs
+     * @summary Get all professeurs
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProfesseursApi
+     */
+    public professeursIndex2(options?: any) {
+        return ProfesseursApiFp(this.configuration).professeursIndex2(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update a professeur's information

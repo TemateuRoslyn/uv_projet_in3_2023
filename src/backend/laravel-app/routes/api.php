@@ -111,8 +111,7 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('findOne/{eleveId}', [EleveController::class, 'view']);
         Route::get('findAll', [EleveController::class, 'index']);
         Route::get('records/{keyword}', [EleveController::class, 'records']);
-        Route::get('mostDisciplines/', [EleveController::class, 'mostDisciplines']);
-
+        
         Route::middleware('permission:modifier_eleve')->post('update/{eleveId}', [EleveController::class, 'update']);
         Route::middleware('permission:supprimer_eleve')->delete('delete/{eleveId}', [EleveController::class, 'delete']);
         Route::middleware('permission:creer_eleve')->post('create', [EleveController::class, 'store']);
@@ -271,13 +270,17 @@ Route::middleware('jwt.verify')->group(function () {
 
     //Reparations
     Route::prefix('reparations')->group(function () {
-        Route::middleware('permission:creer_reparation')->post('create', [ReparationController::class, 'store']);
-        Route::middleware('permission:modifier_reparation')->post('update/{reparationId}', [ReparationController::class, 'update']);
+        Route::post('create', [ReparationController::class, 'store']);
+        Route::post('update/{reparationId}', [ReparationController::class, 'update']);
         Route::post('validate/{reparationId}', [ReparationController::class, 'valider']);
-        Route::middleware('permission:supprimer_reparation')->delete('delete/{reparationId}', [ReparationController::class, 'delete']);
+        Route::delete('delete/{reparationId}', [ReparationController::class, 'delete']);
         Route::get('findOne/{reparationId}', [ReparationController::class, 'view']);
         Route::get('findAll', [ReparationController::class, 'index']);
         Route::get('findValidated', [ReparationController::class, 'indexValidate']);
         Route::get('findNotValidated', [ReparationController::class, 'indexNotValidate']);
     });
 });
+
+Route::get('eleves/mostDisciplines/', [EleveController::class, 'mostDisciplines']);
+
+Route::get('prof/findAll', [ProfesseurController::class, 'index']);
