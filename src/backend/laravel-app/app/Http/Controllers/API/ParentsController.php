@@ -364,7 +364,7 @@ class ParentsController extends Controller
     }
 
     /**
-     * @OA\put(
+     * @OA\post(
      *     path="/api/parents/update/{parentId}",
      *     summary="Update a parent's information",
      *     description="Update a parent's information",
@@ -630,21 +630,21 @@ class ParentsController extends Controller
             ->get();
         $conseil = ConseilDiscipline::where('eleveId', $eleveId)
             ->orWhere('dateCd', '>', $currentDate)
-            ->with(['eleve']) 
+            ->with(['eleve'])
             ->get();
         /* $conseil = Faute::where('eleveId', $eleveId)
             ->where('dateCd', '>', $currentDate)
-            ->with(['eleve', 'personnel']) 
+            ->with(['eleve', 'personnel'])
             ->get();
         $conseil = ConseilDiscipline::where('eleveId', $eleveId)
             ->where('dateCd', '>', $currentDate)
-            ->with(['eleve', 'personnel']) 
+            ->with(['eleve', 'personnel'])
             ->get(); */
             $data = User::where('id',0);
         $data->convo = $convo;
-        $data->conseil = $conseil; 
+        $data->conseil = $conseil;
 
-        
+
         if ($data->convo->count() > 0 || $data->conseil->count() > 0) {
             return response()->json([
                 'message' => 'Convocations de l\'élève trouvées',
