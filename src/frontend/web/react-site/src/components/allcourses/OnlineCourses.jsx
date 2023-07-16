@@ -48,10 +48,10 @@ const OnlineCourses = () => {
           <p>
             Les aprenants en section bilingue suivent un programme bilingue durant le premier cycle et 
             rejoignent le programme anglophone ou francophone pour ceux désirant continuer 
-            en série scientifique, ou alors, rejoinent la série Allemande Bilingue pour ceux désirant continuer
+            en série scientifique, ou alors, rejoignent la série Allemande Bilingue pour ceux désirant continuer
             en série littéraire. 
           </p>
-          <p>Et donc, nous listerons juste le programmes du premier cycle.</p>
+          <p>Et donc, nous listerons juste les programmes du premier cycle.</p>
           <br/>
           <div className='content grid3'>
             {bilingue.map((val, key) => (

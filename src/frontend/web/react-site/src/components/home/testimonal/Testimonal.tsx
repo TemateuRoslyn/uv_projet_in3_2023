@@ -44,7 +44,7 @@ console.log(eleves)
               <div className='items shadow' key={key}>
                 <div className='box flex'>
                   <div className='img'>
-                    <img src={`${environment.basePath}/api/files/download?filekey=${val.cover}`} alt={val.firstName} />
+                    <img src={`${environment.basePath}/api/files/download?filekey=${val.photo}`} alt={val.firstName} />
                     <i className='fa fa-quote-left icon'></i>
                   </div>
                   <div className='name'>
@@ -54,7 +54,7 @@ console.log(eleves)
                     
                   </div>
                 </div>
-                <p>No de faute : {val.fautes_count}</p>
+                <p>Nombre de fautes : {val.fautes_count}</p>
               </div>
             ))}
           </div>

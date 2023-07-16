@@ -179,7 +179,9 @@ const Header: React.FC<HeaderProps> = (props) => {
             
           </ul>
             <div className='start'>
-              <div className='button border p-1 shadow-lg shadow-green-900 rounded-full'><Link to='/login'>Mon compte personnel</Link></div>
+            <Link to='/login'>
+              <div className='button border p-1 shadow-lg shadow-green-900 rounded-full'>Mon compte personnel</div>
+            </Link>
             </div>
             <button className='togglle' onClick={() => setClick(!click)}>
               {click ?  <FontAwesomeIcon icon={faTimes} />:<FontAwesomeIcon icon={faBars} />}
