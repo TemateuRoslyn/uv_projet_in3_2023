@@ -51,7 +51,7 @@ const Convocations = () => {
         <Back title={"Convocations"} />
         <section className='h-100 w-auto justify-center justify-items-center bg-transparent'>
           <div className='container-sm m-2 grid grid-cols-1 justify-center justify-items-center gap-2 bg-transparent md:grid md:grid-cols-2  md:gap-0 xl:grid-cols-3'>
-            {convocations.map((item)=>(
+            {convocations.length > 0 ? (convocations.map((item)=>(
               <div className="contact flex flex-col justify-start p-6">
                 <h5 className="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
                 <b>Sujet :</b> {item.libelle}
@@ -67,7 +67,8 @@ const Convocations = () => {
                   <b>Statut :</b> {item.statut}
                 </p>
             </div>
-            ))}
+            ))):  <h3 className="mb-2 text-3xl font-medium text-neutral-800 dark:text-neutral-50">
+            No Convocations</h3>}
           </div>
         </section>
       </>

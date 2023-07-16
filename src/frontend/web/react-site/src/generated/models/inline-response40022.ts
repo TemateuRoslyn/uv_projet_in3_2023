@@ -31,7 +31,7 @@ export interface InlineResponse40022 {
     success?: any;
     /**
      * 
-     * @type {any}
+     * @type {InlineResponse4003Error}
      * @memberof InlineResponse40022
      */
     error?: any;

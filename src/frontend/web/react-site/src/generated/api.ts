@@ -14,6 +14,7 @@
 export * from './apis/avoirmembreconseildisciplines-api';
 export * from './apis/classes-api';
 export * from './apis/conseil-disciplines-api';
+export * from './apis/contact-api';
 export * from './apis/convocation-api';
 export * from './apis/cours-api';
 export * from './apis/eleves-api';

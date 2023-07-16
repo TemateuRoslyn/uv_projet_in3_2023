@@ -16,13 +16,13 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse20063 } from '../models';
 import { InlineResponse20064 } from '../models';
 import { InlineResponse20065 } from '../models';
 import { InlineResponse20066 } from '../models';
+import { InlineResponse20067 } from '../models';
 import { InlineResponse2019 } from '../models';
-import { InlineResponse40024 } from '../models';
 import { InlineResponse40025 } from '../models';
+import { InlineResponse40026 } from '../models';
 import { InlineResponse401 } from '../models';
 import { InlineResponse40431 } from '../models';
 import { InlineResponse40432 } from '../models';
@@ -530,7 +530,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20066>> {
+        async deleteProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20067>> {
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).deleteProfesseur(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -544,7 +544,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async professeursIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
+        async professeursIndex(authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20064>> {
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).professeursIndex(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -557,7 +557,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async professeursIndex2(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20063>> {
+        async professeursIndex2(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20064>> {
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).professeursIndex2(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -582,7 +582,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20065>> {
+        async updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20066>> {
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).updateProfesseur(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, statut, courId, authorization, professeurId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -597,7 +597,7 @@ export const ProfesseursApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async viewProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20064>> {
+        async viewProfesseur(authorization: string, id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20065>> {
             const localVarAxiosArgs = await ProfesseursApiAxiosParamCreator(configuration).viewProfesseur(authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -641,7 +641,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20066> {
+        deleteProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20067> {
             return ProfesseursApiFp(configuration).deleteProfesseur(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -651,7 +651,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        professeursIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20063> {
+        professeursIndex(authorization: string, options?: any): AxiosPromise<InlineResponse20064> {
             return ProfesseursApiFp(configuration).professeursIndex(authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -660,7 +660,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        professeursIndex2(options?: any): AxiosPromise<InlineResponse20063> {
+        professeursIndex2(options?: any): AxiosPromise<InlineResponse20064> {
             return ProfesseursApiFp(configuration).professeursIndex2(options).then((request) => request(axios, basePath));
         },
         /**
@@ -681,7 +681,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): AxiosPromise<InlineResponse20065> {
+        updateProfesseur(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, statut: string, courId: number, authorization: string, professeurId: number, options?: any): AxiosPromise<InlineResponse20066> {
             return ProfesseursApiFp(configuration).updateProfesseur(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, statut, courId, authorization, professeurId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -692,7 +692,7 @@ export const ProfesseursApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        viewProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20064> {
+        viewProfesseur(authorization: string, id: number, options?: any): AxiosPromise<InlineResponse20065> {
             return ProfesseursApiFp(configuration).viewProfesseur(authorization, id, options).then((request) => request(axios, basePath));
         },
     };

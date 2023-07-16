@@ -5,7 +5,7 @@ const environment: ConfigurationParameters  = {
     username: '',
     password: '',
     accessToken: '',
-    basePath: 'http://localhost:8000',
+    basePath: 'https://phplaravel-1060262-3712842.cloudwaysapps.com',//http://localhost:8000',
     baseOptions: null,
 };
 

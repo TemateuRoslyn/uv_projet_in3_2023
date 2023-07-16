@@ -47,11 +47,11 @@ const MesEnfants = () => {
       <Back title={"Mes Enfants"} />
 
       <section className="h-100 w-auto justify-center justify-items-center bg-transparent">
-        <div className="container-sm m-2 grid grid-cols-1 justify-center justify-items-center gap-2 bg-transparent md:grid md:grid-cols-2  md:gap-0 xl:grid-cols-3">
+        <div className="container-sm m-2 grid grid-cols-1 justify-center justify-items-center gap-2 bg-transparent md:grid md:grid-cols-2  md:gap-0 xl:grid-cols-2">
           {parent?.eleves.map((val,key)=>(
-            <div key={key} className="m-5 flex flex-col rounded-lg bg-stone-200 p-5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 md:max-w-xl md:flex-row">
+            <div key={key} className="m-5 w-[500] flex flex-col rounded-lg bg-stone-200 p-5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 md:max-w-xl md:flex-row">
             <img
-              className="h-96 w-full rounded-t-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+              className="h-96 w-[500] rounded-t-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
               src={`${environment.basePath}/api/files/download?filekey=${val.photo}`}
               alt=""
             />

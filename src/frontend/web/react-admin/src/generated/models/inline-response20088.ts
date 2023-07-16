@@ -29,10 +29,4 @@ export interface InlineResponse20088 {
      * @memberof InlineResponse20088
      */
     message?: any;
-    /**
-     * 
-     * @type {Array&lt;SanctionPrevu&gt;}
-     * @memberof InlineResponse20088
-     */
-    content?: any;
 }

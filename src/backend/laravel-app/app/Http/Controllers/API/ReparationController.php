@@ -97,6 +97,8 @@ class ReparationController extends Controller
      * )
      */
 
+    
+
     public function indexValidate()
     {
         $reparations = Reparation::has('faute')->with('faute.eleve.classe')->where('status', 'valide')->orWhere('status', 'rejete')->get();
@@ -107,6 +109,78 @@ class ReparationController extends Controller
             'content' => $reparations
         ]);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/api/reparations/findAll/eleve/{eleveId}",
+     *     summary="Get mistake information for a student",
+     *     description="Get information about all specific mistake to a student",
+     *     operationId="viewReparationEleve",
+     *     tags={"Reparations"},
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             default="Bearer {your_token}"
+     *         ),
+     *         description="JWT token"
+     *     ),
+     *      @OA\Parameter(
+     *         name="eleveId",
+     *         in="path",
+     *         description="ID of Eleve to get information for",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Error - Not found",
+     *         @OA\JsonContent(
+     *               @OA\Property(property="message", type="string", example="eleve non trouvé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="false"),
+     *
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="fautes de l\'eleve trouvé(e)"),
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="content", type="object", ref="#/components/schemas/Faute")
+     *         )
+     *     )
+     * )
+     */
+    public function viewReparationEleve($eleveId)
+    {
+        $eleve = Reparation::where('fauteId', '=', $eleveId)->get();
+
+        if ($eleve) {
+            return response()->json([
+                'message' => 'Reparation de l\'eleve trouvé(e)',
+                'success' => true,
+                'content' => $eleve
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Reparation non trouvée',
+                'success' => false,
+            ], 404);
+        }
+    }
+
 
     /**
      * @OA\Get(

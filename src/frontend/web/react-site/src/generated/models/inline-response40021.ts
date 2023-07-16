@@ -19,19 +19,19 @@
 export interface InlineResponse40021 {
     /**
      * 
-     * @type {string}
-     * @memberof InlineResponse40021
-     */
-    message?: any;
-    /**
-     * 
      * @type {boolean}
      * @memberof InlineResponse40021
      */
     success?: any;
     /**
      * 
-     * @type {InlineResponse4003Error}
+     * @type {string}
+     * @memberof InlineResponse40021
+     */
+    message?: any;
+    /**
+     * 
+     * @type {any}
      * @memberof InlineResponse40021
      */
     error?: any;

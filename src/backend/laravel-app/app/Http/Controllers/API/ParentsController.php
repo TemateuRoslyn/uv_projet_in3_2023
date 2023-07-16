@@ -184,7 +184,6 @@ class ParentsController extends Controller
      *                 @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
      *                 @OA\Property(property="firstName", type="string", example="John"),
      *                 @OA\Property(property="lastName", type="string", example="Smith"),
-     *                 @OA\Property(property="username", type="string", example="dvlmonster"),
      *                 @OA\Property(property="dateDeNaissance", type="string", format="date", example="1990-01-01"),
      *                 @OA\Property(property="lieuDeNaissance", type="string", example="Paris"),
      *                 @OA\Property(property="photo", type="string", format="binary", nullable=true),
@@ -203,7 +202,6 @@ class ParentsController extends Controller
      *             @OA\Property(property="success", type="boolean", example=false),
      *             @OA\Property(property="error", type="object", example={
      *                 "email": { "The email field is required."},
-     *                 "username": {"The username field is required."},
      *                 "firstName": {"The first name field is required."},
      *                 "lastName": {"The last name field is required."},
      *                 "dateDeNaissance": {"The date de naissance field is required."},
@@ -252,7 +250,7 @@ class ParentsController extends Controller
 
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
-            'username' => 'required|unique:users',
+           
             'firstName' => 'required',
             'lastName' => 'required',
             'dateDeNaissance' => 'required|date',
@@ -279,7 +277,7 @@ class ParentsController extends Controller
 
         $user = User::create([
             'email' => $request->input('email'),
-            'username' => $request->input('username'),
+            'username' => $request->input('email'),
             'password' => bcrypt($password),
         ]);
 
@@ -321,10 +319,12 @@ class ParentsController extends Controller
         }
         //var_dump($eleveIds);
         //dd(gettype($eleveIds));
-
+        $names="";
         //Atache les eleves du parent
         foreach ($eleveIds as $eleveId) {
             $parent->eleves()->attach($eleveId);
+            $eleve = Eleve::find($eleveId);
+            $names = $names . " ," .  $eleve->firstName;
         }
 
         // assigner le role parent
@@ -344,10 +344,10 @@ class ParentsController extends Controller
         //envoie du mail a l'utilisateur
         $details = array();
 
-        $details['greeting'] = "Hi " . $parent->firstName;
-        $details['body'] = "Veuillez Modifier votre mot de passe pour assurer la confidentialite de vos donnees et de vos actions au sein de la plateforme .
-                            \n Mot de passe actuel: $password
-                            \n Login actuel: $user->username
+        $details['greeting'] = "Salut " . $parent->firstName;
+        $details['body'] = "Parent de(s) eleve(s)" . $names .  " Veuillez Modifier votre mot de passe pour assurer la confidentialite de vos donnees et de vos actions au sein de la plateforme \n.
+                            \n Mot de passe actuel: $password 
+                            \n Login actuel: $user->username 
                             Pour cela, veuillez cliquer sur le ce lien pour proceder la la mise a jour de votre mot de passe .";
         $details['actiontext'] = "Modifier mon mot de passe";
         $details['actionurl'] = "https://react-admin-ashy-zeta.vercel.app/";
@@ -398,7 +398,6 @@ class ParentsController extends Controller
      *                 @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
      *                 @OA\Property(property="firstName", type="string", example="John"),
      *                 @OA\Property(property="lastName", type="string", example="Smith"),
-     *                 @OA\Property(property="username", type="string", example="dvlmonster"),
      *                 @OA\Property(property="dateDeNaissance", type="string", format="date", example="1990-01-01"),
      *                 @OA\Property(property="lieuDeNaissance", type="string", example="Paris"),
      *                 @OA\Property(property="photo", type="string", format="binary", nullable=true),
@@ -417,7 +416,6 @@ class ParentsController extends Controller
      *             @OA\Property(property="message", type="string", example="The given data was invalid"),
      *             @OA\Property(property="error", type="object", example={
      *                 "email": { "The email field is required."},
-     *                 "username": {"The username field is required."},
      *                 "firstName": {"The first name field is required."},
      *                 "lastName": {"The last name field is required."},
      *                 "dateDeNaissance": {"The date de naissance field is required."},
@@ -464,7 +462,6 @@ class ParentsController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email|unique:users,email,' . $user->id,
-                'username' => 'required|exists:users',
                 'firstName' => 'required',
                 'lastName' => 'required',
                 'dateDeNaissance' => 'required|date',
@@ -493,7 +490,7 @@ class ParentsController extends Controller
 
         // Mise à jour des champs de l'objet User
         $user->email = $request->input('email');
-        $user->username = $request->input('username');
+        $user->username = $request->input('email');
 
         // Suppression de l'ancienne photo si une nouvelle a été sélectionnée
         if ($request->hasFile('photo')) {
