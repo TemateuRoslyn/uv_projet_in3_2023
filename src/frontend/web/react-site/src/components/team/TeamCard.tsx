@@ -16,7 +16,7 @@ const TeamCard = () => {
 
    // setIsLoading(true)
 
-    professeursApi.professeursIndex('Bearer ' + apiParams)
+    professeursApi.professeursIndex2()
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) { setEnseignants(response.data.content) }
@@ -36,12 +36,12 @@ const TeamCard = () => {
         <div className='items shadow'>
         <div className='img'>
           <img src={`${environment.basePath}/api/files/download?filekey=${val.photo}`} alt='' />
-          <div className='overlay'>
+          {/* <div className='overlay'>
             <i className='fab fa-facebook-f icon'></i>
             <i className='fab fa-twitter icon'></i>
             <i className='fab fa-instagram icon'></i>
             <i className='fab fa-tiktok icon'></i>
-          </div>
+          </div> */}
         </div>
         <div className='details'>
           <h2>{val.firstName}</h2>

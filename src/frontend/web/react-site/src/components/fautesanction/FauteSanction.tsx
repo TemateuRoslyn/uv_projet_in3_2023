@@ -7,12 +7,16 @@ import { useDispatch, useSelector } from "react-redux"
 import { ReduxProps } from "../../redux/configureStore"
 import { TOKEN_EXPIRED } from "../../constants/RESPONSES_CODE"
 import { Faute } from "../../generated/models"
+import FautesSection from "../pageEleve/components/FautesSection"
+import { SanctionprevusApi } from "../../generated/api"
+import { SanctionPrevu } from "../../generated/models/sanction-prevu"
 
 const FauteSanction = () => {
   const state = useSelector((state: ReduxProps) => state);
   const dispatch = useDispatch();
   const [showIndicator, setShowIndicator] = useState<boolean>(false);
   const [fautes, setFautes] = useState<Faute[]>([]);
+  const [sanctions, setSanctions] = useState<SanctionPrevu[]>([]);
     
 
 
@@ -46,7 +50,30 @@ const FauteSanction = () => {
     });
     
     console.log(fautes);
+
+    const apiSanction = new SanctionprevusApi({
+      ...state.environment,
+      accessToken: token,
+    });
+console.log("here");
+apiSanction
+      .viewSanctionPrevusEleve("Bearer " + token, authUser.model.id)
+      .then((response) => {
+        if (response && response.data) {
+          if (response.data.success === true) {
+            console.log(response.data);
+            setSanctions(response.data.content);
+            console.log(response.data);
+          }
+        }
+      }).catch((error) =>{
+
+        console.log(error)
+      });
+
     },[])
+
+    
 
   }else(authUser.roles[0].description == "PARENT")
   {
@@ -56,18 +83,33 @@ const FauteSanction = () => {
     <>
       <Back title='Fautes et sanctions' />
       <section className='contacts padding'>
-        <div className='container shadow flexSB'>
-          {fautes.map((item)=>(
-            <div className="contact flex flex-col justify-start p-6">
-              <h5 className="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
-              <b>Sujet :</b> {item.libelle}
-              </h5>
-              <p className="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50" >
-              <b>Gravité de la faute :</b> {item.gravite}
-              </p>
-            </div>
-          ))}
-        </div>
+        <FautesSection fautes={fautes}/>
+       
+
+        <div className="mt-10 mb-6">
+        <h3 className="text-3xl font-semibold mb-2">Sanctions</h3>
+        {sanctions.map(sanction => (
+
+          
+          <div className="bg-white shadow-lg rounded-lg p-4 mb-4">
+          <div className="flex items-center justify-between mb-2">
+                 <p className="text-lg font-semibold">Sanction #{sanction.id}</p>
+        
+               </div>
+            <p>Created At: {sanction.created_at}</p>
+        
+            <h4 className="mt-4 font-medium">Élève</h4>
+            <p>Nom: {sanction.eleve.firstName} {sanction.eleve.lastName}</p>
+            <p>Date de Naissance: {sanction.eleve.dateDeNaissance}</p>
+            <p>Lieu de Naissance: {sanction.eleve.lieuDeNaissance}</p>
+        
+            <h4 className="mt-4 font-medium">Faute</h4>
+            <p>Libellé de la Faute: {sanction.faute.libelle}</p>
+            <p>Règle: {sanction.faute.regle.libelle}</p>
+          </div>
+   
+        ))}
+      </div>
       </section>
     </>
   )
