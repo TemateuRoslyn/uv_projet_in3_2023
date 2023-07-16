@@ -67,6 +67,41 @@ class ProfesseurController extends Controller
 
     /**
      * @OA\Get(
+     *     path="/api/prof/findAll",
+     *     summary="Get all professeurs",
+     *     description="Retrieve a list of all professeurs",
+     *     operationId="professeursIndex2",
+     *     tags={"professeurs"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Liste des professeurs"),
+     *             @OA\Property(property="content", type="array", @OA\Items(ref="#/components/schemas/Professeur"))
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Error - Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     )
+     * )
+     */
+    public function index2()
+    {
+        $professeurs = Professeur::with('user', 'cour.classes')->get();
+
+        return response()->json([
+            'message' => 'Liste des professeurs',
+            'success' => true,
+            'content' => $professeurs
+        ]);
+    }
+    /**
+     * @OA\Get(
      *     path="/api/professeurs/findOne/{id}",
      *     summary="Get professeur information",
      *     description="Get information about a specific professeur",
@@ -233,7 +268,7 @@ class ProfesseurController extends Controller
             'lastName' => 'required',
             'dateDeNaissance' => 'required|date',
             'lieuDeNaissance' => 'required',
-            'photo' => 'nullable|image',
+            // 'photo' => 'nullable|image',
             'sexe' => 'required',
             'telephone' => 'required',
             'statut' => 'required',
@@ -409,7 +444,7 @@ class ProfesseurController extends Controller
                 'lastName' => 'required',
                 'dateDeNaissance' => 'required|date',
                 'lieuDeNaissance' => 'required',
-                'photo' => 'nullable|image',
+                // 'photo' => 'nullable|image',
                 'sexe' => 'required',
                 'telephone' => 'required',
                 'statut' => 'required',

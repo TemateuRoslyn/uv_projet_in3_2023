@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('avoir_membre_conseil_disciplines', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idMembreConseil');
-            $table->foreign('idMembreConseil')->references('id')->on('membre_conseils');
+            $table->foreign('idMembreConseil')->references('id')->on('membre_conseils')->onDelete('cascade');
             $table->unsignedBigInteger('idConseilDiscipline');
-            $table->foreign('idConseilDiscipline')->references('id')->on('conseil_disciplines');
+            $table->foreign('idConseilDiscipline')->references('id')->on('conseil_disciplines')->onDelete('cascade');
             $table->timestamps();
         });
     }

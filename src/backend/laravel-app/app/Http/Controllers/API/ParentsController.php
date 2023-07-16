@@ -138,6 +138,10 @@ class ParentsController extends Controller
         // $parent = Parents::with('user')->find($parentId);
 
         if ($parent) {
+
+            $parent->eleves->each(function ($eleve) {
+                $eleve->nombresFautes = $eleve->fautes()->count();
+            });
             $parentData = $parent->toArray();
             $parentData['email'] = $parent->user->email;
 
@@ -176,10 +180,11 @@ class ParentsController extends Controller
      *         @OA\MediaType(
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
-     *                 required={"email", "firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "profession", "eleveIds"},
+     *                 required={"email", "firstName", "lastName", "username", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "profession", "eleveIds"},
      *                 @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
      *                 @OA\Property(property="firstName", type="string", example="John"),
      *                 @OA\Property(property="lastName", type="string", example="Smith"),
+     *                 @OA\Property(property="username", type="string", example="dvlmonster"),
      *                 @OA\Property(property="dateDeNaissance", type="string", format="date", example="1990-01-01"),
      *                 @OA\Property(property="lieuDeNaissance", type="string", example="Paris"),
      *                 @OA\Property(property="photo", type="string", format="binary", nullable=true),
@@ -198,6 +203,7 @@ class ParentsController extends Controller
      *             @OA\Property(property="success", type="boolean", example=false),
      *             @OA\Property(property="error", type="object", example={
      *                 "email": { "The email field is required."},
+     *                 "username": {"The username field is required."},
      *                 "firstName": {"The first name field is required."},
      *                 "lastName": {"The last name field is required."},
      *                 "dateDeNaissance": {"The date de naissance field is required."},
@@ -224,6 +230,9 @@ class ParentsController extends Controller
      *                 "email": {
      *                     "The email must be a valid email address."
      *                 },
+     *                 "username": {
+     *                     "The username field is required."
+     *                 }
      *             })
      *         )
      *     ),
@@ -243,11 +252,12 @@ class ParentsController extends Controller
 
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
+            'username' => 'required|unique:users',
             'firstName' => 'required',
             'lastName' => 'required',
             'dateDeNaissance' => 'required|date',
             'lieuDeNaissance' => 'required',
-            'photo' => 'nullable|image',
+            // 'photo' => 'nullable|image',
             'sexe' => 'required',
             'telephone' => 'required',
             'profession' => 'required',
@@ -269,7 +279,7 @@ class ParentsController extends Controller
 
         $user = User::create([
             'email' => $request->input('email'),
-            'username' => $request->input('email'),
+            'username' => $request->input('username'),
             'password' => bcrypt($password),
         ]);
 
@@ -354,7 +364,7 @@ class ParentsController extends Controller
     }
 
     /**
-     * @OA\post(
+     * @OA\put(
      *     path="/api/parents/update/{parentId}",
      *     summary="Update a parent's information",
      *     description="Update a parent's information",
@@ -384,10 +394,11 @@ class ParentsController extends Controller
      *         @OA\MediaType(
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
-     *                 required={"email", "firstName", "lastName", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "profession", "eleveIds"},
+     *                 required={"email", "firstName", "lastName", "username", "dateDeNaissance", "lieuDeNaissance", "sexe", "telephone", "profession", "eleveIds"},
      *                 @OA\Property(property="email", type="string", format="email", example="maestros.roslyn@gmail.com"),
      *                 @OA\Property(property="firstName", type="string", example="John"),
      *                 @OA\Property(property="lastName", type="string", example="Smith"),
+     *                 @OA\Property(property="username", type="string", example="dvlmonster"),
      *                 @OA\Property(property="dateDeNaissance", type="string", format="date", example="1990-01-01"),
      *                 @OA\Property(property="lieuDeNaissance", type="string", example="Paris"),
      *                 @OA\Property(property="photo", type="string", format="binary", nullable=true),
@@ -406,6 +417,7 @@ class ParentsController extends Controller
      *             @OA\Property(property="message", type="string", example="The given data was invalid"),
      *             @OA\Property(property="error", type="object", example={
      *                 "email": { "The email field is required."},
+     *                 "username": {"The username field is required."},
      *                 "firstName": {"The first name field is required."},
      *                 "lastName": {"The last name field is required."},
      *                 "dateDeNaissance": {"The date de naissance field is required."},
@@ -452,11 +464,12 @@ class ParentsController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email|unique:users,email,' . $user->id,
+                'username' => 'required|exists:users',
                 'firstName' => 'required',
                 'lastName' => 'required',
                 'dateDeNaissance' => 'required|date',
                 'lieuDeNaissance' => 'required',
-                'photo' => 'nullable|image',
+                // 'photo' => 'nullable|image',
                 'sexe' => 'required',
                 'telephone' => 'required',
                 'profession' => 'required',
@@ -480,7 +493,7 @@ class ParentsController extends Controller
 
         // Mise à jour des champs de l'objet User
         $user->email = $request->input('email');
-        $user->username = $request->input('email');
+        $user->username = $request->input('username');
 
         // Suppression de l'ancienne photo si une nouvelle a été sélectionnée
         if ($request->hasFile('photo')) {

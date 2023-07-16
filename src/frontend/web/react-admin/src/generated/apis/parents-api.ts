@@ -39,6 +39,7 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} email 
          * @param {string} firstName 
          * @param {string} lastName 
+         * @param {string} username 
          * @param {string} dateDeNaissance 
          * @param {string} lieuDeNaissance 
          * @param {string} photo 
@@ -50,7 +51,7 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createParent: async (email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options: any = {}): Promise<RequestArgs> => {
+        createParent: async (email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             if (email === null || email === undefined) {
                 throw new RequiredError('email','Required parameter email was null or undefined when calling createParent.');
@@ -62,6 +63,10 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'lastName' is not null or undefined
             if (lastName === null || lastName === undefined) {
                 throw new RequiredError('lastName','Required parameter lastName was null or undefined when calling createParent.');
+            }
+            // verify required parameter 'username' is not null or undefined
+            if (username === null || username === undefined) {
+                throw new RequiredError('username','Required parameter username was null or undefined when calling createParent.');
             }
             // verify required parameter 'dateDeNaissance' is not null or undefined
             if (dateDeNaissance === null || dateDeNaissance === undefined) {
@@ -122,6 +127,10 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
 
             if (lastName !== undefined) { 
                 localVarFormParams.append('lastName', lastName as any);
+            }
+
+            if (username !== undefined) { 
+                localVarFormParams.append('username', username as any);
             }
 
             if (dateDeNaissance !== undefined) { 
@@ -269,6 +278,7 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} email 
          * @param {string} firstName 
          * @param {string} lastName 
+         * @param {string} username 
          * @param {string} dateDeNaissance 
          * @param {string} lieuDeNaissance 
          * @param {string} photo 
@@ -281,7 +291,7 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateParent: async (email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options: any = {}): Promise<RequestArgs> => {
+        updateParent: async (email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             if (email === null || email === undefined) {
                 throw new RequiredError('email','Required parameter email was null or undefined when calling updateParent.');
@@ -293,6 +303,10 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'lastName' is not null or undefined
             if (lastName === null || lastName === undefined) {
                 throw new RequiredError('lastName','Required parameter lastName was null or undefined when calling updateParent.');
+            }
+            // verify required parameter 'username' is not null or undefined
+            if (username === null || username === undefined) {
+                throw new RequiredError('username','Required parameter username was null or undefined when calling updateParent.');
             }
             // verify required parameter 'dateDeNaissance' is not null or undefined
             if (dateDeNaissance === null || dateDeNaissance === undefined) {
@@ -338,7 +352,7 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
             if (configuration) {
                 baseOptions = configuration.baseOptions;
             }
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new FormData();
@@ -358,6 +372,10 @@ export const ParentsApiAxiosParamCreator = function (configuration?: Configurati
 
             if (lastName !== undefined) { 
                 localVarFormParams.append('lastName', lastName as any);
+            }
+
+            if (username !== undefined) { 
+                localVarFormParams.append('username', username as any);
             }
 
             if (dateDeNaissance !== undefined) { 
@@ -471,6 +489,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {string} email 
          * @param {string} firstName 
          * @param {string} lastName 
+         * @param {string} username 
          * @param {string} dateDeNaissance 
          * @param {string} lieuDeNaissance 
          * @param {string} photo 
@@ -482,8 +501,8 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createParent(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20052>> {
-            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).createParent(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, options);
+        async createParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20052>> {
+            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).createParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -524,6 +543,7 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {string} email 
          * @param {string} firstName 
          * @param {string} lastName 
+         * @param {string} username 
          * @param {string} dateDeNaissance 
          * @param {string} lieuDeNaissance 
          * @param {string} photo 
@@ -536,8 +556,8 @@ export const ParentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateParent(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20053>> {
-            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).updateParent(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, parentId, options);
+        async updateParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20053>> {
+            const localVarAxiosArgs = await ParentsApiAxiosParamCreator(configuration).updateParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, parentId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -573,6 +593,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {string} email 
          * @param {string} firstName 
          * @param {string} lastName 
+         * @param {string} username 
          * @param {string} dateDeNaissance 
          * @param {string} lieuDeNaissance 
          * @param {string} photo 
@@ -584,8 +605,8 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createParent(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any): AxiosPromise<InlineResponse20052> {
-            return ParentsApiFp(configuration).createParent(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, options).then((request) => request(axios, basePath));
+        createParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any): AxiosPromise<InlineResponse20052> {
+            return ParentsApiFp(configuration).createParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete an parent resource
@@ -614,6 +635,7 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {string} email 
          * @param {string} firstName 
          * @param {string} lastName 
+         * @param {string} username 
          * @param {string} dateDeNaissance 
          * @param {string} lieuDeNaissance 
          * @param {string} photo 
@@ -626,8 +648,8 @@ export const ParentsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateParent(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any): AxiosPromise<InlineResponse20053> {
-            return ParentsApiFp(configuration).updateParent(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, parentId, options).then((request) => request(axios, basePath));
+        updateParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any): AxiosPromise<InlineResponse20053> {
+            return ParentsApiFp(configuration).updateParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, parentId, options).then((request) => request(axios, basePath));
         },
         /**
          * Get information about a specific parent
@@ -656,6 +678,7 @@ export class ParentsApi extends BaseAPI {
      * @param {string} email 
      * @param {string} firstName 
      * @param {string} lastName 
+     * @param {string} username 
      * @param {string} dateDeNaissance 
      * @param {string} lieuDeNaissance 
      * @param {string} photo 
@@ -668,8 +691,8 @@ export class ParentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ParentsApi
      */
-    public createParent(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any) {
-        return ParentsApiFp(this.configuration).createParent(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, options).then((request) => request(this.axios, this.basePath));
+    public createParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, options?: any) {
+        return ParentsApiFp(this.configuration).createParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Delete an parent resource
@@ -700,6 +723,7 @@ export class ParentsApi extends BaseAPI {
      * @param {string} email 
      * @param {string} firstName 
      * @param {string} lastName 
+     * @param {string} username 
      * @param {string} dateDeNaissance 
      * @param {string} lieuDeNaissance 
      * @param {string} photo 
@@ -713,8 +737,8 @@ export class ParentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ParentsApi
      */
-    public updateParent(email: string, firstName: string, lastName: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any) {
-        return ParentsApiFp(this.configuration).updateParent(email, firstName, lastName, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, parentId, options).then((request) => request(this.axios, this.basePath));
+    public updateParent(email: string, firstName: string, lastName: string, username: string, dateDeNaissance: string, lieuDeNaissance: string, photo: string, sexe: string, telephone: string, profession: string, eleveIds: Array<number>, authorization: string, parentId: number, options?: any) {
+        return ParentsApiFp(this.configuration).updateParent(email, firstName, lastName, username, dateDeNaissance, lieuDeNaissance, photo, sexe, telephone, profession, eleveIds, authorization, parentId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get information about a specific parent

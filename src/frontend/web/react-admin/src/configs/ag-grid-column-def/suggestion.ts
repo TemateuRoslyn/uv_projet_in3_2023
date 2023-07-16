@@ -17,7 +17,7 @@ export const SUGGESTION_COLUMNS_DEFS: ColDef[] = [
     filter: 'agTextColumnFilter',
     checkboxSelection: false,
     showDisabledCheckboxes: true,
-    width: 300,
+    width: 700,
   },
  
 ];

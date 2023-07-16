@@ -15,16 +15,16 @@ const Enseignants = () => {
           <Link to="/proviseur">
             <div className='items shadow'>
               <div className='img'>
-                <img src="./images/team/t1.webp" alt='' />
-                <div className='overlay'>
+                <img src="./images/team/user.jpeg" alt='' />
+               {/*  <div className='overlay'>
                   <i className='fab fa-facebook-f icon'></i>
                   <i className='fab fa-twitter icon'></i>
                   <i className='fab fa-instagram icon'></i>
                   <i className='fab fa-tiktok icon'></i>
-                </div>
+                </div> */}
               </div>
               <div className='details'>
-                <h2>Ph.D Adrian Molises</h2>
+                <h2>Ph.D Donald TCHOUMI</h2>
                 <p>PROVISEUR</p>
 
               </div>

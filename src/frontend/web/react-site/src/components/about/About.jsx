@@ -8,13 +8,13 @@ const About = () => {
   return (
     <>
       <Back title='À propos de nous' />
-      <section className='aboutH'>
+      <section className='aboutH p-20'>
         <div className='container flexSB'>
           <div className='left row'>
             {/* <img src='./images/about.webp' alt='' /> */}
             <img src='./images/logo.png' alt='' />
           </div>
-          <div className='right row'>
+          <div className='right row text-center justify-center align-items-center justify-content-center'>
             {/* <Heading subtitle='LEARN ANYTHING' title='Benefits About Online Learning Expertise' /> */}
             <p> L'application school discipline est née de la conviction que la technologie peut transformer l'expérience 
               d'apprentissage en milieu scolaire.

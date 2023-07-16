@@ -118,7 +118,7 @@ const Parents = () => {
               />
             </div>
 
-          {/* <div className="ag-theme-alpine" style={{height: 400}}>
+          {/* <div className="ag-theme-alpine" style={{ height: 500 }}>
             <AgGridReact 
               ref={gridRef}
               rowData={rowData} 

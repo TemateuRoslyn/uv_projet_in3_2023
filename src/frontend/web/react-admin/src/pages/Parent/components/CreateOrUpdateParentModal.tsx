@@ -38,22 +38,23 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [formValues, setFormValues] = useState({
-    firstName : props.item ? props.item.firstName : '',
+    firstName: props.item ? props.item.firstName : '',
     lastname: props.item ? props.item.lastName : '',
     telephone: props.item ? props.item.telephone : '',
     email: props.item ? props.item.user?.email : '',
     dateDeNaissance: props.item ? props.item.dateDeNaissance : '',
     lieuDeNaissance: props.item ? props.item.lieuDeNaissance : '',
     photo: props.item ? props.item.photo : null,
-    sexe: props.item ? props.item.sexe : '',
+    sexe: props.item ? props.item.sexe : 'Masculin',
     profession: props.item ? props.item.profession : '',
     //username: props.item ? props.item.username?.id : '',
   });
-  const [eleveIds,setEleveIds] = useState<number[]>( props.item? props.item.eleves.map((eleveItem: Eleve) => eleveItem.id):[],)
+  const [eleveIds, setEleveIds] = useState<number[]>(
+    props.item ? props.item.eleves.map((eleveItem: Eleve) => eleveItem.id) : []
+  );
 
   const [matchList, setMatchList] = useState<string[]>([]);
 
- 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -112,11 +113,11 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
   const addId = (id: number): void => {
     setEleveIds((prevIds) => [...prevIds, id]);
   };
-  
+
   const removeId = (id: number): void => {
     setEleveIds((prevIds) => prevIds.filter((prevId) => prevId === id));
   };
-  
+
   const extractIdFromString = (str: string): number | null => {
     const matches = str.match(/:(\d+)$/);
     if (matches && matches[1]) {
@@ -131,26 +132,28 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
   const handleOptionSelect = (option: string[]) => {
     if (option.length < eleveIds.length) {
       // Removing IDs
-      console.log(option,eleveIds)
-      const selectedIds :(number | null)[]= option.map((item) => extractIdFromString(item));
-    
-      setEleveIds(selectedIds)
-      console.log("removing ")
+      console.log(option, eleveIds);
+      const selectedIds: (number | null)[] = option.map((item) =>
+        extractIdFromString(item)
+      );
+
+      setEleveIds(selectedIds);
+      console.log('removing ');
     } else {
       // Adding IDs
-      console.log(option,eleveIds)
-      console.log("adding ")
+      console.log(option, eleveIds);
+      console.log('adding ');
       option.forEach((item) => {
         const id = extractIdFromString(item);
         if (id !== null && !eleveIds.includes(id)) {
           addId(id);
-          console.log("adding " + id)
+          console.log('adding ' + id);
         }
       });
     }
     console.log(eleveIds);
   };
-  
+
   const handleCreate = (_event: React.FormEvent) => {
     _event.preventDefault(); // stopper la soumissoin par defaut du formulaire...
 
@@ -189,7 +192,8 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
         formValues.telephone,
         formValues.profession,
         eleveIds,
-         'Bearer ' + token)
+        'Bearer ' + token
+      )
       .then((response) => {
         if (response && response.data) {
           if (response.data.success === true) {
@@ -278,36 +282,35 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
   return (
     <div
       id="authentication-modal"
-      className="authentication-modal pl-800 pt-20"
+      className="authentication-modal fixed inset-0 z-50 flex items-center justify-center overflow-auto"
       onClick={props.onClose}
     >
       <div
-        className="top-modal-animation relative mx-auto items-center  justify-center px-1"
+        className="top-modal-animation  relative mx-auto w-full max-w-3xl items-center justify-center px-4 sm:top-0 sm:max-h-96 sm:px-6 md:top-[50vh] lg:px-8"
         onClick={(event) => event.stopPropagation()}
       >
-        {/* <!-- Contact Form --> */}
+        {/* Contact Form */}
         <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-          <button onClick={props.onClose} className="close-button">
-            <svg
-              aria-hidden="true"
-              className="close-icon"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <span className="sr-only">Close modal</span>
-          </button>
           <div className="modal-body">
+            <button onClick={props.onClose} className="flex">
+              <svg
+                aria-hidden="true"
+                className="close-icon"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span className="sr-only">Close modal</span>
+            </button>
             <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
               <h3 className=" font-medium text-black dark:text-white">
                 {props.title}
-             
               </h3>
             </div>
             <form
@@ -366,7 +369,6 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
 
                 {/* row 2 class, serie, photo*/}
                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
-
                   <div className="w-full xl:w-5/6">
                     <label className="mb-3 block text-black dark:text-white">
                       Ajouter un photo de profile
@@ -398,19 +400,20 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
                     />
                   </div>
                 </div>
-                <div className='form-group'>
-                <CustomMultiSelectInput 
-                  inputLabel={'Eleves'}
-                  inputPlaceholder={'Selection les enfants du parent'}
-                  required={true}
-                  wrapperStyle="w-full"
-                  labelStyle="mb-2.5 block text-black dark:text-white"
-                  inputStyle="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                  maxHeightList={100}
-                  selectOptionEvent={handleOptionSelect}
-                  typingInputEvent={handleTypingInput} 
-                  matchList={matchList}                />
-              </div>
+                <div className="form-group">
+                  <CustomMultiSelectInput
+                    inputLabel={'Eleves'}
+                    inputPlaceholder={'Selection les enfants du parent'}
+                    required={true}
+                    wrapperStyle="w-full"
+                    labelStyle="mb-2.5 block text-black dark:text-white"
+                    inputStyle="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    maxHeightList={100}
+                    selectOptionEvent={handleOptionSelect}
+                    typingInputEvent={handleTypingInput}
+                    matchList={matchList}
+                  />
+                </div>
 
                 {/* row 3  sexe, status, email*/}
                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
@@ -446,7 +449,6 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                   </div>
-                  
                 </div>
 
                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">

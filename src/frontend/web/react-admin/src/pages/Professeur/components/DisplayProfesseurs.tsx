@@ -127,7 +127,7 @@ const DisplayProfesseurs: React.FC<DisplayProfesseursProps> = (props) => {
             const rowData =gridRef.current.api.getSelectedRows();
             if (rowData && rowData.length === 1) {
                 setProfesseur(rowData[0])
-                setShowDisplayOneModal(true);
+                setShowCreateOrUpdateModal(true);
                 setModalMode(MODAL_MODE.update)
                 setModalTitle("Modifier une professeur")
             } else if (rowData && rowData.length > 1) {
@@ -275,7 +275,7 @@ const DisplayProfesseurs: React.FC<DisplayProfesseursProps> = (props) => {
         <div className="col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4 relative">
             <div style={{ position: 'relative' }}>
                 {showIndicator && <AgGridIndicator />}
-                <div className="ag-theme-alpine" style={{height: 400}}>
+                <div className="ag-theme-alpine" style={{ height: 500 }}>
                     <AgGridReact 
                         ref={gridRef}
                         rowData={professeurs} 

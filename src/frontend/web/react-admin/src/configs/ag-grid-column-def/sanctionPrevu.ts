@@ -28,7 +28,7 @@ export const SANCTIONPREVU_COLUMNS_DEFS: ColDef[] = [
   },
   {
     headerName: 'Durée de validité',
-    field: 'dateCd',
+    field: 'dureeValidite',
     filter: 'agDateColumnFilter',
     checkboxSelection: false,
     showDisabledCheckboxes: true,

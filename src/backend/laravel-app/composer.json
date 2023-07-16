@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "nesbot/carbon": "^2.68",
+        "pusher/pusher-php-server": "^7.2",
         "twilio/sdk": "^7.5",
         "tymon/jwt-auth": "^2.0"
     },

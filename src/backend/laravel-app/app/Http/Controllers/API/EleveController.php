@@ -79,17 +79,6 @@ class EleveController extends Controller
      *     summary="Get the most disciplines eleves",
      *     description="Retrieve a list of the most disciplines eleves",
      *     operationId="mostDisciplinesEleves",
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string",
-     *             example="Bearer {your_token}"
-     *         ),
-     *         description="JWT token"
-     *     ),
-     *     security={{"bearerAuth":{}}},
      *     tags={"eleves"},
      *     @OA\Response(
      *         response=200,
@@ -114,7 +103,7 @@ class EleveController extends Controller
     {
         $eleves = Eleve::with(['fautes' => function ($query) {
             $query->orderBy('created_at');
-        }])
+        }])->with('classe')
             ->withCount('fautes')
             ->orderBy('fautes_count')
             ->take(3)
@@ -314,7 +303,7 @@ class EleveController extends Controller
             'dateDeNaissance' => 'required|date',
             'lieuDeNaissance' => 'required',
             'sexe' => 'required',
-            'photo' => 'nullable|image',
+            // 'photo' => 'nullable|image',
             'telephone' => 'required',
             'solvable' => 'required',
             'redoublant' => 'required',
@@ -517,7 +506,7 @@ class EleveController extends Controller
                 'dateDeNaissance' => 'required|date',
                 'lieuDeNaissance' => 'required',
                 'sexe' => 'required',
-                'photo' => 'nullable|image',
+               // 'photo' => 'nullable|image',
                 'telephone' => 'required',
                 'solvable' => 'required',
                 'redoublant' => 'required',

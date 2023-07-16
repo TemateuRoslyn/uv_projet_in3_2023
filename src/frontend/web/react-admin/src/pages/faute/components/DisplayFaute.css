@@ -12,7 +12,7 @@
     padding: 4px;
     overflow-x: hidden;
     overflow-y: auto;
-    height: calc(100% - 1rem);
+    height: calc(100%);
     max-height: 100vh;
     display: flex;
     justify-content: center;

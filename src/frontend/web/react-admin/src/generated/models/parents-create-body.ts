@@ -40,6 +40,12 @@ export interface ParentsCreateBody {
      * @type {string}
      * @memberof ParentsCreateBody
      */
+    username: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof ParentsCreateBody
+     */
     dateDeNaissance: any;
     /**
      * 

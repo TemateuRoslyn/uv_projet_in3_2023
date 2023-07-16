@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -57,39 +57,38 @@ const Header: React.FC<HeaderProps> = (props) => {
     if(authUser.roles[0].description=="PARENT"){
       return (
         <>
-          <Head />
+          <Head isLoggedIn={true} />
           <header>
             <nav className='flexSB'>
               <ul className={click ? "mobile-nav" : "flexSB "} onClick={() => setClick(false)}>
-              <li>
-                <Link to='/'>Acceuil</Link>
-              </li>
-              <li>
-                <Link to='/courses'>Cours</Link>
-              </li>
-              <li>
-                <Link to='/about'>A propos</Link>
-              </li>
-              <li>
-                <Link to='/enseignant'>Enseignants</Link>
-              </li>
-              <li>
-                <Link to='/proviseur'>Proviseur</Link>
-              </li>
-              <li>
-                <Link to='/contact'>Contacts</Link>
-              </li>
-            
-              <li>
-                <Link to='/notification'>Notification</Link>
-              </li>
-              <li>
-                <Link to='/MesEnfants'>MesEnfants</Link>
-              </li>
-            </ul>
+                <li>
+                  <Link to='/'>Acceuil</Link>
+                </li>
+                <li>
+                  <Link to='/courses'>Cours</Link>
+                </li>
+                <li>
+                  <Link to='/about'>A propos</Link>
+                </li>
+                <li>
+                  <Link to='/enseignant'>Enseignants</Link>
+                </li>
+                <li>
+                  <Link to='/proviseur'>Proviseur</Link>
+                </li>
+                <li>
+                  <Link to='/contact'>Contacts</Link>
+                </li>
+              
+                <li>
+                  <Link to='/notification'>Notification</Link>
+                </li>
+                <li>
+                  <Link to='/MesEnfants'>Mes Enfants</Link>
+                </li>
+              </ul>
               <div className='start'>
                 <div className='button'>
-                 
                   <DropdownUser/> 
                 </div>
               </div>
@@ -104,7 +103,7 @@ const Header: React.FC<HeaderProps> = (props) => {
     }else{
       return (
         <>
-          <Head />
+          <Head isLoggedIn={true} />
           <header>
             <nav className='flexSB'>
               <ul className={click ? "mobile-nav" : "flexSB "} onClick={() => setClick(false)}>
@@ -134,8 +133,7 @@ const Header: React.FC<HeaderProps> = (props) => {
               </li>
               <li>
                 <Link to='/notification'>Notification</Link>
-              </li>
-              
+              </li>              
             </ul>
               <div className='start'>
                 <div className='button'>
@@ -156,7 +154,7 @@ const Header: React.FC<HeaderProps> = (props) => {
     
     return (
       <>
-        <Head />
+        <Head isLoggedIn={false} />
         <header>
           <nav className='flexSB'>
             <ul className={click ? "mobile-nav" : "flexSB "} onClick={() => setClick(false)}>
@@ -181,7 +179,7 @@ const Header: React.FC<HeaderProps> = (props) => {
             
           </ul>
             <div className='start'>
-              <div className='button'><Link to='/login'>Mon compte personnel</Link></div>
+              <div className='button border p-1 shadow-lg shadow-green-900 rounded-full'><Link to='/login'>Mon compte personnel</Link></div>
             </div>
             <button className='togglle' onClick={() => setClick(!click)}>
               {click ?  <FontAwesomeIcon icon={faTimes} />:<FontAwesomeIcon icon={faBars} />}
