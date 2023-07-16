@@ -5,7 +5,7 @@ const environment: ConfigurationParameters  = {
     username: '',
     password: '',
     accessToken: '',
-    basePath: 'https://uv-projet-in3-2023-api.vercel.app',
+    basePath: 'https://phplaravel-1060262-3712842.cloudwaysapps.com',
     baseOptions: null,
 };
   
