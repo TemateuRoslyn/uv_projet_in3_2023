@@ -21,18 +21,18 @@ const DashBoard = () => {
 
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
       <ChartThree />
-         <ChartOne />
-        <ChartTwo /> 
+         {/* <ChartOne />
+        <ChartTwo />  */}
      
         
+      {/* <MapOne /> */}
        
         {/* <ChatCard /> */}
       </div>
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-      <MapOne />
-      <div className="col-span-full xl:col-span-full">
+      {/* <div className="col-span-full xl:col-span-full">
           <TableOne />
-        </div>
+        </div> */}
       </div>
     </DefaultLayout>
   );

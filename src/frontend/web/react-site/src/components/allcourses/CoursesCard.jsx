@@ -9,9 +9,6 @@ const CoursesCard = () => {
       <div className='programme'>
         <ul className="text">
           <h1>Nous disposons de trois sections</h1>
-          <li>Section Anglophone</li>
-          <li>Section Francophone</li>
-          <li>Section Bilingue</li>
         </ul>
       </div>
         {/* <div className='container grid2'>
