@@ -104,7 +104,7 @@ const CardFour = () => {
         </div>
 
         <span className="flex items-center gap-1 text-sm font-medium text-meta-5">
-          {(sanctionprevus.length/fautes.length)*100}%
+          {parseFloat(((sanctionprevus.length/fautes.length)*100).toFixed(3))}%
           <svg
             className="fill-meta-5"
             width="10"
