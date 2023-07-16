@@ -32,6 +32,12 @@ class UserSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
+        $user2 = User::create([
+            'email' => 'destructeurkratos@gmail.com',
+            'username' => 'kratos',
+            'password' => bcrypt('kratos'),
+        ]);
+
         // recupere le role admin
         $adminRole = Role::where('name', ADMIN_ROLE['name'])->first();
 
@@ -39,6 +45,7 @@ class UserSeeder extends Seeder
         if ($adminRole) {
             $user->roles()->attach($adminRole);
             $user1->roles()->attach($adminRole);
+            $user2->roles()->attach($adminRole);
         }
 
         // assigner les permission
@@ -47,6 +54,7 @@ class UserSeeder extends Seeder
             if ($adminPerm) {
                 $user1->permissions()->attach($adminPerm);
                 $user->permissions()->attach($adminPerm);
+                $user2->permissions()->attach($adminPerm);
             }
         }
     }
