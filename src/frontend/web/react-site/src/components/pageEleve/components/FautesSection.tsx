@@ -153,7 +153,7 @@ const FautesSection = ({ fautes, reparations }) => {
                       Réparé (Validé)
                     </p>
                   );
-                } else if (reparation.statut === "rejected") {
+                } else if (reparation.statut === "Rejete") {
                   return (
                     <p className="mt-4 text-black text-red-500">
                       Réparé (Rejeté)
