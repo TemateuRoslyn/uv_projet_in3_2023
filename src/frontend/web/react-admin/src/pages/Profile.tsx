@@ -1,7 +1,6 @@
 import Breadcrumb from '../components/Breadcrumb';
 import { USER_LOCAL_STORAGE_KEY } from '../constants/LOCAL_STORAGE';
 import CoverTwo from '../images/cover/cover2.png'
-import CoverOne from '../images/cover/cover-01.png';
 import userSix from '../images/user/userAdmin.jpeg';
 import DefaultLayout from '../layout/DefaultLayout';
 
