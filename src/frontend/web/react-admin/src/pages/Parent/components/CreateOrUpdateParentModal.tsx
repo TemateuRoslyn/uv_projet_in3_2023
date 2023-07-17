@@ -3,7 +3,7 @@ import { MODAL_MODE } from '../../../constants/ENUM';
 import { EditIcon, NewIcon } from '../../../components/Icone';
 import { Eleve, Parents, ParentsCreateBody } from '../../../generated/models';
 import { TOKEN_LOCAL_STORAGE_KEY } from '../../../constants/LOCAL_STORAGE';
-import { CoursApi, ElevesApi, ParentsApi } from '../../../generated';
+import { CoursApi, ElevesApi, ParentsApi } from '../../../generated/api';
 import { useSelector } from 'react-redux';
 import { ReduxProps } from '../../../redux/configureStore';
 import Indicator from '../../Authentication/components/Indicator';
@@ -53,6 +53,7 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
     props.item ? props.item.eleves.map((eleveItem: Eleve) => eleveItem.id) : []
   );
 
+  console.log(props.item)
   const [matchList, setMatchList] = useState<string[]>([]);
 
   const handleInputChange = (
@@ -234,7 +235,7 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
 
     setIsLoading(true);
 
-    console.log(formValues);
+    console.log(formValues, props.item.id);
 
     parentsApi
       .updateParent(
@@ -251,6 +252,7 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
 
         'Bearer ' + token,
         props.item?.id
+        
       )
       .then((response) => {
         if (response && response.data) {
@@ -268,7 +270,7 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
         }
       })
       .catch((error) => {
-        console.log(error?.response?.data);
+        console.log(error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -387,7 +389,7 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
 
                   <div className="w-full xl:w-1/3">
                     <label className="mb-2.5 block text-black dark:text-white">
-                      Statut <span className="text-meta-1">*</span>
+                      Profession <span className="text-meta-1">*</span>
                     </label>
                     <input
                       name="profession"
@@ -395,7 +397,7 @@ const CreateOrUpdateParentModal: React.FC<ModalProps> = (props) => {
                       onChange={handleInputChange}
                       required
                       type="text"
-                      placeholder="Enter your Statut"
+                      placeholder="Enter your profession"
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                   </div>

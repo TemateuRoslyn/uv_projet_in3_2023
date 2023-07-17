@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { ConseilDiscipline, Convocation, Faute, SanctionPrevu } from "../../generated/models";
 import FautesSection from "./components/FautesSection";
 import Back from "../common/back/Back";
+import { ReparationsApi } from "../../generated/api";
 
 
 
@@ -20,6 +21,7 @@ const PageEleve = () => {
   const [fautes, setFautes] = useState<Faute[]>([]);
   const [convocations, setConvocations] = useState<Convocation[]>([]);
   const [sanctions, setSanctions] = useState<SanctionPrevu[]>([]);
+  const [reparations, setReparations] = useState<ReparationsApi[]>([]);
   
   console.log(data)
 
@@ -107,6 +109,30 @@ const PageEleve = () => {
     
             console.log(error)
           });
+
+
+          const apiReparation = new ReparationsApi({
+            ...state.environment,
+            accessToken: token,
+          });
+          console.log("here");
+          apiReparation
+            .viewReparationEleve( "Bearer " + token,  data.id)
+            .then((response) => {
+              if (response && response.data) {
+                if (response.data.success === true) {
+                  console.log(response.data);
+                 setReparations(response.data.content);
+      
+                }
+              }
+            }).catch((error) => {
+              
+              console.log(error)
+            }).finally(() => {
+              
+            });
+         
   
   }, []);
 
@@ -115,7 +141,7 @@ const PageEleve = () => {
     <>
     <Back title={"Etat "}/>
     <div className="container mx-auto p-4 bg-[#6ec9da] shadow-lg">
-      <h2 className="text-4xl font-bold mb-4">Child Disciplinary State Details</h2>
+      <h2 className="text-4xl font-bold mb-4">Etat disciplinaires</h2>
 
       {/* Convocations */}
       <div className="mb-6">
@@ -149,7 +175,7 @@ const PageEleve = () => {
       </div>
 
       {/* Fautes */}
-      <FautesSection fautes={fautes}/>
+      <FautesSection fautes={fautes} reparations={reparations}/>
 
       {/* Conseildiscipline */}
       <div className="mb-6">

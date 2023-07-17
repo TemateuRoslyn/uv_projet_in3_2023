@@ -8,7 +8,7 @@ import { ReduxProps } from "../../redux/configureStore"
 import { TOKEN_EXPIRED } from "../../constants/RESPONSES_CODE"
 import { Faute } from "../../generated/models"
 import FautesSection from "../pageEleve/components/FautesSection"
-import { SanctionprevusApi } from "../../generated/api"
+import { SanctionprevusApi, ReparationsApi } from "../../generated/api"
 import { SanctionPrevu } from "../../generated/models/sanction-prevu"
 
 const FauteSanction = () => {
@@ -17,6 +17,7 @@ const FauteSanction = () => {
   const [showIndicator, setShowIndicator] = useState<boolean>(false);
   const [fautes, setFautes] = useState<Faute[]>([]);
   const [sanctions, setSanctions] = useState<SanctionPrevu[]>([]);
+  const [reparations, setReparations] = useState<ReparationsApi[]>([]);
     
 
 
@@ -25,6 +26,30 @@ const FauteSanction = () => {
   {
     useEffect(()=>{
       const token = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)
+
+      const apiReparation = new ReparationsApi({
+        ...state.environment,
+        accessToken: token,
+      });
+      console.log("here");
+      apiReparation
+        .reparationsIndex( "Bearer " + token,  authUser.model.id)
+        .then((response) => {
+          if (response && response.data) {
+            if (response.data.success === true) {
+              console.log(response.data);
+             setReparations(response.data.content);
+  
+            }
+          }
+        }).catch((error) => {
+          
+          console.log(error)
+        }).finally(() => {
+          
+        });
+     
+
       const fautesApi = new FautesApi({...state.environment,  accessToken:token});
 
       setShowIndicator(true);
@@ -49,7 +74,7 @@ const FauteSanction = () => {
         setShowIndicator(false);
     });
     
-    console.log(fautes);
+    
 
     const apiSanction = new SanctionprevusApi({
       ...state.environment,
@@ -83,15 +108,15 @@ apiSanction
     <>
       <Back title='Fautes et sanctions' />
       <section className='contacts padding'>
-        <FautesSection fautes={fautes}/>
+        <FautesSection fautes={fautes} reparations={reparations}/>
        
 
         <div className="mt-10 mb-6">
         <h3 className="text-3xl font-semibold mb-2">Sanctions</h3>
-        {sanctions.map(sanction => (
+        {sanctions.map((sanction,key) => (
 
           
-          <div className="bg-white shadow-lg rounded-lg p-4 mb-4">
+          <div key={key} className="bg-white shadow-lg rounded-lg p-4 mb-4">
           <div className="flex items-center justify-between mb-2">
                  <p className="text-lg font-semibold">Sanction #{sanction.id}</p>
         

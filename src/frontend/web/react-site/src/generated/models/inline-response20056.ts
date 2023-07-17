@@ -31,7 +31,7 @@ export interface InlineResponse20056 {
     message?: any;
     /**
      * 
-     * @type {Permission}
+     * @type {Array&lt;Permission&gt;}
      * @memberof InlineResponse20056
      */
     content?: any;

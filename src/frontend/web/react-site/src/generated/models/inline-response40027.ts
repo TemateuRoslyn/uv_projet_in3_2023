@@ -34,5 +34,5 @@ export interface InlineResponse40027 {
      * @type {any}
      * @memberof InlineResponse40027
      */
-    error?: any;
+    errors?: any;
 }
