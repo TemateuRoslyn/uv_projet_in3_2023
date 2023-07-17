@@ -70,7 +70,7 @@ class Suggestions extends StatelessWidget {
                     type: 'error',
                   );
                 } else {
-                  context.read<HomeCubit>().insertSuggestion();
+                  // context.read<HomeCubit>().insertSuggestion();
                 }
               },
               text: 'Envoyer',

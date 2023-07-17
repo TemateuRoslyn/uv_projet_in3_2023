@@ -1,10 +1,12 @@
 import 'package:fltter_app/common/logics/internet/internet_cubit.dart';
+import 'package:fltter_app/common/logics/navigation/navigation_cubit.dart';
 import 'package:fltter_app/common/logics/speech/speech_cubit.dart';
 import 'package:fltter_app/common/styles/colors.dart';
 import 'package:fltter_app/common/utils/constants.dart';
 import 'package:fltter_app/common/utils/helper.dart';
 import 'package:fltter_app/common/views/check_internet_page.dart';
 import 'package:fltter_app/common/widgets/common_widgets.dart';
+import 'package:fltter_app/features/authentication/views/login_page.dart';
 import 'package:fltter_app/features/home/logic/home_cubit.dart';
 import 'package:fltter_app/features/home/widgets/cours_component.dart';
 import 'package:fltter_app/features/profile/logic/profile_cubit.dart';
@@ -15,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/models/user.dart';
 import '../../../common/utils/enums.dart';
+import '../../../common/widgets/modals_and_animated_dialogs.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -53,59 +56,29 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
-    final List<ProfileOption> profileOptions = [
-      ProfileOption(
-        icon: Icons.person,
-        // backgroundColor: profileIsSelected ? appColors.primary! : Colors.white,
-        // iconColor: profileIsSelected ? Colors.white : Colors.grey,
-        backgroundColor: appColors.secondary!,
-        iconColor: Colors.white,
-        text: 'Profile',
-        action: () {
-          // setState(() {
-          //   profileIsSelected = !profileIsSelected;
-          //   modifyProfileIsSelected = !modifyProfileIsSelected;
-          // });
-        },
-      ),
-      ProfileOption(
-        icon: Icons.exit_to_app,
-        backgroundColor: appColors.secondary!,
-        iconColor: Colors.white,
-        text: 'Deconnexion',
-        action: () => _profileCubit.logOut(),
-      ),
-      // ProfileOption(
-      //   icon: Icons.edit,
-      //   backgroundColor:
-      //       modifyProfileIsSelected ? appColors.primary! : Colors.white,
-      //   iconColor: modifyProfileIsSelected ? Colors.white : Colors.grey,
-      //   text: 'M.Profile',
-      //   action: () {
-      //     setState(() {
-      //       modifyProfileIsSelected = !modifyProfileIsSelected;
-      //       profileIsSelected = !profileIsSelected;
-      //     });
-      //   },
-      // ),
-    ];
-
     final List profileTiles = [
-      // {
-      //   'text': 'Mes Fautes',
-      //   'icon': Icons.arrow_forward_ios_rounded,
-      // },
-      // {
-      //   'text': 'Mes Sanctions',
-      //   'icon': Icons.arrow_forward_ios_rounded,
-      // },
       {
         'text': 'Changer mon mot de passe',
         'icon': Icons.arrow_forward_ios_rounded,
+        'onPressAction': () {},
       },
       {
         'text': 'Me deconnecter',
         'icon': Icons.arrow_forward_ios_rounded,
+        'onPressAction': () async {
+          await _profileCubit.logOut(
+            nextAction: () {
+              context.read<HomeCubit>().clearState();
+              context.read<ProfileCubit>().clearState();
+              context.read<SpeechCubit>().clearState();
+              context.read<NavigationCubit>().clearState();
+              // ignore: use_build_context_synchronously
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  (route) => false);
+            },
+          );
+        }
       }
     ];
 
@@ -139,217 +112,293 @@ class _ProfilePageState extends State<ProfilePage> {
               ? CommonWidgets.circularProgressIndicatorWidget(
                   positionFromTop: (screenSize.height / 2),
                   context: context,
-                  color: appColors.onBoardingTwo!)
+                  color: appColors.white!)
               : state.status == ApiStatus.failed
                   ? CommonWidgets.failedStatusWidget(
                       positionFromTop: (screenSize.height / 2),
                       context: context,
                       statusMessage: state.statusMessage,
-                      color: appColors.ligthGreen!,
+                      color: appColors.black!,
                       reloadFunction: () => _profileCubit.getCurrentUser())
-                  : Expanded(
-                      child: ListView(
-                        children: [
-                          Stack(children: [
-                            Container(
-                              padding: EdgeInsets.only(
-                                  top: getHeight(
-                                    20,
-                                    context,
-                                  ),
-                                  left: getWidth(10, context)),
-                              // height: getHeight(50, context),
-                              width: double.infinity,
-                              // color: Colors.amber,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  if (currentUserType != 'parents')
-                                    Text(
-                                      'Paramètres',
-                                      style: TextStyle(
-                                          fontSize: getHeight(20, context),
-                                          fontWeight: FontWeight.bold,
-                                          color: appColors.black),
+                  : BlocListener<HomeCubit, HomeState>(
+                      listenWhen: (previous, current) =>
+                          previous.suggestionStatus != current.suggestionStatus,
+                      listener: (context, state) {
+                        if (state.suggestionStatus == ApiStatus.isLoading) {
+                          Modals.showScaffoldMessenger(
+                            context: context,
+                            content: state.suggestionStatusMessage,
+                            type: 'success',
+                          );
+                        }
+                        if (state.suggestionStatus == ApiStatus.success) {
+                          Modals.showScaffoldMessenger(
+                            context: context,
+                            content: state.suggestionStatusMessage,
+                            type: 'success',
+                          );
+                        }
+                        if (state.suggestionStatus == ApiStatus.failed) {
+                          Modals.showScaffoldMessenger(
+                            context: context,
+                            content: state.suggestionStatusMessage,
+                            type: 'error',
+                          );
+                        }
+                      },
+                      child: Expanded(
+                        child: ListView(
+                          children: [
+                            Stack(children: [
+                              Container(
+                                padding: EdgeInsets.only(
+                                    top: getHeight(
+                                      20,
+                                      context,
                                     ),
-                                  SizedBox(
-                                    height: getHeight(30, context),
-                                  ),
-                                  Row(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        child: Image.asset(
-                                          AppImages.unknownPersonImg,
-                                          height: getHeight(60, context),
-                                          width: getWidth(60, context),
-                                        ),
-                                      ),
-                                      if (currentUserType == 'parents') ...[
-                                        Colonne(
-                                            currentUserType: currentUserType,
-                                            isFirst: true,
-                                            text1: 'Hello...',
-                                            text2:
-                                                '${state.currentUser!.firstName} ${state.currentUser!.lastName}'),
-                                        Colonne(
-                                          currentUserType: currentUserType,
-                                          isFirst: false,
-                                          text1: 'Profession',
-                                          text2: state.currentUser!.profession!,
-                                        ),
-                                      ],
-                                      if (currentUserType == 'eleves') ...[
-                                        ...colonnes.map((colonne) => Colonne(
-                                            currentUserType: currentUserType,
-                                            isFirst: colonne['isFirst'],
-                                            text1: colonne['text1'],
-                                            text2: colonne['text2'])),
-                                      ],
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                            if (currentUserType == 'parents') ...[
-                              BlocBuilder<SpeechCubit, SpeechState>(
-                                buildWhen: (previous, current) =>
-                                    previous.speechType != current.speechType,
-                                builder: (context, state) {
-                                  final currentSpeechTYpe = state.speechType;
-                                  return Positioned(
-                                      bottom: getHeight(50, context),
-                                      right: getWidth(10, context),
-                                      child: Container(
-                                        height: getHeight(40, context),
-                                        width: getWidth(40, context),
-                                        decoration: const BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.white),
-                                        // alignment: Alignment.center,
-                                        child: IconButton(
-                                          color: appColors.secondary,
-                                          onPressed: () {
-                                            if (currentSpeechTYpe ==
-                                                SpeechType.isSpeeching) {
-                                              _speechCubit.stopSpeeching();
-                                            } else if (currentSpeechTYpe ==
-                                                SpeechType.speechClosed) {
-                                              _speechCubit.startSpeeching(
-                                                  _profileCubit
-                                                      .state.textToSpeech);
-                                            }
-                                          },
-                                          icon: Icon(
-                                            currentSpeechTYpe ==
-                                                    SpeechType.isSpeeching
-                                                ? Icons.stop
-                                                : currentSpeechTYpe ==
-                                                        SpeechType.speechClosed
-                                                    ? Icons.play_arrow_rounded
-                                                    : null,
-                                            size: getHeight(20, context),
-                                          ),
-                                        ),
-                                      ));
-                                },
-                              ),
-                              Positioned(
-                                  bottom: getHeight(0, context),
-                                  right: getWidth(10, context),
-                                  child: InkWell(
-                                    onTap: () => _profileCubit.logOut(),
-                                    child: Container(
-                                      height: getHeight(40, context),
-                                      width: getWidth(40, context),
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: appColors.secondary),
-                                      child: Icon(
-                                        Icons.exit_to_app_outlined,
-                                        size: getHeight(20, context),
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  )),
-                            ],
-                          ]),
-                          currentUserType == 'parents'
-                              ? Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom: getHeight(20, context),
-                                    top: getHeight(50, context),
-                                    right: getWidth(20, context),
-                                    left: getWidth(20, context),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
+                                    left: getWidth(10, context)),
+                                // height: getHeight(50, context),
+                                width: double.infinity,
+                                // color: Colors.amber,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    if (currentUserType != 'parents')
                                       Text(
-                                        'Mes Enfants...',
+                                        'Paramètres',
                                         style: TextStyle(
                                             fontSize: getHeight(20, context),
                                             fontWeight: FontWeight.bold,
                                             color: appColors.black),
                                       ),
-                                      SizedBox(
-                                        height: getHeight(20, context),
-                                      ),
-                                      ...state
-                                          .currentUser!.childrenAndThierClasses!
-                                          .map((childData) {
-                                        final child =
-                                            childData['child'] as User;
-                                        final hisClass = childData['hisClass'];
-                                        return CoursComponent(
+                                    SizedBox(
+                                      height: getHeight(30, context),
+                                    ),
+                                    Row(
+                                      children: [
+                                        if (state.currentUser != null) ...[
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            child: state.currentUser!.photo ==
+                                                    null
+                                                ? Image.asset(
+                                                    AppImages.unknownPersonImg,
+                                                    height:
+                                                        getHeight(60, context),
+                                                    width:
+                                                        getWidth(60, context),
+                                                  )
+                                                : CommonWidgets.renderImage(
+                                                    imagePath: state
+                                                        .currentUser!.photo!,
+                                                    context: context),
+                                          ),
+                                        ],
+                                        if (currentUserType == 'parents') ...[
+                                          Colonne(
+                                              currentUserType: currentUserType,
+                                              isFirst: true,
+                                              text1: 'Hello...',
+                                              text2:
+                                                  '${state.currentUser!.firstName} ${state.currentUser!.lastName}'),
+                                          Colonne(
                                             currentUserType: currentUserType,
-                                            onPressAction: () => Navigator.of(
-                                                    context)
-                                                .push(MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ParentConsultationPage(
-                                                          child: child,
-                                                          hisClass: hisClass,
-                                                        ))),
-                                            courseTitle:
-                                                '${child.firstName} ${child.lastName}',
-                                            teacherName: hisClass['name']);
-                                      }).toList(),
-                                    ],
-                                  ),
-                                )
-                              :
-                              // Column(children: [
-                              // profile options part
-                              // Padding(
-                              //     padding: EdgeInsets.symmetric(
-                              //         horizontal: getWidth(65, context)),
-                              //     child: Row(
-                              //         mainAxisAlignment:
-                              //             MainAxisAlignment.spaceEvenly,
-                              //         children: profileOptions
-                              //             .map((profileOption) => profileOption)
-                              //             .toList()),
-                              //   ),
-                              SizedBox(
-                                  height: getHeight(20, context),
+                                            isFirst: false,
+                                            text1: 'Profession',
+                                            text2:
+                                                state.currentUser!.profession!,
+                                          ),
+                                        ],
+                                        if (currentUserType == 'eleves') ...[
+                                          ...colonnes.map((colonne) => Colonne(
+                                              currentUserType: currentUserType,
+                                              isFirst: colonne['isFirst'],
+                                              text1: colonne['text1'],
+                                              text2: colonne['text2'])),
+                                        ],
+                                      ],
+                                    )
+                                  ],
                                 ),
-                          // const Divider(
-                          //   thickness: 5,
-                          // ),
-                          ...ListTile.divideTiles(
+                              ),
+                              if (currentUserType == 'parents') ...[
+                                BlocBuilder<SpeechCubit, SpeechState>(
+                                  buildWhen: (previous, current) =>
+                                      previous.speechType != current.speechType,
+                                  builder: (context, state) {
+                                    final currentSpeechTYpe = state.speechType;
+                                    return Positioned(
+                                        bottom: getHeight(50, context),
+                                        right: getWidth(10, context),
+                                        child: Container(
+                                          height: getHeight(40, context),
+                                          width: getWidth(40, context),
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: appColors.secondary),
+                                          // alignment: Alignment.center,
+                                          child: IconButton(
+                                            color: appColors.primary,
+                                            onPressed: () {
+                                              if (currentSpeechTYpe ==
+                                                  SpeechType.isSpeeching) {
+                                                _speechCubit.stopSpeeching();
+                                              } else if (currentSpeechTYpe ==
+                                                  SpeechType.speechClosed) {
+                                                _speechCubit.startSpeeching(
+                                                    _profileCubit
+                                                        .state.textToSpeech);
+                                              }
+                                            },
+                                            icon: Icon(
+                                              currentSpeechTYpe ==
+                                                      SpeechType.isSpeeching
+                                                  ? Icons.stop
+                                                  : currentSpeechTYpe ==
+                                                          SpeechType
+                                                              .speechClosed
+                                                      ? Icons.play_arrow_rounded
+                                                      : null,
+                                              size: getHeight(20, context),
+                                            ),
+                                          ),
+                                        ));
+                                  },
+                                ),
+                                Positioned(
+                                    bottom: getHeight(0, context),
+                                    right: getWidth(10, context),
+                                    child: InkWell(
+                                      onTap: () => _profileCubit.logOut(
+                                        nextAction: () {
+                                          context
+                                              .read<HomeCubit>()
+                                              .clearState();
+                                          context
+                                              .read<ProfileCubit>()
+                                              .clearState();
+                                          context
+                                              .read<SpeechCubit>()
+                                              .clearState();
+                                          context
+                                              .read<NavigationCubit>()
+                                              .clearState();
+                                          // ignore: use_build_context_synchronously
+                                          Navigator.of(context)
+                                              .pushAndRemoveUntil(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const LoginPage()),
+                                                  (route) => false);
+                                        },
+                                      ),
+                                      child: Container(
+                                        height: getHeight(40, context),
+                                        width: getWidth(40, context),
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: appColors.ligthGreen),
+                                        child: Icon(
+                                          Icons.exit_to_app_outlined,
+                                          size: getHeight(20, context),
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    )),
+                              ],
+                            ]),
+                            if (currentUserType == 'parents') ...[
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  bottom: getHeight(20, context),
+                                  top: getHeight(50, context),
+                                  right: getWidth(20, context),
+                                  left: getWidth(20, context),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Mes Enfants...',
+                                          style: TextStyle(
+                                              fontSize: getHeight(20, context),
+                                              fontWeight: FontWeight.bold,
+                                              color: appColors.black),
+                                        ),
+                                        TextButton.icon(
+                                          onPressed: () async {
+                                            await CommonWidgets
+                                                .suggestionBottomSheet(context);
+                                          },
+                                          icon: Icon(
+                                            Icons.lightbulb,
+                                            size: getHeight(20, context),
+                                            color: appColors.secondary,
+                                          ),
+                                          label: Text(
+                                            'Suggerer quelque chose ?',
+                                            style: TextStyle(
+                                                fontSize:
+                                                    getHeight(11, context),
+                                                fontWeight: FontWeight.bold,
+                                                color: appColors.secondary),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: getHeight(20, context),
+                                    ),
+                                    ...state
+                                        .currentUser!.childrenAndThierClasses!
+                                        .map((childData) {
+                                      final child = childData['child'] as User;
+                                      final hisClass = childData['hisClass'];
+                                      final nbreFautes =
+                                          childData['nbreFautes'];
+                                      return CoursComponent(
+                                          color: componentColor(nbreFautes),
+                                          currentUserType: currentUserType,
+                                          imagePath: child.photo,
+                                          onPressAction: () => Navigator.of(
+                                                  context)
+                                              .push(MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ParentConsultationPage(
+                                                        child: child,
+                                                        hisClass: hisClass,
+                                                      ))),
+                                          courseTitle:
+                                              '${child.firstName} ${child.lastName}',
+                                          teacherName: hisClass['name']);
+                                    }).toList(),
+                                  ],
+                                ),
+                              ),
+                            ],
+                            if (currentUserType == 'eleves') ...[
+                              SizedBox(
+                                height: getHeight(20, context),
+                              ),
+                              ...ListTile.divideTiles(
                                   context: context,
                                   color: Colors.grey,
                                   tiles: profileTiles
                                       .map((profileTile) => ProfileTile(
-                                          icon: profileTile['icon'],
-                                          text: profileTile['text']))
-                                      .toList())
-                              .toList(),
-                          // ]),
-                        ],
+                                            icon: profileTile['icon'],
+                                            text: profileTile['text'],
+                                            onPressAction:
+                                                profileTile['onPressAction'],
+                                          ))
+                                      .toList()),
+                            ],
+                          ],
+                        ),
                       ),
                     ),
         );
@@ -416,25 +465,30 @@ class ProfileTile extends StatelessWidget {
     super.key,
     required this.icon,
     required this.text,
+    required this.onPressAction,
   });
 
   final IconData icon;
   final String text;
+  final void Function()? onPressAction;
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Text(
-        text,
-        style: TextStyle(
-            fontSize: getHeight(15, context),
-            color: appColors.black,
-            fontWeight: FontWeight.bold),
-      ),
-      trailing: Icon(
-        icon,
-        size: getHeight(13, context),
-        color: appColors.black,
+    return InkWell(
+      onTap: onPressAction,
+      child: ListTile(
+        leading: Text(
+          text,
+          style: TextStyle(
+              fontSize: getHeight(15, context),
+              color: appColors.black,
+              fontWeight: FontWeight.bold),
+        ),
+        trailing: Icon(
+          icon,
+          size: getHeight(13, context),
+          color: appColors.black,
+        ),
       ),
     );
   }

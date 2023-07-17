@@ -36,15 +36,17 @@ mixin _$HomeState {
   ApiStatus get coursStatus => throw _privateConstructorUsedError;
   List<Cours> get courss => throw _privateConstructorUsedError;
   String get coursStatusMessage =>
-      throw _privateConstructorUsedError; // cours variables
+      throw _privateConstructorUsedError; // sanctions variables
   ApiStatus get sanctionStatus => throw _privateConstructorUsedError;
   List<Sanction> get sanctions => throw _privateConstructorUsedError;
   String get sanctionStatusMessage =>
       throw _privateConstructorUsedError; // all student datas variables
   ApiStatus get allStudentDataStatus => throw _privateConstructorUsedError;
   String get allStudentDataStatusMessage =>
-      throw _privateConstructorUsedError; //Box suggession variables
-  String get suggestionInsertStatus =>
+      throw _privateConstructorUsedError; //suggession variables
+  String get suggestionText => throw _privateConstructorUsedError;
+  String get suggestionStatusMessage => throw _privateConstructorUsedError;
+  ApiStatus get suggestionStatus =>
       throw _privateConstructorUsedError; // parent consultation variables
   ApiStatus get parentConsultationStatus => throw _privateConstructorUsedError;
   String get parentConsultationStatusMessage =>
@@ -81,7 +83,9 @@ abstract class $HomeStateCopyWith<$Res> {
       String sanctionStatusMessage,
       ApiStatus allStudentDataStatus,
       String allStudentDataStatusMessage,
-      String suggestionInsertStatus,
+      String suggestionText,
+      String suggestionStatusMessage,
+      ApiStatus suggestionStatus,
       ApiStatus parentConsultationStatus,
       String parentConsultationStatusMessage});
 }
@@ -119,7 +123,9 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? sanctionStatusMessage = null,
     Object? allStudentDataStatus = null,
     Object? allStudentDataStatusMessage = null,
-    Object? suggestionInsertStatus = null,
+    Object? suggestionText = null,
+    Object? suggestionStatusMessage = null,
+    Object? suggestionStatus = null,
     Object? parentConsultationStatus = null,
     Object? parentConsultationStatusMessage = null,
   }) {
@@ -204,10 +210,18 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.allStudentDataStatusMessage
           : allStudentDataStatusMessage // ignore: cast_nullable_to_non_nullable
               as String,
-      suggestionInsertStatus: null == suggestionInsertStatus
-          ? _value.suggestionInsertStatus
-          : suggestionInsertStatus // ignore: cast_nullable_to_non_nullable
+      suggestionText: null == suggestionText
+          ? _value.suggestionText
+          : suggestionText // ignore: cast_nullable_to_non_nullable
               as String,
+      suggestionStatusMessage: null == suggestionStatusMessage
+          ? _value.suggestionStatusMessage
+          : suggestionStatusMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+      suggestionStatus: null == suggestionStatus
+          ? _value.suggestionStatus
+          : suggestionStatus // ignore: cast_nullable_to_non_nullable
+              as ApiStatus,
       parentConsultationStatus: null == parentConsultationStatus
           ? _value.parentConsultationStatus
           : parentConsultationStatus // ignore: cast_nullable_to_non_nullable
@@ -248,7 +262,9 @@ abstract class _$$_InitialCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
       String sanctionStatusMessage,
       ApiStatus allStudentDataStatus,
       String allStudentDataStatusMessage,
-      String suggestionInsertStatus,
+      String suggestionText,
+      String suggestionStatusMessage,
+      ApiStatus suggestionStatus,
       ApiStatus parentConsultationStatus,
       String parentConsultationStatusMessage});
 }
@@ -283,7 +299,9 @@ class __$$_InitialCopyWithImpl<$Res>
     Object? sanctionStatusMessage = null,
     Object? allStudentDataStatus = null,
     Object? allStudentDataStatusMessage = null,
-    Object? suggestionInsertStatus = null,
+    Object? suggestionText = null,
+    Object? suggestionStatusMessage = null,
+    Object? suggestionStatus = null,
     Object? parentConsultationStatus = null,
     Object? parentConsultationStatusMessage = null,
   }) {
@@ -368,10 +386,18 @@ class __$$_InitialCopyWithImpl<$Res>
           ? _value.allStudentDataStatusMessage
           : allStudentDataStatusMessage // ignore: cast_nullable_to_non_nullable
               as String,
-      suggestionInsertStatus: null == suggestionInsertStatus
-          ? _value.suggestionInsertStatus
-          : suggestionInsertStatus // ignore: cast_nullable_to_non_nullable
+      suggestionText: null == suggestionText
+          ? _value.suggestionText
+          : suggestionText // ignore: cast_nullable_to_non_nullable
               as String,
+      suggestionStatusMessage: null == suggestionStatusMessage
+          ? _value.suggestionStatusMessage
+          : suggestionStatusMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+      suggestionStatus: null == suggestionStatus
+          ? _value.suggestionStatus
+          : suggestionStatus // ignore: cast_nullable_to_non_nullable
+              as ApiStatus,
       parentConsultationStatus: null == parentConsultationStatus
           ? _value.parentConsultationStatus
           : parentConsultationStatus // ignore: cast_nullable_to_non_nullable
@@ -408,7 +434,9 @@ class _$_Initial implements _Initial {
       this.sanctionStatusMessage = '',
       this.allStudentDataStatus = ApiStatus.init,
       this.allStudentDataStatusMessage = '',
-      this.suggestionInsertStatus = '',
+      this.suggestionText = '',
+      this.suggestionStatusMessage = '',
+      this.suggestionStatus = ApiStatus.init,
       this.parentConsultationStatus = ApiStatus.init,
       this.parentConsultationStatusMessage = ''})
       : _ri = ri,
@@ -498,7 +526,7 @@ class _$_Initial implements _Initial {
   @override
   @JsonKey()
   final String coursStatusMessage;
-// cours variables
+// sanctions variables
   @override
   @JsonKey()
   final ApiStatus sanctionStatus;
@@ -521,10 +549,16 @@ class _$_Initial implements _Initial {
   @override
   @JsonKey()
   final String allStudentDataStatusMessage;
-//Box suggession variables
+//suggession variables
   @override
   @JsonKey()
-  final String suggestionInsertStatus;
+  final String suggestionText;
+  @override
+  @JsonKey()
+  final String suggestionStatusMessage;
+  @override
+  @JsonKey()
+  final ApiStatus suggestionStatus;
 // parent consultation variables
   @override
   @JsonKey()
@@ -535,7 +569,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'HomeState(riStatus: $riStatus, ri: $ri, riStatusMessage: $riStatusMessage, fauteStatus: $fauteStatus, fautes: $fautes, fauteStatusMessage: $fauteStatusMessage, cdStatus: $cdStatus, cds: $cds, cdStatusMessage: $cdStatusMessage, convocationStatus: $convocationStatus, convocations: $convocations, convocationStatusMessage: $convocationStatusMessage, coursStatus: $coursStatus, courss: $courss, coursStatusMessage: $coursStatusMessage, sanctionStatus: $sanctionStatus, sanctions: $sanctions, sanctionStatusMessage: $sanctionStatusMessage, allStudentDataStatus: $allStudentDataStatus, allStudentDataStatusMessage: $allStudentDataStatusMessage, suggestionInsertStatus: $suggestionInsertStatus, parentConsultationStatus: $parentConsultationStatus, parentConsultationStatusMessage: $parentConsultationStatusMessage)';
+    return 'HomeState(riStatus: $riStatus, ri: $ri, riStatusMessage: $riStatusMessage, fauteStatus: $fauteStatus, fautes: $fautes, fauteStatusMessage: $fauteStatusMessage, cdStatus: $cdStatus, cds: $cds, cdStatusMessage: $cdStatusMessage, convocationStatus: $convocationStatus, convocations: $convocations, convocationStatusMessage: $convocationStatusMessage, coursStatus: $coursStatus, courss: $courss, coursStatusMessage: $coursStatusMessage, sanctionStatus: $sanctionStatus, sanctions: $sanctions, sanctionStatusMessage: $sanctionStatusMessage, allStudentDataStatus: $allStudentDataStatus, allStudentDataStatusMessage: $allStudentDataStatusMessage, suggestionText: $suggestionText, suggestionStatusMessage: $suggestionStatusMessage, suggestionStatus: $suggestionStatus, parentConsultationStatus: $parentConsultationStatus, parentConsultationStatusMessage: $parentConsultationStatusMessage)';
   }
 
   @override
@@ -582,8 +616,12 @@ class _$_Initial implements _Initial {
                     allStudentDataStatusMessage) ||
                 other.allStudentDataStatusMessage ==
                     allStudentDataStatusMessage) &&
-            (identical(other.suggestionInsertStatus, suggestionInsertStatus) ||
-                other.suggestionInsertStatus == suggestionInsertStatus) &&
+            (identical(other.suggestionText, suggestionText) ||
+                other.suggestionText == suggestionText) &&
+            (identical(other.suggestionStatusMessage, suggestionStatusMessage) ||
+                other.suggestionStatusMessage == suggestionStatusMessage) &&
+            (identical(other.suggestionStatus, suggestionStatus) ||
+                other.suggestionStatus == suggestionStatus) &&
             (identical(
                     other.parentConsultationStatus, parentConsultationStatus) ||
                 other.parentConsultationStatus == parentConsultationStatus) &&
@@ -616,7 +654,9 @@ class _$_Initial implements _Initial {
         sanctionStatusMessage,
         allStudentDataStatus,
         allStudentDataStatusMessage,
-        suggestionInsertStatus,
+        suggestionText,
+        suggestionStatusMessage,
+        suggestionStatus,
         parentConsultationStatus,
         parentConsultationStatusMessage
       ]);
@@ -650,7 +690,9 @@ abstract class _Initial implements HomeState {
       final String sanctionStatusMessage,
       final ApiStatus allStudentDataStatus,
       final String allStudentDataStatusMessage,
-      final String suggestionInsertStatus,
+      final String suggestionText,
+      final String suggestionStatusMessage,
+      final ApiStatus suggestionStatus,
       final ApiStatus parentConsultationStatus,
       final String parentConsultationStatusMessage}) = _$_Initial;
 
@@ -684,7 +726,7 @@ abstract class _Initial implements HomeState {
   List<Cours> get courss;
   @override
   String get coursStatusMessage;
-  @override // cours variables
+  @override // sanctions variables
   ApiStatus get sanctionStatus;
   @override
   List<Sanction> get sanctions;
@@ -694,8 +736,12 @@ abstract class _Initial implements HomeState {
   ApiStatus get allStudentDataStatus;
   @override
   String get allStudentDataStatusMessage;
-  @override //Box suggession variables
-  String get suggestionInsertStatus;
+  @override //suggession variables
+  String get suggestionText;
+  @override
+  String get suggestionStatusMessage;
+  @override
+  ApiStatus get suggestionStatus;
   @override // parent consultation variables
   ApiStatus get parentConsultationStatus;
   @override

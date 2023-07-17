@@ -28,7 +28,7 @@ class HomeState with _$HomeState {
     @Default([]) List<Cours> courss,
     @Default('') String coursStatusMessage,
 
-    // cours variables
+    // sanctions variables
     @Default(ApiStatus.init) ApiStatus sanctionStatus,
     @Default([]) List<Sanction> sanctions,
     @Default('') String sanctionStatusMessage,
@@ -37,8 +37,10 @@ class HomeState with _$HomeState {
     @Default(ApiStatus.init) ApiStatus allStudentDataStatus,
     @Default('') String allStudentDataStatusMessage,
 
-    //Box suggession variables
-    @Default('') String suggestionInsertStatus,
+    //suggession variables
+    @Default('') String suggestionText,
+    @Default('') String suggestionStatusMessage,
+    @Default(ApiStatus.init) ApiStatus suggestionStatus,
 
     // parent consultation variables
     @Default(ApiStatus.init) ApiStatus parentConsultationStatus,

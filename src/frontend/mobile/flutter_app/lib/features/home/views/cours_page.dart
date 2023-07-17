@@ -82,6 +82,8 @@ class _CoursPageState extends State<CoursPage> {
                                                 '${oneCours.libelle} ( ${oneCours.dateCours}: ${oneCours.heureDebut} - ${oneCours.heureFin} )',
                                             teacherName:
                                                 '${oneCours.professeur.firstName} ${oneCours.professeur.lastName}',
+                                            imagePath:
+                                                oneCours.professeur.photo,
                                             onPressAction: () {},
                                           ))
                                       .toList()),

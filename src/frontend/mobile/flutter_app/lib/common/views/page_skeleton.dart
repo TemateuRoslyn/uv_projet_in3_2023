@@ -36,6 +36,10 @@ class _PageSkeletonState extends State<PageSkeleton> {
     _navigationCubit = context.read<NavigationCubit>();
     _currentUserType = AuthRepository.getUserType;
 
+    if (_navigationCubit.state.navigationType != NavigationType.home) {
+      _navigationCubit.changeNavigationType(NavigationType.home);
+    }
+
     PusherService.initCubits(
       profileCubit: context.read<ProfileCubit>(),
       homeCubit: context.read<HomeCubit>(),

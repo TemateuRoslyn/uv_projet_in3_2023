@@ -50,7 +50,8 @@ class ProfileCubit extends Cubit<ProfileState> {
         PusherService.subscribeToSpecificChannel('faute', 'faute-created'),
         PusherService.subscribeToSpecificChannel(
             'sanction', 'sanction-created'),
-        PusherService.subscribeToSpecificChannel('cd', 'cd-created'),
+        PusherService.subscribeToSpecificChannel(
+            'conseil-discipline', 'conseil-discipline-created'),
         PusherService.subscribeToSpecificChannel(
             'convocation', 'convocation-created'),
       ]);
@@ -82,7 +83,23 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  Future<void> logOut() async {
+  Future<void> logOut({required VoidCallback nextAction}) async {
     await authRepository!.logOut();
+    Future.wait([
+      PusherService.unSubscribeToSpecificChannel('faute'),
+      PusherService.unSubscribeToSpecificChannel('sanction'),
+      PusherService.unSubscribeToSpecificChannel('conseil-discipline'),
+      PusherService.unSubscribeToSpecificChannel('convocation'),
+    ]);
+    nextAction();
+  }
+
+  void clearState() {
+    emit(state.copyWith(
+      currentUser: null,
+      status: ApiStatus.init,
+      statusMessage: '',
+      textToSpeech: '',
+    ));
   }
 }

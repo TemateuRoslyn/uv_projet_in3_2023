@@ -119,19 +119,6 @@ class StatisticComponent extends StatelessWidget {
   final int number;
   final String imagePath;
 
-  Color componentColor(int number) {
-    late Color color;
-    if (number == 0) {
-      color = Colors.green;
-    } else if (number >= 1 && number <= 5) {
-      color = Colors.grey;
-    } else if (number > 5) {
-      color = appColors.secondary!;
-    }
-
-    return color;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(

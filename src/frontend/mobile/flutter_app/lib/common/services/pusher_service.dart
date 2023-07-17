@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:fltter_app/common/models/conseil_discipline.dart';
+import 'package:fltter_app/common/models/convocation.dart';
 import 'package:fltter_app/common/models/faute.dart';
 import 'package:fltter_app/common/models/sanction.dart';
 import 'package:fltter_app/common/models/user.dart';
@@ -69,8 +71,6 @@ class PusherService {
         final currentUserId = AuthRepository.getUserId;
         final currentUserType = AuthRepository.getUserType;
         final currentUserInState = _profileCubit.state.currentUser!;
-        // print('event is $event');
-        // print('object');
         final eventBody = jsonDecode(event!.data!)['content'];
         final libelle = eventBody['libelle'];
         final studentConcernedId = eventBody['eleve']['id'];
@@ -81,7 +81,8 @@ class PusherService {
           case 'faute':
             {
               final newFaute = Faute.fromJson(eventBody);
-              if (currentUserId == studentConcernedId) {
+              if (currentUserId == studentConcernedId &&
+                  currentUserType == 'eleves') {
                 _homeCubit.addNewFaute(newFaute);
 
                 NotificationService.showNotification(
@@ -92,13 +93,16 @@ class PusherService {
               }
               if (currentUserType == 'parents') {
                 List<int> childrenId = [];
+                print(currentUserInState.childrenAndThierClasses != null);
+                print(currentUserInState.childrenAndThierClasses!.isNotEmpty);
 
                 if (currentUserInState.childrenAndThierClasses != null &&
                     currentUserInState.childrenAndThierClasses!.isNotEmpty) {
-                  currentUserInState.childrenAndThierClasses!.map((oneChild) {
-                    final childId = (oneChild['child'] as User).id;
+                  for (var element
+                      in currentUserInState.childrenAndThierClasses!) {
+                    final childId = (element['child'] as User).id;
                     childrenId.add(childId);
-                  });
+                  }
 
                   if (childrenId.contains(studentConcernedId)) {
                     _homeCubit.addNewFaute(newFaute);
@@ -116,7 +120,8 @@ class PusherService {
           case 'sanction':
             {
               final sanction = Sanction.fromJson(eventBody);
-              if (currentUserId == studentConcernedId) {
+              if (currentUserId == studentConcernedId &&
+                  currentUserType == 'eleves') {
                 _homeCubit.addNewSanction(sanction);
 
                 NotificationService.showNotification(
@@ -130,10 +135,11 @@ class PusherService {
 
                 if (currentUserInState.childrenAndThierClasses != null &&
                     currentUserInState.childrenAndThierClasses!.isNotEmpty) {
-                  currentUserInState.childrenAndThierClasses!.map((oneChild) {
-                    final childId = (oneChild['child'] as User).id;
+                  for (var element
+                      in currentUserInState.childrenAndThierClasses!) {
+                    final childId = (element['child'] as User).id;
                     childrenId.add(childId);
-                  });
+                  }
 
                   if (childrenId.contains(studentConcernedId)) {
                     _homeCubit.addNewSanction(sanction);
@@ -148,28 +154,80 @@ class PusherService {
               }
             }
             break;
-          case 'cd':
+          case 'conseil-discipline':
             {
-              // if (currentUserId == userIdInEvent) {
-              //   // _homeCubit.addNewFaute(newFaute)
-              //   NotificationService.showNotification(
-              //     title: 'Nouveau conseil de discipline concernant...',
-              //     body: message,
-              //     payLoad: 'cd',
-              //   );
-              // }
+              final cd = ConseilDiscipline.fromJson(eventBody);
+              if (currentUserId == studentConcernedId &&
+                  currentUserType == 'eleves') {
+                _homeCubit.addNewCD(cd);
+
+                NotificationService.showNotification(
+                  title: 'Nouveau conseil de discipline',
+                  body: libelle,
+                  payLoad: 'cd',
+                );
+              }
+              if (currentUserType == 'parents') {
+                List<int> childrenId = [];
+
+                if (currentUserInState.childrenAndThierClasses != null &&
+                    currentUserInState.childrenAndThierClasses!.isNotEmpty) {
+                  for (var element
+                      in currentUserInState.childrenAndThierClasses!) {
+                    final childId = (element['child'] as User).id;
+                    childrenId.add(childId);
+                  }
+
+                  if (childrenId.contains(studentConcernedId)) {
+                    _homeCubit.addNewCD(cd);
+
+                    NotificationService.showNotification(
+                      title:
+                          'Nouveau conseil de discipline concernant votre enfant $studentName',
+                      body: libelle,
+                      payLoad: 'cd',
+                    );
+                  }
+                }
+              }
             }
             break;
           case 'convocation':
             {
-              // if (currentUserId == userIdInEvent) {
-              //   // _homeCubit.addNewFaute(newFaute)
-              //   NotificationService.showNotification(
-              //     title: 'Nouvelle convocation concernant...',
-              //     body: message,
-              //     payLoad: 'convocations',
-              //   );
-              // }
+              final convocation = Convocation.fromJson(eventBody);
+              if (currentUserId == studentConcernedId &&
+                  currentUserType == 'eleves') {
+                _homeCubit.addNewConvocation(convocation);
+
+                NotificationService.showNotification(
+                  title: 'Vous êtes à nouveau convoquer',
+                  body: libelle,
+                  payLoad: 'convocation',
+                );
+              }
+              if (currentUserType == 'parents') {
+                List<int> childrenId = [];
+
+                if (currentUserInState.childrenAndThierClasses != null &&
+                    currentUserInState.childrenAndThierClasses!.isNotEmpty) {
+                  for (var element
+                      in currentUserInState.childrenAndThierClasses!) {
+                    final childId = (element['child'] as User).id;
+                    childrenId.add(childId);
+                  }
+
+                  if (childrenId.contains(studentConcernedId)) {
+                    _homeCubit.addNewConvocation(convocation);
+
+                    NotificationService.showNotification(
+                      title:
+                          'Nouvelle convocation concernant votre enfant $studentName',
+                      body: libelle,
+                      payLoad: 'convocation',
+                    );
+                  }
+                }
+              }
             }
             break;
           default:

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../common/styles/colors.dart';
 import '../../../common/utils/constants.dart';
 import '../../../common/utils/helper.dart';
+import '../../../common/widgets/common_widgets.dart';
 
 class CoursComponent extends StatelessWidget {
   const CoursComponent({
@@ -10,12 +11,16 @@ class CoursComponent extends StatelessWidget {
     this.onPressAction,
     required this.courseTitle,
     required this.teacherName,
+    required this.imagePath,
     required this.currentUserType,
+    this.color,
   });
   final String courseTitle;
   final String teacherName;
+  final String? imagePath;
   final void Function()? onPressAction;
   final String currentUserType;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +34,15 @@ class CoursComponent extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(100),
-                child: Image.asset(
-                  AppImages.unknownPersonImg,
-                  height: getHeight(65, context),
-                  width: getWidth(65, context),
-                  // color: Colors.white,
-                ),
+                child: imagePath == null
+                    ? Image.asset(
+                        AppImages.unknownPersonImg,
+                        height: getHeight(65, context),
+                        width: getWidth(65, context),
+                        // color: Colors.white,
+                      )
+                    : CommonWidgets.renderImage(
+                        imagePath: imagePath!, context: context),
               ),
               SizedBox(
                 width: getWidth(10, context),
@@ -44,9 +52,7 @@ class CoursComponent extends StatelessWidget {
                 width: getWidth(400, context),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: currentUserType == 'parents'
-                        ? appColors.tinary
-                        : appColors.secondary!.withOpacity(0.4)),
+                    color: color ?? appColors.secondary!.withOpacity(0.4)),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: getWidth(10, context), horizontal: 25),
@@ -60,7 +66,9 @@ class CoursComponent extends StatelessWidget {
                         style: TextStyle(
                             fontSize: getHeight(20, context),
                             height: getHeight(1.5, context),
-                            color: appColors.black,
+                            color: currentUserType == 'parents'
+                                ? appColors.primary
+                                : appColors.black,
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
@@ -73,7 +81,9 @@ class CoursComponent extends StatelessWidget {
                           fontSize: getHeight(18, context),
                           fontWeight: FontWeight.bold,
                           height: getHeight(1.5, context),
-                          color: appColors.black,
+                          color: currentUserType == 'parents'
+                              ? appColors.primary
+                              : appColors.black,
                         ),
                       ),
                     ],

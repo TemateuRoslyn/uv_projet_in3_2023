@@ -22,9 +22,9 @@ class Convocation {
     final dateRdv = DateTime.parse(json['dateRdv']);
     final currentDate = DateTime.now();
     if (currentDate.isAfter(dateRdv)) {
-      statut = 'Passer';
+      statut = 'Passé';
     } else {
-      statut = 'A venir';
+      statut = 'À venir';
     }
 
     return Convocation(

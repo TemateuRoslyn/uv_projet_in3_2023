@@ -16,10 +16,6 @@ class SpeechCubit extends Cubit<SpeechState> {
     await _flutterTts.setLanguage('fr-FR');
     await _flutterTts.setPitch(1.0);
     await _flutterTts.setVolume(1.0);
-    // _flutterTts.setProgressHandler((text, start, end, word) {
-    //   print('word is $word');
-    //   print('end is $end');
-    // });
     _flutterTts.setCompletionHandler(() {
       emit(state.copyWith(speechType: SpeechType.speechClosed));
     });
@@ -35,5 +31,12 @@ class SpeechCubit extends Cubit<SpeechState> {
   void pauseSpeech() async {
     await _flutterTts.pause();
     emit(state.copyWith(speechType: SpeechType.speechPaused));
+  }
+
+  void clearState() {
+    emit(state.copyWith(
+      speechType: SpeechType.init,
+      textToSpeech: '',
+    ));
   }
 }

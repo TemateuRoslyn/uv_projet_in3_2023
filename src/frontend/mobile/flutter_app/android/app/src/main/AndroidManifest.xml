@@ -2,10 +2,9 @@
     package="com.example.fltter_app">
 
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
 
    <application
-        android:label="fltter_app"
+        android:label="School Discipline"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

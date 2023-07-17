@@ -13,7 +13,7 @@ class Modals {
     return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         duration: const Duration(seconds: 5),
         backgroundColor:
-            type == 'success' ? appColors.ligthGreen : appColors.ligthGreen,
+            type == 'success' ? appColors.secondary : appColors.ligthGreen,
         content: Text(
           content,
           style: TextStyle(

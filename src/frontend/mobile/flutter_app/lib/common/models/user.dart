@@ -87,6 +87,7 @@ class User {
         final childAndHisClass = {
           'child': childData,
           'hisClass': hisClass,
+          'nbreFautes': data['nombresFautes'],
         };
 
         children.add(childAndHisClass);

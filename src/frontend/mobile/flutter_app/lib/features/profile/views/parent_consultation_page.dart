@@ -69,19 +69,19 @@ class _ParentConsultationPageState extends State<ParentConsultationPage> {
                     ? 0
                     : 1,
                 positionFromTop: (screenSize.height / 2),
-                errorTextColor: Colors.white,
+                errorTextColor: Colors.black,
                 body: state.parentConsultationStatus == ApiStatus.isLoading
                     ? CommonWidgets.circularProgressIndicatorWidget(
                         positionFromTop: (screenSize.height / 2),
                         context: context,
-                        color: appColors.onBoardingTwo!)
+                        color: appColors.white!)
                     : state.parentConsultationStatus == ApiStatus.failed
                         ? CommonWidgets.failedStatusWidget(
                             positionFromTop: (screenSize.height / 2),
                             context: context,
                             statusMessage:
                                 state.parentConsultationStatusMessage,
-                            color: Colors.white,
+                            color: Colors.black,
                             reloadFunction: () =>
                                 _homeCubit.getChildInfosForParentConsultation(
                                     widget.child.id))
@@ -100,12 +100,16 @@ class _ParentConsultationPageState extends State<ParentConsultationPage> {
                                   children: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(100),
-                                      child: Image.asset(
-                                        AppImages.unknownPersonImg,
-                                        height: getHeight(65, context),
-                                        width: getWidth(65, context),
-                                        // color: Colors.white,
-                                      ),
+                                      child: widget.child.photo == null
+                                          ? Image.asset(
+                                              AppImages.unknownPersonImg,
+                                              height: getHeight(65, context),
+                                              width: getWidth(65, context),
+                                              // color: Colors.white,
+                                            )
+                                          : CommonWidgets.renderImage(
+                                              imagePath: widget.child.photo!,
+                                              context: context),
                                     ),
                                     SizedBox(
                                       width: getWidth(30, context),
@@ -138,14 +142,14 @@ class _ParentConsultationPageState extends State<ParentConsultationPage> {
                                       style: TextStyle(
                                           fontSize: getHeight(14, context),
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white),
+                                          color: appColors.black),
                                     ),
                                     Text(
                                       'Nombre(s)',
                                       style: TextStyle(
                                           fontSize: getHeight(14, context),
                                           fontWeight: FontWeight.bold,
-                                          color: appColors.secondary),
+                                          color: appColors.ligthGreen),
                                     ),
                                   ],
                                 ),
@@ -283,13 +287,13 @@ class CategorieIncidentComponent extends StatelessWidget {
                         style: TextStyle(
                             fontSize: getHeight(15, context),
                             fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                            color: appColors.black),
                       ),
                       Text(
                         'Cliquez...',
                         style: TextStyle(
                             fontSize: getHeight(12, context),
-                            color: Colors.white),
+                            color: Colors.grey),
                       ),
                     ],
                   ),
@@ -301,7 +305,7 @@ class CategorieIncidentComponent extends StatelessWidget {
               style: TextStyle(
                   fontSize: getHeight(16, context),
                   fontWeight: FontWeight.bold,
-                  color: appColors.secondary),
+                  color: appColors.ligthGreen),
             ),
           ],
         ),
