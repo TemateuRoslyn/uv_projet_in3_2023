@@ -122,7 +122,7 @@ const Awrapper: React.FC = () => {
               </div>
               <div className='box flex'>
                 <div className='img'>
-                  <img src='https://img.icons8.com/ios/80/1EB2A6/athlete.png' alt='' />
+                  <img src='https://img.icons8.com/ios/50/1EB2A6/error--v1.png' alt='' />
                 </div>
                 <div className='text'>
                   <h1 style={{color: '#1EB2A6'}}>{fautes.length}</h1>
@@ -131,7 +131,7 @@ const Awrapper: React.FC = () => {
               </div>
               <div className='box flex'>
                 <div className='img'>
-                  <img src='https://img.icons8.com/external-outline-icons-maxicons/80/1EB2A6/external-calender-insurance-outline-outline-icons-maxicons.png' alt='' />
+                  <img src='https://img.icons8.com/external-smashingstocks-glyph-smashing-stocks/66/1EB2A6/external-Committee-team-management-smashingstocks-glyph-smashing-stocks.png' alt='' />
                 </div>
                 <div className='text'>
                   <h1 style={{color: '#1EB2A6'}}>{conseilDisciplines.length}</h1>
