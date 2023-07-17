@@ -58,8 +58,8 @@ const AppSwitch: React.FC<AppSwitchProps> = (props) => {
   ) {
     return (
       <Routes>
-        <Route exact path="/admin/permissions" element={<Permissions />} />
-        <Route exact path="/admin/roles" element={<Roles />} />
+        <Route exact path="/permissions" element={<Permissions />} />
+        <Route exact path="/roles" element={<Roles />} />
         <Route exact path="/admin/users" element={<UserGrid />} />
 
         <Route exact path="/eleves" element={<Eleves />} />
